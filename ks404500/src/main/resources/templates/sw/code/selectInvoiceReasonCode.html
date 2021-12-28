@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="@{layout/default-sw}">
+<html xmlns:th="http://www.thymeleaf.org" 
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+layout:decorate="@{layout/default-sw}">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <th:block layout:fragment="customContents">
@@ -11,7 +13,7 @@
 				<div class="container-fluid">
 					<div class="row mb-2">
 						<div class="col-sm-6">
-							<h1 class="m-0">"selectInvoiceReasonCode / 개발사 세금계산서 사유 코드 조회"</h1>
+							<h1 class="m-0" th:text="${title}"></h1>
 						</div><!-- /.col -->
 						<div class="col-sm-6">
 							<ol class="breadcrumb float-sm-right">
@@ -31,21 +33,28 @@
 					<div class="col-lg-12">
 						<div class="card">
 							<div class="card-body">
-								<h5 class="card-title">Card title</h5>
+								<h5 class="card-title">세금계산서수정 사유 코드 조회</h5>
 								<p class="card-text">
-									<table class="table table-striped">
-										<tr>
-											<th>d</th>
-											<th>d</th>
-											<th>d</th>
-										</tr>
-										<tr>
-											<th>1</th>
-											<th>2</th>
-											<th>3</th>
-										</tr>
+									<table class="table table-bordered table-hover">
+										<thead>
+											<tr>
+												<th>전자세금계산서 수정사유 코드이름</th>
+												<th>전자세금계산서 수정사유 내용</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:if="${not #lists.isEmpty(invoiceReason)}" th:each="ir: ${invoiceReason}">
+												<td th:text="${ir.amendedInvoiceReasonCode}"></td>
+												<td th:text="${ir.amendedInvoiceReasonName}"></td>
+											</tr>
+											<tr th:unless="${not #lists.isEmpty(invoiceReason)}">
+												<td>
+													안녕
+												</td>
+											</tr>
+										</tbody>
 									</table>
-								</p>
+									</p>
 								<a href="#" class="card-link">Card link</a>
 								<a href="#" class="card-link">Another link</a>
 							</div>
