@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link th:href="@{/customcss/css/main-index.css}" rel="stylesheet"/>
+</head>
+<th:block layout:fragment="customContents">
+	<!-- Content Wrapper. Contains page content -->
+	<div class="container">
+		<div class="row">
+			<a th:href="@{/sw/index-sw}">
+				<img th:src="@{/customcss/img/main-index-sw.png}" class="img-sw rounded float-start" alt="개발사 바로가기">
+			</a>
+			<a th:href="@{/shop/index-shop}">
+				<img th:src="@{/customcss/img/main-index-shop.png}" class="img-shop rounded float-end" alt="쇼핑몰 바로가기">
+			</a>
+		</div>
+	</div>
+	<!-- /.content-wrapper -->
+</th:block>
+</html>

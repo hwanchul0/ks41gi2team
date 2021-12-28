@@ -1,0 +1,19 @@
+/* main-index */
+.row {
+    display: inline-block;
+}
+.container {
+    text-align: center;
+    padding: 100px 0px;
+    margin: 100px 0px;
+
+}
+img.img-sw.rounded.float-start {
+    height: 350px;
+    width: 350px;
+}
+img.img-shop.rounded.float-end {
+    display: inline-block;
+    height: 350px;
+    width: 350px;
+}

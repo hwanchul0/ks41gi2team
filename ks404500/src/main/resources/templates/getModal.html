@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="@{layout/default}">
+	<th:block layout:fragment="customTitle">
+		<title>ksmart41</title>
+	</th:block>
+	<th:block layout:fragment="customContents">
+		<h1>메인화면</h1>
+		<button type="button" id="modalCall">모달</button>
+		<button type="button" id="ajaxCall">호출</button>
+		<div id="getHtml">클릭시 html 삽입</div>
+		<script>
+			$('#modalCall').click(function(){
+				var request = $.ajax({
+					  url: "/modal",
+					  method: "GET",
+					  data: { id : menuId },
+					  dataType: "html"
+					});
+					request.done(function( data ) {
+						
+						// 받아온 data html코드를 파싱해서 받아옴
+					var htmlParsing = $(data);
+						// 파싱한 데이터 바디영역 찾아서 화면에 출력
+					  $('#getHtml').html(htmlParsing.find('body').html());
+					}
+					});
+					request.fail(function( jqXHR, textStatus ) {
+					  alert( "Request failed: " + textStatus );
+					});
+					// json방식
+			$('#ajaxCall').click(function(){
+				var request = $.ajax({
+					  url: "/json",
+					  method: "GET",
+					  data: { id : menuId },
+					  dataType: "json"
+					});
+					request.done(function( data ) {
+						console.log(data)
+						for(var i=0; i< data.length; i++){
+							html += '<div>' + data[i] + '</div>'
+						}
+						$('#getHtml').html(data)
+					});
+					
+					request.fail(function( jqXHR, textStatus ) {
+					  alert( "Request failed: " + textStatus );
+					});
+		</script>
+	
+	</th:block>
+</html>
