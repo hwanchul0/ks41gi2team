@@ -11,7 +11,7 @@
 				<div class="container-fluid">
 					<div class="row mb-2">
 						<div class="col-sm-6">
-							<h1 class="m-0">"addIsListCode / 개발사 손익 관리계정과목 조회"</h1>
+							<h1 class="m-0" th:text="${title}"></h1>
 						</div><!-- /.col -->
 						<div class="col-sm-6">
 							<ol class="breadcrumb float-sm-right">
@@ -31,18 +31,41 @@
 					<div class="col-lg-12">
 						<div class="card">
 							<div class="card-body">
-								<h5 class="card-title">Card title</h5>
+								<h5 class="card-title" th:text="${title}"></h5>
 								<p class="card-text">
-									<table class="table table-striped">
-										<tr>
-											<th>d</th>
-											<th>d</th>
-											<th>d</th>
+									<table class="table table-hover table-condensed swiscodelist">
+										<thead>
+											<tr>
+												<th>계정과목코드</th>
+												<th>계정과목명</th>
+												<th>통합계정그룹코드</th>
+												<th>사업장별 대표코드</th>
+												<th>계정사용여부</th>
+												<th>수정가능여부</th>
+												<th>등록일자</th>
+												<th>등록자아이디</th>
+												<th>반영연도</th>
+												<th>수정</th>
+											</tr>
+										</thead>
+										<tr th:if="${not #lists.isEmpty(swIsListCode)}" th:each="sl: ${swIsListCode}">
+											<td th:text="${sl.swIsCode}"></td>
+											<td th:text="${sl.swIsName}"></td>
+											<td th:text="${sl.swIsGroupCode}"></td>
+											<td th:text="${sl.mainBusinessCode}"></td>
+											<td th:text="${sl.swIsUse}"></td>
+											<td th:text="${sl.swIsAmend}"></td>
+											<td th:text="${sl.swIsRegDate}"></td>
+											<td th:text="${sl.memberId}"></td>
+											<td th:text="${sl.swIsYear}"></td>
+											<td>
+												<button type="button" class="btn btn-info btn-xs swiscodelist">수정</button>
+											</td>
 										</tr>
-										<tr>
-											<th>1</th>
-											<th>2</th>
-											<th>3</th>
+										<tr th:unless="${not #lists.isEmpty(swIsListCode)}">
+											<td>
+											안녕
+											</td>
 										</tr>
 									</table>
 								</p>

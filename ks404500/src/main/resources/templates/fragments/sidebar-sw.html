@@ -2,33 +2,37 @@
 <html xmlns:th="http://www.thymeleaf.org">
    <div id="sidebar" th:fragment="sidebarFragment-sw">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<div th:replace="fragments/javascript :: javascriptFragment"></div>
+	<meta charset="UTF-8">
 </head>
+
 <body class="layout-fixed">
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
-	<!-- Brand Logo -->
+	<!-- 로고 -->
 	<a href="/" class="brand-link">
 		<img src="/customcss/img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
 		<span class="brand-text font-weight-light">TEAM_404500</span>
 	</a>
 
-	<!-- Sidebar -->
+	<!-- 사이드바 -->
 	<div class="sidebar">
-		<!-- Sidebar user panel (optional) -->
+		<!-- 사이드바 프로필 -->
 		<div class="mt-3 pb-3 pt-3 mb-3">
 			<div class="text-center image-box">
 				<img src="/customcss/img/profile.png" class="img-circle image-thumbnail" alt="User Image">
 			</div>
-			<div class="text-center mt-3">
-				<a href="#" class="text-white"><h5>SW</h5></a>
-				<span class="text-white">총관리자</span>
+			<div th:if="${session.SDI != null}" class="text-center mt-3">
+				<h5 class="text-white">[[${session.SID}]]</h5>
+				<span class="text-white">[[${session.SLEVEL}]]</span>				
+			</div>
+			<div th:unless="${session.SDI != null}" class="text-center mt-3">
+				<h5 class="text-white">비회원</h5>
+				<span class="text-white">user</span>				
 			</div>
 		</div>
-			<!-- Sidebar Menu -->
+
+			<!-- 사이드바 메뉴 -->		
 			<nav class="mt-2">
-				<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+				<ul th:if="${session.SDI != null}" class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 					<!-- 회원관리 시작 -->
 					<li class="nav-item">
 						<a href="#" class="nav-link">
@@ -41,7 +45,7 @@
 								<li class="nav-item">
 									<a th:href="@{/sw/member/addMember}" class="nav-link">
 										<i class="far fa-circle nav-icon"></i>
-										<p>개발사 내부회원등록 [재천] </p> 
+										<p>!개발사 내부회원등록 [재천] </p> 
 									</a>
 								</li>
 							</ul>
@@ -49,7 +53,7 @@
 								<li class="nav-item">
 									<a th:href="@{/sw/member/selectMember}" class="nav-link">
 										<i class="far fa-circle nav-icon"></i>
-										<p>개발사 내부회원조회 [재천]</p>
+										<p>!개발사 내부회원조회 [재천]</p>
 									</a>
 								</li>
 							</ul>
@@ -57,7 +61,7 @@
 								<li class="nav-item">
 									<a th:href="@{/sw/client/addClient}" class="nav-link">
 										<i class="far fa-circle nav-icon"></i>
-										<p>개발사 외부회원 등록 [재천] </p>
+										<p>!개발사 외부회원 등록 [재천] </p>
 									</a>
 								</li>
 							</ul>
@@ -65,7 +69,7 @@
 								<li class="nav-item">
 									<a th:href="@{/sw/client/selectClient}" class="nav-link">
 										<i class="far fa-circle nav-icon"></i>
-										<p>개발사 외부회원 조회 [재천] </p>
+										<p>!개발사 외부회원 조회 [재천] </p>
 									</a>
 								</li>
 							</ul>
@@ -205,7 +209,7 @@
 												<li class="nav-item">
 													<a th:href="@{/sw/code/addBusinessCode}" class="nav-link">
 														<i class="far fa-circle nav-icon"></i>
-														<p>거래처 구분 코드 등록[재천]</p>
+														<p>!거래처 구분 코드 등록[재천]</p>
 													</a>
 												</li>
 											</ul>
@@ -213,7 +217,7 @@
 												<li class="nav-item">
 													<a th:href="@{/sw/code/selectBusinessCode}" class="nav-link">
 														<i class="far fa-circle nav-icon"></i>
-														<p>거래처 구분 코드 조회[재천]</p>
+														<p>!거래처 구분 코드 조회[재천]</p>
 													</a>
 												</li>
 											</ul>
@@ -221,7 +225,7 @@
 												<li class="nav-item">
 													<a th:href="@{/sw/code/addLocalCode}" class="nav-link">
 														<i class="far fa-circle nav-icon"></i>
-														<p>거래처 지역 코드 등록[재천]</p>
+														<p>!거래처 지역 코드 등록[재천]</p>
 													</a>
 												</li>
 											</ul>
@@ -229,7 +233,7 @@
 												<li class="nav-item">
 													<a th:href="@{/sw/code/selectLocalCode}" class="nav-link">
 														<i class="far fa-circle nav-icon"></i>
-														<p>거래처 지역 코드 조회[재천]</p>
+														<p>!거래처 지역 코드 조회[재천]</p>
 													</a>
 												</li>
 											</ul>
@@ -238,7 +242,7 @@
 												<li class="nav-item">
 													<a th:href="@{/sw/code/addInvoiceReasonCode}" class="nav-link">
 														<i class="far fa-circle nav-icon"></i>
-														<p>세금계산서 사유 코드 등록[유경]</p>
+														<p>!세금계산서 사유 코드 등록[유경]</p>
 													</a>
 												</li>
 											</ul>
@@ -254,7 +258,7 @@
 												<li class="nav-item">
 													<a th:href="@{/sw/code/addIsListCode}" class="nav-link">
 														<i class="far fa-circle nav-icon"></i>
-														<p>손익 관리계정과목 등록[유경]</p>
+														<p>!손익 관리계정과목 등록[유경]</p>
 													</a>
 												</li>
 											</ul>
@@ -329,7 +333,7 @@
 													<li class="nav-item">
 														<a th:href="@{/sw/accounting/addIncome}" class="nav-link">
 															<i class="far fa-circle nav-icon"></i>
-															<p>서비스 매출 등록[재천]</p>
+															<p>!서비스 매출 등록[재천]</p>
 														</a>
 													</li>
 												</ul>
@@ -337,7 +341,7 @@
 													<li class="nav-item">
 														<a th:href="@{/sw/accounting/selectIncome}" class="nav-link">
 															<i class="far fa-circle nav-icon"></i>
-															<p>서비스 매출 조회[재천]</p>
+															<p>!서비스 매출 조회[재천]</p>
 														</a>
 													</li>
 												</ul>
@@ -353,7 +357,7 @@
 													<li class="nav-item">
 														<a th:href="@{/sw/accounting/addInvoice}" class="nav-link">
 															<i class="far fa-circle nav-icon"></i>
-															<p>세금계산서 발행[유경]</p>
+															<p>!세금계산서 발행[유경]</p>
 														</a>
 													</li>
 												</ul>
@@ -361,7 +365,7 @@
 													<li class="nav-item">
 														<a th:href="@{/sw/accounting/selectInvoice}" class="nav-link">
 															<i class="far fa-circle nav-icon"></i>
-															<p>세금계산서 조회[유경]</p>
+															<p>!세금계산서 조회[유경]</p>
 														</a>
 													</li>
 												</ul>
@@ -369,7 +373,7 @@
 													<li class="nav-item">
 														<a th:href="@{/sw/accounting/addExpense}" class="nav-link">
 															<i class="far fa-circle nav-icon"></i>
-															<p>비용 등록[재천]</p>
+															<p>!비용 등록[재천]</p>
 														</a>
 													</li>
 												</ul>
@@ -377,7 +381,7 @@
 													<li class="nav-item">
 														<a th:href="@{/sw/accounting/selectExpense}" class="nav-link">
 															<i class="far fa-circle nav-icon"></i>
-															<p>비용 조회[재천]</p>
+															<p>!비용 조회[재천]</p>
 														</a>
 													</li>
 												</ul>
@@ -385,7 +389,7 @@
 													<li class="nav-item">
 														<a th:href="@{/sw/accounting/selectTotalAccounting}" class="nav-link">
 															<i class="far fa-circle nav-icon"></i>
-															<p>통합회계 조회[유경]</p>
+															<p>!통합회계 조회[유경]</p>
 														</a>
 													</li>
 												</ul>
@@ -393,7 +397,7 @@
 													<li class="nav-item">
 														<a th:href="@{/sw/accounting/addInvoiceDetail}" class="nav-link">
 															<i class="far fa-circle nav-icon"></i>
-															<p>세금계산서 품목상세 등록[유경]</p>
+															<p>!세금계산서 품목상세 등록[유경]</p>
 														</a>
 													</li>
 												</ul>
@@ -401,17 +405,74 @@
 													<li class="nav-item">
 														<a th:href="@{/sw/accounting/selectInvoiceDetail}" class="nav-link">
 															<i class="far fa-circle nav-icon"></i>
-															<p>세금계산서 품목상세 조회[유경]</p>
+															<p>!세금계산서 품목상세 조회[유경]</p>
 														</a>
 													</li>
 												</ul>
 											</li>
 											<!-- 재무관리 끝 -->
 				</ul>
+				<ul th:unless="${session.SDI != null}" class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+					<li class="nav-item">
+						<a href="#" class="nav-link">
+							<i class="nav-icon fas fa-circle"></i>
+							<p>비회원 메뉴 
+							<i class="right fas fa-angle-down"></i>
+							</p>
+						</a>
+						<ul class="nav nav-treeview">
+							<li class="nav-item">
+								<a th:href="@{#}" class="nav-link">
+									<i class="far fa-circle nav-icon"></i>
+									<p>비회원 메뉴 구상</p> 
+								</a>
+							</li>
+						</ul>
+					</li>
+					<!-- 추후에 삭제예정 -->
+					<li class="nav-item">
+						<a href="#" class="nav-link">
+							<i class="nav-icon fas fa-circle"></i>
+							<p>회원관리(삭제예정) 
+							<i class="right fas fa-angle-down"></i>
+							</p>
+						</a>
+							<ul class="nav nav-treeview">
+								<li class="nav-item">
+									<a th:href="@{/sw/member/addMember}" class="nav-link">
+										<i class="far fa-circle nav-icon"></i>
+										<p>!개발사 내부회원등록 [재천] </p> 
+									</a>
+								</li>
+							</ul>
+							<ul class="nav nav-treeview">
+								<li class="nav-item">
+									<a th:href="@{/sw/member/selectMember}" class="nav-link">
+										<i class="far fa-circle nav-icon"></i>
+										<p>!개발사 내부회원조회 [재천]</p>
+									</a>
+								</li>
+							</ul>
+							<ul class="nav nav-treeview">
+								<li class="nav-item">
+									<a th:href="@{/sw/client/addClient}" class="nav-link">
+										<i class="far fa-circle nav-icon"></i>
+										<p>!개발사 외부회원 등록 [재천] </p>
+									</a>
+								</li>
+							</ul>
+							<ul class="nav nav-treeview">
+								<li class="nav-item">
+									<a th:href="@{/sw/client/selectClient}" class="nav-link">
+										<i class="far fa-circle nav-icon"></i>
+										<p>!개발사 외부회원 조회 [재천] </p>
+									</a>
+								</li>
+							</ul>
+						</li>
+				</ul>
 			</nav>
-			<!-- /.sidebar-menu -->
 	</div>
-	<!-- /.sidebar -->
     
     <!--  기능 Start -->
     <script type="text/javascript">
