@@ -31,4 +31,9 @@ public class MemberService {
 		System.out.println("MemberService.java" + memberList);
 		return memberList;
 	}
+	
+	//회원정보 조회
+	public Member MemberInfo(String memberId) {
+		return memberMapper.MemberInfo(memberId);
+	}
 } 
