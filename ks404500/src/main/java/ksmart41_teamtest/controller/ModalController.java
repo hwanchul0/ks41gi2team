@@ -10,33 +10,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/sw/modal")
 public class ModalController {
 	
-	@GetMapping("/modal")
-	public String modal(Model model) {
+	@GetMapping("/arequestModal")
+	public String requestModal(Model model) {
 		model.addAttribute("title", "모달화면");
-		List<String> userList = new ArrayList<String>();
-		userList.add("홍길동");
-		userList.add("이순신");
-		model.addAttribute("userList", userList);
-		return "modal";
+		//List<String> requestModal = new ArrayList<String>();
+		//model.addAttribute("requestModal", requestModal);
+		return "sw/modal/requestModal";
 	}
 	
-	@GetMapping(value="/json", produces = "application/json")
-	@ResponseBody
-	public List<String> json(Model model) {
-		model.addAttribute("title", "모달화면");
-		List<String> userList = new ArrayList<String>();
-		userList.add("홍길동");
-		userList.add("이순신");
-		return userList;
-	}
-	
-	//주석처리함 재천
-	/*
-	 * @GetMapping("/modal") public String getModal(Model model) {
-	 * model.addAttribute("title", "메인화면"); return "modal"; }
+	/* json 방식
+	 * @GetMapping(value="/json", produces = "application/json")
+	 * 
+	 * @ResponseBody public List<String> json(Model model) {
+	 * model.addAttribute("title", "모달화면"); List<String> userList = new
+	 * ArrayList<String>(); userList.add("홍길동"); userList.add("이순신"); return
+	 * userList; }
 	 */
+	
+	// 모달 가져올 컨트롤러
+	@GetMapping("/getModal")
+	public String getModal(Model model) {
+		//model.addAttribute("title", "메인화면");
+		return "getModal";
+	}
 	
 }

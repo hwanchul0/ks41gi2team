@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="@{layout/default-sw}">
-	<th:block layout:fragment="customTitle">
-		<title th:text="${title}"></title>
-	</th:block>
-<th:block th:fragment="sidebarFragment-sw">
+<html xmlns:th="http://www.thymeleaf.org">
+   <div id="sidebar" th:fragment="sidebarFragment-sw">
+<head>
+<meta charset="UTF-8">
+<title>SW</title>
+<div th:replace="fragments/javascript :: javascriptFragment"></div>
+</head>
+<body class="layout-fixed">
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
 	<!-- Logo -->
 	<a href="/" class="brand-link">
@@ -452,5 +453,6 @@
           });
     </script>
   </aside>
-</th:block>
+</body>
+</div>
 </html>

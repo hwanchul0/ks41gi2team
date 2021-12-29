@@ -2,11 +2,15 @@ package ksmart41_teamtest.controller;
 
 import java.util.List;
 
+import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import ksmart41_teamtest.dto.InvoiceReason;
 import ksmart41_teamtest.dto.SwIsListCode;
@@ -17,8 +21,10 @@ import ksmart41_teamtest.service.SwIsListService;
 @RequestMapping("/sw/code")
 public class SwCodeController {
 	
+	/*유경 */
 	@Autowired
 	private InvoiceReasonService invoiceReasonService;
+	/*유경 */
 	@Autowired
 	private SwIsListService swIsListService;
 	
@@ -59,8 +65,25 @@ public class SwCodeController {
 		return "sw/code/selectInvoiceReasonCode";
 	}
 	
+	/*유경 개발사 손익계정과목 등록 -> 수정으로 바꿀 예정*/
+	@PostMapping("addIsListCode")
+	public String modifyIsListCode(SwIsListCode swIsListCode) {
+		System.out.println("화면에서 받은 정보 : " + swIsListCode);
+		//swIsListService.modifyIsListCode(swIsListCode);
+		return "redirect:/sw/code/selectIsListCode";
+	}
+	
+	
+	/*유경 개발사 손익계정과목 등록 -> 수정으로 바꿀 예정*/
 	@GetMapping("/addIsListCode")
-	public String addIsListCode(Model model) {
+	public String modifyIsListCode(@RequestParam(value="swIsCode", required = false) String swIsCode
+            ,Model model) {
+		//System.out.println("swIsCode :"+ swIsCode);
+		SwIsListCode swIsCodeInfo = swIsListService.getSwIsCodeBySwIsListCode(swIsCode);
+		if(swIsCode != null && !"".equals(swIsCode) && "Y".equals(swIsCodeInfo.getSwIsAmend()) ) {
+			model.addAttribute("swIsCodeInfo", swIsCodeInfo);
+			swIsCodeInfo.getSwIsAmend();
+		}
 		return "sw/code/addIsListCode";
 	}
 	

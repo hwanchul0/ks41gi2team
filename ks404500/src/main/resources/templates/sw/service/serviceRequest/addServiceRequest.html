@@ -1,41 +1,123 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" 
-xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
-layout:decorate="@{layout/default-sw}">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="@{layout/default-sw}">
+	<th:block layout:fragment="customTitle">
+		<title th:text="${title}"></title>
+	</th:block>
 <th:block layout:fragment="customContents">
-<!-- Content Wrapper. Contains page content -->
+	<!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper">
-	<!-- Content Header (Page header) -->
+		<!-- Content Header (Page header) -->
 		<div class="content-header">
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1 class="m-0">"addServiceRequest / 서비스 계약 요청 등록"</h1>
-					</div><!-- /.col -->
+						<h1 class="m-0">서비스 계약 요청 등록하기</h1>
+					</div>
+					<!-- /.col -->
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
 							<li class="breadcrumb-item"><a href="#">Home</a></li>
 							<li class="breadcrumb-item active">Starter Page</li>
 						</ol>
-					</div><!-- /.col -->
-				</div><!-- /.row -->
-			</div><!-- /.container-fluid -->
+					</div>
+					<!-- /.col -->
+				</div>
+				<!-- /.row -->
+			</div>
+			<!-- /.container-fluid -->
 		</div>
-	<!-- /.content-header -->
-	
-	<!-- Main content -->
+		<!-- /.content-header -->
+
+		<!-- Main content -->
 		<div class="content">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="card">
+							<div class="card-header">서비스 계약 요청 등록</div>
 							<div class="card-body">
-								<h5 class="card-title">Card title</h5>
-								<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-								<a href="#" class="card-link">Card link</a>
-								<a href="#" class="card-link">Another link</a>
+								<div class="container">
+									<div class="input-form-backgroud row">
+										<div class="input-form col-md-12 mx-auto">
+											<form class="validation-form" novalidate>
+												<div class="mb-3">
+													<label for="mainBusinessCode">사업장 대표코드</label>
+													<button type="button" class="btn btn-primary btn-lg" id="openModalBtn" style="height: 27px;padding: 0;margin: 5px;font-size: 14px;">
+													내 사업자 대표코드
+													</button>
+													<input type="email" class="form-control" id="mainBusinessCode" readonly>
+													<!-- 로그인한 아이디 select -> 사업장 대표코드 조회 -->
+													<!-- ID별 사업장 대표코드 모달 -->
+
+												<div class="invalid-feedback">사업장 대표코드를 선택해주세요.</div>
+												</div>
+												<div class="row">
+													<div class="col-md-4">
+														<label for="serviceName">서비스명</label>
+														<select class="serviceName-select d-block w-100" id="serviceName" style="height: 38px;"required>
+															<option value="#" style="text-align: center;">::서비스를선택해 주세요::</option>
+															<option value="1">공장 1일</option>
+															<option value="30">공장 30일</option>
+															<option value="365">공장 365일</option>
+															<option value="1">물류센터 1일</option>
+															<option value="30">물류센터 30일</option>
+															<option value="365">물류센터 365일</option>
+															<option value="1">쇼핑몰 1일</option>
+															<option value="30">쇼핑몰 30일</option>
+															<option value="365">쇼핑몰 365일</option>
+														</select>
+														<div class="invalid-feedback">서비스를 선택해주세요.</div>
+													</div>
+													<div class="col-md-4">
+														<label for="serviceAmount">서비스 계약수량</label> 
+														<input type="number" class="myInput form-control" id="serviceAmount" required>
+														<div class="invalid-feedback">서비스 계약수량을 입력해주세요.</div>
+													</div>
+													<div class="col-md-4">
+														<button type="button" id="totalBtn" class="btn btn-primary" style="height: 38px;position: absolute; top: 50%;">총 서비스 기간 조회</button>
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-md-6 mb-3">
+														<label for="serviceRegistrationDate">서비스 시작 예약날짜</label> 
+														<input type="date" class="form-control" id="serviceRegistrationDate" required>
+														<div class="invalid-feedback">서비스 시작 예약날짜를 입력해주세요.</div>
+													</div>
+													<div class="col-md-6 mb-3">
+														<label for="serviceEndDate">서비스 만료날짜</label> 
+														<input type="text" class="form-control" id="serviceEndDate" placeholder="2021-01-15" readonly required>
+														<div class="invalid-feedback">서비스 만료날짜를 입력해주세요.</div>
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-md-6">
+														<label for="servicePeriod">총 서비스 기간(일)</label> 
+														<input type="text" class="form-control" id="servicePeriod" readonly >
+													</div>
+													<div class="col-md-6">
+														<label for="servicePrice">총 결제 금액</label>
+														<input type="text" class="form-control" id="servicePrice" readonly required>
+													</div>
+												</div>
+											</form>
+										</div>
+									</div>
+									<footer class="my-3 text-small">
+										<div class="custom-control custom-checkbox">
+											<input type="checkbox" class="custom-control-input"
+												id="aggrement"> <label class="custom-control-label"
+												for="aggrement">개인정보 수집 및 이용에 동의합니다.</label>
+										</div>
+									</footer>
+								</div>
+							</div>
+							<!-- /card-body -->
+							<div class="card-footer">
+								<hr class="mb-4">
+								<div class="mb-4"></div>
+								<button class="btn btn-primary btn-lg btn-block" type="submit">등록완료</button>
 							</div>
 						</div>
 					</div>
@@ -43,9 +125,51 @@ layout:decorate="@{layout/default-sw}">
 				</div>
 				<!-- /.container-fluid -->
 			</div>
-	    	<!-- /.content -->
+			<!-- /.content -->
 		</div>
 	</div>
-<!-- /.content-wrapper -->
+	<!-- /.content-wrapper -->
+	
+	<!-- script -->
+	<script>
+	
+	// calendar 서비스 시작 날짜 (default =  오늘날짜)
+	document.getElementById('serviceRegistrationDate').value = new Date().toISOString().substring(0, 10);
+	
+	$(function(){
+		
+			// 총 서비스 기간 조회		
+			$('#totalBtn').click(function(){
+				var serviceName = $('#serviceName').val();
+				var serviceAmount = $('#serviceAmount').val();
+				var servicePeriod = $('#servicePeriod');
+				servicePeriod.val(serviceName * serviceAmount) 
+			});
+			
+			// 모달 버튼에 이벤트를 건다.
+			$('#openModalBtn').on('click', function(){
+				var request = $.ajax({
+					  url: "/requestModal",
+					  method: "GET",
+					  dataType: "html"
+					});
+					 
+					request.done(function( msg ) {
+					  alert('일단성공');
+					});
+					 
+					request.fail(function( jqXHR, textStatus ) {
+					  alert( "Request failed: " + textStatus );
+					});
+		
+			
+			// 모달 안의 취소 버튼에 이벤트를 건다.
+			$('#closeModalBtn').on('click', function(){
+			$('#modalBox').modal('hide');
+			});
+	});
+});
+	</script>
+	<!-- /script -->
 </th:block>
 </html>

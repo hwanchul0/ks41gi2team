@@ -12,9 +12,9 @@
 			<div class="card">
 				<div class="card-body login-card-body">
 					<p class="login-box-msg">개발사 로그인</p>
-					<form th:action="@{/login.html}" method="post">
+					<form th:action="@{/login}" method="post">
 						<div class="input-group mb-3">
-							<input type="text" class="form-control" placeholder="아이디를 입력하세요">
+							<input type="text" class="form-control" placeholder="아이디를 입력하세요" name="memberId" value="test">
 							<div class="input-group-append">
 								<div class="input-group-text">
 									<span class="fas fa-user"></span>
@@ -23,7 +23,7 @@
 						</div>
 						<div class="input-group mb-3">
 							<input type="password" class="form-control"
-								placeholder="비밀번호를 입력하세요">
+								placeholder="비밀번호를 입력하세요" name="memberPw" value="test">
 							<div class="input-group-append">
 								<div class="input-group-text">
 									<span class="fas fa-lock"></span>
@@ -40,7 +40,7 @@
 						<a href="#">비밀번호 찾기</a>
 					</p>
 					<p class="mb-0">
-						<a href="/addMember" class="text-center">회원가입</a>
+						<a th:href=@{/addMember} class="text-center">회원가입</a>
 					</p>
 				</div>
 			</div>
@@ -55,9 +55,9 @@
 			<div class="card">
 				<div class="card-body login-card-body">
 					<p class="login-box-msg">쇼핑몰 로그인</p>
-					<form th:action="@{/login.html}" method="post">
+					<form th:action="@{/login}" method="post">
 						<div class="input-group mb-3">
-							<input type="text" class="form-control" placeholder="아이디를 입력하세요">
+							<input type="text" class="form-control" placeholder="아이디를 입력하세요" name="clientId">
 							<div class="input-group-append">
 								<div class="input-group-text">
 									<span class="fas fa-user"></span>
@@ -65,8 +65,7 @@
 							</div>
 						</div>
 						<div class="input-group mb-3">
-							<input type="password" class="form-control"
-								placeholder="비밀번호를 입력하세요">
+							<input type="password" class="form-control"	placeholder="비밀번호를 입력하세요" name="clientPw">
 							<div class="input-group-append">
 								<div class="input-group-text">
 									<span class="fas fa-lock"></span>
@@ -83,7 +82,7 @@
 						<a href="#">비밀번호 찾기</a>
 					</p>
 					<p class="mb-0">
-						<a href="/addClient" class="text-center">회원가입</a>
+						<a th:href=@{/addClient} class="text-center">회원가입</a>
 					</p>
 				</div>
 			</div>

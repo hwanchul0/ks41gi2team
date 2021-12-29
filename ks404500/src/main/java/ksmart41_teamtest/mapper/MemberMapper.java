@@ -14,5 +14,8 @@ public interface MemberMapper {
 	
 	//내부직원 조회
 	public List<Member> selectMemberList();
+	
+	//내부직원 정보 조회
+	public Member MemberInfo(String memberId);
 }
 
