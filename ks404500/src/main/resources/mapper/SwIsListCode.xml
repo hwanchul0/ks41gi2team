@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ksmart41_teamtest.mapper.CodeMapper">
+	<!-- 유경 : 손익계정과목 조회!-->
 	<select id="getSwIsListCode" resultType="SwIsListCode">
 		SELECT 
 			swIsCode, 
@@ -13,5 +14,22 @@
 			memberId, 
 			swIsYear
 		FROM k2_sw_is_list;
+	</select>
+	
+	<!-- 유경 : 손익계정에서 값 가져오기 -->
+	<select id="getSwIsCodeBySwIsListCode" resultType="SwIsListCode">
+		SELECT 
+			swIsCode, 
+			swIsName, 
+			swIsGroupCode, 
+			mainBusinessCode, 
+			swIsUse, 
+			swIsAmend, 
+			swIsRegDate, 
+			memberId, 
+			swIsYear
+		FROM k2_sw_is_list
+		where
+			swIsCode = #{swIsCode};
 	</select>
 </mapper>

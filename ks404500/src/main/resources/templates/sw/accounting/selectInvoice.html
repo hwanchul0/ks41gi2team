@@ -1,31 +1,35 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" 
-xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
-layout:decorate="@{layout/default-sw}">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="@{layout/default-sw}">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <th:block layout:fragment="customContents">
-<!-- Content Wrapper. Contains page content -->
+	<!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper">
-	<!-- Content Header (Page header) -->
+		<!-- Content Header (Page header) -->
 		<div class="content-header">
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
 						<h1 class="m-0">"selectInvoice / 세금계산서 조회"</h1>
-					</div><!-- /.col -->
+					</div>
+					<!-- /.col -->
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
 							<li class="breadcrumb-item"><a href="#">Home</a></li>
 							<li class="breadcrumb-item active">Starter Page</li>
 						</ol>
-					</div><!-- /.col -->
-				</div><!-- /.row -->
-			</div><!-- /.container-fluid -->
+					</div>
+					<!-- /.col -->
+				</div>
+				<!-- /.row -->
+			</div>
+			<!-- /.container-fluid -->
 		</div>
-	<!-- /.content-header -->
-	
-	<!-- Main content -->
+		<!-- /.content-header -->
+
+		<!-- Main content -->
 		<div class="content">
 			<div class="container-fluid">
 				<div class="row">
@@ -33,19 +37,74 @@ layout:decorate="@{layout/default-sw}">
 						<div class="card">
 							<div class="card-body">
 								<h5 class="card-title">Card title</h5>
-								<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-								<a href="#" class="card-link">Card link</a>
-								<a href="#" class="card-link">Another link</a>
+								<p class="card-text">
+								<div class="card-body table-responsive p-0">
+									<table class="table table-hover">
+										<thead>
+											<tr>
+												<th>세금계산서코드</th>
+												<th>일자</th>
+												<th>유형</th>
+												<th>사업장대표코드</th>
+												<th>거래처</th>
+												<th>공급가액</th>
+												<th>세액</th>
+												<th>수정<br>여부
+												</th>
+												<th>세금계산서<br>미리보기
+												</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:if="${not #lists.isEmpty(invoiceList)}" th:each="il : ${invoiceList}">
+												<td th:text="${il.invoiceCode}"></td>
+												<td th:text="${il.invoiceRegDate}"></td>
+												<td th:text="${il.invoiceType}"></td>
+												<td th:text="${il.mainBusinessCodeDemand}"></td>
+												<td th:text="${il.invoiceDemand}"></td>
+												<td th:text="${il.invoicePrice}"></td>
+												<td th:text="${il.invoiceTax}"></td>
+												<td th:text="${il.amendCheck}"></td>
+												<td>
+													<button type="button" class="btn btn-primary btn-sm" id="myModal" data-toggle="modal" data-target="#myModal">보기</button>
+												</td>
+											<tr th:unless="${not #lists.isEmpty(invoiceList)}">
+										</tbody>
+										<tfoot>
+										</tfoot>
+									</table>
+								</div>
+								<!-- /.card-body -->
 							</div>
+							<!-- /.card -->
+							</p>
 						</div>
 					</div>
-					<!-- /.row -->
 				</div>
-				<!-- /.container-fluid -->
+				<!-- /.row -->
 			</div>
-	    	<!-- /.content -->
+			<!-- /.container-fluid -->
 		</div>
+		<!-- /.content -->
 	</div>
-<!-- /.content-wrapper -->
+	<!-- /.content-wrapper -->
+	
+	<!-- <script type="text/javascript">
+	$('#myModal').click(function(){
+		var request = $.ajax({
+			  url: "/sw/accounting/111",
+			  method: "GET",
+			  dataType: "html"
+			});
+			 
+			request.done(function( data ) {
+				$('#myModal').modal();
+			});
+			 
+			request.fail(function( jqXHR, textStatus ) {
+			  alert( "Request failed: " + textStatus );
+			});
+	});
+	</script> -->
 </th:block>
 </html>
