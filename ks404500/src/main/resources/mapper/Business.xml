@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ksmart41_teamtest.mapper.BusinessMapper">
+	<select id="getBusiness" resultType="Business">
+		SELECT
+			businessRegistrationCode,
+			clientId,
+			localCode,
+			memberId,
+			businessName,
+			businessRepresentativeName,
+			bunsinessNumber,
+			businessPhone,
+			businessAddr,
+			businessEmail,
+			businessMainAccount,
+			businessAccountNumber,
+			businessAccountHolder,
+			businessType1,
+			businessRegistration,
+			businessRegistrationState
+		FROM k0_sw_businessRegistration;
+	</select>
+
+</mapper>
