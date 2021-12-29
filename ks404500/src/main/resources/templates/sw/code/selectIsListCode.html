@@ -39,7 +39,6 @@
 												<th>계정과목코드</th>
 												<th>계정과목명</th>
 												<th>통합계정그룹코드</th>
-												<th>사업장별 대표코드</th>
 												<th>계정사용여부</th>
 												<th>수정가능여부</th>
 												<th>등록일자</th>
@@ -48,18 +47,18 @@
 												<th>수정</th>
 											</tr>
 										</thead>
+										<tbody>
 										<tr th:if="${not #lists.isEmpty(swIsListCode)}" th:each="sl: ${swIsListCode}">
 											<td th:text="${sl.swIsCode}"></td>
 											<td th:text="${sl.swIsName}"></td>
 											<td th:text="${sl.swIsGroupCode}"></td>
-											<td th:text="${sl.mainBusinessCode}"></td>
 											<td th:text="${sl.swIsUse}"></td>
 											<td th:text="${sl.swIsAmend}"></td>
 											<td th:text="${sl.swIsRegDate}"></td>
 											<td th:text="${sl.memberId}"></td>
 											<td th:text="${sl.swIsYear}"></td>
 											<td>
-												<button type="button" class="btn btn-info btn-xs swiscodelist">수정</button>
+												<a th:href="@{/sw/code/addIsListCode(swIsCode=${sl.swIsCode})}" class="amend"> &nbsp수정</a>
 											</td>
 										</tr>
 										<tr th:unless="${not #lists.isEmpty(swIsListCode)}">
@@ -67,10 +66,9 @@
 											안녕
 											</td>
 										</tr>
+										</tbody>
 									</table>
 								</p>
-								<a href="#" class="card-link">Card link</a>
-								<a href="#" class="card-link">Another link</a>
 							</div>
 						</div>
 					</div>
@@ -82,5 +80,14 @@
 		<!-- /.content -->
 	</div>
 	<!-- /.content-wrapper -->
+	<script type="text/javascript">
+	
+		$(document).ready(function() {
+			$('.amend').onclick(function() {
+				console.log(alert);
+		});		
+		
+		
+	</script>
 </th:block>
 </html>

@@ -15,14 +15,26 @@ public class SwIsListService {
 	
 	@Autowired
 	private CodeMapper codeMapper;
+	
 	public SwIsListService(CodeMapper codeMapper) {
 		this.codeMapper = codeMapper;
 	}
 	
+	/*유경 */
 	public List<SwIsListCode> getSwIsListCode() {
 		List<SwIsListCode> swIsListCode = codeMapper.getSwIsListCode();
-		System.out.println(swIsListCode + "<--service");
+		//System.out.println(swIsListCode + "<--service");
 		return swIsListCode;
+	}
+
+	public int addIsListCode(SwIsListCode swiscode) {
+		int result = codeMapper.addIsListCode(swiscode);
+		return result;
+	}
+	
+	/*유경  손익계정정->수정화면에서 값 가져오기*/
+	public SwIsListCode getSwIsCodeBySwIsListCode(String swIsCode) {
+		return codeMapper.getSwIsCodeBySwIsListCode(swIsCode);
 	}
 
 }
