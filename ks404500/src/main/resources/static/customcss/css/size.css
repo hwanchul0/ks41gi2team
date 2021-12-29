@@ -37,11 +37,26 @@
 .sidebar-light-success{
    background-color: #CFE2CE;
 }
-/*테이블 높이 조정, 스크롤바*/
-.table-body{
-	
+/*쇼핑몰 사이드바 상위메뉴 폰트 색 변경*/
+.sidebar-light-success .nav-item .nav-link{
+	color : #121212;
 }
-.form-horizontal{
-	
+/*쇼핑몰 사이드바 하위메뉴 폰트 색 변경*/
+.sidebar-light-success .nav-treeview p{
+	color : #575757;
+}
+/*개발사 손익 계정조회 폰트 사이즈 조절*/
+.card-body .swiscodelist{
+	font-size : 85%
+}
+
+/* 로그인 페이지 크기조절 */
+.login-box{
+	width: 360px;
+	margin: 0 auto;
+	margin-top:150px;
+	line-height: 1.5;
+    color: #212529;
+    text-align: left;
 }
 

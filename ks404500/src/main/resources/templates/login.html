@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="@{layout/default}">
+<div th:replace="fragments/javascript :: javascriptFragment"></div>
+<!-- <th:block layout:fragment="javascriptFragment"></th:block> -->
+<th:block layout:fragment="customContents">
+	<!-- 개발사 로그인 -->
+	<div class="row">
+		<div class="login-box col-3">
+			<div class="login-logo">
+				<a href="/"><b> K-SMART </b>ks404500</a>
+			</div>
+			<div class="card">
+				<div class="card-body login-card-body">
+					<p class="login-box-msg">개발사 로그인</p>
+					<form th:action="@{/login.html}" method="post">
+						<div class="input-group mb-3">
+							<input type="text" class="form-control" placeholder="아이디를 입력하세요">
+							<div class="input-group-append">
+								<div class="input-group-text">
+									<span class="fas fa-user"></span>
+								</div>
+							</div>
+						</div>
+						<div class="input-group mb-3">
+							<input type="password" class="form-control"
+								placeholder="비밀번호를 입력하세요">
+							<div class="input-group-append">
+								<div class="input-group-text">
+									<span class="fas fa-lock"></span>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="mb-3">
+								<button type="submit" class="btn btn-primary btn-block">로그인</button>
+							</div>
+						</div>
+					</form>
+					<p class="mb-1">
+						<a href="#">비밀번호 찾기</a>
+					</p>
+					<p class="mb-0">
+						<a href="/addMember" class="text-center">회원가입</a>
+					</p>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 쇼핑몰 로그인 -->
+		<div class="login-box col-3">
+			<div class="login-logo">
+				<a href="/"><b> K-SMART </b>ks404500</a>
+			</div>
+			<!-- /.login-logo -->
+			<div class="card">
+				<div class="card-body login-card-body">
+					<p class="login-box-msg">쇼핑몰 로그인</p>
+					<form th:action="@{/login.html}" method="post">
+						<div class="input-group mb-3">
+							<input type="text" class="form-control" placeholder="아이디를 입력하세요">
+							<div class="input-group-append">
+								<div class="input-group-text">
+									<span class="fas fa-user"></span>
+								</div>
+							</div>
+						</div>
+						<div class="input-group mb-3">
+							<input type="password" class="form-control"
+								placeholder="비밀번호를 입력하세요">
+							<div class="input-group-append">
+								<div class="input-group-text">
+									<span class="fas fa-lock"></span>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="mb-3">
+								<button type="submit" class="btn btn-primary btn-block">로그인</button>
+							</div>
+						</div>
+					</form>
+					<p class="mb-1">
+						<a href="#">비밀번호 찾기</a>
+					</p>
+					<p class="mb-0">
+						<a href="/addClient" class="text-center">회원가입</a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</th:block>
+</html>
+
+

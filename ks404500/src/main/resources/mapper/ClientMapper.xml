@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ksmart41_teamtest.mapper.ClientMapper">
+	<insert id="addClient" parameterType="Client">
+	INSERT INTO k2_sw_client(
+		clientId,
+		businessLevelCode,
+		clientPw,
+		clientName,
+		clientEmail,
+		clientRegistration,
+		clientPhone,
+		clientStatus,
+		clientWithdrawal,
+		clientWithdrawalReason
+	)VALUES (
+		#{clientId},
+		#{businessLevelCode},
+		#{clientPw},
+		#{clientName},
+		#{clientEmail},
+		#{clientRegistration},
+		#{clientPhone},
+		#{clientStatus},
+		#{clientWithdrawal},
+		#{clientWithdrawalReason}
+	)
+	</insert>
+</mapper>
