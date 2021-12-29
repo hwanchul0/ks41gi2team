@@ -20,11 +20,11 @@
 			<div class="text-center image-box">
 				<img src="/customcss/img/profile.png" class="img-circle image-thumbnail" alt="User Image">
 			</div>
-			<div th:if="${session.SDI != null}" class="text-center mt-3">
+			<div th:if="${session.SID != null}" class="text-center mt-3">
 				<h5 class="text-white">[[${session.SID}]]</h5>
 				<span class="text-white">[[${session.SLEVEL}]]</span>				
 			</div>
-			<div th:unless="${session.SDI != null}" class="text-center mt-3">
+			<div th:unless="${session.SID != null}" class="text-center mt-3">
 				<h5 class="text-white">비회원</h5>
 				<span class="text-white">user</span>				
 			</div>
@@ -32,7 +32,7 @@
 
 			<!-- 사이드바 메뉴 -->		
 			<nav class="mt-2">
-				<ul th:if="${session.SDI != null}" class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+				<ul th:if="${session.SID != null}" class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 					<!-- 회원관리 시작 -->
 					<li class="nav-item">
 						<a href="#" class="nav-link">
@@ -429,47 +429,6 @@
 							</li>
 						</ul>
 					</li>
-					<!-- 추후에 삭제예정 -->
-					<li class="nav-item">
-						<a href="#" class="nav-link">
-							<i class="nav-icon fas fa-circle"></i>
-							<p>회원관리(삭제예정) 
-							<i class="right fas fa-angle-down"></i>
-							</p>
-						</a>
-							<ul class="nav nav-treeview">
-								<li class="nav-item">
-									<a th:href="@{/sw/member/addMember}" class="nav-link">
-										<i class="far fa-circle nav-icon"></i>
-										<p>!개발사 내부회원등록 [재천] </p> 
-									</a>
-								</li>
-							</ul>
-							<ul class="nav nav-treeview">
-								<li class="nav-item">
-									<a th:href="@{/sw/member/selectMember}" class="nav-link">
-										<i class="far fa-circle nav-icon"></i>
-										<p>!개발사 내부회원조회 [재천]</p>
-									</a>
-								</li>
-							</ul>
-							<ul class="nav nav-treeview">
-								<li class="nav-item">
-									<a th:href="@{/sw/client/addClient}" class="nav-link">
-										<i class="far fa-circle nav-icon"></i>
-										<p>!개발사 외부회원 등록 [재천] </p>
-									</a>
-								</li>
-							</ul>
-							<ul class="nav nav-treeview">
-								<li class="nav-item">
-									<a th:href="@{/sw/client/selectClient}" class="nav-link">
-										<i class="far fa-circle nav-icon"></i>
-										<p>!개발사 외부회원 조회 [재천] </p>
-									</a>
-								</li>
-							</ul>
-						</li>
 				</ul>
 			</nav>
 	</div>

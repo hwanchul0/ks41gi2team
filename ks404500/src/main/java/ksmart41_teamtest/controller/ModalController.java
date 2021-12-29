@@ -28,9 +28,14 @@ public class ModalController {
 		userList.add("이순신");
 		return userList;
 	}
+	
+	//주석처리함 재천
+	/*
+=======
 	/*
 	 * // 모달 가져올 컨트롤러
 	 * 
+>>>>>>> refs/heads/develop
 	 * @GetMapping("/modal") public String getModal(Model model) {
 	 * model.addAttribute("title", "메인화면"); return "modal"; }
 	 */
