@@ -30,14 +30,14 @@
  * 
  * // 계약요청 조회
  * 
- * @GetMapping("/serviceRequest/selectServiceRequest") public String
- * getRequestList(Model model) { List<Request> requestList =
- * requestService.getRequestList();
- * 
- * model.addAttribute("title", "회원전체조회"); model.addAttribute("requestList",
- * requestList);
- * 
- * return "sw/service/serviceRequest/selectServiceRequest"; }
+ * @GetMapping("/serviceRequest/selectServiceRequest") 
+ * public String getRequestList(Model model) { 
+ * List<Request> requestList = requestService.getRequestList();
+ * model.addAttribute("title", "회원전체조회"); 
+ * model.addAttribute("requestList", requestList);
+
+ * return "sw/service/serviceRequest/selectServiceRequest"; 
+ * }
  * 
  * @GetMapping("/modal") public String modal(Model model) {
  * model.addAttribute("title", "모달화면"); List<String> userList = new
