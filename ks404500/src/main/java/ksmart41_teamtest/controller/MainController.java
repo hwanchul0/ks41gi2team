@@ -22,7 +22,8 @@ public class MainController {
    
    // 쇼핑몰 메인 페이지
    @GetMapping("/shop/index-shop")
-   public String indexShop() {
+   public String indexShop(Model model) {
+	   model.addAttribute("title", "Shop메인페이지");
       return "shop/index-shop";
    }
    

@@ -73,4 +73,6 @@
 		WHERE
 			clientId = #{clientId}
 	</select>
+	
+
 </mapper>
