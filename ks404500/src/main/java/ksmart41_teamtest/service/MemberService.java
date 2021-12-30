@@ -19,20 +19,20 @@ public class MemberService {
 		this.memberMapper = memberMapper;
 	}
 	
-	//내부직원등록
+	//[재천]내부직원등록
 	public int addMember(Member member) {
 		int addMember = memberMapper.addMember(member);
 		return addMember;
 	}
 	
-	//내부직원 조회
+	//[재천]내부직원 전체 조회
 	public List<Member> selectMemberList(){
 		List<Member> memberList = memberMapper.selectMemberList();
 		System.out.println("MemberService.java" + memberList);
 		return memberList;
 	}
 	
-	//회원정보 조회
+	//[재천]회원정보 조회
 	public Member MemberInfo(String memberId) {
 		return memberMapper.MemberInfo(memberId);
 	}
