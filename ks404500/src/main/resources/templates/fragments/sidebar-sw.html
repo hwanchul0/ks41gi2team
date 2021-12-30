@@ -22,11 +22,11 @@
                <div class="text-center image-box">
                   <img src="/customcss/img/profile.png" class="img-circle image-thumbnail" alt="User Image">
                </div>
-               <div th:if="${session.SID != null}" class="text-center mt-3">
-                  <h5 class="text-white">[[${session.SID}]]</h5>
-                  <span class="text-white">[[${session.SLEVEL}]]</span>
+               <div th:if="${session.SWID != null}" class="text-center mt-3">
+                  <h5 class="text-white">[[${session.SWID}]]</h5>
+                  <span class="text-white">SW총관리자 </span>
                </div>
-               <div th:unless="${session.SID != null}" class="text-center mt-3">
+               <div th:unless="${session.SWID != null}" class="text-center mt-3">
                   <h5 class="text-white">비회원</h5>
                   <span class="text-white">user</span>
                </div>
@@ -35,7 +35,7 @@
 
             <!-- 사이드바 메뉴 -->
             <nav class="mt-2">
-               <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+               <ul th:if="${session.SWID != null}" class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                   <!-- 회원관리 시작 -->
                   <li class="nav-item">
                      <a href="#" class="nav-link">
@@ -61,49 +61,50 @@
                   </li>
                   <!-- 회원관리 끝 -->
 
-                  <!-- 유성 권한관리시작 -->
-                 <li class="nav-item">
-                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-circle"></i>
-                        <p>권한관리 <i class="right fas fa-angle-down"></i></p>
-                     </a>
-                     <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                           <a th:href="@{/sw/level/addMemberLevel}" class="nav-link">
-                              <i class="far fa-circle nav-icon"></i>
-                              <p>!개발사 내부권한등록[유성]</p>
-                           </a>
-                        </li>
-                     </ul>
-                     <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                           <a th:href="@{/sw/level/selectMemberLevel}" class="nav-link">
-                              <i class="far fa-circle nav-icon"></i>
-                              <p>!개발사 내부권한조회[유성]</p>
-                           </a>
-                        </li>
-                     </ul>
-                     <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                           <a th:href="@{/sw/level/addClientLevel}" class="nav-link">
-                              <i class="far fa-circle nav-icon"></i>
-                              <p>!개발사 외부권한등록 [유성]</p>
-                           </a>
-                        </li>
-                     </ul>
-                     <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                           <a th:href="@{/sw/level/selectClientLevel}" class="nav-link">
-                              <i class="far fa-circle nav-icon"></i>
-                              <p>!개발사 외부권한조회 [유성]</p>
-                           </a>
-                        </li>
-                     </ul>
-                  </li>   
-                  <!-- 유성 권한관리 끝 -->
+                  <!-- 권한관리시작 -->
+                      <li class="nav-item">
+                          <a href="#" class="nav-link">
+                             <i class="nav-icon fas fa-circle"></i>
+                             <p>권한관리 <i class="right fas fa-angle-down"></i></p>
+                          </a>
+                          <ul class="nav nav-treeview">
+                             <li class="nav-item">
+                                <a th:href="@{/sw/level/addMemberLevel}" class="nav-link">
+                                   <i class="far fa-circle nav-icon"></i>
+                                   <p>!개발사 내부권한등록[유성]</p>
+                                </a>
+                             </li>
+                          </ul>
+                          <ul class="nav nav-treeview">
+                             <li class="nav-item">
+                                <a th:href="@{/sw/level/selectMemberLevel}" class="nav-link">
+                                   <i class="far fa-circle nav-icon"></i>
+                                   <p>!개발사 내부권한조회[유성]</p>
+                                </a>
+                             </li>
+                          </ul>
+                          <ul class="nav nav-treeview">
+                             <li class="nav-item">
+                                <a th:href="@{/sw/level/addClientLevel}" class="nav-link">
+                                   <i class="far fa-circle nav-icon"></i>
+                                   <p>!개발사 외부권한등록 [유성]</p>
+                                </a>
+                             </li>
+                          </ul>
+                          <ul class="nav nav-treeview">
+                             <li class="nav-item">
+                                <a th:href="@{/sw/level/selectClientLevel}" class="nav-link">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>!개발사 외부권한조회 [유성]</p>
+                                </a>
+                             </li>
+                          </ul>
+                       </li>   
 
-                  <!-- 유성 사업장관리 시작 -->
-                   <li class="nav-item">
+                  <!-- 권한관리 끝 -->
+
+                  <!-- 사업장관리 시작 -->
+                      <li class="nav-item">
                      <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-circle"></i>
                         <p>사업장관리<i class="right fas fa-angle-down"></i></p>
@@ -133,14 +134,13 @@
                         </li>
                      </ul>
                      </li>   
-                  
-     
-                  <!-- 유성 사업장관리 끝 -->
+
+                  <!-- 사업장관리 끝 -->
 
                      
                         
                   <!-- 서비스관리 시작 -->
-				<li class="nav-item">
+                  <li class="nav-item">
                      <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-circle"></i>
                         <p>서비스 관리 <i class="right fas fa-angle-down"></i></p>
@@ -162,6 +162,7 @@
                         </li>
                      </ul>
                   </li>
+
                   <!-- 서비스 관리끝 -->
                   
                   <!-- 코드관리 시작 -->
@@ -245,6 +246,31 @@
                      </ul>
                   </li>
                   <!-- 재무관리 끝 -->
+               </ul>
+               <ul th:unless="${session.SWID != null}" class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                  <!-- 회원관리 시작 -->
+                  <li class="nav-item">
+                     <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-circle"></i>
+                        <p>비회원입니다. <i class="right fas fa-angle-down"></i></p>
+                     </a>
+                     <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                           <a th:href="@{/addMember}" class="nav-link">
+                              <i class="far fa-circle nav-icon"></i>
+                              <p>회원가입</p>
+                           </a>
+                        </li>
+                     </ul>
+                     <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                           <a th:href="@{/Swlogin}" class="nav-link">
+                              <i class="far fa-circle nav-icon"></i>
+                              <p>로그인</p>
+                           </a>
+                        </li>
+                     </ul>
+                  </li>
                </ul>
             </nav>
          </div>

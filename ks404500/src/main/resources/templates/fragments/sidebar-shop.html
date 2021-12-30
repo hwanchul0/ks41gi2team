@@ -25,7 +25,7 @@
                   <h5 class="text-white">[[${session.SHOPID}]]</h5>
                   <span class="text-white">쇼핑몰 관리자</span>
                </div>
-               <div th:unless="${session.SID != null}" class="text-center mt-3">
+               <div th:unless="${session.SHOPID != null}" class="text-center mt-3">
                   <h5 class="text-white">비회원</h5>
                   <span class="text-white">user</span>
                </div>
@@ -33,8 +33,7 @@
             
             <!-- 사이드바 메뉴 -->
             <nav class="mt-2">
-               <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-               
+               <ul th:if="${session.SHOPID != null}" class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                   <!-- 회원관리 시작 -->
                   <li class="nav-item">
                      <a href="#" class="nav-link">
@@ -59,7 +58,7 @@
                      </ul>
                      <ul class="nav nav-treeview">
                         <li class="nav-item">
-                           <a th:href="@{/shop/client/addConsumer}" class="nav-link">
+                           <a th:href="@{/shop/consumer/addConsumer}" class="nav-link">
                               <i class="far fa-circle nav-icon"></i>
                               <p>쇼핑몰 소비자 등록[재천]</p>
                            </a>
@@ -67,7 +66,7 @@
                      </ul>
                      <ul class="nav nav-treeview">
                         <li class="nav-item">
-                           <a th:href="@{/shop/client/selectConsumer}" class="nav-link">
+                           <a th:href="@{/shop/consumer/selectConsumer}" class="nav-link">
                               <i class="far fa-circle nav-icon"></i>
                               <p>쇼핑몰 소비자 조회[재천]</p>
                            </a>
@@ -76,41 +75,40 @@
                   </li>
                   <!-- 회원관리 끝 -->
                   
-                  <!-- 서비스 관리 -->
-                  <li class="nav-item">
-                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-circle"></i>
-                        <p>서비스 관리 <i class="right fas fa-angle-down"></i></p>
-                     </a>
-                     <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                           <a th:href="@{/sw/service/selectServiceManagement}" class="nav-link">
-                              <i class="far fa-circle nav-icon"></i>
-                              <p>!서비스 현황(정보)[환철]</p>
-                           </a>
-                        </li>
-                     </ul>
-                     <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                           <a th:href="@{/shop/service/serviceRequest/addServiceRequest}" class="nav-link">
-                              <i class="far fa-circle nav-icon"></i>
-                              <p>!서비스 계약요청 등록[환철]</p>
-                           </a>
-                        </li>
-                     </ul>
-                     <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                           <a th:href="@{/shop/service/serviceRequest/selectServiceRequest}" class="nav-link">
-                              <i class="far fa-circle nav-icon"></i>
-                              <p>!서비스 계약요청 조회[환철]</p>
-                           </a>
-                        </li>
-                     </ul>
-                  </li>
-                  <!-- 서비스 관리 끝 -->
+                  <!--  서비스관리 시작 -->
+                     <li class="nav-item">
+                        <a href="#" class="nav-link">
+                           <i class="nav-icon fas fa-circle"></i>
+                           <p>서비스 관리 <i class="right fas fa-angle-down"></i></p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                           <li class="nav-item">
+                              <a th:href="@{/sw/service/selectServiceManagement}" class="nav-link">
+                                 <i class="far fa-circle nav-icon"></i>
+                                 <p>!서비스 현황(정보)[환철]</p>
+                              </a>
+                           </li>
+                        </ul>
+                        <ul class="nav nav-treeview">
+                           <li class="nav-item">
+                              <a th:href="@{/shop/service/serviceRequest/addServiceRequest}" class="nav-link">
+                                 <i class="far fa-circle nav-icon"></i>
+                                 <p>!서비스 계약요청 등록[환철]</p>
+                              </a>
+                           </li>
+                        </ul>
+                        <ul class="nav nav-treeview">
+                           <li class="nav-item">
+                              <a th:href="@{/shop/service/serviceRequest/selectServiceRequest}" class="nav-link">
+                                 <i class="far fa-circle nav-icon"></i>
+                                 <p>!서비스 계약요청 조회[환철]</p>
+                              </a>
+                           </li>
+                        </ul>
+                     </li>
+                  <!--  서비스관리 끝 -->
                   
                   
-        
                   <!-- 쇼핑몰 거래처 관리 시작 -->
                   <li class="nav-item">
                      <a href="#" class="nav-link">
@@ -136,7 +134,6 @@
                   </li>
                   <!-- 쇼핑몰 거래처 관리 끝 -->
                   
-                  <!-- 코드관리 시작 -->
                   <li class="nav-item">
                      <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-circle"></i>
@@ -159,166 +156,190 @@
                         </li>
                      </ul>
                   </li>
-                  <!-- 코드관리 끝 -->
-
-            <!-- 매출(재무)관리 시작 -->
-            <li class="nav-item">
-            <a href="#" class="nav-link">
-               <i class="nav-icon fas fa-circle"></i>
-               <p>매출관리
-               <i class="right fas fa-angle-down"></i>
-               </p>
-            </a>
-               <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                     <a th:href="@{/shop/accounting/addIncome}" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>쇼핑몰 매출 등록 [유경]</p>
-                     </a>
-                  </li>
-               </ul>
-               <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                     <a th:href="@{/shop/accounting/selectIncome}" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>쇼핑몰 매출 조회 [유경]</p>
-                     </a>
-                  </li>
-               </ul>
-               <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                     <a th:href="@{/shop/accounting/addExpense}" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>쇼핑몰 비용 등록 [유성]</p>
-                     </a>
-                  </li>
-               </ul>
-               <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                     <a th:href="@{/shop/accounting/selectExpense}" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>쇼핑몰 비용 조회 [유성]</p>
-                     </a>
-                  </li>
-               </ul>
-               <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                     <a th:href="@{/shop/accounting/addTotalAccounting}" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>쇼핑몰 통합 회계 등록 [유경]</p>
-                     </a>
-                  </li>
-               </ul>
-               <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                     <a th:href="@{/shop/accounting/selectTotalAccounting}" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>쇼핑몰 통합 회계조회 [유경]</p>
-                     </a>
-                  </li>
-               </ul>
-            </li>
-                <!-- 재무관리 관리끝 -->
                   
-            <!-- 유성 사업장관리 시작 -->
-            <li class="nav-item">
-               <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-circle"></i>
-                  <p>사업장 관리<i class="right fas fa-angle-down"></i></p>
-               </a>
-               <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                     <a th:href="@{/shop/business/addBusiness}" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>!사업장 신청[유성]</p>
+
+                  <!-- 매출(재무)관리 시작 -->
+                     <li class="nav-item">
+                     <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-circle"></i>
+                        <p>매출관리
+                        <i class="right fas fa-angle-down"></i>
+                        </p>
                      </a>
+                        <ul class="nav nav-treeview">
+                           <li class="nav-item">
+                              <a th:href="@{/shop/accounting/addIncome}" class="nav-link">
+                                 <i class="far fa-circle nav-icon"></i>
+                                 <p>쇼핑몰 매출 등록 [유경]</p>
+                              </a>
+                           </li>
+                        </ul>
+                        <ul class="nav nav-treeview">
+                           <li class="nav-item">
+                              <a th:href="@{/shop/accounting/selectIncome}" class="nav-link">
+                                 <i class="far fa-circle nav-icon"></i>
+                                 <p>쇼핑몰 매출 조회 [유경]</p>
+                              </a>
+                           </li>
+                        </ul>
+                        <ul class="nav nav-treeview">
+                           <li class="nav-item">
+                              <a th:href="@{/shop/accounting/addExpense}" class="nav-link">
+                                 <i class="far fa-circle nav-icon"></i>
+                                 <p>쇼핑몰 비용 등록 [유성]</p>
+                              </a>
+                           </li>
+                        </ul>
+                        <ul class="nav nav-treeview">
+                           <li class="nav-item">
+                              <a th:href="@{/shop/accounting/selectExpense}" class="nav-link">
+                                 <i class="far fa-circle nav-icon"></i>
+                                 <p>쇼핑몰 비용 조회 [유성]</p>
+                              </a>
+                           </li>
+                        </ul>
+                        <ul class="nav nav-treeview">
+                           <li class="nav-item">
+                              <a th:href="@{/shop/accounting/addTotalAccounting}" class="nav-link">
+                                 <i class="far fa-circle nav-icon"></i>
+                                 <p>쇼핑몰 통합 회계 등록 [유경]</p>
+                              </a>
+                           </li>
+                        </ul>
+                        <ul class="nav nav-treeview">
+                           <li class="nav-item">
+                              <a th:href="@{/shop/accounting/selectTotalAccounting}" class="nav-link">
+                                 <i class="far fa-circle nav-icon"></i>
+                                 <p>쇼핑몰 통합 회계조회 [유경]</p>
+                              </a>
+                           </li>
+                        </ul>
+                     </li>
+                  <!-- 재무관리 관리끝 -->
+
+                  <!--  사업장관리 시작 -->
+                     <li class="nav-item">
+                        <a href="#" class="nav-link">
+                           <i class="nav-icon fas fa-circle"></i>
+                           <p>사업장 관리<i class="right fas fa-angle-down"></i></p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                           <li class="nav-item">
+                              <a th:href="@{/shop/business/addBusiness}" class="nav-link">
+                                 <i class="far fa-circle nav-icon"></i>
+                                 <p>!사업장 신청[유성]</p>
+                              </a>
+                           </li>
+                        </ul>
+                     </li> 
+                  <!--  사업장관리 끝 -->
+                  
+                  <!-- 주문관리 시작 -->
+                     <li class="nav-item">
+                        <a href="#" class="nav-link">
+                           <i class="nav-icon fas fa-circle"></i>
+                           <p>주문 관리
+                           <i class="right fas fa-angle-down"></i>
+                           </p>
+                        </a>
+                           <ul class="nav nav-treeview">
+                              <li class="nav-item">
+                                 <a th:href="@{/shop/order/selectOrder}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>쇼핑몰 주문 내역 조회 [유성]</p>
+                                 </a>
+                              </li>
+                           </ul>
+                           <ul class="nav nav-treeview">
+                              <li class="nav-item">
+                                 <a th:href="@{/shop/order/addPaymentCheck}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>쇼핑몰 결제 확인 등록 [유성]</p>
+                                 </a>
+                              </li>
+                           </ul>
+                           <ul class="nav nav-treeview">
+                              <li class="nav-item">
+                                 <a th:href="@{/shop/order/selectPaymentCheck}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>쇼핑몰 결제 확인 조회 [유성]</p>
+                                 </a>
+                              </li>
+                           </ul>
+                        </li>
+
+                  <!-- 주문관리 끝 -->
+
+                  <!-- 배송관리 시작 -->
+                     <li class="nav-item">
+                        <a href="#" class="nav-link">
+                           <i class="nav-icon fas fa-circle"></i>
+                           <p>배송 관리
+                           <i class="right fas fa-angle-down"></i>
+                           </p>
+                        </a>
+                           <ul class="nav nav-treeview">
+                              <li class="nav-item">
+                                 <a th:href="@{/shop/shipment/addShipment}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>배송 단계 등록 [유경]</p>
+                                 </a>
+                              </li>
+                           </ul>
+                           <ul class="nav nav-treeview">
+                              <li class="nav-item">
+                                 <a th:href="@{/shop/shipment/selectShipment}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>배송 단계 조회 [유경]</p>
+                                 </a>
+                              </li>
+                           </ul>
+                           <ul class="nav nav-treeview">
+                              <li class="nav-item">
+                                 <a th:href="@{/shop/shipment/addRequestShipment}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>배송 요청 등록 [유성]</p>
+                                 </a>
+                              </li>
+                           </ul>
+                           <ul class="nav nav-treeview">
+                              <li class="nav-item">
+                                 <a th:href="@{/shop/shipment/selectRequestShipment}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>배송 요청 조회 [유성]</p>
+                                 </a>
+                              </li>
+                           </ul>
+                           
+                        </li>
+
+                  <!-- 배송관리 끝 -->
+               </ul>
+               <ul th:unless="${session.SHOPID != null}" class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                  <li class="nav-item">
+                     <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-circle"></i>
+                        <p>비회원입니다.<i class="right fas fa-angle-down"></i></p>
+                     </a>
+                     <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                           <a th:href="@{/addClient}" class="nav-link">
+                              <i class="far fa-circle nav-icon"></i>
+                              <p>회원가입[재천]</p>
+                           </a>
+                        </li>
+                     </ul>
+                     <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                           <a th:href="@{/Shoplogin}" class="nav-link">
+                              <i class="far fa-circle nav-icon"></i>
+                              <p>로그인[재천]</p>
+                           </a>
+                        </li>
+                     </ul>
                   </li>
                </ul>
-            </li> 
-                 
-            <!-- 유성  사업장관리 끝 -->
-
-            <!-- 주문관리 시작 -->
-            <li class="nav-item">
-               <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-circle"></i>
-                  <p>주문 관리
-                  <i class="right fas fa-angle-down"></i>
-                  </p>
-               </a>
-                  <ul class="nav nav-treeview">
-                     <li class="nav-item">
-                        <a th:href="@{/shop/order/selectOrder}" class="nav-link">
-                           <i class="far fa-circle nav-icon"></i>
-                           <p>쇼핑몰 주문 내역 조회 [유성]</p>
-                        </a>
-                     </li>
-                  </ul>
-                  <ul class="nav nav-treeview">
-                     <li class="nav-item">
-                        <a th:href="@{/shop/order/addPaymentCheck}" class="nav-link">
-                           <i class="far fa-circle nav-icon"></i>
-                           <p>쇼핑몰 결제 확인 등록 [유성]</p>
-                        </a>
-                     </li>
-                  </ul>
-                  <ul class="nav nav-treeview">
-                     <li class="nav-item">
-                        <a th:href="@{/shop/order/selectPaymentCheck}" class="nav-link">
-                           <i class="far fa-circle nav-icon"></i>
-                           <p>쇼핑몰 결제 확인 조회 [유성]</p>
-                        </a>
-                     </li>
-                  </ul>
-               </li>
-               <!-- 주문관리 끝 -->
-            
-            <!-- 배송관리 시작 -->
-            <li class="nav-item">
-               <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-circle"></i>
-                  <p>배송 관리
-                  <i class="right fas fa-angle-down"></i>
-                  </p>
-               </a>
-                  <ul class="nav nav-treeview">
-                     <li class="nav-item">
-                        <a th:href="@{/shop/shipment/addShipment}" class="nav-link">
-                           <i class="far fa-circle nav-icon"></i>
-                           <p>배송 단계 등록 [유경]</p>
-                        </a>
-                     </li>
-                  </ul>
-                  <ul class="nav nav-treeview">
-                     <li class="nav-item">
-                        <a th:href="@{/shop/shipment/selectShipment}" class="nav-link">
-                           <i class="far fa-circle nav-icon"></i>
-                           <p>배송 단계 조회 [유경]</p>
-                        </a>
-                     </li>
-                  </ul>
-                  <ul class="nav nav-treeview">
-                     <li class="nav-item">
-                        <a th:href="@{/shop/shipment/addRequestShipment}" class="nav-link">
-                           <i class="far fa-circle nav-icon"></i>
-                           <p>배송 요청 등록 [유성]</p>
-                        </a>
-                     </li>
-                  </ul>
-                  <ul class="nav nav-treeview">
-                     <li class="nav-item">
-                        <a th:href="@{/shop/shipment/selectRequestShipment}" class="nav-link">
-                           <i class="far fa-circle nav-icon"></i>
-                           <p>배송 요청 조회 [유성]</p>
-                        </a>
-                     </li>
-                  </ul>
-                  
-               </li>
-               <!-- 배송관리 끝 -->
-            </ul>
-</nav>
-<!-- /.sidebar-menu -->
+            </nav>
          </div>
 
       <!-- 기능 -->

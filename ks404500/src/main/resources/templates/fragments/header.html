@@ -8,8 +8,8 @@
 <nav class="main-header navbar navbar-expand navbar-white navbar-light">
 	<ul class="navbar-nav ml-auto">
 		<li class="nav-item d-none d-sm-inline-block">
-			<a th:if="${session.SID != null}" th:href="@{#}">
-				<span style="font-style: italic; color: black;"> [[${session.SLEVEL}]],  [[${session.SNAME}]]님이 로그인 하셨습니다.  </span>
+			<a th:if="${session.SWID != null}" th:href="@{#}">
+				<span style="font-style: italic; color: black;"> SW총관리자,  [[${session.SWNAME}]]님이 로그인 하셨습니다.  </span>
 			</a>
 		</li>
 		<li class="nav-item d-none d-sm-inline-block">
@@ -19,13 +19,13 @@
 		</li>
 		
 		<li class="nav-item d-none d-sm-inline-block">
-			<a th:if="${session.SID != null} or ${session.SHOPID != null}" th:href="@{/logout}">
+			<a th:if="${session.SWID != null} or ${session.SHOPID != null}" th:href="@{/Swlogout}">
 				<span class="menu" style="float: right;"> 로그아웃 </span>
 			</a>
 		</li>
 		
 		<li class="nav-item d-none d-sm-inline-block">
-			<a th:unless="${session.SID != null} or ${session.SHOPID != null}" th:href="@{/login}">
+			<a th:unless="${session.SWID != null} or ${session.SHOPID != null}" th:href="@{/Swlogin}">
 				<span class="menu" style="float: right;"> 로그인 </span>
 			</a>
 		</li>

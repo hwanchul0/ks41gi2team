@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="@{layout/default-sw}">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="@{layout/default-shop}">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <head th:replace="fragments/head :: headFragment"></head>  
@@ -37,7 +37,7 @@
 							</div>
 							
 							<!-- 회원가입 폼 바디 시작 -->
-							<form id="addClientForm" th:action="@{/sw/client/addClient}" method="post" class="form-horizontal">
+							<form id="addClientForm" th:action="@{/shop/client/addClient}" method="post" class="form-horizontal">
 								<div class="card-body">
 									<div class="form-group row">
 										<label class="col-sm-2 col-form-label text-right">아이디 : </label>

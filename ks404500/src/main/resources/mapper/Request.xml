@@ -21,6 +21,7 @@
 			SELECT
 				clientId
 				,r.contractManageCode
+				r.contractManageCode
 				,m.serviceName
 				,r.serviceAmount
 				,r.servicePeriod
@@ -36,6 +37,20 @@
 				k2_sw_serviceManagement AS m
 			ON
 				r.serviceCode = m.serviceCode
+				INNER JOIN 
+				k0_sw_mainBusinessCodeManagement AS mB
+				INNER JOIN 
+				k0_sw_businessRegistration AS bR
+			WHERE 
+				clientId = #{session.}
+			GROUP BY clientId
+			ORDER BY serviceRequestDate ASC; 
+	</select>
+		<select id="getMainBusinessCode" parameterType="String">
+			SELECT 
+				bR.clientId
+			FROM 
+				k2_sw_contractRequest AS cR
 				INNER JOIN 
 				k0_sw_mainBusinessCodeManagement AS mB
 			ON 
