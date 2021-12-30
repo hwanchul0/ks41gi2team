@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ksmart41_teamtest.dto.Client;
-import ksmart41_teamtest.dto.Member;
 import ksmart41_teamtest.mapper.ClientMapper;
 
 @Service
@@ -26,15 +25,15 @@ public class ClientService {
 		return addClient;
 	}
 	
-	//[재천]외부 회원정보 조회
-	public Client ClientInfo(String clientId) {
-		return clientMapper.ClientInfo(clientId);
-	}
-	
 	//[재천]외부 회원 전체 조회
 	public List<Client> selectClientList(){
 		List<Client> clientList = clientMapper.selectClientList();
 		System.out.println("ClientService.java의 값" + clientList);
 		return clientList;
+	}
+	
+	//[재천]외부 회원정보 조회
+	public Client ClientInfo(String clientId) {
+		return clientMapper.ClientInfo(clientId);
 	}
 }
