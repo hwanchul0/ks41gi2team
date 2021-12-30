@@ -9,13 +9,13 @@ import ksmart41_teamtest.dto.Member;
 @Mapper
 public interface MemberMapper {
 
-	//내부직원 등록
+	//[재천]내부직원 등록
 	public int addMember(Member member);
 	
-	//내부직원 조회
+	//[재천]내부직원 조회
 	public List<Member> selectMemberList();
 	
-	//내부직원 정보 조회
+	//[재천]내부직원 정보 조회
 	public Member MemberInfo(String memberId);
 }
 

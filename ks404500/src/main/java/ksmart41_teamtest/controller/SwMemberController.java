@@ -20,12 +20,14 @@ public class SwMemberController {
 	@Autowired
 	private MemberService memberService;
 	
+	//[재천]직원 등록
 	@GetMapping("/addMember")
-	public String addMember() {
+	public String addMember(Model model) {
+		model.addAttribute("title", "SW직원 등록");
 		return "sw/member/addMember";
 	}
 	
-	//멤버조회
+	//[재천]전체 직원 조회
 	@GetMapping("/selectMember")
 	public String selectMember(Model model) {
 		List<Member> memberList = memberService.selectMemberList();
