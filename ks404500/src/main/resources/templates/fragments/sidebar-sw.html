@@ -3,108 +3,108 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <div id="sidebar" th:fragment="sidebarFragment-sw">
 <head>
-	<meta charset="UTF-8">
-	<title>Insert title here</title>
-	<div th:replace="fragments/javascript :: javascriptFragment"></div>
+   <meta charset="UTF-8">
+   <title>Insert title here</title>
+   <div th:replace="fragments/javascript :: javascriptFragment"></div>
 </head>
-	<body class="layout-fixed">
-		<aside class="main-sidebar sidebar-dark-primary elevation-4">
-			<!-- 로고 -->
-			<a href="/" class="brand-link">
-			<img src="/customcss/img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-				<span class="brand-text font-weight-light">TEAM_404500</span>
-			</a>
+   <body class="layout-fixed">
+      <aside class="main-sidebar sidebar-dark-primary elevation-4">
+         <!-- 로고 -->
+         <a href="/" class="brand-link">
+         <img src="/customcss/img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+            <span class="brand-text font-weight-light">TEAM_404500</span>
+         </a>
 
-			<!-- 사이드바 -->
-			<div class="sidebar">
-				<!-- 사이드바 프로필 -->
-				<div class="mt-3 pb-3 pt-3 mb-3">
-					<div class="text-center image-box">
-						<img src="/customcss/img/profile.png" class="img-circle image-thumbnail" alt="User Image">
-					</div>
-					<div th:if="${session.SWID != null}" class="text-center mt-3">
-						<h5 class="text-white">[[${session.SWID}]]</h5>
-						<span class="text-white">SW총관리자 </span>
-					</div>
-					<div th:unless="${session.SWID != null}" class="text-center mt-3">
-						<h5 class="text-white">비회원</h5>
-						<span class="text-white">user</span>
-					</div>
-				</div>
+         <!-- 사이드바 -->
+         <div class="sidebar">
+            <!-- 사이드바 프로필 -->
+            <div class="mt-3 pb-3 pt-3 mb-3">
+               <div class="text-center image-box">
+                  <img src="/customcss/img/profile.png" class="img-circle image-thumbnail" alt="User Image">
+               </div>
+               <div th:if="${session.SWID != null}" class="text-center mt-3">
+                  <h5 class="text-white">[[${session.SWID}]]</h5>
+                  <span class="text-white">SW총관리자 </span>
+               </div>
+               <div th:unless="${session.SWID != null}" class="text-center mt-3">
+                  <h5 class="text-white">비회원</h5>
+                  <span class="text-white">user</span>
+               </div>
+            </div>
 
 
-				<!-- 사이드바 메뉴 -->
-				<nav class="mt-2">
-					<ul th:if="${session.SWID != null}" class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-						<!-- 회원관리 시작 -->
-						<li class="nav-item">
-							<a href="#" class="nav-link">
-								<i class="nav-icon fas fa-circle"></i>
-								<p>회원관리 <i class="right fas fa-angle-down"></i></p>
-							</a>
-							<ul class="nav nav-treeview">
-								<li class="nav-item">
-									<a th:href="@{/sw/member/addMember}" class="nav-link">
-										<i class="far fa-circle nav-icon"></i>
-										<p>!개발사 내부회원등록 [재천]</p>
-									</a>
-								</li>
-							</ul>
-							<ul class="nav nav-treeview">
-								<li class="nav-item">
-									<a th:href="@{/sw/member/selectMember}" class="nav-link">
-										<i class="far fa-circle nav-icon"></i>
-										<p>!개발사 내부회원조회 [재천]</p>
-									</a>
-								</li>
-							</ul>
-						</li>
-						<!-- 회원관리 끝 -->
+            <!-- 사이드바 메뉴 -->
+            <nav class="mt-2">
+               <ul th:if="${session.SWID != null}" class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                  <!-- 회원관리 시작 -->
+                  <li class="nav-item">
+                     <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-circle"></i>
+                        <p>회원관리 <i class="right fas fa-angle-down"></i></p>
+                     </a>
+                     <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                           <a th:href="@{/sw/member/addMember}" class="nav-link">
+                              <i class="far fa-circle nav-icon"></i>
+                              <p>!개발사 내부회원등록 [재천]</p>
+                           </a>
+                        </li>
+                     </ul>
+                     <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                           <a th:href="@{/sw/member/selectMember}" class="nav-link">
+                              <i class="far fa-circle nav-icon"></i>
+                              <p>!개발사 내부회원조회 [재천]</p>
+                           </a>
+                        </li>
+                     </ul>
+                  </li>
+                  <!-- 회원관리 끝 -->
 
-						<!-- 권한관리시작 -->
-		                <li class="nav-item">
-		                    <a href="#" class="nav-link">
-		                       <i class="nav-icon fas fa-circle"></i>
-		                       <p>권한관리 <i class="right fas fa-angle-down"></i></p>
-		                    </a>
-		                    <ul class="nav nav-treeview">
-		                       <li class="nav-item">
-		                          <a th:href="@{/sw/level/addMemberLevel}" class="nav-link">
-		                             <i class="far fa-circle nav-icon"></i>
-		                             <p>!개발사 내부권한등록[유성]</p>
-		                          </a>
-		                       </li>
-		                    </ul>
-		                    <ul class="nav nav-treeview">
-		                       <li class="nav-item">
-		                          <a th:href="@{/sw/level/selectMemberLevel}" class="nav-link">
-		                             <i class="far fa-circle nav-icon"></i>
-		                             <p>!개발사 내부권한조회[유성]</p>
-		                          </a>
-		                       </li>
-		                    </ul>
-		                    <ul class="nav nav-treeview">
-		                       <li class="nav-item">
-		                          <a th:href="@{/sw/level/addClientLevel}" class="nav-link">
-		                             <i class="far fa-circle nav-icon"></i>
-		                             <p>!개발사 외부권한등록 [유성]</p>
-		                          </a>
-		                       </li>
-		                    </ul>
-		                    <ul class="nav nav-treeview">
-		                       <li class="nav-item">
-		                          <a th:href="@{/sw/level/selectClientLevel}" class="nav-link">
-		                            <i class="far fa-circle nav-icon"></i>
-		                            <p>!개발사 외부권한조회 [유성]</p>
-		                          </a>
-		                       </li>
-		                    </ul>
-		                 </li>   
+                  <!-- 권한관리시작 -->
+                      <li class="nav-item">
+                          <a href="#" class="nav-link">
+                             <i class="nav-icon fas fa-circle"></i>
+                             <p>권한관리 <i class="right fas fa-angle-down"></i></p>
+                          </a>
+                          <ul class="nav nav-treeview">
+                             <li class="nav-item">
+                                <a th:href="@{/sw/level/addMemberLevel}" class="nav-link">
+                                   <i class="far fa-circle nav-icon"></i>
+                                   <p>!개발사 내부권한등록[유성]</p>
+                                </a>
+                             </li>
+                          </ul>
+                          <ul class="nav nav-treeview">
+                             <li class="nav-item">
+                                <a th:href="@{/sw/level/selectMemberLevel}" class="nav-link">
+                                   <i class="far fa-circle nav-icon"></i>
+                                   <p>!개발사 내부권한조회[유성]</p>
+                                </a>
+                             </li>
+                          </ul>
+                          <ul class="nav nav-treeview">
+                             <li class="nav-item">
+                                <a th:href="@{/sw/level/addClientLevel}" class="nav-link">
+                                   <i class="far fa-circle nav-icon"></i>
+                                   <p>!개발사 외부권한등록 [유성]</p>
+                                </a>
+                             </li>
+                          </ul>
+                          <ul class="nav nav-treeview">
+                             <li class="nav-item">
+                                <a th:href="@{/sw/level/selectClientLevel}" class="nav-link">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>!개발사 외부권한조회 [유성]</p>
+                                </a>
+                             </li>
+                          </ul>
+                       </li>   
 
-						<!-- 권한관리 끝 -->
+                  <!-- 권한관리 끝 -->
 
-						<!-- 사업장관리 시작 -->
-                   	<li class="nav-item">
+                  <!-- 사업장관리 시작 -->
+                      <li class="nav-item">
                      <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-circle"></i>
                         <p>사업장관리<i class="right fas fa-angle-down"></i></p>
@@ -135,12 +135,12 @@
                      </ul>
                      </li>   
 
-						<!-- 사업장관리 끝 -->
+                  <!-- 사업장관리 끝 -->
 
-							
-								
-						<!-- 서비스관리 시작 -->
-            		<li class="nav-item">
+                     
+                        
+                  <!-- 서비스관리 시작 -->
+                  <li class="nav-item">
                      <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-circle"></i>
                         <p>서비스 관리 <i class="right fas fa-angle-down"></i></p>
@@ -163,121 +163,121 @@
                      </ul>
                   </li>
 
-						<!-- 서비스 관리끝 -->
-						
-						<!-- 코드관리 시작 -->
-						<li class="nav-item">
-							<a href="#" class="nav-link">
-								<i class="nav-icon fas fa-circle"></i>
-								<p>코드 관리 <i class="right fas fa-angle-down"></i></p>
-							</a>
-							<ul class="nav nav-treeview">
-								<li class="nav-item">
-									<a th:href="@{/sw/code/addBusinessCode}" class="nav-link">
-										<i class="far fa-circle nav-icon"></i>
-										<p>!거래처 구분 코드 등록[재천]</p>
-									</a>
-								</li>
-							</ul>
-							<ul class="nav nav-treeview">
-								<li class="nav-item">
-									<a th:href="@{/sw/code/selectBusinessCode}" class="nav-link">
-										<i class="far fa-circle nav-icon"></i>
-										<p>!거래처 구분 코드 조회[재천]</p>
-									</a>
-								</li>
-							</ul>
-							<ul class="nav nav-treeview">
-								<li class="nav-item">
-									<a th:href="@{/sw/code/addLocalCode}" class="nav-link">
-										<i class="far fa-circle nav-icon"></i>
-										<p>!거래처 지역 코드 등록[재천]</p>
-									</a>
-								</li>
-							</ul>
-							<ul class="nav nav-treeview">
-								<li class="nav-item">
-									<a th:href="@{/sw/code/selectLocalCode}" class="nav-link">
-										<i class="far fa-circle nav-icon"></i>
-										<p>!거래처 지역 코드 조회[재천]</p>
-									</a>
-								</li>
-							</ul>
-						</li>
-						<!-- 코드관리 끝 -->
+                  <!-- 서비스 관리끝 -->
+                  
+                  <!-- 코드관리 시작 -->
+                  <li class="nav-item">
+                     <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-circle"></i>
+                        <p>코드 관리 <i class="right fas fa-angle-down"></i></p>
+                     </a>
+                     <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                           <a th:href="@{/sw/code/addBusinessCode}" class="nav-link">
+                              <i class="far fa-circle nav-icon"></i>
+                              <p>!거래처 구분 코드 등록[재천]</p>
+                           </a>
+                        </li>
+                     </ul>
+                     <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                           <a th:href="@{/sw/code/selectBusinessCode}" class="nav-link">
+                              <i class="far fa-circle nav-icon"></i>
+                              <p>!거래처 구분 코드 조회[재천]</p>
+                           </a>
+                        </li>
+                     </ul>
+                     <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                           <a th:href="@{/sw/code/addLocalCode}" class="nav-link">
+                              <i class="far fa-circle nav-icon"></i>
+                              <p>!거래처 지역 코드 등록[재천]</p>
+                           </a>
+                        </li>
+                     </ul>
+                     <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                           <a th:href="@{/sw/code/selectLocalCode}" class="nav-link">
+                              <i class="far fa-circle nav-icon"></i>
+                              <p>!거래처 지역 코드 조회[재천]</p>
+                           </a>
+                        </li>
+                     </ul>
+                  </li>
+                  <!-- 코드관리 끝 -->
 
-						<!-- 재무관리 시작 -->
-						<li class="nav-item">
-							<a href="#" class="nav-link">
-								<i class="nav-icon fas fa-circle"></i>
-								<p>재무 관리 <i class="right fas fa-angle-down"></i></p>
-							</a>
-							<ul class="nav nav-treeview">
-								<li class="nav-item">
-									<a th:href="@{/sw/accounting/addIncome}" class="nav-link">
-										<i class="far fa-circle nav-icon"></i>
-										<p>!서비스 매출 등록[재천]</p>
-									</a>
-								</li>
-							</ul>
-							<ul class="nav nav-treeview">
-								<li class="nav-item">
-									<a th:href="@{/sw/accounting/selectIncome}" class="nav-link">
-										<i class="far fa-circle nav-icon"></i>
-										<p>!서비스 매출 조회[재천]</p>
-									</a>
-								</li>
-							</ul>
-							<ul class="nav nav-treeview">
-								<li class="nav-item">
-									<a th:href="@{/sw/accounting/addExpense}" class="nav-link">
-										<i class="far fa-circle nav-icon"></i>
-										<p>!비용 등록[재천]</p>
-									</a>
-								</li>
-							</ul>
-							<ul class="nav nav-treeview">
-								<li class="nav-item">
-									<a th:href="@{/sw/accounting/selectExpense}" class="nav-link">
-										<i class="far fa-circle nav-icon"></i>
-										<p>!비용 조회[재천]</p>
-									</a>
-								</li>
-							</ul>
-						</li>
-						<!-- 재무관리 끝 -->
-					</ul>
-					<ul th:unless="${session.SWID != null}" class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-						<!-- 회원관리 시작 -->
-						<li class="nav-item">
-							<a href="#" class="nav-link">
-								<i class="nav-icon fas fa-circle"></i>
-								<p>비회원입니다. <i class="right fas fa-angle-down"></i></p>
-							</a>
-							<ul class="nav nav-treeview">
-								<li class="nav-item">
-									<a th:href="@{/addMember}" class="nav-link">
-										<i class="far fa-circle nav-icon"></i>
-										<p>회원가입</p>
-									</a>
-								</li>
-							</ul>
-							<ul class="nav nav-treeview">
-								<li class="nav-item">
-									<a th:href="@{/Swlogin}" class="nav-link">
-										<i class="far fa-circle nav-icon"></i>
-										<p>로그인</p>
-									</a>
-								</li>
-							</ul>
-						</li>
-					</ul>
-				</nav>
-			</div>
+                  <!-- 재무관리 시작 -->
+                  <li class="nav-item">
+                     <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-circle"></i>
+                        <p>재무 관리 <i class="right fas fa-angle-down"></i></p>
+                     </a>
+                     <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                           <a th:href="@{/sw/accounting/addIncome}" class="nav-link">
+                              <i class="far fa-circle nav-icon"></i>
+                              <p>!서비스 매출 등록[재천]</p>
+                           </a>
+                        </li>
+                     </ul>
+                     <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                           <a th:href="@{/sw/accounting/selectIncome}" class="nav-link">
+                              <i class="far fa-circle nav-icon"></i>
+                              <p>!서비스 매출 조회[재천]</p>
+                           </a>
+                        </li>
+                     </ul>
+                     <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                           <a th:href="@{/sw/accounting/addExpense}" class="nav-link">
+                              <i class="far fa-circle nav-icon"></i>
+                              <p>!비용 등록[재천]</p>
+                           </a>
+                        </li>
+                     </ul>
+                     <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                           <a th:href="@{/sw/accounting/selectExpense}" class="nav-link">
+                              <i class="far fa-circle nav-icon"></i>
+                              <p>!비용 조회[재천]</p>
+                           </a>
+                        </li>
+                     </ul>
+                  </li>
+                  <!-- 재무관리 끝 -->
+               </ul>
+               <ul th:unless="${session.SWID != null}" class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                  <!-- 회원관리 시작 -->
+                  <li class="nav-item">
+                     <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-circle"></i>
+                        <p>비회원입니다. <i class="right fas fa-angle-down"></i></p>
+                     </a>
+                     <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                           <a th:href="@{/addMember}" class="nav-link">
+                              <i class="far fa-circle nav-icon"></i>
+                              <p>회원가입</p>
+                           </a>
+                        </li>
+                     </ul>
+                     <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                           <a th:href="@{/Swlogin}" class="nav-link">
+                              <i class="far fa-circle nav-icon"></i>
+                              <p>로그인</p>
+                           </a>
+                        </li>
+                     </ul>
+                  </li>
+               </ul>
+            </nav>
+         </div>
 
-			<!-- 기능 -->
-			<script type="text/javascript">
-      		$(function(){
+         <!-- 기능 -->
+         <script type="text/javascript">
+            $(function(){
 
 /*              $('.nav-link').on('click',function(){
                 $('.fa-circle').removeClass('fas');

@@ -39,7 +39,7 @@ tbody tr td:first-child:before {
          <div class="container-fluid">
             <div class="row">
                <div class="col-lg-12">
-                  <div class="card">
+                  <div class="card-primary">
                      <div class="card-header">현재 계약 요청</div>
                      <div class="card-body">
                         <div id="example2_wrapper"
@@ -53,6 +53,7 @@ tbody tr td:first-child:before {
                                  <table id="example2" class="table table-bordered table-hover dataTable dtr-inline" role="grid" aria-describedby="example2_info">
                                     <thead>
                                        <tr role="row">
+                                          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">ID</th>
                                           <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">Code</th>
                                           <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"> 서비스 명</th>
                                           <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"> 계약수량</th>
@@ -66,7 +67,8 @@ tbody tr td:first-child:before {
                                        </tr>
                                     </thead>
                                     <tbody>
-                                       <tr th:if="${not #lists.isEmpty(requestList)}" th:each="r : ${requestList}">
+                                       <tr th:if="${not #lists.isEmpty(getAllRequestList)}" th:each="r : ${getAllRequestList}">
+                                          <td th:text="${r.clientId}"></td>
                                           <td th:text="${r.contractManageCode}"></td>
                                           <td th:text="${r.serviceName}"></td>
                                           <td th:text="${r.serviceAmount}"></td>
@@ -78,7 +80,7 @@ tbody tr td:first-child:before {
                                           <td th:text="${r.serviceRequestStatus}"></td>
                                           <td th:text="${r.serviceApprovalDate}"></td>
                                        </tr>
-                                       <tr th:unless="${not #lists.isEmpty(requestList)}">
+                                       <tr th:unless="${not #lists.isEmpty(getAllRequestList)}">
                                           <td colspan="9">등록된 계약요청이 없습니다.</td>
                                        </tr>
                                     </tbody>

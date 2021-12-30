@@ -13,6 +13,7 @@ public class Request {
 	private String serviceEndDate;
 	private String serviceRequestStatus;
 	private String serviceApprovalDate;
+	
 	public String getClientId() {
 		return clientId;
 	}
@@ -112,6 +113,11 @@ public class Request {
 		builder.append(serviceRequestStatus);
 		builder.append(", serviceApprovalDate=");
 		builder.append(serviceApprovalDate);
+		builder.append(", serviceCode=");
+		builder.append(", clientId=");
+		builder.append(clientId);
+		builder.append(", memberId=");
+		builder.append(memberId);
 		builder.append("]");
 		return builder.toString();
 	}

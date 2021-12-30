@@ -14,11 +14,13 @@
 		<result column="serviceEndDate" 				property="serviceEndDate"/>
 		<result column="serviceRequestStatus" 			property="serviceRequestStatus"/>
 		<result column="serviceApprovalDate" 			property="serviceApprovalDate"/>
-		<result column="memberId" 						property="memberId"/>
 		<result column="clientId" 						property="clientId"/>
+		<result column="memberId" 						property="memberId"/>
 	</resultMap>
-		<select id="getRequestList" parameterType="String" resultMap="requestResultMap">
+		<select id="getAllRequestList" parameterType="String" resultMap="requestResultMap">
 			SELECT
+				clientId
+				,r.contractManageCode
 				r.contractManageCode
 				,m.serviceName
 				,r.serviceAmount
@@ -33,6 +35,8 @@
 				k2_sw_contractRequest AS r
 				INNER JOIN 
 				k2_sw_serviceManagement AS m
+			ON
+				r.serviceCode = m.serviceCode
 				INNER JOIN 
 				k0_sw_mainBusinessCodeManagement AS mB
 				INNER JOIN 
@@ -49,11 +53,42 @@
 				k2_sw_contractRequest AS cR
 				INNER JOIN 
 				k0_sw_mainBusinessCodeManagement AS mB
-				ON 
-				cR.mainBusinessCode = mB.mainBusinessCode
+			ON 
+				r.mainBusinessCode = mB.mainBusinessCode
 				INNER JOIN 
 				k0_sw_businessRegistration AS bR
-				ON 
-				mB.businessRegistrationCode = bR.businessRegistrationCode;
+			ON 
+				bR.businessRegistrationCode = mB.businessRegistrationCode
+			ORDER BY serviceRequestDate ASC;
+	</select>
+		<select id="getRequestList" parameterType="String" resultMap="requestResultMap">
+			SELECT
+				r.contractManageCode
+				,m.serviceName
+				,r.serviceAmount
+				,r.servicePeriod
+				,r.serviceTotalPrice
+				,r.serviceRequestDate
+				,r.serviceRegistrationDate
+				,r.serviceEndDate
+				,r.serviceRequestStatus
+				,r.serviceApprovalDate
+			FROM
+				k2_sw_contractRequest AS r
+				INNER JOIN 
+				k2_sw_serviceManagement AS m
+			ON
+				r.serviceCode = m.serviceCode
+				INNER JOIN 
+				k0_sw_mainBusinessCodeManagement AS mB
+			ON 
+				r.mainBusinessCode = mB.mainBusinessCode
+				INNER JOIN 
+				k0_sw_businessRegistration AS bR
+			ON 
+				bR.businessRegistrationCode = mB.businessRegistrationCode
+			WHERE 
+			clientId = #{clientId}
+			ORDER BY serviceRequestDate ASC;
 	</select>
 </mapper>
