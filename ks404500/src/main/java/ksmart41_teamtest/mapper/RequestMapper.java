@@ -7,7 +7,9 @@ import ksmart41_teamtest.dto.Request;
 @Mapper
 public interface RequestMapper {
 	
-	// 계약요청 리스트 조회
+	// 계약요청 전체 리스트 조회 (sw개발사)
+	public List<Request> getAllRequestList();
+	// 계약요청 리스트 조회 (client 본인 )
 	public List<Request> getRequestList();
 
 }

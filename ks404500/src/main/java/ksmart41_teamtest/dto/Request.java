@@ -11,6 +11,8 @@ public class Request {
 	private String serviceEndDate;
 	private String serviceRequestStatus;
 	private String serviceApprovalDate;
+	private String clientId;
+	private String memberId;
 	
 	public String getContractManageCode() {
 		return contractManageCode;
@@ -72,6 +74,18 @@ public class Request {
 	public void setServiceApprovalDate(String serviceApprovalDate) {
 		this.serviceApprovalDate = serviceApprovalDate;
 	}
+	public String getClientId() {
+		return clientId;
+	}
+	public void setClientId(String clientId) {
+		this.clientId = clientId;
+	}
+	public String getMemberId() {
+		return memberId;
+	}
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -95,9 +109,16 @@ public class Request {
 		builder.append(serviceRequestStatus);
 		builder.append(", serviceApprovalDate=");
 		builder.append(serviceApprovalDate);
+		builder.append(", serviceCode=");
+		builder.append(", clientId=");
+		builder.append(clientId);
+		builder.append(", memberId=");
+		builder.append(memberId);
 		builder.append("]");
 		return builder.toString();
 	}
+	
+	
 	
 	
 	

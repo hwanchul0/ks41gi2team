@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ksmart41_teamtest.mapper.SeviceManagementMapper">
+	<resultMap type="ServiceManagement" id="serviceManagementResultMap">
+		<result column="serviceCode" 					property="serviceCode"/>
+		<result column="memberId" 						property="memberId"/>
+		<result column="serviceName" 					property="serviceName"/>
+		<result column="servicePrice" 					property="servicePrice"/>
+		<result column="serviceDiscount" 				property="serviceDiscount"/>
+		<result column="servicePeriod" 					property="servicePeriod"/>
+		<result column="serviceStatus" 					property="serviceStatus"/>
+		<result column="serviceRegistrationDate" 		property="serviceRegistrationDate"/>
+		<result column="serviceDeleteDate" 				property="serviceDeleteDate"/>
+	</resultMap>
+		<select id="getServiceManagement" parameterType="String" resultMap="serviceManagementResultMap">
+			SELECT 
+			*	
+			FROM 
+				k2_sw_serviceManagement
+		</select>
+</mapper>
