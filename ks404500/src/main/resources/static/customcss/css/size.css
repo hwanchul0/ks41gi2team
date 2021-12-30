@@ -55,14 +55,18 @@ display: none;
 }
 .layer2 {
 display: none;
+}
 
-/* 로그인 페이지 크기조절 */
+/*로그인 페이지 */
 .login-box{
-   width: 360px;
-   margin: 0 auto;
-   margin-top:150px;
-   line-height: 1.5;
+	width: 360px;
+	margin: 0 auto;
+	margin-top:150px;
+	line-height: 1.5;
     color: #212529;
     text-align: left;
 }
+
+
+
 
