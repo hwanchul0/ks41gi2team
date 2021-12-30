@@ -21,10 +21,10 @@ public class SwLoginController {
 
 	@GetMapping("/login")
 	public String login(Model model) {
-		model.addAttribute("title", "로그인하자");
+		model.addAttribute("title", "로그인타이틀");
 		return "login";
 	}
-	
+	 
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
@@ -42,8 +42,8 @@ public class SwLoginController {
 			Member member = memberService.MemberInfo(memberId);
 			if(member != null && member.getMemberPw()!= null && memberPw.equals(member.getMemberPw())) {
 				//로그인 비밀번호 일치 시 세션을 정보에 담음
-				System.out.println(memberId + " 입력한아이디2");
-				System.out.println(memberPw + " 입력한 패스워드2");
+				System.out.println(memberId + " 로그인 비밀번호 일치 / ID");
+				System.out.println(memberPw + " 로그인 비밀번호 일치  / PW");
 				session.setAttribute("SID", memberId);
 				session.setAttribute("SNAME", member.getMemberName());
 				session.setAttribute("SLEVEL", member.getMemberLevelCode());
@@ -51,8 +51,8 @@ public class SwLoginController {
 			}
 		}
 		//로그인 불일치 시
-		System.out.println(memberId + " 입력한아이디3");
-		System.out.println(memberPw + " 입력한 패스워드3");
+		System.out.println(memberId + " 입력한아이디 불일치");
+		System.out.println(memberPw + " 입력한 패스워드 불일치");
 		return "redirect:/login";
 	}
 	
