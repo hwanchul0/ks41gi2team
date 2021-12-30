@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html xmlns:th="http://www.thymeleaf.org">
 <div id="sidebar" th:fragment="sidebarFragment-sw">
 <head>
@@ -30,6 +31,7 @@
 						<span class="text-white">user</span>
 					</div>
 				</div>
+
 
 				<!-- 사이드바 메뉴 -->
 				<nav class="mt-2">
@@ -142,29 +144,162 @@
 								<p>
 									서비스 관리 <i class="right fas fa-angle-down"></i>
 								</p>
-						</a>
-							<ul class="nav nav-treeview">
-								<li class="nav-item"><a
-									th:href="@{/sw/service/serviceRequest/addServiceRequest}"
-									class="nav-link"> <i class="far fa-circle nav-icon"></i>
-										<p>서비스 계약 요청 등록[환철]</p>
-								</a></li>
-							</ul>
-							<ul class="nav nav-treeview">
-								<li class="nav-item"><a
-									th:href="@{/sw/service/serviceRequest/selectServiceRequest}"
-									class="nav-link"> <i class="far fa-circle nav-icon"></i>
-										<p>서비스 계약 요청 조회[환철]</p>
-								</a></li>
-							</ul>
-							<ul class="nav nav-treeview">
-								<li class="nav-item"><a
-									th:href="@{/sw/service/serviceStatus}" class="nav-link"> <i
-										class="far fa-circle nav-icon"></i>
-										<p>서비스 조회[환철]</p>
-								</a></li>
-							</ul></li>
-						<!-- 서비스 관리끝 -->
+
+							</a>
+								<ul class="nav nav-treeview">
+									<li class="nav-item">
+										<a th:href="@{/sw/level/addMemberLevel}" class="nav-link">
+											<i class="far fa-circle nav-icon"></i>
+											<p>개발사 내부권한등록[유성]</p>
+										</a>
+									</li>
+								</ul>
+								<ul class="nav nav-treeview">
+									<li class="nav-item">
+										<a th:href="@{/sw/level/selectMemberLevel}" class="nav-link">
+											<i class="far fa-circle nav-icon"></i>
+											<p>개발사 내부권한조회[유성]</p>
+										</a>
+									</li>
+								</ul>
+								<ul class="nav nav-treeview">
+									<li class="nav-item">
+										<a th:href="@{/sw/level/addClientLevel}" class="nav-link">
+											<i class="far fa-circle nav-icon"></i>
+											<p>개발사 외부권한등록[유성]</p>
+										</a>
+									</li>
+								</ul>
+								<ul class="nav nav-treeview">
+									<li class="nav-item">
+										<a th:href="@{/sw/level/selectClientLevel}" class="nav-link">
+											<i class="far fa-circle nav-icon"></i>
+											<p>개발사 외부권한조회[유성]</p>
+										</a>
+									</li>
+								</ul>
+							</li>
+							<!-- 권한관리 끝 -->
+							
+							<!-- 사업장관리 시작 -->
+							<li class="nav-item">
+								<a href="#" class="nav-link">
+									<i class="nav-icon fas fa-circle"></i>
+									<p>사업장 관리
+									<i class="right fas fa-angle-down"></i>
+									</p>
+								</a>
+									<ul class="nav nav-treeview">
+										<li class="nav-item">
+											<a th:href="@{/sw/business/addBusiness}" class="nav-link">
+												<i class="far fa-circle nav-icon"></i>
+												<p>사업장등록[유성]</p>
+											</a>
+										</li>
+									</ul>
+									<ul class="nav nav-treeview">
+										<li class="nav-item">
+											<a th:href="@{/sw/business/selectBusiness}" class="nav-link">
+												<i class="far fa-circle nav-icon"></i>
+												<p>사업장조회[유성]</p>
+											</a>
+										</li>
+									</ul>
+									<ul class="nav nav-treeview">
+										<li class="nav-item">
+											<a th:href="@{/sw/business/addMainBusinessCode}" class="nav-link">
+												<i class="far fa-circle nav-icon"></i>
+												<p>사업장 대표 코드 등록[유성]</p>
+											</a>
+										</li>
+									</ul>
+									<ul class="nav nav-treeview">
+										<li class="nav-item">
+											<a th:href="@{/sw/business/selectMainBusinessCode}" class="nav-link">
+												<i class="far fa-circle nav-icon"></i>
+												<p>사업장 대표 코드 조회[유성]</p>
+											</a>
+										</li>
+									</ul>
+								</li>
+								<!-- 사업장관리 끝 -->
+								
+								<!-- 서비스관리 시작 -->
+								<li class="nav-item">
+									<a href="#" class="nav-link">
+										<i class="nav-icon fas fa-circle"></i>
+										<p>서비스 관리
+										<i class="right fas fa-angle-down"></i>
+										</p>
+									</a>
+										<ul class="nav nav-treeview">
+											<li class="nav-item">
+												<a th:href="@{/sw/service/serviceRequest/addServiceRequest}" class="nav-link">
+													<i class="far fa-circle nav-icon"></i>
+													<p>!서비스 계약 요청 등록[환철]</p>
+												</a>
+											</li>
+										</ul>
+										<ul class="nav nav-treeview">
+											<li class="nav-item">
+												<a th:href="@{/sw/service/serviceRequest/selectServiceRequest}" class="nav-link">
+													<i class="far fa-circle nav-icon"></i>
+													<p>!서비스 계약 요청 조회[환철]</p>
+												</a>
+											</li>
+										</ul>
+										<ul class="nav nav-treeview">
+											<li class="nav-item">
+												<a th:href="@{/sw/service/serviceStatus}" class="nav-link">
+													<i class="far fa-circle nav-icon"></i>
+													<p>!서비스 조회[환철]</p>
+												</a>
+											</li>
+										</ul>
+									</li>
+									<!-- 서비스 관리끝 -->
+									
+									<!-- 코드관리 시작 -->
+									<li class="nav-item">
+										<a href="#" class="nav-link">
+											<i class="nav-icon fas fa-circle"></i>
+											<p>코드 관리
+											<i class="right fas fa-angle-down"></i>
+											</p>
+										</a>
+											<ul class="nav nav-treeview">
+												<li class="nav-item">
+													<a th:href="@{/sw/code/addBusinessCode}" class="nav-link">
+														<i class="far fa-circle nav-icon"></i>
+														<p>!거래처 구분 코드 등록[재천]</p>
+													</a>
+												</li>
+											</ul>
+											<ul class="nav nav-treeview">
+												<li class="nav-item">
+													<a th:href="@{/sw/code/selectBusinessCode}" class="nav-link">
+														<i class="far fa-circle nav-icon"></i>
+														<p>!거래처 구분 코드 조회[재천]</p>
+													</a>
+												</li>
+											</ul>
+											<ul class="nav nav-treeview">
+												<li class="nav-item">
+													<a th:href="@{/sw/code/addLocalCode}" class="nav-link">
+														<i class="far fa-circle nav-icon"></i>
+														<p>!거래처 지역 코드 등록[재천]</p>
+													</a>
+												</li>
+											</ul>
+											<ul class="nav nav-treeview">
+												<li class="nav-item">
+													<a th:href="@{/sw/code/selectLocalCode}" class="nav-link">
+														<i class="far fa-circle nav-icon"></i>
+														<p>!거래처 지역 코드 조회[재천]</p>
+													</a>
+												</li>
+											</ul>
+
 
 						<!-- 코드관리 시작 -->
 						<li class="nav-item"><a href="#" class="nav-link"> <i
@@ -371,21 +506,24 @@
 			<!--  기능 Start -->
 	<script type="text/javascript">
        $(function(){
-				$('.nav-link').on('click',function(){
+
+/*              $('.nav-link').on('click',function(){
                 $('.fa-circle').removeClass('fas');
                 $('.fa-circle').addClass('far');
                 $(this).find('i').removeClass('far');
                 $(this).find('i').addClass('fas');
-             }); 
-           $(document).on('click','.nav-link',function(){
-               $('.fa-circle').removeClass('fas');
-               $('.fa-circle').addClass('far');
-               $(this).find('i').removeClass('far');
-               $(this).find('i').addClass('fas');
-            }); 
-         });
+
+             });  */
+             $(document).on('click','.nav-link', function(){
+                 $('.fa-circle').removeClass('fas');
+                 $('.fa-circle').addClass('far');
+                 $(this).find('i').removeClass('far');
+                 $(this).find('i').addClass('fas');
+             });  
+             
+          });
     </script>
-		</aside>
-	</body>
-</div>
+  </aside>
+</th:block>
+
 </html>
