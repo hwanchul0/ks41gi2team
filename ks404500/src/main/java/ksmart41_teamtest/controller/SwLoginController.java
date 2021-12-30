@@ -21,7 +21,7 @@ public class SwLoginController {
 
 	@GetMapping("/login")
 	public String login(Model model) {
-		model.addAttribute("title", "로그인타이틀");
+		model.addAttribute("title", "로그인");
 		return "login";
 	}
 	 

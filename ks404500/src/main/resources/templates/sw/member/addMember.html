@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="@{layout/default-sw}">
-<div th:replace="fragments/javascript :: javascriptFragment"></div>
-<th:block layout:fragment="javascriptFragment">
-</th:block>	  
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<head th:replace="fragments/head :: headFragment"></head>
 
 <th:block layout:fragment="customContents">
 	<!-- 전체컨텐츠 -->
@@ -12,7 +12,7 @@
 			<div class="container-fluid">
 				<div class="row md-2">
 					<div class="col-sm-6">
-						<h1 class="m-0">"addMember / 개발사 내부직원등록"</h1>
+						<h1 class="m-0" th:text="${title}"></h1>
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
@@ -33,7 +33,7 @@
 						<!-- 회원가입폼 -->
 						<div class="card card-primary">
 							<div class="card-header">
-								<h3 class="card-title">개발사 내부회원 등록</h3>
+								<h5 class="card-title" th:text="${title}"></h5>
 							</div>
 							
 							<!-- 회원가입 폼 바디 시작 -->
@@ -100,9 +100,7 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-		//변수에 담아주기
-		var memberId = document.getElementBtId("memberId");
-		
+	
 	</script>
 </th:block>
 </html>
