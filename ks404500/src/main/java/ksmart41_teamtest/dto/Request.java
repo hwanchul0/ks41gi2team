@@ -1,8 +1,6 @@
 package ksmart41_teamtest.dto;
 
 public class Request {
-	private String clientId;
-	private String memberId;
 	private String contractManageCode;
 	private String serviceName;
 	private String serviceAmount;
@@ -14,18 +12,6 @@ public class Request {
 	private String serviceRequestStatus;
 	private String serviceApprovalDate;
 	
-	public String getClientId() {
-		return clientId;
-	}
-	public void setClientId(String clientId) {
-		this.clientId = clientId;
-	}
-	public String getMemberId() {
-		return memberId;
-	}
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
-	}
 	public String getContractManageCode() {
 		return contractManageCode;
 	}
@@ -89,11 +75,7 @@ public class Request {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Request [clientId=");
-		builder.append(clientId);
-		builder.append(", memberId=");
-		builder.append(memberId);
-		builder.append(", contractManageCode=");
+		builder.append("Request [contractManageCode=");
 		builder.append(contractManageCode);
 		builder.append(", serviceName=");
 		builder.append(serviceName);
@@ -113,13 +95,10 @@ public class Request {
 		builder.append(serviceRequestStatus);
 		builder.append(", serviceApprovalDate=");
 		builder.append(serviceApprovalDate);
-		builder.append(", serviceCode=");
-		builder.append(", clientId=");
-		builder.append(clientId);
-		builder.append(", memberId=");
-		builder.append(memberId);
 		builder.append("]");
 		return builder.toString();
 	}
+	
+	
 	
 }

@@ -22,4 +22,5 @@
 		FROM k0_sw_businessRegistration;
 	</select>
 
+	
 </mapper>

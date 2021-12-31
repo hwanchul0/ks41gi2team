@@ -39,7 +39,7 @@
 							</div>
 							<!-- /.card-header -->
 							<!-- form start -->
-							<form class="form-horizontal" th:action="@{/sw/code/addyIsListCode}" method="post">
+							<form class="form-horizontal" th:action="@{/sw/code/addIsListCode}" method="post">
 								<div class="card-body">
 									<div class="form-group row">
 										<label for="IsCode" class="col-sm-2 col-form-label">수정할 계정과목코드 : </label>
@@ -56,11 +56,13 @@
 									<div class="form-group row">
 										<label for="IsCode" class="col-sm-2 col-form-label">계정사용여부</label>
 										<div class="col-sm-2">
-											<select class="form-control " style="width: 120%;">
+											
+										 <select class="form-control " style="width: 120%;" name="swIsUse">
 												<option selected="selected" style="text-align: center">:: 계정사용여부 ::</option>
-												<option value="Y">사용</option>
-												<option value="N">미사용</option>
-											</select>
+												<option th:value="Y">Y</option>
+												<option th:value="N">N</option>
+											</select> 
+											
 										</div>
 									</div>
 									<div class="form-group row">
@@ -89,26 +91,5 @@
 		<!-- /.content -->
 	</div>
 	<!-- /.content-wrapper -->
-	<script type="text/javascript">
-	
-		/*$(document).ready(function() {
-			$('#selectBox').change(function() {
-				var state = $('#selectBox option:selected').val();
-				if (state == 'production') {
-					$('.layer1').show();
-					$('.layer2').hide();
-				} else if (state == 'sales') {
-					$('.layer1').hide();
-					$('.layer2').show();
-				} else {
-					$('.layer1').hide();
-					$('.layer2').hide();
-				}
-			});
-		});*/
-		
-		
-		//$("select option[value*='Sold Out']").prop('disabled',true);
-	</script>
 </th:block>
 </html>

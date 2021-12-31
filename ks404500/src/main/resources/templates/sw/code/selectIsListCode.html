@@ -2,8 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="@{layout/default-sw}">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<th:block layout:fragment="customContents">
 
+<th:block layout:fragment="customContents">
 <!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper">
 		<!-- Content Header (Page header) -->
@@ -58,7 +58,7 @@
 											<td th:text="${sl.memberId}"></td>
 											<td th:text="${sl.swIsYear}"></td>
 											<td>
-												<a th:href="@{/sw/code/addIsListCode(swIsCode=${sl.swIsCode})}" class="amend"> &nbsp수정</a>
+												<a th:href="@{/sw/code/addIsListCode(swIsCode=${sl.swIsCode})}" class="amend"><i class="fas fa-pencil-alt"></i></a>
 											</td>
 										</tr>
 										<tr th:unless="${not #lists.isEmpty(swIsListCode)}">
@@ -80,14 +80,5 @@
 		<!-- /.content -->
 	</div>
 	<!-- /.content-wrapper -->
-	<script type="text/javascript">
-	
-		$(document).ready(function() {
-			$('.amend').onclick(function() {
-				console.log(alert);
-		});		
-		
-		
-	</script>
 </th:block>
 </html>

@@ -1,22 +1,54 @@
 package ksmart41_teamtest.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import ksmart41_teamtest.dto.ShopAddAccounting;
+import ksmart41_teamtest.service.InvoiceListService;
+import ksmart41_teamtest.service.ShopAcountingService;
 
 @Controller
 @RequestMapping("/shop/accounting")
 public class ShopAccountingController {
+	
+	@Autowired
+	private ShopAcountingService shopAcountingService;
 	
 	@GetMapping("/addExpense")
 	public String addExpense() {
 		return "shop/accounting/addExpense";
 	}
 	
+	//유경 - 쇼핑몰 매출 등록화면에서 발행 대상 조회
 	@GetMapping("/addIncome")
-	public String addIncome() {
+	public String showAddIncome(Model model) {
+		List<ShopAddAccounting> shopAddAccounting = shopAcountingService.getAddIncome();
+		ShopAddAccounting shopAddIncomeCode = shopAcountingService.getAddIncomeCode();
+		
+		model.addAttribute("shopAddAccounting", shopAddAccounting);
+		model.addAttribute("shopAddIncomeCode", shopAddIncomeCode);
+		//System.out.println(shopAddIncomeCode);
 		return "shop/accounting/addIncome";
+	}
+	
+	//유경 - 쇼핑몰 매출 등록
+	@PostMapping("/addIncome")
+	public String addIncome(@RequestParam(value="shopIncomeCode", required=false) String shopIncomeCode
+			,ShopAddAccounting shopAddAccounting) {
+		System.out.println("입력받은 값 : " + shopAddAccounting);
+		String code = shopAddAccounting.getAddIncomeCode();
+		if(code!= null && !"".equals(code)) {
+			shopAcountingService.addIncome(shopAddAccounting);
+		}
+		
+		return "redirect:/shop/accounting/addIncome";
 	}
 	
 	@GetMapping("/addTotalAccounting")

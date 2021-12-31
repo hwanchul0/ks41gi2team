@@ -12,10 +12,19 @@ public interface MemberMapper {
 	//[재천]내부직원 등록
 	public int addMember(Member member);
 	
+	//[재천]내부직원 정보 조회
+	public Member MemberInfo(String memberId);
+	
 	//[재천]내부직원 조회
 	public List<Member> selectMemberList();
 	
-	//[재천]내부직원 정보 조회
-	public Member MemberInfo(String memberId);
+	//[재천]내부직원 삭제
+	public int deleteMember(Member member);
+
+	//[재천]내부직원 수정
+	public int modifyMember(Member member);
+	
+	//[재천]중복 체크
+	public int idCheck(String memberId);
 }
 

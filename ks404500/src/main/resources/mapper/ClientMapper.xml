@@ -2,16 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ksmart41_teamtest.mapper.ClientMapper">
 	<resultMap type="Client" id="clientResultMap">
-		<result column="clientId" 				property="clientId"></result>
-		<result column="businessLevelCode" 		property="businessLevelCode"></result>
-		<result column="clientPw"				property="clientPw"></result>
-		<result column="clientName" 			property="clientName"></result>
-		<result column="clientEmail"			property="clientEmail"></result>
-		<result column="clientRegistration"		property="clientRegistration"></result>
-		<result column="clientPhone"			property="clientPhone"></result>
-		<result column="clientStatus"			property="clientStatus"></result>
-		<result column="clientWithdrawal"		property="clientWithdrawal"></result>
-		<result column="clientWithdrawalReason"	property="clientWithdrawalReason"></result>
+		<result column="clientId" 				property="clientId"/>
+		<result column="businessLevelCode" 		property="businessLevelCode"/>
+		<result column="clientPw"				property="clientPw"/>
+		<result column="clientName" 			property="clientName"/>
+		<result column="clientEmail"			property="clientEmail"/>
+		<result column="clientRegistration"		property="clientRegistration"/>
+		<result column="clientPhone"			property="clientPhone"/>
+		<result column="clientStatus"			property="clientStatus"/>
+		<result column="clientWithdrawal"		property="clientWithdrawal"/>
+		<result column="clientWithdrawalReason"	property="clientWithdrawalReason"/>
 	</resultMap>
 
 	<insert id="addClient" parameterType="Client">
@@ -26,7 +26,7 @@
 		clientStatus,
 		clientWithdrawal,
 		clientWithdrawalReason
-	)VALUES (
+	)VALUES(
 		#{clientId},
 		#{businessLevelCode},
 		#{clientPw},

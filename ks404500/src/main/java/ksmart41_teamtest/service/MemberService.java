@@ -36,4 +36,19 @@ public class MemberService {
 	public Member MemberInfo(String memberId) {
 		return memberMapper.MemberInfo(memberId);
 	}
+	
+	//[재천]내부 직원 삭제
+	public int deleteMember(Member member) {
+		return memberMapper.deleteMember(member); 
+	}
+	
+	//[재천]내부 직원 수정
+	public int modifyMember(Member member) {
+		return memberMapper.modifyMember(member);
+	}
+	
+	//[재천]중복체크
+	public int idCheck(String memberId) {
+		return memberMapper.idCheck(memberId);
+	}
 } 

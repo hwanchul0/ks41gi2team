@@ -1,12 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="ksmart41_teamtest.mapper.CodeMapper">
+<mapper namespace="ksmart41_teamtest.mapper.ShopShipmentMapper">
+
+	<!-- 유경 - 쇼핑몰 배송현황 조회하기 -->
 	<select id="getShipmentCode" resultType="ShipmentCode">
-		SELECT 
-			shopShipmentCode,
-			shopShipmentSequence,
-			shopShipmentName
-		FROM 
-			k2_shop_shipment;
+				SELECT
+					o.shopOrderCode,
+					o.shopConsumerId,
+					o.shopMemberId,
+					r.releaseDate,
+					o.shopDeliveryLocation,
+					s.shopShipmentName,
+					o.shopOrderRegDate
+				FROM
+					k2_shop_order AS o
+				LEFT JOIN
+					k2_release AS r
+				ON
+					o.shopOrderCode = r.shopOrderCode
+				LEFT JOIN
+					k2_shop_shipment AS s
+				on
+					s.shopShipmentCode = r.shopShipmentCode
+				ORDER BY (releaseDate IS NOT NULL)
+      	 , releaseDate DESC
+	</select>
+	
+	<!-- 유경 - 쇼핑몰 주문내역 중 출고되지 않은 건수 조회 -->
+	<select id="getCountNoneRealese" resultType="int">
+		SELECT
+			COUNT(o.shopOrderCode)
+		FROM
+			k2_shop_order AS o
+		LEFT JOIN
+			k2_release AS r
+		ON
+			o.shopOrderCode = r.shopOrderCode
+		LEFT JOIN
+			k2_shop_shipment AS s
+		on
+			s.shopShipmentCode = r.shopShipmentCode
+		WHERE 
+			releaseDate IS NULL;
 	</select>
 </mapper>

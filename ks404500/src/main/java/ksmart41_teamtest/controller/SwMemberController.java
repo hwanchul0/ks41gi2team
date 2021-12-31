@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import ksmart41_teamtest.dto.Member;
 import ksmart41_teamtest.service.MemberService;
@@ -50,6 +52,45 @@ public class SwMemberController {
 			memberService.addMember(member);
 		}
 		return "redirect:/sw/member/selectMember";
+	}
+	
+	//[재천]멤버 삭제
+	@RequestMapping ("/deleteMember")
+	public @ResponseBody int deleteMember(Member member) {
+		return memberService.deleteMember(member);
+	}
+	
+	//[재천]멤버 수정
+	@PostMapping("/modifyMember")
+	public String modifyMember(Member member) {
+		memberService.modifyMember(member);
+		return "redirect:/sw/member/selectMember";
+	}
+	
+	//[재천]멤버 수정
+	@GetMapping("/modifyMember")
+	public String modifyMember(@RequestParam(value = "memberId", required = false) String memberId,
+								Model model) {
+		System.out.println(memberId + "받아온 memberId (controller)");
+		if(memberId != null && !"".equals(memberId)) {
+			Member memberInfo = memberService.MemberInfo(memberId);
+			model.addAttribute("memberInfo", memberInfo);
+		}
+		model.addAttribute("title", "회원수정");
+		return "sw/member/modifyMember";
+	}
+	
+	//[재천] 중복체크
+	@PostMapping("/idCheck")
+	@ResponseBody
+	public boolean idCheck(@RequestParam (value="memberId", required = false) String memberId) {
+		boolean idCheckResult = false;
+		int idCheck = memberService.idCheck(memberId);
+		
+		if(idCheck > 0) {
+			idCheckResult = true;
+		}
+		return idCheckResult;
 	}
 	
 }
