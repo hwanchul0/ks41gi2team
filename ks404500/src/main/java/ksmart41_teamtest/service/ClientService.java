@@ -29,6 +29,9 @@ public class ClientService {
 	public List<Client> selectClientList(){
 		List<Client> clientList = clientMapper.selectClientList();
 		System.out.println("ClientService.java의 값" + clientList);
+		System.out.println("ClientService.java의 값" + clientList);
+		System.out.println("ClientService.java의 값" + clientList);
+		System.out.println("ClientService.java의 값" + clientList);
 		return clientList;
 	}
 	

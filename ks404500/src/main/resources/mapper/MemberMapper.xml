@@ -78,6 +78,24 @@
 			memberId = #{memberId}
 	</select>
 	
+	<delete id="deleteMember" parameterType="Member">
+		DELETE
+		FROM
+			k2_sw_member
+		WHERE
+			memberId = #{memberId}
+	</delete>
 	
+	<update id="modifyMember" parameterType="Member">
+		UPDATE 
+			k2_sw_member
+		SET
+			memberPw = #{memberPw},
+			memberAddr = #{memberAddr},
+			memberEmail = #{memberEmail},
+			memberPhone = #{memberPhone}
+		WHERE
+			memberId = #{memberId}
+	</update>
  
 </mapper>

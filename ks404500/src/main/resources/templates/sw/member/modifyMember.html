@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="@{layout/default-shop}">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="@{layout/default-sw}">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<head th:replace="fragments/head :: headFragment"></head>  
+<head th:replace="fragments/head :: headFragment"></head>
 
 <th:block layout:fragment="customContents">
 	<!-- 전체컨텐츠 -->
@@ -37,53 +37,56 @@
 							</div>
 							
 							<!-- 회원가입 폼 바디 시작 -->
-							<form id="addClientForm" th:action="@{/shop/client/addClient}" method="post" class="form-horizontal">
+							<form id="modifyMemberForm" th:action="@{/sw/member/modifyMember}" method="post" class="form-horizontal">
 								<div class="card-body">
 									<div class="form-group row">
 										<label class="col-sm-2 col-form-label text-right">아이디 : </label>
 										<div class="col-sm-8">
-											<input type="text" class="form-control" id="inputId" placeholder="아이디를 입력하세요" name="clientId">
-										</div>
-										<div>
-											<button type="button" id="idCheckBtn" class="btn btn-success">중복확인</button>
+											<input th:value="${memberInfo.memberId}" type="text" class="form-control" id="inputId" name="memberId" readonly="readonly">
 										</div>
 									</div>
 									<div class="form-group row">
 										<label class="col-sm-2 col-form-label text-right">비밀번호 : </label>
 										<div class="col-sm-8">
-											<input type="password" class="form-control" id="inputPw" placeholder="비밀번호를 입력하세요" name="clientPw">
+											<input type="text" class="form-control" id="inputPw" placeholder="비밀번호를 입력하세요" name="memberPw">
 										</div>
 									</div>
 									<div class="form-group row">
 										<label class="col-sm-2 col-form-label text-right">비밀번호 확인 : </label>
 										<div class="col-sm-8">
-											<input type="password" class="form-control" id="pwCheck" placeholder="비밀번호를 한번 더 입력하세요" name="pwCheck">
+											<input type="text" class="form-control" id="pwCheck" placeholder="비밀번호를 한번 더 입력하세요" name="pwCheck">
 										</div>
 									</div>
 									<div class="form-group row">
 										<label class="col-sm-2 col-form-label text-right">이름 : </label>
 										<div class="col-sm-8">
-											<input type="text" class="form-control" id="inputName" placeholder="이름을 입력하세요" name="clientName">
+											<input type="text" class="form-control" id="inputName" placeholder="이름을 입력하세요" name="pwCheck" readonly="readonly">
+										</div>
+									</div>
+									<div class="form-group row">
+										<label class="col-sm-2 col-form-label text-right">주소 : </label>
+										<div class="col-sm-8">
+											<input type="text" class="form-control" id="inputAddr" placeholder="주소를 입력하세요" name="memberAddr">
 										</div>
 									</div>
 									<div class="form-group row">
 										<label class="col-sm-2 col-form-label text-right">이메일 : </label>
 										<div class="col-sm-8">
-											<input type="email" class="form-control" id="inputAddr" placeholder="주소를 입력하세요" name="clientEmail">
+											<input type="email" class="form-control" id="inputEmail" placeholder="이메일을 입력하세요" name="memberEmail">
 										</div>
 									</div>
 									<div class="form-group row">
 										<label class="col-sm-2 col-form-label text-right">전화번호 : </label>
 										<div class="col-sm-8">
-											<input type="number" class="form-control" id="inputEmail" placeholder="이메일을 입력하세요" name="clientPhone">
+											<input type="text" class="form-control" id="inputPhone" placeholder="전화번호를 입력하세요" name="memberPhone">
 										</div>
 									</div>
 								<!-- 회원가입폼 바디 끝 -->
 								</div>
 								
 								<div class="card-footer">
-									<button type="submit" class="btn btn-success" id ="addClientBtn"> 등록 </button>
-									<button type="button" class="btn btn-default float-right" id="cancleCLientBtn"> 취소 </button>
+									<button type="submit" class="btn btn-success" id ="modifyMemberBtn"> 수정완료 </button>
+									<button type="button" class="btn btn-default float-right" id="cancleMemberBtn"> 취소 </button>
 								</div>
 							</form>
 							<!-- 회원가입 폼 끝 -->
@@ -94,7 +97,7 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-		
+	
 	</script>
 </th:block>
 </html>

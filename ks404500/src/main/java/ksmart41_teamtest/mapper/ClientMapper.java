@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import ksmart41_teamtest.dto.Client;
-import ksmart41_teamtest.dto.Member;
 
 @Mapper
 public interface ClientMapper {
