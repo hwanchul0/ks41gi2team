@@ -68,7 +68,7 @@
 											<td th:text="${ml.memberWithdrawalReason}"></td>
 											<!-- <td><button type="button" class="modifyBtn" th:onclick="modifyBtn([[${ml.memberId}]]);">수정</button></td> -->
 											<td><a th:href="@{/sw/member/modifyMember(memberId=${ml.memberId})}">수정</a></td>
-											<td><button type="button" class="deleteBtn" th:onclick="deleteBtn([[${ml.memberId}]]);">삭제</button></td>
+											<td><button type="button" class="btn btn-primary deleteBtn " th:onclick="deleteBtn([[${ml.memberId}]]);">삭제</button></td>
 										</tr>
 										<tr th:unless="${not #lists.isEmpty(memberList)}">
 											<td><h1>불러올 데이터가 없습니다.</h1></td>
@@ -111,7 +111,6 @@
 			alert("삭제 실패 ");
 		}
 	}
-	
 	//[재천] 회원 수정
 /* 	function modifyBtn(memberId){
 		console.log(memberId + "아이디출력");

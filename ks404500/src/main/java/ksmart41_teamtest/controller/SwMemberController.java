@@ -80,6 +80,18 @@ public class SwMemberController {
 		return "sw/member/modifyMember";
 	}
 	
+	//[재천] 중복체크
+	@PostMapping("/idCheck")
+	@ResponseBody
+	public boolean idCheck(@RequestParam (value="memberId", required = false) String memberId) {
+		boolean idCheckResult = false;
+		int idCheck = memberService.idCheck(memberId);
+		
+		if(idCheck > 0) {
+			idCheckResult = true;
+		}
+		return idCheckResult;
+	}
 	
 }
 
