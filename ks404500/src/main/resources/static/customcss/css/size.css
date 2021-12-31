@@ -49,6 +49,7 @@
 .card-body .swiscodelist{
 	font-size : 85%
 }
+
 /*개발사 손익계정과목 등록*/
 .layer1 {
 display: none;
@@ -56,3 +57,14 @@ display: none;
 .layer2 {
 display: none;
 }
+
+/* 로그인 페이지 크기조절 */
+.login-box{
+   width: 360px;
+   margin: 0 auto;
+   margin-top:150px;
+   line-height: 1.5;
+    color: #212529;
+    text-align: left;
+}
+
