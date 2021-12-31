@@ -11,6 +11,8 @@ public interface RequestMapper {
 	public List<Request> getRequestList();
 	
 	public Request getDetailRequestList(String contractManageCode);
+
+	public List<Request> getAllRequestList();
 	
 
 }
