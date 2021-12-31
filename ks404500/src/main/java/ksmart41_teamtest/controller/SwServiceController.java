@@ -19,11 +19,11 @@ import ksmart41_teamtest.service.ServiceManagementService;
 public class SwServiceController {
 	
 	private RequestService requestService;
-	private ServiceManagementService serviceManagementService;
+	private ServiceManagementService serviceManagementSerivce;
 	
-	public SwServiceController(RequestService requestService, ServiceManagementService serviceManagementService) {
+	public SwServiceController(RequestService requestService, ServiceManagementService serviceManagementSerivce) {
 		this.requestService = requestService;
-		this.serviceManagementService =serviceManagementService;
+		this.serviceManagementSerivce = serviceManagementSerivce;
 	}
 	
 	@GetMapping("/serviceRequest/addServiceRequest")
@@ -68,14 +68,13 @@ public class SwServiceController {
 	// 서비스 현황(정보) 
 	@GetMapping("/selectServiceManagement")
 	public String getServiceManagement(Model model) {
-		List<ServiceManagement> getServiceManagement = serviceManagementService.getServiceManagement();
+		List<ServiceManagement> getServiceManagement = serviceManagementSerivce.getServiceManagement();
 		
 		model.addAttribute("title", "서비스 현황");
 		model.addAttribute("getServiceManagement", getServiceManagement);
 		
 		return "sw/service/selectServiceManagement";
 	}
-
 	@GetMapping("/serviceStatus")
 	public String serviceStatus() {
 		return "sw/service/serviceStatus";
