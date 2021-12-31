@@ -1,7 +1,6 @@
 package ksmart41_teamtest.service;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,17 +15,23 @@ public class BusinessService {
 	
 	@Autowired
 	private BusinessMapper businessMapper;
-	
 	public BusinessService(BusinessMapper businessMapper) {
 		this.businessMapper = businessMapper;
 	}
-	
+	//사업장 등록
+	public int addBusinessRegistration(Business business) {
+		int addBusinessRegistration = businessMapper.addBusinessRegistration(business);
+		return addBusinessRegistration; 
+	}
+	// 사업장 조회
 	public List<Business> getBusiness() {
 		List<Business> business = businessMapper.getBusiness();
 		//System.out.println(business + "<-- service");
 		return business;
 	}
-
+	
+	
+	
 
 
 }
