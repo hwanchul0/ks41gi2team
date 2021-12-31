@@ -23,5 +23,8 @@ public interface MemberMapper {
 
 	//[재천]내부직원 수정
 	public int modifyMember(Member member);
+	
+	//[재천]중복 체크
+	public int idCheck(String memberId);
 }
 

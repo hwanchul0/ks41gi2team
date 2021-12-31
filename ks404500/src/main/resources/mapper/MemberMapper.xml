@@ -97,5 +97,14 @@
 		WHERE
 			memberId = #{memberId}
 	</update>
+	
+	<select id="idCheck" resultType="int">
+		SELECT
+			COUNT(1)
+		FROM
+			k2_sw_member
+		WHERE
+			memberId = #{memberId}
+	</select>
  
 </mapper>

@@ -46,4 +46,9 @@ public class MemberService {
 	public int modifyMember(Member member) {
 		return memberMapper.modifyMember(member);
 	}
+	
+	//[재천]중복체크
+	public int idCheck(String memberId) {
+		return memberMapper.idCheck(memberId);
+	}
 } 
