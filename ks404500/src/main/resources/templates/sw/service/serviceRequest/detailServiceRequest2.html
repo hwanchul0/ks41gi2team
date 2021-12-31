@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="@{layout/default}">
+	<th:block layout:fragment="customTitle">
+		<title th:text="${title}"></title>
+	</th:block>
+	
+	
+	<th:block layout:fragment="customContents">
+		<form th:action="@{/sw/service/serviceRequest/detailServiceRequest}" method="post">
+			<div class=" card-primary">
+				<div class="card-header">
+			<table border="1">	
+				<tr>
+					<td>
+						<label for="contractManageCode">계약요청코드</label>
+					</td>
+					<td>
+						<input type="text" id="contractManageCode" name="contractManageCode" 
+							   readonly="readonly" th:value="${requestInfo.contractManageCode}"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="clientId">회원 아이디</label>
+					</td>
+					<td>
+						<input type="text" id="clientId" name="clientId"  th:value="${requestInfo.clientId}"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="serviceName">서비스명</label>
+					</td>
+					<td>
+						<input type="text" id="serviceName" name="serviceName"  th:value="${requestInfo.serviceName}"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="serviceAmount">서비스 수량</label>
+					</td>
+					<td>
+						<input type="text" id="serviceAmount" name="serviceAmount"  th:value="${requestInfo.serviceAmount}"/>
+					</td>
+				</tr>
+				<tr>	
+					<td>
+						<label for="servicePeriod">서비스(일)</label>
+					</td>
+					<td>
+						<input type="text" id="servicePeriod" name="servicePeriod"  th:value="${requestInfo.servicePeriod}"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="serviceTotalPrice">총 결제 금액</label>
+					</td>
+					<td>
+						<input type="text" id="serviceTotalPrice" name="serviceTotalPrice"  th:value="${requestInfo.serviceTotalPrice}"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="serviceRequestDate">서비스 계약 요청 날짜</label>
+					</td>
+					<td>
+						<input type="text" id="serviceRequestDate" name="serviceRequestDate"  th:value="${requestInfo.serviceRequestDate}"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="serviceRegistrationDate">서비스 시작 예약 날짜</label>
+					</td>
+					<td>
+						<input type="text" id="serviceRegistrationDate" name="serviceRegistrationDate"  th:value="${requestInfo.serviceRegistrationDate}"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="serviceEndDate">서비스 종료 날짜</label>
+					</td>
+					<td>
+						<input type="text" id="serviceEndDate" name="serviceEndDate"  th:value="${requestInfo.serviceEndDate}"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="serviceRequestStatus">서비스 승인상태 </label>
+					</td>
+					<td>
+						<input type="text" id="serviceRequestStatus" name="serviceRequestStatus"  th:value="${requestInfo.serviceRequestStatus}"/>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<button type="submit">저장</button>
+					</td>
+				</tr>
+			</table>
+				</div>
+			</div>
+		</form>
+	</th:block>
+	
+	
+	
+	
+	
+	
+	
+</html>
