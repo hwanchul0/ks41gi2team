@@ -6,58 +6,73 @@
 
 <!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper">
-		<!-- Content Header (Page header) -->
-			<div class="content-header">
-				<div class="container-fluid">
-					<div class="row mb-2">
-						<div class="col-sm-6">
-							<h1 class="m-0">"selectLevel / 개발사 내부권한조회"</h1>
-						</div><!-- /.col -->
-						<div class="col-sm-6">
-							<ol class="breadcrumb float-sm-right">
-								<li class="breadcrumb-item"><a href="#">Home</a></li>
-								<li class="breadcrumb-item active">Starter Page</li>
-							</ol>
-						</div><!-- /.col -->
-					</div><!-- /.row -->
-				</div><!-- /.container-fluid -->
-			</div>
-			<!-- /.content-header -->
-			
-		<!-- Main content -->
+	<!-- Content Header (Page header) -->
+		<div class="content-header">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div class="col-sm-6">
+						<h1 class="m-0" th:text="${title}"></h1>
+					</div><!-- /.col -->
+					<div class="col-sm-6">
+						<ol class="breadcrumb float-sm-right">
+							<li class="breadcrumb-item"><a href="#">Home</a></li>
+							<li class="breadcrumb-item active">Starter Page</li>
+						</ol>
+					</div><!-- /.col -->
+				</div><!-- /.row -->
+			</div><!-- /.container-fluid -->
+		</div>
+	<!-- /.content-header -->
+	
+	<!-- Main content -->
 		<div class="content">
 			<div class="container-fluid">
-	        	<div class="row">
+				<div class="row">
 					<div class="col-lg-12">
-						<div class="card">
+						<div class="card card-primary">
+							<div class="card-header">
+								<h5 class="card-title" th:text="${title}"></h5>
+							</div>
 							<div class="card-body">
-								<h5 class="card-title">Card title</h5>
 								<p class="card-text">
-									<table class="table table-striped">
-										<tr>
-											<th>d</th>
-											<th>d</th>
-											<th>d</th>
+									<table class="table table-hover table-condensed swMemberLevel">
+										<thead>
+											<tr>
+												<th>직원 권한 코드</th>
+												<th>권한명</th>
+												<th>수정일자</th>
+											</tr>
+										</thead>
+										<tbody>
+										<tr th:if="${not #lists.isEmpty(memberLevel)}" th:each="ml: ${memberLevel}">
+											<td th:text="${ml.memberLevelCode}"></td>
+											<td th:text="${ml.memberLevelName}"></td>
+											<td th:text="${ml.memberLevelUpdateDate}"></td>
+											
+											<td>
+												<button type="button" class="btn btn-primary btn-xs memberLevel">수정</button>
+											</td>
 										</tr>
-										<tr>
-											<th>1</th>
-											<th>2</th>
-											<th>3</th>
+										<tr th:unless="${not #lists.isEmpty(memberLevel)}">
+											<td>
+						
+											</td>
 										</tr>
+										</tbody>
 									</table>
 								</p>
-								<a href="#" class="card-link">Card link</a>
-								<a href="#" class="card-link">Another link</a>
+												
+												
 							</div>
 						</div>
 					</div>
+					<!-- /.row -->
 				</div>
-				<!-- /.row -->
+				<!-- /.container-fluid -->
 			</div>
-			<!-- /.container-fluid -->
+	    	<!-- /.content -->
 		</div>
-		<!-- /.content -->
 	</div>
-	<!-- /.content-wrapper -->
+<!-- /.content-wrapper -->
 </th:block>
 </html>

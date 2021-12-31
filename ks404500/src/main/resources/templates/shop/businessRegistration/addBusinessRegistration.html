@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="@{layout/default-shop}">
+<th:block layout:fragment="javascriptFragment">
+</th:block>	  
+
+<th:block layout:fragment="customContents">
+	<!-- Content Wrapper. Contains page content -->
+	<div class="content-wrapper">
+		<!-- Content Header (Page header) -->
+		<div class="content-header">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div class="col-sm-6">
+						<h1 class="m-0">사업장 등록</h1>
+					</div>
+					<!-- /.col -->
+					<div class="col-sm-6">
+						<ol class="breadcrumb float-sm-right">
+							<li class="breadcrumb-item"><a href="#">Home</a></li>
+							<li class="breadcrumb-item active">Starter Page</li>
+						</ol>
+					</div>
+					<!-- /.col -->
+				</div>
+				<!-- /.row -->
+			</div>
+			<!-- /.container-fluid -->
+		</div>
+		<!-- /.content-header -->
+
+		<!-- Main content -->
+		<div class="content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="card card-primary">
+							<div class="card-header">
+								<h5 class="card-title"> 사업장 등록</h5>
+							</div>
+							
+							<!--  사업장 등록 폼바디 시작 -->
+							<form id="addBusinessRegistration" th:action="@{/shop/businessRegistration/addBusinessRegistration}" method="post" class="form-horizontal">
+								<p class="card-body" >
+
+								<div class="form-group row">
+									<label class="col-sm-1 col-form-laebl text-right">회원아이디</label>
+									<div class="col-sm-4">
+										<input class="form-control" type="text" id="clientId" name="clientId">
+									</div>
+								</div>
+
+								<div class="form-group row">
+									<label class="col-sm-1 col-form-laebl text-right">사업장 이름</label>
+									<div class="col-sm-4">
+										<input class="form-control" type="text" id="businessName" name="businessName">
+									</div>
+								</div>
+
+								<div class="form-group row">
+									<label class="col-sm-1 col-form-laebl text-right">사업장 대표</label>
+									<div class="col-sm-4">
+										<input class="form-control" type="text" id="businessRepresentativeName" name="businessRepresentativeName">
+									</div>
+								</div>
+
+								<div class="form-group row">
+									<label class="col-sm-1 col-form-laebl text-right">사업장 번호</label>
+									<div class="col-sm-4">
+										<input class="form-control" type="text" id="bunsinessNumber" name="bunsinessNumber">
+									</div>
+								</div>
+
+
+								<div class="form-group row">
+									<label class="col-sm-1 col-form-laebl text-right">사업장 주소</label>
+									<div class="col-sm-4">
+										<input class="form-control" type="text" id="businessAddr" name="businessAddr">
+									</div>
+								</div>
+
+								<div class="form-group row">
+									<label class="col-sm-1 col-form-laebl text-right">사업장 이메일</label>
+									<div class="col-sm-4">
+										<input class="form-control" type="text" id="businessEmail" name="businessEmail">
+									</div>
+								</div>
+
+								<div class="form-group row">
+									<label class="col-sm-1 col-form-laebl text-right">주거래 통장</label>
+									<div class="col-sm-2">
+										<select id="AccountTrade" class="form-control" name="businessMainAccount">
+											<option value="">::주거래 은행 선택::</option>
+											<option>기업은행</option>
+											<option>농협은행</option>
+											<option>신협은행</option>
+											<option>전북은행</option>
+											<option>새마을금고</option>
+											<option>전북은행</option>
+											
+										</select>
+									</div>
+								</div>
+
+								<div class="form-group row">
+									<label class="col-sm-1 col-form-laebl text-right">계좌번호</label>
+									<div class="col-sm-4">
+										<input class="form-control" type="text" id="businessAccountNumber" name="businessAccountNumber">
+									</div>
+								</div>
+								
+								<div class="form-group row">
+									<label class="col-sm-1 col-form-laebl text-right">예금주</label>
+									<div class="col-sm-4">
+										<input class="form-control" type="text" id="businessAccountHolder" name="businessAccountHolder">
+									</div>
+								</div>
+								<div class="card-footer">
+									<button type="submit" class="btn btn-success" id="addBusinessRegistrationBtn"> 등록 </button>
+									<button type="button" class="btn btn-default float-right" id="cancleBusinessRegistrationBtn"> 취소 </button>
+								</div>
+							</form>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /.row -->
+			</div>
+			<!-- /.container-fluid -->
+		</div>
+		<!-- /.content -->
+	</div>
+	</div>
+	<!-- /.content-wrapper -->
+</th:block>
+</html>
