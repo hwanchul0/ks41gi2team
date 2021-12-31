@@ -1,20 +1,45 @@
 package ksmart41_teamtest.dto;
 
+//쇼핑몰 - 배송조회
 public class ShipmentCode {
-	private String shopShipmentCode;
-	private String shopShipmentSequence;
+	private String shopOrderCode;
+	private String shopConsumerId;
+	private String shopMemberId;
+	private String releaseDate;
+	private String shopDeliveryLocation;
 	private String shopShipmentName;
-	public String getShopShipmentCode() {
-		return shopShipmentCode;
+	private String shopOrderRegDate;
+	
+	
+	public String getShopOrderCode() {
+		return shopOrderCode;
 	}
-	public void setShopShipmentCode(String shopShipmentCode) {
-		this.shopShipmentCode = shopShipmentCode;
+	public void setShopOrderCode(String shopOrderCode) {
+		this.shopOrderCode = shopOrderCode;
 	}
-	public String getShopShipmentSequence() {
-		return shopShipmentSequence;
+	public String getShopConsumerId() {
+		return shopConsumerId;
 	}
-	public void setShopShipmentSequence(String shopShipmentSequence) {
-		this.shopShipmentSequence = shopShipmentSequence;
+	public void setShopConsumerId(String shopConsumerId) {
+		this.shopConsumerId = shopConsumerId;
+	}
+	public String getShopMemberId() {
+		return shopMemberId;
+	}
+	public void setShopMemberId(String shopMemberId) {
+		this.shopMemberId = shopMemberId;
+	}
+	public String getReleaseDate() {
+		return releaseDate;
+	}
+	public void setReleaseDate(String releaseDate) {
+		this.releaseDate = releaseDate;
+	}
+	public String getShopDeliveryLocation() {
+		return shopDeliveryLocation;
+	}
+	public void setShopDeliveryLocation(String shopDeliveryLocation) {
+		this.shopDeliveryLocation = shopDeliveryLocation;
 	}
 	public String getShopShipmentName() {
 		return shopShipmentName;
@@ -22,17 +47,17 @@ public class ShipmentCode {
 	public void setShopShipmentName(String shopShipmentName) {
 		this.shopShipmentName = shopShipmentName;
 	}
+	public String getShopOrderRegDate() {
+		return shopOrderRegDate;
+	}
+	public void setShopOrderRegDate(String shopOrderRegDate) {
+		this.shopOrderRegDate = shopOrderRegDate;
+	}
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("ShipmentCode [shopShipmentCode=");
-		builder.append(shopShipmentCode);
-		builder.append(", shopShipmentSequence=");
-		builder.append(shopShipmentSequence);
-		builder.append(", shopShipmentName=");
-		builder.append(shopShipmentName);
-		builder.append("]");
-		return builder.toString();
+		return "ShipmentCode [shopOrderCode=" + shopOrderCode + ", shopConsumerId=" + shopConsumerId + ", shopMemberId="
+				+ shopMemberId + ", releaseDate=" + releaseDate + ", shopDeliveryLocation=" + shopDeliveryLocation
+				+ ", shopShipmentName=" + shopShipmentName + ", shopOrderRegDate=" + shopOrderRegDate + "]";
 	}
 	
 	

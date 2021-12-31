@@ -1,6 +1,5 @@
 package ksmart41_teamtest.dto;
 
-
 public class InvoiceList {
 	private String invoiceCode;
 	private String invoiceType;
@@ -28,7 +27,14 @@ public class InvoiceList {
 	private String amendedInvoiceCode;
 	private int totalPrice;
 	private int totalTax;
+	private String contractManageCode;
 	
+	public String getContractManageCode() {
+		return contractManageCode;
+	}
+	public void setContractManageCode(String contractManageCode) {
+		this.contractManageCode = contractManageCode;
+	}
 	public String getInvoiceCode() {
 		return invoiceCode;
 	}
@@ -189,61 +195,18 @@ public class InvoiceList {
 	}
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("InvoiceList [invoiceCode=");
-		builder.append(invoiceCode);
-		builder.append(", invoiceType=");
-		builder.append(invoiceType);
-		builder.append(", invoiceRegDate=");
-		builder.append(invoiceRegDate);
-		builder.append(", mainBusinessCodeDemand=");
-		builder.append(mainBusinessCodeDemand);
-		builder.append(", invoiceDemandBizNumber=");
-		builder.append(invoiceDemandBizNumber);
-		builder.append(", invoiceDemandNumber=");
-		builder.append(invoiceDemandNumber);
-		builder.append(", invoiceDemand=");
-		builder.append(invoiceDemand);
-		builder.append(", invoiceDemandName=");
-		builder.append(invoiceDemandName);
-		builder.append(", invoiceDemandAddr=");
-		builder.append(invoiceDemandAddr);
-		builder.append(", invoiceDemandType1=");
-		builder.append(invoiceDemandType1);
-		builder.append(", invoiceDemandType2=");
-		builder.append(invoiceDemandType2);
-		builder.append(", invoiceDemandEmail1=");
-		builder.append(invoiceDemandEmail1);
-		builder.append(", invoiceDemandEmail2=");
-		builder.append(invoiceDemandEmail2);
-		builder.append(", invoicePrice=");
-		builder.append(invoicePrice);
-		builder.append(", invoiceTax=");
-		builder.append(invoiceTax);
-		builder.append(", invoiceNote=");
-		builder.append(invoiceNote);
-		builder.append(", invoiceState=");
-		builder.append(invoiceState);
-		builder.append(", cash=");
-		builder.append(cash);
-		builder.append(", invoiceCheck=");
-		builder.append(invoiceCheck);
-		builder.append(", draft=");
-		builder.append(draft);
-		builder.append(", accountsReceivable=");
-		builder.append(accountsReceivable);
-		builder.append(", confirm=");
-		builder.append(confirm);
-		builder.append(", amendCheck=");
-		builder.append(amendCheck);
-		builder.append(", amendedInvoiceCode=");
-		builder.append(amendedInvoiceCode);
-		builder.append(", totalPrice=");
-		builder.append(totalPrice);
-		builder.append(", totalTax=");
-		builder.append(totalTax);
-		builder.append("]");
-		return builder.toString();
+		return "InvoiceList [invoiceCode=" + invoiceCode + ", invoiceType=" + invoiceType + ", invoiceRegDate="
+				+ invoiceRegDate + ", mainBusinessCodeDemand=" + mainBusinessCodeDemand + ", invoiceDemandBizNumber="
+				+ invoiceDemandBizNumber + ", invoiceDemandNumber=" + invoiceDemandNumber + ", invoiceDemand="
+				+ invoiceDemand + ", invoiceDemandName=" + invoiceDemandName + ", invoiceDemandAddr="
+				+ invoiceDemandAddr + ", invoiceDemandType1=" + invoiceDemandType1 + ", invoiceDemandType2="
+				+ invoiceDemandType2 + ", invoiceDemandEmail1=" + invoiceDemandEmail1 + ", invoiceDemandEmail2="
+				+ invoiceDemandEmail2 + ", invoicePrice=" + invoicePrice + ", invoiceTax=" + invoiceTax
+				+ ", invoiceNote=" + invoiceNote + ", invoiceState=" + invoiceState + ", cash=" + cash
+				+ ", invoiceCheck=" + invoiceCheck + ", draft=" + draft + ", accountsReceivable=" + accountsReceivable
+				+ ", confirm=" + confirm + ", amendCheck=" + amendCheck + ", amendedInvoiceCode=" + amendedInvoiceCode
+				+ ", totalPrice=" + totalPrice + ", totalTax=" + totalTax + ", contractManageCode=" + contractManageCode
+				+ "]";
 	}
 	
 }
