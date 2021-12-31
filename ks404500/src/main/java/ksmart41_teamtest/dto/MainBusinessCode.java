@@ -6,6 +6,8 @@ public class MainBusinessCode {
 	private String businessLevelCode;
 	private String businessRegistrationCode;
 	private String businessCodeRegistrationDate;
+	private String businessCodeDeleteDate;
+	
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -24,7 +26,6 @@ public class MainBusinessCode {
 		builder.append("]");
 		return builder.toString();
 	}
-	private String businessCodeDeleteDate;
 	public String getMainBusinessCode() {
 		return mainBusinessCode;
 	}
