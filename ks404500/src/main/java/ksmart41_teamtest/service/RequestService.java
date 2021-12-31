@@ -30,6 +30,14 @@ public class RequestService {
 		
 		return getRequestList;
 	}
+	
+	// 계약요청 상세페이지 ( sw )
+	public Request getDetailRequestList(String contractManageCode){
+		Request getDetailRequestList = requestMapper.getDetailRequestList(contractManageCode);
+		return getDetailRequestList;
+	}
+	
+
 
 }
 
