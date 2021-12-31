@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="@{layout/default-sw}">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<head th:replace="fragments/head :: headFragment"></head>
 
 <th:block layout:fragment="customContents">
 	<!-- 전체컨텐츠 -->
@@ -11,7 +12,7 @@
 			<div class="container-fluid">
 				<div class="row md-2">
 					<div class="col-sm-6">
-						<h1 class="m-0">"memberList / 개발사 직원 조회"</h1>
+						<h1 class="m-0" th:text="${title}"></h1>
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
@@ -22,6 +23,7 @@
 				</div>
 			</div>
 		</div>
+		
 		<!-- 컨텐츠 헤더 끝 -->
 
 		<!-- 메인컨텐츠 -->
@@ -32,10 +34,10 @@
 						<!-- 회원가입폼 -->
 						<div class="card card-primary">
 							<div class="card-header">
-								<h3 class="card-title">개발사 내부회원 등록</h3>
+								<h5 class="card-title" th:text="${title}"></h5>
 							</div>
 							<div class="card-body">
-								<table class="table table-hover table-coondensed">
+								<table class="table table-hover table-coondensed" style="text-align: center;">
 									<thead>
 										<tr>
 											<th>아이디</th>
@@ -48,23 +50,30 @@
 											<th>회원상태</th>
 											<th>탈퇴날짜</th>
 											<th>탈퇴이유</th>
+											<th>수정</th>
+											<th>삭제</th>
 										</tr>
 									</thead>
-										<tr th:if="${not #lists.isEmpty(memberList)}" th:each="sm : ${memberList}">
-											<td th:text="${sm.memberId}"></td>
-											<td th:text="${sm.memberLevelCode}"></td>
-											<td th:text="${sm.memberName}"></td>
-											<td th:text="${sm.memberAddr}"></td>
-											<td th:text="${sm.memberEmail}"></td>
-											<td th:text="${sm.memberPhone}"></td>
-											<td th:text="${sm.memberRegDate}"></td>
-											<td th:text="${sm.memberStatus}"></td>
-											<td th:text="${sm.memberWithdrawal}"></td>
-											<td th:text="${sm.memberWithdrawalReason}"></td>
+									<tbody>
+										<tr th:if="${not #lists.isEmpty(memberList)}" th:each="ml : ${memberList}">
+											<td th:text="${ml.memberId}"></td>
+											<td th:text="${ml.memberLevelCode}"></td>
+											<td th:text="${ml.memberName}"></td>
+											<td th:text="${ml.memberAddr}"></td>
+											<td th:text="${ml.memberEmail}"></td>
+											<td th:text="${ml.memberPhone}"></td>
+											<td th:text="${ml.memberRegDate}"></td>
+											<td th:text="${ml.memberStatus}"></td>
+											<td th:text="${ml.memberWithdrawal}"></td>
+											<td th:text="${ml.memberWithdrawalReason}"></td>
+											<!-- <td><button type="button" class="modifyBtn" th:onclick="modifyBtn([[${ml.memberId}]]);">수정</button></td> -->
+											<td><a th:href="@{/sw/member/modifyMember(memberId=${ml.memberId})}">수정</a></td>
+											<td><button type="button" class="btn btn-primary deleteBtn " th:onclick="deleteBtn([[${ml.memberId}]]);">삭제</button></td>
 										</tr>
-									<tr th:unless="${not #lists.isEmpty(memberList)}">
-										<td><h1>불러올 데이터가 없습니다.</h1></td>
-									</tr>
+										<tr th:unless="${not #lists.isEmpty(memberList)}">
+											<td><h1>불러올 데이터가 없습니다.</h1></td>
+										</tr>
+									</tbody>	
 								</table>
 							</div>
 								<!-- <div class="card-footer">
@@ -77,5 +86,37 @@
 			</div>
 		</div>
 	</div>
+	<script type="text/javascript">
+	//[재천] 회원삭제
+	function deleteBtn(memberId) {
+		if(memberId != null && memberId != ""){
+			var request = $.ajax({
+				  url: "/sw/member/deleteMember",
+				  method: "POST",
+				  data: { memberId : memberId },
+				  dataType: "text"
+				  
+				});
+			
+			request.done(function(data) {
+				
+				if(data > 0) {
+					alert("삭제 되었습니다.");
+				}else {
+					alert("실패했습니다.");
+				}
+				location.reload();
+			});
+		} else {
+			alert("삭제 실패 ");
+		}
+	}
+	//[재천] 회원 수정
+/* 	function modifyBtn(memberId){
+		console.log(memberId + "아이디출력");
+		location.href="/sw/member/modifyMember?memberId" + memberId;
+	} */
+											
+    </script>
 </th:block>
 </html>

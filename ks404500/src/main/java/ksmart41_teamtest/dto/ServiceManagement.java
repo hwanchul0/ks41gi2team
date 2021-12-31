@@ -71,5 +71,4 @@ public class ServiceManagement {
 				+ ", servicePeriod=" + servicePeriod + ", serviceStatus=" + serviceStatus + ", serviceRegistrationDate="
 				+ serviceRegistrationDate + ", serviceDeleteDate=" + serviceDeleteDate + "]";
 	}
-	
 }
