@@ -4,6 +4,12 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 layout:decorate="@{layout/default-shop}">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<th:block layout:fragment="customJs">
+<script type="text/javascript">
+
+</script>
+</th:block>
+
 <th:block layout:fragment="customContents">
 <!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper">
@@ -35,48 +41,46 @@ layout:decorate="@{layout/default-shop}">
 						<!-- Horizontal Form -->
 						<div class="card card-success">
 							<div class="card-header">
-								<h3 class="card-title">Horizontal Form</h3>
+								<h3 class="card-title">쇼핑몰 매출 등록</h3>
 							</div>
 							<!-- /.card-header -->
 							<!-- form start -->
 							<form class="form-horizontal">
 								<div class="card-body">
-									<div class="form-group row">
-										<label for="inputEmail3" class="col-sm-2 col-form-label">주문내역</label>
-										<div class="col-sm-6">
-											<div class="col-sm-6">
-							                        <select class="form-control">
-							                          <option>::선택 ::</option>
-							                          <option>option 2</option>
-							                          <option>option 3</option>
-							                          <option>option 4</option>
-							                          <option>option 5</option>
-							                        </select>
-							                 </div>
-										</div>
-									</div>
 									<div>
-									<label for="biz" class="col-sm-2 col-form-label">주문내역</label>
-									<table class="table">
-										<tr>
-											<td style="width:150px;">출고정보</td>
-											<td>주문내역코드</td>
-											<td>상품코드</td>
-											<td>주문자아이디</td>
-											<td>그룹전표번호영수증번호</td>
-											<td>주문수량</td>
-											<td>결제 금액</td>
-										</tr>
-										<tr>
-											<td>ㅇ</td>
-											<td>ㅇ</td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-										</tr>
-									
+									<label for="biz" class="col-sm-6 col-form-label">주문내역 - 발행대상만 등록가능</label>
+									<table class="table table-hover table-condensed" style="font-size: 12px;">
+										<thead>
+											<tr>
+												<th>선택</th>
+												<th>구분</th>
+												<th>매출코드</th>
+												<th>주문번호</th>
+												<th>전표번호</th>
+												<th>공급가액</th>
+												<th>세액</th>
+												<th>일자</th>
+												<th>환불일자</th>
+												<th>그룹전표코드</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:if="${not #lists.isEmpty(shopAddAccounting)}" th:each="a: ${shopAddAccounting}">
+												<td><input type="radio" th:disabled="${a.addIncome.equals('발행완료')}"></td>
+												<td th:text="${a.addIncome}"></td>
+												<td th:text="${a.shopIncomeCode}"></td>
+												<td th:text="${a.shopOrderCode}"></td>
+												<td th:text="${a.shopSlipNumber}"></td>
+												<td th:text="${#numbers.formatInteger(a.renontax, 0, 'COMMA')}"></td>
+												<td th:text="${#numbers.formatInteger(a.retax, 0, 'COMMA')}"></td>
+												<td th:text="${a.shopPaymentDate}"></td>
+												<td th:text="${a.shopRefundDate}"></td>
+												<td th:text="${a.groupslip}"></td>
+												</tr>
+											<tr th:unless="${not #lists.isEmpty(shopAddAccounting)}">
+												<td>dd</td>
+											</tr>
+										</tbody>
 									</table>
 									
 									
@@ -84,25 +88,26 @@ layout:decorate="@{layout/default-shop}">
 										<label for="inputEmail3" class="col-sm-2 col-form-label">계정과목코드</label>
 										<div class="col-sm-6">
 											<div class="col-sm-6">
-							                        <input type="email" class="form-control" id="inputEmail3"
-												placeholder="40101 상품매출" disabled="disabled">
+							                        <span>40101 상품매출</span>
 							                 </div>
 										</div>
 									</div>
 									<div class="form-group row">
-										<label for="inputEmail3" class="col-sm-2 col-form-label">회계통합그룹코드</label>
-										<div class="col-sm-4">
-											<input type="email" class="form-control" id="inputEmail3"
-												placeholder="Email">
+										<label for="inputEmail3" class="col-sm-2 col-form-label">발행할 매출코드 </label>
+										<div class="col-sm-6">
+											<div class="col-sm-6">
+							                       <div><span th:text="${shopAddIncomeCode.addIncomeCode}"></span></div>
+							                 </div>
 										</div>
 									</div>
 								</div>
 								<!-- /.card-body -->
 								<div class="card-footer">
-									<button type="submit" class="btn btn-success">Sign in</button>
+									<button type="submit" class="btn btn-success" id="sign">Sign in</button>
 									<button type="submit" class="btn btn-default float-right">Cancel</button>
 								</div>
 								<!-- /.card-footer -->
+								</div>
 							</form>
 						</div>
 						<!-- /.card -->

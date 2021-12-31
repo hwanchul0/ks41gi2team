@@ -26,10 +26,10 @@ public class SwIsListService {
 		//System.out.println(swIsListCode + "<--service");
 		return swIsListCode;
 	}
-
-	public int addIsListCode(SwIsListCode swiscode) {
-		int result = codeMapper.addIsListCode(swiscode);
-		return result;
+	
+	/*유경 - 손익계정 사용여부 수정*/
+	public int modifyIsListCode(SwIsListCode swiscode) {
+		return codeMapper.modifyIsListCode(swiscode);
 	}
 	
 	/*유경  손익계정정->수정화면에서 값 가져오기*/
