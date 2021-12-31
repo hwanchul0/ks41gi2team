@@ -23,7 +23,7 @@ public class ShopBusinessRegistrationController {
 	}
 
 	
-	//addBusinessRegistration
+	//- 유성 - addBusinessRegistration 
 	@PostMapping("/addBusinessRegistration")
 	public String addBusinessRegistration(Business business) {
 	System.out.println("ShopBusinessRegistrationController에서 입력받은 값 " + business);
