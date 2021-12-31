@@ -20,7 +20,7 @@
 			SELECT
 				bR.clientId
 				,r.contractManageCode
-				 ,r.contractManageCode
+				,r.contractManageCode
 				,m.serviceName
 				,r.serviceAmount
 				,r.servicePeriod

@@ -19,10 +19,10 @@ public class RequestService {
 		}
 	
 	// 계약요청 목록 조회(장바구니)
-	public List<Request> getRequestList(){
-		List<Request> requestList = requestMapper.getRequestList();
-		System.out.println("RequestService : " + requestList);
-		return requestList;
+	public List<Request> getAllRequestList(){
+		List<Request> getAllRequestList = requestMapper.getAllRequestList();
+		System.out.println("RequestService : " + getAllRequestList);
+		return getAllRequestList;
 	}
 	// 계약요청 조회 ( client )
 	public List<Request> getRequestList() {

@@ -10,16 +10,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import ksmart41_teamtest.dto.Request;
+import ksmart41_teamtest.dto.ServiceManagement;
 import ksmart41_teamtest.service.RequestService;
+import ksmart41_teamtest.service.ServiceManagementService;
 
 @Controller
 @RequestMapping("/sw/service")
 public class SwServiceController {
 	
 	private RequestService requestService;
+	private ServiceManagementService serviceManagementService;
 	
-	public SwServiceController(RequestService requestService) {
+	public SwServiceController(RequestService requestService, ServiceManagementService serviceManagementService) {
 		this.requestService = requestService;
+		this.serviceManagementService =serviceManagementService;
 	}
 	
 	@GetMapping("/serviceRequest/addServiceRequest")
@@ -28,12 +32,12 @@ public class SwServiceController {
 		return "sw/service/serviceRequest/addServiceRequest";
 	}
 	
-	@GetMapping("/serviceRequest/selectServiceRequest") 
-	  public String getRequestList(Model model) { 
-	  List<Request> requestList = requestService.getRequestList();
+	@GetMapping("/serviceRequest/selectAllServiceRequest") 
+	  public String getAllRequestList(Model model) { 
+	  List<Request> getAllRequestList = requestService.getAllRequestList();
 	  
 	  model.addAttribute("title", "회원전체조회"); 
-	  model.addAttribute("requestList", requestList);
+	  model.addAttribute("requestList", getAllRequestList);
 
 	  return "sw/service/serviceRequest/selectServiceRequest"; 
 	  }
@@ -70,6 +74,7 @@ public class SwServiceController {
 		model.addAttribute("getServiceManagement", getServiceManagement);
 		
 		return "sw/service/selectServiceManagement";
+	}
 
 	@GetMapping("/serviceStatus")
 	public String serviceStatus() {
