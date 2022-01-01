@@ -61,7 +61,7 @@ tbody tr td:first-child:before {
                                           <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">총 금액</th>
                                           <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">서비스 시작 요청 날짜</th>
                                           <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">서비스 시작 예약 날짜</th>
-                                          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">서비스 시작 요청 상태</th>
+                                          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">서비스 종료 날짜</th>
                                           <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">서비스 승인 상태</th>
                                           <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">서비스 승인 날짜</th>
                                           <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">상세정보</th>
@@ -76,8 +76,8 @@ tbody tr td:first-child:before {
                                           <td th:text="${r.servicePeriod}"></td>
                                           <td th:text="${#numbers.formatInteger(r.serviceTotalPrice, 0, 'COMMA')}"></td>
                                           <td th:text="${r.serviceRequestDate}"></td>
-                                          <td th:text="${r.serviceRegistrationDate}"></td>
                                           <td th:text="${r.serviceEndDate}"></td>
+                                          <td th:text="${r.serviceRegistrationDate}"></td>
                                           <td th:text="${r.serviceRequestStatus}"></td>
                                           <td th:text="${r.serviceApprovalDate}"></td>
                                           <td>

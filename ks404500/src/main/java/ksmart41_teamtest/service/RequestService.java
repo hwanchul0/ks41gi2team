@@ -18,7 +18,7 @@ public class RequestService {
 		this.requestMapper = requestMapper;
 		}
 	
-	// 계약요청 목록 조회(장바구니)
+	// 계약요청 전체 조회(장바구니)
 	public List<Request> getAllRequestList(){
 		List<Request> getAllRequestList = requestMapper.getAllRequestList();
 		System.out.println("RequestService : " + getAllRequestList);
