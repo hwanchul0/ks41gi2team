@@ -15,9 +15,12 @@
 		<result column="serviceRequestStatus" 			property="serviceRequestStatus"/>
 		<result column="serviceApprovalDate" 			property="serviceApprovalDate"/>
 	</resultMap>
-		<select id="getRequestList" parameterType="String" resultMap="requestResultMap">
+	<!-- 계약요청 전체 조회 ( sw) -->
+		<select id="getAllRequestList" parameterType="String" resultMap="requestResultMap">
 			SELECT
-				 r.contractManageCode
+				bR.clientId
+				,r.contractManageCode
+				 ,r.contractManageCode
 				,m.serviceName
 				,r.serviceAmount
 				,r.servicePeriod
@@ -33,20 +36,79 @@
 				k2_sw_serviceManagement AS m
 				ON 
 				r.serviceCode = m.serviceCode
+				INNER JOIN 
+				k0_sw_mainBusinessCodeManagement AS mB
+			ON 
+				r.mainBusinessCode = mB.mainBusinessCode
+				INNER JOIN 
+				k0_sw_businessRegistration AS bR
+			ON 
+				mB.businessRegistrationCode = bR.businessRegistrationCode
+			GROUP BY bR.clientId
 			ORDER BY serviceRequestDate ASC;
 	</select>
-		<select id="getMainBusinessCode" parameterType="String">
-			SELECT 
-				bR.clientId
-			FROM 
-				k2_sw_contractRequest AS cR
+	<!-- 계약요청 조회 (client) -->
+		<select id="getRequestList" parameterType="String" resultMap="requestResultMap">
+			SELECT
+				r.contractManageCode
+				,m.serviceName
+				,r.serviceAmount
+				,r.servicePeriod
+				,r.serviceTotalPrice
+				,r.serviceRequestDate
+				,r.serviceRegistrationDate
+				,r.serviceEndDate
+				,r.serviceRequestStatus
+				,r.serviceApprovalDate
+			FROM
+				k2_sw_contractRequest AS r
+				INNER JOIN 
+				k2_sw_serviceManagement AS m
+			ON
+				r.serviceCode = m.serviceCode
 				INNER JOIN 
 				k0_sw_mainBusinessCodeManagement AS mB
 				ON 
 				cR.mainBusinessCode = mB.mainBusinessCode
 				INNER JOIN 
 				k0_sw_businessRegistration AS bR
-				ON 
-				mB.businessRegistrationCode = bR.businessRegistrationCode;
+			ON 
+				bR.businessRegistrationCode = mB.businessRegistrationCode
+			WHERE 
+			clientId = #{clientId}
+			ORDER BY serviceRequestDate ASC;
+	</select>
+		
+	<select id="getDetailRequestList" resultType="Request" resultMap="requestResultMap">
+			SELECT
+				bR.clientId
+				,r.contractManageCode
+				,m.serviceName
+				,r.serviceAmount
+				,r.servicePeriod
+				,r.serviceTotalPrice
+				,r.serviceRequestDate
+				,r.serviceRegistrationDate
+				,r.serviceEndDate
+				,r.serviceRequestStatus
+				,r.serviceApprovalDate
+			FROM
+				k2_sw_contractRequest AS r
+				INNER JOIN 
+				k2_sw_serviceManagement AS m
+			ON
+				r.serviceCode = m.serviceCode
+				INNER JOIN 
+				k0_sw_mainBusinessCodeManagement AS mB
+			ON 
+				r.mainBusinessCode = mB.mainBusinessCode
+				INNER JOIN 
+				k0_sw_businessRegistration AS bR
+			ON 
+				mB.businessRegistrationCode = bR.businessRegistrationCode
+			WHERE 
+				contractManageCode = #{contractManageCode}
+			GROUP BY bR.clientId
+			ORDER BY r.serviceRequestDate ASC; 		
 	</select>
 </mapper>

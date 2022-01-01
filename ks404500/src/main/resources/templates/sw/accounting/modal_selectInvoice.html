@@ -1,0 +1,2207 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+	layout:decorate="@{layout/modal}">
+	
+<th:block layout:fragment="customContents">
+	<!-- Modal -->
+	<div class="modal fade">
+		<div class="modal-dialog modal-xl">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">세금계산서 미리보기</h4>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+
+				<div class="modal-body">
+					<style>
+<!--
+table {
+	mso-displayed-decimal-separator: "\.";
+	mso-displayed-thousand-separator: "\,";
+}
+
+@page {
+	mso-header-data: "";
+	mso-footer-data: "";
+	margin: 0.984305560588837in 0.748055577278137in 0.984305560588837in
+		0.748055577278137in;
+	mso-header-margin: 0.511666655540466in;
+	mso-footer-margin: 0.511666655540466in;
+	mso-page-orientation: Portrait;
+}
+
+tr {
+	mso-height-source: auto;
+	mso-ruby-visibility: none;
+}
+
+col {
+	mso-width-source: auto;
+	mso-ruby-visibility: none;
+}
+
+br {
+	mso-data-placement: same-cell;
+}
+
+ruby {
+	ruby-align: left;
+}
+
+.style0 {
+	mso-number-format: General;
+	text-align: general;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: auto;
+	mso-pattern: auto;
+	color: #000000;
+	font-size: 11pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border: none;
+	mso-protection: locked visible;
+	mso-style-name: Normal;
+	mso-style-id: 0;
+}
+
+.font0 {
+	color: #000000;
+	font-size: 11pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+}
+
+.font1 {
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+}
+
+.font2 {
+	color: #000000;
+	font-size: 15pt;
+	font-weight: 700;
+	font-style: normal;
+	font-family: "맑은 고딕";
+}
+
+td {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: general;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: auto;
+	mso-pattern: auto;
+	color: #000000;
+	font-size: 11pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border: none;
+	mso-protection: locked visible;
+	mso-ignore: padding;
+}
+
+.style0 {
+	text-align: general;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: auto;
+	mso-pattern: auto;
+	font-size: 11pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border: none;
+	mso-protection: locked visible;
+	mso-style-name: "Normal";
+}
+
+.style1 {
+	text-align: general;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: auto;
+	mso-pattern: auto;
+	font-size: 11pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border: none;
+	mso-protection: locked visible;
+}
+
+.style2 {
+	text-align: general;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: auto;
+	mso-pattern: auto;
+	font-size: 11pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border: none;
+	mso-protection: locked visible;
+}
+
+.style3 {
+	text-align: general;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: auto;
+	mso-pattern: auto;
+	font-size: 11pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border: none;
+	mso-protection: locked visible;
+}
+
+.style4 {
+	text-align: general;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: auto;
+	mso-pattern: auto;
+	font-size: 11pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border: none;
+	mso-protection: locked visible;
+}
+
+.style5 {
+	text-align: general;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: auto;
+	mso-pattern: auto;
+	font-size: 11pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border: none;
+	mso-protection: locked visible;
+}
+
+.style6 {
+	text-align: general;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: auto;
+	mso-pattern: auto;
+	font-size: 11pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border: none;
+	mso-protection: locked visible;
+}
+
+.style7 {
+	text-align: general;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: auto;
+	mso-pattern: auto;
+	font-size: 11pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border: none;
+	mso-protection: locked visible;
+}
+
+.style8 {
+	text-align: general;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: auto;
+	mso-pattern: auto;
+	font-size: 11pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border: none;
+	mso-protection: locked visible;
+}
+
+.style9 {
+	text-align: general;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: auto;
+	mso-pattern: auto;
+	font-size: 11pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border: none;
+	mso-protection: locked visible;
+}
+
+.style10 {
+	text-align: general;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: auto;
+	mso-pattern: auto;
+	font-size: 11pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border: none;
+	mso-protection: locked visible;
+}
+
+.style11 {
+	text-align: general;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: auto;
+	mso-pattern: auto;
+	font-size: 11pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border: none;
+	mso-protection: locked visible;
+}
+
+.style12 {
+	text-align: general;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: auto;
+	mso-pattern: auto;
+	font-size: 11pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border: none;
+	mso-protection: locked visible;
+}
+
+.style13 {
+	text-align: general;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: auto;
+	mso-pattern: auto;
+	font-size: 11pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border: none;
+	mso-protection: locked visible;
+}
+
+.style14 {
+	text-align: general;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: auto;
+	mso-pattern: auto;
+	font-size: 11pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border: none;
+	mso-protection: locked visible;
+}
+
+.x15 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: general;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: auto;
+	mso-pattern: auto;
+	font-size: 11pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border: none;
+	mso-protection: locked visible;
+}
+
+.style16 {
+	mso-number-format: "0%";
+	text-align: general;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: auto;
+	mso-pattern: auto;
+	font-size: 11pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border: none;
+	mso-protection: locked visible;
+	mso-style-name: "Percent";
+}
+
+.style17 {
+	mso-number-format:
+		"_-* \#\,\#\#0\.00_-\;\\-* \#\,\#\#0\.00_-\;_-* \0022-\0022??_-\;_-\@_-";
+	text-align: general;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: auto;
+	mso-pattern: auto;
+	font-size: 11pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border: none;
+	mso-protection: locked visible;
+	mso-style-name: "Comma";
+}
+
+.style18 {
+	mso-number-format:
+		"_-* \#\,\#\#0_-\;\\-* \#\,\#\#0_-\;_-* \0022-\0022_-\;_-\@_-";
+	text-align: general;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: auto;
+	mso-pattern: auto;
+	font-size: 11pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border: none;
+	mso-protection: locked visible;
+	mso-style-name: "Comma [0]";
+}
+
+.style19 {
+	mso-number-format:
+		"_-\0022₩\0022* \#\,\#\#0\.00_-\;\\-\0022₩\0022* \#\,\#\#0\.00_-\;_-\0022₩\0022* \0022-\0022??_-\;_-\@_-";
+	text-align: general;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: auto;
+	mso-pattern: auto;
+	font-size: 11pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border: none;
+	mso-protection: locked visible;
+	mso-style-name: "Currency";
+}
+
+.style20 {
+	mso-number-format:
+		"_-\0022₩\0022* \#\,\#\#0_-\;\\-\0022₩\0022* \#\,\#\#0_-\;_-\0022₩\0022* \0022-\0022_-\;_-\@_-";
+	text-align: general;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: auto;
+	mso-pattern: auto;
+	font-size: 11pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border: none;
+	mso-protection: locked visible;
+	mso-style-name: "Currency [0]";
+}
+
+.x21 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: auto;
+	mso-pattern: auto;
+	font-size: 11pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border: none;
+	mso-protection: locked visible;
+}
+
+.x22 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: general;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: auto;
+	mso-pattern: auto;
+	font-size: 11pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border: none;
+	mso-protection: locked visible;
+}
+
+.x23 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: auto;
+	mso-pattern: auto;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: 2px solid windowtext;
+	border-right: 1px solid windowtext;
+	border-bottom: 1px solid windowtext;
+	border-left: 1px solid windowtext;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x24 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: auto;
+	mso-pattern: auto;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: 2px solid windowtext;
+	border-right: 2px solid windowtext;
+	border-bottom: 1px solid windowtext;
+	border-left: 1px solid windowtext;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x25 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: #F2F5FF;
+	mso-pattern: auto none;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: 2px solid windowtext;
+	border-right: 1px solid windowtext;
+	border-bottom: 1px solid windowtext;
+	border-left: 1px solid windowtext;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x26 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: general;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: auto;
+	mso-pattern: auto;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: 2px solid windowtext;
+	border-right: 2px solid windowtext;
+	border-bottom: 1px solid windowtext;
+	border-left: 1px solid windowtext;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x27 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: auto;
+	mso-pattern: auto;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: 1px solid windowtext;
+	border-right: 1px solid windowtext;
+	border-bottom: 1px solid windowtext;
+	border-left: 1px solid windowtext;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x28 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: auto;
+	mso-pattern: auto;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: 1px solid windowtext;
+	border-right: 2px solid windowtext;
+	border-bottom: 1px solid windowtext;
+	border-left: 1px solid windowtext;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x29 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: #F2F5FF;
+	mso-pattern: auto none;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: 1px solid windowtext;
+	border-right: 1px solid windowtext;
+	border-bottom: 1px solid windowtext;
+	border-left: 1px solid windowtext;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x30 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: general;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: auto;
+	mso-pattern: auto;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: 1px solid windowtext;
+	border-right: 2px solid windowtext;
+	border-bottom: 1px solid windowtext;
+	border-left: 1px solid windowtext;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x31 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: #F2F5FF;
+	mso-pattern: auto none;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: 1px solid windowtext;
+	border-right: 1px solid windowtext;
+	border-bottom: 2px solid windowtext;
+	border-left: 1px solid windowtext;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x32 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: #F5F5FA;
+	mso-pattern: auto none;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: none;
+	border-right: 1px solid windowtext;
+	border-bottom: 1px solid windowtext;
+	border-left: 2px solid windowtext;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x33 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: #F5F5FA;
+	mso-pattern: auto none;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: none;
+	border-right: 1px solid windowtext;
+	border-bottom: 1px solid windowtext;
+	border-left: 1px solid windowtext;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x34 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: auto;
+	mso-pattern: auto;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: 1px solid windowtext;
+	border-right: 1px solid windowtext;
+	border-bottom: 1px solid windowtext;
+	border-left: 2px solid windowtext;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x35 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: auto;
+	mso-pattern: auto;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: 1px solid windowtext;
+	border-right: 1px solid windowtext;
+	border-bottom: none;
+	border-left: 2px solid windowtext;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x36 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: auto;
+	mso-pattern: auto;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: 1px solid windowtext;
+	border-right: 1px solid windowtext;
+	border-bottom: none;
+	border-left: 1px solid windowtext;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x37 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: #F5F5FA;
+	mso-pattern: auto none;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: 2px solid windowtext;
+	border-right: 1px solid windowtext;
+	border-bottom: 1px solid windowtext;
+	border-left: 1px solid windowtext;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x38 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: auto;
+	mso-pattern: auto;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: 1px solid windowtext;
+	border-right: 1px solid windowtext;
+	border-bottom: 2px solid windowtext;
+	border-left: 1px solid windowtext;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x39 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: normal;
+	word-wrap: break-word;
+	background: #FFB8B8;
+	mso-pattern: auto none;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: 2px solid windowtext;
+	border-right: 1px solid windowtext;
+	border-bottom: 1px solid windowtext;
+	border-left: 2px solid windowtext;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x40 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: normal;
+	word-wrap: break-word;
+	background: #FFB8B8;
+	mso-pattern: auto none;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: 1px solid windowtext;
+	border-right: 1px solid windowtext;
+	border-bottom: 1px solid windowtext;
+	border-left: 2px solid windowtext;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x41 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: normal;
+	word-wrap: break-word;
+	background: #FFB8B8;
+	mso-pattern: auto none;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: 1px solid windowtext;
+	border-right: 1px solid windowtext;
+	border-bottom: 2px solid windowtext;
+	border-left: 2px solid windowtext;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x42 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: normal;
+	word-wrap: break-word;
+	background: #C2D9F2;
+	mso-pattern: auto none;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: 2px solid windowtext;
+	border-right: 1px solid windowtext;
+	border-bottom: 1px solid windowtext;
+	border-left: 2px solid windowtext;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x43 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: #C2D9F2;
+	mso-pattern: auto none;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: 1px solid windowtext;
+	border-right: 1px solid windowtext;
+	border-bottom: 1px solid windowtext;
+	border-left: 2px solid windowtext;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x44 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: #C2D9F2;
+	mso-pattern: auto none;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: 1px solid windowtext;
+	border-right: 1px solid windowtext;
+	border-bottom: 2px solid windowtext;
+	border-left: 2px solid windowtext;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x45 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: auto;
+	mso-pattern: auto;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: 1px solid windowtext;
+	border-right: 1px solid windowtext;
+	border-bottom: 2px solid windowtext;
+	border-left: 1px solid windowtext;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x46 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: auto;
+	mso-pattern: auto;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: 1px solid windowtext;
+	border-right: 2px solid windowtext;
+	border-bottom: 2px solid windowtext;
+	border-left: 1px solid windowtext;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x47 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: #F5F5FA;
+	mso-pattern: auto none;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: none;
+	border-right: 1px solid windowtext;
+	border-bottom: 1px solid windowtext;
+	border-left: 1px solid windowtext;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x48 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: #F5F5FA;
+	mso-pattern: auto none;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: none;
+	border-right: 2px solid windowtext;
+	border-bottom: 1px solid windowtext;
+	border-left: 1px solid windowtext;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x49 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: auto;
+	mso-pattern: auto;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: 1px solid windowtext;
+	border-right: 1px solid windowtext;
+	border-bottom: 1px solid windowtext;
+	border-left: 1px solid windowtext;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x50 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: auto;
+	mso-pattern: auto;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: 1px solid windowtext;
+	border-right: 2px solid windowtext;
+	border-bottom: 1px solid windowtext;
+	border-left: 1px solid windowtext;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x51 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: auto;
+	mso-pattern: auto;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: 1px solid windowtext;
+	border-right: 1px solid windowtext;
+	border-bottom: none;
+	border-left: 1px solid windowtext;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x52 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: auto;
+	mso-pattern: auto;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: 1px solid windowtext;
+	border-right: 2px solid windowtext;
+	border-bottom: none;
+	border-left: 1px solid windowtext;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x53 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: auto;
+	mso-pattern: auto;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: 1px solid windowtext;
+	border-right: 1px solid windowtext;
+	border-bottom: 2px solid windowtext;
+	border-left: 2px solid windowtext;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x54 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: #F5F5FA;
+	mso-pattern: auto none;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: 2px solid windowtext;
+	border-right: 1px solid windowtext;
+	border-bottom: 1px solid windowtext;
+	border-left: 2px solid windowtext;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x55 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: #F5F5FA;
+	mso-pattern: auto none;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: 2px solid windowtext;
+	border-right: 1px solid windowtext;
+	border-bottom: 1px solid windowtext;
+	border-left: 1px solid windowtext;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x56 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: #F2F5FF;
+	mso-pattern: auto none;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: 1px solid windowtext;
+	border-right: 1px solid windowtext;
+	border-bottom: 1px solid windowtext;
+	border-left: 1px solid windowtext;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x57 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: normal;
+	word-wrap: break-word;
+	background: #F2F5FF;
+	mso-pattern: auto none;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: 2px solid windowtext;
+	border-right: 1px solid windowtext;
+	border-bottom: 1px solid windowtext;
+	border-left: 1px solid windowtext;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x58 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: #F5F5FA;
+	mso-pattern: auto none;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: 2px solid windowtext;
+	border-right: 2px solid windowtext;
+	border-bottom: 1px solid windowtext;
+	border-left: 1px solid windowtext;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x59 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: auto;
+	mso-pattern: auto;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: 1px solid windowtext;
+	border-right: 1px solid windowtext;
+	border-bottom: 1px solid windowtext;
+	border-left: 2px solid windowtext;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x60 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: #FFE0E0;
+	mso-pattern: auto none;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: 2px solid windowtext;
+	border-right: none;
+	border-bottom: 1px solid windowtext;
+	border-left: 1px solid windowtext;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x61 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: #FFE0E0;
+	mso-pattern: auto none;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: 2px solid windowtext;
+	border-right: 1px solid windowtext;
+	border-bottom: 1px solid windowtext;
+	border-left: none;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x62 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: #FFE0E0;
+	mso-pattern: auto none;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: 1px solid windowtext;
+	border-right: none;
+	border-bottom: 1px solid windowtext;
+	border-left: 1px solid windowtext;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x63 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: #FFE0E0;
+	mso-pattern: auto none;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: 1px solid windowtext;
+	border-right: 1px solid windowtext;
+	border-bottom: 1px solid windowtext;
+	border-left: none;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x64 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: #FFE0E0;
+	mso-pattern: auto none;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: 1px solid windowtext;
+	border-right: none;
+	border-bottom: 2px solid windowtext;
+	border-left: 1px solid windowtext;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x65 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: #FFE0E0;
+	mso-pattern: auto none;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: 1px solid windowtext;
+	border-right: 1px solid windowtext;
+	border-bottom: 2px solid windowtext;
+	border-left: none;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x66 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: normal;
+	word-wrap: break-word;
+	background: #FFE0E0;
+	mso-pattern: auto none;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: 2px solid windowtext;
+	border-right: none;
+	border-bottom: 1px solid windowtext;
+	border-left: 1px solid windowtext;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x67 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: normal;
+	word-wrap: break-word;
+	background: #FFE0E0;
+	mso-pattern: auto none;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: 2px solid windowtext;
+	border-right: 1px solid windowtext;
+	border-bottom: 1px solid windowtext;
+	border-left: none;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x68 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: auto;
+	mso-pattern: auto;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: 1px solid windowtext;
+	border-right: none;
+	border-bottom: 1px solid windowtext;
+	border-left: 1px solid windowtext;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x69 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: auto;
+	mso-pattern: auto;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: 1px solid windowtext;
+	border-right: none;
+	border-bottom: 1px solid windowtext;
+	border-left: none;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x70 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: auto;
+	mso-pattern: auto;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: 1px solid windowtext;
+	border-right: 1px solid windowtext;
+	border-bottom: 1px solid windowtext;
+	border-left: none;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x71 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: #F5F5FA;
+	mso-pattern: auto none;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: 2px solid windowtext;
+	border-right: none;
+	border-bottom: 1px solid windowtext;
+	border-left: 1px solid windowtext;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x72 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: #F5F5FA;
+	mso-pattern: auto none;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: 2px solid windowtext;
+	border-right: none;
+	border-bottom: 1px solid windowtext;
+	border-left: none;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x73 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: #F5F5FA;
+	mso-pattern: auto none;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: 2px solid windowtext;
+	border-right: 1px solid windowtext;
+	border-bottom: 1px solid windowtext;
+	border-left: none;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x74 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: #F5F5FA;
+	mso-pattern: auto none;
+	color: #000000;
+	font-size: 15pt;
+	font-weight: 700;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: 2px solid windowtext;
+	border-right: none;
+	border-bottom: 2px solid windowtext;
+	border-left: 2px solid windowtext;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x75 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: #F5F5FA;
+	mso-pattern: auto none;
+	color: #000000;
+	font-size: 15pt;
+	font-weight: 700;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: 2px solid windowtext;
+	border-right: none;
+	border-bottom: 2px solid windowtext;
+	border-left: none;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x76 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: #F5F5FA;
+	mso-pattern: auto none;
+	color: #000000;
+	font-size: 15pt;
+	font-weight: 700;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: 2px solid windowtext;
+	border-right: 2px solid windowtext;
+	border-bottom: 2px solid windowtext;
+	border-left: none;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x77 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: auto;
+	mso-pattern: auto;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: 1px solid windowtext;
+	border-right: none;
+	border-bottom: none;
+	border-left: 1px solid windowtext;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x78 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: auto;
+	mso-pattern: auto;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: 1px solid windowtext;
+	border-right: 1px solid windowtext;
+	border-bottom: none;
+	border-left: none;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x79 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: auto;
+	mso-pattern: auto;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: 2px solid windowtext;
+	border-right: none;
+	border-bottom: none;
+	border-left: 1px solid windowtext;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x80 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: auto;
+	mso-pattern: auto;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: 2px solid windowtext;
+	border-right: none;
+	border-bottom: none;
+	border-left: none;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x81 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: auto;
+	mso-pattern: auto;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: 2px solid windowtext;
+	border-right: 2px solid windowtext;
+	border-bottom: none;
+	border-left: none;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x82 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: auto;
+	mso-pattern: auto;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: none;
+	border-right: none;
+	border-bottom: 2px solid windowtext;
+	border-left: 1px solid windowtext;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x83 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: auto;
+	mso-pattern: auto;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: none;
+	border-right: none;
+	border-bottom: 2px solid windowtext;
+	border-left: none;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x84 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: auto;
+	mso-pattern: auto;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: none;
+	border-right: 2px solid windowtext;
+	border-bottom: 2px solid windowtext;
+	border-left: none;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x85 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: #F5F5FA;
+	mso-pattern: auto none;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: 1px solid windowtext;
+	border-right: 1px solid windowtext;
+	border-bottom: 2px solid windowtext;
+	border-left: 2px solid windowtext;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+
+.x86 {
+	mso-style-parent: style0;
+	mso-number-format: General;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	background: #F5F5FA;
+	mso-pattern: auto none;
+	color: #000000;
+	font-size: 10pt;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "맑은 고딕";
+	border-top: 1px solid windowtext;
+	border-right: 1px solid windowtext;
+	border-bottom: 2px solid windowtext;
+	border-left: 1px solid windowtext;
+	mso-diagonal-down: none;
+	mso-diagonal-up: none;
+	mso-protection: locked visible;
+}
+-->
+</style>
+					<!--[if gte mso 9]><xml>
+								 <x:ExcelWorkbook>
+								  <x:ExcelWorksheets>
+								   <x:ExcelWorksheet>
+								    <x:Name>Sheet1</x:Name>
+								<x:WorksheetOptions>
+								 <x:StandardWidth>2304</x:StandardWidth>
+								 <x:Print>
+								  <x:FitWidth>0</x:FitWidth>
+								  <x:FitHeight>0</x:FitHeight>
+								  <x:ValidPrinterInfo/>
+								  <x:PaperSizeIndex>9</x:PaperSizeIndex>
+								  <x:HorizontalResolution>600</x:HorizontalResolution>
+								  <x:VerticalResolution>600</x:VerticalResolution>
+								 </x:Print>
+								 <x:Selected/>
+								</x:WorksheetOptions>
+								   </x:ExcelWorksheet>
+								  </x:ExcelWorksheets>
+								  <x:WindowHeight>8376</x:WindowHeight>
+								  <x:WindowWidth>22788</x:WindowWidth>
+								  <x:WindowTopX>0</x:WindowTopX>
+								  <x:WindowTopY>0</x:WindowTopY>
+								  <x:RefModeR1C1/>
+								  <x:TabRatio>500</x:TabRatio>
+								  <x:ActiveSheet>0</x:ActiveSheet>
+								 </x:ExcelWorkbook>
+								</xml><![endif]-->
+					</head>
+					<body link="blue" vlink="purple">
+
+						<table border="0" cellpadding="0" cellspacing="0" width="1044"
+							style="border-collapse: collapse; table-layout: fixed; width: 783pt">
+							<colgroup>
+								<col width="72" style="width: 54pt">
+								<col width="30" style="mso-width-source: userset; width: 22.5pt">
+								<col width="34" style="mso-width-source: userset; width: 25.5pt">
+								<col width="49"
+									style="mso-width-source: userset; width: 36.75pt">
+								<col width="126"
+									style="mso-width-source: userset; width: 94.5pt">
+								<col width="66" style="mso-width-source: userset; width: 49.5pt">
+								<col width="43"
+									style="mso-width-source: userset; width: 32.25pt">
+								<col width="150"
+									style="mso-width-source: userset; width: 112.5pt">
+								<col width="30" style="mso-width-source: userset; width: 22.5pt">
+								<col width="79"
+									style="mso-width-source: userset; width: 59.25pt">
+								<col width="126"
+									style="mso-width-source: userset; width: 94.5pt">
+								<col width="62" style="mso-width-source: userset; width: 46.5pt">
+								<col width="27"
+									style="mso-width-source: userset; width: 20.25pt">
+								<col width="150"
+									style="mso-width-source: userset; width: 112.5pt">
+							</colgroup>
+							<tbody>
+								<tr height="22"
+									style="mso-height-source: userset; height: 16.5pt" id="r0">
+									<td height="22" style="height: 16.5pt"></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr height="49"
+									style="mso-height-source: userset; height: 37.2pt" id="r1">
+									<td height="49" style="height: 37.2pt;"></td>
+									<td colspan="13" class="x74"
+										style="border-right: 2px solid windowtext; border-bottom: 2px solid windowtext;">전자세금계산서</td>
+								</tr>
+								<tr height="49"
+									style="mso-height-source: userset; height: 37.2pt" id="r2">
+									<td height="49" style="height: 37.2pt;"></td>
+									<td rowspan="5" height="166" class="x39"
+										style="border-right: 1px solid windowtext; border-bottom: 2px solid windowtext; height: 124.55pt; overflow: hidden;">공급자</td>
+									<td colspan="2" class="x60"
+										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;">등록번호</td>
+									<td class="x23">111-11-11111</td>
+									<td colspan="2" class="x66"
+										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;">종사업장<br>번호
+									</td>
+									<td class="x24"></td>
+									<td rowspan="5" height="166" class="x42"
+										style="border-right: 1px solid windowtext; border-bottom: 2px solid windowtext; height: 124.55pt; overflow: hidden;">공급<br>받는자
+									</td>
+									<td class="x25">등록번호</td>
+									<td class="x23"></td>
+									<td colspan="2" class="x57"
+										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;">종사업장<br>번호
+									</td>
+									<td class="x26"></td>
+								</tr>
+								<tr height="29"
+									style="mso-height-source: userset; height: 22.4pt" id="r3">
+									<td height="29" style="height: 22.4pt;"></td>
+									<td colspan="2" class="x62"
+										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;">상호</td>
+									<td class="x27">2team404500</td>
+									<td colspan="2" class="x62"
+										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;">성명</td>
+									<td class="x28">이팀</td>
+									<td class="x29">상호</td>
+									<td class="x27"><input type="text" size="12"
+										style="border: none"></td>
+									<td colspan="2" class="x56"
+										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;">성명</td>
+									<td class="x30"></td>
+								</tr>
+								<tr height="29"
+									style="mso-height-source: userset; height: 22.4pt" id="r4">
+									<td height="29" style="height: 22.4pt;"></td>
+									<td colspan="2" class="x62"
+										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;">사업장주소</td>
+									<td colspan="4" class="x49"
+										style="border-right: 2px solid windowtext; border-bottom: 1px solid windowtext;">전북
+										전주시</td>
+									<td class="x29">사업장주소</td>
+									<td colspan="4" class="x49"
+										style="border-right: 2px solid windowtext; border-bottom: 1px solid windowtext;"></td>
+								</tr>
+								<tr height="29"
+									style="mso-height-source: userset; height: 22.4pt" id="r5">
+									<td height="29" style="height: 22.4pt;"></td>
+									<td colspan="2" class="x62"
+										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;">업태</td>
+									<td class="x27">전자상거래</td>
+									<td colspan="2" class="x62"
+										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;">종목</td>
+									<td class="x28">전자상거래</td>
+									<td class="x29">업태</td>
+									<td class="x27"></td>
+									<td colspan="2" class="x56"
+										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;">종목</td>
+									<td class="x30"></td>
+								</tr>
+								<tr height="29"
+									style="mso-height-source: userset; height: 22.4pt" id="r6">
+									<td height="29" style="height: 22.4pt;"></td>
+									<td colspan="2" class="x64"
+										style="border-right: 1px solid windowtext; border-bottom: 2px solid windowtext;">이메일</td>
+									<td colspan="4" class="x45"
+										style="border-right: 2px solid windowtext; border-bottom: 2px solid windowtext;">404500@naver.com</td>
+									<td class="x31">이메일</td>
+									<td colspan="4" class="x45"
+										style="border-right: 2px solid windowtext; border-bottom: 2px solid windowtext;"></td>
+								</tr>
+								<tr height="29"
+									style="mso-height-source: userset; height: 22.4pt" id="r7">
+									<td height="29" style="height: 22.4pt;"></td>
+									<td colspan="3" class="x54"
+										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;">작성일자</td>
+									<td colspan="3" class="x71"
+										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;">공급가액</td>
+									<td colspan="2" class="x55"
+										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;">세액</td>
+									<td colspan="2" class="x55"
+										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;">수정사유</td>
+									<td colspan="3" class="x55"
+										style="border-right: 2px solid windowtext; border-bottom: 1px solid windowtext;">비고</td>
+								</tr>
+								<tr height="29"
+									style="mso-height-source: userset; height: 22.4pt" id="r8">
+									<td height="29" style="height: 22.4pt;"></td>
+									<td colspan="3" class="x59"
+										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;"></td>
+									<td colspan="3" class="x68"
+										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;"></td>
+									<td colspan="2" class="x49"
+										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;"></td>
+									<td colspan="2" class="x49"
+										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;"></td>
+									<td colspan="3" class="x49"
+										style="border-right: 2px solid windowtext; border-bottom: 1px solid windowtext;"></td>
+								</tr>
+								<tr height="29"
+									style="mso-height-source: userset; height: 22.4pt" id="r9">
+									<td height="29" style="height: 22.4pt;"></td>
+									<td colspan="3" class="x85"
+										style="border-right: 1px solid windowtext; border-bottom: 2px solid windowtext;">수정사유</td>
+									<td colspan="10" class="x45"
+										style="border-right: 2px solid windowtext; border-bottom: 2px solid windowtext;"></td>
+								</tr>
+								<tr height="32" style="mso-height-source: userset; height: 24pt"
+									id="r10">
+									<td height="32" style="height: 24pt;"></td>
+									<td class="x32">월</td>
+									<td class="x33">일</td>
+									<td colspan="2" class="x47"
+										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;">품목</td>
+									<td class="x33">규격</td>
+									<td class="x33">수량</td>
+									<td class="x33">단가</td>
+									<td colspan="2" class="x47"
+										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;">공급가액</td>
+									<td class="x33">새액</td>
+									<td colspan="3" class="x47"
+										style="border-right: 2px solid windowtext; border-bottom: 1px solid windowtext;">비고</td>
+								</tr>
+								<tr height="29"
+									style="mso-height-source: userset; height: 22.4pt" id="r11">
+									<td height="29" style="height: 22.4pt;"></td>
+									<td class="x34"></td>
+									<td class="x27"></td>
+									<td colspan="2" class="x68"
+										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;"></td>
+									<td class="x27"></td>
+									<td class="x27"></td>
+									<td class="x27"></td>
+									<td colspan="2" class="x49"
+										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;"></td>
+									<td class="x27"></td>
+									<td colspan="3" class="x49"
+										style="border-right: 2px solid windowtext; border-bottom: 1px solid windowtext;"></td>
+								</tr>
+								<tr height="29"
+									style="mso-height-source: userset; height: 22.4pt" id="r12">
+									<td height="29" style="height: 22.4pt;"></td>
+									<td class="x34"></td>
+									<td class="x27"></td>
+									<td colspan="2" class="x68"
+										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;"></td>
+									<td class="x27"></td>
+									<td class="x27"></td>
+									<td class="x27"></td>
+									<td colspan="2" class="x49"
+										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;"></td>
+									<td class="x27"></td>
+									<td colspan="3" class="x49"
+										style="border-right: 2px solid windowtext; border-bottom: 1px solid windowtext;"></td>
+								</tr>
+								<tr height="29"
+									style="mso-height-source: userset; height: 22.4pt" id="r13">
+									<td height="29" style="height: 22.4pt;"></td>
+									<td class="x35"></td>
+									<td class="x36"></td>
+									<td colspan="2" class="x77"
+										style="border-right: 1px solid windowtext;"></td>
+									<td class="x36"></td>
+									<td class="x36"></td>
+									<td class="x36"></td>
+									<td colspan="2" class="x51"
+										style="border-right: 1px solid windowtext;"></td>
+									<td class="x36"></td>
+									<td colspan="3" class="x51"
+										style="border-right: 2px solid windowtext;"></td>
+								</tr>
+								<tr height="32" style="mso-height-source: userset; height: 24pt"
+									id="r14">
+									<td height="32" style="height: 24pt;"></td>
+									<td colspan="3" class="x54"
+										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;">합계금액</td>
+									<td class="x37">현금</td>
+									<td colspan="2" class="x55"
+										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;">수표</td>
+									<td class="x37">어음</td>
+									<td colspan="2" class="x55"
+										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;">외상미수금</td>
+									<td colspan="4" rowspan="2" height="62" class="x79"
+										style="border-right: 2px solid windowtext; border-bottom: 2px solid windowtext; height: 46.5pt;"></td>
+								</tr>
+								<tr height="32" style="mso-height-source: userset; height: 24pt"
+									id="r15">
+									<td height="32" style="height: 24pt;"></td>
+									<td colspan="3" class="x53"
+										style="border-right: 1px solid windowtext; border-bottom: 2px solid windowtext;"></td>
+									<td class="x38"></td>
+									<td colspan="2" class="x45"
+										style="border-right: 1px solid windowtext; border-bottom: 2px solid windowtext;"></td>
+									<td class="x38"></td>
+									<td colspan="2" class="x45"
+										style="border-right: 1px solid windowtext; border-bottom: 2px solid windowtext;"></td>
+								</tr>
+								<tr height="21"
+									style="mso-height-source: userset; height: 16.4pt" id="r16">
+									<td height="21" style="height: 16.4pt;"></td>
+									<td class="x21"></td>
+									<td class="x21"></td>
+									<td class="x21"></td>
+									<td class="x21"></td>
+									<td class="x21"></td>
+									<td class="x21"></td>
+									<td class="x21"></td>
+									<td class="x21"></td>
+									<td class="x21"></td>
+									<td class="x21"></td>
+									<td class="x21"></td>
+									<td class="x21"></td>
+									<td class="x21"></td>
+								</tr>
+								<!--[if supportMisalignedColumns]-->
+								<tr height="0" style="display: none">
+									<td width="72" style="width: 54pt"></td>
+									<td width="30" style="width: 22.5pt"></td>
+									<td width="34" style="width: 25.5pt"></td>
+									<td width="49" style="width: 36.75pt"></td>
+									<td width="126" style="width: 94.5pt"></td>
+									<td width="66" style="width: 49.5pt"></td>
+									<td width="43" style="width: 32.25pt"></td>
+									<td width="150" style="width: 112.5pt"></td>
+									<td width="30" style="width: 22.5pt"></td>
+									<td width="79" style="width: 59.25pt"></td>
+									<td width="126" style="width: 94.5pt"></td>
+									<td width="62" style="width: 46.5pt"></td>
+									<td width="27" style="width: 20.25pt"></td>
+									<td width="150" style="width: 112.5pt"></td>
+								</tr>
+								<!--[endif]-->
+							</tbody>
+						</table>
+				</div>
+				<div class="modal-footer justify-content-between">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+	</p>
+
+</th:block>
+</html>

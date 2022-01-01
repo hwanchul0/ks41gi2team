@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ksmart41_teamtest.mapper.AccountingMapper">
+
+	<!--유경 : 세금계산서 발행화면- 계약내용 조회  -->
+	<select id="getAddByBizInvoice" resultType="GetInvoiceInfo">
+		SELECT
+			main.mainBusinessCode,
+	        biz.businessName,
+	        biz.clientId,
+	        biz.businessRepresentativeName,
+	        biz.bunsinessNumber,
+	        biz.businessAddr,
+	        biz.businessEmail,
+	        biz.businessManagerEmail,
+	        biz.businessType1,
+	        biz.businessType2,
+	        con.serviceCode,
+	        con.serviceAmount,
+	        con.servicePeriod,
+	        s.serviceName,
+	        con.slipNumber,
+	        con.serviceRegistrationDate,
+	        con.serviceTotalPrice,
+	        round(con.serviceTotalPrice / 1.1, 0) AS nontax,
+	        round(con.serviceTotalPrice /1.1 * 0.1, 0) AS tax,
+	        I.invoiceCode,
+	        con.contractManageCode
+		FROM
+			k0_invoice AS I
+		right JOIN
+			k2_sw_contractRequest AS con
+		ON
+			I.contractManageCode = con.contractManageCode
+		INNER JOIN
+			k0_sw_mainBusinessCodeManagement AS main
+		on
+			con.mainBusinessCode = main.mainBusinessCode
+		INNER JOIN
+			k0_sw_businessRegistration AS biz
+		ON
+			biz.businessRegistrationCode = main.businessRegistrationCode
+		INNER JOIN
+			k2_sw_serviceManagement AS s
+		ON
+			s.serviceCode = con.serviceCode
+		WHERE con.contractManageCode IS NOT NULL
+		AND
+			I.invoiceCode IS NULL
+		ORDER BY (I.invoiceCode IS NOT NULL)
+		      	 , I.invoiceCode DESC
+	</select>
+
+</mapper>

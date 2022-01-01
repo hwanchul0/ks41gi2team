@@ -9,5 +9,10 @@ public interface RequestMapper {
 	
 	// 계약요청 리스트 조회
 	public List<Request> getRequestList();
+	
+	public Request getDetailRequestList(String contractManageCode);
+
+	public List<Request> getAllRequestList();
+	
 
 }
