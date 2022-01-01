@@ -16,5 +16,15 @@ FROM
 	k0_invoice;
 </select>
 
+<!-- 세금계산서 상세조회 -->
+<select id="getInvoiceView" parameterType="String" resultType="InvoiceList">
+	SELECT
+		*
+	FROM
+		k0_invoice
+	WHERE
+		invoiceCode = #{invoiceCode};
+</select>
+
 
 </mapper>

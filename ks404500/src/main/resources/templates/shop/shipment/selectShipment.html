@@ -4,20 +4,23 @@
 	layout:decorate="@{layout/default-shop}">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <th:block layout:fragment="customJs">
 <script type="text/javascript">
 //미배송건수 받아오기
 $(function(){
 	var request = $.ajax({
         url: '/shop/shipment/shipmentCheck',
-        method: 'POST',
+        method: 'get',
      });
   request.done(function(data){
 	$('#count').val(data);
+	
   });
   request.fail(function( jqXHR, textStatus ){
      alert("Request failed:  " + textStatus);
   });
+  console.log(data);
 });
 </script>
 </th:block>

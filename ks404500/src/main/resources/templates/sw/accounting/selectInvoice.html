@@ -4,6 +4,12 @@
 	layout:decorate="@{layout/default-sw}">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<th:block layout:fragment="customJs">
+<script type="text/javascript">
+
+</script>
+</th:block>
+
 <th:block layout:fragment="customContents">
 	<!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper">
@@ -66,7 +72,7 @@
 												<td th:text="${#numbers.formatInteger(il.invoiceTax, 0, 'COMMA')}"></td>
 												<td th:text="${il.amendCheck}"></td>
 												<td>
-													<button type="button" class="btn btn-primary btn-sm" id="myModal" data-toggle="modal" data-target="#myModal">보기</button>
+													<a th:href="@{/sw/accounting/viewInvoice(invoiceCode=${il.invoiceCode})}">보기</a>
 												</td>
 											<tr th:unless="${not #lists.isEmpty(invoiceList)}">
 										</tbody>
@@ -88,24 +94,7 @@
 		<!-- /.content -->
 	</div>
 	<!-- /.content-wrapper -->
-	
-	<!-- <script type="text/javascript">
-	$('#myModal').click(function(){
-		var request = $.ajax({
-			  url: "/sw/accounting/111",
-			  method: "GET",
-			  dataType: "html"
-			});
-			 
-			request.done(function( data ) {
-				$('#myModal').modal();
-			});
-			 
-			request.fail(function( jqXHR, textStatus ) {
-			  alert( "Request failed: " + textStatus );
-			});
-	});
-	</script> -->
+
 </th:block>
 
 </html>

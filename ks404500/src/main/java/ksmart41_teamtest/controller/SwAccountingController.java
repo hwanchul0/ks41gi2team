@@ -2,12 +2,21 @@ package ksmart41_teamtest.controller;
 
 
 import java.util.List;
+import java.util.Map;
 
+import javax.activation.CommandMap;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import ksmart41_teamtest.dto.GetInvoiceInfo;
 import ksmart41_teamtest.dto.InvoiceList;
@@ -18,6 +27,7 @@ import ksmart41_teamtest.service.InvoiceListService;
 @RequestMapping("/sw/accounting")
 public class SwAccountingController {
 	
+	private static final Logger log = LoggerFactory.getLogger(SwAccountingController.class);
 	
 	@Autowired
 	private InvoiceListService invoiceListService;
@@ -30,7 +40,6 @@ public class SwAccountingController {
 	public String selectInvoiceDetail() {
 		return "sw/accounting/selectInvoiceDetail";
 	}
-	
 	
 	
 	@GetMapping("/addInvoiceDetail")
@@ -53,9 +62,18 @@ public class SwAccountingController {
 		return "sw/accounting/addExpense";
 	}
 	
+	//유경 - 개발사 세금계산서상세정보조회
+	@RequestMapping("/viewInvoice")
+	public String InvoiceView(@ModelAttribute("viewInvoice") InvoiceList viewInvoice,
+			@RequestParam("invoiceCode") String invoiceCode, Model model) {
+		InvoiceList getInvoiceView = invoiceListService.getInvoiceView(invoiceCode);
+		model.addAttribute("getInvoiceView", getInvoiceView);
+		System.out.println("getInvoiceView"+getInvoiceView);
+		return "sw/accounting/viewInvoice";
+	}
 	
 	
-	//유경 - 세금계산서 조회
+	//유경 - 개발사 세금계산서 목록 조회
 	@GetMapping("/selectInvoice")
 	public String selectInvoice(Model model) {
 		List<InvoiceList> invoiceList = invoiceListService.getInvoiceList();
