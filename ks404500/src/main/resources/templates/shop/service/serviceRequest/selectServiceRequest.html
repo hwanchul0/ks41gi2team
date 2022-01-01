@@ -40,7 +40,7 @@ tbody tr td:first-child:before {
             <div class="row">
                <div class="col-lg-12">
                   <div class="card-primary">
-                     <div class="card-header">현재 계약 요청</div>
+                     <div class="card-header"> 내 계약요청  </div>
                      <div class="card-body">
                         <div id="example2_wrapper"
                            class="dataTables_wrapper dt-bootstrap4">
@@ -53,22 +53,20 @@ tbody tr td:first-child:before {
                                  <table id="example2" class="table table-bordered table-hover dataTable dtr-inline" role="grid" aria-describedby="example2_info">
                                     <thead>
                                        <tr role="row">
-                                          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">ID</th>
-                                          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">Code</th>
+                                          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">서비스 코드</th>
                                           <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"> 서비스 명</th>
                                           <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"> 계약수량</th>
                                           <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">서비스 기간(일)</th>
                                           <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">총 금액</th>
                                           <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">서비스 시작 요청 날짜</th>
                                           <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">서비스 시작 예약 날짜</th>
-                                          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">서비스 시작 요청 상태</th>
+                                          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">서비스 종료 날짜</th>
                                           <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">서비스 승인 상태</th>
                                           <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">서비스 승인 날짜</th>
                                        </tr>
                                     </thead>
                                     <tbody>
                                        <tr th:if="${not #lists.isEmpty(getAllRequestList)}" th:each="r : ${getAllRequestList}">
-                                          <td th:text="${r.clientId}"></td>
                                           <td th:text="${r.contractManageCode}"></td>
                                           <td th:text="${r.serviceName}"></td>
                                           <td th:text="${r.serviceAmount}"></td>

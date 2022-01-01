@@ -26,20 +26,20 @@ public class SwServiceController {
 		this.serviceManagementSerivce = serviceManagementSerivce;
 	}
 	
+	// 계약요청 조회(client)
 	@GetMapping("/serviceRequest/addServiceRequest")
 	public String addServiceRequest() {
 		
 		return "sw/service/serviceRequest/addServiceRequest";
 	}
-	
+	// 계약요청 전체 조회 (sw개발사)
 	@GetMapping("/serviceRequest/selectAllServiceRequest") 
 	  public String getAllRequestList(Model model) { 
 	  List<Request> getAllRequestList = requestService.getAllRequestList();
-	  
 	  model.addAttribute("title", "회원전체조회"); 
-	  model.addAttribute("requestList", getAllRequestList);
+	  model.addAttribute("getAllRequestList", getAllRequestList);
 
-	  return "sw/service/serviceRequest/selectServiceRequest"; 
+	  return "sw/service/serviceRequest/selectAllServiceRequest"; 
 	  }
 	
 

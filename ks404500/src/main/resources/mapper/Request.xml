@@ -14,13 +14,13 @@
 		<result column="serviceEndDate" 				property="serviceEndDate"/>
 		<result column="serviceRequestStatus" 			property="serviceRequestStatus"/>
 		<result column="serviceApprovalDate" 			property="serviceApprovalDate"/>
-	</resultMap>
+		<result column="clientId" 						property="clientId"/>
+	</resultMap>		
 	<!-- 계약요청 전체 조회 ( sw) -->
 		<select id="getAllRequestList" parameterType="String" resultMap="requestResultMap">
 			SELECT
 				bR.clientId
 				,r.contractManageCode
-				 ,r.contractManageCode
 				,m.serviceName
 				,r.serviceAmount
 				,r.servicePeriod
@@ -69,20 +69,19 @@
 				INNER JOIN 
 				k0_sw_mainBusinessCodeManagement AS mB
 				ON 
-				cR.mainBusinessCode = mB.mainBusinessCode
+				r.mainBusinessCode = mB.mainBusinessCode
 				INNER JOIN 
 				k0_sw_businessRegistration AS bR
 			ON 
 				bR.businessRegistrationCode = mB.businessRegistrationCode
 			WHERE 
-			clientId = #{clientId}
+			clientId = 'test'
 			ORDER BY serviceRequestDate ASC;
 	</select>
 		
 	<select id="getDetailRequestList" resultType="Request" resultMap="requestResultMap">
 			SELECT
-				bR.clientId
-				,r.contractManageCode
+				 r.contractManageCode
 				,m.serviceName
 				,r.serviceAmount
 				,r.servicePeriod
@@ -107,7 +106,7 @@
 			ON 
 				mB.businessRegistrationCode = bR.businessRegistrationCode
 			WHERE 
-				contractManageCode = #{contractManageCode}
+				clientId = #{clientId}
 			GROUP BY bR.clientId
 			ORDER BY r.serviceRequestDate ASC; 		
 	</select>
