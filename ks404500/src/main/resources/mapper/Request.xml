@@ -106,7 +106,7 @@
 			ON 
 				mB.businessRegistrationCode = bR.businessRegistrationCode
 			WHERE 
-				clientId = #{clientId}
+				contractManageCode = #{contractManageCode}
 			GROUP BY bR.clientId
 			ORDER BY r.serviceRequestDate ASC; 		
 	</select>

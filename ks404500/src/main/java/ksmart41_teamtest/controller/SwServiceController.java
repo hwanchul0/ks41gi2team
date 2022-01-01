@@ -56,10 +56,10 @@ public class SwServiceController {
 	@GetMapping("/serviceRequest/detailServiceRequest")
 	public String getDetailRequestList(@RequestParam(value="contractManageCode", required=false) String contractManageCode
 													,Model model) {
-		Request requestInfo = requestService.getDetailRequestList(contractManageCode);
-		System.out.println(requestInfo);
+		Request getDetailRequestList = requestService.getDetailRequestList(contractManageCode);
+		System.out.println(getDetailRequestList);
 		model.addAttribute("title","계약요청 상세페이지");
-		model.addAttribute("requestInfo",requestInfo);
+		model.addAttribute("requestInfo",getDetailRequestList);
 		
 		return "sw/service/serviceRequest/detailServiceRequest";
 	}
