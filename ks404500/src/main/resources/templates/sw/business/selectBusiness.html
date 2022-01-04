@@ -4,8 +4,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <th:block layout:fragment="customContents">
 
+
 <!-- Content Wrapper. Contains page content -->
-	<div class="content-wrapper">
+	<div class="content-wrapper" style="width:2500px; overflow-x:scroll;">
 	<!-- Content Header (Page header) -->
 		<div class="content-header">
 			<div class="container-fluid">
@@ -29,34 +30,42 @@
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-lg-12">
-						<div class="card card-primary">
-							<div class="card-body">
+						<div class="card card-primary" >
+							<div class="card-header">
 								<h5 class="card-title" th:text="${title}"></h5>
+							</div>
+							<div class="card-body">
 								<p class="card-text">
-									<table class="table table-hover table-condensed swiscodelist">
+									<table class="table table-hover table-condensed swBusiness" >
 										<thead>
 											<tr>
 												<th>사업장등록코드</th>
-												<th>회원 아이디</th>
+												<th>거래처 구분 코드</th>
+												<th>사업장 권한</th>
+												<th>사업장 등록 날짜</th>
+												<th>사업장 삭제 날짜</th>
+												<th>회원아이디</th>
 												<th>지역 코드</th>
-												<th>사업장 등록 승인자</th>
-												<th>사업자명</th>
-												<th>사업장 대표자명</th>
-												<th>사업자 번호</th>
-												<th>사업장 전화번호</th>
-												<th>사업장 상세주소</th>
+												<th>사업장 승인자</th>
+												<th>사업장 이름</th>
+												<th>사업장 대표자</th>
+												<th>사업자등록번호</th>
+												<th>사업장 번호</th>
+												<th>사업장 주소</th>
 												<th>사업장 이메일</th>
-												<th>주거래통장</th>
-												<th>계좌번호</th>
+												<th>은행</th>
+												<th>계좌</th>
 												<th>예금주</th>
-												<th>업태</th>
-												<th>승인일자</th>
-												<th>상태</th>
+												<th>등록상태</th>
 											</tr>
 										</thead>
 										<tbody>
 										<tr th:if="${not #lists.isEmpty(business)}" th:each="bs: ${business}">
-											<td th:text="${bs.businessRegistrationCode}"></td>
+											<td th:text="${bs.mainBusinessCode}"></td>
+											<td th:text="${bs.businessCode}"></td>
+											<td th:text="${bs.businessLevelCode}"></td>
+											<td th:text="${bs.businessCodeRegistrationDate}"></td>
+											<td th:text="${bs.businessCodeDeleteDate}"></td>
 											<td th:text="${bs.clientId}"></td>
 											<td th:text="${bs.localCode}"></td>
 											<td th:text="${bs.memberId}"></td>
@@ -69,11 +78,9 @@
 											<td th:text="${bs.businessMainAccount}"></td>
 											<td th:text="${bs.businessAccountNumber}"></td>
 											<td th:text="${bs.businessAccountHolder}"></td>
-											<td th:text="${bs.businessType1}"></td>
-											<td th:text="${bs.businessRegistration}"></td>
 											<td th:text="${bs.businessRegistrationState}"></td>
 											<td>
-												<button type="button" class="btn btn-primary btn-xs businesslist">수정</button>
+												<button type="button" class="btn btn-primary btn-xs businessSelect">수정</button>
 											</td>
 										</tr>
 										<tr th:unless="${not #lists.isEmpty(business)}">
@@ -84,8 +91,6 @@
 										</tbody>
 									</table>
 								</p>
-								<a href="#" class="card-link">Card link</a>
-								<a href="#" class="card-link">Another link</a>
 												
 												
 							</div>

@@ -2,7 +2,31 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="@{layout/default-sw}">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<th:block layout:fragment="customJs">
+<script type="text/javascript">
 
+//검색창
+$(document).ready(function(){
+	  $("#myInput").on("keyup", function() {
+	    var value = $(this).val().toLowerCase();
+	    $("#myTable tr").filter(function() {
+	      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+	    });
+	  });
+	});
+}
+
+$( "input" ).datepicker({
+    dateFormat:"yy-mm-dd",
+    onSelect:function(val,obj){
+        $("table tr td:contains('"+val+"')").parent("tr").fadeIn().siblings().fadeOut();
+        //console.log($("table tr td[textContent='"+val+"']"));
+    }
+});
+
+</script>
+</th:block>
+<input type="text" name="day" />
 <th:block layout:fragment="customContents">
 <!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper">
@@ -15,8 +39,8 @@
 						</div><!-- /.col -->
 						<div class="col-sm-6">
 							<ol class="breadcrumb float-sm-right">
-								<li class="breadcrumb-item"><a href="#">Home</a></li>
-								<li class="breadcrumb-item active">Starter Page</li>
+								<li class="breadcrumb-item"><a href="/sw/index-sw">Home</a></li>
+								<li class="breadcrumb-item active">재무관리</li>
 							</ol>
 						</div><!-- /.col -->
 					</div><!-- /.row -->
@@ -32,6 +56,7 @@
 						<div class="card">
 							<div class="card-body">
 								<h5 class="card-title" th:text="${title}"></h5>
+								<input class="form-control col-md-3" style="float : right" id="myInput" type="text" placeholder="검색어를 입력해주세요">
 								<p class="card-text">
 									<table class="table table-hover table-condensed swiscodelist">
 										<thead>
@@ -47,7 +72,7 @@
 												<th>수정</th>
 											</tr>
 										</thead>
-										<tbody>
+										<tbody id="myTable">
 										<tr th:if="${not #lists.isEmpty(swIsListCode)}" th:each="sl: ${swIsListCode}">
 											<td th:text="${sl.swIsCode}"></td>
 											<td th:text="${sl.swIsName}"></td>

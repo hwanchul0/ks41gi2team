@@ -4,11 +4,11 @@
 	layout:decorate="@{layout/default-sw}">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<th:block layout:fragment="customJs">
 
+<th:block layout:fragment="customJs">
 <script type="text/javascript">
 $(function(){
-
+	//합계금액 계산하기
 	$('input.money1').on('keyup',function(){
 	          var cnt = $(".exam input.num_sum").length;     
 	          console.log(cnt);
@@ -24,17 +24,18 @@ $(function(){
 	            var sum3 = parseInt($("#fn_type3_price").val() || 0);
 	            var sum4 = parseInt($("#fn_type4_price").val() || 0);
 
-
-
 	            var sum = sum1 + sum2 + sum3 + sum4;
 	            console.log(sum);
 	            $("#fn_total").val(sum);
+	            
+	            if(sum > $()){
+	            	
+	            }
 	        });
-
+	
 	});
 
 </script>
-
 </th:block>
 <th:block layout:fragment="customContents">
 	<!-- Content Wrapper. Contains page content -->
@@ -48,7 +49,7 @@ $(function(){
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
-							<li class="breadcrumb-item"><a href="#">Home</a></li>
+							<li class="breadcrumb-item"><a href="/sw/index-sw">Home</a></li>
 							<li class="breadcrumb-item active">General Form</li>
 						</ol>
 					</div>
@@ -110,7 +111,7 @@ $(function(){
 												<td th:text="${g.servicePeriod}"></td>
 												<td th:text="${#numbers.formatInteger(g.nontax, 0, 'COMMA')}"></td>
 												<td th:text="${#numbers.formatInteger(g.tax, 0, 'COMMA')}"></td>
-												<td th:text="${#numbers.formatInteger(g.serviceTotalPrice, 0, 'COMMA')}" id="servicePrice"></td>
+												<td th:text="${#numbers.formatInteger(g.serviceTotalPrice, 0, 'COMMA')}" value="servicePrice"></td>
 												<td th:text="${g.serviceRegistrationDate}"></td>
 											</tr>
 											<tr th:unless="${not #lists.isEmpty(getInvoiceInfo)}">

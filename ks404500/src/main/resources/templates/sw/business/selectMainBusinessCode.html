@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" 
-xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
-layout:decorate="@{layout/default-sw}">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="@{layout/default-sw}">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <th:block layout:fragment="customContents">
+
 <!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper">
 	<!-- Content Header (Page header) -->
@@ -12,7 +11,7 @@ layout:decorate="@{layout/default-sw}">
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1 class="m-0">"selectMainBusinessCode / 사업장 코드 조회"</h1>
+						<h1 class="m-0" th:text="${title}"></h1>
 					</div><!-- /.col -->
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
@@ -30,12 +29,46 @@ layout:decorate="@{layout/default-sw}">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-lg-12">
-						<div class="card">
+						<div class="card card-primary">
+							<div class="card-header">
+								<h5 class="card-title" th:text="${title}"></h5>
+							</div>
 							<div class="card-body">
-								<h5 class="card-title">Card title</h5>
-								<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-								<a href="#" class="card-link">Card link</a>
-								<a href="#" class="card-link">Another link</a>
+								<p class="card-text">
+									<table class="table table-hover table-condensed swMainBusinessCode">
+										<thead>
+											<tr>
+												<th>사업장별 대표코드</th>
+												<th>거래처 구분 코드</th>
+												<th>사업장 권한</th>
+												<th>사업장 등록 코드</th>
+												<th>사업장코드 등록일자</th>
+												<th>사업장코드 삭제일자</th>
+											</tr>
+										</thead>
+										<tbody>
+										<tr th:if="${not #lists.isEmpty(mainBusinessCode)}" th:each="mbc: ${mainBusinessCode}">
+											<td th:text="${mbc.mainBusinessCode}"></td>
+											<td th:text="${mbc.businessCode}"></td>
+											<td th:text="${mbc.businessLevelCode}"></td>
+											<td th:text="${mbc.businessRegistrationCode}"></td>
+											<td th:text="${mbc.businessCodeRegistrationDate}"></td>
+											<td th:text="${mbc.businessCodeDeleteDate}"></td>
+
+											<td>
+												<button type="button" class="btn btn-primary btn-xs businesslist">수정</button>
+											</td>
+										</tr>
+										<tr th:unless="${not #lists.isEmpty(mainBusinessCode)}">
+											<td>
+											안녕
+											</td>
+										</tr>
+										</tbody>
+									</table>
+								</p>
+												
+												
 							</div>
 						</div>
 					</div>

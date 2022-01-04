@@ -1,26 +1,96 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ksmart41_teamtest.mapper.BusinessMapper">
-	<select id="getBusiness" resultType="Business">
-		SELECT
-			businessRegistrationCode,
+	<resultMap type="BusinessSelect" id="businessResultMap">
+		<result column="mainBusinessCode"				property="mainBusinessCode"/>
+		<result column="businessCode"					property="businessCode"/>
+		<result column="businessLevelCode"				property="businessLevelCode"/>
+		<result column="businessRegistrationCode"		property="businessRegistrationCode"/>		
+		<result column="businessCodeRegistrationDate"	property="businessCodeRegistrationDate"/>		
+		<result column="businessCodeDeleteDate"			property="businessCodeDeleteDate"/>
+		<result column="businessRegistrationCode"		property="businessRegistrationCode"/>
+		<result column="clientId"						property="clientId"/>
+		<result column="localCode"						property="localCode"/>
+		<result column="memberId"						property="memberId"/>
+		<result column="businessName"					property="businessName"/>
+		<result column="businessRepresentativeName"		property="businessRepresentativeName"/>
+		<result column="bunsinessNumber"				property="bunsinessNumber"/>
+		<result column="businessPhone"					property="businessPhone"/>
+		<result column="businessAddr"					property="businessAddr"/>
+		<result column="businessEmail"					property="businessEmail"/>
+		<result column="businessManagerName"			property="businessManagerName"/>
+		<result column="businessManagerPhone"			property="businessManagerPhone"/>
+		<result column="businessPhone"					property="businessPhone"/>
+		<result column="businessManagerEmail"			property="businessManagerEmail"/>
+		<result column="businessMainAccount"			property="businessMainAccount"/>
+		<result column="businessAccountNumber"			property="businessAccountNumber"/>
+		<result column="businessAccountHolder"			property="businessAccountHolder"/>
+		<result column="businessType1"					property="businessType1"/>
+		<result column="businessType2"					property="businessType2"/>
+		<result column="businessRegistration"			property="businessRegistration"/>
+		<result column="businessRegistrationState"		property="businessRegistrationState"/>
+	</resultMap>
+	
+	<insert id="addBusinessRegistration" parameterType="Business">
+	INSERT INTO k0_sw_businessRegistration(
 			clientId,
-			localCode,
-			memberId,
 			businessName,
 			businessRepresentativeName,
 			bunsinessNumber,
-			businessPhone,
 			businessAddr,
 			businessEmail,
 			businessMainAccount,
 			businessAccountNumber,
-			businessAccountHolder,
-			businessType1,
-			businessRegistration,
-			businessRegistrationState
-		FROM k0_sw_businessRegistration;
+			businessAccountHolder
+		)VALUES(
+			#{clientId},
+			#{businessName},
+			#{businessRepresentativeName},
+			#{bunsinessNumber},
+			#{businessAddr},
+			#{businessEmail},
+			#{businessMainAccount},
+			#{businessAccountNumber},
+			#{businessAccountHolder}
+			)
+	
+	
+	
+	</insert>
+	<select id="getBusiness" parameterType="String" resultType="BusinessSelect">
+		SELECT
+			main.mainBusinessCode,
+			main.businessCode,
+			main.businessLevelCode,
+			main.businessCodeRegistrationDate,
+			main.businessCodeDeleteDate,
+			b.businessRegistrationCode,
+			b.clientId,
+			b.localCode,
+			b.memberId,
+			b.businessName,
+			b.businessRepresentativeName,
+			b.bunsinessNumber,
+			b.businessPhone,
+			b.businessAddr,
+			b.businessEmail,
+			b.businessManagerName,
+			b.businessManagerPhone,
+			b.businessManagerEmail,
+			b.businessMainAccount,
+			b.businessAccountNumber,
+			b.businessAccountHolder,
+			b.businessType1,
+			b.businessType2,
+			b.businessRegistration,
+			b.businessRegistrationState
+		from
+			k0_sw_mainBusinessCodeManagement AS main
+			INNER JOIN
+			k0_sw_businessRegistration AS b
+			ON
+			b.businessRegistrationCode = main.businessRegistrationCode;
+
 	</select>
 
-	
 </mapper>

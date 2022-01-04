@@ -12,7 +12,7 @@
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1 class="m-0">서비스 계약 요청 조회하기</h1>
+						<h1 class="m-0">서비스 현황</h1>
 					</div>
 					<!-- /.col -->
 					<div class="col-sm-6">
@@ -80,67 +80,82 @@
 															th:each="s : ${getServiceManagement}">
 															<td th:text="${s.serviceCode}"></td>
 															<td th:text="${s.serviceName}"></td>
-															<td th:text="${s.servicePrice}"></td>
+															<td th:text="${#numbers.formatInteger(s.servicePrice, 0, 'COMMA')}"></td>
 															<td th:text="${s.serviceDiscount}"></td>
 															<td th:text="${s.servicePeriod}"></td>
 															<td th:text="${s.serviceStatus}"></td>
 															<td th:text="${s.serviceRegistrationDate}"></td>
 															<td th:text="${s.serviceDeleteDate}"></td>
 															<td th:text="${s.memberId}"></td>
-															<td><a th:href="@{#}">수정</a></td>
-															<td><a th:href="@{#}">삭제</a></td>
+															<td><a th:href="@{/sw/service/modifyServiceManagement}">수정</a></td>
+															<td><a th:href="@{/sw/service/deleteServiceManagement}">삭제</a></td>
 														</tr>
-														<tr
-															th:unless="${not #lists.isEmpty(getServiceManagement)}">
+														<tr th:unless="${not #lists.isEmpty(getServiceManagement)}">
 															<td colspan="9">등록된 서비스가 없습니다.</td>
 														</tr>
 													</tbody>
 												</table>
 											</div>
 										</div>
-										<div class="row">
-											<div class="col-sm-12 col-md-5">
-												<div class="dataTables_info" id="example2_info"
-													role="status" aria-live="polite">Showing 1 to 10 of
-													57 entries</div>
-											</div>
-											<div class="col-sm-12 col-md-7">
-												<div class="dataTables_paginate paging_simple_numbers"
-													id="example2_paginate">
-													<ul class="pagination">
-														<li class="paginate_button page-item previous disabled"
-															id="example2_previous"><a href="#"
-															aria-controls="example2" data-dt-idx="0" tabindex="0"
-															class="page-link">Previous</a></li>
-														<li class="paginate_button page-item active"><a
-															href="#" aria-controls="example2" data-dt-idx="1"
-															tabindex="0" class="page-link">1</a></li>
-														<li class="paginate_button page-item "><a href="#"
-															aria-controls="example2" data-dt-idx="2" tabindex="0"
-															class="page-link">2</a></li>
-														<li class="paginate_button page-item "><a href="#"
-															aria-controls="example2" data-dt-idx="3" tabindex="0"
-															class="page-link">3</a></li>
-														<li class="paginate_button page-item "><a href="#"
-															aria-controls="example2" data-dt-idx="4" tabindex="0"
-															class="page-link">4</a></li>
-														<li class="paginate_button page-item "><a href="#"
-															aria-controls="example2" data-dt-idx="5" tabindex="0"
-															class="page-link">5</a></li>
-														<li class="paginate_button page-item "><a href="#"
-															aria-controls="example2" data-dt-idx="6" tabindex="0"
-															class="page-link">6</a></li>
-														<li class="paginate_button page-item next"
-															id="example2_next"><a href="#"
-															aria-controls="example2" data-dt-idx="7" tabindex="0"
-															class="page-link">Next</a></li>
-													</ul>
-												</div>
+									</div>
+									<!-- /card body -->
+										<div class="card-footer">
+											<div class="row">
+												<div class="col-sm-12 col-md-7">
+													<div class="dataTables_paginate paging_simple_numbers"
+														id="example2_paginate">
+														<ul class="pagination">
+															<li class="paginate_button page-item previous disabled" id="example2_previous">
+																<a href="#" aria-controls="example2" data-dt-idx="0" tabindex="0" class="page-link">
+																Previous
+																</a>
+															</li>
+															<li class="paginate_button page-item active">
+																<a href="#" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">
+																	1
+																</a>
+															</li>
+															<li class="paginate_button page-item ">
+																<a href="#" aria-controls="example2" data-dt-idx="2" tabindex="0" class="page-link">
+																	2
+																</a>
+															</li>
+															<li class="paginate_button page-item ">
+																<a href="#" aria-controls="example2" data-dt-idx="3" tabindex="0" class="page-link">
+																3
+																</a>
+															</li>
+															<li class="paginate_button page-item ">
+																<a href="#" aria-controls="example2" data-dt-idx="4" tabindex="0" class="page-link">
+																	4
+																</a>
+															</li>
+															<li class="paginate_button page-item ">
+																<a href="#" aria-controls="example2" data-dt-idx="5" tabindex="0" class="page-link">
+																5
+																</a>
+															</li>
+															<li class="paginate_button page-item ">
+																<a href="#" aria-controls="example2" data-dt-idx="6" tabindex="0" class="page-link">
+																6
+																</a>
+															</li>
+															<li class="paginate_button page-item next" id="example2_next">
+																<a href="#" aria-controls="example2" data-dt-idx="7" tabindex="0" class="page-link">
+																Next
+																</a>
+															</li>
+														</ul>
+													</div>
 											</div>
 										</div>
+										<a th:href="@{/sw/service/addServiceManagement}">
+											<input type="button" class="btn btn-primary" style="float: right;" value="서비스 등록">
+										</a>
 									</div>
 								</div>
 							</div>
+							<!-- /card body -->
 						</div>
 					</div>
 				</div>

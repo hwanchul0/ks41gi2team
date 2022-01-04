@@ -16,6 +16,13 @@ public interface ShopAddAccountingMapper {
 	ShopAddAccounting getAddIncomeCode();
 	
 	//유경 - 쇼핑몰 매출등록
-	int addIncome(ShopAddAccounting shopAddAccounting);
+	public int addIncome(ShopAddAccounting shopAddAccounting);
+	
+	//유경 - 쇼핑몰 매출조회
+	List<ShopAddAccounting> getSelectIncome();
+	
+	//유경 - 쇼핑몰 매출 마감
+	ShopAddAccounting getModifyShopIncome(String shopIncomeCode);
 
+	
 }

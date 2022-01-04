@@ -1,24 +1,20 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="@{layout/default-sw}">
+	layout:decorate="@{layout/default-shop}">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <th:block layout:fragment="customJs">
-<script type="text/javascript">
-$( document ).ready( function() {
+<script>
+$(function() {
+$(document).ready(function(){
 
-	$("#submit").click(function(){
-		var select = $(this).children("option:selected").text();
-		if(select == null){
-			alert('수정여부를 선택해주세요');
-			return false;
-		}
-	});
-	
+   
 });
+
 </script>
 </th:block>
+
 <th:block layout:fragment="customContents">
 	<!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper">
@@ -27,12 +23,12 @@ $( document ).ready( function() {
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1>"addIsListCode / 개발사 계정과목 수정"</h1>
+						<h1>"modifyShopIncome / 쇼핑몰 마감 확인페이지"</h1>
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
-							<li class="breadcrumb-item"><a href="/sw/index-sw">Home</a></li>
-							<li class="breadcrumb-item active">재무관리</li>
+							<li class="breadcrumb-item"><a href="/shop/index-shop">Home</a></li>
+							<li class="breadcrumb-item active">매출관리</li>
 						</ol>
 					</div>
 				</div>
@@ -48,48 +44,49 @@ $( document ).ready( function() {
 					<div class="col-md-12">
 						<!-- /.card-header -->
 						<!-- Horizontal Form -->
-						<div class="card card-primary">
+						<div class="card card-success">
 							<div class="card-header">
-								<h3 class="card-title">개발사 계정과목 수정</h3>
+								<h3 class="card-title">쇼핑몰 마감 확인</h3>
 							</div>
 							<!-- /.card-header -->
 							<!-- form start -->
-							<form class="form-horizontal" th:action="@{/sw/code/addIsListCode}" method="post">
+							<form class="form-horizontal">
 								<div class="card-body">
 									<div class="form-group row">
-										<label for="IsCode" class="col-sm-2 col-form-label">수정할 계정과목코드 : </label>
+										<label for="IsCode" class="col-sm-2 col-form-label">마감할 매출코드 : </label>
 										<div class="col-sm-6">
-											<input type="text" id="swIsCode" name="swIsCode" readonly="readonly" th:value="${swIsCodeInfo.swIsCode}">
+											<input type="text" id="swIsCode" name="swIsCode" readonly="readonly" th:value="${finish.shopIncomeCode}">
 										</div>
 									</div>
 									<div class="form-group row">
-										<label for="IsCode" class="col-sm-2 col-form-label">수정할 계정과목이름 : </label>
+										<label for="finalIncomeVatImply" class="col-sm-2 col-form-label">공급가액 : </label>
 										<div class="col-sm-6">
-											<input type="text" id="swIsName" name="swIsName" readonly="readonly" th:value="${swIsCodeInfo.swIsName}">
+											<input type="text" readonly="readonly" name="finalIncomeVatImply" th:value="${finish.finalIncomeVatImply}">
 										</div>
 									</div>
 									<div class="form-group row">
-										<label for="IsCode" class="col-sm-2 col-form-label">계정사용여부</label>
+										<label for="finalIncomeVatNotImply" class="col-sm-2 col-form-label"> 부가세 : </label>
+										<div class="col-sm-6">
+											<input type="text"  readonly="readonly" name="finalIncomeVatNotImply" th:value="${finish.finalIncomeVatNotImply}">
+										</div>
+									</div>
+									<div class="form-group row">
+										<label for="IsCode" class="col-sm-2 col-form-label">마감확인여부</label>
 										<div class="col-sm-2">
 											
-										 <select class="form-control " style="width: 120%;" name="swIsUse" id="selectbox">
-												<option selected="selected" th:value="Y">Y</option>
+										 <select class="form-control " style="width: 120%;" name="swIsUse">
+												<option selected="selected" style="text-align: center" value="none">:: 마감확인여부 ::</option>
+												<option th:value="Y">Y</option>
 												<option th:value="N">N</option>
 											</select> 
 											
 										</div>
 									</div>
-									<div class="form-group row">
-										<label for="IsCode" class="col-sm-2 col-form-label">통합그룹코드</label>
-										<div class="col-sm-6">
-											<input type="text" id="GroupCode" th:value="${swIsCodeInfo.swIsGroupCode}" disabled="disabled">
-										</div>
-									</div>
 								</div>
 								<!-- /.card-body -->
 								<div class="card-footer">
-									<button type="submit" class="btn btn-primary" id="submit">입력완료</button>
-									<button type="submit" class="btn btn-default float-right">취소</button>
+									<button type="button" class="btn btn-success sign">입력완료</button>
+									<button type="button" class="btn btn-default float-right">취소</button>
 								</div>
 								<!-- /.card-footer -->
 							</form>
