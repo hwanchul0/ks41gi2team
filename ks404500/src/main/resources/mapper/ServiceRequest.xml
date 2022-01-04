@@ -2,8 +2,8 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="ksmart41_teamtest.mapper.RequestMapper">
-	<resultMap type="Request" id="requestResultMap">
+<mapper namespace="ksmart41_teamtest.mapper.ServiceRequestMapper">
+	<resultMap type="ServiceRequest" id="requestResultMap">
 		<result column="contractManageCode" 			property="contractManageCode"/>
 		<result column="serviceName" 					property="serviceName"/>
 		<result column="serviceAmount" 					property="serviceAmount"/>
@@ -79,7 +79,7 @@
 			ORDER BY serviceRequestDate ASC;
 	</select>
 		
-	<select id="getDetailRequestList" resultType="Request" resultMap="requestResultMap">
+	<select id="getDetailRequestList" resultType="ServiceRequest" resultMap="requestResultMap">
 			SELECT
 				 r.contractManageCode
 				,m.serviceName
@@ -106,7 +106,7 @@
 			ON 
 				mB.businessRegistrationCode = bR.businessRegistrationCode
 			WHERE 
-				clientId = #{clientId}
+				contractManageCode = #{contractManageCode}
 			GROUP BY bR.clientId
 			ORDER BY r.serviceRequestDate ASC; 		
 	</select>

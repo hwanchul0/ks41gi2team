@@ -1,6 +1,6 @@
 package ksmart41_teamtest.dto;
 
-public class Request {
+public class ServiceRequest {
 	private String contractManageCode;
 	private String serviceName;
 	private String serviceAmount;
@@ -82,7 +82,7 @@ public class Request {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Request [contractManageCode=");
+		builder.append("ServiceRequest [contractManageCode=");
 		builder.append(contractManageCode);
 		builder.append(", serviceName=");
 		builder.append(serviceName);
