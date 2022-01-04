@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="@{layout/default-sw}">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="@{layout/default-sw}">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <th:block layout:fragment="customContents">
@@ -12,16 +10,16 @@
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1 class="m-0">01main</h1>
+<!-- 						<h1 class="m-0" th:text="${title}"></h1> -->
 					</div>
 					<!-- /.col -->
 					<div class="col-sm-6">
-						<ol class="breadcrumb float-sm-right">
+<!-- 						<ol class="breadcrumb float-sm-right">
 							<li class="breadcrumb-item">
-								<a href="#">Home</a>
+								<a href="/">Home</a>
 							</li>
-							<li class="breadcrumb-item active">Starter Page</li>
-						</ol>
+							<li class="breadcrumb-item active">main</li>
+						</ol> -->
 					</div>
 					<!-- /.col -->
 				</div>
@@ -35,14 +33,26 @@
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-lg-12">
-						<div class="card">
-							<div class="card-body">
-								<h5 class="card-title">프로젝트 명</h5>
-								<p class="card-text">간단한 프로젝트 설명</p>
-<!-- 								<a href="#" class="card-link">Card link</a>
-								<a href="#"	class="card-link">Another link</a> -->
+						<!-- 프로젝트 설명 시작 -->
+						<div class="callout">
+			              <h5><i class="fas fa-info"></i><strong> SW 메인페이지</strong></h5>
+			              	<p><p>
+			              	<i class="fas fa-chart-line"></i> 프로젝트 개요 및 목적 : 이러쿵
+			              	<p>
+			              	<i class="fas fa-calendar-alt"></i> 개발기간 : 2021-00-00 ~ 2022-00-00
+			            </div>
+						<!-- 프로젝트 설명 끝 -->
+						<!-- <div class="card card-primary">
+							<div class="card-header">
+								<h5 class="card-title" th:text="${title}"></h5>
 							</div>
-						</div>
+							<div class="card-body">
+									<p class="card-text">간단한 프로젝트 설명</p>
+							</div>
+								<a href="#" class="card-link">Card link</a>
+								<a href="#"	class="card-link">Another link</a>
+							</div> 
+						</div>-->
 <!-- 						<div class="card card-primary card-outline">
 							<div class="card-body">
 								<h5 class="card-title">Card title</h5>
@@ -58,18 +68,27 @@
 				<div class="row">
 					<!-- /.col-md-6 -->
 					<div class="col-lg-6">
-						<div class="card">
+						<!-- 진유경 소개 시작 -->
+						<div class="card card-primary card-outline">
 							<div class="card-header">
-								<h5 class="col-lg-3">ks404500팀원</h5>
+								<i class="far fa-user"></i><h6 class="col-md-3 text-muted text-center" style="display: inline">ks404500 팀원</h6>
+								<h2 class="col-md-3 lead text-center" style="display: inline;"><strong>진유경 Jin Yukyeong</strong></h2>
 							</div>
-							<div class="card-body">
-								<h6 class="card-title">진유경</h6>
-								<p class="card-text">소개 & 개발내용</p>
-								<p class="card-text">소개 & 개발내용</p>
-								<p class="card-text">소개 & 개발내용</p>
-								<a href="#" class="btn btn-primary float-right">링크</a>
+							<div class="card-body box-profile">								
+								<strong><i class="far fa-file-alt mr-1"></i> Notes</strong>
+								<p class="text-muted">소개 /개발내용을 적자 </p>
+								<hr>
+								<strong><i class="fas fa-pencil-alt mr-1"></i> Skills</strong>
+				                <p class="text-muted">
+				                  <span class="tag tag-danger">Java 문맹</span>
+				                  <span class="tag tag-info">Javascript 못함</span>
+				                  <span class="tag tag-warning">MySql 별로</span>
+				                  <span class="tag tag-primary">jQuery 그닥</span>
+				                </p>
+								<a href="#" class="btn btn-primary float-right"> <i class="fas fa-user"></i> View Profile</a>
 							</div>
 						</div>
+						<!-- 진유경 소개 끝 -->
 						<div class="card">
 							<div class="card-header">
 								<h5 class="col-lg-6">ks404500팀원</h5>

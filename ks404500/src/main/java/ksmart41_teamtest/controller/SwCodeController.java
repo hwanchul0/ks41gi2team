@@ -1,8 +1,14 @@
 package ksmart41_teamtest.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
-import org.apache.catalina.connector.Response;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,7 +16,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import ksmart41_teamtest.dto.InvoiceReason;
 import ksmart41_teamtest.dto.SwIsListCode;
@@ -20,6 +25,7 @@ import ksmart41_teamtest.service.SwIsListService;
 @Controller
 @RequestMapping("/sw/code")
 public class SwCodeController {
+	private static final Logger log = LoggerFactory.getLogger(SwCodeController.class);
 	
 	/*유경 */
 	@Autowired
@@ -27,27 +33,6 @@ public class SwCodeController {
 	/*유경 */
 	@Autowired
 	private SwIsListService swIsListService;
-	
-	@GetMapping("/addBusinessCode")
-	public String addBusinessCode() {
-		return "sw/code/addBusinessCode";
-	}
-	
-	@GetMapping("/selectBusinessCode")
-	public String selectBusinessCode() {
-		return "sw/code/selectBusinessCode";
-	}
-	
-	@GetMapping("/addLocalCode")
-	public String addLocalCode() {
-		return "sw/code/addLocalCode";
-	}
-	
-	@GetMapping("/selectLocalCode")
-	public String selectLocalCode() {
-		return "sw/code/selectLocalCode";
-	}
-	
 	
 	@GetMapping("/addInvoiceReasonCode")
 	public String addInvoiceReasonCode() {
@@ -65,11 +50,12 @@ public class SwCodeController {
 		return "sw/code/selectInvoiceReasonCode";
 	}
 	
-	/*유경 개발사 손익계정과목 등록 -> 수정으로 바꿀 예정*/
-	@PostMapping("addIsListCode")
+	/*유경 개발사 손익계정과목 등록 -> 수정*/
+	@PostMapping("/addIsListCode")
 	public String modifyIsListCode(SwIsListCode swIsListCode) {
-		System.out.println("화면에서 받은 정보 : " + swIsListCode);
-		//swIsListService.modifyIsListCode(swIsListCode);
+		 log.info("정보 : {}", swIsListCode );
+		//계정사용여부수정
+		swIsListService.modifyIsListCode(swIsListCode);
 		return "redirect:/sw/code/selectIsListCode";
 	}
 	
@@ -77,12 +63,21 @@ public class SwCodeController {
 	/*유경 개발사 손익계정과목 등록 -> 수정으로 바꿀 예정*/
 	@GetMapping("/addIsListCode")
 	public String modifyIsListCode(@RequestParam(value="swIsCode", required = false) String swIsCode
-            ,Model model) {
+            ,Model model, HttpServletResponse response,HttpServletRequest request) throws IOException {
 		//System.out.println("swIsCode :"+ swIsCode);
 		SwIsListCode swIsCodeInfo = swIsListService.getSwIsCodeBySwIsListCode(swIsCode);
+		List<SwIsListCode> swIsListCode = swIsListService.getSwIsListCode();
+		response.setContentType("text/html; charset=UTF-8");
 		if(swIsCode != null && !"".equals(swIsCode) && "Y".equals(swIsCodeInfo.getSwIsAmend()) ) {
 			model.addAttribute("swIsCodeInfo", swIsCodeInfo);
+			model.addAttribute("swIsListCode", swIsListCode);
 			swIsCodeInfo.getSwIsAmend();
+
+		}else if("N".equals(swIsCodeInfo.getSwIsAmend())){
+            PrintWriter out = response.getWriter();
+            out.println("<script>alert('수정할 수 없는 계정과목입니다.'); history.go(-1);</script>");
+            out.flush();
+            out.close();
 		}
 		return "sw/code/addIsListCode";
 	}

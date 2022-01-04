@@ -4,6 +4,21 @@
 	layout:decorate="@{layout/default-sw}">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<th:block layout:fragment="customJs">
+<script type="text/javascript">
+$( document ).ready( function() {
+
+	$("#submit").click(function(){
+		var select = $(this).children("option:selected").text();
+		if(select == null){
+			alert('수정여부를 선택해주세요');
+			return false;
+		}
+	});
+	
+});
+</script>
+</th:block>
 <th:block layout:fragment="customContents">
 	<!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper">
@@ -16,8 +31,8 @@
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
-							<li class="breadcrumb-item"><a href="#">Home</a></li>
-							<li class="breadcrumb-item active">General Form</li>
+							<li class="breadcrumb-item"><a href="/sw/index-sw">Home</a></li>
+							<li class="breadcrumb-item active">재무관리</li>
 						</ol>
 					</div>
 				</div>
@@ -39,7 +54,7 @@
 							</div>
 							<!-- /.card-header -->
 							<!-- form start -->
-							<form class="form-horizontal" th:action="@{/sw/code/addyIsListCode}" method="post">
+							<form class="form-horizontal" th:action="@{/sw/code/addIsListCode}" method="post">
 								<div class="card-body">
 									<div class="form-group row">
 										<label for="IsCode" class="col-sm-2 col-form-label">수정할 계정과목코드 : </label>
@@ -56,11 +71,12 @@
 									<div class="form-group row">
 										<label for="IsCode" class="col-sm-2 col-form-label">계정사용여부</label>
 										<div class="col-sm-2">
-											<select class="form-control " style="width: 120%;">
-												<option selected="selected" style="text-align: center">:: 계정사용여부 ::</option>
-												<option value="Y">사용</option>
-												<option value="N">미사용</option>
-											</select>
+											
+										 <select class="form-control " style="width: 120%;" name="swIsUse" id="selectbox">
+												<option selected="selected" th:value="Y">Y</option>
+												<option th:value="N">N</option>
+											</select> 
+											
 										</div>
 									</div>
 									<div class="form-group row">
@@ -72,7 +88,7 @@
 								</div>
 								<!-- /.card-body -->
 								<div class="card-footer">
-									<button type="submit" class="btn btn-primary">입력완료</button>
+									<button type="submit" class="btn btn-primary" id="submit">입력완료</button>
 									<button type="submit" class="btn btn-default float-right">취소</button>
 								</div>
 								<!-- /.card-footer -->
@@ -89,26 +105,5 @@
 		<!-- /.content -->
 	</div>
 	<!-- /.content-wrapper -->
-	<script type="text/javascript">
-	
-		/*$(document).ready(function() {
-			$('#selectBox').change(function() {
-				var state = $('#selectBox option:selected').val();
-				if (state == 'production') {
-					$('.layer1').show();
-					$('.layer2').hide();
-				} else if (state == 'sales') {
-					$('.layer1').hide();
-					$('.layer2').show();
-				} else {
-					$('.layer1').hide();
-					$('.layer2').hide();
-				}
-			});
-		});*/
-		
-		
-		//$("select option[value*='Sold Out']").prop('disabled',true);
-	</script>
 </th:block>
 </html>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ksmart41_teamtest.mapper.SeviceManagementMapper">
+	<resultMap type="ServiceManagement" id="serviceManagementResultMap">
+		<result column="serviceCode" 					property="serviceCode"/>
+		<result column="memberId" 						property="memberId"/>
+		<result column="serviceName" 					property="serviceName"/>
+		<result column="servicePrice" 					property="servicePrice"/>
+		<result column="serviceDiscount" 				property="serviceDiscount"/>
+		<result column="servicePeriod" 					property="servicePeriod"/>
+		<result column="serviceStatus" 					property="serviceStatus"/>
+		<result column="serviceRegistrationDate" 		property="serviceRegistrationDate"/>
+		<result column="serviceDeleteDate" 				property="serviceDeleteDate"/>
+	</resultMap>
+		<!--  서비스 현황 조회 -->
+		<select id="getServiceManagement" parameterType="String" resultMap="serviceManagementResultMap">
+			SELECT 
+			*	
+			FROM 
+				k2_sw_serviceManagement
+		</select>
+		<!-- 서비스 등록 -->
+		<insert id="addService"  parameterType="ServiceManagement">
+		INSERT INTO k2_sw_serviceManagement(
+			serviceCode
+			, memberId
+			, serviceName
+			, servicePrice
+			, serviceDiscount
+			, servicePeriod
+			, serviceStatus
+			, serviceRegistrationDate
+		)VALUES (
+		  #{serviceCode}
+		, #{memberId}
+		, #{serviceName}
+		, #{servicePrice}
+		, #{serviceDiscount}
+		, #{servicePeriod}
+		, #{serviceStatus}
+		, NOW()
+		);
+		</insert>
+		<!-- 서비스 등록 - 서비스 코드 중복체크 -->
+		<select id="serviceCheck" resultType="int">
+			SELECT
+				COUNT(1)
+			FROM
+				k2_sw_serviceManagement
+			WHERE
+				serviceCode = #{serviceCode};
+		</select>
+		
+</mapper>

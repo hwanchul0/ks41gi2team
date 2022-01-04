@@ -4,6 +4,61 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 layout:decorate="@{layout/default-shop}">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<th:block layout:fragment="customJs">
+<script>
+$(document).ready(function () {
+    $('.radioButton').click(function () {
+
+			var str = ""
+			var tdArr = new Array();	// 배열 선언
+			var checkBtn = $(this);
+
+			var tr = checkBtn.parent().parent();
+			var td = tr.children();
+			td.each(function(i){	
+				tdArr.push(td.eq(i).text());
+			});
+
+			console.log("클릭한 Row의 모든 데이터 : "+td.text());
+			
+			// 반복문을 이용해서 배열에 값을 담음
+			td.each(function(i){	
+				tdArr.push(td.eq(i).text());
+			});
+		
+			
+			/* console.log(tdArr[2]); //매출코드
+			console.log(tdArr[3]); //주문번호
+			console.log(tdArr[4]); //전표번호
+			console.log(tdArr[5]); //공급가액
+			console.log(tdArr[6]); //세액
+			console.log(tdArr[7]); //일자
+			console.log(tdArr[8]); //환불일자
+			console.log(tdArr[9]); //그룹전표번호
+			console.log(tdArr[10]); //출고코드 */
+			
+			document.getElementById("groupslip").value = tdArr[9]; //그룹전표번호
+			document.getElementById("renontax").value = tdArr[5];
+			document.getElementById("retax").value = tdArr[6];
+			document.getElementById("releaseCode").value = tdArr[10];
+
+    });
+    
+    //버튼을 선택하지않고 입력완료 선택시 경고창
+    $('#sign').click(function () {
+    	 var Category1 = $('.radioButton');
+    	    if($(':radio[class="radioButton"]:checked').length < 1){
+    	        alert('발행대상을 선택해주세요');
+    	        Category1.focus();
+    	        event.preventDefault();
+    	   		}
+    	
+    });
+   
+  });
+</script>
+</th:block>
+
 <th:block layout:fragment="customContents">
 <!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper">
@@ -16,8 +71,8 @@ layout:decorate="@{layout/default-shop}">
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
-							<li class="breadcrumb-item"><a href="#">Home</a></li>
-							<li class="breadcrumb-item active">General Form</li>
+							<li class="breadcrumb-item"><a href="/shop/index-shop">Home</a></li>
+							<li class="breadcrumb-item active">매출관리</li>
 						</ol>
 					</div>
 				</div>
@@ -35,74 +90,119 @@ layout:decorate="@{layout/default-shop}">
 						<!-- Horizontal Form -->
 						<div class="card card-success">
 							<div class="card-header">
-								<h3 class="card-title">Horizontal Form</h3>
+								<h3 class="card-title">쇼핑몰 매출 등록</h3>
 							</div>
 							<!-- /.card-header -->
 							<!-- form start -->
-							<form class="form-horizontal">
+							<form class="form-horizontal" th:action="@{/shop/accounting/addIncome}" method="post">
 								<div class="card-body">
-									<div class="form-group row">
-										<label for="inputEmail3" class="col-sm-2 col-form-label">주문내역</label>
-										<div class="col-sm-6">
-											<div class="col-sm-6">
-							                        <select class="form-control">
-							                          <option>::선택 ::</option>
-							                          <option>option 2</option>
-							                          <option>option 3</option>
-							                          <option>option 4</option>
-							                          <option>option 5</option>
-							                        </select>
-							                 </div>
-										</div>
-									</div>
-									<div>
-									<label for="biz" class="col-sm-2 col-form-label">주문내역</label>
-									<table class="table">
-										<tr>
-											<td style="width:150px;">출고정보</td>
-											<td>주문내역코드</td>
-											<td>상품코드</td>
-											<td>주문자아이디</td>
-											<td>그룹전표번호영수증번호</td>
-											<td>주문수량</td>
-											<td>결제 금액</td>
-										</tr>
-										<tr>
-											<td>ㅇ</td>
-											<td>ㅇ</td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-										</tr>
 									
+									<!-- 주문내역 테이블 시작 -->
+									<div style="height: 300px; overflow-y: auto; width: 1200px;">
+									<label for="biz" class="col-sm-6 col-form-label">주문내역 - 발행대상을 선택해주세요</label>
+									<table class="table table-hover table-condensed" style="font-size: 13px;">
+										<thead>
+											<tr>
+												<th>선택</th>
+												<th>구분</th>
+												<th>매출코드</th>
+												<th>주문번호</th>
+												<th>전표번호</th>
+												<th>공급가액</th>
+												<th>세액</th>
+												<th>일자</th>
+												<th>환불일자</th>
+												<th>그룹전표코드</th>
+												<th>출고코드</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:if="${not #lists.isEmpty(shopAddAccounting)}" th:each="a: ${shopAddAccounting}">
+												<td><input type="radio" th:disabled="${a.addIncome.equals('발행완료')}" name="list" class="radioButton"></td>
+												<td th:text="${a.addIncome}" ></td>
+												<td th:text="${a.shopIncomeCode}"></td>
+												<td th:text="${a.shopOrderCode}" ></td>
+												<td th:text="${a.shopSlipNumber}" ></td>
+												<td th:text="${#numbers.formatInteger(a.renontax, 0, 'COMMA')}"></td>
+												<td th:text="${#numbers.formatInteger(a.retax, 0, 'COMMA')}" ></td>
+												<td th:text="${a.shopPaymentDate}" ></td>
+												<td th:text="${a.shopRefundDate}"></td>
+												<td th:text="${a.groupslip}" ></td>
+												<td th:text="${a.releaseCode}"></td>
+												</tr>
+											<tr th:unless="${not #lists.isEmpty(shopAddAccounting)}">
+												<td>dd</td>
+											</tr>
+										</tbody>
 									</table>
-									
-									
-									<div class="form-group row">
-										<label for="inputEmail3" class="col-sm-2 col-form-label">계정과목코드</label>
+								</div>
+								<!-- 주문내역 테이블 끝  -->
+								<!-- insert -->
+								<div class="form-group row">
+									<label for="shopIsCode" class="col-sm-2 col-form-label">계정과목코드</label>
 										<div class="col-sm-6">
 											<div class="col-sm-6">
-							                        <input type="email" class="form-control" id="inputEmail3"
-												placeholder="40101 상품매출" disabled="disabled">
+							                        <input type="text" value="40101" name="shopIsCode"  readonly="readonly" style="width:220px;">
 							                 </div>
 										</div>
 									</div>
 									<div class="form-group row">
-										<label for="inputEmail3" class="col-sm-2 col-form-label">회계통합그룹코드</label>
-										<div class="col-sm-4">
-											<input type="email" class="form-control" id="inputEmail3"
-												placeholder="Email">
+										<label for="addIncomeCode" class="col-sm-2 col-form-label">발행할 매출코드 </label>
+										<div class="col-sm-6">
+											<div class="col-sm-6">
+							                       <input type="text" th:value="${shopAddIncomeCode.addIncomeCode}" id="addIncomeCode" name="addIncomeCode"  readonly="readonly" style="width:220px;"></input>
+							                 </div>
 										</div>
 									</div>
-								</div>
+									<div class="form-group row">
+										<label for="groupslip" class="col-sm-2 col-form-label">전표번호 </label>
+										<div class="col-sm-6">
+											<div class="col-sm-6">
+							                       <input type="text" name="groupslip" id="groupslip" readonly="readonly"  style="width:220px;"></input>
+							                 </div>
+										</div>
+									</div>
+									<div class="form-group row">
+										<label for="renontax" class="col-sm-2 col-form-label">공급가 </label>
+										<div class="col-sm-6">
+											<div class="col-sm-6">
+							                       <input type="number" name="renontax" readonly="readonly"  id="renontax"style="width:220px;"></input>
+							                 </div>
+										</div>
+									</div>
+									<div class="form-group row">
+										<label for="retax" class="col-sm-2 col-form-label">세액 </label>
+										<div class="col-sm-6">
+											<div class="col-sm-6">
+							                       <input type="number" name="retax" readonly="readonly"  id="retax"style="width:220px;"></input>
+							                 </div>
+										</div>
+									</div>
+									<div class="form-group row">
+										<label for="releaseCode" class="col-sm-2 col-form-label">출고 </label>
+										<div class="col-sm-6">
+											<div class="col-sm-6">
+							                       <input type="text" name="releaseCode" id="releaseCode" readonly="readonly" style="width:220px;"></input>
+							                 </div>
+										</div>
+									</div>
+									<!-- 매퍼에서 shopid001로 고정되어있음. -->
+									<div class="form-group row">
+										<label for="shopMemberId" class="col-sm-2 col-form-label">등록자 </label>
+										<div class="col-sm-6">
+											<div class="col-sm-6">
+							                       <input type="text" th:value="${SHOPID}" name="shopMemberId" id="shopMemberId" readonly="readonly" style="width:220px;"></input>
+							                 </div>
+										</div>
+									</div>
+								<!-- /insert -->
 								<!-- /.card-body -->
 								<div class="card-footer">
-									<button type="submit" class="btn btn-success">Sign in</button>
-									<button type="submit" class="btn btn-default float-right">Cancel</button>
+									<button type="submit" class="btn btn-success" id="sign">입력완료</button>
+									<button type="submit" class="btn btn-default float-right">취소</button>
 								</div>
 								<!-- /.card-footer -->
+								</div>
 							</form>
 						</div>
 						<!-- /.card -->

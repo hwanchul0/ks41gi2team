@@ -19,50 +19,43 @@ public class SwLoginController {
 		this.memberService = memberService;
 	}
 
-	@GetMapping("/login")
+	@GetMapping("/Swlogin")
 	public String login(Model model) {
-		model.addAttribute("title", "로그인하자");
+		model.addAttribute("title", "로그인");
 		return "login";
 	}
 	
-	@GetMapping("/logout")
+	@GetMapping("/Swlogout")
 	public String logout(HttpSession session) {
 		session.invalidate();
-		//return "redirect:/login";
-		return "redirect:/sw/index-sw";
+		return "redirect:/";
 	}
 	
-	@PostMapping("/login")
+	@PostMapping("/Swlogin")
 	public String login(@RequestParam(value="memberId", required = false)String memberId,
 						@RequestParam(value="memberPw", required = false)String memberPw,
 						HttpSession session) {
-		System.out.println(memberId + " 입력한아이디1");
-		System.out.println(memberPw + " 입력한 패스워드1");
+		System.out.println(memberId + " memberId입력값");
 		if(memberId !=null && !"".equals(memberId) && memberPw!=null && !"".equals(memberPw)){
 			Member member = memberService.MemberInfo(memberId);
 			if(member != null && member.getMemberPw()!= null && memberPw.equals(member.getMemberPw())) {
 				//로그인 비밀번호 일치 시 세션을 정보에 담음
-				System.out.println(memberId + " 입력한아이디2");
-				System.out.println(memberPw + " 입력한 패스워드2");
-				session.setAttribute("SID", memberId);
-				session.setAttribute("SNAME", member.getMemberName());
-				session.setAttribute("SLEVEL", member.getMemberLevelCode());
+				session.setAttribute("SWID", memberId);
+				session.setAttribute("SWNAME", member.getMemberName());
+				session.setAttribute("SWLEVEL", member.getMemberLevelCode());
 				return "redirect:/sw/index-sw";
 			}
 		}
 		//로그인 불일치 시
-		System.out.println(memberId + " 입력한아이디3");
-		System.out.println(memberPw + " 입력한 패스워드3");
-		return "redirect:/login";
-	}
+		return "redirect:/Swlogin";
+		}
+
+	//
 	
+	//회원가입시
 	@GetMapping("/addMember")
-	public String addMember() {
+	public String addMember(Model model) {
+		model.addAttribute("title", "직원가입");
 		return "sw/member/addMember";
-	}
-	
-	@GetMapping("/addClient")
-	public String addClient() {
-		return "sw/client/addClient";
 	}
 }

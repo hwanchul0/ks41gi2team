@@ -4,19 +4,52 @@
 	layout:decorate="@{layout/default-sw}">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<th:block layout:fragment="customJs">
+<script type="text/javascript">
+$(function(){
+	//합계금액 계산하기
+	$('input.money1').on('keyup',function(){
+	          var cnt = $(".exam input.num_sum").length;     
+	          console.log(cnt);
+	          
+	  for( var i=1; i< cnt; i++){
+	     var sum = parseInt($(this).val() || 0 );
+	     sum++
+	    console.log(sum);
+	  }
+	  
+	            var sum1 = parseInt($("#fn_type1_price").val() || 0 ); // input 값을 가져오며 계산하지만 값이 없을경우 0이 대입된다  뒷부분에 ( || 0 ) 없을경우 합계에 오류가 생겨 NaN 값이 떨어진다
+	            var sum2 = parseInt($("#fn_type2_price").val() || 0);
+	            var sum3 = parseInt($("#fn_type3_price").val() || 0);
+	            var sum4 = parseInt($("#fn_type4_price").val() || 0);
+
+	            var sum = sum1 + sum2 + sum3 + sum4;
+	            console.log(sum);
+	            $("#fn_total").val(sum);
+	            
+	            if(sum > $()){
+	            	
+	            }
+	        });
+	
+	});
+
+</script>
+</th:block>
 <th:block layout:fragment="customContents">
-<!-- Content Wrapper. Contains page content -->
+	<!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper">
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1>"addInvoice / 개발사 세금계산서 등록"</h1>
+						<h1>"addInvoice / 개발사 세금계산서 발행"</h1>
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
-							<li class="breadcrumb-item"><a href="#">Home</a></li>
+							<li class="breadcrumb-item"><a href="/sw/index-sw">Home</a></li>
 							<li class="breadcrumb-item active">General Form</li>
 						</ol>
 					</div>
@@ -35,128 +68,116 @@
 						<!-- Horizontal Form -->
 						<div class="card card-primary">
 							<div class="card-header">
-								<h3 class="card-title">Horizontal Form</h3>
+								<h3 class="card-title">세금계산서 발행</h3>
 							</div>
 							<!-- /.card-header -->
 							<!-- form start -->
 							<form class="form-horizontal">
 								<div class="card-body">
-									<div class="form-group row">
-										<label for="inputEmail3" class="col-sm-2 col-form-label">사업장대표코드</label>
-										<div class="col-sm-6">
-											<div class="col-sm-6">
-							                        <select class="form-control">
-							                          <option>::선택 ::</option>
-							                          <option>option 2</option>
-							                          <option>option 3</option>
-							                          <option>option 4</option>
-							                          <option>option 5</option>
-							                        </select>
-							                 </div>
-										</div>
-									</div>
-									<div>
-									<label for="biz" class="col-sm-2 col-form-label">사업장정보</label>
-									<table class="table">
-										<tr>
-											<td style="width: 200px;">사업장대표코드</td>
-											<td>사업장명</td>
-											<td>대표자명</td>
-											<td>사업자번호</td>
-											<td>상세주소</td>
-											<td>이메일</td>
-											<td>업태</td>
-											<td>종목</td>
-										</tr>
-										<tr>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-										</tr>
-									
+									<label for="biz" class="col-sm-12 col-form-label">세금계산서 발행대상</label>
+								
+									<table class="table table-hover table-condensed" style="font-size: 12px;">
+										<thead>
+											<tr>
+												<th>선택</th>
+												<th>사업장명</th>
+												<th>대표자명</th>
+												<th>사업자번호</th>
+												<th>이메일</th>
+												<th>주소</th>
+												<th>업태</th>
+												<th>업종</th>
+												<th>서비스명</th>
+												<th>일수</th>
+												<th>수량</th>
+												<th>공급가</th>
+												<th>세액</th>
+												<th>합계</th>
+												<th>일자</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:if="${not #lists.isEmpty(getInvoiceInfo)}" th:each="g: ${getInvoiceInfo}">
+												<td><input type="radio" name="check"></td>
+												<td th:text="${g.businessName}"></td>
+												<td th:text="${g.businessRepresentativeName}"></td>
+												<td th:text="${g.bunsinessNumber}"></td>
+												<td th:text="${g.businessAddr}"></td>
+												<td th:text="${g.businessEmail}"></td>
+												<td th:text="${g.businessType1}"></td>
+												<td th:text="${g.businessType2}"></td>
+												<td th:text="${g.serviceCode}"></td>
+												<td th:text="${g.serviceAmount}"></td>
+												<td th:text="${g.servicePeriod}"></td>
+												<td th:text="${#numbers.formatInteger(g.nontax, 0, 'COMMA')}"></td>
+												<td th:text="${#numbers.formatInteger(g.tax, 0, 'COMMA')}"></td>
+												<td th:text="${#numbers.formatInteger(g.serviceTotalPrice, 0, 'COMMA')}" value="servicePrice"></td>
+												<td th:text="${g.serviceRegistrationDate}"></td>
+											</tr>
+											<tr th:unless="${not #lists.isEmpty(getInvoiceInfo)}">
+												<td>dd</td>
+											</tr>
+										</tbody>
 									</table>
 									
-									<label for="" class="col-sm-2 col-form-label">서비스정보</label>
-									<table class="table">
-										<tr>
-											<td style="width: 100px;">선택</td>
-											<td>상품명</td>
-											<td>단가</td>
-											<td>수량</td>
-											<td>공급가액</td>
-											<td>세액</td>
-											<td>합계금액</td>
-											<td>서비스시작일</td>
-											<td>서비스만료일</td>
-										</tr>
-										<tr>
-											<td>
-											    <input type="checkbox">
-											</td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-										</tr>
-									</table>
-									</div>
-									
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+								
+									<div class="exam">
 									<div class="form-group row">
-										<label for="inputEmail3" class="col-sm-2 col-form-label">현금</label>
-										<div class="col-sm-4">
-											<input type="email" class="form-control" id="inputEmail3"
-												placeholder="Email">
+										<label for="inputEmail3" class="col-sm-1 col-form-label" style="font-size: 14px;">현금</label>
+										<div class="col-sm-2">
+											<input type="number" class="form-control money1" 
+												placeholder=""   id="fn_type1_price" style="height: 85%"  min="0">
 										</div>
 									</div>
 									<div class="form-group row">
-										<label for="inputEmail3" class="col-sm-2 col-form-label">수표</label>
-										<div class="col-sm-4">
-											<input type="email" class="form-control" id="inputEmail3"
-												placeholder="Email">
+										<label for="inputEmail3" class="col-sm-1 col-form-label" style="font-size: 14px;">수표</label>
+										<div class="col-sm-2">
+											<input type="number" class="form-control money1" 
+												placeholder=""  id="fn_type2_price" style="height: 85%"  min="0">
 										</div>
 									</div>
 									<div class="form-group row">
-										<label for="inputEmail3" class="col-sm-2 col-form-label">어음</label>
-										<div class="col-sm-4">
-											<input type="email" class="form-control" id="inputEmail3"
-												placeholder="Email">
+										<label for="inputEmail3" class="col-sm-1 col-form-label" style="font-size: 14px;">어음</label>
+										<div class="col-sm-2">
+											<input type="number" class="form-control money1" 
+												placeholder="" id="fn_type3_price" style="height: 85%"  min="0">
 										</div>
 									</div>
 									<div class="form-group row">
-										<label for="inputEmail3" class="col-sm-2 col-form-label">외상미수금</label>
-										<div class="col-sm-4">
-											<input type="email" class="form-control" id="inputEmail3"
-												placeholder="Email">
+										<label for="inputEmail3" class="col-sm-1 col-form-label" style="font-size: 14px;">외상미수금</label>
+										<div class="col-sm-2">
+											<input type="email" class="form-control money1" 
+												placeholder="" id="fn_type4_price" style="height: 85%"  min="0">
+										</div>
+									</div>
+									<div class="form-group row">
+										<label for="inputEmail3" class="col-sm-1 col-form-label" style="font-size: 14px;">입력합계</label>
+										<div class="col-sm-2">
+											<input type="email" class="form-control num_sum" 
+												placeholder="" id="fn_total" disabled="disabled" style="height: 85%"  min="0">
 										</div>
 									</div>
 									<div class="col-sm-12">
-					                      <!-- radio -->
-					                      <div class="form-group">
-					                        <div class="form-check">
-					                          <input class="form-check-input" type="radio" name="radio1" >
-					                          <label class="form-check-label col-sm-2">외상</label>
-					                          <input class="form-check-input" type="radio" name="radio1" checked>
-					                          <label class="form-check-label col-sm-2">청구</label>
-					                        </div>
-					                      </div>
-					                    </div>
+										<!-- radio -->
+										<div class="form-group">
+											<div class="form-check">
+												<input class="form-check-input" type="radio" name="radio1">
+												<label class="form-check-label col-sm-1">외상</label> <input
+													class="form-check-input" type="radio" name="radio1" checked>
+												<label class="form-check-label col-sm-1">청구</label>
+											</div>
+										</div>
+									</div>
+									</div>
 								</div>
 								<!-- /.card-body -->
-								<div class="card-footer">
-									<button type="submit" class="btn btn-primary">Sign in</button>
-									<button type="submit" class="btn btn-default float-right">Cancel</button>
-								</div>
-								<!-- /.card-footer -->
 							</form>
+							<div class="card-footer">
+								<button type="button" class="btn btn-primary" th:href="@{sw/accounting/selectInvoice.html}">입력완료</button>
+								<button type="submit" class="btn btn-default float-right">취소</button>
+							</div>
+							<!-- /.card-footer -->
 						</div>
 						<!-- /.card -->
 					</div>
