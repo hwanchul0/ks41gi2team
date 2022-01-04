@@ -4,6 +4,21 @@
 	layout:decorate="@{layout/default-sw}">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<th:block layout:fragment="customJs">
+<script type="text/javascript">
+$( document ).ready( function() {
+
+	$("#submit").click(function(){
+		var select = $(this).children("option:selected").text();
+		if(select == null){
+			alert('수정여부를 선택해주세요');
+			return false;
+		}
+	});
+	
+});
+</script>
+</th:block>
 <th:block layout:fragment="customContents">
 	<!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper">
@@ -16,8 +31,8 @@
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
-							<li class="breadcrumb-item"><a href="#">Home</a></li>
-							<li class="breadcrumb-item active">General Form</li>
+							<li class="breadcrumb-item"><a href="/sw/index-sw">Home</a></li>
+							<li class="breadcrumb-item active">재무관리</li>
 						</ol>
 					</div>
 				</div>
@@ -57,9 +72,8 @@
 										<label for="IsCode" class="col-sm-2 col-form-label">계정사용여부</label>
 										<div class="col-sm-2">
 											
-										 <select class="form-control " style="width: 120%;" name="swIsUse">
-												<option selected="selected" style="text-align: center">:: 계정사용여부 ::</option>
-												<option th:value="Y">Y</option>
+										 <select class="form-control " style="width: 120%;" name="swIsUse" id="selectbox">
+												<option selected="selected" th:value="Y">Y</option>
 												<option th:value="N">N</option>
 											</select> 
 											
@@ -74,7 +88,7 @@
 								</div>
 								<!-- /.card-body -->
 								<div class="card-footer">
-									<button type="submit" class="btn btn-primary">입력완료</button>
+									<button type="submit" class="btn btn-primary" id="submit">입력완료</button>
 									<button type="submit" class="btn btn-default float-right">취소</button>
 								</div>
 								<!-- /.card-footer -->

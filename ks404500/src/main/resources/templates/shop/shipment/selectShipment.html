@@ -4,7 +4,10 @@
 	layout:decorate="@{layout/default-shop}">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 <th:block layout:fragment="customJs">
+
 <script type="text/javascript">
 //미배송건수 받아오기
 $(function(){
@@ -14,12 +17,16 @@ $(function(){
      });
   request.done(function(data){
 	$('#count').val(data);
+	
   });
   request.fail(function( jqXHR, textStatus ){
      alert("Request failed:  " + textStatus);
   });
+  
 });
+
 </script>
+
 </th:block>
 
 <th:block layout:fragment="customContents">
@@ -35,8 +42,8 @@ $(function(){
 					<!-- /.col -->
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
-							<li class="breadcrumb-item"><a href="#">Home</a></li>
-							<li class="breadcrumb-item active">Starter Page</li>
+							<li class="breadcrumb-item"><a href="/shop/index-shop">Home</a></li>
+							<li class="breadcrumb-item active">배송관리</li>
 						</ol>
 					</div>
 					<!-- /.col -->
@@ -57,7 +64,6 @@ $(function(){
 								<h5 class="card-title">배송내역조회</h5>
 								<p class="card-text">
 								미배송 된 주문내역은 <input type="text" disabled="disabled" id="count" style="width: 50px; border:none; color:#218838;  text-align: center">건 입니다.
-								<button type="button" class="btn btn-success" onclick="location.href='/shop/shipment/addRequestShipment'">배송요청 바로가기</button>
 								
 								<table class="table table-hover" style="font-size: 90%">
 									<thead>
@@ -69,6 +75,7 @@ $(function(){
 											<th>배송지</th>
 											<th>배송시작일자</th>
 											<th>담당자</th>
+											<th>배송요청</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -80,6 +87,11 @@ $(function(){
 											<td th:text="${sc.shopDeliveryLocation}"></td>
 											<td th:text="${sc.releaseDate}"></td>
 											<td th:text="${sc.shopMemberId}"></td>
+											<td th:if="${sc.releaseDate} == null">
+												<button type="button" class="btn btn-block btn-success btn-xs" 
+											onclick="location.href='/shop/shipment/addRequestShipment'">배송요청</button></td>
+											<td th:if="${sc.releaseDate} != null">
+												<button type="button" class="btn btn-block btn-success btn-xs disabled">배송요청</button></td>
 										</tr>
 										<tr th:unless="${not #lists.isEmpty(shipmentCode)}">
 											<td>발행대상이 없습니다.</td>

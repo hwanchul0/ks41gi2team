@@ -34,27 +34,6 @@ public class SwCodeController {
 	@Autowired
 	private SwIsListService swIsListService;
 	
-	@GetMapping("/addBusinessCode")
-	public String addBusinessCode() {
-		return "sw/code/addBusinessCode";
-	}
-	
-	@GetMapping("/selectBusinessCode")
-	public String selectBusinessCode() {
-		return "sw/code/selectBusinessCode";
-	}
-	
-	@GetMapping("/addLocalCode")
-	public String addLocalCode() {
-		return "sw/code/addLocalCode";
-	}
-	
-	@GetMapping("/selectLocalCode")
-	public String selectLocalCode() {
-		return "sw/code/selectLocalCode";
-	}
-	
-	
 	@GetMapping("/addInvoiceReasonCode")
 	public String addInvoiceReasonCode() {
 		

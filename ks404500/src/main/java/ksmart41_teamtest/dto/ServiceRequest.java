@@ -1,6 +1,6 @@
 package ksmart41_teamtest.dto;
 
-public class Request {
+public class ServiceRequest {
 	private String contractManageCode;
 	private String serviceName;
 	private String serviceAmount;
@@ -11,6 +11,7 @@ public class Request {
 	private String serviceEndDate;
 	private String serviceRequestStatus;
 	private String serviceApprovalDate;
+	private String clientId;
 	
 	public String getContractManageCode() {
 		return contractManageCode;
@@ -72,10 +73,16 @@ public class Request {
 	public void setServiceApprovalDate(String serviceApprovalDate) {
 		this.serviceApprovalDate = serviceApprovalDate;
 	}
+	public String getClientId() {
+		return clientId;
+	}
+	public void setClientId(String clientId) {
+		this.clientId = clientId;
+	}
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Request [contractManageCode=");
+		builder.append("ServiceRequest [contractManageCode=");
 		builder.append(contractManageCode);
 		builder.append(", serviceName=");
 		builder.append(serviceName);
@@ -95,6 +102,8 @@ public class Request {
 		builder.append(serviceRequestStatus);
 		builder.append(", serviceApprovalDate=");
 		builder.append(serviceApprovalDate);
+		builder.append(", clientId=");
+		builder.append(clientId);
 		builder.append("]");
 		return builder.toString();
 	}

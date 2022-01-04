@@ -40,7 +40,7 @@ public class ShopShipmentController {
 	@ResponseBody
 	public int shipmentCheck (Model model) {
 		int result = shopShipmentService.getCountNoneRealese();
-		//System.out.println("미배송건수 : "+ result);
+		System.out.println("미배송건수 : "+ result);
 		return result;
 	 }
 	 
