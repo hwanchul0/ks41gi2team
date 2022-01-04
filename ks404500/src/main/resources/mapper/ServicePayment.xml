@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ksmart41_teamtest.mapper.ServicePaymentMapper">
+	<resultMap type="ServicePayment" id="paymentResultMap">
+		<result column="contractManageCode" 			property="contractManageCode"/>
+		<result column="serviceName" 					property="serviceName"/>
+		<result column="serviceAmount" 					property="serviceAmount"/>
+		<result column="servicePeriod" 					property="servicePeriod"/>
+		<result column="serviceTotalPrice" 				property="serviceTotalPrice"/>
+		<result column="serviceRequestDate" 			property="serviceRequestDate"/>
+		<result column="serviceRegistrationDate" 		property="serviceRegistrationDate"/>
+		<result column="serviceEndDate" 				property="serviceEndDate"/>
+		<result column="serviceRequestStatus" 			property="serviceRequestStatus"/>
+		<result column="serviceApprovalDate" 			property="serviceApprovalDate"/>
+		<result column="clientId" 						property="clientId"/>
+	</resultMap>		
+	<!-- 계약요청 결제예정  조회 ( sw) -->
+		<select id="getServicePaymentSum" parameterType="String" resultMap="paymentResultMap">
+			SELECT 
+				p.paymentCode
+				,p.contractManageCode
+				,p.slipNumber
+				,p.servicePaymentAmount
+				,p.servicePaymentDueDate
+				,p.paymentSumRegistration
+			FROM 
+				k2_sw_paymentSum AS p
+				INNER JOIN 
+				k2_sw_contractRequest AS r
+			ON 
+				p.contractManageCode = r.contractManageCode
+			ORDER BY p.paymentSumRegistration ASC;
+		</select>
+	<!-- 계약요청 결제예정 상세정보 -->
+		<select id="getDetailServicePayment" resultType="ServicePayment" resultMap="paymentResultMap">
+			SELECT 
+				p.paymentCode
+				,p.contractManageCode
+				,p.slipNumber
+				,p.servicePaymentAmount
+				,p.servicePaymentDueDate
+				,p.paymentSumRegistration
+			FROM 
+				k2_sw_paymentSum AS p
+				INNER JOIN 
+				k2_sw_contractRequest AS r
+			ON 
+				p.contractManageCode = r.contractManageCode
+			WHERE
+				paymentCode = #{paymentCode}				
+		</select>
+</mapper>
