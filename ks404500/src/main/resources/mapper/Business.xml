@@ -92,5 +92,21 @@
 			b.businessRegistrationCode = main.businessRegistrationCode;
 
 	</select>
+	
+	
+	
+	<update id="modifyBusiness" parameterType="Business">
+		UPDATE 
+			k0_sw_businessRegistration
+		SET
+			memberPw = #{memberPw},
+			memberAddr = #{memberAddr},
+			memberEmail = #{memberEmail},
+			memberPhone = #{memberPhone}
+		WHERE
+			memberId = #{memberId}
+	</update>
+	
+	
 
 </mapper>
