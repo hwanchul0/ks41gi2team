@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="@{layout/default-sw}">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<head th:replace="fragments/head :: headFragment"></head>
+<th:block layout:fragment="customContents">
+	<!-- Content Wrapper. Contains page content -->
+	<div class="content-wrapper">
+		<!-- Content Header (Page Header) -->
+		<div class="content-header">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div class="col-sm-6">
+						<h1 class="m-0">addService / 서비스 등록하기</h1>
+					</div>
+					<!-- /.col -->
+					<div class="col-sm-6">
+						<ol class="breadcrumb float-sm-right">
+							<li class="breadcrumb-item">
+								<a href="#">Home</a>
+							</li>
+							<li class="breadcrumb-item active">Starter Page</li>
+						</ol>
+					</div>
+					<!-- /.col -->
+				</div>
+				<!-- /.row -->
+			</div>
+			<!-- /.container-fluid -->
+		</div>
+		<!-- Content Header (Page Header) -->
+		<div class="col-md-12">
+			<!-- /.card-header -->
+			<!-- Horizontal Form -->
+			<div class="card card-primary">
+				<div class="card-header">
+					<h3 class="card-title" th:text="${title}"></h3>
+				</div>
+				<!-- card-header -->
+				<!-- form start -->
+				<form class="form-horizontal" id="addServiceForm" th:action="@{/sw/service/addServiceManagement}" method="post">
+					<!-- card-body -->
+					<div class="card-body">
+						<div class="form-group row">
+							<label for="serviceCode" class="col-sm-2 col-form-label">서비스 코드</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="serviceCode" placeholder="F_001" name="serviceCode">
+							</div>
+							<div>
+							<button type="button" id="codeCheckbtn" class="btn-primary">중복체크</button>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="serviceName" class="col-sm-2 col-form-label">서비스명</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="serviceName" name="serviceName">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="servicePeriod" class="col-sm-2 col-form-label">서비스 기간(일)</label>
+							<div class="col-sm-4">
+								<input type="number" class="form-control" id="servicePeriod" name="servicePeriod">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="servicePrice" class="col-sm-2 col-form-label">서비스 가격</label>
+							<div class="col-sm-4">
+								<input type="number" class="form-control" id="servicePrice" name="servicePrice">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="serviceDiscount" class="col-sm-2 col-form-label">서비스 할인율</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="serviceDiscount" name="serviceDiscount">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="serviceStatus" class="col-sm-2 col-form-label">서비스 상태</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="serviceStatus" placeholder="Y or N" name="serviceStatus">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="memberId" class="col-sm-2 col-form-label">등록자</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="memberId" name="memberId" th:value="${session.SWID}" readonly>
+							</div>
+						</div>
+					</div>
+					<!-- /card-body -->
+					<!-- card-footer -->
+					<div class="card-footer">
+						<button type="button" class="btn btn-primary" id="addServiceBtn">등록</button>
+						<button type="button" class="btn btn-default float-right" th:href="@{/sw/service/selectServiceManagement}">취소</button>
+					</div>
+					<!-- /.card-footer -->
+				</form>
+				<!-- /form -->
+			</div>
+			<!-- /.card -->
+		</div>
+	</div>
+	<!-- /Content Wrapper. Contains page content -->
+
+	<script>
+	$(function(){
+		// 서비스 코드 중복체크
+		$('#codeCheckbtn').click(function(){
+
+			var serviceCode = $('#serviceCode').val();
+				var request = $.ajax({
+					  url: "/sw/service/codeCheck", 
+					  method: "POST", 
+					  data: { serviceCode : serviceCode },
+					  dataType: "text" 
+					});			
+				
+				request.done(function(data) {
+					if(serviceCode != null && serviceCode !=""){
+						if(data == "true"){
+							alert('중복되는 코드입니다');
+							$('#addServiceForm input').not('#serviceCode').prop('disabled', true);
+							$('#addServiceForm select').prop('disabled', true);
+							$('#addServiceForm button').not('#codeCheckbtn').prop('disabled', true);
+						}else{
+							alert('등록가능한 코드입니다')
+							$('#addServiceForm input').not('#serviceCode').prop('disabled', false);
+							$('#addServiceForm select').prop('disabled', false);
+							$('#addServiceForm button').not('#codeCheckbtn').prop('disabled', false);
+						}
+					}else{
+						alert('공백 없이 입력해주세요');
+					}
+					});;				
+				});
+       		//서비스 등록 유효성 검사
+			$(document).on('click','#addServiceBtn', function(){
+	            var submitCheck = true;
+	            var inputObj = $('#addServiceForm').find('input');
+	               
+	               $.each(inputObj, function(i, d){
+	                  var inputData = $(this).val();
+	                  var inputId  = $(this).attr('id');
+	                  var labelText = $('label[for='+ inputId +']').text();
+	                  //console.log(inputData);
+	                   if(typeof inputData == 'undefined' || inputData == null || inputData ==''){
+	                     alert(labelText + '을 입력해주세요');
+	                     $(this).focus();
+	                     submitCheck = false;
+	                     return false;
+	                   }
+	                 
+	               });
+	                  if(submitCheck) $('#addServiceForm').submit();
+	
+	           });
+		});
+	</script>
+</th:block>
+</html>
