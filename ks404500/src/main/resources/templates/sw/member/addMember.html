@@ -103,6 +103,7 @@
 	$('#idCheckBtn').click(function(){
 		var memberId = $('#memberId').val();
 		
+		//[재천]ajax통신
 		var request = $.ajax({
 			  url: "/sw/member/idCheck",
 			  method: "POST",
