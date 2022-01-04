@@ -67,8 +67,8 @@ public class SwAccountingController {
 	public String InvoiceView(@ModelAttribute("viewInvoice") InvoiceList viewInvoice,
 			@RequestParam("invoiceCode") String invoiceCode, Model model) {
 		InvoiceList getInvoiceView = invoiceListService.getInvoiceView(invoiceCode);
-		model.addAttribute("getInvoiceView", getInvoiceView);
-		System.out.println("getInvoiceView"+getInvoiceView);
+		model.addAttribute("invoiceView", getInvoiceView);
+		System.out.println("invoiceView"+getInvoiceView);
 		return "sw/accounting/viewInvoice";
 	}
 	

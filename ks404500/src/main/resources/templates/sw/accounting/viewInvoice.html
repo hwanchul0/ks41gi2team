@@ -1,22 +1,40 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
-	layout:decorate="@{layout/modal}">
-	
-<th:block layout:fragment="customContents">
-	<!-- Modal -->
-	<div class="modal fade">
-		<div class="modal-dialog modal-xl">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title">세금계산서 미리보기</h4>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
+	layout:decorate="@{layout/default-sw}">
 
-				<div class="modal-body">
+<th:block layout:fragment="customContents">
+<!-- Content Wrapper. Contains page content -->
+	<div class="content-wrapper">
+		<!-- Content Header (Page header) -->
+		<div class="content-header">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div class="col-sm-6">
+						<h1 class="m-0">"세금계산서 상세조회"</h1>
+					</div>
+					<!-- /.col -->
+					<div class="col-sm-6">
+						<ol class="breadcrumb float-sm-right">
+							<li class="breadcrumb-item"><a href="/sw/index-sw">Home</a></li>
+							<li class="breadcrumb-item active">Starter Page</li>
+						</ol>
+					</div>
+					<!-- /.col -->
+				</div>
+				<!-- /.row -->
+			</div>
+			<!-- /.container-fluid -->
+		</div>
+		<!-- /.content-header -->
+		
+	<!-- Modal -->
+	<div class="card">
+		<div class="card-dialog">
+				<div class="card-header">
+				<div class="card-content">
+				<div class="card-body">
+				
 					<style>
 <!--
 table {
@@ -1903,7 +1921,7 @@ td {
 					<body link="blue" vlink="purple">
 
 						<table border="0" cellpadding="0" cellspacing="0" width="1044"
-							style="border-collapse: collapse; table-layout: fixed; width: 783pt">
+							style="border-collapse: collapse; margin-left: auto; margin-right: auto; table-layout: fixed; width: 783pt" >
 							<colgroup>
 								<col width="72" style="width: 54pt">
 								<col width="30" style="mso-width-source: userset; width: 22.5pt">
@@ -1968,11 +1986,11 @@ td {
 										style="border-right: 1px solid windowtext; border-bottom: 2px solid windowtext; height: 124.55pt; overflow: hidden;">공급<br>받는자
 									</td>
 									<td class="x25">등록번호</td>
-									<td class="x23"></td>
+									<td class="x23"><p th:text="${invoiceView.invoiceDemandBizNumber}"></td>
 									<td colspan="2" class="x57"
 										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;">종사업장<br>번호
 									</td>
-									<td class="x26"></td>
+									<td class="x26"><p th:text="${invoiceView.invoiceDemandNumber}"></td>
 								</tr>
 								<tr height="29"
 									style="mso-height-source: userset; height: 22.4pt" id="r3">
@@ -1984,11 +2002,10 @@ td {
 										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;">성명</td>
 									<td class="x28">이팀</td>
 									<td class="x29">상호</td>
-									<td class="x27"><input type="text" size="12"
-										style="border: none"></td>
+									<td class="x27"><p th:text="${invoiceView.invoiceDemand}"></td>
 									<td colspan="2" class="x56"
 										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;">성명</td>
-									<td class="x30"></td>
+									<td class="x30"><p th:text="${invoiceView.invoiceDemandName}"></td>
 								</tr>
 								<tr height="29"
 									style="mso-height-source: userset; height: 22.4pt" id="r4">
@@ -1997,10 +2014,10 @@ td {
 										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;">사업장주소</td>
 									<td colspan="4" class="x49"
 										style="border-right: 2px solid windowtext; border-bottom: 1px solid windowtext;">전북
-										전주시</td>
+										전주시 덕진구</td>
 									<td class="x29">사업장주소</td>
 									<td colspan="4" class="x49"
-										style="border-right: 2px solid windowtext; border-bottom: 1px solid windowtext;"></td>
+										style="border-right: 2px solid windowtext; border-bottom: 1px solid windowtext;">주소자리</td>
 								</tr>
 								<tr height="29"
 									style="mso-height-source: userset; height: 22.4pt" id="r5">
@@ -2012,10 +2029,10 @@ td {
 										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;">종목</td>
 									<td class="x28">전자상거래</td>
 									<td class="x29">업태</td>
-									<td class="x27"></td>
+									<td class="x27"><p th:text="${invoiceView.invoiceDemandType1}"></td>
 									<td colspan="2" class="x56"
 										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;">종목</td>
-									<td class="x30"></td>
+									<td class="x30"><p th:text="${invoiceView.invoiceDemandType2}"></td>
 								</tr>
 								<tr height="29"
 									style="mso-height-source: userset; height: 22.4pt" id="r6">
@@ -2026,7 +2043,7 @@ td {
 										style="border-right: 2px solid windowtext; border-bottom: 2px solid windowtext;">404500@naver.com</td>
 									<td class="x31">이메일</td>
 									<td colspan="4" class="x45"
-										style="border-right: 2px solid windowtext; border-bottom: 2px solid windowtext;"></td>
+										style="border-right: 2px solid windowtext; border-bottom: 2px solid windowtext;"><p th:text="${invoiceView.invoiceDemandEmail1}"></td>
 								</tr>
 								<tr height="29"
 									style="mso-height-source: userset; height: 22.4pt" id="r7">
@@ -2046,15 +2063,15 @@ td {
 									style="mso-height-source: userset; height: 22.4pt" id="r8">
 									<td height="29" style="height: 22.4pt;"></td>
 									<td colspan="3" class="x59"
-										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;"></td>
+										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;"><p th:text="${#dates.format(invoiceView.invoiceRegDate, 'yyyy-MM-dd')}"></td>
 									<td colspan="3" class="x68"
-										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;"></td>
+										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;"><p th:text="${#numbers.formatInteger(invoiceView.invoicePrice, 3, 'COMMA')}"></td>
 									<td colspan="2" class="x49"
-										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;"></td>
+										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;"><p th:text="${#numbers.formatInteger(invoiceView.invoiceTax, 3, 'COMMA')}"></td>
 									<td colspan="2" class="x49"
-										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;"></td>
+										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;"><p th:text="${invoiceView.amendedInvoiceReasonName}"></td>
 									<td colspan="3" class="x49"
-										style="border-right: 2px solid windowtext; border-bottom: 1px solid windowtext;"></td>
+										style="border-right: 2px solid windowtext; border-bottom: 1px solid windowtext;"><p th:text="${invoiceView.invoiceNote}"></td>
 								</tr>
 								<tr height="29"
 									style="mso-height-source: userset; height: 22.4pt" id="r9">
@@ -2083,18 +2100,18 @@ td {
 								<tr height="29"
 									style="mso-height-source: userset; height: 22.4pt" id="r11">
 									<td height="29" style="height: 22.4pt;"></td>
-									<td class="x34"></td>
-									<td class="x27"></td>
+									<td class="x34"><p th:text="${#dates.format(invoiceView.invoiceDetailDate, 'MM')}"></td>
+									<td class="x27"><p th:text="${#dates.format(invoiceView.invoiceDetailDate, 'dd')}"></td>
 									<td colspan="2" class="x68"
-										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;"></td>
-									<td class="x27"></td>
-									<td class="x27"></td>
-									<td class="x27"></td>
+										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;"><p th:text="${invoiceView.invoiceDetailProduct}"></td>
+									<td class="x27"><p th:text="${invoiceView.invoiceDetailStandard}"></td>
+									<td class="x27"><p th:text="${invoiceView.invoiceDetailQty}"></td>
+									<td class="x27"><p th:text="${#numbers.formatInteger(invoiceView.invoiceDetail, 3, 'COMMA')}"></td>
 									<td colspan="2" class="x49"
-										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;"></td>
-									<td class="x27"></td>
+										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;"><p th:text="${#numbers.formatInteger(invoiceView.invoiceDetailUnitPrice, 3, 'COMMA')}"></td>
+									<td class="x27"><p th:text="${#numbers.formatInteger(invoiceView.invoiceDetailTax, 3, 'COMMA')}"></td>
 									<td colspan="3" class="x49"
-										style="border-right: 2px solid windowtext; border-bottom: 1px solid windowtext;"></td>
+										style="border-right: 2px solid windowtext; border-bottom: 1px solid windowtext;"><p th:text="${invoiceView.invoiceDetailNote}"></td>
 								</tr>
 								<tr height="29"
 									style="mso-height-source: userset; height: 22.4pt" id="r12">
@@ -2140,19 +2157,19 @@ td {
 									<td colspan="2" class="x55"
 										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;">외상미수금</td>
 									<td colspan="4" rowspan="2" height="62" class="x79"
-										style="border-right: 2px solid windowtext; border-bottom: 2px solid windowtext; height: 46.5pt;"></td>
+										style="border-right: 2px solid windowtext; border-bottom: 2px solid windowtext; height: 46.5pt;">위 금액을<p th:text="${invoiceView.confirm}"/>함</td>
 								</tr>
 								<tr height="32" style="mso-height-source: userset; height: 24pt"
 									id="r15">
 									<td height="32" style="height: 24pt;"></td>
 									<td colspan="3" class="x53"
-										style="border-right: 1px solid windowtext; border-bottom: 2px solid windowtext;"></td>
-									<td class="x38"></td>
+										style="border-right: 1px solid windowtext; border-bottom: 2px solid windowtext;">합자리</td>
+									<td class="x38"><p th:text="${invoiceView.cash}"></td>
 									<td colspan="2" class="x45"
-										style="border-right: 1px solid windowtext; border-bottom: 2px solid windowtext;"></td>
-									<td class="x38"></td>
+										style="border-right: 1px solid windowtext; border-bottom: 2px solid windowtext;"><p th:text="${invoiceView.invoiceCheck}"></td>
+									<td class="x38"><p th:text="${invoiceView.draft}"></td>
 									<td colspan="2" class="x45"
-										style="border-right: 1px solid windowtext; border-bottom: 2px solid windowtext;"></td>
+										style="border-right: 1px solid windowtext; border-bottom: 2px solid windowtext;"><p th:text="${invoiceView.accountsReceivable}"></td>
 								</tr>
 								<tr height="21"
 									style="mso-height-source: userset; height: 16.4pt" id="r16">
@@ -2192,16 +2209,14 @@ td {
 							</tbody>
 						</table>
 				</div>
-				<div class="modal-footer justify-content-between">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				</div>
 			</div>
-			<!-- /.modal-content -->
+			<!-- /.card-content -->
 		</div>
-		<!-- /.modal-dialog -->
+		<!-- /.card-dialog -->
 	</div>
-	<!-- /.modal -->
+	<!-- /.card -->
+	</div>
+	</div>
 	</p>
-
 </th:block>
 </html>

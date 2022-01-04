@@ -3,28 +3,35 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ksmart41_teamtest.mapper.InvoiceMapper">
-
-<select id="getInvoiceList" resultType="InvoiceList">
-SELECT 
- invoiceCode, invoiceType, invoiceRegDate, 
- mainBusinessCodeDemand, invoiceDemandBizNumber, 
- invoiceDemandNumber, invoiceDemand, invoiceDemandName, invoiceDemandAddr, 
- invoiceDemandType1, invoiceDemandType2, invoiceDemandEmail1, invoiceDemandEmail2, 
- invoicePrice, invoiceTax, invoiceNote, invoiceState, cash, invoiceCheck, draft, 
- accountsReceivable, confirm, amendCheck, amendedInvoiceCode
-FROM
-	k0_invoice;
-</select>
-
-<!-- 세금계산서 상세조회 -->
-<select id="getInvoiceView" parameterType="String" resultType="InvoiceList">
-	SELECT
-		*
+	
+	<!--유경- 세금계산서 목록 조회-->
+	<select id="getInvoiceList" resultType="InvoiceList">
+	SELECT 
+	 invoiceCode, invoiceType, invoiceRegDate, 
+	 mainBusinessCodeDemand, invoiceDemandBizNumber, 
+	 invoiceDemandNumber, invoiceDemand, invoiceDemandName, invoiceDemandAddr, 
+	 invoiceDemandType1, invoiceDemandType2, invoiceDemandEmail1, invoiceDemandEmail2, 
+	 invoicePrice, invoiceTax, invoiceNote, invoiceState, cash, invoiceCheck, draft, 
+	 accountsReceivable, confirm, amendCheck, amendedInvoiceCode
 	FROM
-		k0_invoice
-	WHERE
-		invoiceCode = #{invoiceCode};
-</select>
-
-
+		k0_invoice;
+	</select>
+	
+	<!--유경- 세금계산서 상세조회 -->
+	<select id="getInvoiceView" parameterType="String" resultType="InvoiceList">
+				SELECT
+					*
+				from
+					k0_invoice AS i
+				INNER JOIN
+					k0_invoiceDetail AS d
+				ON
+					i.invoiceCode = d.invoiceCode
+				left JOIN
+					k0_amendedInvoiceReason AS a
+				on
+					i.amendedInvoiceCode = a.amendedInvoiceReasonCode
+				where 
+					i.invoiceCode = #{invoiceCode};
+	</select>
 </mapper>

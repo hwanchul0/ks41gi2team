@@ -1,9 +1,12 @@
 package ksmart41_teamtest.dto;
 
+import java.util.Date;
+
 public class InvoiceList {
+	//유경 - 세금계산서 발행 항목
 	private String invoiceCode;
 	private String invoiceType;
-	private String invoiceRegDate;
+	private Date invoiceRegDate;
 	private String mainBusinessCodeDemand;
 	private String invoiceDemandBizNumber;
 	private String invoiceDemandNumber;
@@ -29,6 +32,23 @@ public class InvoiceList {
 	private int totalTax;
 	private String contractManageCode;
 	
+	//유경 - 세금계산서 발행 상세 발행
+	private String invoiceDetailCode;
+	private String swIsCode;
+	private Date invoiceDetailDate;
+	private String invoiceDetailProduct;
+	private String invoiceDetailStandard;
+	private int invoiceDetailQty;
+	private int invoiceDetail;
+	private int invoiceDetailUnitPrice;
+	private int invoiceDetailTax;
+	private String invoiceDetailNote;
+	private String projectCode;
+	private String invoiceDetailFinish;
+	//세금계산서 수정 사유
+	private String amendedInvoiceReasonName;
+	
+	
 	public String getContractManageCode() {
 		return contractManageCode;
 	}
@@ -47,10 +67,10 @@ public class InvoiceList {
 	public void setInvoiceType(String invoiceType) {
 		this.invoiceType = invoiceType;
 	}
-	public String getInvoiceRegDate() {
+	public Date getInvoiceRegDate() {
 		return invoiceRegDate;
 	}
-	public void setInvoiceRegDate(String invoiceRegDate) {
+	public void setInvoiceRegDate(Date invoiceRegDate) {
 		this.invoiceRegDate = invoiceRegDate;
 	}
 	public String getMainBusinessCodeDemand() {
@@ -180,7 +200,6 @@ public class InvoiceList {
 		this.amendedInvoiceCode = amendedInvoiceCode;
 	}
 	
-	
 	public int getTotalPrice() {
 		return totalPrice;
 	}
@@ -193,20 +212,173 @@ public class InvoiceList {
 	public void setTotalTax(int totalTax) {
 		this.totalTax = totalTax;
 	}
+	public String getInvoiceDetailCode() {
+		return invoiceDetailCode;
+	}
+	public void setInvoiceDetailCode(String invoiceDetailCode) {
+		this.invoiceDetailCode = invoiceDetailCode;
+	}
+	public String getSwIsCode() {
+		return swIsCode;
+	}
+	public void setSwIsCode(String swIsCode) {
+		this.swIsCode = swIsCode;
+	}
+	public Date getInvoiceDetailDate() {
+		return invoiceDetailDate;
+	}
+	public void setInvoiceDetailDate(Date invoiceDetailDate) {
+		this.invoiceDetailDate = invoiceDetailDate;
+	}
+	public String getInvoiceDetailProduct() {
+		return invoiceDetailProduct;
+	}
+	public void setInvoiceDetailProduct(String invoiceDetailProduct) {
+		this.invoiceDetailProduct = invoiceDetailProduct;
+	}
+	public String getInvoiceDetailStandard() {
+		return invoiceDetailStandard;
+	}
+	public void setInvoiceDetailStandard(String invoiceDetailStandard) {
+		this.invoiceDetailStandard = invoiceDetailStandard;
+	}
+	public int getInvoiceDetailQty() {
+		return invoiceDetailQty;
+	}
+	public void setInvoiceDetailQty(int invoiceDetailQty) {
+		this.invoiceDetailQty = invoiceDetailQty;
+	}
+	public int getInvoiceDetail() {
+		return invoiceDetail;
+	}
+	public void setInvoiceDetail(int invoiceDetail) {
+		this.invoiceDetail = invoiceDetail;
+	}
+	public int getInvoiceDetailUnitPrice() {
+		return invoiceDetailUnitPrice;
+	}
+	public void setInvoiceDetailUnitPrice(int invoiceDetailUnitPrice) {
+		this.invoiceDetailUnitPrice = invoiceDetailUnitPrice;
+	}
+	public int getInvoiceDetailTax() {
+		return invoiceDetailTax;
+	}
+	public void setInvoiceDetailTax(int invoiceDetailTax) {
+		this.invoiceDetailTax = invoiceDetailTax;
+	}
+	public String getInvoiceDetailNote() {
+		return invoiceDetailNote;
+	}
+	public void setInvoiceDetailNote(String invoiceDetailNote) {
+		this.invoiceDetailNote = invoiceDetailNote;
+	}
+	public String getProjectCode() {
+		return projectCode;
+	}
+	public void setProjectCode(String projectCode) {
+		this.projectCode = projectCode;
+	}
+	public String getInvoiceDetailFinish() {
+		return invoiceDetailFinish;
+	}
+	public void setInvoiceDetailFinish(String invoiceDetailFinish) {
+		this.invoiceDetailFinish = invoiceDetailFinish;
+	}
+	
+	public String getAmendedInvoiceReasonName() {
+		return amendedInvoiceReasonName;
+	}
+	public void setAmendedInvoiceReasonName(String amendedInvoiceReasonName) {
+		this.amendedInvoiceReasonName = amendedInvoiceReasonName;
+	}
 	@Override
 	public String toString() {
-		return "InvoiceList [invoiceCode=" + invoiceCode + ", invoiceType=" + invoiceType + ", invoiceRegDate="
-				+ invoiceRegDate + ", mainBusinessCodeDemand=" + mainBusinessCodeDemand + ", invoiceDemandBizNumber="
-				+ invoiceDemandBizNumber + ", invoiceDemandNumber=" + invoiceDemandNumber + ", invoiceDemand="
-				+ invoiceDemand + ", invoiceDemandName=" + invoiceDemandName + ", invoiceDemandAddr="
-				+ invoiceDemandAddr + ", invoiceDemandType1=" + invoiceDemandType1 + ", invoiceDemandType2="
-				+ invoiceDemandType2 + ", invoiceDemandEmail1=" + invoiceDemandEmail1 + ", invoiceDemandEmail2="
-				+ invoiceDemandEmail2 + ", invoicePrice=" + invoicePrice + ", invoiceTax=" + invoiceTax
-				+ ", invoiceNote=" + invoiceNote + ", invoiceState=" + invoiceState + ", cash=" + cash
-				+ ", invoiceCheck=" + invoiceCheck + ", draft=" + draft + ", accountsReceivable=" + accountsReceivable
-				+ ", confirm=" + confirm + ", amendCheck=" + amendCheck + ", amendedInvoiceCode=" + amendedInvoiceCode
-				+ ", totalPrice=" + totalPrice + ", totalTax=" + totalTax + ", contractManageCode=" + contractManageCode
-				+ "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("InvoiceList [invoiceCode=");
+		builder.append(invoiceCode);
+		builder.append(", invoiceType=");
+		builder.append(invoiceType);
+		builder.append(", invoiceRegDate=");
+		builder.append(invoiceRegDate);
+		builder.append(", mainBusinessCodeDemand=");
+		builder.append(mainBusinessCodeDemand);
+		builder.append(", invoiceDemandBizNumber=");
+		builder.append(invoiceDemandBizNumber);
+		builder.append(", invoiceDemandNumber=");
+		builder.append(invoiceDemandNumber);
+		builder.append(", invoiceDemand=");
+		builder.append(invoiceDemand);
+		builder.append(", invoiceDemandName=");
+		builder.append(invoiceDemandName);
+		builder.append(", invoiceDemandAddr=");
+		builder.append(invoiceDemandAddr);
+		builder.append(", invoiceDemandType1=");
+		builder.append(invoiceDemandType1);
+		builder.append(", invoiceDemandType2=");
+		builder.append(invoiceDemandType2);
+		builder.append(", invoiceDemandEmail1=");
+		builder.append(invoiceDemandEmail1);
+		builder.append(", invoiceDemandEmail2=");
+		builder.append(invoiceDemandEmail2);
+		builder.append(", invoicePrice=");
+		builder.append(invoicePrice);
+		builder.append(", invoiceTax=");
+		builder.append(invoiceTax);
+		builder.append(", invoiceNote=");
+		builder.append(invoiceNote);
+		builder.append(", invoiceState=");
+		builder.append(invoiceState);
+		builder.append(", cash=");
+		builder.append(cash);
+		builder.append(", invoiceCheck=");
+		builder.append(invoiceCheck);
+		builder.append(", draft=");
+		builder.append(draft);
+		builder.append(", accountsReceivable=");
+		builder.append(accountsReceivable);
+		builder.append(", confirm=");
+		builder.append(confirm);
+		builder.append(", amendCheck=");
+		builder.append(amendCheck);
+		builder.append(", amendedInvoiceCode=");
+		builder.append(amendedInvoiceCode);
+		builder.append(", totalPrice=");
+		builder.append(totalPrice);
+		builder.append(", totalTax=");
+		builder.append(totalTax);
+		builder.append(", contractManageCode=");
+		builder.append(contractManageCode);
+		builder.append(", invoiceDetailCode=");
+		builder.append(invoiceDetailCode);
+		builder.append(", swIsCode=");
+		builder.append(swIsCode);
+		builder.append(", invoiceDetailDate=");
+		builder.append(invoiceDetailDate);
+		builder.append(", invoiceDetailProduct=");
+		builder.append(invoiceDetailProduct);
+		builder.append(", invoiceDetailStandard=");
+		builder.append(invoiceDetailStandard);
+		builder.append(", invoiceDetailQty=");
+		builder.append(invoiceDetailQty);
+		builder.append(", invoiceDetail=");
+		builder.append(invoiceDetail);
+		builder.append(", invoiceDetailUnitPrice=");
+		builder.append(invoiceDetailUnitPrice);
+		builder.append(", invoiceDetailTax=");
+		builder.append(invoiceDetailTax);
+		builder.append(", invoiceDetailNote=");
+		builder.append(invoiceDetailNote);
+		builder.append(", projectCode=");
+		builder.append(projectCode);
+		builder.append(", invoiceDetailFinish=");
+		builder.append(invoiceDetailFinish);
+		builder.append(", amendedInvoiceReasonName=");
+		builder.append(amendedInvoiceReasonName);
+		builder.append("]");
+		return builder.toString();
 	}
+	
+	
+
 	
 }
