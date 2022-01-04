@@ -18,16 +18,25 @@ public class BusinessService {
 	public BusinessService(BusinessMapper businessMapper) {
 		this.businessMapper = businessMapper;
 	}
-	//사업장 등록
+	//[유성] 사업장 등록
 	public int addBusinessRegistration(Business business) {
 		int addBusinessRegistration = businessMapper.addBusinessRegistration(business);
 		return addBusinessRegistration; 
 	}
-	// 사업장 조회
+	//[유성] 사업장 전체 조회
 	public List<Business> getBusiness() {
 		List<Business> business = businessMapper.getBusiness();
 		//System.out.println(business + "<-- service");
 		return business;
+	}
+	// [유성] 사업장 조회
+	
+	public Business getBusiness(String clinetId) {
+		return businessMapper.getBusiness(clinetId);
+	}
+	//[유성] 사업장 수정
+	public int modifyBusiness(Business business) {
+		return businessMapper.modifyBusiness(business);
 	}
 	
 	

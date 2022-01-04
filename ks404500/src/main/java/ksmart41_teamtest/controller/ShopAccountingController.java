@@ -10,8 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import ksmart41_teamtest.dto.Expense;
 import ksmart41_teamtest.dto.ShopAddAccounting;
-import ksmart41_teamtest.service.InvoiceListService;
+import ksmart41_teamtest.service.ExpenseService;
 import ksmart41_teamtest.service.ShopAcountingService;
 
 @Controller
@@ -20,6 +21,8 @@ public class ShopAccountingController {
 	
 	@Autowired
 	private ShopAcountingService shopAcountingService;
+	@Autowired
+	private ExpenseService expenseService;
 	
 	@GetMapping("/addExpense")
 	public String addExpense() {
@@ -56,8 +59,13 @@ public class ShopAccountingController {
 		return "shop/accounting/addTotalAccounting";
 	}
 	
+	/* 유성 쇼핑몰 비용 조회 */
 	@GetMapping("/selectExpense")
-	public String selectExpense() {
+	public String selectExpense(Model model) {
+		List<Expense> expense = expenseService.getExpense();
+		model.addAttribute("tilte", "비용조회");
+		model.addAttribute("expense", expense);
+		System.out.println(expense + "<--controller");
 		return "shop/accounting/selectExpense";
 	}
 	
