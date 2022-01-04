@@ -1,51 +1,215 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" 
-xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
-layout:decorate="@{layout/default-shop}">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="@{layout/default-shop}">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <th:block layout:fragment="customContents">
-<!-- Content Wrapper. Contains page content -->
+	<th:block layout:fragment="customJs">
+		<script>
+		//검색기능
+		$(document).ready(function(){
+			  $("#myInput").on("keyup", function() {
+			    var value = $(this).val().toLowerCase();
+			    $("#myTable tr").filter(function() {
+			      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+			    });
+			  });
+			});
+		
+		//마감내역 선택시 경고창
+		$(function(){
+			$('.finish').click(function(){
+				alert('이미 마감된내역입니다');
+			})
+
+		});
+
+
+$(function() {
+				//--------------
+				//- AREA CHART -
+				//--------------
+				// Get context with jQuery - using jQuery's .get() method.
+				var areaChartCanvas = $('#areaChart').get(0).getContext('2d')
+
+				var areaChartData = {
+					labels : [ '1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+					datasets : [ {
+						label : 'Digital Goods',
+						backgroundColor : '#cfe2ce',
+						borderColor : '#698c68',
+						pointRadius : false,
+						pointColor : '#698c68',
+						pointStrokeColor : '#698c68',
+						pointHighlightFill : '#fff',
+						pointHighlightStroke : '#698c68',
+						data : [160000,1650000,60000,80000,70000,110000,0,160000,0]
+					} ]
+				}
+
+				var areaChartOptions = {
+					maintainAspectRatio : false,
+					responsive : true,
+					legend : {
+						display : false
+					},
+					scales : {
+						xAxes : [ {
+							gridLines : {
+								display : true,
+							}
+						} ],
+						yAxes : [ {
+							gridLines : {
+								display : false,
+							}
+						} ]
+					}
+				}
+
+				// This will get the first returned node in the jQuery collection.
+				var areaChart = new Chart(areaChartCanvas, {
+					type : 'bar',
+					data : areaChartData,
+					options : areaChartOptions
+				})
+				
+				
+				
+			})
+		</script>
+	</th:block>
+	<!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper">
-	<!-- Content Header (Page header) -->
-		<div class="content-header">
+		<!-- Content Header (Page header) -->
+		<section class="content-header">
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1 class="m-0">"selectIncome / 쇼핑몰 매출 조회"</h1>
-					</div><!-- /.col -->
+						<h1>"addIncome / 쇼핑몰 매출 조회"</h1>
+					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
-							<li class="breadcrumb-item"><a href="#">Home</a></li>
-							<li class="breadcrumb-item active">Starter Page</li>
+							<li class="breadcrumb-item"><a href="/shop/index-shop">Home</a></li>
+							<li class="breadcrumb-item active">매출관리</li>
 						</ol>
-					</div><!-- /.col -->
-				</div><!-- /.row -->
-			</div><!-- /.container-fluid -->
-		</div>
-	<!-- /.content-header -->
-	
-	<!-- Main content -->
-		<div class="content">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-lg-12">
-						<div class="card">
-							<div class="card-body">
-								<h5 class="card-title">Card title</h5>
-								<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-								<a href="#" class="card-link">Card link</a>
-								<a href="#" class="card-link">Another link</a>
+					</div>
+				</div>
+			</div>
+			<!-- /.container-fluid -->
+		</section>
+
+		<!-- 차트시작 -->
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card">
+						<div class="card-header">
+							<h3 class="card-title">월별 매출</h3>
+							<div class="card-tools">
+								<button type="button" class="btn btn-tool"
+									data-card-widget="collapse">
+									<i class="fas fa-minus"></i>
+								</button>
+								<button type="button" class="btn btn-tool"
+									data-card-widget="remove">
+									<i class="fas fa-times"></i>
+								</button>
 							</div>
 						</div>
+						<div class="card-body">
+							<div class="chart">
+								<canvas id="areaChart" style="height: 250px; min-height: 250px"></canvas>
+							</div>
+						</div>
+						<!-- /.card-body -->
+					</div>
+				</div>
+			</div>
+			<!-- /.차트 끝 -->
+			
+
+			<!-- Main content -->
+			<section class="content">
+				<div class="container-fluid">
+					<div class="row">
+						<!-- left column -->
+						<div class="col-md-12">
+							<!-- /.card-header -->
+							<!-- Horizontal Form -->
+							<div class="card card-seccess card-outline">
+								<div class="card-header">
+									<h3 class="card-title">쇼핑몰 매출 조회</h3>
+									<input class="form-control col-md-3" style="float : right" id="myInput" type="text" placeholder="검색어를 입력해주세요">
+								</div>
+								<!-- /.card-header -->
+								<!-- form start -->
+								<form class="form-horizontal">
+									<div class="card-body">
+										<!-- 매출내역 테이블 시작 -->
+										<div style="overflow-y: auto;">
+											<table class="table table-hover table-condensed"
+												style="font-size: 13px; ">
+												<thead>
+													<tr>
+														<th>구분</th>
+														<th>매출코드</th>
+														<th>주문번호</th>
+														<th>전표번호</th>
+														<th>공급가액</th>
+														<th>세액</th>
+														<th>환불일자</th>
+														<th>그룹전표코드</th>
+														<th>마감확인</th>
+														<th>마감확인날짜</th>
+														<th>마감</th>
+													</tr>
+												</thead>
+												<tbody id="myTable">
+													<tr th:if="${not #lists.isEmpty(shopAddAccounting)}"
+														th:each="a: ${shopAddAccounting}">
+														<td th:text="${a.addIncome}"></td>
+														<td th:text="${a.shopIncomeCode}"></td>
+														<td th:text="${a.shopOrderCode}"></td>
+														<td th:text="${a.shopSlipNumber}"></td>
+														<td
+															th:text="${#numbers.formatInteger(a.renontax, 0, 'COMMA')}"></td>
+														<td
+															th:text="${#numbers.formatInteger(a.retax, 0, 'COMMA')}"></td>
+														<td th:text="${a.shopRefundDate}"></td>
+														<td th:text="${a.groupslip}"></td>
+														<td th:text="${a.shopIncomeFinish}"></td>
+														<td th:text="${a.shopIncomeFinishDate} ? ${#dates.format(a.shopIncomeFinishDate,'yyyy-MM-dd')}"></td>
+														<td th:if="${a.shopIncomeFinish} == null">
+														<a th:href="@{/shop/accounting/modifyIncome(shopIncomeCode=${a.shopIncomeCode})}"><i class="fas fa-pencil-alt" style="color: #28a745"></i></a></td>
+														<td th:if="${a.shopIncomeFinish} != null"><i class="fas fa-pencil-alt finish"></i></td>
+													</tr>
+													<tr th:unless="${not #lists.isEmpty(shopAddAccounting)}">
+														<td>표시할 내용이 없습니다</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+										<!-- 매출내역테이블 끝  -->
+
+										<!-- /.card-body -->
+										<div class="card-footer"></div>
+										<!-- /.card-footer -->
+									</div>
+								</form>
+							</div>
+							<!-- /.card -->
+						</div>
+						<!--/.col (left) -->
 					</div>
 					<!-- /.row -->
 				</div>
 				<!-- /.container-fluid -->
-			</div>
-	    	<!-- /.content -->
+			</section>
+			<!-- /.content -->
 		</div>
+		<!-- /.content-wrapper -->
 	</div>
-<!-- /.content-wrapper -->
 </th:block>
 </html>

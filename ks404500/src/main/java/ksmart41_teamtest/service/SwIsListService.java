@@ -32,7 +32,7 @@ public class SwIsListService {
 		return codeMapper.modifyIsListCode(swiscode);
 	}
 	
-	/*유경  손익계정정->수정화면에서 값 가져오기*/
+	/*유경  손익계정->수정화면에서 값 가져오기*/
 	public SwIsListCode getSwIsCodeBySwIsListCode(String swIsCode) {
 		return codeMapper.getSwIsCodeBySwIsListCode(swIsCode);
 	}

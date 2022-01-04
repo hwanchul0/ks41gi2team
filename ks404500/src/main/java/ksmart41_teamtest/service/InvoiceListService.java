@@ -25,5 +25,12 @@ public class InvoiceListService {
 		return invoiceList;
 	}
 	
+	//유경 - 세금계산서 상세조회
+	public InvoiceList getInvoiceView(String invoiceCode) {
+		
+		return invoiceMapper.getInvoiceView(invoiceCode);
+	}
+
+	
 
 }

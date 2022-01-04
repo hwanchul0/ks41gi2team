@@ -1,5 +1,7 @@
 package ksmart41_teamtest.dto;
 
+import java.util.Date;
+
 //유경 - 쇼핑몰 매출등록
 public class ShopAddAccounting {
 	private String addIncome;
@@ -18,8 +20,82 @@ public class ShopAddAccounting {
 	private String shopRefundDate;
 	private String groupslip; //통합그룹코드
 	private String shopPaymentCheckCode;
-	private String addIncomeCode;
+	private String addIncomeCode; //생성될 income 코드
+	private String shopMemberId;
 	
+	//차트생성
+	private String mon; //월
+	private int chartPrice; //월합계
+	
+	//마감확인
+	private String shopIncomeFinish; //마감확인
+	private Date shopIncomeFinishDate; //마감날짜
+	private String shopIsCode;
+	private int finalIncomeVatImply;
+	private int finalIncomeVatNotImply;
+	private Date shopIncomeDate;
+	private Date shopIncomeRegDate;
+	
+	public String getShopIsCode() {
+		return shopIsCode;
+	}
+	public void setShopIsCode(String shopIsCode) {
+		this.shopIsCode = shopIsCode;
+	}
+	public int getFinalIncomeVatImply() {
+		return finalIncomeVatImply;
+	}
+	public void setFinalIncomeVatImply(int finalIncomeVatImply) {
+		this.finalIncomeVatImply = finalIncomeVatImply;
+	}
+	public int getFinalIncomeVatNotImply() {
+		return finalIncomeVatNotImply;
+	}
+	public void setFinalIncomeVatNotImply(int finalIncomeVatNotImply) {
+		this.finalIncomeVatNotImply = finalIncomeVatNotImply;
+	}
+	public Date getShopIncomeDate() {
+		return shopIncomeDate;
+	}
+	public void setShopIncomeDate(Date shopIncomeDate) {
+		this.shopIncomeDate = shopIncomeDate;
+	}
+	public Date getShopIncomeRegDate() {
+		return shopIncomeRegDate;
+	}
+	public void setShopIncomeRegDate(Date shopIncomeRegDate) {
+		this.shopIncomeRegDate = shopIncomeRegDate;
+	}
+	public String getShopIncomeFinish() {
+		return shopIncomeFinish;
+	}
+	public void setShopIncomeFinish(String shopIncomeFinish) {
+		this.shopIncomeFinish = shopIncomeFinish;
+	}
+	public Date getShopIncomeFinishDate() {
+		return shopIncomeFinishDate;
+	}
+	public void setShopIncomeFinishDate(Date shopIncomeFinishDate) {
+		this.shopIncomeFinishDate = shopIncomeFinishDate;
+	}
+	public String getMon() {
+		return mon;
+	}
+	public void setMon(String mon) {
+		this.mon = mon;
+	}
+	public int getChartPrice() {
+		return chartPrice;
+	}
+	public void setChartPrice(int chartPrice) {
+		this.chartPrice = chartPrice;
+	}
+	public String getShopMemberId() {
+		return shopMemberId;
+	}
+	public void setShopMemberId(String shopMemberId) {
+		this.shopMemberId = shopMemberId;
+	}
 	public String getAddIncome() {
 		return addIncome;
 	}
@@ -160,9 +236,30 @@ public class ShopAddAccounting {
 		builder.append(shopPaymentCheckCode);
 		builder.append(", addIncomeCode=");
 		builder.append(addIncomeCode);
+		builder.append(", shopMemberId=");
+		builder.append(shopMemberId);
+		builder.append(", mon=");
+		builder.append(mon);
+		builder.append(", chartPrice=");
+		builder.append(chartPrice);
+		builder.append(", shopIncomeFinish=");
+		builder.append(shopIncomeFinish);
+		builder.append(", shopIncomeFinishDate=");
+		builder.append(shopIncomeFinishDate);
+		builder.append(", shopIsCode=");
+		builder.append(shopIsCode);
+		builder.append(", finalIncomeVatImply=");
+		builder.append(finalIncomeVatImply);
+		builder.append(", finalIncomeVatNotImply=");
+		builder.append(finalIncomeVatNotImply);
+		builder.append(", shopIncomeDate=");
+		builder.append(shopIncomeDate);
+		builder.append(", shopIncomeRegDate=");
+		builder.append(shopIncomeRegDate);
 		builder.append("]");
 		return builder.toString();
 	}
 	
+
 	
 }
