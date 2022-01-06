@@ -25,7 +25,7 @@ public class SwMainBusinessController {
 	
 	
 	
-	/* 유성 사업장 조회 */
+	/* 유성 사업장 전체 조회 */
 	@GetMapping("/selectBusiness")
 	public String selectBusiness(Model model) {
 		List<Business> business = businessService.getBusiness();
@@ -33,6 +33,23 @@ public class SwMainBusinessController {
 		model.addAttribute("business", business);
 		System.out.println(business + "<-- controller");
 		return "sw/business/selectBusiness";
+	}
+	/* 유성 사업장 조회 상세페이지 */
+	@PostMapping("/detailBusiness")
+	public String getDetailBusinessList(String clientId)	{
+		businessService.getDetailBusinessList(clientId);
+		
+		return "redirect:sw/business/detailBusiness";
+	}
+	
+	@GetMapping("/detailBusiness")
+	public String getDetailBusinessList(@RequestParam(value="clientId", required=false) String clientId
+														,Model model) {
+		Business getDetailBusinessList = businessService.getDetailBusinessList(clientId);
+		model.addAttribute("title", "사업장 조회 상세페이지");
+		model.addAttribute("getDetailBusinessList", getDetailBusinessList);
+		
+		return "sw/business/detailBusiness";
 	}
 	/* 유성 사업장 수정 */
 	@PostMapping ("/modifyBusiness")
@@ -53,7 +70,6 @@ public class SwMainBusinessController {
 		model.addAttribute("tilte", "사업장 수정");
 		return "sw/business/modifyBusiness";
 	}
-	/*유성 사업장 조회(상세보기) */
 	
 	/*유성 사업장 대표코드 등록 */
 	@GetMapping("/addMainBusinessCode")

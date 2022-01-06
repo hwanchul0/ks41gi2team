@@ -18,6 +18,7 @@ public class ExpenseService {
 	public ExpenseService(ExpenseMapper expenseMapper) {
 		this.expenseMapper = expenseMapper;
 	}
+	// 유성 쇼핑몰 비용 조회 
 	public List<Expense> getExpense() {
 		List<Expense> expense = expenseMapper.getExpense();
 		return expense;

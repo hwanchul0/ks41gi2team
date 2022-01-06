@@ -16,7 +16,7 @@
 	
 	
 	</resultMap>
-	<select id="getOrder" parameterType="String" resultMap="OrderResultMap">
+	<select id="getOrder" parameterType="String" resultType="Order">
 	SELECT
 		shopOrderCode,
 		assortCode,

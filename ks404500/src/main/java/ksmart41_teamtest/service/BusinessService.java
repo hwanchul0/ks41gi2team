@@ -31,8 +31,13 @@ public class BusinessService {
 	}
 	// [유성] 사업장 조회
 	
-	public Business getBusiness(String clinetId) {
-		return businessMapper.getBusiness(clinetId);
+	public Business getBusiness(String clientId) {
+		return businessMapper.getBusiness(clientId);
+	}
+	// [유성] 사업장 조회 상세페이지 
+	public Business getDetailBusinessList(String clientId) {
+		Business getDetailBusinessList = businessMapper.getDetailBusinessList(clientId);
+		return getDetailBusinessList;
 	}
 	//[유성] 사업장 수정
 	public int modifyBusiness(Business business) {
