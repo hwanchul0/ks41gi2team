@@ -34,34 +34,13 @@ public class SwCodeController {
 	@Autowired
 	private SwIsListService swIsListService;
 	
-	@GetMapping("/addBusinessCode")
-	public String addBusinessCode() {
-		return "sw/code/addBusinessCode";
-	}
-	
-	@GetMapping("/selectBusinessCode")
-	public String selectBusinessCode() {
-		return "sw/code/selectBusinessCode";
-	}
-	
-	@GetMapping("/addLocalCode")
-	public String addLocalCode() {
-		return "sw/code/addLocalCode";
-	}
-	
-	@GetMapping("/selectLocalCode")
-	public String selectLocalCode() {
-		return "sw/code/selectLocalCode";
-	}
-	
-	
 	@GetMapping("/addInvoiceReasonCode")
 	public String addInvoiceReasonCode() {
 		
 		return "sw/code/addInvoiceReasonCode";
 	}
 	
-	/*유경 개발사 세금계산서 사유코드 조회 */
+	/*유경 개발사 세금계산서 사유코드 조회 - 안쓸듯 */
 	@GetMapping("/selectInvoiceReasonCode")
 	public String selectInvoiceReasonCode(Model model) {
 		List<InvoiceReason> invoiceReason = invoiceReasonService.getInvoiceReasonList();

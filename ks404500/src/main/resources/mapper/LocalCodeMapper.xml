@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ksmart41_teamtest.mapper.LocalCodeMapper">
+	<resultMap type="LocalCode" id="localCodeResultMap">
+		<result column="localCode" 		property="localCode"></result>
+		<result column="localNumber" 	property="localNumber"></result>
+		<result column="localName" 		property="localName"></result>
+	</resultMap>
+	
+	<insert id="addLocalCode" parameterType="LocalCode">
+		INSERT INTO	k2_sw_local(
+			localCode,
+			localNumber,
+			localName
+		)VALUES(
+			#{localCode},
+			#{localNumber},
+			#{localName}
+		)
+	</insert>
+	
+	<select id="selectLocalCodeList" resultType="LocalCode">
+		SELECT
+			localCode,
+			localNumber,
+			localName
+		FROM
+			k2_sw_local
+	</select>
+	
+	<update id="modifyLocalCode" parameterType="LocalCode">
+		UPDATE k2_sw_local
+		SET
+			localNumber = #{localNumber},
+			localName = #{localName}
+		WHERE
+			localCode = #{localCode}
+	</update>
+	
+	<select id="selectLocalCodeInfo" resultType="LocalCode">
+		SELECT
+			localCode,
+			localNumber,
+			localName
+		FROM
+			k2_sw_local
+		WHERE
+			localCode = #{localCode}
+	</select>
+	
+	<delete id="deleteLocalCode" parameterType="LocalCode">
+		DELETE
+		FROM
+			k2_sw_local
+		WHERE
+		localCode = #{localCode};
+	</delete>
+	
+</mapper>

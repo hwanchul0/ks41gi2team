@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ksmart41_teamtest.mapper.ExpenseMapper">
+	<resultMap type="Expense" id="expenseResultMap">
+		<result column="shopExpenseCode"									property="shopExpenseCode"/>
+		<result column="shopIsCode"											property="shopIsCode"/>
+		<result column="shopClientCode"										property="shopClientCode"/>
+		<result column="shopMemberId"										property="shopMemberId"/>
+		<result column="shopMemberIdFinish"									property="shopMemberIdFinish"/>
+		<result column="shopIsName"											property="shopIsName"/>
+		<result column="shopExpenseDate"									property="shopExpenseDate"/>
+		<result column="shopExpenseInfo"									property="shopExpenseInfo"/>
+		<result column="shopExpensePrice"									property="shopExpensePrice"/>
+		<result column="shopExpenseRegDate"									property="shopExpenseRegDate"/>
+		<result column="shopExpenseFinish"									property="shopExpenseFinish"/>
+		<result column="shopExpenseFinishDate"								property="shopExpenseFinishDate"/>
+		<result column="shopExpenseSlipNumber"								property="shopExpenseSlipNumber"/>
+		<result column="shopExpenseGroupSlip"								property="shopExpenseGroupSlip"/>
+	</resultMap>
+	<select id="getExpense" parameterType="String" resultType="Expense">
+	SELECT
+		shopExpenseCode,
+		shopIsCode,
+		shopClientCode,
+		shopMemberId,
+		shopMemberIdFinish,
+		shopIsName,
+		shopExpenseDate,
+		shopExpenseInfo,
+		shopExpensePrice,
+		shopExpenseRegDate,
+		shopExpenseFinish,
+		shopExpenseFinishDate,
+		shopExpenseSlipNumber,
+		shopExpenseGroupSlip
+	FROM
+		k2_shop_expense;
+		
+		</select>
+</mapper>

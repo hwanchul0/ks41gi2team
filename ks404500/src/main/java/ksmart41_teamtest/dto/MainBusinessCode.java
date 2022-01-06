@@ -26,7 +26,6 @@ public class MainBusinessCode {
 		builder.append("]");
 		return builder.toString();
 	}
-	
 	public String getMainBusinessCode() {
 		return mainBusinessCode;
 	}

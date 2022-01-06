@@ -46,18 +46,24 @@ public class ShopAcountingService {
 		return shopAddAccounting;
 	}
 	
-	/*//유경 - 쇼핑몰 통합회계 조회
-	public List<ShopAddAccounting> getSelectTotalAccounting() {
-		// TODO Auto-generated method stub
-		return null;
-	}*/
+	//유경 - 쇼핑몰 통합회계 조회
+	public int getSelectTotalAccounting() {
+		int expense = 0;
+		expense = shopAddAccountingMapper.getSelectTotalAccounting();
+		return expense;
+	}
 	
 	//유경 - 쇼핑몰 매출 마감
 	public ShopAddAccounting getModifyShopIncome(String shopIncomeCode) {
 		return shopAddAccountingMapper.getModifyShopIncome(shopIncomeCode);
 	}
-
 	
+	//유경 - 쇼핑몰 매출 마감 - post
+	public int ShopIncomeFinish(ShopAddAccounting shopIncomeCode) {
+		return shopAddAccountingMapper.ShopIncomeFinish(shopIncomeCode);
+	}
+
+
 
 
 }

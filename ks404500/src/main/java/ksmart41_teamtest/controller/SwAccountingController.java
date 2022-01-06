@@ -52,15 +52,7 @@ public class SwAccountingController {
 		return "sw/accounting/selectTotalAccounting";
 	}
 	
-	@GetMapping("/selectExpense")
-	public String selectExpense() {
-		return "sw/accounting/selectExpense";
-	}
-	
-	@GetMapping("/addExpense")
-	public String addExpense() {
-		return "sw/accounting/addExpense";
-	}
+
 	
 	//유경 - 개발사 세금계산서상세정보조회
 	@RequestMapping("/viewInvoice")
@@ -90,27 +82,21 @@ public class SwAccountingController {
 		//model.addAttribute("bizname", bizname);
 		//System.out.println("bizname" + bizname);
 		List<GetInvoiceInfo> getInvoiceInfo = accountingService.getAddByBizInvoice();
+		//세.계 기본 코드 자동증가 가져오기
+		InvoiceList invoiceCode = accountingService.getInvoiceCode();
+		//세.계 기본 코드 세부자동증가 가져오기
+		InvoiceList invoiceDetailCode = accountingService.getInvoiceDetailCode();
+
 		model.addAttribute("getInvoiceInfo", getInvoiceInfo);
+		model.addAttribute("invoiceCode", invoiceCode);
+		model.addAttribute("invoiceDetailCode", invoiceDetailCode);
 		//System.out.println("계약내용 : "+ getInvoiceInfo);
 		return "sw/accounting/addInvoice";
 	}
-	
-
 	
 	@GetMapping("/addPaymentSum")
 	public String addPaymentSum() {
 		return "sw/accounting/addPaymentSum";
 	}
-	
-	@GetMapping("/selectIncome")
-	public String selectIncome() {
-		return "sw/accounting/selectIncome";
-	}
-	
-	@GetMapping("/addIncome")
-	public String addIncome() {
-		return "sw/accounting/addIncome";
-	}
-	
 	
 }

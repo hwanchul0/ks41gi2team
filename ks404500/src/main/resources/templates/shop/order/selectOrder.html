@@ -3,6 +3,7 @@
 xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
 layout:decorate="@{layout/default-shop}">
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <th:block layout:fragment="customContents">
 <!-- Content Wrapper. Contains page content -->
@@ -30,12 +31,50 @@ layout:decorate="@{layout/default-shop}">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-lg-12">
-						<div class="card">
+						<div class="card card-success" >
+							<div class="card-header">
+								<h5 class="card-title">쇼핑몰 주문 내역 조회</h5>
+							</div>
 							<div class="card-body">
-								<h5 class="card-title">Card title</h5>
-								<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-								<a href="#" class="card-link">Card link</a>
-								<a href="#" class="card-link">Another link</a>
+								<p class="card-text">
+									 <table class="table table-hover table-condensed shopOrder" >
+										<thead>
+											<tr>
+												<th>주문자 아이디</th>
+												<th>주문내역 코드</th>
+												<th>상품코드</th>
+												<th>주문수량</th>
+												<th>결제 금액</th>
+												<th>배송지</th>
+												<th>연락처</th>
+												<th>등록일자</th>
+												<th>주문취소일자</th>
+											
+											</tr>
+										</thead>
+										<tbody>
+										<tr th:if="${not #lists.isEmpty(order)}" th:each="od: ${order}">
+											<td th:text="${od.shopConsumerId}"></td>
+											<td th:text="${od.shopOrderCode}"></td>
+											<td th:text="${od.assortCode}"></td>
+											<td th:text="${od.shopOrderAmount}"></td>
+											<td th:text="${#numbers.formatInteger(od.goodsPaymentAmount, 0, 'COMMA')}"></td>
+											<td th:text="${od.shopDeliveryLocation}"></td>
+											<td th:text="${od.shopCustomerPhone}"></td>
+											<td th:text="${od.shopOrderRegDate}"></td>
+											<td th:text="${od.shopOrderCancleDate}"></td>
+										
+										</tr>
+										<tr th:unless="${not #lists.isEmpty(order)}">
+											<td>
+											안녕
+											</td>
+										</tr>
+										</tbody>
+									</table>
+								</p>
+												
+												
 							</div>
 						</div>
 					</div>
