@@ -52,15 +52,7 @@ public class SwAccountingController {
 		return "sw/accounting/selectTotalAccounting";
 	}
 	
-	@GetMapping("/selectExpense")
-	public String selectExpense() {
-		return "sw/accounting/selectExpense";
-	}
-	
-	@GetMapping("/addExpense")
-	public String addExpense() {
-		return "sw/accounting/addExpense";
-	}
+
 	
 	//유경 - 개발사 세금계산서상세정보조회
 	@RequestMapping("/viewInvoice")
@@ -95,22 +87,9 @@ public class SwAccountingController {
 		return "sw/accounting/addInvoice";
 	}
 	
-
-	
 	@GetMapping("/addPaymentSum")
 	public String addPaymentSum() {
 		return "sw/accounting/addPaymentSum";
 	}
-	
-	@GetMapping("/selectIncome")
-	public String selectIncome() {
-		return "sw/accounting/selectIncome";
-	}
-	
-	@GetMapping("/addIncome")
-	public String addIncome() {
-		return "sw/accounting/addIncome";
-	}
-	
 	
 }

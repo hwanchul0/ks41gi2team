@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ksmart41_teamtest.mapper.ShopMemberMapper">
+	<resultMap type="ShopMember" id="ShopMemberResultMap">
+		<result column="shopMemberId" 					property="shopMemberId"/>
+		<result column="businessLevelCode" 				property="businessLevelCode"/>
+		<result column="shopMemberPw" 					property="shopMemberPw"/>
+		<result column="shopMemberName" 				property="shopMemberName"/>
+		<result column="shopMemberAddr" 				property="shopMemberAddr"/>
+		<result column="shopMemberEmail" 				property="shopMemberEmail"/>
+		<result column="shopMemberPhone" 				property="shopMemberPhone"/>
+		<result column="shopMemberState" 				property="shopMemberState"/>
+		<result column="shopWithdrawalReason" 			property="shopWithdrawalReason"/>
+		<result column="shopWithdrawalDate" 			property="shopWithdrawalDate"/>
+		<result column="shopMemberReg" 					property="shopMemberReg"/>
+	</resultMap>
+
+	<insert id="addShopMember" parameterType="ShopMember">
+		INSERT INTO k2_shop_member(
+			shopMemberId,
+			businessLevelCode,
+			shopMemberPw,
+			shopMemberName,
+			shopMemberAddr,
+			shopMemberEmail,
+			shopMemberPhone,
+			shopMemberState,
+			shopWithdrawalReason,
+			shopWithdrawalDate,
+			shopMemberReg
+		)VALUES(
+			#{shopMemberId},
+			#{businessLevelCode},
+			#{shopMemberPw},
+			#{shopMemberName},
+			#{shopMemberAddr},
+			#{shopMemberEmail},
+			#{shopMemberPhone},
+			#{shopMemberState},
+			#{shopWithdrawalReason},
+			#{shopWithdrawalDate},
+			#{shopMemberReg}
+		)
+	</insert>
+	
+	<select id="selectShopMemberList" resultType="ShopMember">
+		SELECT
+			shopMemberId,
+			businessLevelCode,
+			shopMemberName,
+			shopMemberAddr,
+			shopMemberEmail,
+			shopMemberPhone,
+			shopMemberState,
+			shopWithdrawalReason,
+			shopWithdrawalDate,
+			shopMemberReg
+		FROM
+			k2_shop_member
+	</select>
+	
+	<select id="ShopMemberInfo" parameterType="String" resultMap="ShopMemberResultMap">
+		SELECT
+			shopMemberId,
+			businessLevelCode,
+			shopMemberPw,
+			shopMemberName,
+			shopMemberAddr,
+			shopMemberEmail,
+			shopMemberPhone,
+			shopMemberState,
+			shopWithdrawalReason,
+			shopWithdrawalDate,
+			shopMemberReg
+		FROM
+			k2_shop_member
+		WHERE
+			shopMemberId = #{shopMemberId}
+	</select>
+</mapper>

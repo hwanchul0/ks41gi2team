@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="@{layout/default-shop}">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="@{layout/default-sw}">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <head th:replace="fragments/head :: headFragment"></head>
@@ -33,7 +33,7 @@
 						<!-- 회원가입폼 -->
 						<div class="card card-primary">
 							<div class="card-header">
-								<h5 class="card-title" th:text="${title}"></h5>
+								<h5 class="card-title" th:text="${title}" style="margin: 0; padding: 0;"></h5>
 							</div>
 							<div class="card-body">
 								<table class="table table-hover table-coondensed">
@@ -42,28 +42,32 @@
 											<th>아이디</th>
 											<th>사업장 권한</th>
 											<th>이름</th>
+											<th>주소</th>
 											<th>이메일</th>
-											<th>가입일</th>
 											<th>전화번호</th>
 											<th>회원상태</th>
-											<th>탈퇴날짜</th>
 											<th>탈퇴이유</th>
+											<th>탈퇴날짜</th>
+											<th>가입일</th>
 										</tr>
 									</thead>
-										<tr th:if="${not #lists.isEmpty(clientList)}" th:each="cl : ${clientList}">
-											<td th:text="${cl.clientId}"></td>
-											<td th:text="${cl.businessLevelCode}"></td>
-											<td th:text="${cl.clientName}"></td>
-											<td th:text="${cl.clientEmail}"></td>
-											<td th:text="${cl.clientRegistration}"></td>
-											<td th:text="${cl.clientPhone}"></td>
-											<td th:text="${cl.clientStatus}"></td>
-											<td th:text="${cl.clientWithdrawal}"></td>
-											<td th:text="${cl.clientWithdrawalReason}"></td>
+									<tbody>
+										<tr th:if="${not #lists.isEmpty(shopmemberlist)}" th:each="sl : ${shopmemberlist}">
+											<td th:text="${sl.shopMemberId}"></td>
+											<td th:text="${sl.businessLevelCode}"></td>
+											<td th:text="${sl.shopMemberName}"></td>
+											<td th:text="${sl.shopMemberAddr}"></td>
+											<td th:text="${sl.shopMemberEmail}"></td>
+											<td th:text="${sl.shopMemberPhone}"></td>
+											<td th:text="${sl.shopMemberState}"></td>
+											<td th:text="${sl.shopWithdrawalReason}"></td>
+											<td th:text="${sl.shopWithdrawalDate}"></td>
+											<td th:text="${sl.shopMemberReg}"></td>
 										</tr>
-										<tr th:unless="${not #lists.isEmpty(clientList)}">
-											<td><h1>안되면여기</h1></td>
+										<tr th:unless="${not #lists.isEmpty(shopmemberlist)}">
+											<td><h1>데이터 없음!</h1></td>
 										</tr>
+									</tbody>
 								</table>
 							</div>
 								<!-- <div class="card-footer">
