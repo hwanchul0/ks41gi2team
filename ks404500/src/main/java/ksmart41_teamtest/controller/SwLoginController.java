@@ -36,7 +36,7 @@ public class SwLoginController {
 						@RequestParam(value="memberPw", required = false)String memberPw,
 						HttpSession session) {
 		System.out.println(memberId + " memberId입력값");
-		if(memberId !=null && !"".equals(memberId) && memberPw!=null && !"".equals(memberPw)){
+		if(memberId != null && !"".equals(memberId) && memberPw != null && !"".equals(memberPw)){
 			Member member = memberService.MemberInfo(memberId);
 			if(member != null && member.getMemberPw()!= null && memberPw.equals(member.getMemberPw())) {
 				//로그인 비밀번호 일치 시 세션을 정보에 담음
@@ -50,8 +50,6 @@ public class SwLoginController {
 		return "redirect:/Swlogin";
 		}
 
-	//
-	
 	//회원가입시
 	@GetMapping("/addMember")
 	public String addMember(Model model) {

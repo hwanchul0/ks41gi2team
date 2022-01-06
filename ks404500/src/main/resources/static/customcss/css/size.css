@@ -66,3 +66,7 @@ display: none;
     color: #212529;
     text-align: left;
 }
+
+.card-header h5{
+	 margin: 0; padding: 0;
+}
