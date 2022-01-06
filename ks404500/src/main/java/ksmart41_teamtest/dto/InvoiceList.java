@@ -48,7 +48,23 @@ public class InvoiceList {
 	//세금계산서 수정 사유
 	private String amendedInvoiceReasonName;
 	
+	//세금계산서 기본발행코드
+	private String addInvoiceCode;
+	//세금계산서 세부발행될코드
+	private String invoiceNewDetailCode;
 	
+	public String getInvoiceNewDetailCode() {
+		return invoiceNewDetailCode;
+	}
+	public void setInvoiceNewDetailCode(String invoiceNewDetailCode) {
+		this.invoiceNewDetailCode = invoiceNewDetailCode;
+	}
+	public String getAddInvoiceCode() {
+		return addInvoiceCode;
+	}
+	public void setAddInvoiceCode(String addInvoiceCode) {
+		this.addInvoiceCode = addInvoiceCode;
+	}
 	public String getContractManageCode() {
 		return contractManageCode;
 	}
@@ -374,6 +390,10 @@ public class InvoiceList {
 		builder.append(invoiceDetailFinish);
 		builder.append(", amendedInvoiceReasonName=");
 		builder.append(amendedInvoiceReasonName);
+		builder.append(", addInvoiceCode=");
+		builder.append(addInvoiceCode);
+		builder.append(", invoiceNewDetailCode=");
+		builder.append(invoiceNewDetailCode);
 		builder.append("]");
 		return builder.toString();
 	}

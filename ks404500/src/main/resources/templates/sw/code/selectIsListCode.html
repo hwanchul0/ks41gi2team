@@ -2,7 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="@{layout/default-sw}">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <th:block layout:fragment="customJs">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" rel="stylesheet">
 <script type="text/javascript">
 
 //검색창
@@ -14,19 +17,24 @@ $(document).ready(function(){
 	    });
 	  });
 	});
-}
 
-$( "input" ).datepicker({
-    dateFormat:"yy-mm-dd",
-    onSelect:function(val,obj){
-        $("table tr td:contains('"+val+"')").parent("tr").fadeIn().siblings().fadeOut();
-        //console.log($("table tr td[textContent='"+val+"']"));
-    }
+//테이블 페이징
+$(function(){
+	$('.table').footable({
+		"paging": {
+			"enabled": true,
+		},
+		"sorting": {
+			"enabled": true
+		}
+
+	});
 });
+
 
 </script>
 </th:block>
-<input type="text" name="day" />
+
 <th:block layout:fragment="customContents">
 <!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper">
@@ -40,7 +48,7 @@ $( "input" ).datepicker({
 						<div class="col-sm-6">
 							<ol class="breadcrumb float-sm-right">
 								<li class="breadcrumb-item"><a href="/sw/index-sw">Home</a></li>
-								<li class="breadcrumb-item active">재무관리</li>
+								<li class="breadcrumb-item active">코드관리</li>
 							</ol>
 						</div><!-- /.col -->
 					</div><!-- /.row -->
@@ -56,9 +64,10 @@ $( "input" ).datepicker({
 						<div class="card">
 							<div class="card-body">
 								<h5 class="card-title" th:text="${title}"></h5>
-								<input class="form-control col-md-3" style="float : right" id="myInput" type="text" placeholder="검색어를 입력해주세요">
 								<p class="card-text">
-									<table class="table table-hover table-condensed swiscodelist">
+								<input class="form-control col-md-3" style="float : right" id="myInput" type="text" placeholder="검색어를 입력해주세요">
+									<div class="card-body table-responsive p-0">
+									<table class="table table-hover" id="swiscodelist">
 										<thead>
 											<tr>
 												<th>계정과목코드</th>
@@ -73,26 +82,25 @@ $( "input" ).datepicker({
 											</tr>
 										</thead>
 										<tbody id="myTable">
-										<tr th:if="${not #lists.isEmpty(swIsListCode)}" th:each="sl: ${swIsListCode}">
-											<td th:text="${sl.swIsCode}"></td>
-											<td th:text="${sl.swIsName}"></td>
-											<td th:text="${sl.swIsGroupCode}"></td>
-											<td th:text="${sl.swIsUse}"></td>
-											<td th:text="${sl.swIsAmend}"></td>
-											<td th:text="${sl.swIsRegDate}"></td>
-											<td th:text="${sl.memberId}"></td>
-											<td th:text="${sl.swIsYear}"></td>
-											<td>
-												<a th:href="@{/sw/code/addIsListCode(swIsCode=${sl.swIsCode})}" class="amend"><i class="fas fa-pencil-alt"></i></a>
-											</td>
-										</tr>
-										<tr th:unless="${not #lists.isEmpty(swIsListCode)}">
-											<td>
-											안녕
-											</td>
-										</tr>
+											<tr th:if="${not #lists.isEmpty(swIsListCode)}" th:each="sl: ${swIsListCode}">
+												<td th:text="${sl.swIsCode}"></td>
+												<td th:text="${sl.swIsName}"></td>
+												<td th:text="${sl.swIsGroupCode}"></td>
+												<td th:text="${sl.swIsUse}"></td>
+												<td th:text="${sl.swIsAmend}"></td>
+												<td th:text="${sl.swIsRegDate}"></td>
+												<td th:text="${sl.memberId}"></td>
+												<td th:text="${sl.swIsYear}"></td>
+												<td>
+													<a th:href="@{/sw/code/addIsListCode(swIsCode=${sl.swIsCode})}" class="amend"><i class="fas fa-pencil-alt"></i></a>
+												</td>
+											<tr th:unless="${not #lists.isEmpty(swIsListCode)}">
+												<td>내용이 없습니다.</td>
 										</tbody>
+										<tfoot>
+										</tfoot>
 									</table>
+									</div>
 								</p>
 							</div>
 						</div>

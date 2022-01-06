@@ -4013,7 +4013,7 @@
 					.append($('<label/>', {'class': 'sr-only', text: 'Search'})),
 				$input_grp = $('<div/>', {'class': 'input-group'}).appendTo($form_grp),
 				$input_grp_btn = $('<div/>', {'class': 'input-group-btn'}),
-				$dropdown_toggle = $('<button/>', {type: 'button', 'class': 'btn btn-default dropdown-toggle'})
+				$dropdown_toggle = $('<button/>', {type: 'button', 'class': 'btn btn-priamry dropdown-toggle'})
 					.on('click', { self: self }, self._onDropdownToggleClicked)
 					.append($('<span/>', {'class': 'caret'})),
 				position;
@@ -4038,7 +4038,7 @@
 
 			self.$input = $('<input/>', {type: 'text', 'class': 'form-control', placeholder: self.placeholder});
 
-			self.$button = $('<button/>', {type: 'button', 'class': 'btn btn-primary'})
+			self.$button = $('<button/>', {type: 'button', 'class': 'btn btn-priamry'})
 				.on('click', { self: self }, self._onSearchButtonClicked)
 				.append($('<span/>', {'class': 'fooicon fooicon-search'}));
 
@@ -6334,7 +6334,8 @@
 		 * @returns {(string|HTMLElement|jQuery)}
 		 */
 		$buttonShow: function(){
-			return '<button type="button" class="btn btn-primary footable-show">' + this.showText + '</button>';
+
+			return '<button type="button" class="btn btn-footable-show">' + this.showText + '</button>';
 		},
 		/**
 		 * Creates the hide button for the editing component.
@@ -6352,6 +6353,7 @@
 		 * @returns {(string|HTMLElement|jQuery)}
 		 */
 		$buttonAdd: function(){
+
 			return '<button type="button" class="btn btn-primary footable-add">' + this.addText + '</button> ';
 		},
 		/**
