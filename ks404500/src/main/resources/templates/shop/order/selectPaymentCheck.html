@@ -30,12 +30,48 @@ layout:decorate="@{layout/default-shop}">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-lg-12">
-						<div class="card">
+						<div class="card card-success" >
+							<div class="card-header">
+								<h5 class="card-title">쇼핑몰 결제상태조회</h5>
+							</div>
 							<div class="card-body">
-								<h5 class="card-title">Card title</h5>
-								<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-								<a href="#" class="card-link">Card link</a>
-								<a href="#" class="card-link">Another link</a>
+								<p class="card-text">
+									<table class="table table-hover table-condensed shopPaymentCheck" >
+										<thead>
+											<tr>
+												<th>결제확인코드</th>
+												<th>소비자 아이디</th>
+												<th>결제 상태 코드</th>
+												<th>결제 금액(VAT포함)</th>
+												<th>잔금</th>
+												<th>결제방법</th>
+												<th>결제일</th>
+
+
+											</tr>
+										</thead>
+										<tbody>
+										<tr th:if="${not #lists.isEmpty(shopPaymentCheck)}" th:each="sp: ${shopPaymentCheck}">
+											<td th:text="${sp.shopPaymentCheckCode}"></td>
+											<td th:text="${sp.shopConsumerId}"></td>
+											<td th:text="${sp.paymentStateCode}"></td>
+											<td th:text="${#numbers.formatInteger(sp.shopPaymentCharge, 0, 'COMMA')}"></td>
+											<td th:text="${sp.shopPaymentBalance}"></td>
+											<td th:text="${sp.paymentType}"></td>
+											<td th:text="${sp.shopPaymentDate}"></td>
+											
+										
+										</tr>
+										<tr th:unless="${not #lists.isEmpty(shopPaymentCheck)}">
+											<td>
+											안녕
+											</td>
+										</tr>
+										</tbody>
+									</table>
+								</p>
+												
+												
 							</div>
 						</div>
 					</div>

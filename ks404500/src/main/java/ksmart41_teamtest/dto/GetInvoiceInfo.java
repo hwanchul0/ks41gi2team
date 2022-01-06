@@ -5,7 +5,7 @@ public class GetInvoiceInfo {
 	private String businessName;
 	private String clientId;
 	private String businessRepresentativeName;
-	private String bunsinessNumber;
+	private String businessNumber;
 	private String businessAddr;
 	private String businessEmail;
 	private String businessManagerEmail;
@@ -45,11 +45,11 @@ public class GetInvoiceInfo {
 	public void setBusinessRepresentativeName(String businessRepresentativeName) {
 		this.businessRepresentativeName = businessRepresentativeName;
 	}
-	public String getBunsinessNumber() {
-		return bunsinessNumber;
+	public String getBusinessNumber() {
+		return businessNumber;
 	}
-	public void setBunsinessNumber(String bunsinessNumber) {
-		this.bunsinessNumber = bunsinessNumber;
+	public void setBusinessNumber(String businessNumber) {
+		this.businessNumber = businessNumber;
 	}
 	public String getBusinessAddr() {
 		return businessAddr;
@@ -144,8 +144,8 @@ public class GetInvoiceInfo {
 	@Override
 	public String toString() {
 		return "GetInvoiceInfo [mainBusinessCode=" + mainBusinessCode + ", businessName=" + businessName + ", clientId="
-				+ clientId + ", businessRepresentativeName=" + businessRepresentativeName + ", bunsinessNumber="
-				+ bunsinessNumber + ", businessAddr=" + businessAddr + ", businessEmail=" + businessEmail
+				+ clientId + ", businessRepresentativeName=" + businessRepresentativeName + ", businessNumber="
+				+ businessNumber + ", businessAddr=" + businessAddr + ", businessEmail=" + businessEmail
 				+ ", businessManagerEmail=" + businessManagerEmail + ", businessType1=" + businessType1
 				+ ", businessType2=" + businessType2 + ", serviceCode=" + serviceCode + ", serviceAmount="
 				+ serviceAmount + ", servicePeriod=" + servicePeriod + ", serviceName=" + serviceName + ", slipNumber="

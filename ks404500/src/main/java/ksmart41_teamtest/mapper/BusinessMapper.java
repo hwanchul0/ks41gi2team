@@ -16,6 +16,9 @@ public interface BusinessMapper {
 	//[유성] 사업장 정보조회
 	public Business getBusiness(String clientId);
 	
+	//[유성] 사업장 상세정보 조회
+	public Business getDetailBusinessList(String clientId);
+	
 	//[유성] 사업장 수정
 	public int modifyBusiness(Business business);
 }
