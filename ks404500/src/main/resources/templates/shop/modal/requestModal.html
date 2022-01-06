@@ -166,7 +166,7 @@
                         </tr>
                      </thead>
                         <tbody>
-                           <tr th:if="${not #lists.isEmpty(contractorList)}" th:each="c:${contractorList}">
+                           <tr th:if="${not #lists.isEmpty(getRequestModal)}" th:each="m:${getRequestModal}">
                               <td>
                                     <label>
                                        <input id="removeContract" type="checkbox"/>&nbsp; &nbsp;
@@ -178,60 +178,14 @@
                                  </a>
                               </td>
                               <td>
-                                 <a href="#" class="searchDetailContractor" th:data-contractorCode="${c.contractorCode}">
+                                 <a href="#" class="searchDetailContractor" th:data-contractorCode="${m.mainBusinessCode}">
                                     상세조회
                                  </a>
                               </td>                              
-                              <td  th:text="${c.contractorCode}"></td>
-                              <td  th:text="${c.contractorName}"></td>
-                              <td  th:text="${c.contractorItem}"></td>
-                              <td  th:text="${c.contractorStatus}"></td>
-                              <td  th:text="${c.contractorDevision}"></td>
-                              <td  th:text="${c.contractorPhone}"></td>
-                              <td  th:text="${c.contractorRegistrationDate}"></td>
-                              <td  th:text="${c.contractorId}"></td>
-                              <td  th:text="${c.contractorState}"></td>
-                              <td  th:text="${c.memberId}"></td>
+                              <td  th:text="${m.mainBusinessCode}"></td>
                            </tr>
                         </tbody>                  
                      </table>
-                     <ul class="pagination center">
-                        <li class="paginate_button page-item previous disabled" id="example1_previous">
-                           <a th:if="${currentPage > 1}" th:href="@{loginHistory2(currentPage=${currentPage - 1})}" aria-controls="example1" data-dt-idx="0" tabindex="0" class="page-link">
-                              이전
-                           </a>
-                        </li>
-                         <li class="paginate_button page-item active">
-                           <a href="#" aria-controls="example1" data-dt-idx="1" tabindex="0" class="page-link">
-                              1
-                           </a>
-                         </li>
-                         <li class="paginate_button page-item ">
-                           <a href="#" aria-controls="example1" data-dt-idx="2" tabindex="0" class="page-link">
-                              2
-                           </a>
-                         </li>
-                         <li class="paginate_button page-item ">
-                           <a href="#" aria-controls="example1" data-dt-idx="3" tabindex="0" class="page-link">
-                              3
-                           </a>
-                         </li>
-                         <li class="paginate_button page-item ">
-                           <a href="#" aria-controls="example1" data-dt-idx="4" tabindex="0" class="page-link">
-                              4
-                           </a>
-                         </li>
-                         <li class="paginate_button page-item ">
-                           <a href="#" aria-controls="example1" data-dt-idx="5" tabindex="0" class="page-link">
-                              5
-                           </a>
-                         </li>
-                          <li class="paginate_button page-item next" id="example1_next">
-                           <a href="#" aria-controls="example1" data-dt-idx="7" tabindex="0" class="page-link">
-                              다음
-                           </a>
-                         </li>
-                     </ul>
                   </div>
                   <!--End card body -->
                </div>

@@ -13,5 +13,5 @@ public interface ServicePaymentMapper {
 	public List<ServicePayment> getServicePaymentSum();
 	
 	// 서비스 계약요청 결제예정 상세정보(sw)
-	public ServicePayment getDetailServicePayment(String paymentCode);
+	public ServicePayment servicePaymentCheck(String paymentCode);
 }
