@@ -37,7 +37,7 @@ layout:decorate="@{layout/default-shop}">
 							</div>
 							<div class="card-body">
 								<p class="card-text">
-									<!--  <table class="table table-hover table-condensed shopOrder" >
+									 <table class="table table-hover table-condensed shopOrder" >
 										<thead>
 											<tr>
 												<th>주문자 아이디</th>
@@ -53,16 +53,16 @@ layout:decorate="@{layout/default-shop}">
 											</tr>
 										</thead>
 										<tbody>
-										<tr th:if="${not #lists.isEmpty(order)}" th:each="or: ${order}">
-											<td th:text="${or.shopConsumerId}"></td>
-											<td th:text="${or.shopOrderCode}"></td>
-											<td th:text="${or.assortCode}"></td>
-											<td th:text="${or.shopOrderAmount}"></td>
-											<td th:text="${or.goodsPaymentAmount}"></td>
-											<td th:text="${or.shopDeliveryLocation}"></td>
-											<td th:text="${or.shopCustomerPhone}"></td>
-											<td th:text="${or.shopOrderRegDate}"></td>
-											<td th:text="${or.shopOrderCancleDate}"></td>
+										<tr th:if="${not #lists.isEmpty(order)}" th:each="od: ${order}">
+											<td th:text="${od.shopConsumerId}"></td>
+											<td th:text="${od.shopOrderCode}"></td>
+											<td th:text="${od.assortCode}"></td>
+											<td th:text="${od.shopOrderAmount}"></td>
+											<td th:text="${#numbers.formatInteger(od.goodsPaymentAmount, 0, 'COMMA')}"></td>
+											<td th:text="${od.shopDeliveryLocation}"></td>
+											<td th:text="${od.shopCustomerPhone}"></td>
+											<td th:text="${od.shopOrderRegDate}"></td>
+											<td th:text="${od.shopOrderCancleDate}"></td>
 										
 										</tr>
 										<tr th:unless="${not #lists.isEmpty(order)}">
@@ -71,7 +71,7 @@ layout:decorate="@{layout/default-shop}">
 											</td>
 										</tr>
 										</tbody>
-									</table>-->
+									</table>
 								</p>
 												
 												

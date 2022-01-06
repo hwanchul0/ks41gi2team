@@ -25,14 +25,10 @@ $(function(){
 	            var sum4 = parseInt($("#fn_type4_price").val() || 0);
 
 	            var sum = sum1 + sum2 + sum3 + sum4;
-	            console.log(sum);
+	            //console.log(sum);
 	            $("#fn_total").val(sum);
-	            
-	            if(sum > $()){
-	            	
-	            }
+
 	        });
-	
 	});
 
 </script>
@@ -50,7 +46,7 @@ $(function(){
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
 							<li class="breadcrumb-item"><a href="/sw/index-sw">Home</a></li>
-							<li class="breadcrumb-item active">General Form</li>
+							<li class="breadcrumb-item active">재무관리</li>
 						</ol>
 					</div>
 				</div>
@@ -98,7 +94,7 @@ $(function(){
 										</thead>
 										<tbody>
 											<tr th:if="${not #lists.isEmpty(getInvoiceInfo)}" th:each="g: ${getInvoiceInfo}">
-												<td><input type="radio" name="check"></td>
+												<td><input type="radio" name="radio" class="radioButton"></td>
 												<td th:text="${g.businessName}"></td>
 												<td th:text="${g.businessRepresentativeName}"></td>
 												<td th:text="${g.bunsinessNumber}"></td>
@@ -115,49 +111,86 @@ $(function(){
 												<td th:text="${g.serviceRegistrationDate}"></td>
 											</tr>
 											<tr th:unless="${not #lists.isEmpty(getInvoiceInfo)}">
-												<td>dd</td>
+												<td>내역이 없습니다.</td>
 											</tr>
 										</tbody>
 									</table>
 									
 									<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-								
+									<div class="form-group row">
+										<label for="sum" class="col-sm-2 col-form-label" style="font-size: 14px;">코드번호</label>
+										<div class="col-sm-2">
+											<input type="text" class="form-control num_sum" 
+												th:value="${invoiceCode.addInvoiceCode}" id="" style="height: 100%"  readonly="readonly">
+										</div>
+									</div>
+									<div class="form-group row">
+										<label for="sum" class="col-sm-2 col-form-label" style="font-size: 14px;">세부발행코드</label>
+										<div class="col-sm-2">
+											<input type="text" class="form-control num_sum" 
+												th:value="${invoiceDetailCode.invoiceNewDetailCode}" id="" style="height: 100%"  readonly="readonly">
+										</div>
+									</div>
+									<div class="form-group row">
+										<label for="invoiceType" class="col-sm-2 col-form-label" style="font-size: 14px;">세금계산서 구분</label>
+										<div class="col-sm-2">
+											<div class="form-group">
+						                        <select class="form-control">
+						                          <option value="일반" selected="selected">일반</option>
+						                          <option value="영세">영세</option>
+						                          <option value="일반">면세</option>
+						                        </select>
+						                      </div>
+										</div>
+									</div>
+									<div class="form-group row">
+										<label for="amendCheck" class="col-sm-2 col-form-label" style="font-size: 14px;">수정여부</label>
+										<div class="col-sm-2">
+											<div class="form-group">
+						                        <select class="form-control">
+						                          <option value="N" selected="selected">일반</option>
+						                          <option valuE="Y">수정</option>
+						                        </select>
+						                      </div>
+										</div>
+									</div>
 									<div class="exam">
 									<div class="form-group row">
-										<label for="inputEmail3" class="col-sm-1 col-form-label" style="font-size: 14px;">현금</label>
+										<label for="cash" class="col-sm-2 col-form-label" style="font-size: 14px;">현금</label>
 										<div class="col-sm-2">
 											<input type="number" class="form-control money1" 
-												placeholder=""   id="fn_type1_price" style="height: 85%"  min="0">
+												placeholder=""   id="fn_type1_price" value="0" style="height: 85%"  min="0">
 										</div>
 									</div>
 									<div class="form-group row">
-										<label for="inputEmail3" class="col-sm-1 col-form-label" style="font-size: 14px;">수표</label>
+										<label for="draft" class="col-sm-2 col-form-label" style="font-size: 14px;">수표</label>
 										<div class="col-sm-2">
 											<input type="number" class="form-control money1" 
-												placeholder=""  id="fn_type2_price" style="height: 85%"  min="0">
+												placeholder=""  id="fn_type2_price" value="0" style="height: 85%"  min="0">
 										</div>
 									</div>
 									<div class="form-group row">
-										<label for="inputEmail3" class="col-sm-1 col-form-label" style="font-size: 14px;">어음</label>
+										<label for="note" class="col-sm-2 col-form-label" style="font-size: 14px;">어음</label>
 										<div class="col-sm-2">
 											<input type="number" class="form-control money1" 
-												placeholder="" id="fn_type3_price" style="height: 85%"  min="0">
+												placeholder="" id="fn_type3_price" value="0" style="height: 85%"  min="0">
 										</div>
 									</div>
 									<div class="form-group row">
-										<label for="inputEmail3" class="col-sm-1 col-form-label" style="font-size: 14px;">외상미수금</label>
+										<label for="inputEmail3" class="col-sm-2 col-form-label" style="font-size: 14px;">외상미수금</label>
 										<div class="col-sm-2">
 											<input type="email" class="form-control money1" 
-												placeholder="" id="fn_type4_price" style="height: 85%"  min="0">
+												placeholder="" id="fn_type4_price" value="0" style="height: 85%"  min="0">
 										</div>
 									</div>
 									<div class="form-group row">
-										<label for="inputEmail3" class="col-sm-1 col-form-label" style="font-size: 14px;">입력합계</label>
+										<label for="sum" class="col-sm-2 col-form-label" style="font-size: 14px;">입력합계</label>
 										<div class="col-sm-2">
-											<input type="email" class="form-control num_sum" 
-												placeholder="" id="fn_total" disabled="disabled" style="height: 85%"  min="0">
+											<input type="text" class="form-control num_sum" 
+												placeholder="" id="fn_total" readonly="readonly" style="height: 85%"  min="0">
 										</div>
 									</div>
+									
 									<div class="col-sm-12">
 										<!-- radio -->
 										<div class="form-group">
@@ -175,7 +208,7 @@ $(function(){
 							</form>
 							<div class="card-footer">
 								<button type="button" class="btn btn-primary" th:href="@{sw/accounting/selectInvoice.html}">입력완료</button>
-								<button type="submit" class="btn btn-default float-right">취소</button>
+								<button type="button" onclick="history.back();" class="btn btn-default float-right">취소</button>
 							</div>
 							<!-- /.card-footer -->
 						</div>

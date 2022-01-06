@@ -12,7 +12,7 @@ layout:decorate="@{layout/default-sw}">
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1 class="m-0">"selectExpense / 비용조회"</h1>
+						<h1 class="m-0" th:text="${title}"></h1>
 					</div><!-- /.col -->
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
@@ -31,11 +31,48 @@ layout:decorate="@{layout/default-sw}">
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="card">
-							<div class="card-body">
-								<h5 class="card-title">Card title</h5>
-								<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-								<a href="#" class="card-link">Card link</a>
-								<a href="#" class="card-link">Another link</a>
+							<div class="card-header">
+								<h5 class="card-title" th:text="${title}"></h5>
+							</div>
+							<div class="card-body" >
+								<table class="table table-hover table-coondensed" style="text-align: center;">
+									<thead>
+										<tr>
+											<!-- <th>지출 코드</th> -->
+											<th>계정과목코드</th>
+											<th>마감담당자</th>
+											<th>등록담당자</th>
+											<th>그룹전표번호</th>
+											<th>회계통합그룹코드</th>
+											<th>계정과목명</th>
+											<th>적요</th>
+											<th>금액</th>
+											<th>등록일</th>
+											<th>마감유무</th>
+											<th>마감일</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:if="${not #lists.isEmpty(expenselist)}" th:each="el : ${expenselist}">
+											<!-- 지출코드 주석처리 -->
+											<!-- <td th:text="${el.swExpensePayCode}"></td> -->
+											<td th:text="${el.swIsCode}"></td>
+											<td th:text="${el.memberIdFinish}"></td>
+											<td th:text="${el.memberId}"></td>
+											<td th:text="${el.swSlipNumber}"></td>
+											<td th:text="${el.swGroupSlip}"></td>
+											<td th:text="${el.swIsName}"></td>
+											<td th:text="${el.swExpenseInfo}"></td>
+											<td th:text="${#numbers.formatInteger(el.swExpensePrice, 0, 'COMMA')}"></td>
+											<td th:text="${el.swExpenseRegDate}"></td>
+											<td th:text="${el.swExpenseFinish}"></td>
+											<td th:text="${el.swExpenseFinishDate}"></td>
+										</tr>
+										<tr th:unless="${not #lists.isEmpty(expenselist)}">
+											<td>데이터가 없습니다...</td>
+										</tr>
+									</tbody>
+								</table>
 							</div>
 						</div>
 					</div>

@@ -23,6 +23,12 @@ public interface ShopAddAccountingMapper {
 	
 	//유경 - 쇼핑몰 매출 마감
 	ShopAddAccounting getModifyShopIncome(String shopIncomeCode);
-
+	
+	//유경 - 쇼핑몰 매출 마감
+	int ShopIncomeFinish(ShopAddAccounting shopIncomeCode);
+	
+	//유경 - 쇼핑몰 통합회계 조회
+	int getSelectTotalAccounting();
+		
 	
 }
