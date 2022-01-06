@@ -90,7 +90,14 @@ public class SwAccountingController {
 		//model.addAttribute("bizname", bizname);
 		//System.out.println("bizname" + bizname);
 		List<GetInvoiceInfo> getInvoiceInfo = accountingService.getAddByBizInvoice();
+		//세.계 기본 코드 자동증가 가져오기
+		InvoiceList invoiceCode = accountingService.getInvoiceCode();
+		//세.계 기본 코드 세부자동증가 가져오기
+		InvoiceList invoiceDetailCode = accountingService.getInvoiceDetailCode();
+
 		model.addAttribute("getInvoiceInfo", getInvoiceInfo);
+		model.addAttribute("invoiceCode", invoiceCode);
+		model.addAttribute("invoiceDetailCode", invoiceDetailCode);
 		//System.out.println("계약내용 : "+ getInvoiceInfo);
 		return "sw/accounting/addInvoice";
 	}

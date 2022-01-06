@@ -46,7 +46,7 @@
 	color : #575757;
 }
 /*개발사 손익 계정조회 폰트 사이즈 조절*/
-.card-body .swiscodelist{
+.card-body #swiscodelist{
 	font-size : 85%
 }
 /*개발사 손익계정과목 등록*/
