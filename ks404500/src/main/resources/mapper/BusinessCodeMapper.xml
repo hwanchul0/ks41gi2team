@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ksmart41_teamtest.mapper.BusinessCodeMapper">
+	<resultMap type="BusinessCode" id="BusinessCodeResultMap">
+		<result column="businessCode" 		property="businessCode"/>
+		<result column="businessCodeName" 	property="businessCodeName"/>
+	</resultMap>
+
+	<insert id="addBusinessCode" parameterType="BusinessCode">
+		INSERT INTO k0_BusinessCode(
+			businessCode,
+			businessCodeName
+		)VALUES(
+			#{businessCode},
+			#{businessCodeName}
+		)
+	</insert>
+	
+	<select id="selectBusinessCodeList" resultType="BusinessCode">
+		SELECT
+			businessCode,
+			businessCodeName
+		FROM
+			k0_BusinessCode
+	</select>
+	
+	<select id="selectBusinessCodeInfo" resultType="BusinessCode">
+		SELECT
+			businessCode,
+			businessCodeName
+		FROM
+			k0_BusinessCode
+		WHERE
+			businessCode = #{businessCode}
+	</select>
+	
+	<update id="modifyBusinessCode" parameterType="BusinessCode">
+		UPDATE k0_BusinessCode
+		SET
+			businessCodeName = #{businessCodeName}
+		WHERE
+			businessCode = #{businessCode}
+	</update>
+ 	
+ 	<delete id="deleteBusinessCode" parameterType="BusinessCode">
+ 		DELETE
+ 		FROM
+ 			k0_BusinessCode
+ 		WHERE
+ 			businessCode = #{businessCode}
+ 	</delete>
+</mapper>

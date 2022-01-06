@@ -2,11 +2,44 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="@{layout/default-sw}">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<th:block layout:fragment="customJs">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" rel="stylesheet">
+<script type="text/javascript">
+
+$(document).ready(function(){
+    $("#myInput").on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      $("#myTable tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+  });
+//테이블 페이징
+$(function(){
+   $('.table').footable({
+      "paging": {
+         "enabled": true,
+         "size":6
+      },
+      "filtering": {
+         "enabled": false
+      },
+      "sorting": {
+         "enabled": true
+      }
+
+   });
+});
+</script>
+</th:block>
 <th:block layout:fragment="customContents">
 
 
+
 <!-- Content Wrapper. Contains page content -->
-	<div class="content-wrapper" style="width:2500px; overflow-x:scroll;">
+	<div class="content-wrapper">
 	<!-- Content Header (Page header) -->
 		<div class="content-header">
 			<div class="container-fluid">
@@ -35,52 +68,38 @@
 								<h5 class="card-title" th:text="${title}"></h5>
 							</div>
 							<div class="card-body">
+								<input class="form-control col-md-3" style="float : right" id="myInput" type="text" placeholder="검색어를 입력해주세요">
 								<p class="card-text">
 									<table class="table table-hover table-condensed swBusiness" >
 										<thead>
 											<tr>
-												<th>사업장등록코드</th>
-												<th>거래처 구분 코드</th>
-												<th>사업장 권한</th>
-												<th>사업장 등록 날짜</th>
-												<th>사업장 삭제 날짜</th>
 												<th>회원아이디</th>
-												<th>지역 코드</th>
-												<th>사업장 승인자</th>
 												<th>사업장 이름</th>
-												<th>사업장 대표자</th>
-												<th>사업자등록번호</th>
-												<th>사업장 번호</th>
-												<th>사업장 주소</th>
-												<th>사업장 이메일</th>
-												<th>은행</th>
-												<th>계좌</th>
-												<th>예금주</th>
+												<th>사업장 등록코드</th>
+												<th>사업장 권한</th>
+												<th>사업장 등록날짜</th>
 												<th>등록상태</th>
+												<th>회원정보 상세보기</th>
+
 											</tr>
 										</thead>
-										<tbody>
+										<tbody id="myTable">
 										<tr th:if="${not #lists.isEmpty(business)}" th:each="bs: ${business}">
+											<td th:text="${bs.clientId}"></td>
+											<td th:text="${bs.businessName}"></td>
 											<td th:text="${bs.mainBusinessCode}"></td>
-											<td th:text="${bs.businessCode}"></td>
 											<td th:text="${bs.businessLevelCode}"></td>
 											<td th:text="${bs.businessCodeRegistrationDate}"></td>
-											<td th:text="${bs.businessCodeDeleteDate}"></td>
-											<td th:text="${bs.clientId}"></td>
-											<td th:text="${bs.localCode}"></td>
-											<td th:text="${bs.memberId}"></td>
-											<td th:text="${bs.businessName}"></td>
-											<td th:text="${bs.businessRepresentativeName}"></td>
-											<td th:text="${bs.bunsinessNumber}"></td>
-											<td th:text="${bs.businessPhone}"></td>
-											<td th:text="${bs.businessAddr}"></td>
-											<td th:text="${bs.businessEmail}"></td>
-											<td th:text="${bs.businessMainAccount}"></td>
-											<td th:text="${bs.businessAccountNumber}"></td>
-											<td th:text="${bs.businessAccountHolder}"></td>
 											<td th:text="${bs.businessRegistrationState}"></td>
+											<td> <a th:href="@{/sw/business/detailBusiness(clientId=${bs.clientId})}">
+													<button type="button" class="btn btn-primary btn-sm" >상세보기 </button>
+												</a>
+											</td>
 											<td>
-												<button type="button" class="btn btn-primary btn-xs businessSelect">수정</button>
+												<a th:href="@{/sw/business/modifyBusiness(clientId=${bs.clientId})}">수정</a>
+											</td>
+											<td>
+												<button type="button" class="btn btn-primary btn-xs businessSelect">삭제</button>
 											</td>
 										</tr>
 										<tr th:unless="${not #lists.isEmpty(business)}">

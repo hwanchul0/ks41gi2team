@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ksmart41_teamtest.mapper.ShopPaymentCheckMapper">
+	<resultMap type="ShopPaymentCheck" id="ShopPaymentCheckResultMap">
+		<result column="shopPaymentCheckCode"					property="shopPaymentCheckCode"/>
+		<result column="shopConsumerId"							property="shopConsumerId"/>
+		<result column="shopMemberId"							property="shopMemberId"/>
+		<result column="paymentStateCode"						property="paymentStateCode"/>
+		<result column="shopPaymentCode"						property="shopPaymentCode"/>
+		<result column="shopPaymentCharge"						property="shopPaymentCharge"/>
+		<result column="shopPaymentBalance"						property="shopPaymentBalance"/>
+		<result column="paymentType"							property="paymentType"/>
+		<result column="shopPaymentDate"						property="shopPaymentDate"/>
+		
+	
+	
+	</resultMap>
+	<select id="getShopPaymentCheck" parameterType="String" resultType="ShopPaymentCheck">
+	SELECT
+		shopPaymentCheckCode,
+		shopConsumerId,
+		shopMemberId,
+		paymentStateCode,
+		shopPaymentCode,
+		shopPaymentCharge,
+		shopPaymentBalance,
+		paymentType,
+		shopPaymentDate
+	FROM
+		k2_shop_paymentCheck;
+	
+	</select>
+</mapper>

@@ -7,7 +7,7 @@ public class Business {
 	private String memberId;
 	private String businessName;
 	private String businessRepresentativeName;
-	private String bunsinessNumber;
+	private String businessNumber;
 	private String businessPhone;
 	private String businessAddr;
 	private String businessEmail;
@@ -57,11 +57,11 @@ public class Business {
 	public void setBusinessRepresentativeName(String businessRepresentativeName) {
 		this.businessRepresentativeName = businessRepresentativeName;
 	}
-	public String getBunsinessNumber() {
-		return bunsinessNumber;
+	public String getBusinessNumber() {
+		return businessNumber;
 	}
-	public void setBunsinessNumber(String bunsinessNumber) {
-		this.bunsinessNumber = bunsinessNumber;
+	public void setBusinessNumber(String businessNumber) {
+		this.businessNumber = businessNumber;
 	}
 	public String getBusinessPhone() {
 		return businessPhone;
@@ -156,8 +156,8 @@ public class Business {
 		builder.append(businessName);
 		builder.append(", businessRepresentativeName=");
 		builder.append(businessRepresentativeName);
-		builder.append(", bunsinessNumber=");
-		builder.append(bunsinessNumber);
+		builder.append(", businessNumber=");
+		builder.append(businessNumber);
 		builder.append(", businessPhone=");
 		builder.append(businessPhone);
 		builder.append(", businessAddr=");
@@ -184,10 +184,57 @@ public class Business {
 		builder.append(businessRegistration);
 		builder.append(", businessRegistrationState=");
 		builder.append(businessRegistrationState);
+		builder.append(", mainBusinessCode=");
+		builder.append(mainBusinessCode);
+		builder.append(", businessCode=");
+		builder.append(businessCode);
+		builder.append(", businessLevelCode=");
+		builder.append(businessLevelCode);
+		builder.append(", businessCodeRegistrationDate=");
+		builder.append(businessCodeRegistrationDate);
+		builder.append(", businessCodeDeleteDate=");
+		builder.append(businessCodeDeleteDate);
 		builder.append("]");
 		return builder.toString();
 	}
 
+	private String mainBusinessCode;
+	private String businessCode;
+	private String businessLevelCode;
+	private String businessCodeRegistrationDate;
+	private String businessCodeDeleteDate;
+	public String getMainBusinessCode() {
+		return mainBusinessCode;
+	}
+	public void setMainBusinessCode(String mainBusinessCode) {
+		this.mainBusinessCode = mainBusinessCode;
+	}
+	public String getBusinessCode() {
+		return businessCode;
+	}
+	public void setBusinessCode(String businessCode) {
+		this.businessCode = businessCode;
+	}
+	public String getBusinessLevelCode() {
+		return businessLevelCode;
+	}
+	public void setBusinessLevelCode(String businessLevelCode) {
+		this.businessLevelCode = businessLevelCode;
+	}
+	public String getBusinessCodeRegistrationDate() {
+		return businessCodeRegistrationDate;
+	}
+	public void setBusinessCodeRegistrationDate(String businessCodeRegistrationDate) {
+		this.businessCodeRegistrationDate = businessCodeRegistrationDate;
+	}
+	public String getBusinessCodeDeleteDate() {
+		return businessCodeDeleteDate;
+	}
+	public void setBusinessCodeDeleteDate(String businessCodeDeleteDate) {
+		this.businessCodeDeleteDate = businessCodeDeleteDate;
+	}
+	
+	
 	
 	
 }

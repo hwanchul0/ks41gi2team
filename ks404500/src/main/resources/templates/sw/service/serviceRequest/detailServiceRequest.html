@@ -92,7 +92,7 @@
 													</div>
 													<div class="col-md-6">
 														<label for="serviceTotalPrice">총 결제 금액</label>
-														<input type="text" class="form-control" id="serviceTotalPrice" th:value="${requestInfo.serviceTotalPrice}" readonly>
+														<input type="text" class="form-control" id="serviceTotalPrice" th:value="${#numbers.formatInteger(requestInfo.serviceTotalPrice, 0, 'COMMA')}" readonly>
 													</div>
 												</div>
 											</form>

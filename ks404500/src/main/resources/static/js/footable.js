@@ -6334,7 +6334,8 @@
 		 * @returns {(string|HTMLElement|jQuery)}
 		 */
 		$buttonShow: function(){
-			return '<button type="button" class="btn btn-default footable-show">' + this.showText + '</button>';
+
+			return '<button type="button" class="btn btn-footable-show">' + this.showText + '</button>';
 		},
 		/**
 		 * Creates the hide button for the editing component.
@@ -6352,7 +6353,8 @@
 		 * @returns {(string|HTMLElement|jQuery)}
 		 */
 		$buttonAdd: function(){
-			return '<button type="button" class="btn btn-default footable-add">' + this.addText + '</button> ';
+
+			return '<button type="button" class="btn btn-primary footable-add">' + this.addText + '</button> ';
 		},
 		/**
 		 * Creates the edit button for the editing component.

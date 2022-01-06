@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="@{layout/default-sw}">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<th:block layout:fragment="customContents">
+	<!-- Content Wrapper. Contains page content -->
+	<div class="content-wrapper">
+		<!-- Content Header (Page Header) -->
+		<div class="content-header">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div class="col-sm-6">
+						<h1 class="m-0">deleteService / 서비스 삭제</h1>
+					</div>
+					<!-- /.col -->
+					<div class="col-sm-6">
+						<ol class="breadcrumb float-sm-right">
+							<li class="breadcrumb-item">
+								<a href="#">Home</a>
+							</li>
+							<li class="breadcrumb-item active">Starter Page</li>
+						</ol>
+					</div>
+					<!-- /.col -->
+				</div>
+				<!-- /.row --> 
+			</div>
+			<!-- /.container-fluid -->
+		</div>
+		<!-- Content Header (Page Header) -->
+		<div class="col-md-12">
+			<!-- /.card-header -->
+			<!-- Horizontal Form -->
+			<div class="card card-primary">
+				<div class="card-header">
+					<h3 class="card-title">서비스 등록</h3>
+				</div>
+				<!-- /.card-header -->
+				<!-- form start -->
+				<form class="form-horizontal">
+					<div class="card-body">
+						<div class="form-group row">
+							<label for="inputEmail3" class="col-sm-2 col-form-label">서비스 코드</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="inputEmail3" placeholder="F_001">
+							</div>
+						</div>
+					</div>
+					<!-- /.card-body -->
+					<div class="card-footer">
+						<button type="submit" class="btn btn-primary">삭제</button>
+						<button type="button" class="btn btn-default float-right">취소</button>
+					</div>
+					<!-- /.card-footer -->
+				</form>
+			</div>
+			<!-- /.card -->
+		</div>
+	</div>
+	<!-- /Content Wrapper. Contains page content -->
+</th:block>

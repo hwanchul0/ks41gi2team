@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ksmart41_teamtest.mapper.OrderMapper">
+	<resultMap type="Order" id="OrderResultMap">
+		<result column="shopOrderCode"									property="shopOrderCode"/>
+		<result column="assortCode"										property="assortCode"/>
+		<result column="shopConsumerId"									property="shopConsumerId"/>
+		<result column="shopMemberId"									property="shopMemberId"/>
+		<result column="shopSlipNumber"									property="shopSlipNumber"/>
+		<result column="shopOrderAmount"								property="shopOrderAmount"/>
+		<result column="goodsPaymentAmount"								property="goodsPaymentAmount"/>
+		<result column="shopDeliveryLocation"							property="shopDeliveryLocation"/>
+		<result column="shopCustomerPhone"								property="shopCustomerPhone"/>
+		<result column="shopOrderRegDate"								property="shopOrderRegDate"/>
+		<result column="shopOrderCancleDate"							property="shopOrderCancleDate"/>
+	
+	
+	</resultMap>
+	<select id="getOrder" parameterType="String" resultType="Order">
+	SELECT
+		shopOrderCode,
+		assortCode,
+		shopConsumerId,
+		shopMemberId,
+		shopSlipNumber,
+		shopOrderAmount,
+		goodsPaymentAmount,
+		shopDeliveryLocation,
+		shopCustomerPhone,
+		shopOrderRegDate,
+		shopOrderCancleDate
+	FROM
+		k2_shop_order;
+	</select>
+</mapper>
