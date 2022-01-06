@@ -2,6 +2,8 @@ package ksmart41_teamtest.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +23,8 @@ import ksmart41_teamtest.service.ServicePaymentService;
 @Controller
 @RequestMapping("/sw/service")
 public class SwServiceController {
+	
+	private static final Logger log = LoggerFactory.getLogger(SwServiceController.class);
 	
 	@Autowired
 	private ServiceRequestService serviceRequestService;
@@ -44,23 +48,23 @@ public class SwServiceController {
 		model.addAttribute("getServicePaymentSum",getServicePaymentSum);
 		return "sw/service/servicePaymentSum";
 	}
-	// 서비스 결제예정 상세 (sw 개발사)
-	@PostMapping("/detailServicePayment")
-		public String getDetailServicePayment(String paymentCode) {
+	// 서비스 결제예정 확인 테이블 (sw 개발사)
+	@PostMapping("/servicePaymentCheck")
+		public String servicePaymentCheck(String paymentCode) {
 		
-		servicePaymentService.getDetailServicePayment(paymentCode);
+		servicePaymentService.servicePaymentCheck(paymentCode);
 		
-		return "redirect:/detailServicePayment";
+		return "redirect:/servicePaymentCheck";
 	}
-	@GetMapping("/detailServicePayment")
-	public String getDetailServicePayment (@RequestParam(value="paymentCode", required=false) String paymentCode,
+	@GetMapping("/servicePaymentCheck")
+	public String servicePaymentCheck (@RequestParam(value="paymentCode", required=false) String paymentCode,
 											Model model) {
 		
-		ServicePayment getDetailServicePayment = servicePaymentService.getDetailServicePayment(paymentCode);
-		model.addAttribute("title","계약요청 결제예정 상세");
-		model.addAttribute("getDetailServicePayment",getDetailServicePayment);
+		ServicePayment servicePaymentCheck = servicePaymentService.servicePaymentCheck(paymentCode);
+		model.addAttribute("title","서비스 결제확인");
+		model.addAttribute("servicePaymentCheck",servicePaymentCheck);
 		
-		return "sw/service/detailServicePayment";
+		return "sw/service/servicePaymentCheck";
 	}
 	// 계약요청 전체 조회 (sw개발사)
 	@GetMapping("/serviceRequest/selectAllServiceRequest") 
@@ -95,14 +99,17 @@ public class SwServiceController {
 	// 서비스 계약요청 상세페이지 끝
 	
 	// 서비스 현황(정보) 
-	@GetMapping("/selectServiceManagement")
-	public String getServiceManagement(Model model) {
-		List<ServiceManagement> getServiceManagement = serviceManagementSerivce.getServiceManagement();
-		
-		model.addAttribute("title", "서비스 현황");
-		model.addAttribute("getServiceManagement", getServiceManagement);
-		
-		return "sw/service/selectServiceManagement";
+		@GetMapping("/selectServiceManagement")
+		public String getServiceManagement(Model model) {
+			List<ServiceManagement> getServiceManagement = serviceManagementSerivce.getServiceManagement();
+			System.out.println("테스트");
+			System.out.println("테스트");
+			System.out.println("테스트");
+			System.out.println("테스트");
+			model.addAttribute("title", "서비스 현황");
+			model.addAttribute("getServiceManagement", getServiceManagement);
+			
+			return "sw/service/selectServiceManagement";
 	}
 	// 서비스 등록 페이지
 	@GetMapping("/addServiceManagement")
@@ -112,12 +119,6 @@ public class SwServiceController {
 	}
 	@PostMapping("/addServiceManagement")
 	public String addService(ServiceManagement serviceManagement) {
-		System.out.println("SwServiceController 서비스 추가 입력받은 값 : " + serviceManagement );
-		System.out.println("SwServiceController 서비스 추가 입력받은 값 : " + serviceManagement );
-		System.out.println("SwServiceController 서비스 추가 입력받은 값 : " + serviceManagement );
-		System.out.println("SwServiceController 서비스 추가 입력받은 값 : " + serviceManagement );
-		System.out.println("SwServiceController 서비스 추가 입력받은 값 : " + serviceManagement );
-		System.out.println("SwServiceController 서비스 추가 입력받은 값 : " + serviceManagement );
 		System.out.println("SwServiceController 서비스 추가 입력받은 값 : " + serviceManagement );
 		String serviceCode = serviceManagement.getServiceCode();
 		//System.out.println(addService);
@@ -143,8 +144,25 @@ public class SwServiceController {
 		return codeCheckResult;
 	}
 	// 서비스 수정 페이지
+		@PostMapping("/modifyServiceManagement")
+		public String modifyService(ServiceManagement serviceManagement) {
+			log.info("서비스 수정 페이지 - 입력받은 서비스 정보 : {} ", serviceManagement);
+			
+			serviceManagementSerivce.modifyService(serviceManagement);
+			
+			return "redirect:/sw/service/selectServiceManagement";
+		}
+	
 	@GetMapping("/modifyServiceManagement")
-	public String modifyService(Model model) {
+	public String modifyService(@RequestParam(value="serviceCode", required = false) String serviceCode
+								,Model model) {
+		log.info("modifyServiceManagement serviceCode : {}", serviceCode);
+		model.addAttribute("title", "서비스 수정화면");
+		//서비스 정보
+		if(serviceCode != null && !"".equals(serviceCode)) {
+			ServiceManagement getServiceInfo = serviceManagementSerivce.getServiceInfo(serviceCode);
+			model.addAttribute("getServiceInfo", getServiceInfo);
+		}
 		
 		return "sw/service/modifyServiceManagement";
 	}

@@ -75,13 +75,14 @@
 			ON 
 				bR.businessRegistrationCode = mB.businessRegistrationCode
 			WHERE 
-			clientId = 'test'
+			clientId = #{clientId}
 			ORDER BY serviceRequestDate ASC;
 	</select>
 		
 	<select id="getDetailRequestList" resultType="ServiceRequest" resultMap="requestResultMap">
 			SELECT
-				 r.contractManageCode
+				 bR.clientId
+				,r.contractManageCode
 				,m.serviceName
 				,r.serviceAmount
 				,r.servicePeriod

@@ -12,7 +12,7 @@ layout:decorate="@{layout/default-shop}">
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1 class="m-0">"addConsumer / 쇼핑몰 소비자회원 등록"</h1>
+						<h1 class="m-0" th:text="${title}"></h1>
 					</div><!-- /.col -->
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
@@ -30,13 +30,23 @@ layout:decorate="@{layout/default-shop}">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-lg-12">
-						<div class="card">
-							<div class="card-body">
-								<h5 class="card-title">Card title</h5>
-								<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-								<a href="#" class="card-link">Card link</a>
-								<a href="#" class="card-link">Another link</a>
+						<div class="card card-primary">
+							<div class="card-header">
+								<h5 class="card-title" th:text="${title}"></h5>
 							</div>
+							<form id="addConsumerForm" th:action="@{/shop/consumer/addConsumer}" method="post" class="form-horizontal">
+								<div class="card-body">
+									<div class="form-group row">
+										<label class="col-sm-2 col-form-label text-right">아이디 : </label>
+										<div class="col-sm-8">
+											<input type="text" class="form-control" id="shopConsumerId" placeholder="아이디를 입력하세요" name="shopConsumerId">
+										</div>
+										<div>
+											<button type="button" id="idCheckBtn" class="btn btn-primary">중복확인</button>
+										</div>
+									</div>
+								</div>
+							</form>
 						</div>
 					</div>
 					<!-- /.row -->

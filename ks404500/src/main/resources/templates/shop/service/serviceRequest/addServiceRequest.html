@@ -5,6 +5,45 @@
 	<th:block layout:fragment="customTitle">
 		<title th:text="${title}"></title>
 	</th:block>
+<th:block layout:fragment="customJs">
+	<!-- script -->
+	<script type="text/javascript">
+	// calendar 서비스 시작 날짜 (default =  오늘날짜)
+	$(document).ready(function(){
+		 $('#serviceRegistrationDate').datepicker({
+			    dateFormat: "yy-mm-dd"
+		 }).datepicker("setDate", "0");
+		 
+		// 총 서비스 기간 조회		
+			$('#totalBtn').click(function(){
+				var serviceName = $('#serviceName').val();
+				var serviceAmount = $('#serviceAmount').val();
+				var servicePeriod = $('#servicePeriod');
+				servicePeriod.val(serviceName * serviceAmount) 
+			});
+		// 내 사업장 대표코드 불러오기
+			$('#myMainBizCode').on('click', function(){
+				var mainBusinessCode = $(this).attr('data-mainBusinessCode');
+				console.log(mainBusinessCode)
+				var request = $.ajax({
+					  url: "/shop/service/addServiceRequest",
+					  data: {"mainBusinessCode": mainBusinessCode},
+					  method: "POST",
+					  dataType: "html"
+					});
+					 
+					request.done(function( data ) {
+						console.log(data)
+					});
+					 
+					request.fail(function( jqXHR, textStatus ) {
+					  alert( "Request failed: " + textStatus );
+					});
+				}); 
+});
+	</script>
+	<!-- /script -->
+</th:block>
 <th:block layout:fragment="customContents">
 	<!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper">
@@ -44,7 +83,8 @@
 											<form class="validation-form" novalidate>
 												<div class="mb-3">
 													<label for="mainBusinessCode">사업장 대표코드</label>
-													<button type="button" class="btn btn-primary btn-lg" id="openModalBtn" style="height: 27px;padding: 0;margin: 5px;font-size: 14px;">
+													<button type="button" class="btn btn-success btn-lg" id="myMainBizCode" style="height: 27px;padding: 0;margin: 5px;font-size: 14px;"
+													data-toggle="modal" data-target="#myModal" >
 													내 사업자 대표코드
 													</button>
 													<input type="email" class="form-control" id="mainBusinessCode" readonly>
@@ -76,7 +116,7 @@
 														<div class="invalid-feedback">서비스 계약수량을 입력해주세요.</div>
 													</div>
 													<div class="col-md-4">
-														<button type="button" id="totalBtn" class="btn btn-primary" style="height: 38px;position: absolute; top: 50%;">총 서비스 기간 조회</button>
+														<button type="button" id="totalBtn" class="btn btn-success" style="height: 38px;position: absolute; top: 50%;">총 서비스 기간 조회</button>
 													</div>
 												</div>
 												<div class="row">
@@ -117,7 +157,7 @@
 							<div class="card-footer">
 								<hr class="mb-4">
 								<div class="mb-4"></div>
-								<button class="btn btn-primary btn-lg btn-block" type="submit">등록완료</button>
+								<button class="btn btn-success btn-lg btn-block" type="submit">등록완료</button>
 							</div>
 						</div>
 					</div>
@@ -130,46 +170,31 @@
 	</div>
 	<!-- /.content-wrapper -->
 	
-	<!-- script -->
-	<script>
-	
-	// calendar 서비스 시작 날짜 (default =  오늘날짜)
-	document.getElementById('serviceRegistrationDate').value = new Date().toISOString().substring(0, 10);
-	
-	$(function(){
+
+	<!-- 사업장 대표코드 모달 -->
+	<div class="modal" style="text-align: center" id="myMainBizModal" tabindex="-1"  role="dialog" aria-labelledby="detailContractorModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" style="color:#286273">나의 사업장 대표코드</h5>
+					<a type="button" class="btn-close" data-dismiss="modal"  aria-label="Close">X</a>
+				</div>
+				<div class="modal-body">
+					<div class=" card card-body bg-light container-fluid" id="modifyContractor">
+						<table id="tmodal" class="table table-striped table-hover">
 		
-			// 총 서비스 기간 조회		
-			$('#totalBtn').click(function(){
-				var serviceName = $('#serviceName').val();
-				var serviceAmount = $('#serviceAmount').val();
-				var servicePeriod = $('#servicePeriod');
-				servicePeriod.val(serviceName * serviceAmount) 
-			});
-			
-			// 모달 버튼에 이벤트를 건다.
-			$('#openModalBtn').on('click', function(){
-				var request = $.ajax({
-					  url: "/requestModal",
-					  method: "GET",
-					  dataType: "html"
-					});
-					 
-					request.done(function( msg ) {
-					  alert('일단성공');
-					});
-					 
-					request.fail(function( jqXHR, textStatus ) {
-					  alert( "Request failed: " + textStatus );
-					});
-		
-			
-			// 모달 안의 취소 버튼에 이벤트를 건다.
-			$('#closeModalBtn').on('click', function(){
-			$('#modalBox').modal('hide');
-			});
-	});
-});
-	</script>
-	<!-- /script -->
+						</table>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<a class="ahsbtn1 btn btn-outline-info saveBtn" th:href="@{#}">저장</a>
+					<a class="ahsbtn1 btn btn-outline-info deleteBtn">삭제</a>
+				</div>
+			</div>
+		</div>
+	</div> 
+   <!--/ 내 사업장 대표코드  -->
+	
 </th:block>
 </html>

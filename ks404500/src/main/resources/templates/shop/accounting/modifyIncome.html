@@ -6,10 +6,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <th:block layout:fragment="customJs">
 <script>
-$(function() {
 $(document).ready(function(){
+$('#sign').click(function(){
+	var select = $("#select option:selected").val();
+	console.log(select);
+	if(select == null || select == "none"){
+		alert('마감을 확인해주세요');
+		return false;
+	}
 
-   
+})
+
 });
 
 </script>
@@ -50,12 +57,12 @@ $(document).ready(function(){
 							</div>
 							<!-- /.card-header -->
 							<!-- form start -->
-							<form class="form-horizontal">
+							<form class="form-horizontal" th:action="@{/shop/accounting/modifyIncome}" method="post">
 								<div class="card-body">
 									<div class="form-group row">
-										<label for="IsCode" class="col-sm-2 col-form-label">마감할 매출코드 : </label>
+										<label for="shopIncomeCode" class="col-sm-2 col-form-label">마감할 매출코드 : </label>
 										<div class="col-sm-6">
-											<input type="text" id="swIsCode" name="swIsCode" readonly="readonly" th:value="${finish.shopIncomeCode}">
+											<input type="text" id="shopIncomeCode" name="shopIncomeCode" readonly="readonly" th:value="${finish.shopIncomeCode}">
 										</div>
 									</div>
 									<div class="form-group row">
@@ -71,22 +78,19 @@ $(document).ready(function(){
 										</div>
 									</div>
 									<div class="form-group row">
-										<label for="IsCode" class="col-sm-2 col-form-label">마감확인여부</label>
+										<label for="shopIncomeFinish" class="col-sm-2 col-form-label">마감확인여부</label>
 										<div class="col-sm-2">
-											
-										 <select class="form-control " style="width: 120%;" name="swIsUse">
+										 <select class="form-control " id="select" style="width: 120%;" name="shopIncomeFinish">
 												<option selected="selected" style="text-align: center" value="none">:: 마감확인여부 ::</option>
 												<option th:value="Y">Y</option>
-												<option th:value="N">N</option>
 											</select> 
-											
 										</div>
 									</div>
 								</div>
 								<!-- /.card-body -->
 								<div class="card-footer">
-									<button type="button" class="btn btn-success sign">입력완료</button>
-									<button type="button" class="btn btn-default float-right">취소</button>
+									<button type="submit" id="sign" class="btn btn-success sign">입력완료</button>
+									<button type="button" onclick="history.back();" class="btn btn-default float-right">취소</button>
 								</div>
 								<!-- /.card-footer -->
 							</form>

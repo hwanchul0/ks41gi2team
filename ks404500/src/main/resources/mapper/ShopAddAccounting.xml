@@ -150,4 +150,21 @@
 			shopIncomeCode = #{shopIncomeCode};
 	</select>
 	
+	<update id="ShopIncomeFinish" parameterType="ShopAddAccounting">
+		UPDATE k2_shop_income
+		SET
+			shopIncomeFinish=#{shopIncomeFinish},
+			shopIncomeFinishDate=curdate()
+		WHERE shopIncomeCode=#{shopIncomeCode};
+	</update>
+	
+	<select id="getSelectTotalAccounting"  resultType="int">
+		SELECT
+			sum(t.shopTotalPrice) AS shopExpensePrice
+		FROM
+			k2_shop_totalAccounting AS t
+		WHERE t.shopSalesSection = '비용'
+		AND
+			substring(t.shopGroupSlip,8,2) = '21'
+	</select>
 </mapper>

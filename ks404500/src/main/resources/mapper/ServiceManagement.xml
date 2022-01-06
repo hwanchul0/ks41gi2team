@@ -52,5 +52,45 @@
 			WHERE
 				serviceCode = #{serviceCode};
 		</select>
+		<!-- 서비스 수정 -->
+		<update id="modifyService" parameterType="ServiceManagement">
+			UPDATE k2_sw_serviceManagement
+			<trim prefix="SET" prefixOverrides=",">
+				<if test="serviceName != null and serviceName != ''.toString()">			
+					 serviceName		=#{serviceName}
+				</if>
+				<if test="servicePrice != null and servicePrice != ''.toString()">
+					,servicePrice	=#{servicePrice}
+				</if>
+				<if test="serviceDiscount != null and serviceDiscount != ''.toString()">		
+					,serviceDiscount		=#{serviceDiscount}
+				</if>
+				<if test="servicePeriod != null and servicePeriod != ''.toString()">
+					,servicePeriod	=#{servicePeriod}
+				</if>
+				<if test="serviceStatus != null and serviceStatus != ''.toString()">
+					,serviceStatus		=#{serviceStatus}
+				</if>
+			</trim>
+			WHERE
+				serviceCode=#{serviceCode};
+		</update>
+		
+		<!-- 서비스 정보 -->
+		<select id="getServiceInfo" parameterType="String" resultMap="serviceManagementResultMap">
+			SELECT
+				 s.serviceCode
+				,s.memberId
+				,s.serviceName
+				,s.servicePrice
+				,s.serviceDiscount
+				,s.servicePeriod
+				,s.serviceStatus
+				,s.serviceRegistrationDate
+			FROM 
+				k2_sw_serviceManagement AS s
+			WHERE 
+				serviceCode = #{serviceCode};
+		</select>
 		
 </mapper>

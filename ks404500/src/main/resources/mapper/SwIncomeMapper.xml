@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ksmart41_teamtest.mapper.SwIncomeMapper">
+ 	<select id="selectSwIncomeList" resultType="SwIncome">
+ 		SELECT
+	 		swIncomeCode,
+	 		contractManageCode,
+	 		swIsCode,
+	 		memberIdFinish,
+	 		invoiceCode,
+	 		memberId,
+	 		swGroupSlip,
+	 		swSlipNumber,
+	 		swIsName,
+	 		swIncomeInfo,
+	 		swIncomeRegDate,
+	 		swIncomeFinish,
+	 		swIncomeFinishDate
+		FROM
+			k2_sw_income
+ 	</select>
+</mapper>

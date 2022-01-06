@@ -12,7 +12,7 @@ public class BusinessSelect {
 	private String memberId;
 	private String businessName;
 	private String businessRepresentativeName;
-	private String bunsinessNumber;
+	private String businessNumber;
 	private String businessPhone;
 	private String businessAddr;
 	private String businessEmail;
@@ -92,11 +92,11 @@ public class BusinessSelect {
 	public void setBusinessRepresentativeName(String businessRepresentativeName) {
 		this.businessRepresentativeName = businessRepresentativeName;
 	}
-	public String getBunsinessNumber() {
-		return bunsinessNumber;
+	public String getBusinessNumber() {
+		return businessNumber;
 	}
-	public void setBunsinessNumber(String bunsinessNumber) {
-		this.bunsinessNumber = bunsinessNumber;
+	public void setBusinessNumber(String businessNumber) {
+		this.businessNumber = businessNumber;
 	}
 	public String getBusinessPhone() {
 		return businessPhone;
@@ -201,8 +201,8 @@ public class BusinessSelect {
 		builder.append(businessName);
 		builder.append(", businessRepresentativeName=");
 		builder.append(businessRepresentativeName);
-		builder.append(", bunsinessNumber=");
-		builder.append(bunsinessNumber);
+		builder.append(", businessNumber=");
+		builder.append(businessNumber);
 		builder.append(", businessPhone=");
 		builder.append(businessPhone);
 		builder.append(", businessAddr=");

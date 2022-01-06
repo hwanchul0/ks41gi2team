@@ -33,8 +33,8 @@
 				p.contractManageCode = r.contractManageCode
 			ORDER BY p.paymentSumRegistration ASC;
 		</select>
-	<!-- 계약요청 결제예정 상세정보 -->
-		<select id="getDetailServicePayment" resultType="ServicePayment" resultMap="paymentResultMap">
+	<!-- 계약요청 결제예정 확인 -->
+		<select id="servicePaymentCheck" resultType="ServicePayment" resultMap="paymentResultMap">
 			SELECT 
 				p.paymentCode
 				,p.contractManageCode

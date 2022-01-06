@@ -12,25 +12,29 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import ksmart41_teamtest.dto.Member;
+import ksmart41_teamtest.dto.ShopMember;
 import ksmart41_teamtest.service.MemberService;
+import ksmart41_teamtest.service.ShopMemberService;
 
 @Controller
-@RequestMapping("/sw/member")
+@RequestMapping("/sw")
 public class SwMemberController {
 	
 	//의존성 주입
 	@Autowired
 	private MemberService memberService;
+	@Autowired
+	private ShopMemberService shopMemberService;
 	
 	//[재천]직원 등록
-	@GetMapping("/addMember")
+	@GetMapping("/member/addMember")
 	public String addMember(Model model) {
 		model.addAttribute("title", "SW직원 등록");
 		return "sw/member/addMember";
 	}
 	
 	//[재천]전체 직원 조회
-	@GetMapping("/selectMember")
+	@GetMapping("/member/selectMember")
 	public String selectMember(Model model) {
 		List<Member> memberList = memberService.selectMemberList();
 		
@@ -41,7 +45,7 @@ public class SwMemberController {
 	}
 	
 	//post방식 addMember
-	@PostMapping("/addMember")
+	@PostMapping("/member/addMember")
 	public String addMember(Member member) {
 		System.out.println("SwMemberConetoller에서 입력받은 값 " + member);
 		
@@ -55,20 +59,20 @@ public class SwMemberController {
 	}
 	
 	//[재천]멤버 삭제
-	@RequestMapping ("/deleteMember")
+	@RequestMapping ("/member/deleteMember")
 	public @ResponseBody int deleteMember(Member member) {
 		return memberService.deleteMember(member);
 	}
 	
 	//[재천]멤버 수정
-	@PostMapping("/modifyMember")
+	@PostMapping("/member/modifyMember")
 	public String modifyMember(Member member) {
 		memberService.modifyMember(member);
 		return "redirect:/sw/member/selectMember";
 	}
 	
 	//[재천]멤버 수정
-	@GetMapping("/modifyMember")
+	@GetMapping("/member/modifyMember")
 	public String modifyMember(@RequestParam(value = "memberId", required = false) String memberId,
 								Model model) {
 		System.out.println(memberId + "받아온 memberId (controller)");
@@ -93,6 +97,16 @@ public class SwMemberController {
 		return idCheckResult;
 	}
 	
+	//[재천]회원 조회
+	@GetMapping("/client/selectClient")
+	public String selectClient(Model model) {
+
+		List<ShopMember> shopmemberlist = shopMemberService.selectShopMemberList();
+		model.addAttribute("title", "회원조회");
+		model.addAttribute("shopmemberlist", shopmemberlist);
+		
+		return "sw/client/selectClient";
+	}
 }
 
 

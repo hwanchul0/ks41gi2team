@@ -5,6 +5,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <th:block layout:fragment="customJs">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" rel="stylesheet">
 <script type="text/javascript">
 $(document).ready(function(){
 	  $("#myInput").on("keyup", function() {
@@ -14,6 +16,19 @@ $(document).ready(function(){
 	    });
 	  });
 	});
+	
+//테이블 페이징
+$(function(){
+	$('.table').footable({
+		"paging": {
+			"enabled": true,
+		},
+		"sorting": {
+			"enabled": true
+		}
+
+	});
+});	
 </script>
 </th:block>
 
@@ -60,7 +75,8 @@ $(document).ready(function(){
 												<th>일자</th>
 												<th>유형</th>
 												<th>사업장대표코드</th>
-												<th>거래처</th>
+												<th>사업자번호</th>
+												<th>거래처명</th>
 												<th>공급가액</th>
 												<th>세액</th>
 												<th>수정<br>여부
@@ -75,6 +91,7 @@ $(document).ready(function(){
 												<td th:text="${il.invoiceRegDate} ? ${#dates.format(il.invoiceRegDate,'yyyy-MM-dd')}"></td>
 												<td th:text="${il.invoiceType}"></td>
 												<td th:text="${il.mainBusinessCodeDemand}"></td>
+												<td th:text="${il.invoiceDemandBizNumber}"></td>
 												<td th:text="${il.invoiceDemand}"></td>
 												<td th:text="${#numbers.formatInteger(il.invoicePrice, 0, 'COMMA')}"></td>
 												<td th:text="${#numbers.formatInteger(il.invoiceTax, 0, 'COMMA')}"></td>

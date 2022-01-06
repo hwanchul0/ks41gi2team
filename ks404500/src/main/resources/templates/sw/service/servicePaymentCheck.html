@@ -12,7 +12,6 @@ tbody tr td:first-child:before {
    content: counter(aaa)"";
 }
 </style>
-<link th:href="@{/customcss/css/serviceRequest.css}" rel="stylesheet"/>
 <th:block layout:fragment="customContents">
 <!-- Content Wrapper. Contains page content -->
    <div class="content-wrapper">
@@ -21,7 +20,7 @@ tbody tr td:first-child:before {
          <div class="container-fluid">
             <div class="row mb-2">
                <div class="col-sm-6">
-                  <h1 class="m-0">서비스 결제예정 상세정보 </h1>
+                  <h1 class="m-0" th:text="${title}"></h1>
                </div><!-- /.col -->
                <div class="col-sm-6">
                   <ol class="breadcrumb float-sm-right">
@@ -39,8 +38,8 @@ tbody tr td:first-child:before {
          <div class="container-fluid">
             <div class="row">
                <div class="col-lg-12">
-                  <div class="card-primary">
-                     <div class="card-header">서비스 결제예정 상세정보</div>
+                  <div class="card card-primary">
+                     <div class="card-header">서비스 결제예정 확인</div>
                      <div class="card-body">
                         <div id="example2_wrapper"
                            class="dataTables_wrapper dt-bootstrap4">
@@ -64,7 +63,7 @@ tbody tr td:first-child:before {
                                        </tr>
                                     </thead>
                                     <tbody>
-                                       <tr th:if="${not #lists.isEmpty(getDetailServicePayment)}" th:each="d : ${getDetailServicePayment}">
+                                       <tr th:if="${not #lists.isEmpty(servicePaymentCheck)}" th:each="d : ${servicePaymentCheck}">
                                           <td th:text="${d.paymentCode}"></td>
                                           <td th:text="${d.contractManageCode}"></td>
                                           <td th:text="${d.slipNumber}"></td>
@@ -72,13 +71,17 @@ tbody tr td:first-child:before {
                                           <td th:text="${d.servicePaymentDueDate}"></td>
                                           <td th:text="${d.paymentSumRegistration}"></td>
                                        </tr>
-                                       <tr th:unless="${not #lists.isEmpty(getDetailServicePayment)}">
+                                       <tr th:unless="${not #lists.isEmpty(servicePaymentCheck)}">
                                           <td colspan="9">등록된 계약요청이 없습니다.</td>
                                        </tr>
                                     </tbody>
                                  </table>
                               </div>
                            </div>
+                     </div>
+                     <!-- /card-body -->
+                           <!-- card footer -->
+                           <div class="card-footer">
                            <div class="row">
                               <div class="col-sm-12 col-md-5">
                                  <div class="dataTables_info" id="example2_info" role="status"
@@ -118,9 +121,11 @@ tbody tr td:first-child:before {
                                  </div>
                               </div>
                            </div>
+                           </div>
+                           <!-- /card footer -->
                         </div>
-                     </div>
                   </div>
+                  <!-- /card -->
                </div>
                <!-- /.row -->
             </div>
