@@ -6,19 +6,33 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import ksmart41_teamtest.dto.ShopModal;
+import ksmart41_teamtest.service.ShopModalService;
+
 @Controller
-@RequestMapping("/sw/modal")
-public class ModalController {
+@RequestMapping("/shop/modal")
+@ResponseBody
+public class ShopModalController {
 	
-	@GetMapping("/arequestModal")
-	public String requestModal(Model model) {
+	private ShopModalService shopRequestService;
+	
+	public ShopModalController(ShopModalService shopRequestService) {
+		this.shopRequestService = shopRequestService;
+	}
+	
+	@GetMapping("/requestModal")
+	@ResponseBody
+	public String getRequestModal(Model model) {
+		List<ShopModal> getRequestModal = shopRequestService.getRequestModal();
+		System.out.println("requestModal 컨트롤러 접근 확인 ");
+		System.out.println(getRequestModal);
 		model.addAttribute("title", "모달화면");
-		//List<String> requestModal = new ArrayList<String>();
-		//model.addAttribute("requestModal", requestModal);
-		return "sw/modal/requestModal";
+		model.addAttribute("getRequestModal", getRequestModal);
+		return "/shop/modal/requestModal";
 	}
 	
 	/* json 방식

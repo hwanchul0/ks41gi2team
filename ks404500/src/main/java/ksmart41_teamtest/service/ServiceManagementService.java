@@ -32,6 +32,14 @@ public class ServiceManagementService {
 	public int serviceCheck(String serviceCode) {
 		return serviceManagementMapper.serviceCheck(serviceCode);
 	}
+	//  서비스 수정
+	public int modifyService(ServiceManagement serviceManagement) {
+		return serviceManagementMapper.modifyService(serviceManagement);
+	}
+	// 서비스 정보 조회
+	public ServiceManagement getServiceInfo(String serviceCode) {
+		return serviceManagementMapper.getServiceInfo(serviceCode);
+	}
 		
 
 }

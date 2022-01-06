@@ -24,10 +24,10 @@ public class ServicePaymentService {
 		return getServicePaymentSum;
 	}
 	// 서비스 계약요청 결제예정 상세 (sw)
-	public ServicePayment getDetailServicePayment(String paymentCode) {
-		ServicePayment getDetailServicePayment = servicePaymentMapper.getDetailServicePayment(paymentCode);
+	public ServicePayment servicePaymentCheck(String paymentCode) {
+		ServicePayment servicePaymentCheck = servicePaymentMapper.servicePaymentCheck(paymentCode);
 		
-		return getDetailServicePayment;
+		return servicePaymentCheck;
 	}
 
 }

@@ -60,7 +60,7 @@ tbody tr td:first-child:before {
                                           <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">결제예정 일자</th>
                                           <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">결제상태</th>
                                           <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">등록일자</th>
-                                          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">결제</th>
+                                          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">결제확인</th>
                                        </tr>
                                     </thead>
                                     <tbody>
@@ -73,7 +73,7 @@ tbody tr td:first-child:before {
                                           <td>미결제</td>
                                           <td th:text="${p.paymentSumRegistration}"></td>
                                           <td>
-	                                          <a th:href="@{/sw/service/detailServicePayment(paymentCode=${p.paymentCode})}">
+	                                          <a th:href="@{/sw/service/servicePaymentCheck(paymentCode=${p.paymentCode})}">
 	                                          	<button type="button" class="btn-primary">보기</button>
 	                                          </a>
                                           </td>
