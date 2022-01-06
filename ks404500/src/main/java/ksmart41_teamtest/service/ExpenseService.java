@@ -18,7 +18,7 @@ public class ExpenseService {
 	public ExpenseService(ExpenseMapper expenseMapper) {
 		this.expenseMapper = expenseMapper;
 	}
-	
+
 	public List<Expense> getExpense() {
 		List<Expense> expense = expenseMapper.getExpense();
 		return expense;

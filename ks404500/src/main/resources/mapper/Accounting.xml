@@ -9,7 +9,7 @@
 	        biz.businessName,
 	        biz.clientId,
 	        biz.businessRepresentativeName,
-	        biz.bunsinessNumber,
+	        biz.businessNumber,
 	        biz.businessAddr,
 	        biz.businessEmail,
 	        biz.businessManagerEmail,
