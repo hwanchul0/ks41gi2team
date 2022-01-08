@@ -70,7 +70,7 @@ tbody tr td:first-child:before {
                                           <td th:text="${p.slipNumber}"></td>
                                           <td th:text="${#numbers.formatInteger(p.servicePaymentAmount, 0, 'COMMA')}"></td>
                                           <td th:text="${p.servicePaymentDueDate}"></td>
-                                          <td>미결제</td>
+                                          <td th:value="${p.paymentStateCode}" th:text="${p.paymentState}"></td>
                                           <td th:text="${p.paymentSumRegistration}"></td>
                                           <td>
 	                                          <a th:href="@{/sw/service/servicePaymentCheck(paymentCode=${p.paymentCode})}">

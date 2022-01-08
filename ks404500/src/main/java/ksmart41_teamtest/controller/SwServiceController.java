@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import ksmart41_teamtest.dto.ServiceRequest;
+import ksmart41_teamtest.dto.PaymentState;
 import ksmart41_teamtest.dto.ServiceManagement;
 import ksmart41_teamtest.dto.ServicePayment;
 import ksmart41_teamtest.service.ServiceRequestService;
@@ -40,7 +41,7 @@ public class SwServiceController {
 	}
 	
 	
-	// 서비스 결제 예정 (sw 개발사)
+	// 서비스 결제 예정 조회 (sw 개발사)
 	@GetMapping("/servicePaymentSum")
 	public String getServicePaymentSum(Model model) {
 		List<ServicePayment> getServicePaymentSum = servicePaymentService.getServicePaymentSum();
@@ -63,9 +64,23 @@ public class SwServiceController {
 		ServicePayment servicePaymentCheck = servicePaymentService.servicePaymentCheck(paymentCode);
 		model.addAttribute("title","서비스 결제확인");
 		model.addAttribute("servicePaymentCheck",servicePaymentCheck);
+		model.addAttribute("PaymentStateCode",servicePaymentService.getPaymentStateCode());
 		
 		return "sw/service/servicePaymentCheck";
 	}
+	
+	// 서비스 결제예정 확인 -> 결제예정 결제상태 업데이트
+	@PostMapping("/modifyPaymentState")
+	public String modifyPaymentState(@RequestParam(value="servicePaymentCheck" , required = false) String servicePaymentCheck
+									,@RequestParam(value="paymentCode" , required = false) String paymentCode) {
+		log.info("서비스 결제정보 코드 : {}" + paymentCode);
+		log.info("서비스 결제 상태  코드 : {}" + servicePaymentCheck);
+		servicePaymentService.modifyPaymentStateCode(paymentCode,servicePaymentCheck);
+		return "redirect:/sw/service/servicePaymentSum";
+	}
+	
+	
+	
 	// 계약요청 전체 조회 (sw개발사)
 	@GetMapping("/serviceRequest/selectAllServiceRequest") 
 	  public String getAllRequestList(Model model) { 
@@ -102,10 +117,6 @@ public class SwServiceController {
 		@GetMapping("/selectServiceManagement")
 		public String getServiceManagement(Model model) {
 			List<ServiceManagement> getServiceManagement = serviceManagementSerivce.getServiceManagement();
-			System.out.println("테스트");
-			System.out.println("테스트");
-			System.out.println("테스트");
-			System.out.println("테스트");
 			model.addAttribute("title", "서비스 현황");
 			model.addAttribute("getServiceManagement", getServiceManagement);
 			
