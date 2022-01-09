@@ -71,11 +71,11 @@ public class SwServiceController {
 	
 	// 서비스 결제예정 확인 -> 결제예정 결제상태 업데이트
 	@PostMapping("/modifyPaymentState")
-	public String modifyPaymentState(@RequestParam(value="servicePaymentCheck" , required = false) String servicePaymentCheck
+	public String modifyPaymentState(@RequestParam(value="servicePaymentCheck" , required = false) String paymentStateCode
 									,@RequestParam(value="paymentCode" , required = false) String paymentCode) {
-		log.info("서비스 결제정보 코드 : {}" + paymentCode);
-		log.info("서비스 결제 상태  코드 : {}" + servicePaymentCheck);
-		servicePaymentService.modifyPaymentStateCode(paymentCode,servicePaymentCheck);
+		log.info("서비스 결제정보 코드  {} : " + paymentCode);
+		log.info("서비스 결제 상태  코드  {} : " + paymentStateCode);
+		servicePaymentService.modifyPaymentStateCode(paymentCode,paymentStateCode);
 		return "redirect:/sw/service/servicePaymentSum";
 	}
 	
