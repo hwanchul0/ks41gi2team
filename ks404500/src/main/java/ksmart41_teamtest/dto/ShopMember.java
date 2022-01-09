@@ -13,6 +13,7 @@ public class ShopMember {
 	private String shopWithdrawalReason;
 	private String shopWithdrawalDate;
 	private String shopMemberReg;
+	
 	public String getShopMemberId() {
 		return shopMemberId;
 	}

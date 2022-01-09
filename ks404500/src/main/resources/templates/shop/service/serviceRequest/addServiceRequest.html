@@ -1,200 +1,263 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="@{layout/default-shop}">
-	<th:block layout:fragment="customTitle">
-		<title th:text="${title}"></title>
-	</th:block>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="@{layout/default-shop}">
+<th:block layout:fragment="customTitle">
+<title th:text="${title}"></title>
+</th:block>
 <th:block layout:fragment="customJs">
-	<!-- script -->
-	<script type="text/javascript">
+<link rel="stylesheet" href="//cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css"/>
+<link rel="stylesheet" th:href="@{/customcss/css/modal.css}">
+<!-- 날짜계산 moment.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.0/moment.min.js"></script>
+<!-- script -->
+<script type="text/javascript">
 	// calendar 서비스 시작 날짜 (default =  오늘날짜)
 	$(document).ready(function(){
-		 $('#serviceRegistrationDate').datepicker({
-			    dateFormat: "yy-mm-dd"
-		 }).datepicker("setDate", "0");
-		 
+		var nowDate = moment();
+		 $('#serviceRegistrationDate').val(nowDate.format("YYYY-MM-DD"));
 		// 총 서비스 기간 조회		
 			$('#totalBtn').click(function(){
+				var serviceRegistrationDate = $('#serviceRegistrationDate').val();
 				var serviceName = $('#serviceName').val();
 				var serviceAmount = $('#serviceAmount').val();
 				var servicePeriod = $('#servicePeriod');
-				servicePeriod.val(serviceName * serviceAmount) 
+				// 총 서비스 기간(일) 계산
+				var totalServiceDate = Number(serviceName * serviceAmount); 
+				console.log(totalServiceDate);
+				servicePeriod.val(totalServiceDate);
+				// 서비스 만료 날짜 
+				$('#serviceEndDate').val(moment(serviceRegistrationDate).add(totalServiceDate,'d').format("YYYY-MM-DD"));
 			});
-		// 내 사업장 대표코드 불러오기
-			$('#myMainBizCode').on('click', function(){
-				var mainBusinessCode = $(this).attr('data-mainBusinessCode');
-				console.log(mainBusinessCode)
-				var request = $.ajax({
-					  url: "/shop/service/addServiceRequest",
-					  data: {"mainBusinessCode": mainBusinessCode},
-					  method: "POST",
-					  dataType: "html"
+			// 내 사업장 대표코드 모달
+			$(document).on('click', '#myMainBizCode', function(){
+				$('#dataTableAjax').DataTable({
+						destroy: true,
+						ajax: {
+							url: '/shop/service/findMyMainBizCode',
+		   					type: 'POST',
+		   					dataSrc: function(data){
+		        				console.log(JSON.stringify(data));
+		        				return data;
+		        			}
+						},
+						columns: [
+							{ "data": "선택"},
+							{ "data": "mainBusinessCode"},
+							{ "data": "businessRegistrationCode"},								
+							{ "data": "businessCode"},
+							{ "data": "businessLevelCode"},								
+							{ "data": "businessCodeRegistrationDate"}								
+						],
+						columnDefs: [
+							{
+								targets: [0],
+								orderable : false,
+								searchable : false,
+								render : function(data, type, row){
+									var htmlbtn = '<input type="radio" class="mainBusinessCode" name="mainBusinessCode" value="'+ row.mainBusinessCode +'">'
+									return htmlbtn;
+								}
+							}
+						]
 					});
-					 
-					request.done(function( data ) {
-						console.log(data)
+					var modal = $('.modal');
+					$(".exitBtn").click(function(){
+						modal.addClass('hidden');
 					});
-					 
-					request.fail(function( jqXHR, textStatus ) {
-					  alert( "Request failed: " + textStatus );
+					var overlay = $('.modal_overlay');
+					modal.removeClass('hidden');
+						$(".confirmBtn").click(function(){
+							var checkedBox = $('.mainBusinessCode:checked');
+			 				var mainBusinessCodeName = $('#mainBusinessCodeNameInput');
+			 				var mainBusinessCodeId = $('#mainBusinessCodeIdInput');
+			 				var checkedTrName = checkedBox.parent().parent().children().eq(1).text();
+			 				mainBusinessCodeName.attr('value',checkedBox.val());
+			 				mainBusinessCodeId.attr('value',checkedTrName);
+						modal.addClass('hidden');
 					});
-				}); 
+			});
 });
 	</script>
-	<!-- /script -->
+<!-- /script -->
 </th:block>
 <th:block layout:fragment="customContents">
-	<!-- Content Wrapper. Contains page content -->
-	<div class="content-wrapper">
-		<!-- Content Header (Page header) -->
-		<div class="content-header">
-			<div class="container-fluid">
-				<div class="row mb-2">
-					<div class="col-sm-6">
-						<h1 class="m-0">서비스 계약 요청 등록하기</h1>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+	<!-- Content Header (Page header) -->
+	<div class="content-header">
+		<div class="container-fluid">
+			<div class="row mb-2">
+				<div class="col-sm-6">
+					<h1 class="m-0">서비스 계약 요청 등록하기</h1>
+				</div>
+				<!-- /.col -->
+				<div class="col-sm-6">
+					<ol class="breadcrumb float-sm-right">
+						<li class="breadcrumb-item"><a href="#">Home</a></li>
+						<li class="breadcrumb-item active">Starter Page</li>
+					</ol>
+				</div>
+				<!-- /.col -->
+			</div>
+			<!-- /.row -->
+		</div>
+		<!-- /.container-fluid -->
+	</div>
+	<!-- /.content-header -->
+	<!-- Main content -->
+	<div class="content">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="card card-success">
+						<div class="card-header card-success">
+							서비스 계약 요청 등록
+						</div>
+						<div class="card-body">
+							<div class="container">
+								<div class="input-form-backgroud row">
+									<div class="input-form col-md-12 mx-auto">
+										<form class="validation-form" novalidate>
+											<div class="row">
+												<div class="col-md-6">	
+													<label for="mainBusinessCode">사업장 대표코드</label>
+													<input type="hidden" id="mainBusinessCodeIdInput" name="mainBusinessCodeId">
+													<button type="button" class="btn btn-success btn-lg" id="myMainBizCode" style="height: 27px;padding: 0;margin: 5px;font-size: 14px;" data-toggle="modal" data-target="#myModal">
+													내 사업자 대표코드 </button>
+													<input type="text" class="inputBox form-control" id="mainBusinessCodeNameInput" name="mainBusinessCodeName" readonly>
+													<!-- 로그인한 아이디 select -> 사업장 대표코드 조회 -->
+													<!-- ID별 사업장 대표코드 모달 -->
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-4">
+													<label for="serviceName">서비스명</label>
+													<select class="serviceName-select d-block w-100" id="serviceName" style="height: 38px;" required>
+														<option value="#" style="text-align: center;">::서비스를선택해 주세요::</option>
+														<option value="1">공장 1일</option>
+														<option value="30">공장 30일</option>
+														<option value="365">공장 365일</option>
+														<option value="1">물류센터 1일</option>
+														<option value="30">물류센터 30일</option>
+														<option value="365">물류센터 365일</option>
+														<option value="1">쇼핑몰 1일</option>
+														<option value="30">쇼핑몰 30일</option>
+														<option value="365">쇼핑몰 365일</option>
+													</select>
+													<div class="invalid-feedback">
+														서비스를 선택해주세요.
+													</div>
+												</div>
+												<div class="col-md-4">
+													<label for="serviceAmount">서비스 계약수량</label>
+													<input type="number" class="myInput form-control" id="serviceAmount" required>
+													<div class="invalid-feedback">
+														서비스 계약수량을 입력해주세요.
+													</div>
+												</div>
+												<div class="col-md-4">
+													<button type="button" id="totalBtn" class="btn btn-success" style="height: 38px;position: absolute; top: 50%;">총 서비스 기간 조회</button>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-6 mb-3">
+													<label for="serviceRegistrationDate">서비스 시작 예약날짜</label>
+													<input type="date" class="form-control" id="serviceRegistrationDate" required>
+													<div class="invalid-feedback">
+														서비스 시작 예약날짜를 입력해주세요.
+													</div>
+												</div>
+												<div class="col-md-6 mb-3">
+													<label for="serviceEndDate">서비스 만료날짜</label>
+													<input type="text" class="form-control" id="serviceEndDate" placeholder="2021-01-15" readonly required>
+													<div class="invalid-feedback">
+														서비스 만료날짜를 입력해주세요.
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-6">
+													<label for="servicePeriod">총 서비스 기간(일)</label>
+													<input type="text" class="form-control" id="servicePeriod" readonly>
+												</div>
+												<div class="col-md-6">
+													<label for="servicePrice">총 결제 금액</label>
+													<input type="text" class="form-control" id="servicePrice" readonly required>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+								<footer class="my-3 text-small">
+								<div class="custom-control custom-checkbox">
+									<input type="checkbox" class="custom-control-input" id="aggrement"><label class="custom-control-label" for="aggrement">개인정보 수집 및 이용에 동의합니다.</label>
+								</div>
+								</footer>
+							</div>
+						</div>
+						<!-- /card-body -->
+						<div class="card-footer">
+							<hr class="mb-4">
+							<div class="mb-4">
+							</div>
+							<button class="btn btn-success btn-lg btn-block" type="submit">등록완료</button>
+						</div>
 					</div>
-					<!-- /.col -->
-					<div class="col-sm-6">
-						<ol class="breadcrumb float-sm-right">
-							<li class="breadcrumb-item"><a href="#">Home</a></li>
-							<li class="breadcrumb-item active">Starter Page</li>
-						</ol>
-					</div>
-					<!-- /.col -->
 				</div>
 				<!-- /.row -->
 			</div>
 			<!-- /.container-fluid -->
 		</div>
-		<!-- /.content-header -->
-
-		<!-- Main content -->
-		<div class="content">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-lg-12">
-						<div class="card">
-							<div class="card-header">서비스 계약 요청 등록</div>
-							<div class="card-body">
-								<div class="container">
-									<div class="input-form-backgroud row">
-										<div class="input-form col-md-12 mx-auto">
-											<form class="validation-form" novalidate>
-												<div class="mb-3">
-													<label for="mainBusinessCode">사업장 대표코드</label>
-													<button type="button" class="btn btn-success btn-lg" id="myMainBizCode" style="height: 27px;padding: 0;margin: 5px;font-size: 14px;"
-													data-toggle="modal" data-target="#myModal" >
-													내 사업자 대표코드
-													</button>
-													<input type="email" class="form-control" id="mainBusinessCode" readonly>
-													<!-- 로그인한 아이디 select -> 사업장 대표코드 조회 -->
-													<!-- ID별 사업장 대표코드 모달 -->
-
-												<div class="invalid-feedback">사업장 대표코드를 선택해주세요.</div>
-												</div>
-												<div class="row">
-													<div class="col-md-4">
-														<label for="serviceName">서비스명</label>
-														<select class="serviceName-select d-block w-100" id="serviceName" style="height: 38px;"required>
-															<option value="#" style="text-align: center;">::서비스를선택해 주세요::</option>
-															<option value="1">공장 1일</option>
-															<option value="30">공장 30일</option>
-															<option value="365">공장 365일</option>
-															<option value="1">물류센터 1일</option>
-															<option value="30">물류센터 30일</option>
-															<option value="365">물류센터 365일</option>
-															<option value="1">쇼핑몰 1일</option>
-															<option value="30">쇼핑몰 30일</option>
-															<option value="365">쇼핑몰 365일</option>
-														</select>
-														<div class="invalid-feedback">서비스를 선택해주세요.</div>
-													</div>
-													<div class="col-md-4">
-														<label for="serviceAmount">서비스 계약수량</label> 
-														<input type="number" class="myInput form-control" id="serviceAmount" required>
-														<div class="invalid-feedback">서비스 계약수량을 입력해주세요.</div>
-													</div>
-													<div class="col-md-4">
-														<button type="button" id="totalBtn" class="btn btn-success" style="height: 38px;position: absolute; top: 50%;">총 서비스 기간 조회</button>
-													</div>
-												</div>
-												<div class="row">
-													<div class="col-md-6 mb-3">
-														<label for="serviceRegistrationDate">서비스 시작 예약날짜</label> 
-														<input type="date" class="form-control" id="serviceRegistrationDate" required>
-														<div class="invalid-feedback">서비스 시작 예약날짜를 입력해주세요.</div>
-													</div>
-													<div class="col-md-6 mb-3">
-														<label for="serviceEndDate">서비스 만료날짜</label> 
-														<input type="text" class="form-control" id="serviceEndDate" placeholder="2021-01-15" readonly required>
-														<div class="invalid-feedback">서비스 만료날짜를 입력해주세요.</div>
-													</div>
-												</div>
-												<div class="row">
-													<div class="col-md-6">
-														<label for="servicePeriod">총 서비스 기간(일)</label> 
-														<input type="text" class="form-control" id="servicePeriod" readonly >
-													</div>
-													<div class="col-md-6">
-														<label for="servicePrice">총 결제 금액</label>
-														<input type="text" class="form-control" id="servicePrice" readonly required>
-													</div>
-												</div>
-											</form>
-										</div>
-									</div>
-									<footer class="my-3 text-small">
-										<div class="custom-control custom-checkbox">
-											<input type="checkbox" class="custom-control-input"
-												id="aggrement"> <label class="custom-control-label"
-												for="aggrement">개인정보 수집 및 이용에 동의합니다.</label>
-										</div>
-									</footer>
-								</div>
-							</div>
-							<!-- /card-body -->
-							<div class="card-footer">
-								<hr class="mb-4">
-								<div class="mb-4"></div>
-								<button class="btn btn-success btn-lg btn-block" type="submit">등록완료</button>
-							</div>
-						</div>
-					</div>
-					<!-- /.row -->
-				</div>
-				<!-- /.container-fluid -->
-			</div>
-			<!-- /.content -->
-		</div>
+		<!-- /.content -->
 	</div>
-	<!-- /.content-wrapper -->
-	
-
-	<!-- 사업장 대표코드 모달 -->
-	<div class="modal" style="text-align: center" id="myMainBizModal" tabindex="-1"  role="dialog" aria-labelledby="detailContractorModalLabel"
-		aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" style="color:#286273">나의 사업장 대표코드</h5>
-					<a type="button" class="btn-close" data-dismiss="modal"  aria-label="Close">X</a>
-				</div>
-				<div class="modal-body">
-					<div class=" card card-body bg-light container-fluid" id="modifyContractor">
-						<table id="tmodal" class="table table-striped table-hover">
-		
+</div>
+<!-- /.content-wrapper -->
+<!-- 내 사업장 대표코드 조회 모달창 -->
+<div class="modal hidden">
+	<div class="modal_overlay">
+	</div>
+	<div class="modal_content">
+		<div class="modal_header d-flex justify-content-between">
+			<div class="textTitle">
+				내 사업장 대표코드
+			</div>
+			<button class="exitBtn" type="button">
+			<i class="fas fa-times-circle"></i>
+			</button>
+		</div>
+		<div class="modal_body">
+			<form>
+				<table border="1" id="dataTableAjax" class="dataTable">
+				<thead>
+				<tr bgcolor="#BDBDBD">
+					<th>
+						선택
+					</th>
+					<th>
+						사업장별 대표코드
+					</th>
+					<th>
+						사업장 등록코드
+					</th>
+					<th>
+						거래처 구분코드
+					</th>
+					<th>
+						사업장 권한
+					</th>
+					<th>
+						등록일자
+						<th>
+						</tr>
+						</thead>
 						</table>
-					</div>
+					</form>
 				</div>
-				<div class="modal-footer">
-					<a class="ahsbtn1 btn btn-outline-info saveBtn" th:href="@{#}">저장</a>
-					<a class="ahsbtn1 btn btn-outline-info deleteBtn">삭제</a>
+				<div class="modal_fotter">
+					<button class="btn btn-secondary confirmBtn" type="button">확인</button>
 				</div>
 			</div>
 		</div>
-	</div> 
-   <!--/ 내 사업장 대표코드  -->
-	
-</th:block>
-</html>
+		<!-- End 모달창 -->
+		<!--/ 내 사업장 대표코드  -->
+		</th:block>
+		</html>
