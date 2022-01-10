@@ -20,4 +20,7 @@ public interface SeviceManagementMapper {
 	public int modifyService(ServiceManagement serviceManagement);
 	// 서비스 정보 조회
 	public ServiceManagement getServiceInfo(String serviceCode);
+	// 서비스 제거
+	public int deleteService(ServiceManagement serviceManagement);
+		
 }

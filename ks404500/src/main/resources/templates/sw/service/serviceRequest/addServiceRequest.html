@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="@{layout/default-shop}">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="@{layout/default-sw}">
 <th:block layout:fragment="customTitle">
 <title th:text="${title}"></title>
 </th:block>
@@ -32,10 +32,10 @@
 				$('#dataTableAjax').DataTable({
 						destroy: true,
 						ajax: {
-							url: '/shop/service/findMyMainBizCode',
+							url: '/sw/service/findMyMainBizCode',
 		   					type: 'POST',
 		   					dataSrc: function(data){
-		        				console.log(JSON.stringify(data));
+		        				console.table(data);
 		        				return data;
 		        			}
 						},
@@ -65,15 +65,17 @@
 					});
 					var overlay = $('.modal_overlay');
 					modal.removeClass('hidden');
-						$(".confirmBtn").click(function(){
-							var checkedBox = $('.mainBusinessCode:checked');
-			 				var mainBusinessCodeName = $('#mainBusinessCodeNameInput');
-			 				var mainBusinessCodeId = $('#mainBusinessCodeIdInput');
-			 				var checkedTrName = checkedBox.parent().parent().children().eq(1).text();
-			 				mainBusinessCodeName.attr('value',checkedBox.val());
-			 				mainBusinessCodeId.attr('value',checkedTrName);
-						modal.addClass('hidden');
-					});
+						
+			});
+			$(".confirmBtn").click(function(){
+				var modal = $('.modal');
+				var checkedBox = $('.mainBusinessCode:checked');
+ 				var mainBusinessCodeName = $('#mainBusinessCodeNameInput');
+ 				var mainBusinessCodeId = $('#mainBusinessCodeIdInput');
+ 				var checkedTrName = checkedBox.parent().parent().children().eq(1).text();
+ 				mainBusinessCodeName.attr('value',checkedBox.val());
+ 				mainBusinessCodeId.attr('value',checkedTrName);
+				modal.addClass('hidden');
 			});
 });
 	</script>
@@ -108,8 +110,8 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-lg-12">
-					<div class="card card-success">
-						<div class="card-header card-success">
+					<div class="card card-primary">
+						<div class="card-header">
 							서비스 계약 요청 등록
 						</div>
 						<div class="card-body">
@@ -121,7 +123,7 @@
 												<div class="col-md-6">	
 													<label for="mainBusinessCode">사업장 대표코드</label>
 													<input type="hidden" id="mainBusinessCodeIdInput" name="mainBusinessCodeId">
-													<button type="button" class="btn btn-success btn-lg" id="myMainBizCode" style="height: 27px;padding: 0;margin: 5px;font-size: 14px;" data-toggle="modal" data-target="#myModal">
+													<button type="button" class="btn btn-primary btn-lg" id="myMainBizCode" style="height: 27px;padding: 0;margin: 5px;font-size: 14px;" data-toggle="modal" data-target="#myModal">
 													내 사업자 대표코드 </button>
 													<input type="text" class="inputBox form-control" id="mainBusinessCodeNameInput" name="mainBusinessCodeName" readonly>
 													<!-- 로그인한 아이디 select -> 사업장 대표코드 조회 -->
@@ -155,7 +157,7 @@
 													</div>
 												</div>
 												<div class="col-md-4">
-													<button type="button" id="totalBtn" class="btn btn-success" style="height: 38px;position: absolute; top: 50%;">총 서비스 기간 조회</button>
+													<button type="button" id="totalBtn" class="btn btn-primary" style="height: 38px;position: absolute; top: 50%;">총 서비스 기간 조회</button>
 												</div>
 											</div>
 											<div class="row">
@@ -199,7 +201,7 @@
 							<hr class="mb-4">
 							<div class="mb-4">
 							</div>
-							<button class="btn btn-success btn-lg btn-block" type="submit">등록완료</button>
+							<button class="btn btn-primary btn-lg btn-block" type="submit">등록완료</button>
 						</div>
 					</div>
 				</div>
@@ -225,36 +227,34 @@
 			</button>
 		</div>
 		<div class="modal_body">
-			<form>
 				<table border="1" id="dataTableAjax" class="dataTable">
-				<thead>
-				<tr bgcolor="#BDBDBD">
-					<th>
-						선택
-					</th>
-					<th>
-						사업장별 대표코드
-					</th>
-					<th>
-						사업장 등록코드
-					</th>
-					<th>
-						거래처 구분코드
-					</th>
-					<th>
-						사업장 권한
-					</th>
-					<th>
-						등록일자
-						<th>
+					<thead>
+						<tr bgcolor="#BDBDBD">
+							<th>
+								선택
+							</th>
+							<th>
+								사업장별 대표코드
+							</th>
+							<th>
+								사업장 등록코드
+							</th>
+							<th>
+								거래처 구분코드
+							</th>
+							<th>
+								사업장 권한
+							</th>
+							<th>
+								등록일자
+							</th>
 						</tr>
-						</thead>
-						</table>
-					</form>
-				</div>
-				<div class="modal_fotter">
-					<button class="btn btn-secondary confirmBtn" type="button">확인</button>
-				</div>
+					</thead>
+				</table>
+		</div>
+		<div class="modal_fotter">
+			<button class="btn btn-secondary confirmBtn" type="button">확인</button>
+		</div>
 			</div>
 		</div>
 		<!-- End 모달창 -->

@@ -33,47 +33,7 @@ public class ShopServiceController {
 		this.serviceManagementService = serviceManagementService;
 	}
 	
-	// shop - 계약요청 / sw서비스 / 계약요청 등록
-	@GetMapping("/serviceRequest/addServiceRequest")
-	public String addServiceRequest() {
-		
-		return "shop/service/serviceRequest/addServiceRequest";
-	}
-	// shop - 계약요청 등록 / 내 사업장별 대표코드 조회하기 modal
-	@PostMapping("/findMyMainBizCode")
-	@ResponseBody
-	public List<Map<String, Object>> findMyMainBizCode(){
-		List<Map<String, Object>> myMainBizCode = serviceRequestService.findMyMainBizCode();
-		log.info("PostMapping 계약요청 등록 - 내 사업장별 대표코드 조회 결과 ----" , myMainBizCode);
-		return myMainBizCode;
-	}
-	// 계약요청 등록 / 총 결제금액 계산하기(불러오기)
 	
-	
-	
-	
-	// 계약요청 수정 페이지
-	@GetMapping("/serviceRequest/modifyServiceRequest")
-	public String modifyServiceRequest(Model model) {
-		
-		return "shop/service/serviceRequest/modifyServiceRequest";
-	}
-	// 계약요청 삭제 페이지
-	@GetMapping("/serviceRequest/deleteServiceRequest")
-	public String deleteServiceRequest(Model model) {
-		
-		return "shop/service/serviceRequest/deleteServiceRequest";
-	}
-	
-	// shop - client 본인 계약요청 전체 조회
-	@GetMapping("/serviceRequest/selectServiceRequest") 
-	  public String getRequestList(Model model) { 
-	  List<ServiceRequest> getRequestList = serviceRequestService.getRequestList();
-	  model.addAttribute("title", "계약요청 개인조회"); 
-	  model.addAttribute("getRequestList", getRequestList);
-
-	  return "shop/service/serviceRequest/selectServiceRequest"; 
-	  }
 	
 	
 	
