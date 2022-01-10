@@ -17,7 +17,7 @@ $(document).ready(function(){
     });
   });
 //테이블 페이징
- $(function(){
+$(function(){
    $('.table').footable({
       "paging": {
          "enabled": true,
@@ -31,7 +31,7 @@ $(document).ready(function(){
       }
 
    });
-}); 
+});
 </script>
 </th:block>
 <th:block layout:fragment="customContents">
@@ -76,30 +76,30 @@ $(document).ready(function(){
 												<th>회원아이디</th>
 												<th>사업장 이름</th>
 												<th>사업장 등록코드</th>
+												<th>사업장 권한</th>
 												<th>사업장 등록날짜</th>
 												<th>등록상태</th>
-												<th>상세보기</th>
-												<th>수정</th>
-												<th>삭제</th>
+												<th>회원정보 상세보기</th>
 
 											</tr>
 										</thead>
-										<tbody id="myTable" >
+										<tbody id="myTable">
 										<tr th:if="${not #lists.isEmpty(business)}" th:each="bs: ${business}">
 											<td th:text="${bs.clientId}"></td>
 											<td th:text="${bs.businessName}"></td>
-											<td th:text="${bs.businessRegistrationCode}"></td>
-											<td th:text="${bs.businessRegistration}"></td>
+											<td th:text="${bs.mainBusinessCode}"></td>
+											<td th:text="${bs.businessLevelCode}"></td>
+											<td th:text="${bs.businessCodeRegistrationDate}"></td>
 											<td th:text="${bs.businessRegistrationState}"></td>
 											<td> <a th:href="@{/sw/business/detailBusiness(clientId=${bs.clientId})}">
-													<button type="button" class="btn btn-primary btn-sm" >상세보기</button>
+													<button type="button" class="btn btn-primary btn-sm" >상세보기 </button>
 												</a>
 											</td>
 											<td>
 												<a th:href="@{/sw/business/modifyBusiness(clientId=${bs.clientId})}">수정</a>
 											</td>
 											<td>
-												<button type="button" class="btn btn-primary deleteBtn" th:onclick="deleteBtn([[${bs.clientId}]]);">삭제</button>
+												<button type="button" class="btn btn-primary btn-xs businessSelect">삭제</button>
 											</td>
 										</tr>
 										<tr th:unless="${not #lists.isEmpty(business)}">
@@ -123,29 +123,5 @@ $(document).ready(function(){
 		</div>
 	</div>
 <!-- /.content-wrapper -->
-<script type="text/javascript">
-	//유성 사업장 삭제
-	function deleteBtn(clientId) {
-		if(clientId != null && clientId != ""){
-			var request = $.ajax({
-				  url: "/sw/business/deleteBusiness",
-				  method: "POST",
-				  data: { clientId : clientId },
-				  dataType: "text"
-				});
-			
-			request.done(function(data) {
-				if(data > 0) {
-					alert("삭제 되었습니다.");
-				}else {
-					alert("실패했습니다.");
-				}
-				location.reload();
-			});
-		} else {
-			alert("삭제 실패 ");
-		}
-	}
-    </script>
 </th:block>
 </html>

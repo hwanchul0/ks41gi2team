@@ -20,11 +20,5 @@ public interface BusinessMapper {
 	public Business getDetailBusinessList(String clientId);
 	
 	//[유성] 사업장 수정
-	public int modifyBusiness(Business clientId);
-	
-	//[유성] 사업장 삭제 
-	public int deleteBusiness(Business business);
-	
-	//[유성] 중복확인
-	public int idCheck(String clientId);
+	public int modifyBusiness(Business business);
 }
