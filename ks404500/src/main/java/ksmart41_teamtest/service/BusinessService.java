@@ -40,12 +40,19 @@ public class BusinessService {
 		return getDetailBusinessList;
 	}
 	//[유성] 사업장 수정
-	public int modifyBusiness(Business business) {
-		return businessMapper.modifyBusiness(business);
+	public int modifyBusiness(Business clientId) {
+		return businessMapper.modifyBusiness(clientId);
 	}
 	
+	//[유성] 사업장 삭제 
+	public int deleteBusiness(Business business) {
+		return businessMapper.deleteBusiness(business);
+	}
 	
-	
+	//[유성]중복체크
+		public int idCheck(String clientId) {
+			return businessMapper.idCheck(clientId);
+	}
 
 
 }

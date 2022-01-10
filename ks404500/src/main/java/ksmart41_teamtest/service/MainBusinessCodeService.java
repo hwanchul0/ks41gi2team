@@ -19,10 +19,16 @@ public class MainBusinessCodeService {
 	public MainBusinessCodeService(MainBusinessCodeMapper mainBusinessCodeMapper) {
 		this.mainBusinessCodeMapper = mainBusinessCodeMapper;
 	}
-	
+	// 유성 사업장 대표코드 조회 
 	public List<MainBusinessCode> getMainBusinessCode() {
 		List<MainBusinessCode> mainBusinessCode = mainBusinessCodeMapper.getMainBusinessCode();
 		return mainBusinessCode;
 	}
-
+	
+	// 유성 사업장 대표코드 등록 
+	public int addMainBusinessCode(MainBusinessCode	mainBusinessCode) {
+		int addMainBusinessCode = mainBusinessCodeMapper.addMainBusinessCode(mainBusinessCode);
+		return addMainBusinessCode;
+		
+	}
 }

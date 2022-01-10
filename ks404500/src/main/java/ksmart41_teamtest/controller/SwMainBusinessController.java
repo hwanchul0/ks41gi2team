@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import ksmart41_teamtest.dto.Business;
 import ksmart41_teamtest.service.BusinessService;
@@ -64,18 +65,32 @@ public class SwMainBusinessController {
 								Model model) {
 		System.out.println(clientId + "받아온 clientId (controller)");
 		if(clientId != null && !"".equals(clientId)) {
-			Business getBusiness = businessService.getBusiness(clientId);
+			Business getBusiness = businessService.getDetailBusinessList(clientId);
 			model.addAttribute("getBusiness", getBusiness);
 		}
 		model.addAttribute("tilte", "사업장 수정");
 		return "sw/business/modifyBusiness";
 	}
+	/* 유성 사업장 삭제  */
+	@RequestMapping ("/deleteBusiness")
+	public @ResponseBody int deleteBusiness(Business business) {
+		return businessService.deleteBusiness(business);
+	}
 	
-	/*유성 사업장 대표코드 등록 */
+	/*유성 사업장 대표코드 등록get */
 	@GetMapping("/addMainBusinessCode")
 	public String addMainBusinessCode() {
 		return "sw/business/addMainBusinessCode";
 	}
+	
+	/*유성 사업장 대표코드 등록 post */
+	@PostMapping("/addMainBusinessCode")
+	public String addMainBusinessCode(MainBusinessCode mainBusinessCode) {
+	System.out.println("SwMainBusinessController에서 입력받은 값" + mainBusinessCode);
+		mainBusinessCodeService.addMainBusinessCode(mainBusinessCode);
+		return	"redirect:/sw/business/addMainBusinessCode";
+	}
+	
 	/* 유성 사업장 대표코드 조회 */
 	@GetMapping("/selectMainBusinessCode")
 	public String selectMainBusinessCode(Model model) {
