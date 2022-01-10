@@ -41,54 +41,108 @@
 							</div>
 							
 							<!--  사업장 등록 폼바디 시작 -->
-							<form id="addBusinessRegistration" th:action="@{/shop/businessRegistration/addBusinessRegistration}" method="post" class="form-horizontal">
+							<form id="addClientForm" th:action="@{/shop/businessRegistration/addBusinessRegistration}" method="post" class="form-horizontal"> 
 								<p class="card-body" >
 
 								<div class="form-group row">
-									<label class="col-sm-1 col-form-laebl text-right">사업장 아이디</label>
+									<label class="col-sm-2 col-form-laebl text-right">사업장 아이디</label>
 									<div class="col-sm-4">
 										<input class="form-control" type="text" id="clientId" name="clientId" placeholder="아이디를 입력하세요">
 									</div>
+									<div>
+										<button type="button" id="idCheckBtn" class="btn btn-success">중복확인</button>
+									</div>
 								</div>
+								
+								<div class="form-group row">
+									<label class="col-sm-2 col-form-laebl text-right">지역 코드</label>
+									<div class="col-sm-2">
+										<select id="localCode" class="form-control" name="localCode">
+											<option value="">::지역 코드 선택::</option>
+											<option>sw_local_code_02(서울)</option>
+											<option>sw_local_code_031(경기도)</option>
+											<option>sw_local_code_042(세종)</option>
+											<option>sw_local_code_044(대전)</option>
+											<option>sw_local_code_051(부산)</option>
+											<option>sw_local_code_052(울산)</option>
+											<option>sw_local_code_053(대구)</option>
+											<option>sw_local_code_061(전남)</option>
+											<option>sw_local_code_062(광주)</option>
+											<option>sw_local_code_063(전북)</option>
+											
+											
+										</select>
+									</div>
+								
+								</div>
+								
 
 								<div class="form-group row">
-									<label class="col-sm-1 col-form-laebl text-right">사업장 이름</label>
+									<label class="col-sm-2 col-form-laebl text-right">사업장 이름</label>
 									<div class="col-sm-4">
 										<input class="form-control" type="text" id="businessName" name="businessName" placeholder="사업장 이름을 입력하세요">
 									</div>
 								</div>
 
 								<div class="form-group row">
-									<label class="col-sm-1 col-form-laebl text-right">사업장 대표</label>
+									<label class="col-sm-2 col-form-laebl text-right">사업장 대표</label>
 									<div class="col-sm-4">
 										<input class="form-control" type="text" id="businessRepresentativeName" name="businessRepresentativeName"placeholder="대표이름을 입력하세요">
 									</div>
 								</div>
 
 								<div class="form-group row">
-									<label class="col-sm-1 col-form-laebl text-right">사업장 번호</label>
+									<label class="col-sm-2 col-form-laebl text-right">사업장 번호</label>
 									<div class="col-sm-4">
-										<input class="form-control" type="text" id="bunsinessNumber" name="bunsinessNumber" placeholder="사업장 번호를 입력하세요">
+										<input class="form-control" type="text" id="businessNumber" name="businessNumber" placeholder="사업장 번호를 입력하세요">
+									</div>
+								</div>
+								
+								<div class="form-group row">
+									<label class="col-sm-2 col-form-laebl text-right">사업장 전화번호</label>
+									<div class="col-sm-4">
+										<input class="form-control" type="text" id="businessPhone" name="businessPhone"placeholder="사업장  전화번호를 입력하세요">
 									</div>
 								</div>
 
-
 								<div class="form-group row">
-									<label class="col-sm-1 col-form-laebl text-right">사업장 주소</label>
+									<label class="col-sm-2 col-form-laebl text-right">사업장 주소</label>
 									<div class="col-sm-4">
 										<input class="form-control" type="text" id="businessAddr" name="businessAddr"placeholder="사업장 주소를 입력하세요">
 									</div>
 								</div>
 
 								<div class="form-group row">
-									<label class="col-sm-1 col-form-laebl text-right">사업장 이메일</label>
+									<label class="col-sm-2 col-form-laebl text-right">사업장 이메일</label>
 									<div class="col-sm-4">
 										<input class="form-control" type="text" id="businessEmail" name="businessEmail"placeholder="사업장 이메일을 입력하세요">
 									</div>
 								</div>
+								
+								<div class="form-group row">
+									<label class="col-sm-2 col-form-laebl text-right">사업장 담당자 이름</label>
+									<div class="col-sm-4">
+										<input class="form-control" type="text" id="businessManagerName" name="businessManagerName"placeholder="사업장  담당자 이름 입력하세요">
+									</div>
+								</div>
+								
+								<div class="form-group row">
+									<label class="col-sm-2 col-form-laebl text-right">사업장 담당자 번호</label>
+									<div class="col-sm-4">
+										<input class="form-control" type="text" id="businessManagerPhone" name="businessManagerPhone"placeholder="사업장 담당자 번호를 입력하세요">
+									</div>
+								</div>
+								
+								<div class="form-group row">
+									<label class="col-sm-2 col-form-laebl text-right">사업장 담당자 이메일</label>
+									<div class="col-sm-4">
+										<input class="form-control" type="text" id="businessManagerEmail" name="businessManagerEmail"placeholder="사업장 담당자 이메일을 입력하세요">
+									</div>
+								</div>
+
 
 								<div class="form-group row">
-									<label class="col-sm-1 col-form-laebl text-right">주거래 통장</label>
+									<label class="col-sm-2 col-form-laebl text-right">주거래 통장</label>
 									<div class="col-sm-2">
 										<select id="AccountTrade" class="form-control" name="businessMainAccount">
 											<option value="">::주거래 은행 선택::</option>
@@ -103,14 +157,14 @@
 								</div>
 
 								<div class="form-group row">
-									<label class="col-sm-1 col-form-laebl text-right">계좌번호</label>
+									<label class="col-sm-2 col-form-laebl text-right">계좌번호</label>
 									<div class="col-sm-4">
 										<input class="form-control" type="text" id="businessAccountNumber" name="businessAccountNumber"placeholder="계좌번호를 입력하세요">
 									</div>
 								</div>
 								
 								<div class="form-group row">
-									<label class="col-sm-1 col-form-laebl text-right">예금주</label>
+									<label class="col-sm-2 col-form-laebl text-right">예금주</label>
 									<div class="col-sm-4">
 										<input class="form-control" type="text" id="businessAccountHolder" name="businessAccountHolder" placeholder="예금주를 입력하세요">
 									</div>
@@ -119,7 +173,7 @@
 									<button type="submit" class="btn btn-success" id="addBusinessRegistrationBtn"> 등록 </button>
 									<button type="button" class="btn btn-default float-right" id="cancleBusinessRegistrationBtn"> 취소 </button>
 								</div>
-							</form>
+						<	</form> 
 							</div>
 						</div>
 					</div>
@@ -129,8 +183,38 @@
 			<!-- /.container-fluid -->
 		</div>
 		<!-- /.content -->
-	</div>
-	</div>
-	<!-- /.content-wrapper -->
+	<script type="text/javascript">
+	$('#idCheckBtn').click(function(){
+		var clientId = $('#clientId').val();
+		
+		//유성 중복확인 
+		var request = $.ajax({
+			  url: "/sw/business/idCheck",
+			  method: "POST",
+			  data: { clientId : clientId },
+			  dataType: "text"
+			});
+		
+		request.done(function(data) {
+			if(clientId != null && clientId != ""){
+				if(data == "true"){
+					alert('회원가입 불가능');
+					$('#addClientForm input').not('#clientId').prop('disabled', true);
+					$('#addClientForm select').prop('disabled', true);
+					$('#addClientForm button').not('#idCheckBtn').prop('disabled', true);
+				}else{
+					alert('회원가입 가능');
+					$('#addClientForm input').not('#clientId').prop('disabled', false);
+					$('#addClientForm select').prop('disabled', false);
+					$('#addClientForm button').not('#idCheckBtn').prop('disabled', false);
+				}
+			}else{
+				alert('공백에러!');
+			}
+		});
+	});
+	
+	</script>
+	
 </th:block>
 </html>
