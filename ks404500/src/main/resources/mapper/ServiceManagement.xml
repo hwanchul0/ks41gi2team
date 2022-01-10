@@ -12,7 +12,7 @@
 		<result column="servicePeriod" 					property="servicePeriod"/>
 		<result column="serviceStatus" 					property="serviceStatus"/>
 		<result column="serviceRegistrationDate" 		property="serviceRegistrationDate"/>
-		<result column="serviceDeleteDate" 				property="serviceDeleteDate"/>
+		<result column="serviceModifyDate" 				property="serviceModifyDate"/>
 	</resultMap>
 		<!--  서비스 현황 조회 -->
 		<select id="getServiceManagement" parameterType="String" resultMap="serviceManagementResultMap">
@@ -76,7 +76,7 @@
 				serviceCode=#{serviceCode};
 		</update>
 		
-		<!-- 서비스 정보 -->
+		<!-- 서비스 정보 조회-->
 		<select id="getServiceInfo" parameterType="String" resultMap="serviceManagementResultMap">
 			SELECT
 				 s.serviceCode
@@ -87,10 +87,18 @@
 				,s.servicePeriod
 				,s.serviceStatus
 				,s.serviceRegistrationDate
+				,s.serviceModifyDate
 			FROM 
 				k2_sw_serviceManagement AS s
 			WHERE 
 				serviceCode = #{serviceCode};
 		</select>
 		
+		<delete id="deleteService" parameterType="ServiceManagement">
+			DELETE
+			FROM
+				k2_sw_serviceManagement
+			WHERE
+			serviceCode=#{serviceCode};
+		</delete>
 </mapper>

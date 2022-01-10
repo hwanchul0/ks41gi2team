@@ -40,6 +40,10 @@ public class ServiceManagementService {
 	public ServiceManagement getServiceInfo(String serviceCode) {
 		return serviceManagementMapper.getServiceInfo(serviceCode);
 	}
+	// 서비스 삭제
+	public int deleteService(ServiceManagement serviceManagement) {
+		return serviceManagementMapper.deleteService(serviceManagement);
+	}
 		
 
 }

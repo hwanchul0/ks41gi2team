@@ -1,6 +1,7 @@
 package ksmart41_teamtest.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,10 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ksmart41_teamtest.dto.ServiceRequest;
 import ksmart41_teamtest.dto.PaymentState;
@@ -39,7 +43,44 @@ public class SwServiceController {
 		this.serviceManagementSerivce = serviceManagementSerivce;
 		this.servicePaymentService = servicePaymentService;
 	}
+	// sw - 계약요청 / sw서비스 / 계약요청 등록
+	@GetMapping("/serviceRequest/addServiceRequest")
+	public String addServiceRequest() {
+		
+		return "sw/service/serviceRequest/addServiceRequest";
+	}
+	// sw - 계약요청 등록 / client 내 사업장별 대표코드 조회하기 modal
+	@PostMapping("/findMyMainBizCode")
+	@ResponseBody
+	public List<Map<String, Object>> findMyMainBizCode(){
+		List<Map<String, Object>> myMainBizCode = serviceRequestService.findMyMainBizCode();
+		log.info("PostMapping 계약요청 등록 - 내 사업장별 대표코드 조회 결과 :{}" , myMainBizCode);
+		return myMainBizCode;
+	}
+	// 계약요청 수정 페이지
+	@GetMapping("/serviceRequest/modifyServiceRequest")
+	public String modifyServiceRequest(Model model) {
+		
+		return "sw/service/serviceRequest/modifyServiceRequest";
+	}
+	// 계약요청 삭제 페이지
+	@GetMapping("/serviceRequest/deleteServiceRequest")
+	public String deleteServiceRequest(Model model) {
+		
+		return "sw/service/serviceRequest/deleteServiceRequest";
+	}
 	
+	// sw - client 본인 계약요청 전체 조회
+	@GetMapping("/serviceRequest/selectServiceRequest") 
+	  public String getRequestList(Model model) { 
+	  List<ServiceRequest> getRequestList = serviceRequestService.getRequestList();
+	  model.addAttribute("title", "계약요청 개인조회"); 
+	  model.addAttribute("getRequestList", getRequestList);
+
+	  return "sw/service/serviceRequest/selectServiceRequest"; 
+	  }
+	
+	// 서비스 결제예정 관리 =================================================
 	
 	// 서비스 결제 예정 조회 (sw 개발사)
 	@GetMapping("/servicePaymentSum")
@@ -79,7 +120,7 @@ public class SwServiceController {
 		return "redirect:/sw/service/servicePaymentSum";
 	}
 	
-	
+	// /서비스 결제예정 관리 =================================================================
 	
 	// 계약요청 전체 조회 (sw개발사)
 	@GetMapping("/serviceRequest/selectAllServiceRequest") 
@@ -111,16 +152,38 @@ public class SwServiceController {
 		
 		return "sw/service/serviceRequest/detailServiceRequest";
 	}
-	// 서비스 계약요청 상세페이지 끝
+	// 서비스 계약요청 상세페이지 끝 ======================================================
 	
+	
+	// 서비스 삭제 페이지
+	@PostMapping("/deleteServiceManagement")
+	public String deleteService(ServiceManagement serviceManagement) {
+		log.info("서비스 삭제 페이지 / 입력받은 서비스 코드 : {}", serviceManagement);
+		serviceManagementSerivce.deleteService(serviceManagement);
+		
+		return "redirect:/sw/service/selectServiceManagement";
+	}
+	@GetMapping("/deleteServiceManagement")
+	public String deleteService(@RequestParam(value="serviceCode", required = false) String serviceCode
+								,Model model) {
+		log.info("deleteServiceManagement serviceCode : {}", serviceCode);
+		model.addAttribute("title", "서비스 수정화면");
+		//서비스 정보
+		if(serviceCode != null && !"".equals(serviceCode)) {
+			ServiceManagement ServiceInfo = serviceManagementSerivce.getServiceInfo(serviceCode);
+			model.addAttribute("ServiceInfo", ServiceInfo);
+		}
+		
+		return "sw/service/deleteServiceManagement";
+	}
 	// 서비스 현황(정보) 
-		@GetMapping("/selectServiceManagement")
-		public String getServiceManagement(Model model) {
-			List<ServiceManagement> getServiceManagement = serviceManagementSerivce.getServiceManagement();
-			model.addAttribute("title", "서비스 현황");
-			model.addAttribute("getServiceManagement", getServiceManagement);
-			
-			return "sw/service/selectServiceManagement";
+	@GetMapping("/selectServiceManagement")
+	public String getServiceManagement(Model model) {
+		List<ServiceManagement> getServiceManagement = serviceManagementSerivce.getServiceManagement();
+		model.addAttribute("title", "서비스 현황");
+		model.addAttribute("getServiceManagement", getServiceManagement);
+		
+		return "sw/service/selectServiceManagement";
 	}
 	// 서비스 등록 페이지
 	@GetMapping("/addServiceManagement")
@@ -177,11 +240,6 @@ public class SwServiceController {
 		
 		return "sw/service/modifyServiceManagement";
 	}
-	// 서비스 삭제 페이지
-	@GetMapping("/deleteServiceManagement")
-	public String deleteService(Model model) {
-		
-		return "sw/service/deleteServiceManagement";
-	}
+
 	
 }

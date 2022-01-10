@@ -9,7 +9,7 @@ public class ServiceManagement {
 	private String servicePeriod;
 	private String serviceStatus;
 	private String serviceRegistrationDate;
-	private String serviceDeleteDate;
+	private String serviceModifyDate;
 	
 	public String getServiceCode() {
 		return serviceCode;
@@ -59,11 +59,11 @@ public class ServiceManagement {
 	public void setServiceRegistrationDate(String serviceRegistrationDate) {
 		this.serviceRegistrationDate = serviceRegistrationDate;
 	}
-	public String getServiceDeleteDate() {
-		return serviceDeleteDate;
+	public String getServiceModifyDate() {
+		return serviceModifyDate;
 	}
-	public void setServiceDeleteDate(String serviceDeleteDate) {
-		this.serviceDeleteDate = serviceDeleteDate;
+	public void setServiceModifyDate(String serviceModifyDate) {
+		this.serviceModifyDate = serviceModifyDate;
 	}
 	@Override
 	public String toString() {
@@ -85,7 +85,7 @@ public class ServiceManagement {
 		builder.append(", serviceRegistrationDate=");
 		builder.append(serviceRegistrationDate);
 		builder.append(", serviceDeleteDate=");
-		builder.append(serviceDeleteDate);
+		builder.append(serviceModifyDate);
 		builder.append(", serviceApprovalDate=");
 		builder.append("]");
 		return builder.toString();
