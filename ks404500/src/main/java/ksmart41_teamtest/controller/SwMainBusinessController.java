@@ -101,4 +101,33 @@ public class SwMainBusinessController {
 		return "sw/business/selectMainBusinessCode";
 	}
 	
+	/* 유성 사업장 대표코드 수정 */
+	@PostMapping ("/modifyMainBusinessCode")
+	public String modifyMainBusinessCode(MainBusinessCode mainBusinessCode) {
+		mainBusinessCodeService.modifyMainBusinessCode(mainBusinessCode);
+		return "redirect:/sw/business/selectMainBusinessCode";
+	}
+	
+	@GetMapping ("/modifyMainBusinessCode")
+	public String modifyMainBusinessCode(@RequestParam(value ="mainBusinessCode", required = false) String mainBusinessCode,
+										Model model) {
+		System.out.println(mainBusinessCode + "받아온 mainBusinessCode(controller)");
+		if(mainBusinessCode != null && !"".equals(mainBusinessCode)) {
+			MainBusinessCode mainBusinessCodeInfo = mainBusinessCodeService.mainBusinessCodeInfo(mainBusinessCode);
+			model.addAttribute("mainBusinessCodeInfo", mainBusinessCodeInfo);
+			
+			//merge 코드 받아오기
+			List<MainBusinessCode> merge = mainBusinessCodeService.getMergeCode();
+			model.addAttribute("merge", merge);
+		}
+		model.addAttribute("title", "사업장 대표코드 수정");
+		return "sw/business/modifyMainBusinessCode";
+		
+	
+	}
+	/* 유성 사업장 대표코드 삭제 */
+	@RequestMapping ("/deleteMainBusinessCode")
+	public @ResponseBody int deleteMainBusinessCode (MainBusinessCode mainBusinessCode)  {
+		return mainBusinessCodeService.deleteMainBusinessCode(mainBusinessCode);
+	}
 }
