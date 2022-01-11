@@ -52,7 +52,7 @@ layout:decorate="@{layout/default-sw}">
 								<div class="form-group row">
 									<label class="col-sm-2 col-form-laebl text-right">거래처 구분 코드</label>
 									<div class="col-sm-2">
-											<select class="form-control" name="mainBusinessCode" id="mainBusinessCode" style="height: 85%">
+											<select class="form-control" name="BusinessCode" style="height: 85%">
                                                    <option value=""> ::거래처 구분 코드 선택:: </option>
                                                 <th:block th:if="${not #lists.isEmpty(merge)}"
                                                          th:each="mbc : ${merge}">
