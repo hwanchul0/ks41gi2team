@@ -6,115 +6,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <th:block layout:fragment="customJs">
-	<script type="text/javascript">
-		//라디오버튼(발행내역 선택) 유효성검사
-		$(document).ready(function() {
-			$('#sign').click(function() {
-				var Category1 = $('.radioButton');
-				if ($(':radio[class="radioButton"]:checked').length < 1) {
-					alert('발행대상을 선택해주세요');
-					return false;
-				}
-			});
-		});
-
-		//합계금액 계산하기
-		$(function() {
-			$('input.money1').on('keyup', function() {
-				var cnt = $(".exam input.num_sum").length;
-				console.log(cnt);
-
-				for (var i = 1; i < cnt; i++) {
-					var sum = parseInt($(this).val() || 0);
-					sum++
-					console.log(sum);
-				}
-
-				var sum1 = parseInt($("#fn_type1_price").val() || 0); // input 값을 가져오며 계산하지만 값이 없을경우 0이 대입된다  뒷부분에 ( || 0 ) 없을경우 합계에 오류가 생겨 NaN 값이 떨어진다
-				var sum2 = parseInt($("#fn_type2_price").val() || 0);
-				var sum3 = parseInt($("#fn_type3_price").val() || 0);
-				var sum4 = parseInt($("#fn_type4_price").val() || 0);
-
-				var sum = sum1 + sum2 + sum3 + sum4;
-				//console.log(sum);
-				$("#fn_total").val(sum);
-
-			});
-		});
-
-
-//라디오 버튼 클릭시 값 가져오기
-$(document).ready(function() {
-	$('.radioButton').click(function() {
-
-					var str = ""
-					var tdArr = new Array(); // 배열 선언
-					var checkBtn = $(this);
-
-					var tr = checkBtn.parent().parent();
-					var td = tr.children();
-					td.each(function(i) {
-					tdArr.push(td.eq(i).text());
-				});
-
-					console.log("클릭한 Row의 모든 데이터 : "
-									+ td.text());
-
-						// 반복문을 이용해서 배열에 값을 담음
-						td.each(function(i) {
-						tdArr.push(td.eq(i).text());
-					});
-
-					/*console.log("사업장명"+tdArr[1]); //사업장명
-					console.log("대표자명"+tdArr[2]); //대표자명
-					console.log(tdArr[3]); //사업자번호
-					console.log("주소"+tdArr[4]); //주소
-					console.log("이메일"+ tdArr[5]); //이메일
-					console.log("6"+ tdArr[6]); //업태
-					console.log(tdArr[7]); //업종
-					console.log(tdArr[8]); //서비스명
-					console.log(tdArr[9]); //일수
-					console.log(tdArr[10]); //수량
-					console.log(tdArr[11]); //계약코드
-					console.log(tdArr[12]); //공급가
-					console.log("세액"+tdArr[13]); //세액
-					console.log(tdArr[14]); //합계
-					console.log(tdArr[15]); //일자
-					console.log(tdArr[16]); //mainBusinessCodeDemand*/
-					
-					/*일반 발행*/
-					document.getElementById("businessName").value = tdArr[1]; //사업장명
-					document.getElementById("invoiceDemandName").value = tdArr[2]; //대표자명
-					document.getElementById("invoiceDemandBizNumber").value = tdArr[3]; //사업자번호
-					document.getElementById("invoiceDemandEmail1").value = tdArr[5]; //이메일
-					document.getElementById("invoiceDemandAddr").value = tdArr[4]; //주소
-					document.getElementById("invoiceDemandType1").value = tdArr[6]; //업태
-					document.getElementById("invoiceDemandType2").value = tdArr[7]; //업종
-					document.getElementById("serviceCode").value = tdArr[8]; //서비스명
-					document.getElementById("servicePeriod").value = tdArr[9]; //일수
-					document.getElementById("serviceAmount").value = tdArr[10]; //수량
-					document.getElementById("contractManageCode").value = tdArr[11]; //계약코드 estimate
-					document.getElementById("invoicePrice").value = tdArr[12]; //공급가
-					document.getElementById("invoiceTax").value = tdArr[13]; //세액
-					document.getElementById("serviceTotalPrice").value = tdArr[14]; //합계
-					document.getElementById("serviceRegistrationDate").value = tdArr[15]; //일자
-					document.getElementById("mainBusinessCodeDemand").value = tdArr[16]; //mainBusinessCodeDemand
-					/*세부 발행*/
-					document.getElementById("invoiceDetailProduct").value = tdArr[8]; //서비스명
-					document.getElementById("invoiceDetailQty").value = tdArr[10]; //수량
-					document.getElementById("invoiceDetailUnitPrice").value = tdArr[12]; //공급가
-					document.getElementById("invoiceDetailTax").value = tdArr[13]; //세액
-					var invoiceDetail = Math.round(tdArr[12] / tdArr[10]);
-					//console.log(invoiceDetail);
-					document.getElementById("invoiceDetail").value = invoiceDetail; //단가
-
-				});
-});
-		
+<script type="text/javascript">
 $(document).ready(function(){
-	//탬 메뉴1번 첫번째로 보이기
+	//탭 메뉴1번 첫번째로 보이기
 	$('a[href="#tabmenu_01"]').tab('show');
-	//유효성 검사
+
+})
+
+//유효성 검사
+$(document).ready(function(){
 	$('#sign').click(function(){
 		if($('#invoiceRegDate').val().length == 0){
 			alert('작성일자를 입력하세요');
@@ -128,11 +28,23 @@ $(document).ready(function(){
 			alert('세부발행의 수량를 입력하세요');
 			return false;
 		}
+		if($('#invoicePrice').val().length == 0){
+			alert('공급가를 입력하세요.');
+			return false;
+		}
+		if($('#invoiceTax').val().length == 0){
+			alert('세액를 입력하세요.');
+			return false;
+		}
+		if($('#amendedInvoiceCode').val().length == 0){
+			alert('수정사유를 입력하세요.');
+			return false;
+		}
 	})
 })
 
 
-	</script>
+</script>
 </th:block>
 
 <th:block layout:fragment="customContents">
@@ -143,7 +55,7 @@ $(document).ready(function(){
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1>"addInvoice / 개발사 세금계산서 발행"</h1>
+						<h1>"amendInvoice / 개발사 세금계산서 수정발행"</h1>
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
@@ -166,65 +78,41 @@ $(document).ready(function(){
 						<!-- Horizontal Form -->
 						<div class="card card-primary">
 							<div class="card-header">
-								<h3 class="card-title">세금계산서 발행</h3>
+								<h3 class="card-title">수정 세금계산서 발행</h3>
 							</div>
 							<!-- /.card-header -->
 							<!-- form start -->
-							<form class="form-horizontal"
-								th:action="@{/sw/accounting/addInvoice}" method="post">
+							<form class="form-horizontal" th:action="@{/sw/accounting/amendInvoice}" method="post">
 								<div class="card-body">
-									<label for="biz" class="col-sm-12 col-form-label">세금계산서
-										발행대상</label>
+									<label for="biz" class="col-sm-12 col-form-label">기존 발행된 세금계산서 정보</label>
 
 									<table class="table table-hover table-condensed"
 										style="font-size: 12px;">
 										<thead>
 											<tr>
-												<th>선택</th>
-												<th>사업장명</th>
-												<th>대표자명</th>
+												<th>코드번호</th>
+												<th>작성일자</th>
 												<th>사업자번호</th>
-												<th>주소</th>
-												<th>이메일</th>
-												<th>업태</th>
-												<th>업종</th>
-												<th>서비스명</th>
-												<th>일수</th>
-												<th>수량</th>
-												<th>계약코드</th>
+												<th>사업장명</th>
 												<th>공급가</th>
 												<th>세액</th>
-												<th>합계</th>
-												<th>일자</th>
-												<th>사업장대표코드</th>
 											</tr>
 										</thead>
 										<tbody>
-											<tr th:if="${not #lists.isEmpty(getInvoiceInfo)}"
-												th:each="g: ${getInvoiceInfo}">
-												<td><input type="radio" name="list" class="radioButton"></td>
-												<td th:text="${g.businessName}"></td>
-												<td th:text="${g.businessRepresentativeName}"></td>
-												<td th:text="${g.businessNumber}"></td>
-												<td th:text="${g.businessAddr}"></td>
-												<td th:text="${g.businessEmail}"></td>
-												<td th:text="${g.businessType1}"></td>
-												<td th:text="${g.businessType2}"></td>
-												<td th:text="${g.serviceCode}"></td>
-												<td th:text="${g.serviceAmount}"></td>
-												<td th:text="${g.servicePeriod}"></td>
-												<td th:text="${g.contractManageCode}"></td>
-												<td th:text="${g.nontax}"></td>
-												<td th:text="${g.tax}"></td>
-												<td th:text="${g.serviceTotalPrice}"></td>
-												<td th:text="${g.serviceRegistrationDate}"></td>
-												<td th:text="${g.mainBusinessCode}"></td>
+											<tr th:if="${not #lists.isEmpty(amendInvoice)}" th:each="a: ${amendInvoice}">
+												<td th:text="${a.invoiceCode}"></td>
+												<td th:text="${#dates.format(a.invoiceRegDate,'yyyy-MM-dd')}"></td>
+												<td th:text="${a.invoiceDemandBizNumber}"></td>
+												<td th:text="${a.invoiceDemand}"></td>
+												<td th:text="${a.invoicePrice}"></td>
+												<td th:text="${a.invoiceTax}"></td>
 											</tr>
-											<tr th:unless="${not #lists.isEmpty(getInvoiceInfo)}">
+											<tr th:unless="${not #lists.isEmpty(amendInvoice)}">
 												<td>내역이 없습니다.</td>
 											</tr>
 										</tbody>
 									</table>
+									
 
 									<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
 
@@ -242,8 +130,18 @@ $(document).ready(function(){
 														style="font-size: 14px;">코드번호</label>
 													<div class="col-sm-2">
 														<input type="text" class="form-control"
-															th:value="${invoiceCode.addInvoiceCode}" id="invoiceCode"
+															th:value="${amendInvoice.invoiceCode}" id="invoiceCode"
 															name="invoiceCode" style="height: 100%"
+															readonly="readonly">
+													</div>
+												</div>
+												<div class="form-group row">
+													<label for="addInvoiceCode" class="col-sm-2 col-form-label"
+														style="font-size: 14px;">수정발행 코드번호</label>
+													<div class="col-sm-2">
+														<input type="text" class="form-control"
+															th:value="${newcode.addInvoiceCode}" id="addInvoiceCode"
+															name="addInvoiceCode" style="height: 100%"
 															readonly="readonly">
 													</div>
 												</div>
@@ -276,12 +174,37 @@ $(document).ready(function(){
 														style="font-size: 14px;">수정여부</label>
 													<div class="col-sm-2">
 														<div class="form-group">
-															<select class="form-control" name="amendCheck"
-																style="height: 85%">
-																<option value="N">일반</option>
-																<option value="Y">수정</option>
+															<select class="form-control" name="amendedInvoiceCode" id="amendedInvoiceCode" style="height: 85%">
+								      							<option value=""> :: 수정 사유 선택 :: </option>
+																<th:block th:if="${not #lists.isEmpty(invoiceReason)}"
+								      									th:each="i : ${invoiceReason}">
+								      							<option th:value="${i.amendedInvoiceReasonCode}" th:text="${i.amendedInvoiceReasonName}" >
+								      								[[${i.amendedInvoiceReasonName}]]
+								      							</option>
+								      						</th:block>
+								      						<th:block th:unless="${not #lists.isEmpty(invoiceReason)}">
+								      							<option>수정사유를 등록해주세요</option>
+								      						</th:block>
 															</select>
 														</div>
+													</div>
+												</div>
+												<div class="form-group row">
+													<label for="invoicePrice" class="col-sm-2 col-form-label"
+														style="font-size: 14px;">공급가</label>
+													<div class="col-sm-2">
+														<input type="number" class="form-control money1"
+															placeholder="" id="invoicePrice" name="invoicePrice" value="0"
+															style="height: 85%" min="0">
+													</div>
+												</div>
+												<div class="form-group row">
+													<label for="invoiceTax" class="col-sm-2 col-form-label"
+														style="font-size: 14px;">세액</label>
+													<div class="col-sm-2">
+														<input type="number" class="form-control money1"
+															placeholder="" id="invoiceTax" name="invoiceTax" value="0"
+															style="height: 85%" min="0">
 													</div>
 												</div>
 												<div class="form-group row">
@@ -360,10 +283,18 @@ $(document).ready(function(){
 											&nbsp;
 												<!-- 세부발행코드 -->
 												<div class="form-group row">
-													<label for="invoiceNewDetailCode"
+													<label for="invoiceDetailCode"
 														class="col-sm-2 col-form-label" style="font-size: 14px;">세부발행코드</label>
 													<div class="col-sm-2">
-														<input type="text" class="form-control"th:value="${invoiceDetailCode.invoiceNewDetailCode}" id="invoiceNewDetailCode"  name="invoiceDetailCode" style="height: 100%"
+														<input type="text" class="form-control"th:value="${amendInvoice.invoiceDetailCode}" id="invoiceDetailCode"  name="invoiceDetailCode" style="height: 100%"
+															readonly="readonly">
+													</div>
+												</div>
+												<div class="form-group row">
+													<label for="invoiceNewDetailCode"
+														class="col-sm-2 col-form-label" style="font-size: 14px;">수정발행 세부발행코드</label>
+													<div class="col-sm-2">
+														<input type="text" class="form-control"th:value="${invoiceDetailCode.invoiceNewDetailCode}" id="invoiceNewDetailCode"  name="invoiceNewDetailCode" style="height: 100%"
 															readonly="readonly">
 													</div>
 												</div>
@@ -454,93 +385,11 @@ $(document).ready(function(){
 									<div style="display: none">
 										<!-- businessName -->
 										<div class="col-sm-2">
-											<input type="text" class="form-control num_sum"
+											<input type="text" class="form-control"
 												id="businessName" name="invoiceDemand" style="height: 85%">
 										</div>
-										<!-- invoiceDemandName -->
-										<div class="col-sm-2">
-											<input type="text" class="form-control"
-												id="invoiceDemandName" name="invoiceDemandName"
-												style="height: 85%">
-										</div>
-										<!-- invoiceDemandBizNumber -->
-										<div class="col-sm-2">
-											<input type="text" id="invoiceDemandBizNumber"
-												name="invoiceDemandBizNumber" style="height: 85%">
-										</div>
-										<!-- businessName -->
-										<div class="col-sm-2">
-											<input type="text" class="form-control"
-												id="invoiceDemandEmail1" name="invoiceDemandEmail1"
-												style="height: 85%">
-										</div>
-										<!-- invoiceDemandAddr -->
-										<div class="col-sm-2">
-											<input type="text" class="form-control"
-												id="invoiceDemandAddr" name="invoiceDemandAddr"
-												style="height: 85%">
-										</div>
-										<!-- invoiceDemandType1 -->
-										<div class="col-sm-2">
-											<input type="text" class="form-control"
-												id="invoiceDemandType1" name="invoiceDemandType1"
-												style="height: 85%">
-										</div>
-										<!-- invoiceDemandType2 -->
-										<div class="col-sm-2">
-											<input type="text" class="form-controlm"
-												id="invoiceDemandType2" name="invoiceDemandType2"
-												style="height: 85%">
-										</div>
-										<!-- serviceCode -->
-										<div class="col-sm-2">
-											<input type="text" class="form-control" id="serviceCode"
-												name="serviceCode" style="height: 85%">
-										</div>
-										<!-- servicePeriod -->
-										<div class="col-sm-2">
-											<input type="text" class="form-control" id="servicePeriod"
-												name="servicePeriod" style="height: 85%">
-										</div>
-										<!-- serviceAmount -->
-										<div class="col-sm-2">
-											<input type="text" class="form-control" id="serviceAmount"
-												name="serviceAmount" style="height: 85%">
-										</div>
-										<!-- invoicePrice -->
-										<div class="col-sm-2">
-											<input type="number" class="form-control" id="invoicePrice"
-												name="invoicePrice" style="height: 85%">
-										</div>
-										<!-- invoiceTax-->
-										<div class="col-sm-2">
-											<input type="number" class="form-control" id="invoiceTax"
-												name="invoiceTax" style="height: 85%" min="0">
-										</div>
-										<!-- serviceTotalPrice -->
-										<div class="col-sm-2">
-											<input type="text" class="form-control num_sum"
-												id="serviceTotalPrice" name="serviceTotalPrice"
-												style="height: 85%" min="0">
-										</div>
-										<!-- serviceRegistrationDate -->
-										<div class="col-sm-2">
-											<input type="text" class="form-control num_sum"
-												id="serviceRegistrationDate" name="serviceRegistrationDate"
-												style="height: 85%" min="0">
-										</div>
-										<!--mainBusinessCodeDemand -->
-										<div class="col-sm-2">
-											<input type="text" class="form-control"
-												id="mainBusinessCodeDemand" name="mainBusinessCodeDemand"
-												style="height: 85%">
-										</div>
-										<!--contractManageCode -->
-										<div class="col-sm-2">
-											<input type="text" class="form-control"
-												id="contractManageCode" name="contractManageCode"
-												style="height: 85%">
-										</div>
+
+
 									</div>
 									<!-- /hidden -->
 								</div>

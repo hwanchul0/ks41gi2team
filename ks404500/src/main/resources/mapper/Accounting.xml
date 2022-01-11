@@ -2,8 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ksmart41_teamtest.mapper.AccountingMapper">
 
+	<resultMap type="GetInvoiceInfo" id="GetInvoiceInfoResultMap">
+		<result column="mainBusinessCode"				property="mainBusinessCode"/>
+		<result column="businessName"				property="businessName"/>
+		<result column="contractManageCode"				property="contractManageCode"/>
+
+	</resultMap>
+
 	<!--유경 : 세금계산서 발행화면- 계약내용 조회  -->
-	<select id="getAddByBizInvoice" resultType="GetInvoiceInfo">
+	<select id="getAddByBizInvoice" resultType="GetInvoiceInfo" resultMap="GetInvoiceInfoResultMap">
 		SELECT
 			main.mainBusinessCode,
 	        biz.businessName,
@@ -54,14 +61,130 @@
 	
 	<!--개발사 세금계산서 등록시 코드 증가  -->
 	<select id="getInvoiceCode" resultType="InvoiceList">
-	SELECT CONCAT('code_',replace(CURDATE(),'-',''), '_',(SELECT LPAD(COUNT(*)+1,3,'0') FROM k0_invoice )) as addInvoiceCode
+	SELECT CONCAT('code_',replace(CURDATE(),'-',''),'_',(SELECT LPAD(max(SUBSTRING((invoiceCode),15,3))+1,3,'0') FROM k0_invoice )) as addInvoiceCode
 
 	</select>
 	
 	<!-- 개발사 세금계산서 등록시  세부발행 코드 증가   -->
 	<select id="getInvoiceDetailCode" resultType="InvoiceList">
-	 SELECT CONCAT('detail_',right(CONCAT('code_',replace(CURDATE(),'-',''), '_',(SELECT LPAD(COUNT(*)+1,3,'0') FROM k0_invoice)),3))
-	 as invoiceNewDetailCode;
+		SELECT
+		CONCAT('detail_',max(substring(invoiceDetailCode,8,1))+1) as invoiceNewDetailCode
+		FROM
+		k0_invoiceDetail;
 	</select>
+	
+	<!-- 개발사 세금계산서 등록  -->
+	<insert id="addInvoiceByContract" parameterType="InvoiceList">
+	INSERT INTO k0_invoice
+		(invoiceCode,invoiceType,invoiceRegDate, 
+		invoiceSupplyBizNumber,invoiceSupplyNumber, 
+		invoiceSupply,invoiceSupplyName,invoiceSupplyAddr,
+		invoiceSupplyType1,invoiceSupplyType2,invoiceSupplyEmail, 
+		mainBusinessCodeDemand,invoiceDemandBizNumber,invoiceDemandNumber, 
+		invoiceDemand,invoiceDemandName,invoiceDemandAddr, 
+		invoiceDemandType1,invoiceDemandType2,invoiceDemandEmail1, 
+		invoiceDemandEmail2,invoicePrice,invoiceTax, 
+		invoiceNote,invoiceState,cash, 
+		invoiceCheck,draft,accountsReceivable, 
+		confirm,amendCheck,
+		contractManageCode)
+	VALUES 
+		(#{invoiceCode},#{invoiceType}, #{invoiceRegDate}
+		, '111-11-1111', '',
+		 '2team404500', '이팀', '전북 전주시 덕진구',
+		'전자상거래', '전자상거래', '404500@naver.com', 
+		#{mainBusinessCodeDemand}, #{invoiceDemandBizNumber}, #{invoiceDemandNumber},
+		#{invoiceDemand}, #{invoiceDemandName}, #{invoiceDemandAddr},
+		#{invoiceDemandType1}, #{invoiceDemandType2}, #{invoiceDemandEmail1},
+		#{invoiceDemandEmail2}, #{invoicePrice}, #{invoiceTax},
+		#{invoiceNote}, '1)정상_발행완료', #{cash}, 
+		#{invoiceCheck}, #{draft}, #{accountsReceivable}, 
+		#{confirm}, #{amendCheck},
+		 #{contractManageCode})
+	</insert>
+	
+	<!--유경 -  세금계산서 세부발행 등록 -->
+	<insert id="addDetailInvoiceByContract" parameterType="InvoiceList">
+		INSERT INTO k0_invoiceDetail
+			(invoiceDetailCode, invoiceCode, swIsCode,
+			 invoiceDetailDate, invoiceDetailProduct,
+			invoiceDetailStandard, invoiceDetailQty, invoiceDetail,
+			invoiceDetailUnitPrice, invoiceDetailTax, invoiceDetailNote)
+		VALUES 
+			(#{invoiceDetailCode}, #{invoiceCode}, #{swIsCode},
+			#{invoiceDetailDate}, #{invoiceDetailProduct}, #{invoiceDetailStandard},
+			#{invoiceDetailQty}, #{invoiceDetail}, #{invoiceDetailUnitPrice},
+			#{invoiceDetailTax}, #{invoiceDetailNote});
+	</insert>
+	
+	<!-- 유경 수정세금계산서 발행 정보받아오기 -->
+	<select id="getAmendInvoice" resultType="InvoiceList" >
+				SELECT
+					 *
+				FROM
+					k0_invoice AS i
+				INNER join
+					k0_invoiceDetail AS d
+					on
+					i.invoiceCode = d.invoiceCode
+				WHERE i.invoiceCode = #{invoiceCode};
+	</select>
+	
+	<!-- 유경 수정세금계산서 수정발행 -->
+	<update id="amendInvoicByDefault" parameterType="InvoiceList">
+	UPDATE k0_invoice
+	SET
+		amendCheck='Y',
+		amendedInvoiceCode = #{amendedInvoiceCode}
+	WHERE invoiceCode = #{invoiceCode};
+	</update> 
+	
+	<!-- 유경 수정세금계산서 일반발행 1건 추가 발행 -->
+	<insert id="addAmendInvoice" parameterType="InvoiceList">
+	INSERT INTO k0_invoice 
+		(invoiceCode, invoiceType, invoiceRegDate, 
+		invoiceSupplyBizNumber, invoiceSupplyNumber, invoiceSupply, 
+		invoiceSupplyName, invoiceSupplyAddr, invoiceSupplyType1, 
+		invoiceSupplyType2, invoiceSupplyEmail, mainBusinessCodeDemand, 
+		invoiceDemandBizNumber, invoiceDemandNumber, invoiceDemand, 
+		invoiceDemandName, invoiceDemandAddr, invoiceDemandType1, 
+		invoiceDemandType2, invoiceDemandEmail1, invoiceDemandEmail2, 
+		invoicePrice, invoiceTax, invoiceNote, 
+		invoiceState, cash, invoiceCheck, draft, 
+		accountsReceivable, confirm, amendCheck, 
+		amendedInvoiceCode, contractManageCode) 
+	SELECT 
+		#{addInvoiceCode}, #{invoiceType}, #{invoiceRegDate}, 
+		invoiceSupplyBizNumber, invoiceSupplyNumber, invoiceSupply,
+		 invoiceSupplyName, invoiceSupplyAddr, invoiceSupplyType1, 
+		 invoiceSupplyType2, invoiceSupplyEmail, mainBusinessCodeDemand, 
+		 invoiceDemandBizNumber, invoiceDemandNumber, invoiceDemand, 
+		 invoiceDemandName, invoiceDemandAddr, invoiceDemandType1, 
+		 invoiceDemandType2, invoiceDemandEmail1, invoiceDemandEmail2, 
+		 #{invoicePrice}, #{invoiceTax}, #{invoiceNote}, 
+		 invoiceState, #{cash}, invoiceCheck,
+		  draft, accountsReceivable, confirm, 
+		  'Y', #{amendedInvoiceCode}, contractManageCode 
+	  FROM k0_invoice WHERE invoiceCode = #{invoiceCode};
+	
+	</insert>
+	
+	<!-- 유경 수정세금계산서 상세발행 1건 추가 발행 -->
+	<insert id="addDetailAmendInvoice" parameterType="InvoiceList">
+		INSERT INTO k0_invoiceDetail
+			(invoiceDetailCode, invoiceCode, swIsCode, 
+			invoiceDetailDate, invoiceDetailProduct, 
+			invoiceDetailStandard, invoiceDetailQty,
+			 invoiceDetail, invoiceDetailUnitPrice, 
+			 invoiceDetailTax, invoiceDetailNote)
+		SELECT 
+			#{invoiceNewDetailCode}, #{addInvoiceCode}, #{swIsCode},
+			#{invoiceDetailDate}, invoiceDetailProduct, 
+			#{invoiceDetailStandard}, #{invoiceDetailQty},
+			 #{invoiceDetail}, #{invoiceDetailUnitPrice}, 
+			 #{invoiceDetailTax}, #{invoiceDetailNote}
+		FROM k0_invoiceDetail
+		WHERE invoiceDetailCode = #{invoiceDetailCode};
+	</insert>
 
 </mapper>

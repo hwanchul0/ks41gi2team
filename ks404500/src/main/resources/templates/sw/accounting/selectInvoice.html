@@ -8,6 +8,7 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" rel="stylesheet">
 <script type="text/javascript">
+//테이블 검색
 $(document).ready(function(){
 	  $("#myInput").on("keyup", function() {
 	    var value = $(this).val().toLowerCase();
@@ -72,6 +73,7 @@ $(function(){
 										<thead>
 											<tr>
 												<th>세금계산서코드</th>
+												
 												<th>일자</th>
 												<th>유형</th>
 												<th>사업장대표코드</th>
@@ -82,6 +84,7 @@ $(function(){
 												<th>수정<br>여부
 												</th>
 												<th>미리<br>보기
+												<th>수정<br>발행
 												</th>
 											</tr>
 										</thead>
@@ -98,6 +101,9 @@ $(function(){
 												<td th:text="${il.amendCheck}"></td>
 												<td>
 													<a th:href="@{/sw/accounting/viewInvoice(invoiceCode=${il.invoiceCode})}"><i class="fas fa-search" ></i></a>
+												</td>
+												<td>
+													<a th:href="@{/sw/accounting/amendInvoice(invoiceCode=${il.invoiceCode})}"><i class="fas fa-pencil-alt"></i></a>
 												</td>
 											<tr th:unless="${not #lists.isEmpty(invoiceList)}">
 										</tbody>
