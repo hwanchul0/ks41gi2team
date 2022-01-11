@@ -19,7 +19,8 @@ public class InvoiceReasonService{
 	public InvoiceReasonService(CodeMapper codeMapper) {
 		this.codeMapper = codeMapper;
 	}
-
+	
+	//유경 - 세금계산서 수정사유
 	public List<InvoiceReason> getInvoiceReasonList() {
 		List<InvoiceReason> invoiceReason = codeMapper.getInvoiceReason();
 		//System.out.println(invoiceReason+"<---service");

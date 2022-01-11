@@ -25,7 +25,7 @@ public class ShopAddAccounting {
 	
 	//차트생성
 	private String mon; //월
-	private int chartPrice; //월합계
+	private String chartPrice; //월합계
 	
 	//마감확인
 	private String shopIncomeFinish; //마감확인
@@ -93,10 +93,10 @@ public class ShopAddAccounting {
 	public void setMon(String mon) {
 		this.mon = mon;
 	}
-	public int getChartPrice() {
+	public String getChartPrice() {
 		return chartPrice;
 	}
-	public void setChartPrice(int chartPrice) {
+	public void setChartPrice(String chartPrice) {
 		this.chartPrice = chartPrice;
 	}
 	public String getShopMemberId() {

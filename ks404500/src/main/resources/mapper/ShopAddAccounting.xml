@@ -124,7 +124,7 @@
 	, i.shopIncomeCode DESC
 	</select>
 	
-	<!-- 유경 - 쇼핑몰  매출 조회 차트-->
+	<!-- 유경 - 쇼핑몰  매출 조회 차트- 지웠나?? -->
 	<select id = "getSelectIncomeChart" resultType="ShopAddAccounting">
 		<!--  SELECT
 			CONCAT(MONTH((i.shopIncomeDate)),'월')AS mon,
@@ -150,14 +150,16 @@
 			shopIncomeCode = #{shopIncomeCode};
 	</select>
 	
+	<!--유경 - 쇼핑몰 매출 마감 -->
 	<update id="ShopIncomeFinish" parameterType="ShopAddAccounting">
 		UPDATE k2_shop_income
 		SET
 			shopIncomeFinish=#{shopIncomeFinish},
-			shopIncomeFinishDate=curdate()
+			shopIncomeFinishDate=CURDATE()
 		WHERE shopIncomeCode=#{shopIncomeCode};
 	</update>
 	
+	<!--유경 - 쇼핑몰 통합 회계 조회 중 비용 -->
 	<select id="getSelectTotalAccounting"  resultType="int">
 		SELECT
 			sum(t.shopTotalPrice) AS shopExpensePrice
@@ -167,4 +169,43 @@
 		AND
 			substring(t.shopGroupSlip,8,2) = '21'
 	</select>
+	
+	<!-- 유경 - 쇼핑몰 2021 매출 차트 조회 -->
+	<select id="getIncomeChart" resultType="ShopAddAccounting">
+		SELECT
+		 group_concat(CONCAT('"',monSub.mon,'"')) AS Mon
+		,group_concat(ifnull(statitics.total1, 0)) AS chartPrice
+	FROM 
+	(	SELECT
+			CONCAT(MONTH((i.shopIncomeDate)),'월')AS MON,
+			sum(i.finalIncomeVatImply)AS total1
+		FROM
+			k2_shop_income AS i
+			WHERE YEAR(i.shopIncomeDate) = 2021
+		GROUP BY MON ) AS statitics
+		RIGHT join
+		(SELECT '1월' AS mon UNION
+		SELECT '2월' AS mon UNION 
+		SELECT '3월' AS mon UNION 
+		SELECT '4월' AS mon UNION 
+		SELECT '5월' AS mon UNION 
+		SELECT '6월' AS mon UNION
+		SELECT '7월' AS mon union
+		SELECT '8월' AS mon union
+		SELECT '9월' AS mon union
+		SELECT '10월' AS mon union
+		SELECT '11월' AS mon union
+		SELECT '12월' AS mon ) AS monSub
+		ON 
+		statitics.MON = monSub.mon;
+	</select>
+	
+	<!-- 유경 - 쇼핑몰 매출 삭제 -->
+	<delete id="deleteIncome" parameterType="ShopAddAccounting">
+		DELETE
+		FROM
+				k2_shop_income
+		WHERE
+			shopIncomeCode = #{shopIncomeCode};
+	</delete>
 </mapper>

@@ -1,5 +1,6 @@
 package ksmart41_teamtest.dto;
 
+//세금계산서 수정사유
 public class InvoiceReason {
 	private String amendedInvoiceReasonCode;
 	private String amendedInvoiceReasonName;
