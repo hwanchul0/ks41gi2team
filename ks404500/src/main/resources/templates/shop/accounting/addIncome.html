@@ -5,8 +5,6 @@ layout:decorate="@{layout/default-shop}">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <th:block layout:fragment="customJs">
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" rel="stylesheet">
 <script>
 $(document).ready(function () {
     $('.radioButton').click(function () {
@@ -29,7 +27,7 @@ $(document).ready(function () {
 			});
 		
 			
-			/* console.log(tdArr[2]); //매출코드
+			/*console.log(tdArr[2]); //매출코드
 			console.log(tdArr[3]); //주문번호
 			console.log(tdArr[4]); //전표번호
 			console.log(tdArr[5]); //공급가액
@@ -59,23 +57,18 @@ $(document).ready(function () {
     });
    
   });
-  
-//테이블 페이징
-$(function(){
-	$('.table').footable({
-		"paging": {
-			"enabled": true,
-			"size": 5
-		},
-		"filtering": {
-			"enabled": false
-		},
-		"sorting": {
-			"enabled": true
-		}
+ 
+ //검색
 
+$(document).ready(function(){
+	  $("#myInput").on("keyup", function() {
+	    var value = $(this).val().toLowerCase();
+	    $("#myTable tr").filter(function() {
+	      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+	    });
+	  });
 	});
-});
+
 </script>
 </th:block>
 
@@ -116,11 +109,12 @@ $(function(){
 							<!-- form start -->
 							<form class="form-horizontal" th:action="@{/shop/accounting/addIncome}" method="post">
 								<div class="card-body">
+									<input class="form-control col-md-3" style="float : right" id="myInput" type="text" placeholder="검색어를 입력해주세요">
 									
 									<!-- 주문내역 테이블 시작 -->
 									<div style="width: 100%;">
 									<label for="biz" class="col-sm-6 col-form-label">주문내역 - 발행대상을 선택해주세요</label>
-									<table class="table table-hover table-condensed" style="font-size: 13px;">
+									<table class="table table-hover table-condensed" style="font-size: 13px; overflow-y : scroll; height: 150px;">
 										<thead>
 											<tr>
 												<th>선택</th>
@@ -136,7 +130,7 @@ $(function(){
 												<th>출고코드</th>
 											</tr>
 										</thead>
-										<tbody>
+										<tbody id="myTable">
 											<tr th:if="${not #lists.isEmpty(shopAddAccounting)}" th:each="a: ${shopAddAccounting}">
 												<td><input type="radio" th:disabled="${a.addIncome.equals('발행완료')}" name="list" class="radioButton"></td>
 												<td th:text="${a.addIncome}" ></td>
@@ -189,7 +183,7 @@ $(function(){
 										<label for="renontax" class="col-sm-2 col-form-label">공급가 </label>
 										<div class="col-sm-6">
 											<div class="col-sm-6">
-							                       <input type="text" name="renontax" readonly="readonly" id="renontax"style="width:220px;"></input>
+							                       <input type="number" name="renontax" readonly="readonly" id="renontax"style="width:220px;"></input>
 							                 </div>
 										</div>
 									</div>

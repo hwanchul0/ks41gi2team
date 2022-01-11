@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="@{layout/default-sw}">
 <meta charset="UTF-8">
@@ -49,6 +50,8 @@
 											<th>탈퇴이유</th>
 											<th>탈퇴날짜</th>
 											<th>가입일</th>
+											<th>수정</th>
+											<th>삭제</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -63,6 +66,8 @@
 											<td th:text="${sl.shopWithdrawalReason}"></td>
 											<td th:text="${sl.shopWithdrawalDate}"></td>
 											<td th:text="${sl.shopMemberReg}"></td>
+											<td><a th:href="@{/sw/client/modifyClient(memberId=${sl.shopMemberId})}">수정</a></td>
+											<td><button type="button" class="btn btn-primary deleteBtn" th:onclick="deleteBtn([[${sl.shopMemberId}]]);">삭제</button></td>
 										</tr>
 										<tr th:unless="${not #lists.isEmpty(shopmemberlist)}">
 											<td><h1>데이터 없음!</h1></td>

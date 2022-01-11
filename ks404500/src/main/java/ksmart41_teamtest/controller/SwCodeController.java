@@ -101,16 +101,7 @@ public class SwCodeController {
 	public String selectContractStateCode() {
 		return "sw/code/selectContractStateCode";
 	}
-	
-	@GetMapping("/addPaymentStateCode")
-	public String addPaymentStateCode() {
-		return "sw/code/addPaymentStateCode";
-	}
-	
-	@GetMapping("/selectPaymentStateCode")
-	public String selectPaymentStateCode() {
-		return "sw/code/selectPaymentStateCode";
-	}
+
 	
 	@GetMapping("/addContractRefundStateCode")
 	public String addContractRefundStateCode() {

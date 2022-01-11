@@ -16,4 +16,11 @@ public interface SeviceManagementMapper {
 	public List<ServiceManagement> getServiceManagement();
 	// 서비스 등록 - 서비스 코드 중복체크
 	public int serviceCheck(String serviceCode);
+	// 서비스 수정
+	public int modifyService(ServiceManagement serviceManagement);
+	// 서비스 정보 조회
+	public ServiceManagement getServiceInfo(String serviceCode);
+	// 서비스 제거
+	public int deleteService(ServiceManagement serviceManagement);
+		
 }

@@ -12,7 +12,7 @@ layout:decorate="@{layout/default-shop}">
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1 class="m-0">"selectPaymentState / 쇼핑몰 결제상태 코드 조회"</h1>
+						<h1 class="m-0" th:text="${title}"></h1>
 					</div><!-- /.col -->
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
@@ -31,11 +31,31 @@ layout:decorate="@{layout/default-shop}">
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="card">
+							<div class="card-header">
+								<h5 class="card-title" th:text="${title}"></h5>
+							</div>
 							<div class="card-body">
-								<h5 class="card-title">Card title</h5>
-								<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-								<a href="#" class="card-link">Card link</a>
-								<a href="#" class="card-link">Another link</a>
+								<table class="table table-hover table-coondensed" style="text-align: center;">
+									<thead>
+										<tr >
+											<td>결제 상태 코드</td>
+											<td>결제 상태</td>
+											<td>수정</td>
+											<td>삭제</td>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:if="${not #lists.isEmpty(paymentlist)}" th:each="pl : ${paymentlist}">
+											<td th:text="${pl.paymentStateCode}"></td>
+											<td th:text="${pl.paymentState}"></td>
+											<td><a th:href="@{/shop/code/modifyPaymentState(paymentStateCode=${pl.paymentStateCode})}">수정</a></td>
+											<td><button type="button" class="btn btn-primary deleteBtn" th:onclick="deleteBtn([[${pl.paymentStateCode}]])">삭제</button></td>
+										</tr>
+										<tr th:unless="${not #lists.isEmpty(paymentlist)}">
+											<td><h3>데이터가 없습니다..</h3></td>
+										</tr>
+									</tbody>
+								</table>
 							</div>
 						</div>
 					</div>

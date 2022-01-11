@@ -10,8 +10,16 @@ public class ServiceManagement {
 	private String serviceStatus;
 	private String serviceRegistrationDate;
 	private String serviceDeleteDate;
+	private String serviceModifyDate;
+	
 	public String getServiceCode() {
 		return serviceCode;
+	}
+	public String getServiceDeleteDate() {
+		return serviceDeleteDate;
+	}
+	public void setServiceDeleteDate(String serviceDeleteDate) {
+		this.serviceDeleteDate = serviceDeleteDate;
 	}
 	public void setServiceCode(String serviceCode) {
 		this.serviceCode = serviceCode;
@@ -58,17 +66,36 @@ public class ServiceManagement {
 	public void setServiceRegistrationDate(String serviceRegistrationDate) {
 		this.serviceRegistrationDate = serviceRegistrationDate;
 	}
-	public String getServiceDeleteDate() {
-		return serviceDeleteDate;
+	public String getServiceModifyDate() {
+		return serviceModifyDate;
 	}
-	public void setServiceDeleteDate(String serviceDeleteDate) {
-		this.serviceDeleteDate = serviceDeleteDate;
+	public void setServiceModifyDate(String serviceModifyDate) {
+		this.serviceModifyDate = serviceModifyDate;
 	}
 	@Override
 	public String toString() {
-		return "ServiceManagement [serviceCode=" + serviceCode + ", memberId=" + memberId + ", serviceName="
-				+ serviceName + ", servicePrice=" + servicePrice + ", serviceDiscount=" + serviceDiscount
-				+ ", servicePeriod=" + servicePeriod + ", serviceStatus=" + serviceStatus + ", serviceRegistrationDate="
-				+ serviceRegistrationDate + ", serviceDeleteDate=" + serviceDeleteDate + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("ServiceManagement [serviceCode=");
+		builder.append(serviceCode);
+		builder.append(", memberId=");
+		builder.append(memberId);
+		builder.append(", serviceName=");
+		builder.append(serviceName);
+		builder.append(", servicePrice=");
+		builder.append(servicePrice);
+		builder.append(", serviceDiscount=");
+		builder.append(serviceDiscount);
+		builder.append(", servicePeriod=");
+		builder.append(servicePeriod);
+		builder.append(", serviceStatus=");
+		builder.append(serviceStatus);
+		builder.append(", serviceRegistrationDate=");
+		builder.append(serviceRegistrationDate);
+		builder.append(", serviceDeleteDate=");
+		builder.append(serviceDeleteDate);
+		builder.append(", serviceModifyDate=");
+		builder.append(serviceModifyDate);
+		builder.append("]");
+		return builder.toString();
 	}
 }

@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="@{layout/default-sw}">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<th:block layout:fragment="customJs">
+<script type="text/javascript">
+$(document).ready(function(){
+	//탭 메뉴1번 첫번째로 보이기
+	$('a[href="#tabmenu_01"]').tab('show');
+
+})
+
+//유효성 검사
+$(document).ready(function(){
+	$('#sign').click(function(){
+		if($('#invoiceRegDate').val().length == 0){
+			alert('작성일자를 입력하세요');
+			return false;
+		}
+		if($('#invoiceDetailDate').val().length == 0){
+			alert('세부발행의 작성일자를 입력하세요');
+			return false;
+		}
+		if($('#invoiceDetailQty').val().length == 0){
+			alert('세부발행의 수량를 입력하세요');
+			return false;
+		}
+		if($('#invoicePrice').val().length == 0){
+			alert('공급가를 입력하세요.');
+			return false;
+		}
+		if($('#invoiceTax').val().length == 0){
+			alert('세액를 입력하세요.');
+			return false;
+		}
+		if($('#amendedInvoiceCode').val().length == 0){
+			alert('수정사유를 입력하세요.');
+			return false;
+		}
+	})
+})
+
+
+</script>
+</th:block>
+
+<th:block layout:fragment="customContents">
+	<!-- Content Wrapper. Contains page content -->
+	<div class="content-wrapper">
+		<!-- Content Header (Page header) -->
+		<section class="content-header">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div class="col-sm-6">
+						<h1>"amendInvoice / 개발사 세금계산서 수정발행"</h1>
+					</div>
+					<div class="col-sm-6">
+						<ol class="breadcrumb float-sm-right">
+							<li class="breadcrumb-item"><a href="/sw/index-sw">Home</a></li>
+							<li class="breadcrumb-item active">재무관리</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+			<!-- /.container-fluid -->
+		</section>
+
+		<!-- Main content -->
+		<section class="content">
+			<div class="container-fluid">
+				<div class="row">
+					<!-- left column -->
+					<div class="col-md-12">
+						<!-- /.card-header -->
+						<!-- Horizontal Form -->
+						<div class="card card-primary">
+							<div class="card-header">
+								<h3 class="card-title">수정 세금계산서 발행</h3>
+							</div>
+							<!-- /.card-header -->
+							<!-- form start -->
+							<form class="form-horizontal" th:action="@{/sw/accounting/amendInvoice}" method="post">
+								<div class="card-body">
+									<label for="biz" class="col-sm-12 col-form-label">기존 발행된 세금계산서 정보</label>
+
+									<table class="table table-hover table-condensed"
+										style="font-size: 12px;">
+										<thead>
+											<tr>
+												<th>코드번호</th>
+												<th>작성일자</th>
+												<th>사업자번호</th>
+												<th>사업장명</th>
+												<th>공급가</th>
+												<th>세액</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:if="${not #lists.isEmpty(amendInvoice)}" th:each="a: ${amendInvoice}">
+												<td th:text="${a.invoiceCode}"></td>
+												<td th:text="${#dates.format(a.invoiceRegDate,'yyyy-MM-dd')}"></td>
+												<td th:text="${a.invoiceDemandBizNumber}"></td>
+												<td th:text="${a.invoiceDemand}"></td>
+												<td th:text="${a.invoicePrice}"></td>
+												<td th:text="${a.invoiceTax}"></td>
+											</tr>
+											<tr th:unless="${not #lists.isEmpty(amendInvoice)}">
+												<td>내역이 없습니다.</td>
+											</tr>
+										</tbody>
+									</table>
+									
+
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+
+									<div style='width: 100%; margin: 0 auto; margin-top: 20px;'>
+										<ul class="nav nav-tabs">
+											<li class="nav-link active"><a href="#tabmenu_01" data-toggle="tab">일반발행</a></li>
+											<li class="nav-link"><a href="#tabmenu_02" data-toggle="tab">세부항목</a></li>
+										</ul>
+										<div class="tab-content">
+											<!-- 일반발행 -->
+											<div class="tab-pane fade in active" id="tabmenu_01">
+											&nbsp;
+												<div class="form-group row">
+													<label for="invoiceCode" class="col-sm-2 col-form-label"
+														style="font-size: 14px;">코드번호</label>
+													<div class="col-sm-2">
+														<input type="text" class="form-control"
+															th:value="${amendInvoice.invoiceCode}" id="invoiceCode"
+															name="invoiceCode" style="height: 100%"
+															readonly="readonly">
+													</div>
+												</div>
+												<div class="form-group row">
+													<label for="addInvoiceCode" class="col-sm-2 col-form-label"
+														style="font-size: 14px;">수정발행 코드번호</label>
+													<div class="col-sm-2">
+														<input type="text" class="form-control"
+															th:value="${newcode.addInvoiceCode}" id="addInvoiceCode"
+															name="addInvoiceCode" style="height: 100%"
+															readonly="readonly">
+													</div>
+												</div>
+												
+												<div class="form-group row">
+													<label for="invoiceRegDate" class="col-sm-2 col-form-label"
+														style="font-size: 14px;">작성일자</label>
+													<div class="col-sm-2">
+														<input type="date" class="form-control invoiceRegDate"
+															id="invoiceRegDate" name="invoiceRegDate"
+															style="height: 100%">
+													</div>
+												</div>
+												<div class="form-group row">
+													<label for="invoiceType" class="col-sm-2 col-form-label"
+														style="font-size: 14px;">세금계산서 구분</label>
+													<div class="col-sm-2">
+														<div class="form-group">
+															<select class="form-control" name="invoiceType"
+																style="height: 85%">
+																<option value="일반">일반</option>
+																<option value="영세">영세</option>
+																<option value="일반">면세</option>
+															</select>
+														</div>
+													</div>
+												</div>
+												<div class="form-group row">
+													<label for="amendCheck" class="col-sm-2 col-form-label"
+														style="font-size: 14px;">수정여부</label>
+													<div class="col-sm-2">
+														<div class="form-group">
+															<select class="form-control" name="amendedInvoiceCode" id="amendedInvoiceCode" style="height: 85%">
+								      							<option value=""> :: 수정 사유 선택 :: </option>
+																<th:block th:if="${not #lists.isEmpty(invoiceReason)}"
+								      									th:each="i : ${invoiceReason}">
+								      							<option th:value="${i.amendedInvoiceReasonCode}" th:text="${i.amendedInvoiceReasonName}" >
+								      								[[${i.amendedInvoiceReasonName}]]
+								      							</option>
+								      						</th:block>
+								      						<th:block th:unless="${not #lists.isEmpty(invoiceReason)}">
+								      							<option>수정사유를 등록해주세요</option>
+								      						</th:block>
+															</select>
+														</div>
+													</div>
+												</div>
+												<div class="form-group row">
+													<label for="invoicePrice" class="col-sm-2 col-form-label"
+														style="font-size: 14px;">공급가</label>
+													<div class="col-sm-2">
+														<input type="number" class="form-control money1"
+															placeholder="" id="invoicePrice" name="invoicePrice" value="0"
+															style="height: 85%" min="0">
+													</div>
+												</div>
+												<div class="form-group row">
+													<label for="invoiceTax" class="col-sm-2 col-form-label"
+														style="font-size: 14px;">세액</label>
+													<div class="col-sm-2">
+														<input type="number" class="form-control money1"
+															placeholder="" id="invoiceTax" name="invoiceTax" value="0"
+															style="height: 85%" min="0">
+													</div>
+												</div>
+												<div class="form-group row">
+													<label for="cash" class="col-sm-2 col-form-label"
+														style="font-size: 14px;">현금</label>
+													<div class="col-sm-2">
+														<input type="number" class="form-control money1"
+															placeholder="" id="fn_type1_price" name="cash" value="0"
+															style="height: 85%" min="0">
+													</div>
+												</div>
+												<div class="form-group row">
+													<label for="invoiceCheck" class="col-sm-2 col-form-label"
+														style="font-size: 14px;">수표</label>
+													<div class="col-sm-2">
+														<input type="number" class="form-control money1"
+															placeholder="" id="fn_type2_price" value="0"
+															name="invoiceCheck" style="height: 85%" min="0">
+													</div>
+												</div>
+												<div class="form-group row">
+													<label for="draft" class="col-sm-2 col-form-label"
+														style="font-size: 14px;">어음</label>
+													<div class="col-sm-2">
+														<input type="number" class="form-control money1"
+															placeholder="" name="draft" id="fn_type3_price" value="0"
+															style="height: 85%" min="0">
+													</div>
+												</div>
+												<div class="form-group row">
+													<label for="accountsReceivable"
+														class="col-sm-2 col-form-label" style="font-size: 14px;">외상미수금</label>
+													<div class="col-sm-2">
+														<input type="number" class="form-control money1"
+															placeholder="" id="fn_type4_price"
+															name="accountsReceivable" value="0" style="height: 85%"
+															min="0">
+													</div>
+												</div>
+												<div class="form-group row">
+													<label for="sum" class="col-sm-2 col-form-label"
+														style="font-size: 14px;">입력합계</label>
+													<div class="col-sm-2">
+														<input type="text" class="form-control num_sum"
+															placeholder="" id="fn_total" readonly="readonly"
+															style="height: 85%" min="0">
+													</div>
+												</div>
+												<div class="form-group row">
+													<label for="invoiceNote" class="col-sm-2 col-form-label"
+														style="font-size: 14px;">비고</label>
+													<div class="col-sm-2">
+														<input type="text" class="form-control num_sum"
+															placeholder="" id="invoiceNote" name="invoiceNote"
+															style="height: 85%" maxlength="15">
+													</div>
+												</div>
+												<!-- 영수/청구 -->
+												<div class="form-group row">
+													<label for="amendCheck" class="col-sm-2 col-form-label"
+														style="font-size: 14px;">영수 청구</label>
+													<div class="col-sm-2">
+														<div class="form-group">
+															<select class="form-control" name="confirm" id="confirm" style="height: 85%">
+																<option value="영수">영수</option>
+																<option value="청구">청구</option>
+															</select>
+														</div>
+													</div>
+												</div>
+											</div>
+											<!-- 일반발행 -->
+
+											<!-- 세부발행-->
+											<div class="tab-pane fade" id="tabmenu_02">
+											&nbsp;
+												<!-- 세부발행코드 -->
+												<div class="form-group row">
+													<label for="invoiceDetailCode"
+														class="col-sm-2 col-form-label" style="font-size: 14px;">세부발행코드</label>
+													<div class="col-sm-2">
+														<input type="text" class="form-control"th:value="${amendInvoice.invoiceDetailCode}" id="invoiceDetailCode"  name="invoiceDetailCode" style="height: 100%"
+															readonly="readonly">
+													</div>
+												</div>
+												<div class="form-group row">
+													<label for="invoiceNewDetailCode"
+														class="col-sm-2 col-form-label" style="font-size: 14px;">수정발행 세부발행코드</label>
+													<div class="col-sm-2">
+														<input type="text" class="form-control"th:value="${invoiceDetailCode.invoiceNewDetailCode}" id="invoiceNewDetailCode"  name="invoiceNewDetailCode" style="height: 100%"
+															readonly="readonly">
+													</div>
+												</div>
+												<!-- 세부발행코드 -->
+												<!-- 계정과목 -->
+												<div class="form-group row">
+													<label for="swIsCode" class="col-sm-2 col-form-label"
+														style="font-size: 14px;">계정과목</label>
+													<div class="col-sm-2">
+														<div class="form-group">
+															<select class="form-control" name="swIsCode" style="height: 85%">
+																<option value="40101">40101 상품매출</option>
+																<option value="40400">40400 제품매출</option>
+															</select>
+														</div>
+													</div>
+												</div>
+												<!-- 계정과목 -->
+												<!-- 세부 일자-->
+												<div class="form-group row">
+													<label for="invoiceDetailDate" class="col-sm-2 col-form-label"
+														style="font-size: 14px;">세부 작성일자</label>
+													<div class="col-sm-2">
+														<input type="date" class="form-control invoiceRegDate"
+															id="invoiceDetailDate" name="invoiceDetailDate" required
+															style="height: 100%">
+													</div>
+												</div>
+												<!-- 세부 일자-->
+												<!-- 품목-->
+												<div class="form-group row">
+													<label for="invoiceDetailProduct" class="col-sm-2 col-form-label"
+														style="font-size: 14px;">품목</label>
+													<div class="col-sm-2">
+														<input type="text" class="form-control num_sum" placeholder="" id="invoiceDetailProduct" name="invoiceDetailProduct"
+															style="height: 85%" maxlength="15">
+													</div>
+												</div>
+												<div class="form-group row">
+													<label for="invoiceDetailStandard" class="col-sm-2 col-form-label" style="font-size: 14px;">규격</label>
+													<div class="col-sm-2">
+														<input type="text" class="form-control" placeholder="" id="" name="invoiceDetailStandard"
+															style="height: 85%" min="0">
+													</div>
+												</div>
+												<div class="form-group row">
+													<label for="invoiceDetailQty" class="col-sm-2 col-form-label"
+														style="font-size: 14px;">수량</label>
+													<div class="col-sm-2">
+														<input type="number" class="form-control" placeholder="" value="0"  id="invoiceDetailQty" name="invoiceDetailQty" style="height: 85%" min="0">
+													</div>
+												</div>
+												<div class="form-group row">
+													<label for="invoiceDetail" class="col-sm-2 col-form-label"
+														style="font-size: 14px;">단가</label>
+													<div class="col-sm-2">
+														<input type="number" class="form-control" placeholder=""  value="0"  id="invoiceDetail" name="invoiceDetail" style="height: 85%" min="0">
+													</div>
+												</div>
+												<div class="form-group row">
+													<label for="invoiceDetailUnitPrice" class="col-sm-2 col-form-label"
+														style="font-size: 14px;">공급가</label>
+													<div class="col-sm-2">
+														<input type="number" class="form-control" placeholder="" value="0"  id="invoiceDetailUnitPrice" name="invoiceDetailUnitPrice" style="height: 85%" min="0">
+													</div>
+												</div>
+												<div class="form-group row">
+													<label for="invoiceDetailTax" class="col-sm-2 col-form-label"
+														style="font-size: 14px;">세액</label>
+													<div class="col-sm-2">
+														<input type="number" class="form-control" placeholder=""value="0"  id="invoiceDetailTax" name="invoiceDetailTax"
+															style="height: 85%" min="0">
+													</div>
+												</div>
+												<div class="form-group row">
+													<label for="invoiceDetailNote" class="col-sm-2 col-form-label"
+														style="font-size: 14px;">비고</label>
+													<div class="col-sm-2">
+														<input type="text" class="form-control" placeholder="" id="invoiceDetailNote" name="invoiceDetailNote"  style="height: 85%" min="0">
+													</div>
+												</div>
+											</div>
+											<!-- 세부발행-->
+										</div>
+									</div>
+	
+									<!-- hidden영역 -->
+									<div style="display: none">
+										<!-- businessName -->
+										<div class="col-sm-2">
+											<input type="text" class="form-control"
+												id="businessName" name="invoiceDemand" style="height: 85%">
+										</div>
+
+
+									</div>
+									<!-- /hidden -->
+								</div>
+								<!-- /.card-body -->
+								<div class="card-footer">
+									<button type="submit" id="sign" class="btn btn-primary">입력완료</button>
+									<button type="button" onclick="history.back();"
+										class="btn btn-default float-right">취소</button>
+								</div>
+							</form>
+							<!-- /.card-footer -->
+						</div>
+						<!-- /.card -->
+					</div>
+					<!--/.col (left) -->
+				</div>
+				<!-- /.row -->
+			</div>
+			<!-- /.container-fluid -->
+		</section>
+		<!-- /.content -->
+	</div>
+	<!-- /.content-wrapper -->
+</th:block>
+</html>

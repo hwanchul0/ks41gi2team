@@ -3,10 +3,8 @@ package ksmart41_teamtest.controller;
 
 
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
+import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -17,11 +15,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import ksmart41_teamtest.dto.Expense;
+import ksmart41_teamtest.dto.Member;
 import ksmart41_teamtest.dto.ShopAddAccounting;
 
 import ksmart41_teamtest.service.ExpenseService;
@@ -90,11 +88,13 @@ public class ShopAccountingController {
 		return "shop/accounting/selectExpense";
 	}
 	
-	//쇼핑몰 매출 마감 확인
+	//쇼핑몰 매출 마감확인
 	@PostMapping("/modifyIncome")
-	public String modifyIncome(ShopAddAccounting shopAddAccounting) {
-		log.info("정보 : {}", shopAddAccounting);
-		return "redirect:/shop/accounting/modifyIncome";
+	public String ShopIncomeFinish(ShopAddAccounting shopAddAccounting) {
+		 log.info("정보 : {}", shopAddAccounting );
+		//계정사용여부수정
+		 shopAcountingService.ShopIncomeFinish(shopAddAccounting);
+		return "redirect:/shop/accounting/selectIncome";
 	}
 	
 	//쇼핑몰 매출 마감확인
@@ -111,18 +111,28 @@ public class ShopAccountingController {
 	//유경 - 쇼핑몰 매출조회
 	@GetMapping("/selectIncome")
 	public String selectIncome(Model model) {
+		//쇼핑몰 매출 목록 조회
 		List<ShopAddAccounting> shopAddAccounting = shopAcountingService.getSelectIncome();
 		model.addAttribute("shopAddAccounting", shopAddAccounting);
+		log.info("shopAddAccounting===========",shopAddAccounting);
+		//쇼핑몰 매출 차트 조회
+		ShopAddAccounting incomeChart = shopAcountingService.getIncomeChart();
+		model.addAttribute("incomeChart", incomeChart);
+		//System.out.println("incomeChart =============="+incomeChart);
 		return "shop/accounting/selectIncome";
 	}
 	
+	//유경 - 쇼핑몰 매출삭제
+	@RequestMapping ("/accounting/deleteIncome")
+	public @ResponseBody int deleteIncome(ShopAddAccounting shopAddAccounting) {
+		return shopAcountingService.deleteIncome(shopAddAccounting);
+	}
 	
-	/*//유경 - 쇼핑몰 통합회계 조회
+	//유경 - 쇼핑몰 통합회계 조회
 	@GetMapping("/selectTotalAccounting")
 	public String selectTotalAccounting(Model model) {
-		List<ShopAddAccounting> selectTotalAccounting = shopAcountingService.getSelectTotalAccounting();
-		model.addAttribute("selectTotalAccounting", selectTotalAccounting);
-		return "shop/accounting/selectTotalAccounting";
-	}*/
+		//Map<String, Object> expense = shopAcountingService.getSelectTotalAccounting();
+				return "shop/accounting/selectTotalAccounting";
+		}
 	
 }

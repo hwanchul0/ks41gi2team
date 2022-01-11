@@ -12,7 +12,7 @@
 		<result column="servicePeriod" 					property="servicePeriod"/>
 		<result column="serviceStatus" 					property="serviceStatus"/>
 		<result column="serviceRegistrationDate" 		property="serviceRegistrationDate"/>
-		<result column="serviceDeleteDate" 				property="serviceDeleteDate"/>
+		<result column="serviceModifyDate" 				property="serviceModifyDate"/>
 	</resultMap>
 		<!--  서비스 현황 조회 -->
 		<select id="getServiceManagement" parameterType="String" resultMap="serviceManagementResultMap">
@@ -52,5 +52,53 @@
 			WHERE
 				serviceCode = #{serviceCode};
 		</select>
+		<!-- 서비스 수정 -->
+		<update id="modifyService" parameterType="ServiceManagement">
+			UPDATE k2_sw_serviceManagement
+			<trim prefix="SET" prefixOverrides=",">
+				<if test="serviceName != null and serviceName != ''.toString()">			
+					 serviceName		=#{serviceName}
+				</if>
+				<if test="servicePrice != null and servicePrice != ''.toString()">
+					,servicePrice	=#{servicePrice}
+				</if>
+				<if test="serviceDiscount != null and serviceDiscount != ''.toString()">		
+					,serviceDiscount		=#{serviceDiscount}
+				</if>
+				<if test="servicePeriod != null and servicePeriod != ''.toString()">
+					,servicePeriod	=#{servicePeriod}
+				</if>
+				<if test="serviceStatus != null and serviceStatus != ''.toString()">
+					,serviceStatus		=#{serviceStatus}
+				</if>
+			</trim>
+			WHERE
+				serviceCode=#{serviceCode};
+		</update>
 		
+		<!-- 서비스 정보 조회-->
+		<select id="getServiceInfo" parameterType="String" resultMap="serviceManagementResultMap">
+			SELECT
+				 s.serviceCode
+				,s.memberId
+				,s.serviceName
+				,s.servicePrice
+				,s.serviceDiscount
+				,s.servicePeriod
+				,s.serviceStatus
+				,s.serviceRegistrationDate
+				,s.serviceModifyDate
+			FROM 
+				k2_sw_serviceManagement AS s
+			WHERE 
+				serviceCode = #{serviceCode};
+		</select>
+		
+		<delete id="deleteService" parameterType="ServiceManagement">
+			DELETE
+			FROM
+				k2_sw_serviceManagement
+			WHERE
+			serviceCode=#{serviceCode};
+		</delete>
 </mapper>

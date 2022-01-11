@@ -7,7 +7,13 @@ public class MainBusinessCode {
 	private String businessRegistrationCode;
 	private String businessCodeRegistrationDate;
 	private String businessCodeDeleteDate;
-	
+	private String businessCodeName;
+	public String getBusinessCodeName() {
+		return businessCodeName;
+	}
+	public void setBusinessCodeName(String businessCodeName) {
+		this.businessCodeName = businessCodeName;
+	}
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
