@@ -36,7 +36,7 @@
 			#{memberAddr},
 			#{memberEmail},
 			#{memberPhone},
-			#{memberRegDate},
+			NOW(),
 			#{memberStatus},
 			#{memberWithdrawal},
 			#{memberWithdrawalReason}
