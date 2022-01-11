@@ -2,8 +2,10 @@ package ksmart41_teamtest.dto;
 
 public class PaymentState {
 
+
 	private String paymentStateCode;
 	private String paymentState;
+
 	public String getPaymentStateCode() {
 		return paymentStateCode;
 	}

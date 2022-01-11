@@ -36,6 +36,15 @@ public class ShopAddAccounting {
 	private Date shopIncomeDate;
 	private Date shopIncomeRegDate;
 	
+	//쇼핑몰 통합회계 - 비용
+	private int shopExpensePrice; //21년 비용 합계
+
+	public int getShopExpenseMonPrice() {
+		return shopExpensePrice;
+	}
+	public void setShopExpenseMonPrice(int shopExpenseMonPrice) {
+		this.shopExpensePrice = shopExpenseMonPrice;
+	}
 	public String getShopIsCode() {
 		return shopIsCode;
 	}
@@ -256,6 +265,8 @@ public class ShopAddAccounting {
 		builder.append(shopIncomeDate);
 		builder.append(", shopIncomeRegDate=");
 		builder.append(shopIncomeRegDate);
+		builder.append(", shopExpensePrice=");
+		builder.append(shopExpensePrice);
 		builder.append("]");
 		return builder.toString();
 	}

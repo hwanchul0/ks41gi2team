@@ -14,7 +14,7 @@
 		<result column="memberId"						property="memberId"/>
 		<result column="businessName"					property="businessName"/>
 		<result column="businessRepresentativeName"		property="businessRepresentativeName"/>
-		<result column="businessNumber"				property="businessNumber"/>
+		<result column="businessNumber"					property="businessNumber"/>
 		<result column="businessPhone"					property="businessPhone"/>
 		<result column="businessAddr"					property="businessAddr"/>
 		<result column="businessEmail"					property="businessEmail"/>
@@ -32,123 +32,158 @@
 	</resultMap>
 	
 	<insert id="addBusinessRegistration" parameterType="BusinessSelect">
-	 <!--  INSERT INTO k0_sw_businessRegistration(
-			businessRegistrationCode,
+	   INSERT INTO k0_sw_businessRegistration(
 			clientId,
+			localCode,
+			memberId,
 			businessName,
 			businessRepresentativeName,
 			businessNumber,
+			businessPhone,
 			businessAddr,
 			businessEmail,
+			businessManagerName,
+			businessManagerPhone,
+			businessManagerEmail,
 			businessMainAccount,
 			businessAccountNumber,
-			businessAccountHolder
+			businessAccountHolder,
+			businessType1,
+			businessType2,
+			businessRegistration,
+			businessRegistrationState
 		)VALUES(
-			"13",
-			"agency002",
-			"II에이전시",
-			"박상철",
-			"410-12-12154",
-			"금아동",
-			"KS@NAVER.COM",
-			"국민",
-			"415-1515-1515",
-			"II쇼핑몰"
-			)
-			-->
-	INSERT INTO k0_sw_businessRegistration
-	(businessRegistrationCode, clientId, localCode, memberId, businessName, businessRepresentativeName, businessNumber, businessPhone, businessAddr, businessEmail, businessManagerName, businessManagerPhone, businessManagerEmail, businessMainAccount, businessAccountNumber, businessAccountHolder, businessType1, businessType2, businessRegistration, businessRegistrationState)
-	VALUES ('13', 'factory001', 'sw_local_code_02', 'swid001', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', CURDATE(), '19');
-	
-	
+			#{clientId},
+			#{localCode},
+			#{memberId},
+			#{businessName},
+			#{businessRepresentativeName},
+			#{businessNumber},
+			#{businessPhone},
+			#{businessAddr},
+			#{businessEmail},
+			#{businessManagerName},
+			#{businessManagerPhone},
+			#{businessManagerEmail},
+			#{businessMainAccount},
+			#{businessAccountNumber},
+			#{businessAccountHolder},
+			#{businessType1},
+			#{businessType2},
+			#{businessRegistration},
+			#{businessRegistrationState}
+			
+			);
+
 	
 	</insert>
+
 	<select id="getBusiness" parameterType="String" resultType="BusinessSelect">
 		SELECT
-			main.mainBusinessCode,
-			main.businessCode,
-			main.businessLevelCode,
-			main.businessCodeRegistrationDate,
-			main.businessCodeDeleteDate,
-			b.businessRegistrationCode,
-			b.clientId,
-			b.localCode,
-			b.memberId,
-			b.businessName,
-			b.businessRepresentativeName,
-			b.businessNumber,
-			b.businessPhone,
-			b.businessAddr,
-			b.businessEmail,
-			b.businessManagerName,
-			b.businessManagerPhone,
-			b.businessManagerEmail,
-			b.businessMainAccount,
-			b.businessAccountNumber,
-			b.businessAccountHolder,
-			b.businessType1,
-			b.businessType2,
-			b.businessRegistration,
-			b.businessRegistrationState
-		from
-			k0_sw_mainBusinessCodeManagement AS main
-			INNER JOIN
-			k0_sw_businessRegistration AS b
-			ON
-			b.businessRegistrationCode = main.businessRegistrationCode;
-
+			businessRegistrationCode,
+			clientId,
+			localCode,
+			memberId,
+			businessName,
+			businessRepresentativeName,
+			businessNumber,
+			businessPhone,
+			businessAddr,
+			businessEmail,
+			businessManagerName,
+			businessManagerPhone,
+			businessManagerEmail,
+			businessMainAccount,
+			businessAccountNumber,
+			businessAccountHolder,
+			businessType1,
+			businessType2,
+			businessRegistration,
+			businessRegistrationState
+		FROM
+			k0_sw_businessRegistration;
+ 
+		
 	</select>
 	
-	<select id="getDetailBusinessList" resultType="Business" resultMap="businessResultMap">
-				SELECT
-					main.mainBusinessCode,
-					main.businessCode,
-					main.businessLevelCode,
-					main.businessCodeRegistrationDate,
-					main.businessCodeDeleteDate,
-					b.businessRegistrationCode,
-					b.clientId,
-					b.localCode,
-					b.memberId,
-					b.businessName,
-					b.businessRepresentativeName,
-					b.businessNumber,
-					b.businessPhone,
-					b.businessAddr,
-					b.businessEmail,
-					b.businessManagerName,
-					b.businessManagerPhone,
-					b.businessManagerEmail,
-					b.businessMainAccount,
-					b.businessAccountNumber,
-					b.businessAccountHolder,
-					b.businessType1,
-					b.businessType2,
-					b.businessRegistration,
-					b.businessRegistrationState
-		from
-					k0_sw_mainBusinessCodeManagement AS main
-					INNER JOIN
-					k0_sw_businessRegistration AS b
-			ON
-					b.businessRegistrationCode = main.businessRegistrationCode
+	<select id="getDetailBusinessList" resultType="Business">
+	
+			SELECT
+					businessRegistrationCode,
+					clientId,
+					localCode,
+					memberId,
+					businessName,
+					businessRepresentativeName,
+					businessNumber,
+					businessPhone,
+					businessAddr,
+					businessEmail,
+					businessManagerName,
+					businessManagerPhone,
+					businessManagerEmail,
+					businessMainAccount,
+					businessAccountNumber,
+					businessAccountHolder,
+					businessType1,
+					businessType2,
+					businessRegistration,
+					businessRegistrationState
+			from
+					k0_sw_businessRegistration 
 			WHERE 
-					b.clientId = #{clientId};
-			
+					clientId = #{clientId};
+				
 	
 	</select>
+	
+	
+		
 	
 	<update id="modifyBusiness" parameterType="Business">
 		UPDATE 
 			k0_sw_businessRegistration
 		SET
-			memberPw = #{memberPw},
-			memberAddr = #{memberAddr},
-			memberEmail = #{memberEmail},
-			memberPhone = #{memberPhone}
+			localCode = #{localCode},
+			clientId = #{clientId},
+			memberId = #{memberId},
+			businessName = #{businessName},
+			businessRepresentativeName = #{businessRepresentativeName},
+			businessNumber = #{businessNumber},
+			businessPhone = #{businessPhone},
+			businessAddr = #{businessAddr},
+			businessEmail = #{businessEmail},
+			businessManagerName = #{businessManagerName},
+			businessManagerPhone = #{businessManagerPhone},
+			businessManagerEmail = #{businessManagerEmail},
+			businessMainAccount = #{businessMainAccount},
+			businessAccountNumber = #{businessAccountNumber},
+			businessAccountHolder = #{businessAccountHolder},
+			businessType1 = #{businessType1},
+			businessType2 = #{businessType2},
+			businessRegistration = #{businessRegistration},
+			businessRegistrationState = #{businessRegistrationState}
 		WHERE
-			memberId = #{memberId}
+			clientId = #{clientId}
 	</update>
+	
+	<delete id="deleteBusiness" parameterType="Business">
+		DELETE
+		FROM
+			k0_sw_businessRegistration
+		WHERE 
+			clientId = #{clientId}
+	
+	</delete>
+	
+	<select id="idCheck" resultType="int">
+		SELECT
+			COUNT(1)
+		FROM
+			k0_sw_businessRegistration
+		WHERE
+			clientId = #{clientId}
+	</select>
 	
 	
 

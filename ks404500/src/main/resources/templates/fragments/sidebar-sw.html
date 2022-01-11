@@ -1,6 +1,4 @@
-
 <!DOCTYPE html>
-
 <html xmlns:th="http://www.thymeleaf.org">
 <div id="sidebar" th:fragment="sidebarFragment-sw">
 <head>
@@ -220,6 +218,14 @@
 									</a>
 								</li>
 							</ul>
+							<ul class="nav nav-treeview">
+								<li class="nav-item">
+									<a th:href="@{/sw/code/selectIsListCode}" class="nav-link">
+										<i class="far fa-circle nav-icon"></i>
+										<p>손익계정과목 조회[유경]</p>
+									</a>
+								</li>
+							</ul>
 						</li>
 						<!-- 코드관리 끝 -->
 
@@ -258,6 +264,38 @@
 									<a th:href="@{/sw/accounting/selectExpense}" class="nav-link">
 										<i class="far fa-circle nav-icon"></i>
 										<p>!비용 조회[재천]</p>
+									</a>
+								</li>
+							</ul>
+							<ul class="nav nav-treeview">
+								<li class="nav-item">
+									<a th:href="@{/sw/accounting/addInvoice}" class="nav-link">
+										<i class="far fa-circle nav-icon"></i>
+										<p>!세금계산서 등록[유경]</p>
+									</a>
+								</li>
+							</ul>
+							<ul class="nav nav-treeview">
+								<li class="nav-item">
+									<a th:href="@{/sw/accounting/selectInvoice}" class="nav-link">
+										<i class="far fa-circle nav-icon"></i>
+										<p>!세금계산서 조회[유경]</p>
+									</a>
+								</li>
+							</ul>
+							<ul class="nav nav-treeview">
+								<li class="nav-item">
+									<a th:href="@{/sw/accounting/addTotalAccounting}" class="nav-link">
+										<i class="far fa-circle nav-icon"></i>
+										<p>#통합회계등록[유경]</p>
+									</a>
+								</li>
+							</ul>
+							<ul class="nav nav-treeview">
+								<li class="nav-item">
+									<a th:href="@{/sw/accounting/selectTotalAccounting}" class="nav-link">
+										<i class="far fa-circle nav-icon"></i>
+										<p>!통합회계조회[유경]</p>
 									</a>
 								</li>
 							</ul>

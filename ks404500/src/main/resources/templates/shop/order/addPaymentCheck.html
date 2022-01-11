@@ -2,8 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org" 
 xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
 layout:decorate="@{layout/default-shop}">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<th:block layout:fragment="javascriptFragment">
+</th:block>	 
+
 <th:block layout:fragment="customContents">
 <!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper">
@@ -12,7 +13,7 @@ layout:decorate="@{layout/default-shop}">
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1 class="m-0">"addPaymentCheck / 쇼핑몰 결제 확인 상태 등록"</h1>
+						<h1 class="m-0">쇼핑몰 결제  등록 </h1>
 					</div><!-- /.col -->
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
@@ -30,20 +31,82 @@ layout:decorate="@{layout/default-shop}">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-lg-12">
-						<div class="card">
-							<div class="card-body">
-								<h5 class="card-title">Card title</h5>
-								<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-								<a href="#" class="card-link">Card link</a>
-								<a href="#" class="card-link">Another link</a>
+						<div class="card card-success">
+							<div class="card-header">
+								<h5 class="card-title"> 쇼핑몰 결제  등록</h5>
+							</div>
+							
+							<!--  쇼핑몰 결제  등록 등록 폼바디 시작 -->
+							
+								<p class="card-body" >
+									
+								
+								<div class="form-group row">
+									<label class="col-sm-2 col-form-laebl text-right">소비자아이디</label>
+									<div class="col-sm-2">
+										<select id="businessCode" class="form-control" name="businessCode">
+											<option value="">::거래처 구분 코드 선택::</option>
+											<option value="merge_shop">merge_shop</option>
+											<option value="merge_fac">merge_fac</option>
+											<option value="merge_mart">merge_mart</option>
+											<option value="merge_ware">merge_ware</option>
+											<option value="merge_agency">merge_agency</option>		
+											
+										</select>
+									</div>
+								</div>
+								
+								
+								
+
+								<div class="form-group row">
+									<label class="col-sm-2 col-form-laebl text-right">결제상태코드</label>
+									<div class="col-sm-4">
+										<input class="form-control" type="text" id="paymentStateCode" name="paymentStateCode" placeholder="paywaiting" readonly ="readonly">
+									</div>
+								</div>
+								
+								<div class="form-group row">
+									<label class="col-sm-2 col-form-laebl text-right">금액</label>
+									<div class="col-sm-4">
+										<input class="form-control" type="text" id="shopPaymentCharge" name="shopPaymentCharge" placeholder="결제금액 (VAT포함)">
+									</div>
+								</div>
+								
+								<div class="form-group row">
+									<label class="col-sm-2 col-form-laebl text-right">결제방법</label>
+									<div class="col-sm-2">
+										<select id="businessCode" class="form-control" name="paymentType">
+											<option value="">::결제방법선택::</option>
+											<option value="현금">현금</option>
+											<option value="카드">카드</option>
+											<option value="계좌이체">계좌이체</option>
+											
+										</select>
+									</div>
+								</div>
+								
+								<div class="form-group row">
+									<label class="col-sm-2 col-form-laebl text-right">결제일</label>
+									<div class="col-sm-4">
+										<input class="form-control" type="date" id="shopPaymentDate" name="shopPaymentDate" placeholder="결제일">
+									</div>
+								</div>
+
+								<div class="card-footer">
+									<button type="submit" class="btn btn-success" id="addMainBusinessCodeBtn"> 등록 </button>
+									<button type="button" class="btn btn-default float-right" id="cancleMainBusinessCodeBtn"> 취소 </button>
+								</div>
+							</form> 
 							</div>
 						</div>
 					</div>
-					<!-- /.row -->
 				</div>
-				<!-- /.container-fluid -->
+				<!-- /.row -->
 			</div>
-	    	<!-- /.content -->
+			<!-- /.container-fluid -->
+		</div>
+		<!-- /.content -->
 		</div>
 	</div>
 <!-- /.content-wrapper -->

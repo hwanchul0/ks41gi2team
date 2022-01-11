@@ -50,5 +50,18 @@
 		ORDER BY (I.invoiceCode IS NOT NULL)
 		      	 , I.invoiceCode DESC
 	</select>
+	
+	
+	<!--개발사 세금계산서 등록시 코드 증가  -->
+	<select id="getInvoiceCode" resultType="InvoiceList">
+	SELECT CONCAT('code_',replace(CURDATE(),'-',''), '_',(SELECT LPAD(COUNT(*)+1,3,'0') FROM k0_invoice )) as addInvoiceCode
+
+	</select>
+	
+	<!-- 개발사 세금계산서 등록시  세부발행 코드 증가   -->
+	<select id="getInvoiceDetailCode" resultType="InvoiceList">
+	 SELECT CONCAT('detail_',right(CONCAT('code_',replace(CURDATE(),'-',''), '_',(SELECT LPAD(COUNT(*)+1,3,'0') FROM k0_invoice)),3))
+	 as invoiceNewDetailCode;
+	</select>
 
 </mapper>

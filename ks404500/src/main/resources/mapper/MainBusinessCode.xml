@@ -1,13 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ksmart41_teamtest.mapper.MainBusinessCodeMapper">
+	<resultMap type="MainBusinessCode"	id="mainBusinessCodeResultMap">
+		<result column="mainBusinessCode"								property="mainBusinessCode"/>
+		<result column="businessCode"									property="businessCode"/>
+		<result column="businessLevelCode"								property="businessLevelCode"/>
+		<result column="businessCodeRegistrationDate"					property="businessCodeRegistrationDate"/>
+		<result column="businessCodeDeleteDate"							property="businessCodeDeleteDate"/>
+	
+	
+	</resultMap>
+
+
 	<select id="getMainBusinessCode" resultType="MainBusinessCode">
 		SELECT 
 			mainBusinessCode,
 			businessCode,
 			businessLevelCode,
-			businessRegistrationCode,
-			businessCodeRegistrationDate
+			businessCodeRegistrationDate,
+			businessCodeDeleteDate
 		FROM k0_sw_mainBusinessCodeManagement;
 	</select>
+	
+	<insert id="addMainBusinessCode" parameterType="MainBusinessCode">
+		INSERT INTO k0_sw_mainBusinessCodeManagement(
+			mainBusinessCode,
+			businessCode,
+			businessLevelCode,
+			businessCodeRegistrationDate
+		)VALUES(
+			#{mainBusinessCode},
+			#{businessCode},
+			#{businessLevelCode},
+			#{businessCodeRegistrationDate}
+		
+		);
+	</insert>
+	<update id="modifyMainBusinessCode" parameterType="MainBusinessCode">
+		UPDATE
+			k0_sw_mainBusinessCodeManagement
+		SET
+			mainBusinessCode = #{mainBusinessCode},
+			businessCode = #{businessCode},
+			businessLevelCode = #{businessLevelCode},
+			businessCodeRegistrationDate = #{businessCodeRegistrationDate},
+			businessCodeDeleteDate = #{businessCodeDeleteDate}
+		WHERE
+			mainBusinessCode = #{mainBusinessCode};
+			
+	</update>
+	<select id="mainBusinessCodeInfo" parameterType="String" resultType="MainBusinessCode">
+		SELECT 
+			mainBusinessCode,
+			businessCode,
+			businessLevelCode,
+			businessCodeRegistrationDate,
+			businessCodeDeleteDate
+		FROM 
+			k0_sw_mainBusinessCodeManagement
+		WHERE 
+			mainBusinessCode = #{mainBusinessCode};
+		
+	
+	</select>
+	
+	<delete id="deleteMainBusinessCode" parameterType="MainBusinessCode">
+		DELETE
+		FROM
+			k0_sw_mainBusinessCodeManagement
+		WHERE
+			mainBusinessCode = #{mainBusinessCode};	
+	
+	
+	</delete>
+	
+	
+	<select id="getMergeCode" resultType="mainBusinessCode">
+	SELECT
+		*
+		FROM
+	k0_BusinessCode;
+	</select>
+	
 </mapper>

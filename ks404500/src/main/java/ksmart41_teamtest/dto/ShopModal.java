@@ -1,37 +1,13 @@
 package ksmart41_teamtest.dto;
 
-public class MainBusinessCode {
+public class ShopModal {
 	private String mainBusinessCode;
 	private String businessCode;
 	private String businessLevelCode;
 	private String businessRegistrationCode;
 	private String businessCodeRegistrationDate;
 	private String businessCodeDeleteDate;
-	private String businessCodeName;
-	public String getBusinessCodeName() {
-		return businessCodeName;
-	}
-	public void setBusinessCodeName(String businessCodeName) {
-		this.businessCodeName = businessCodeName;
-	}
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("MainBusinessCode [mainBusinessCode=");
-		builder.append(mainBusinessCode);
-		builder.append(", businessCode=");
-		builder.append(businessCode);
-		builder.append(", businessLevelCode=");
-		builder.append(businessLevelCode);
-		builder.append(", businessRegistrationCode=");
-		builder.append(businessRegistrationCode);
-		builder.append(", businessCodeRegistrationDate=");
-		builder.append(businessCodeRegistrationDate);
-		builder.append(", businessCodeDeleteDate=");
-		builder.append(businessCodeDeleteDate);
-		builder.append("]");
-		return builder.toString();
-	}
+	private String clientId;
 	public String getMainBusinessCode() {
 		return mainBusinessCode;
 	}
@@ -67,6 +43,32 @@ public class MainBusinessCode {
 	}
 	public void setBusinessCodeDeleteDate(String businessCodeDeleteDate) {
 		this.businessCodeDeleteDate = businessCodeDeleteDate;
+	}
+	public String getClientId() {
+		return clientId;
+	}
+	public void setClientId(String clientId) {
+		this.clientId = clientId;
+	}
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("ShopModal [mainBusinessCode=");
+		builder.append(mainBusinessCode);
+		builder.append(", businessCode=");
+		builder.append(businessCode);
+		builder.append(", businessLevelCode=");
+		builder.append(businessLevelCode);
+		builder.append(", businessRegistrationCode=");
+		builder.append(businessRegistrationCode);
+		builder.append(", businessCodeRegistrationDate=");
+		builder.append(businessCodeRegistrationDate);
+		builder.append(", businessCodeDeleteDate=");
+		builder.append(businessCodeDeleteDate);
+		builder.append(", clientId=");
+		builder.append(clientId);
+		builder.append("]");
+		return builder.toString();
 	}
 	
 }

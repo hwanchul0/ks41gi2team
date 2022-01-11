@@ -40,7 +40,7 @@ public class SwCodeController {
 		return "sw/code/addInvoiceReasonCode";
 	}
 	
-	/*유경 개발사 세금계산서 사유코드 조회 */
+	/*유경 개발사 세금계산서 사유코드 조회 - 안쓸듯 */
 	@GetMapping("/selectInvoiceReasonCode")
 	public String selectInvoiceReasonCode(Model model) {
 		List<InvoiceReason> invoiceReason = invoiceReasonService.getInvoiceReasonList();

@@ -39,7 +39,7 @@ tbody tr td:first-child:before {
          <div class="container-fluid">
             <div class="row">
                <div class="col-lg-12">
-                  <div class="card-primary">
+                  <div class="card card-primary">
                      <div class="card-header">서비스 결제예정</div>
                      <div class="card-body">
                         <div id="example2_wrapper"
@@ -60,7 +60,7 @@ tbody tr td:first-child:before {
                                           <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">결제예정 일자</th>
                                           <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">결제상태</th>
                                           <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">등록일자</th>
-                                          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">결제</th>
+                                          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">결제확인</th>
                                        </tr>
                                     </thead>
                                     <tbody>
@@ -70,10 +70,10 @@ tbody tr td:first-child:before {
                                           <td th:text="${p.slipNumber}"></td>
                                           <td th:text="${#numbers.formatInteger(p.servicePaymentAmount, 0, 'COMMA')}"></td>
                                           <td th:text="${p.servicePaymentDueDate}"></td>
-                                          <td>미결제</td>
+                                          <td th:value="${p.paymentStateCode}" th:text="${p.paymentState}"></td>
                                           <td th:text="${p.paymentSumRegistration}"></td>
                                           <td>
-	                                          <a th:href="@{/sw/service/detailServicePayment(paymentCode=${p.paymentCode})}">
+	                                          <a th:href="@{/sw/service/servicePaymentCheck(paymentCode=${p.paymentCode})}">
 	                                          	<button type="button" class="btn-primary">보기</button>
 	                                          </a>
                                           </td>
@@ -85,45 +85,49 @@ tbody tr td:first-child:before {
                                  </table>
                               </div>
                            </div>
-                           <div class="row">
-                              <div class="col-sm-12 col-md-5">
-                                 <div class="dataTables_info" id="example2_info" role="status"
-                                    aria-live="polite">Showing 1 to 10 of 57 entries</div>
-                              </div>
-                              <div class="col-sm-12 col-md-7">
-                                 <div class="dataTables_paginate paging_simple_numbers"
-                                    id="example2_paginate">
-                                    <ul class="pagination">
-                                       <li class="paginate_button page-item previous disabled"
-                                          id="example2_previous"><a href="#"
-                                          aria-controls="example2" data-dt-idx="0" tabindex="0"
-                                          class="page-link">Previous</a></li>
-                                       <li class="paginate_button page-item active"><a
-                                          href="#" aria-controls="example2" data-dt-idx="1"
-                                          tabindex="0" class="page-link">1</a></li>
-                                       <li class="paginate_button page-item "><a href="#"
-                                          aria-controls="example2" data-dt-idx="2" tabindex="0"
-                                          class="page-link">2</a></li>
-                                       <li class="paginate_button page-item "><a href="#"
-                                          aria-controls="example2" data-dt-idx="3" tabindex="0"
-                                          class="page-link">3</a></li>
-                                       <li class="paginate_button page-item "><a href="#"
-                                          aria-controls="example2" data-dt-idx="4" tabindex="0"
-                                          class="page-link">4</a></li>
-                                       <li class="paginate_button page-item "><a href="#"
-                                          aria-controls="example2" data-dt-idx="5" tabindex="0"
-                                          class="page-link">5</a></li>
-                                       <li class="paginate_button page-item "><a href="#"
-                                          aria-controls="example2" data-dt-idx="6" tabindex="0"
-                                          class="page-link">6</a></li>
-                                       <li class="paginate_button page-item next"
-                                          id="example2_next"><a href="#"
-                                          aria-controls="example2" data-dt-idx="7" tabindex="0"
-                                          class="page-link">Next</a></li>
-                                    </ul>
-                                 </div>
-                              </div>
+                           <!-- card-footer -->
+                           <div class="card-footer">
+	                           <div class="row">
+	                              <div class="col-sm-12 col-md-5">
+	                                 <div class="dataTables_info" id="example2_info" role="status"
+	                                    aria-live="polite">Showing 1 to 10 of 57 entries</div>
+	                              </div>
+	                              <div class="col-sm-12 col-md-7">
+	                                 <div class="dataTables_paginate paging_simple_numbers"
+	                                    id="example2_paginate">
+	                                    <ul class="pagination">
+	                                       <li class="paginate_button page-item previous disabled"
+	                                          id="example2_previous"><a href="#"
+	                                          aria-controls="example2" data-dt-idx="0" tabindex="0"
+	                                          class="page-link">Previous</a></li>
+	                                       <li class="paginate_button page-item active"><a
+	                                          href="#" aria-controls="example2" data-dt-idx="1"
+	                                          tabindex="0" class="page-link">1</a></li>
+	                                       <li class="paginate_button page-item "><a href="#"
+	                                          aria-controls="example2" data-dt-idx="2" tabindex="0"
+	                                          class="page-link">2</a></li>
+	                                       <li class="paginate_button page-item "><a href="#"
+	                                          aria-controls="example2" data-dt-idx="3" tabindex="0"
+	                                          class="page-link">3</a></li>
+	                                       <li class="paginate_button page-item "><a href="#"
+	                                          aria-controls="example2" data-dt-idx="4" tabindex="0"
+	                                          class="page-link">4</a></li>
+	                                       <li class="paginate_button page-item "><a href="#"
+	                                          aria-controls="example2" data-dt-idx="5" tabindex="0"
+	                                          class="page-link">5</a></li>
+	                                       <li class="paginate_button page-item "><a href="#"
+	                                          aria-controls="example2" data-dt-idx="6" tabindex="0"
+	                                          class="page-link">6</a></li>
+	                                       <li class="paginate_button page-item next"
+	                                          id="example2_next"><a href="#"
+	                                          aria-controls="example2" data-dt-idx="7" tabindex="0"
+	                                          class="page-link">Next</a></li>
+	                                    </ul>
+	                                 </div>
+	                              </div>
+	                           </div>
                            </div>
+                           <!-- /card-footer -->
                         </div>
                      </div>
                   </div>

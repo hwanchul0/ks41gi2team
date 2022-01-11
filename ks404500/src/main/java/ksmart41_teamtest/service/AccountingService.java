@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ksmart41_teamtest.dto.GetInvoiceInfo;
+import ksmart41_teamtest.dto.InvoiceList;
 import ksmart41_teamtest.mapper.AccountingMapper;
 
 @Service
@@ -20,5 +21,16 @@ public class AccountingService {
 		//System.out.println(getInvoiceInfo);
 		return getInvoiceInfo;
 	}
-
+	
+	//유경 세계 발행 기본코드증가
+	public InvoiceList getInvoiceCode() {
+		InvoiceList invoiceCode = accountingMapper.getInvoiceCode();
+		return invoiceCode;
+	}
+	//유경 세계 발행 세부코드증가
+	public InvoiceList getInvoiceDetailCode() {
+		InvoiceList invoiceDetailCode = accountingMapper.getInvoiceDetailCode();
+		return invoiceDetailCode;
+	}
+	
 }

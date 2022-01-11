@@ -40,62 +40,61 @@
 				</div>
 				<!-- /.card-header -->
 				<!-- form start -->
-				<form class="form-horizontal">
+				<form class="form-horizontal" th:action="@{/sw/service/modifyServiceManagement}" method="POST">
 					<div class="card-body">
 						<div class="form-group row">
-							<label for="inputEmail3" class="col-sm-2 col-form-label">서비스 코드</label>
+							<label for="serviceCode" class="col-sm-2 col-form-label">서비스 코드</label>
 							<div class="col-sm-4">
-								<input type="text" class="form-control" id="inputEmail3"
-									placeholder="F_001">
+								<input type="text" class="form-control" id="serviceCode" name="serviceCode"  th:value="${getServiceInfo.serviceCode}" readonly="readonly">
 							</div>
 						</div>
 						<div class="form-group row">
-							<label for="inputEmail3" class="col-sm-2 col-form-label">서비스명</label>
+							<label for="serviceName" class="col-sm-2 col-form-label">서비스명</label>
 							<div class="col-sm-4">
-								<input type="text" class="form-control" id="inputEmail3">
+								<input type="text" class="form-control" id="serviceName" name="serviceName">
 							</div>
 						</div>
 						<div class="form-group row">
-							<label for="inputEmail3" class="col-sm-2 col-form-label">서비스 가격</label>
+							<label for="servicePrice" class="col-sm-2 col-form-label">서비스 가격</label>
 							<div class="col-sm-4">
-								<input type="text" class="form-control" id="inputEmail3">
+								<input type="number" class="form-control" id="servicePrice" name="servicePrice">
 							</div>
 						</div>
 						<div class="form-group row">
-							<label for="inputEmail3" class="col-sm-2 col-form-label">서비스 할인율</label>
+							<label for="serviceDiscount" class="col-sm-2 col-form-label">서비스 할인율</label>
 							<div class="col-sm-4">
-								<input type="text" class="form-control" id="inputEmail3">
+								<input type="text" class="form-control" id="serviceDiscount" name="serviceDiscount">
 							</div>
 						</div>
 						<div class="form-group row">
-							<label for="inputEmail3" class="col-sm-2 col-form-label">서비스 이용 날짜</label>
+							<label for="servicePeriod" class="col-sm-2 col-form-label">서비스 이용일수</label>
 							<div class="col-sm-4">
-								<input type="text" class="form-control" id="inputEmail3">
+								<input type="number" class="form-control" id="servicePeriod" name="servicePeriod">
 							</div>
 						</div>
 						<div class="form-group row">
-							<label for="inputEmail3" class="col-sm-2 col-form-label">서비스 상태</label>
+							<label for="serviceStatus" class="col-sm-2 col-form-label">사용여부</label>
 							<div class="col-sm-4">
-								<input type="text" class="form-control" id="inputEmail3" placeholder="Y or N">
+								<input type="text" class="form-control" id="serviceStatus" name="serviceStatus">
 							</div>
 						</div>
 						<div class="form-group row">
-							<label for="inputEmail3" class="col-sm-2 col-form-label">서비스 등록날짜</label>
+							<label for="serviceRegistrationDate" class="col-sm-2 col-form-label">서비스 등록날짜</label>
 							<div class="col-sm-4">
-								<input type="text" class="form-control" id="inputEmail3">
+								<input type="date" class="form-control" id="serviceRegistrationDate" name="serviceRegistrationDate" readonly="readonly" th:value="${getServiceInfo.serviceRegistrationDate}">
 							</div>
 						</div>
 						<div class="form-group row">
-							<label for="inputEmail3" class="col-sm-2 col-form-label">등록자</label>
+							<label for="memberId" class="col-sm-2 col-form-label">서비스 등록자</label>
 							<div class="col-sm-4">
-								<input type="text" class="form-control" id="inputEmail3" placeholder="#{memberId}">
+								<input type="text" class="form-control" id="memberId" name="memberId" readonly="readonly" th:value="${getServiceInfo.memberId}">
 							</div>
 						</div>
 					</div>
 					<!-- /.card-body -->
 					<div class="card-footer">
-						<button type="submit" class="btn btn-primary">등록</button>
-						<button type="submit" class="btn btn-default float-right" href="shop/shipment/addShipment">취소</button>
+						<button type="submit" class="btn btn-primary">저장</button>
+						<button type="submit" class="btn btn-default float-right" th:href="@{#}">취소</button>
 					</div>
 					<!-- /.card-footer -->
 				</form>

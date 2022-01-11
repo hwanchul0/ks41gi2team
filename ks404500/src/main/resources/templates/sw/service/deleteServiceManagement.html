@@ -4,7 +4,24 @@
 	layout:decorate="@{layout/default-sw}">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
+	<th:block layout:fragment="customJs">
+		<script>
+			$(function(){
+				$(document).on('click', '#cancleBtn', function(){
+					location.href="/sw/service/selectServiceManagement";
+				});
+				$(document).on('click','#removeBtn', function(){
+					var serviceCode = $(this).parent().parent().find('#serviceCode');
+					if(confirm("서비스코드 : " + serviceCode.val() + "를 제거하시겠습니까?")){
+						$('#deleteServiceFrom').submit();
+					}else{
+						location.href="/sw/service/selectServiceManagement";
+					}
+					
+				}); 
+			});
+		</script>
+	</th:block>
 <th:block layout:fragment="customContents">
 	<!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper">
@@ -36,26 +53,63 @@
 			<!-- Horizontal Form -->
 			<div class="card card-primary">
 				<div class="card-header">
-					<h3 class="card-title">서비스 등록</h3>
+					<h3 class="card-title">서비스 제거</h3>
 				</div>
 				<!-- /.card-header -->
 				<!-- form start -->
-				<form class="form-horizontal">
+				<form id="deleteServiceFrom" class="form-horizontal" th:action="@{/sw/service/deleteServiceManagement}" method="post">
 					<div class="card-body">
 						<div class="form-group row">
-							<label for="inputEmail3" class="col-sm-2 col-form-label">서비스 코드</label>
+							<label for="serviceCode" class="col-sm-2 col-form-label">서비스 코드</label>
 							<div class="col-sm-4">
-								<input type="text" class="form-control" id="inputEmail3" placeholder="F_001">
+								<input type="text" class="form-control" id="serviceCode" name="serviceCode" th:value="${ServiceInfo.serviceCode}" readonly="readonly">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="serviceName" class="col-sm-2 col-form-label">서비스명</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="serviceName" name="serviceName" th:value="${ServiceInfo.serviceName}" readonly="readonly">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="servicePrice" class="col-sm-2 col-form-label">서비스 이용단가</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="servicePrice" name="servicePrice" th:value="${ServiceInfo.servicePrice}" readonly="readonly">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="serviceDiscount" class="col-sm-2 col-form-label">할인율</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="serviceDiscount" name="serviceDiscount" th:value="${ServiceInfo.serviceDiscount}" readonly="readonly">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="servicePeriod" class="col-sm-2 col-form-label">서비스 기간</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="servicePeriod" name="servicePeriod" th:value="${ServiceInfo.servicePeriod}" readonly="readonly">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="serviceRegistrationDate" class="col-sm-2 col-form-label">서비스 등록일자</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="serviceRegistrationDate" name="serviceRegistrationDate" th:value="${ServiceInfo.serviceRegistrationDate}" readonly="readonly">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="serviceModifyDate" class="col-sm-2 col-form-label">서비스 수정날짜</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="serviceModifyDate" name="serviceModifyDate" th:value="${ServiceInfo.serviceModifyDate}" readonly="readonly">
 							</div>
 						</div>
 					</div>
 					<!-- /.card-body -->
 					<div class="card-footer">
-						<button type="submit" class="btn btn-primary">삭제</button>
-						<button type="button" class="btn btn-default float-right">취소</button>
+						<button type="button" id="removeBtn" class="btn btn-primary">제거</button>
+						<button type="button" id="cancleBtn" class="btn btn-default float-right">취소</button>
 					</div>
 					<!-- /.card-footer -->
 				</form>
+				<h1 th:if="${result != null}" th:text="${result}"></h1>
 			</div>
 			<!-- /.card -->
 		</div>
