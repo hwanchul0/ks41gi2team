@@ -116,6 +116,7 @@
 			GROUP BY bR.clientId
 			ORDER BY r.serviceRequestDate ASC; 		
 	</select>
+	<!-- 서비스 등록 | 내 사업장대표코드 modal -->
 	<select id="findMyMainBizCode" parameterType="map" resultType="map">
 	SELECT 
 		main.mainBusinessCode
@@ -130,6 +131,6 @@
 	ON 
 		main.businessRegistrationCode = bR.businessRegistrationCode
 	WHERE 
-		bR.clientId = 'shopid001';
+		bR.clientId = #{clientId};
 	</select>
 </mapper>
