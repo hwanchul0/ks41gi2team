@@ -12,7 +12,6 @@ import ksmart41_teamtest.mapper.ShopBusinessInfoMapper;
 @Service
 @Transactional
 public class ShopBusinessInfoService {
-
 	
 	@Autowired
 	private ShopBusinessInfoMapper shopBusinessInfoMapper;
@@ -26,4 +25,24 @@ public class ShopBusinessInfoService {
 		return businesslist;
 	}
 	
+	//[재천]쇼핑몰 거래처 등록
+	public int addBusinessInfo(ShopBusinessInfo shopBusinessInfo) {
+		int addbusinessinfo = shopBusinessInfoMapper.addBusinessInfo(shopBusinessInfo);
+		return addbusinessinfo;
+	}
+	
+	//[재천]쇼핑몰 거래처 수정
+	public int modifyBusinessInfo(ShopBusinessInfo shopClientCode) {
+		return shopBusinessInfoMapper.modifyBusinessInfo(shopClientCode);
+	}
+	
+	//[재천] 쇼핑몰 거래처 코드 조회
+	public ShopBusinessInfo selectBusinessInfo(String shopClientCode) {
+		return shopBusinessInfoMapper.selectBusinessInfo(shopClientCode);
+	}
+	
+	//[재천] 쇼핑몰 거래처 코드 삭제
+	public int deleteBusinessInfo(ShopBusinessInfo shopBusinessInfo) {
+		return shopBusinessInfoMapper.deleteBusinessInfo(shopBusinessInfo);
+	}
 }

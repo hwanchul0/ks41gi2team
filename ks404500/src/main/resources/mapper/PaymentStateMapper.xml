@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ksmart41_teamtest.mapper.PaymentStateMapper">
+	<select id="PaymentStateList" resultType="PaymentState">
+		SELECT
+			paymentStateCode,
+			paymentState
+		FROM
+			k2_paymentState
+	</select>
+	
+	<insert id="addPaymentStateCode" parameterType="PaymentState">
+		INSERT INTO k2_paymentState(
+			paymentStateCode,
+			paymentState
+		)VALUES(
+			#{paymentStateCode},
+			#{paymentState}
+		)
+	</insert>
+	
+	<update id="modifyPaymentStateCode" parameterType="PaymentState">
+		UPDATE k2_paymentState
+			SET
+				paymentState = #{paymentState}
+			WHERE 
+				paymentStateCode = #{paymentStateCode}
+	</update>
+	
+	<select id="selectPaymentStateCode" resultType="PaymentState">
+	SELECT
+		paymentStateCode,
+		paymentState
+	FROM
+		k2_paymentState
+	WHERE
+		paymentStateCode =#{paymentStateCode}
+	</select>
+</mapper>

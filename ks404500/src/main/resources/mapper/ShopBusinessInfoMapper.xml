@@ -1,7 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ksmart41_teamtest.mapper.ShopBusinessInfoMapper">
-
+	<resultMap type="ShopBusinessInfo" id="ShopBusinessInfoResultMap">
+		<result column="shopClientCode"					property="shopClientCode"/>
+		<result column="mainBusinessCode"				property="mainBusinessCode"/>
+		<result column="shopClientBusinessName"			property="shopClientBusinessName"/>
+		<result column="shopClientBusinessPhone"		property="shopClientBusinessPhone"/>
+		<result column="shopClientBusinessStaff"		property="shopClientBusinessStaff"/>
+		<result column="shopClientBizLeaderName"		property="shopClientBizLeaderName"/>
+		<result column="shopClientBusinessNumber"		property="shopClientBusinessNumber"/>
+		<result column="shopClientBusinessAddr"			property="shopClientBusinessAddr"/>
+		<result column="shopClientBusinessType1"		property="shopClientBusinessType1"/>
+		<result column="shopClientBusinessType2"		property="shopClientBusinessType2"/>
+		<result column="shopClientBusinessRegDate"		property="shopClientBusinessRegDate"/>
+	</resultMap>
+	
+	<insert id="addBusinessInfo" parameterType="ShopBusinessInfo">
+		<selectKey keyProperty="shopClientCode" resultType="String" order="BEFORE">
+			SELECT 
+					CONCAT('shop_biz_code_', LPAD( RIGHT(MAX(shop.shopClientCode), 3) +1 , 3, '0'))
+			FROM 
+				k2_shop_businessInfo as shop			
+		</selectKey>
+		INSERT INTO k2_shop_businessInfo(
+			shopClientCode,
+			mainBusinessCode,
+			shopClientBusinessName,
+			shopClientBusinessPhone,
+			shopClientBusinessStaff,
+			shopClientBizLeaderName,
+			shopClientBusinessNumber,
+			shopClientBusinessAddr,
+			shopClientBusinessType1,
+			shopClientBusinessType2,
+			shopClientBusinessRegDate
+		)VALUES( 
+			#{shopClientCode},
+			#{mainBusinessCode},
+			#{shopClientBusinessName},
+			#{shopClientBusinessPhone},
+			#{shopClientBusinessStaff},
+			#{shopClientBizLeaderName},
+			#{shopClientBusinessNumber},
+			#{shopClientBusinessAddr},
+			#{shopClientBusinessType1},
+			#{shopClientBusinessType2},
+			now()
+		)
+	</insert>
+	
 	<select id="ShopBusinessList" resultType="ShopBusinessInfo">
 		SELECT
 			shopClientCode,
@@ -18,4 +65,45 @@
 		FROM
 			k2_shop_businessInfo
 	</select>
+	
+	<update id="modifyBusinessInfo" parameterType="ShopBusinessInfo">
+		UPDATE k2_shop_businessInfo
+		SET
+			shopClientBusinessName = #{shopClientBusinessName},
+			shopClientBusinessPhone = #{shopClientBusinessPhone},
+			shopClientBusinessStaff = #{shopClientBusinessStaff},
+			shopClientBizLeaderName = #{shopClientBizLeaderName},
+			shopClientBusinessNumber = #{shopClientBusinessNumber},
+			shopClientBusinessAddr = #{shopClientBusinessAddr},
+			shopClientBusinessType1 = #{shopClientBusinessType1},
+			shopClientBusinessType2 = #{shopClientBusinessType2}
+		WHERE
+			shopClientCode = #{shopClientCode}
+	</update>
+	
+	<select id="selectBusinessInfo" resultType="ShopBusinessInfo">
+		SELECT
+			shopClientCode,
+			mainBusinessCode,
+			shopClientBusinessName,
+			shopClientBusinessPhone,
+			shopClientBusinessStaff,
+			shopClientBizLeaderName,
+			shopClientBusinessNumber,
+			shopClientBusinessAddr,
+			shopClientBusinessType1,
+			shopClientBusinessType2,
+			shopClientBusinessRegDate
+		FROM
+			k2_shop_businessInfo
+		WHERE
+			shopClientCode = #{shopClientCode}
+	</select>
+	
+	<delete id="deleteBusinessInfo" parameterType="ShopBusinessInfo">
+		DELETE FROM
+			k2_shop_businessInfo
+		WHERE
+			shopClientCode= #{shopClientCode}
+	</delete>
 </mapper>

@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" 
-xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
-layout:decorate="@{layout/default-shop}">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="@{layout/default-shop}">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <th:block layout:fragment="customContents">
@@ -47,11 +45,15 @@ layout:decorate="@{layout/default-shop}">
 											<th>업태</th>
 											<th>종목</th>
 											<th>등록일</th>
+											<th>수정</th>
+											<th>삭제</th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr th:if="${not #lists.isEmpty(businesslist)}" th:each="bl : ${businesslist}">
 											<td th:text="${bl.shopClientBusinessName}"></td>
+											<td th:text="${bl.mainBusinessCode}" style="display: none"></td>
+											<td th:text="${bl.shopClientCode}" style="display: none"></td>
 											<td th:text="${bl.shopClientBusinessPhone}"></td>
 											<td th:text="${bl.shopClientBusinessStaff}"></td>
 											<td th:text="${bl.shopClientBizLeaderName}"></td>
@@ -60,14 +62,14 @@ layout:decorate="@{layout/default-shop}">
 											<td th:text="${bl.shopClientBusinessType1}"></td>
 											<td th:text="${bl.shopClientBusinessType2}"></td>
 											<td th:text="${bl.shopClientBusinessRegDate}"></td>
+											<td><a th:href="@{/shop/business/modifyBusinessInfo(shopClientCode=${bl.shopClientCode})}">수정</a></td>
+											<td><button type="button" class="btn btn-primary deleteBtn" th:onclick="deleteBtn([[${bl.shopClientCode}]]);">삭제</button></td>
 										</tr>
 										<tr th:unless="${not #lists.isEmpty(businesslist)}">
 											<td><h3>데이터가 없습니다.</h3></td>
 										<tr>
 									</tbody>
 								</table>
-							
-							
 							</div>
 						</div>
 					</div>
@@ -79,5 +81,30 @@ layout:decorate="@{layout/default-shop}">
 		</div>
 	</div>
 <!-- /.content-wrapper -->
+	<script type="text/javascript">
+	//[재천] 회원삭제
+	function deleteBtn(shopClientCode) {
+		if(shopClientCode != null && shopClientCode != ""){
+			console.log(shopClientCode);
+			var request = $.ajax({
+				  url: "/shop/business/deleteBusinessInfo",
+				  method: "POST",
+				  data: { shopClientCode : shopClientCode },
+				  dataType: "text"
+				});
+			
+			request.done(function(data) {
+				if(data > 0) {
+					alert("삭제 되었습니다.");
+				}else {
+					alert("실패했습니다.");
+				}
+				location.reload();
+			});
+		} else {
+			alert("삭제 실패 ");
+		}
+	}
+    </script>
 </th:block>
 </html>

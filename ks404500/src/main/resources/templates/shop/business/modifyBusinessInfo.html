@@ -1,41 +1,45 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" 
-xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
-layout:decorate="@{layout/default-shop}">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="@{layout/default-shop}">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<head th:replace="fragments/head :: headFragment"></head>
+
 <th:block layout:fragment="customContents">
-<!-- Content Wrapper. Contains page content -->
+	<!-- 전체컨텐츠 -->
 	<div class="content-wrapper">
-	<!-- Content Header (Page header) -->
+		<!-- 컨텐츠 헤더 -->
 		<div class="content-header">
 			<div class="container-fluid">
-				<div class="row mb-2">
+				<div class="row md-2">
 					<div class="col-sm-6">
 						<h1 class="m-0" th:text="${title}"></h1>
-					</div><!-- /.col -->
+					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
 							<li class="breadcrumb-item"><a href="#">Home</a></li>
 							<li class="breadcrumb-item active">Starter Page</li>
 						</ol>
-					</div><!-- /.col -->
-				</div><!-- /.row -->
-			</div><!-- /.container-fluid -->
+					</div>
+				</div>
+			</div>
 		</div>
-	<!-- /.content-header -->
-	
-	<!-- Main content -->
+		<!-- 컨텐츠 헤더 끝 -->
+
+		<!-- 메인컨텐츠 -->
 		<div class="content">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-lg-12">
-						<div class="card">
-						<div class="card-header">
-							<h5 class="card-title" th:text=${title}></h5>
-						</div>
-							<form id="addBusinessInfoForm" th:action="@{/shop/business/addBusinessInfo}" method="post" class="form-horizontal">
+						<!-- 회원가입폼 -->
+						<div class="card card-primary">
+							<form id="modifyBusinessInfoForm" th:action="@{/shop/business/modifyBusinessInfo}" method="post" class="form-horizontal">
+								<div class="card-header">
+									<h5 class="card-title" th:text="${title}"></h5>
+								</div>
 								<div class="card-body">
+									<div class="form-group row"  style="display: none;">
+										<input type="text" class="form-control" id="shopClientCode" th:value=${shopbusinesscode.shopClientCode} name="shopClientCode" >
+									</div>
 									<div class="form-group row">
 										<label class="col-sm-2 col-form-label text-right">상호명 : </label>
 										<div class="col-sm-8">
@@ -86,19 +90,20 @@ layout:decorate="@{layout/default-shop}">
 									</div>
 								</div>
 								<div class="card-footer">
-									<button type="submit" class="btn btn-primary" id ="addBusinessInfoBtn"> 등록 </button>
+									<button type="submit" class="btn btn-primary" id ="modifyBusinessInfo"> 수정완료 </button>
 									<button type="button" class="btn btn-default float-right" id="cancleBusinessInfo"> 취소 </button>
 								</div>
 							</form>
 						</div>
 					</div>
-					<!-- /.row -->
 				</div>
-				<!-- /.container-fluid -->
 			</div>
-	    	<!-- /.content -->
 		</div>
 	</div>
-<!-- /.content-wrapper -->
+	<script type="text/javascript">
+	
+	</script>
 </th:block>
 </html>
+
+
