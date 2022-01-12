@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="@{layout/default-shop}">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<th:block layout:fragment="customContents">
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+	<!-- Content Header (Page Header) -->
+	<div class="content-header">
+		<div class="container-fluid">
+			<div class="row mb-2">
+				<div class="col-sm-6">
+					<h1 class="m-0">shop / 서비스 계약요청 삭제</h1>
+				</div>
+				<!-- /.col -->
+				<div class="col-sm-6">
+					<ol class="breadcrumb float-sm-right">
+						<li class="breadcrumb-item">
+						<a href="#">Home</a>
+						</li>
+						<li class="breadcrumb-item active">Starter Page</li>
+					</ol>
+				</div>
+				<!-- /.col -->
+			</div>
+			<!-- /.row -->
+		</div>
+		<!-- /.container-fluid -->
+	</div>
+	<!-- Content Header (Page Header) -->
+	<div class="col-md-12">
+		<!-- /.card-header -->
+		<!-- Horizontal Form -->
+		<div class="card card-success">
+			<div class="card-header">
+				<h3 class="card-title">서비스 계약요청 삭제</h3>
+			</div>
+			<!-- /.card-header -->
+			<!-- form start -->
+			<form class="form-horizontal">
+				<div class="card-body">
+					<div class="form-group row">
+						<label for="inputEmail3" class="col-sm-2 col-form-label">서비스 코드</label>
+						<div class="col-sm-4">
+							<input type="text" class="form-control" id="inputEmail3" placeholder="F_001">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="inputEmail3" class="col-sm-2 col-form-label">서비스명</label>
+						<div class="col-sm-4">
+							<input type="text" class="form-control" id="inputEmail3">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="inputEmail3" class="col-sm-2 col-form-label">서비스 가격</label>
+						<div class="col-sm-4">
+							<input type="text" class="form-control" id="inputEmail3">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="inputEmail3" class="col-sm-2 col-form-label">서비스 할인율</label>
+						<div class="col-sm-4">
+							<input type="text" class="form-control" id="inputEmail3">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="inputEmail3" class="col-sm-2 col-form-label">서비스 이용 날짜</label>
+						<div class="col-sm-4">
+							<input type="text" class="form-control" id="inputEmail3">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="inputEmail3" class="col-sm-2 col-form-label">서비스 상태</label>
+						<div class="col-sm-4">
+							<input type="text" class="form-control" id="inputEmail3" placeholder="Y or N">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="inputEmail3" class="col-sm-2 col-form-label">서비스 등록날짜</label>
+						<div class="col-sm-4">
+							<input type="text" class="form-control" id="inputEmail3">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="inputEmail3" class="col-sm-2 col-form-label">등록자</label>
+						<div class="col-sm-4">
+							<input type="text" class="form-control" id="inputEmail3" placeholder="#{memberId}">
+						</div>
+					</div>
+				</div>
+				<!-- /.card-body -->
+				<div class="card-footer">
+					<button type="submit" class="btn btn-primary">등록</button>
+					<button type="submit" class="btn btn-default float-right" href="shop/shipment/addShipment">취소</button>
+				</div>
+				<!-- /.card-footer -->
+			</form>
+		</div>
+		<!-- /.card -->
+	</div>
+</div>
+<!-- /Content Wrapper. Contains page content -->
+</th:block>

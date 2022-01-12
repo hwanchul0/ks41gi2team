@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ksmart41_teamtest.controller.ShopAccountingController;
+import ksmart41_teamtest.dto.Member;
 import ksmart41_teamtest.dto.ShopAddAccounting;
 import ksmart41_teamtest.mapper.ShopAddAccountingMapper;
 
@@ -62,8 +63,29 @@ public class ShopAcountingService {
 	public int ShopIncomeFinish(ShopAddAccounting shopIncomeCode) {
 		return shopAddAccountingMapper.ShopIncomeFinish(shopIncomeCode);
 	}
-
-
-
+	
+	//유경 - 쇼핑몰 차트
+	public ShopAddAccounting getIncomeChart() {
+		ShopAddAccounting incomeChart = shopAddAccountingMapper.getIncomeChart();
+		log.info("controller incomeChart =========", incomeChart);
+		return incomeChart;
+	}
+	
+	//유경 - 쇼핑몰 매출 삭제
+	public int deleteIncome(ShopAddAccounting shopAddAccounting) {
+		return shopAddAccountingMapper.deleteIncome(shopAddAccounting); 
+	}
+	
+	//유경 - 쇼핑몰 통합회계 조회
+	public List<ShopAddAccounting> selectByTotalIncome() {
+		List<ShopAddAccounting> totalIncome = shopAddAccountingMapper.selectByTotalIncome();
+		return totalIncome;
+	}
+	
+	//유경 - 쇼핑몰 통합회계 등록
+	public int addTotalAccountingByIncome(ShopAddAccounting shopAddAccounting) {
+		int result = shopAddAccountingMapper.addTotalAccountingByIncome(shopAddAccounting);
+		return result;
+	}
 
 }

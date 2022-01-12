@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="@{layout/default-shop}">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<th:block layout:fragment="customJs">
+<script>
+$(document).ready(function(){
+$('#sign').click(function(){
+	var select = $("#select option:selected").val();
+	console.log(select);
+	if(select == null || select == "none"){
+		alert('마감을 확인해주세요');
+		return false;
+	}
+
+})
+
+});
+
+</script>
+</th:block>
+
+<th:block layout:fragment="customContents">
+	<!-- Content Wrapper. Contains page content -->
+	<div class="content-wrapper">
+		<!-- Content Header (Page header) -->
+		<section class="content-header">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div class="col-sm-6">
+						<h1>"modifyShopExpense / 쇼핑몰  비용 마감 확인페이지"</h1>
+					</div>
+					<div class="col-sm-6">
+						<ol class="breadcrumb float-sm-right">
+							<li class="breadcrumb-item"><a href="/shop/index-shop">Home</a></li>
+							<li class="breadcrumb-item active">비용관리</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+			<!-- /.container-fluid -->
+		</section>
+
+		<!-- Main content -->
+		<section class="content">
+			<div class="container-fluid">
+				<div class="row">
+					<!-- left column -->
+					<div class="col-md-12">
+						<!-- /.card-header -->
+						<!-- Horizontal Form -->
+						<div class="card card-success">
+							<div class="card-header">
+								<h3 class="card-title">쇼핑몰 마감 확인</h3>
+							</div>
+							<!-- /.card-header -->
+							<!-- form start -->
+							<form class="form-horizontal" th:action="@{/shop/accounting/modifyExpense}" method="post">
+								<div class="card-body">
+									<div class="form-group row">
+										<label for="shopExpenseCode" class="col-sm-2 col-form-label">마감할 지출코드 : </label>
+										<div class="col-sm-6">
+											<input type="text" id="shopExpenseCode" name="shopExpenseCode" readonly="readonly" th:value="${finish.shopExpenseCode}">
+										</div>
+									</div>
+									<div class="form-group row">
+										<label for="shopExpenseInfo" class="col-sm-2 col-form-label"> 비용 적요 : </label>
+										<div class="col-sm-6">
+											<input type="text"  readonly="readonly" name="shopExpenseInfo" th:value="${finish.shopExpenseInfo}">
+										</div>
+									</div>
+									<div class="form-group row">
+										<label for="shopExpensePrice" class="col-sm-2 col-form-label">공급가액 : </label>
+										<div class="col-sm-6">
+											<input type="text" readonly="readonly" name="shopExpensePrice" th:value="${finish.shopExpensePrice}">
+										</div>
+									</div>
+									<div class="form-group row">
+										<label for="shopExpenseFinish" class="col-sm-2 col-form-label">마감확인여부</label>
+										<div class="col-sm-2">
+										 <select class="form-control " id="select" style="width: 120%;" name="shopExpenseFinish">
+												<option selected="selected" style="text-align: center" value="none">:: 마감확인여부 ::</option>
+												<option value="Y">Y</option>
+											</select> 
+										</div>
+									</div>
+								</div>
+								<!-- /.card-body -->
+								<div class="card-footer">
+									<button type="submit" id="sign" class="btn btn-success sign">입력완료</button>
+									<button type="button" onclick="history.back();" class="btn btn-default float-right">취소</button>
+								</div>
+								<!-- /.card-footer -->
+							</form>
+						</div>
+						<!-- /.card -->
+					</div>
+					<!--/.col (left) -->
+				</div>
+				<!-- /.row -->
+			</div>
+			<!-- /.container-fluid -->
+		</section>
+		<!-- /.content -->
+	</div>
+	<!-- /.content-wrapper -->
+</th:block>
+</html>

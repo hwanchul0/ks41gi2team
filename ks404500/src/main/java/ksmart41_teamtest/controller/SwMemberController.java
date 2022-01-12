@@ -85,7 +85,7 @@ public class SwMemberController {
 	}
 	
 	//[재천] 중복체크
-	@PostMapping("/idCheck")
+	@PostMapping("/member/idCheck")
 	@ResponseBody
 	public boolean idCheck(@RequestParam (value="memberId", required = false) String memberId) {
 		boolean idCheckResult = false;
@@ -108,7 +108,5 @@ public class SwMemberController {
 		return "sw/client/selectClient";
 	}
 }
-
-
 
 

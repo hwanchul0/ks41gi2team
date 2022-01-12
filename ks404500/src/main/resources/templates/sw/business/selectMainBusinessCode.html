@@ -56,6 +56,7 @@
 											<td>
 												<a th:href="@{/sw/business/modifyMainBusinessCode(mainBusinessCode=${mbc.mainBusinessCode})}">수정</a>
 											</td>
+											<td><button type="button" class="btn btn-primary deleteBtn" th:onclick="deleteBtn([[${mbc.mainBusinessCode}]]);">삭제</button></td>
 										</tr>
 										<tr th:unless="${not #lists.isEmpty(mainBusinessCode)}">
 											<td>
@@ -78,5 +79,29 @@
 		</div>
 	</div>
 <!-- /.content-wrapper -->
+<script type="text/javascript">
+	//유성 사업장 대표코드 삭제
+	function deleteBtn(mainBusinessCode) {
+		if(mainBusinessCode != null && mainBusinessCode != ""){
+			var request = $.ajax({
+				  url: "/sw/business/deleteMainBusinessCode",
+				  method: "POST",
+				  data: { mainBusinessCode : mainBusinessCode },
+				  dataType: "text"
+				});
+			
+			request.done(function(data) {
+				if(data > 0) {
+					alert("삭제 되었습니다.");
+				}else {
+					alert("실패했습니다.");
+				}
+				location.reload();
+			});
+		} else {
+			alert("삭제 실패 ");
+		}
+	}
+    </script>
 </th:block>
 </html>

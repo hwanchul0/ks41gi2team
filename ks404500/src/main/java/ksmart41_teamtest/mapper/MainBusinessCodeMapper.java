@@ -8,14 +8,21 @@ import ksmart41_teamtest.dto.MainBusinessCode;
 
 @Mapper
 public interface MainBusinessCodeMapper {
-	//유성 사업장 대표코드 전체조회 
+	//유성 사업장 대표코드 전체 조회 
 	public List<MainBusinessCode> getMainBusinessCode();
+	
+	//유성 사업장 대표코드 조회 
+	public MainBusinessCode mainBusinessCodeInfo(String mainBusinessCode);
 
-	//유성 사업장 대표코드 조회
-	public MainBusinessCode MainBusinessCodeInfo(String mainBusinessCode);
 	//유성 사업장 대표코드 등록 
 	public int addMainBusinessCode(MainBusinessCode	mainBusinessCode);
 
 	//유성 사업장 대표코드 수정 
 	public int modifyMainBusinessCode(MainBusinessCode mainBusinessCode);
+	
+	//유성 사업장 대표코드 삭제 
+	public int deleteMainBusinessCode(MainBusinessCode mainBusinessCode);
+	
+	//유성 merge 코드
+	public List<MainBusinessCode> getMergeCode();
 }

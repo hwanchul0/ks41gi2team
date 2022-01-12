@@ -47,6 +47,7 @@
 									<div class="form-group row">
 										<label class="col-sm-2 col-form-laebl text-right">지역 코드: </label>
 											<div class="col-sm-8">
+												
 												<select id="localCode" class="form-control" name="localCode">
 												<option value="">::지역 코드 선택::</option>
 												<option>sw_local_code_02(서울)</option>
@@ -70,62 +71,62 @@
 									<div class="form-group row">
 										<label class="col-sm-2 col-form-label text-right">사업장 이름 : </label>
 										<div class="col-sm-8">
-											<input type="text" class="form-control" id="businessName" placeholder="사업장 이름을 입력하세요" name="businessName">
+											<input type="text" class="form-control" id="businessName" placeholder="사업장 이름을 입력하세요" name="businessName" th:value="${getDetailBusinessList.businessName}">
 										</div>
 									</div>
 									<div class="form-group row">
 										<label class="col-sm-2 col-form-label text-right">사업장 대표 : </label>
 										<div class="col-sm-8">
-											<input type="text" class="form-control" id="businessRepresentativeName" placeholder="사업장 대표를 입력하세요" name="businessRepresentativeName">
+											<input type="text" class="form-control" id="businessRepresentativeName" placeholder="사업장 대표를 입력하세요" name="businessRepresentativeName" th:value="${getDetailBusinessList.businessRepresentativeName}">
 										</div>
 									</div>
 									<div class="form-group row">
 										<label class="col-sm-2 col-form-label text-right">사업장 번호 : </label>
 										<div class="col-sm-8">
-											<input th:value="${getBusiness.businessNumber}" type="text" class="form-control" id="inputbusinessNumber" name="businessNumber" readonly="readonly">
+											<input th:value="${getBusiness.businessNumber}" type="text" class="form-control" id="inputbusinessNumber" name="businessNumber" readonly="readonly" >
 										</div>
 									</div>
 									<div class="form-group row">
 										<label class="col-sm-2 col-form-label text-right">사업장 전화번호: </label>
 										<div class="col-sm-8">
-											<input type="text" class="form-control" id="businessPhone" placeholder="사업장 전화번호를 입력하세요" name="businessPhone">
+											<input type="text" class="form-control" id="businessPhone" placeholder="사업장 전화번호를 입력하세요" name="businessPhone" th:value="${getDetailBusinessList.businessPhone}">
 										</div>
 									</div>
 									<div class="form-group row">
 										<label class="col-sm-2 col-form-label text-right">사업장 주소 : </label>
 										<div class="col-sm-8">
-											<input type="text" class="form-control" id="businessAddr" placeholder="사업장 주소를 입력하세요" name="businessAddr">
+											<input type="text" class="form-control" id="businessAddr" placeholder="사업장 주소를 입력하세요" name="businessAddr" th:value="${getDetailBusinessList.businessAddr}">
 										</div>
 									</div>
 									<div class="form-group row">
 										<label class="col-sm-2 col-form-laebl text-right">사업장 이메일</label>
 										<div class="col-sm-8">
-											<input class="form-control" type="text" id="businessEmail" name="businessEmail"placeholder="사업장 이메일을 입력하세요">
+											<input class="form-control" type="text" id="businessEmail" name="businessEmail"placeholder="사업장 이메일을 입력하세요" th:value="${getDetailBusinessList.businessEmail}">
 									</div>
 									</div>
 									<div class="form-group row">
 										<label class="col-sm-2 col-form-label text-right">사업장 담당자 이름 : </label>
 										<div class="col-sm-8">
-											<input type="text" class="form-control" id="businessManagerName" placeholder="사업장 담당자 이름을 입력하세요" name="businessManagerName">
+											<input type="text" class="form-control" id="businessManagerName" placeholder="사업장 담당자 이름을 입력하세요" name="businessManagerName" th:value="${getDetailBusinessList.businessManagerName}">
 										</div>
 									</div>
 									<div class="form-group row">
 										<label class="col-sm-2 col-form-label text-right">사업장 담당자 번호 : </label>
 										<div class="col-sm-8">
-											<input type="text" class="form-control" id="businessManagerPhone" placeholder="사업장 담당자 번호를 입력하세요" name="businessManagerPhone">
+											<input type="text" class="form-control" id="businessManagerPhone" placeholder="사업장 담당자 번호를 입력하세요" name="businessManagerPhone" th:value="${getDetailBusinessList.businessManagerPhone}">
 										</div>
 									</div>
 									<div class="form-group row">
 										<label class="col-sm-2 col-form-label text-right">사업장 담당자 이메일 : </label>
 										<div class="col-sm-8">
-											<input type="email" class="form-control" id="businessManagerEmail" placeholder="사업장 담당자 이메일을 입력하세요" name="businessManagerEmail">
+											<input type="email" class="form-control" id="businessManagerEmail" placeholder="사업장 담당자 이메일을 입력하세요" name="businessManagerEmail" th:value="${getDetailBusinessList.businessManagerEmail}">
 										</div>
 									</div>
 									
 									<div class="form-group row">
 									<label class="col-sm-2 col-form-laebl text-right">주거래 통장</label>
 									<div class="col-sm-8">
-										<select id="AccountTrade" class="form-control" name="businessMainAccount">
+										<select id="AccountTrade" class="form-control" name="businessMainAccount" th:value="${getDetailBusinessList.businessMainAccount}" >
 											<option value="">::주거래 은행 선택::</option>
 											<option value="기업">기업은행</option>
 											<option value="농협">농협은행</option>
@@ -140,21 +141,21 @@
 								<div class="form-group row">
 										<label class="col-sm-2 col-form-label text-right">계좌번호 : </label>
 										<div class="col-sm-8">
-											<input type="text" class="form-control" id="businessAccountNumber" placeholder="계좌번호를 입력하세요" name="businessAccountNumber">
+											<input type="text" class="form-control" id="businessAccountNumber" placeholder="계좌번호를 입력하세요" name="businessAccountNumber" th:value="${getDetailBusinessList.businessAccountNumber}">
 										</div>
 									</div>
 									
 									<div class="form-group row">
 										<label class="col-sm-2 col-form-label text-right">예금주 : </label>
 										<div class="col-sm-8">
-											<input type="text" class="form-control" id="businessAccountHolder" placeholder="예금주를 입력하세요" name="businessAccountHolder">
+											<input type="text" class="form-control" id="businessAccountHolder" placeholder="예금주를 입력하세요" name="businessAccountHolder" th:value="${getDetailBusinessList.businessAccountHolder}">
 										</div>
 									</div>
 									
 									<div class="form-group row">
 										<label class="col-sm-2 col-form-label text-right">승인날짜 : </label>
 										<div class="col-sm-8">
-											<input type="date" class="form-control" id="businessRegistration" placeholder="승인날짜를 입력하세요" name="businessRegistration">
+											<input type="date" class="form-control" id="businessRegistration" placeholder="승인날짜를 입력하세요" name="businessRegistration" th:value="${getDetailBusinessList.businessRegistration}">
 										</div>
 									</div>
 									

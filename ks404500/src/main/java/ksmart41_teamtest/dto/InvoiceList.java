@@ -2,10 +2,13 @@ package ksmart41_teamtest.dto;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class InvoiceList {
 	//유경 - 세금계산서 발행 항목
 	private String invoiceCode;
 	private String invoiceType;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date invoiceRegDate;
 	private String mainBusinessCodeDemand;
 	private String invoiceDemandBizNumber;
@@ -35,6 +38,7 @@ public class InvoiceList {
 	//유경 - 세금계산서 발행 상세 발행
 	private String invoiceDetailCode;
 	private String swIsCode;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date invoiceDetailDate;
 	private String invoiceDetailProduct;
 	private String invoiceDetailStandard;
@@ -44,7 +48,7 @@ public class InvoiceList {
 	private int invoiceDetailTax;
 	private String invoiceDetailNote;
 	private String projectCode;
-	private String invoiceDetailFinish;
+	
 	//세금계산서 수정 사유
 	private String amendedInvoiceReasonName;
 	
@@ -294,12 +298,6 @@ public class InvoiceList {
 	public void setProjectCode(String projectCode) {
 		this.projectCode = projectCode;
 	}
-	public String getInvoiceDetailFinish() {
-		return invoiceDetailFinish;
-	}
-	public void setInvoiceDetailFinish(String invoiceDetailFinish) {
-		this.invoiceDetailFinish = invoiceDetailFinish;
-	}
 	
 	public String getAmendedInvoiceReasonName() {
 		return amendedInvoiceReasonName;
@@ -386,8 +384,6 @@ public class InvoiceList {
 		builder.append(invoiceDetailNote);
 		builder.append(", projectCode=");
 		builder.append(projectCode);
-		builder.append(", invoiceDetailFinish=");
-		builder.append(invoiceDetailFinish);
 		builder.append(", amendedInvoiceReasonName=");
 		builder.append(amendedInvoiceReasonName);
 		builder.append(", addInvoiceCode=");

@@ -63,6 +63,9 @@ public class SwMainBusinessController {
 	@GetMapping ("/modifyBusiness")
 	public String modifyBusiness(@RequestParam(value = "clientId", required = false) String clientId,
 								Model model) {
+		Business getDetailBusinessList = businessService.getDetailBusinessList(clientId);
+		//model.addAttribute("title", "사업장 수");
+		model.addAttribute("getDetailBusinessList", getDetailBusinessList);
 		System.out.println(clientId + "받아온 clientId (controller)");
 		if(clientId != null && !"".equals(clientId)) {
 			Business getBusiness = businessService.getDetailBusinessList(clientId);
@@ -91,7 +94,7 @@ public class SwMainBusinessController {
 		return	"redirect:/sw/business/addMainBusinessCode";
 	}
 	
-	/* 유성 사업장 대표코드 전체 조회 */
+	/* 유성 사업장 대표코드 조회 */
 	@GetMapping("/selectMainBusinessCode")
 	public String selectMainBusinessCode(Model model) {
 		List<MainBusinessCode> mainBusinessCode = mainBusinessCodeService.getMainBusinessCode();
@@ -101,8 +104,6 @@ public class SwMainBusinessController {
 		return "sw/business/selectMainBusinessCode";
 	}
 	
-
-	
 	/* 유성 사업장 대표코드 수정 */
 	@PostMapping ("/modifyMainBusinessCode")
 	public String modifyMainBusinessCode(MainBusinessCode mainBusinessCode) {
@@ -110,18 +111,26 @@ public class SwMainBusinessController {
 		return "redirect:/sw/business/selectMainBusinessCode";
 	}
 	
-	
-	/* 유성 사업장 대표코드 수정 */
-	@GetMapping	("/modifyMainBusinessCode")
-	public String modifyMainBusinessCode(@RequestParam(value = "mainBusinessCode", required = false) String mainBusinessCode,
-										Model model)	{
-		System.out.println(mainBusinessCode + "받아온 mainBusinessCode (controller)");
-		if(mainBusinessCode != null && !"".equals(mainBusinessCode))	{
-			MainBusinessCode getMainBusinessCode = mainBusinessCodeService.MainBusinessCodeInfo(mainBusinessCode);
-			model.addAttribute("getMainBusinessCode", getMainBusinessCode);
+	@GetMapping ("/modifyMainBusinessCode")
+	public String modifyMainBusinessCode(@RequestParam(value ="mainBusinessCode", required = false) String mainBusinessCode,
+										Model model) {
+		System.out.println(mainBusinessCode + "받아온 mainBusinessCode(controller)");
+		if(mainBusinessCode != null && !"".equals(mainBusinessCode)) {
+			MainBusinessCode mainBusinessCodeInfo = mainBusinessCodeService.mainBusinessCodeInfo(mainBusinessCode);
+			model.addAttribute("mainBusinessCodeInfo", mainBusinessCodeInfo);
+			
+			//merge 코드 받아오기
+			List<MainBusinessCode> merge = mainBusinessCodeService.getMergeCode();
+			model.addAttribute("merge", merge);
 		}
 		model.addAttribute("title", "사업장 대표코드 수정");
-		return "sw/business/modifyMainBuisnessCode";
-	}
+		return "sw/business/modifyMainBusinessCode";
+		
 	
+	}
+	/* 유성 사업장 대표코드 삭제 */
+	@RequestMapping ("/deleteMainBusinessCode")
+	public @ResponseBody int deleteMainBusinessCode (MainBusinessCode mainBusinessCode)  {
+		return mainBusinessCodeService.deleteMainBusinessCode(mainBusinessCode);
+	}
 }

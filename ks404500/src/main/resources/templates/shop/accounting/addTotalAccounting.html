@@ -4,48 +4,197 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 layout:decorate="@{layout/default-shop}">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<th:block layout:fragment="customJs">
+<script>
+$(document).ready(function () {
+    $('.radioButton').click(function () {
+
+			var str = ""
+			var tdArr = new Array();	// 배열 선언
+			var checkBtn = $(this);
+
+			var tr = checkBtn.parent().parent();
+			var td = tr.children();
+			td.each(function(i){	
+				tdArr.push(td.eq(i).text());
+			});
+
+			console.log("클릭한 Row의 모든 데이터 : "+td.text());
+			
+			// 반복문을 이용해서 배열에 값을 담음
+			td.each(function(i){	
+				tdArr.push(td.eq(i).text());
+			});
+			
+			console.log("통합코드"+tdArr[3]); //회계통합코드
+			console.log("금액"+tdArr[4]); //금액
+			
+			document.getElementById("shopTotalPrice").value = tdArr[4]; //금액
+			document.getElementById("shopGroupSlip").value = tdArr[3]; //회계통합코드
+
+    });
+    
+    //버튼을 선택하지않고 입력완료 선택시 경고창
+    $('#sign').click(function () {
+    	 var Category1 = $('.radioButton');
+    	    if($(':radio[class="radioButton"]:checked').length < 1){
+    	        alert('등록대상을 선택해주세요');
+    	        Category1.focus();
+    	        event.preventDefault();
+    	   		}
+    	
+    });
+   
+  });
+ 
+ //검색
+
+$(document).ready(function(){
+	  $("#myInput").on("keyup", function() {
+	    var value = $(this).val().toLowerCase();
+	    $("#myTable tr").filter(function() {
+	      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+	    });
+	  });
+	});
+
+</script>
+</th:block>
+
 <th:block layout:fragment="customContents">
 <!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper">
-	<!-- Content Header (Page header) -->
-		<div class="content-header">
+		<!-- Content Header (Page header) -->
+		<section class="content-header">
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1 class="m-0">"addTotalAccounting / 쇼핑몰 통합회계 등록"</h1>
-					</div><!-- /.col -->
+						<h1>"addTotalAccounting / 쇼핑몰 통합회계 매출등록"</h1>
+					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
-							<li class="breadcrumb-item"><a href="#">Home</a></li>
-							<li class="breadcrumb-item active">Starter Page</li>
+							<li class="breadcrumb-item"><a href="/shop/index-shop">Home</a></li>
+							<li class="breadcrumb-item active">매출관리</li>
 						</ol>
-					</div><!-- /.col -->
-				</div><!-- /.row -->
-			</div><!-- /.container-fluid -->
-		</div>
-	<!-- /.content-header -->
-	
-	<!-- Main content -->
-		<div class="content">
+					</div>
+				</div>
+			</div>
+			<!-- /.container-fluid -->
+		</section>
+
+		<!-- Main content -->
+		<section class="content">
 			<div class="container-fluid">
 				<div class="row">
-					<div class="col-lg-12">
-						<div class="card">
-							<div class="card-body">
-								<h5 class="card-title">Card title</h5>
-								<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-								<a href="#" class="card-link">Card link</a>
-								<a href="#" class="card-link">Another link</a>
+					<!-- left column -->
+					<div class="col-md-12">
+						<!-- /.card-header -->
+						<!-- Horizontal Form -->
+						<div class="card card-success">
+							<div class="card-header">
+								<h3 class="card-title">쇼핑몰 통합회계 등록</h3>
 							</div>
+							<!-- /.card-header -->
+							<!-- form start -->
+							<form class="form-horizontal" th:action="@{/shop/accounting/addTotalAccounting}"  method="post">
+								<div class="card-body">
+									<input class="form-control col-md-3" style="float : right" id="myInput" type="text" placeholder="검색어를 입력해주세요">
+									
+									<!-- 주문내역 테이블 시작 -->
+									<div style="width: 100%;">
+									<label for="biz" class="col-sm-6 col-form-label">마감된 내역만 통합회계에 등록가능합니다.</label>
+									<table class="table table-hover table-condensed" style="font-size: 13px; overflow-y : scroll; height: 150px;">
+										<thead>
+											<tr>
+												<th>선택</th>
+												<th>등록구분</th>
+												<th>매출코드</th>
+												<th>통합그룹코드</th>
+												<th>금액</th>
+												<th>회계통합코드</th>
+												<th>손익구분</th>
+												<th>대상테이블</th>
+												<th>회계통합금액</th>
+											</tr>
+										</thead>
+										<tbody id="myTable">
+											 <tr th:if="${not #lists.isEmpty(totalIncome)}" th:each="i: ${totalIncome}">
+												<td><input type="radio"  th:disabled="${i.shopTotalCode != null}" name="list" class="radioButton"></td>
+												<td th:if="${i.shopTotalCode == null}" th:text="등록대상"></td>
+												<td th:unless="${i.shopTotalCode == null}" th:text="등록완료"></td>
+												<td th:text="${i.shopIncomeCode}" ></td>
+												<td th:text="${i.shopIncomeGroupSlip}" ></td>
+												<td th:text="${i.finalIncomeVatNotImply}" ></td>
+												<td th:text="${i.shopTotalCode}" ></td>
+												<td th:text="${i.shopSalesSection}" ></td>
+												<td th:text="${i.shopTotalTable}" ></td>
+												<td th:text="${i.shopTotalPrice}" ></td>
+												</tr>
+											<tr th:unless="${not #lists.isEmpty(totalIncome)}">
+												<td>매출 내역이 없습니다.</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<!-- 주문내역 테이블 끝  -->
+								<div class="row">
+									<label for="biz" class="col-sm-6 col-form-label">통합회계매출 - 발행내역을 확인해주세요</label>
+								</div>
+								<!-- insert -->
+								<div class="form-group row">
+									</div>
+									<div class="form-group row">
+										<label for="shopTotalPrice" class="col-sm-2 col-form-label">금액 </label>
+										<div class="col-sm-6">
+											<div class="col-sm-6">
+							                       <input type="number" name="shopTotalPrice" readonly="readonly" id="shopTotalPrice" style="width:220px;"></input>
+							                 </div>
+										</div>
+									</div>
+									<div class="form-group row">
+										<label for="shopSalesSection" class="col-sm-2 col-form-label">구분 </label>
+										<div class="col-sm-6">
+											<div class="col-sm-6">
+							                       <input type="text" value="매출" name="shopSalesSection" id="shopSalesSection" readonly="readonly" style="width:220px;"></input>
+							                 </div>
+										</div>
+									</div>
+									<div class="form-group row">
+										<label for="shopTotalTable" class="col-sm-2 col-form-label">대상테이블 </label>
+										<div class="col-sm-6">
+											<div class="col-sm-6">
+							                       <input type="text" value="2팀_쇼핑몰_매출관리" name="shopTotalTable" id="shopTotalTable" readonly="readonly" style="width:220px;"></input>
+							                 </div>
+										</div>
+									</div>
+									<div class="form-group row">
+										<label for="shopGroupSlip" class="col-sm-2 col-form-label">통합그룹코드 </label>
+										<div class="col-sm-6">
+											<div class="col-sm-6">
+							                       <input type="text"  name="shopGroupSlip" id="shopGroupSlip" readonly="readonly" style="width:220px;"></input>
+							                 </div>
+										</div>
+									</div>
+								<!-- /insert -->
+								<!-- /.card-body -->
+								<div class="card-footer">
+									<button type="submit" class="btn btn-success" id="sign">입력완료</button>
+									<button type="button" onclick="history.back();"  class="btn btn-default float-right">취소</button>
+								</div>
+								<!-- /.card-footer -->
+								</div>
+							</form>
 						</div>
+						<!-- /.card -->
 					</div>
-					<!-- /.row -->
+					<!--/.col (left) -->
 				</div>
-				<!-- /.container-fluid -->
+				<!-- /.row -->
 			</div>
-	    	<!-- /.content -->
-		</div>
+			<!-- /.container-fluid -->
+		</section>
+		<!-- /.content -->
 	</div>
-<!-- /.content-wrapper -->
+	<!-- /.content-wrapper -->
 </th:block>
 </html>

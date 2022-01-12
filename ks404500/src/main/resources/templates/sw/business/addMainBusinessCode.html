@@ -37,9 +37,9 @@ layout:decorate="@{layout/default-sw}">
 							</div>
 							
 							<!--  사업장 대표코드 등록 폼바디 시작 -->
-							<form id="addMainBusinessCodeForm" th:action="@{/sw/business/addMainBusinessCode}" method="post" class="form-horizontal"> 
+								<form id="addMainBusinessCodeForm" th:action="@{/sw/business/addMainBusinessCode}" method="post" class="form-horizontal"> 
 								<p class="card-body" >
-
+								
 								<div class="form-group row">
 									<label class="col-sm-2 col-form-laebl text-right">사업장 대표코드</label>
 									<div class="col-sm-4">
@@ -53,13 +53,13 @@ layout:decorate="@{layout/default-sw}">
 								<div class="form-group row">
 									<label class="col-sm-2 col-form-laebl text-right">거래처 구분 코드</label>
 									<div class="col-sm-2">
-										<select id="localCode" class="form-control" name="businessCode">
+										<select id="businessCode" class="form-control" name="businessCode">
 											<option value="">::거래처 구분 코드 선택::</option>
-											<option>merge_shop(쇼핑몰)</option>
-											<option>merge_fac(공장)</option>
-											<option>merge_mart(마트)</option>
-											<option>merge_ware(창고)</option>
-											<option>merge_agency(대리점)</option>		
+											<option value="merge_shop">merge_shop</option>
+											<option value="merge_fac">merge_fac</option>
+											<option value="merge_mart">merge_mart</option>
+											<option value="merge_ware">merge_ware</option>
+											<option value="merge_agency">merge_agency</option>		
 											
 										</select>
 									</div>

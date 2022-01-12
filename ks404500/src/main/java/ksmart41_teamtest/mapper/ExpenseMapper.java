@@ -10,5 +10,13 @@ public interface ExpenseMapper {
 	
 	//유성 쇼핑몰 비용조회
 	public List<Expense> getExpense();
+	
+	//유성 쇼핑몰 비용 마감
+	Expense getModifyShopExpense(String shopExpenseCode);
 
+	// 유성 쇼핑몰 비용 마감 
+	int ShopExpenseFinish(Expense shopExpenseCode);
+	
+	// 유성 쇼핑몰 비용 삭제 
+	int deleteExpense(Expense expense);
 }

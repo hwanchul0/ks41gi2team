@@ -34,9 +34,22 @@
 			#{businessLevelCode},
 			#{businessCodeRegistrationDate}
 		
-		);	
+		);
 	</insert>
-	<select id ="MainBusinessCodeInfo" resultType="MainBusinessCode">
+	<update id="modifyMainBusinessCode" parameterType="MainBusinessCode">
+		UPDATE
+			k0_sw_mainBusinessCodeManagement
+		SET
+			mainBusinessCode = #{mainBusinessCode},
+			businessCode = #{businessCode},
+			businessLevelCode = #{businessLevelCode},
+			businessCodeRegistrationDate = #{businessCodeRegistrationDate},
+			businessCodeDeleteDate = #{businessCodeDeleteDate}
+		WHERE
+			mainBusinessCode = #{mainBusinessCode};
+			
+	</update>
+	<select id="mainBusinessCodeInfo" parameterType="String" resultType="MainBusinessCode">
 		SELECT 
 			mainBusinessCode,
 			businessCode,
@@ -45,20 +58,28 @@
 			businessCodeDeleteDate
 		FROM 
 			k0_sw_mainBusinessCodeManagement
-		WHERE
+		WHERE 
 			mainBusinessCode = #{mainBusinessCode};
 		
 	
 	</select>
-	<update id="modifyMainBusinessCode" parameterType="MainBusinessCode">
-		UPDATE
-			k0_sw_mainBusinessCodeManagement
-		SET
-			businessCode = #{businessCode},
-			businessLevelCode = #{businessLevelCode},
-			businessCodeRegistrationDate = #{businessCodeRegistrationDate},
-		WHERE
-			mainBusinessCode = #{mainBusinessCode}
 	
-	</update>
+	<delete id="deleteMainBusinessCode" parameterType="MainBusinessCode">
+		DELETE
+		FROM
+			k0_sw_mainBusinessCodeManagement
+		WHERE
+			mainBusinessCode = #{mainBusinessCode};	
+	
+	
+	</delete>
+	
+	
+	<select id="getMergeCode" resultType="mainBusinessCode">
+	SELECT
+		*
+		FROM
+	k0_BusinessCode;
+	</select>
+	
 </mapper>

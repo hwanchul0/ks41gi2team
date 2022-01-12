@@ -21,6 +21,15 @@ public class GetInvoiceInfo {
 	private int nontax;
 	private int tax;
 	private String invoiceCode;
+	private String contractManageCode;
+	
+	
+	public String getContractManageCode() {
+		return contractManageCode;
+	}
+	public void setContractManageCode(String contractManageCode) {
+		this.contractManageCode = contractManageCode;
+	}
 	public String getMainBusinessCode() {
 		return mainBusinessCode;
 	}
@@ -143,14 +152,51 @@ public class GetInvoiceInfo {
 	}
 	@Override
 	public String toString() {
-		return "GetInvoiceInfo [mainBusinessCode=" + mainBusinessCode + ", businessName=" + businessName + ", clientId="
-				+ clientId + ", businessRepresentativeName=" + businessRepresentativeName + ", businessNumber="
-				+ businessNumber + ", businessAddr=" + businessAddr + ", businessEmail=" + businessEmail
-				+ ", businessManagerEmail=" + businessManagerEmail + ", businessType1=" + businessType1
-				+ ", businessType2=" + businessType2 + ", serviceCode=" + serviceCode + ", serviceAmount="
-				+ serviceAmount + ", servicePeriod=" + servicePeriod + ", serviceName=" + serviceName + ", slipNumber="
-				+ slipNumber + ", serviceRegistrationDate=" + serviceRegistrationDate + ", serviceTotalPrice="
-				+ serviceTotalPrice + ", nontax=" + nontax + ", tax=" + tax + ", invoiceCode=" + invoiceCode + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("GetInvoiceInfo [mainBusinessCode=");
+		builder.append(mainBusinessCode);
+		builder.append(", businessName=");
+		builder.append(businessName);
+		builder.append(", clientId=");
+		builder.append(clientId);
+		builder.append(", businessRepresentativeName=");
+		builder.append(businessRepresentativeName);
+		builder.append(", businessNumber=");
+		builder.append(businessNumber);
+		builder.append(", businessAddr=");
+		builder.append(businessAddr);
+		builder.append(", businessEmail=");
+		builder.append(businessEmail);
+		builder.append(", businessManagerEmail=");
+		builder.append(businessManagerEmail);
+		builder.append(", businessType1=");
+		builder.append(businessType1);
+		builder.append(", businessType2=");
+		builder.append(businessType2);
+		builder.append(", serviceCode=");
+		builder.append(serviceCode);
+		builder.append(", serviceAmount=");
+		builder.append(serviceAmount);
+		builder.append(", servicePeriod=");
+		builder.append(servicePeriod);
+		builder.append(", serviceName=");
+		builder.append(serviceName);
+		builder.append(", slipNumber=");
+		builder.append(slipNumber);
+		builder.append(", serviceRegistrationDate=");
+		builder.append(serviceRegistrationDate);
+		builder.append(", serviceTotalPrice=");
+		builder.append(serviceTotalPrice);
+		builder.append(", nontax=");
+		builder.append(nontax);
+		builder.append(", tax=");
+		builder.append(tax);
+		builder.append(", invoiceCode=");
+		builder.append(invoiceCode);
+		builder.append(", contractManageCode=");
+		builder.append(contractManageCode);
+		builder.append("]");
+		return builder.toString();
 	}
 	
 	

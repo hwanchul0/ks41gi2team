@@ -15,7 +15,9 @@
 	         $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
 	       });
 	     });
-	     });
+	     
+	     
+	});
 	  
 </script>
 </th:block>
@@ -63,6 +65,7 @@
 										</div>
 										<div class="row">
 											<div class="col-sm-12">
+												<form>
 													<table id="example2" class="table table-bordered table-hover" role="grid" aria-describedby="example2_info" style="overflow: hidden;">
 														<thead>
 															<tr role="row">
@@ -73,10 +76,10 @@
 																<th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">이용일수</th>
 																<th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">사용여부</th>
 																<th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">서비스 등록날짜</th>
-																<th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">서비스 삭제날짜</th>
+																<th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">서비스 수정날짜</th>
 																<th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">등록자</th>
 																<th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">수정</th>
-																<th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">삭제</th>
+																<th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">제거</th>
 															</tr>
 														</thead>
 														<tbody id="myTable">
@@ -89,16 +92,25 @@
 																<td th:text="${s.servicePeriod}"></td>
 																<td th:text="${s.serviceStatus}"></td>
 																<td th:text="${s.serviceRegistrationDate}"></td>
-																<td th:text="${s.serviceDeleteDate}"></td>
+																<td th:text="${s.serviceModifyDate}"></td>
 																<td th:text="${s.memberId}"></td>
-																<td><a th:href="@{/sw/service/modifyServiceManagement(serviceCode=${s.serviceCode})}">수정</a></td>
-																<td><a th:href="@{/sw/service/deleteServiceManagement}">삭제</a></td>
+																<td>
+																	<a th:href="@{/sw/service/modifyServiceManagement(serviceCode=${s.serviceCode})}">
+																		<button type="button" class="btn btn-primary">수정</button>
+																	</a>
+																</td>
+																<td>
+																	<a th:href="@{/sw/service/deleteServiceManagement(serviceCode=${s.serviceCode})}">
+																		<button type="button" class="btn btn-primary deleteBtn">삭제</button>
+																	</a>
+																</td>
 															</tr>
 															<tr th:unless="${not #lists.isEmpty(getServiceManagement)}">
 																<td colspan="9">등록된 서비스가 없습니다.</td>
 															</tr>
 														</tbody>
 													</table>
+												</form>
 											</div>
 										</div>
 									</div>

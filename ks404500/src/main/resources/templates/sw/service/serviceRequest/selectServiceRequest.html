@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="@{layout/default-sw}">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+tbody tr {
+   counter-increment : aaa;
+}
+tbody tr td:first-child:before {
+   content: counter(aaa)"";
+}
+</style>
+<link th:href="@{/customcss/css/serviceRequest.css}" rel="stylesheet"/>
+<th:block layout:fragment="customContents">
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+	<!-- Content Header (Page header) -->
+	<div class="content-header">
+		<div class="container-fluid">
+			<div class="row mb-2">
+				<div class="col-sm-6">
+				<h1 class="m-0">서비스 계약 요청 조회하기 </h1>
+				</div>
+				<!-- /.col -->
+				<div class="col-sm-6">
+					<ol class="breadcrumb float-sm-right">
+						<li class="breadcrumb-item"><a href="#">Home</a></li>
+						<li class="breadcrumb-item active">Starter Page</li>
+					</ol>
+				</div>
+				<!-- /.col -->
+			</div>
+			<!-- /.row -->
+		</div>
+		<!-- /.container-fluid -->
+	</div>
+	<!-- /.content-header -->
+	<!-- Main content -->
+	<div class="content">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="card card-primary">
+						<div class="card-header">
+							 내 계약요청
+						</div>
+						<!-- CARD BODY -->
+						<div class="card-body">
+							<div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
+								<div class="row">
+									<div class="col-sm-12 col-md-6">
+									</div>
+									<div class="col-sm-12 col-md-6">
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-12">
+										<table id="example2" class="table table-bordered table-hover dataTable dtr-inline" role="grid" aria-describedby="example2_info">
+										<thead>
+										<tr role="row">
+											<th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">
+												서비스 코드
+											</th>
+											<th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">
+												 서비스 명
+											</th>
+											<th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">
+												 계약수량
+											</th>
+											<th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">
+												서비스 기간(일)
+											</th>
+											<th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">
+												총 금액
+											</th>
+											<th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">
+												서비스 시작 요청 날짜
+											</th>
+											<th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">
+												서비스 시작 예약 날짜
+											</th>
+											<th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">
+												서비스 종료 날짜
+											</th>
+											<th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">
+												서비스 승인 상태
+											</th>
+											<th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">
+												서비스 승인 날짜
+											</th>
+											<th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">
+												수정
+											</th>
+											<th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">
+												삭제
+											</th>
+										</tr>
+										</thead>
+										<tbody>
+										<tr th:if="${not #lists.isEmpty(getRequestList)}" th:each="r : ${getRequestList}">
+											<td th:text="${r.contractManageCode}"></td>
+											<td th:text="${r.serviceName}"></td>
+											<td th:text="${r.serviceAmount}"></td>
+											<td th:text="${r.servicePeriod}"></td>
+											<td th:text="${r.serviceTotalPrice}"></td>
+											<td th:text="${r.serviceRequestDate}"></td>
+											<td th:text="${r.serviceRegistrationDate}"></td>
+											<td th:text="${r.serviceEndDate}"></td>
+											<td th:text="${r.serviceRequestStatus}"></td>
+											<td th:text="${r.serviceApprovalDate}"></td>
+											<td>
+												<a th:href="@{/shop/service/serviceRequest/modifyServiceRequest}">수정</a>
+											</td>
+											<td>
+												<a th:href="@{/shop/service/serviceRequest/deleteServiceRequest}">삭제</a>
+											</td>
+										</tr>
+										<tr th:unless="${not #lists.isEmpty(getRequestList)}">
+											<td colspan="9">
+												등록된 계약요청이 없습니다.
+											</td>
+										</tr>
+										</tbody>
+										</table>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-12 col-md-5">
+										<div class="dataTables_info" id="example2_info" role="status" aria-live="polite">
+											Showing 1 to 10 of 57 entries
+										</div>
+									</div>
+									<div class="col-sm-12 col-md-7">
+										<div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
+											<ul class="pagination">
+												<li class="paginate_button page-item previous disabled" id="example2_previous"><a href="#" aria-controls="example2" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li>
+												<li class="paginate_button page-item active"><a href="#" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
+												<li class="paginate_button page-item "><a href="#" aria-controls="example2" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
+												<li class="paginate_button page-item "><a href="#" aria-controls="example2" data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
+												<li class="paginate_button page-item "><a href="#" aria-controls="example2" data-dt-idx="4" tabindex="0" class="page-link">4</a></li>
+												<li class="paginate_button page-item "><a href="#" aria-controls="example2" data-dt-idx="5" tabindex="0" class="page-link">5</a></li>
+												<li class="paginate_button page-item "><a href="#" aria-controls="example2" data-dt-idx="6" tabindex="0" class="page-link">6</a></li>
+												<li class="paginate_button page-item next" id="example2_next"><a href="#" aria-controls="example2" data-dt-idx="7" tabindex="0" class="page-link">Next</a></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- /CARD BODY -->
+					</div>
+				</div>
+				<!-- /.row -->
+			</div>
+			<!-- /.container-fluid -->
+		</div>
+		<!-- /.content -->
+	</div>
+</div>
+<!-- /.content-wrapper -->
+</th:block>
+</html>

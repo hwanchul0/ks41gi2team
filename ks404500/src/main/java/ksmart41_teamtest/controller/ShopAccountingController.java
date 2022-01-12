@@ -3,10 +3,8 @@ package ksmart41_teamtest.controller;
 
 
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
+import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -17,7 +15,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -75,9 +72,20 @@ public class ShopAccountingController {
 		return "redirect:/shop/accounting/addIncome";
 	}
 	
+	//유경 - 쇼핑몰 통합회계  발행대상 조회
 	@GetMapping("/addTotalAccounting")
-	public String addTotalAccounting() {
+	public String addTotalAccounting(Model model) {
+		//통합회계 매출 등록
+		List<ShopAddAccounting> totalIncome = shopAcountingService.selectByTotalIncome();
+		model.addAttribute("totalIncome",totalIncome);
 		return "shop/accounting/addTotalAccounting";
+	}
+	
+	//유경 - 쇼핑몰 통합회계  발행대상 등록
+	@PostMapping("/addTotalAccounting")
+	public String addTotalAccountingByIncome(ShopAddAccounting shopAddAccounting) {
+		shopAcountingService.addTotalAccountingByIncome(shopAddAccounting);
+		return "redirect:/shop/accounting/addTotalAccounting";
 	}
 	
 	/* 유성 쇼핑몰 비용 조회 */
@@ -90,14 +98,40 @@ public class ShopAccountingController {
 		return "shop/accounting/selectExpense";
 	}
 	
-	//쇼핑몰 매출 마감 확인
-	@PostMapping("/modifyIncome")
-	public String modifyIncome(ShopAddAccounting shopAddAccounting) {
-		log.info("정보 : {}", shopAddAccounting);
-		return "redirect:/shop/accounting/modifyIncome";
+	//유성 쇼핑몰 비용 마감확인
+	@PostMapping("/modifyExpense")
+	public String ShopExpenseFinish(Expense expense) {
+			 log.info("정보 : {}", expense );
+			//계정사용여부수정
+			 expenseService.ShopExpenseFinish(expense);
+			return "redirect:/shop/accounting/selectExpense";
+		}
+		
+	// 유성 쇼핑몰 비용 마감확인
+	@GetMapping("/modifyExpense")
+	public String modifyShopExpense(@RequestParam(value="shopExpenseCode", required = false) String shopExpenseCode
+	            ,Model model) {
+			Expense finish = expenseService.getModifyShopExpense(shopExpenseCode);
+			model.addAttribute("finish", finish);
+			log.info("finish 데이터 확인 ", finish);
+			return "/shop/accounting/modifyExpense";
+		}
+	//유성 - 쇼핑몰 비용 삭제
+	@RequestMapping ("/deleteExpense")
+	public @ResponseBody int deleteExpense(Expense expense) {
+		return expenseService.deleteExpense(expense);
 	}
 	
-	//쇼핑몰 매출 마감확인
+	// 유경 쇼핑몰 매출 마감확인
+	@PostMapping("/modifyIncome")
+	public String ShopIncomeFinish(ShopAddAccounting shopAddAccounting) {
+		 log.info("정보 : {}", shopAddAccounting );
+		//계정사용여부수정
+		 shopAcountingService.ShopIncomeFinish(shopAddAccounting);
+		return "redirect:/shop/accounting/selectIncome";
+	}
+	
+	// 유경 쇼핑몰 매출 마감확인
 	@GetMapping("/modifyIncome")
 	public String modifyShopIncome(@RequestParam(value="shopIncomeCode", required = false) String shopIncomeCode
             ,Model model) {
@@ -108,21 +142,32 @@ public class ShopAccountingController {
 	}
 	
 	
+	
 	//유경 - 쇼핑몰 매출조회
 	@GetMapping("/selectIncome")
 	public String selectIncome(Model model) {
+		//쇼핑몰 매출 목록 조회
 		List<ShopAddAccounting> shopAddAccounting = shopAcountingService.getSelectIncome();
 		model.addAttribute("shopAddAccounting", shopAddAccounting);
+		log.info("shopAddAccounting===========",shopAddAccounting);
+		//쇼핑몰 매출 차트 조회
+		ShopAddAccounting incomeChart = shopAcountingService.getIncomeChart();
+		model.addAttribute("incomeChart", incomeChart);
+		//System.out.println("incomeChart =============="+incomeChart);
 		return "shop/accounting/selectIncome";
 	}
 	
+	//유경 - 쇼핑몰 매출삭제
+	@RequestMapping ("/deleteIncome")
+	public @ResponseBody int deleteIncome(ShopAddAccounting shopAddAccounting) {
+		log.info("delete shop매출=========",shopAddAccounting);
+		return shopAcountingService.deleteIncome(shopAddAccounting);
+	}
 	
-	/*//유경 - 쇼핑몰 통합회계 조회
+	//유경 - 쇼핑몰 통합회계 조회
 	@GetMapping("/selectTotalAccounting")
 	public String selectTotalAccounting(Model model) {
-		List<ShopAddAccounting> selectTotalAccounting = shopAcountingService.getSelectTotalAccounting();
-		model.addAttribute("selectTotalAccounting", selectTotalAccounting);
-		return "shop/accounting/selectTotalAccounting";
-	}*/
+				return "shop/accounting/selectTotalAccounting";
+		}
 	
 }

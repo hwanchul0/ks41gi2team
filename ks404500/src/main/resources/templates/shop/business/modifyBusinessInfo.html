@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="@{layout/default-shop}">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<head th:replace="fragments/head :: headFragment"></head>
+
+<th:block layout:fragment="customContents">
+	<!-- 전체컨텐츠 -->
+	<div class="content-wrapper">
+		<!-- 컨텐츠 헤더 -->
+		<div class="content-header">
+			<div class="container-fluid">
+				<div class="row md-2">
+					<div class="col-sm-6">
+						<h1 class="m-0" th:text="${title}"></h1>
+					</div>
+					<div class="col-sm-6">
+						<ol class="breadcrumb float-sm-right">
+							<li class="breadcrumb-item"><a href="#">Home</a></li>
+							<li class="breadcrumb-item active">Starter Page</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 컨텐츠 헤더 끝 -->
+
+		<!-- 메인컨텐츠 -->
+		<div class="content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-12">
+						<!-- 회원가입폼 -->
+						<div class="card card-primary">
+							<form id="modifyBusinessInfoForm" th:action="@{/shop/business/modifyBusinessInfo}" method="post" class="form-horizontal">
+								<div class="card-header">
+									<h5 class="card-title" th:text="${title}"></h5>
+								</div>
+								<div class="card-body">
+									<div class="form-group row"  style="display: none;">
+										<input type="text" class="form-control" id="shopClientCode" th:value=${shopbusinesscode.shopClientCode} name="shopClientCode" >
+									</div>
+									<div class="form-group row">
+										<label class="col-sm-2 col-form-label text-right">상호명 : </label>
+										<div class="col-sm-8">
+											<input type="text" class="form-control" id="shopClientBusinessName" placeholder="상호명을 입력하세요" name="shopClientBusinessName">
+										</div>
+									</div>
+									<div class="form-group row">
+										<label class="col-sm-2 col-form-label text-right">연락처 : </label>
+										<div class="col-sm-8">
+											<input type="number" class="form-control" id="shopClientBusinessPhone" placeholder="연락처를 입력하세요" name="shopClientBusinessPhone">
+										</div>
+									</div>
+									<div class="form-group row">
+										<label class="col-sm-2 col-form-label text-right">담당자 : </label>
+										<div class="col-sm-8">
+											<input type="text" class="form-control" id="shopClientBusinessStaff" placeholder="담당자명을 입력하세요" name="shopClientBusinessStaff">
+										</div>
+									</div>
+									<div class="form-group row">
+										<label class="col-sm-2 col-form-label text-right">대표자 : </label>
+										<div class="col-sm-8">
+											<input type="text" class="form-control" id="shopClientBizLeaderName" placeholder="대표자명을 입력하세요" name="shopClientBizLeaderName">
+										</div>
+									</div>
+									<div class="form-group row">
+										<label class="col-sm-2 col-form-label text-right">사업자 번호 : </label>
+										<div class="col-sm-8">
+											<input type="text" class="form-control" id="shopClientBusinessNumber" placeholder="사업자 번호를 입력하세요" name="shopClientBusinessNumber">
+										</div>
+									</div>
+									<div class="form-group row">
+										<label class="col-sm-2 col-form-label text-right">주소 :  </label>
+										<div class="col-sm-8">
+											<input type="text" class="form-control" id="shopClientBusinessAddr" placeholder="대표자명을 입력하세요" name="shopClientBusinessAddr">
+										</div>
+									</div>
+									<div class="form-group row">
+										<label class="col-sm-2 col-form-label text-right">업태 :  </label>
+										<div class="col-sm-8">
+											<input type="text" class="form-control" id="shopClientBusinessType1" placeholder="업태를 입력하세요" name="shopClientBusinessType1">
+										</div>
+									</div>
+									<div class="form-group row">
+										<label class="col-sm-2 col-form-label text-right">종목 :  </label>
+										<div class="col-sm-8">
+											<input type="text" class="form-control" id="shopClientBusinessType2" placeholder="종목을 입력하세요" name="shopClientBusinessType2">
+										</div>
+									</div>
+								</div>
+								<div class="card-footer">
+									<button type="submit" class="btn btn-primary" id ="modifyBusinessInfo"> 수정완료 </button>
+									<button type="button" class="btn btn-default float-right" id="cancleBusinessInfo"> 취소 </button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+	
+	</script>
+</th:block>
+</html>
+
+

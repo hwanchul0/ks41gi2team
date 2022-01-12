@@ -4,17 +4,22 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ksmart41_teamtest.mapper.ServiceRequestMapper">
 	<resultMap type="ServiceRequest" id="requestResultMap">
-		<result column="contractManageCode" 			property="contractManageCode"/>
-		<result column="serviceName" 					property="serviceName"/>
-		<result column="serviceAmount" 					property="serviceAmount"/>
-		<result column="servicePeriod" 					property="servicePeriod"/>
-		<result column="serviceTotalPrice" 				property="serviceTotalPrice"/>
-		<result column="serviceRequestDate" 			property="serviceRequestDate"/>
-		<result column="serviceRegistrationDate" 		property="serviceRegistrationDate"/>
-		<result column="serviceEndDate" 				property="serviceEndDate"/>
-		<result column="serviceRequestStatus" 			property="serviceRequestStatus"/>
-		<result column="serviceApprovalDate" 			property="serviceApprovalDate"/>
-		<result column="clientId" 						property="clientId"/>
+		<result column="contractManageCode" 							property="contractManageCode"/>
+		<result column="serviceName" 									property="serviceName"/>
+		<result column="serviceAmount" 									property="serviceAmount"/>
+		<result column="servicePeriod" 									property="servicePeriod"/>
+		<result column="serviceTotalPrice" 								property="serviceTotalPrice"/>
+		<result column="serviceRequestDate" 							property="serviceRequestDate"/>
+		<result column="serviceRegistrationDate" 						property="serviceRegistrationDate"/>
+		<result column="serviceEndDate" 								property="serviceEndDate"/>
+		<result column="serviceRequestStatus" 							property="serviceRequestStatus"/>
+		<result column="serviceApprovalDate" 							property="serviceApprovalDate"/>
+		<result column="clientId" 										property="clientId"/>
+		<result column="mainBusinessCode" 								property="mainBusinessCode"/>
+		<result column="businessCode" 									property="businessCode"/>
+		<result column="businessLevelCode" 								property="businessLevelCode"/>
+		<result column="businessRegistrationCode" 						property="businessRegistrationCode"/>
+		<result column="businessCodeRegistrationDate" 					property="businessCodeRegistrationDate"/>
 	</resultMap>		
 	<!-- 계약요청 전체 조회 ( sw) -->
 		<select id="getAllRequestList" parameterType="String" resultMap="requestResultMap">
@@ -47,7 +52,7 @@
 			GROUP BY bR.clientId
 			ORDER BY serviceRequestDate ASC;
 	</select>
-	<!-- 계약요청 조회 (client) -->
+	<!-- 계약요청 조회 (shop-client) -->
 		<select id="getRequestList" parameterType="String" resultMap="requestResultMap">
 			SELECT
 				r.contractManageCode
@@ -78,7 +83,7 @@
 			clientId = #{clientId}
 			ORDER BY serviceRequestDate ASC;
 	</select>
-		
+	<!-- 계약요청 상세정보 (sw) -->
 	<select id="getDetailRequestList" resultType="ServiceRequest" resultMap="requestResultMap">
 			SELECT
 				 bR.clientId
@@ -110,5 +115,22 @@
 				contractManageCode = #{contractManageCode}
 			GROUP BY bR.clientId
 			ORDER BY r.serviceRequestDate ASC; 		
+	</select>
+	<!-- 서비스 등록 | 내 사업장대표코드 modal -->
+	<select id="findMyMainBizCode" parameterType="map" resultType="map">
+	SELECT 
+		main.mainBusinessCode
+		,main.businessCode
+		,main.businessLevelCode
+		,main.businessRegistrationCode
+		,main.businessCodeRegistrationDate
+	FROM 
+		k0_sw_mainBusinessCodeManagement AS main
+	INNER JOIN 
+		k0_sw_businessRegistration AS bR
+	ON 
+		main.businessRegistrationCode = bR.businessRegistrationCode
+	WHERE 
+		bR.clientId = #{clientId};
 	</select>
 </mapper>

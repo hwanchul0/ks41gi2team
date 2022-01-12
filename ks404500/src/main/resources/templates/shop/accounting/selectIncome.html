@@ -6,24 +6,31 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <th:block layout:fragment="customContents">
 	<th:block layout:fragment="customJs">
-		<script>
+		<script th:inline="javascript">
 		//검색기능
-		$(document).ready(function(){
-			  $("#myInput").on("keyup", function() {
-			    var value = $(this).val().toLowerCase();
-			    $("#myTable tr").filter(function() {
-			      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-			    });
-			  });
-			});
-		
-		//마감내역 선택시 경고창
-		$(function(){
-			$('.finish').click(function(){
-				alert('이미 마감된내역입니다');
-			})
-
+	$(document).ready(function(){
+		  $("#myInput").on("keyup", function() {
+		    var value = $(this).val().toLowerCase();
+		    $("#myTable tr").filter(function() {
+		      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+		    });
+		  });
 		});
+	
+	//마감내역 선택시 경고창
+	$(function(){
+		$('.finish').click(function(){
+			alert('이미 마감된내역입니다');
+		})
+
+	});
+	
+	$(function(){
+		$('.btn-default').click(function(){
+			alert('이미 마감된내역입니다');
+		})
+
+	});
 
 
 $(function() {
@@ -32,9 +39,12 @@ $(function() {
 				//--------------
 				// Get context with jQuery - using jQuery's .get() method.
 				var areaChartCanvas = $('#areaChart').get(0).getContext('2d')
+				/*<![CDATA[*/
+				var mon = [['['+${incomeChart.mon+']'}]];
+				/*]]>*/
 
 				var areaChartData = {
-					labels : [ '1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+					labels : JSON.parse(mon),
 					datasets : [ {
 						label : '매출액',
 						backgroundColor : '#cfe2ce',
@@ -44,8 +54,8 @@ $(function() {
 						pointStrokeColor : '#698c68',
 						pointHighlightFill : '#fff',
 						pointHighlightStroke : '#698c68',
-						data : [160000,1650000,60000,80000,70000,110000,0,160000,0]
-						
+						//data : [160000,1650000,60000,80000,70000,110000,0,160000,0]
+						data : [[${'['+incomeChart.chartPrice+']'}]]
 					} ]
 				}
 
@@ -79,6 +89,36 @@ $(function() {
 				
 				
 			})
+		
+			
+			
+//매출삭제
+function deleteBtn(shopIncomeCode) {
+		if(shopIncomeCode != null && shopIncomeCode != ""){
+			
+			var delConfirm = confirm('해당 내역을 삭제합니다.');
+			if (delConfirm) {
+			      alert('삭제되었습니다.');
+			      var request = $.ajax({
+					  url: "/shop/accounting/deleteIncome",
+					  method: "POST",
+					  data: { shopIncomeCode : shopIncomeCode },
+					  dataType: "text"
+					});
+			      location.reload();
+			   }
+			location.reload();
+			request.done(function(data) {
+				if(data < 0) {
+					alert("실패했습니다.");
+				}
+				location.reload();
+			});
+		} else {
+			alert("삭제 실패 ");
+		}
+	}
+
 		</script>
 	</th:block>
 	<!-- Content Wrapper. Contains page content -->
@@ -165,6 +205,7 @@ $(function() {
 														<th>마감확인</th>
 														<th>마감확인날짜</th>
 														<th>마감</th>
+														<th>삭제</th>
 													</tr>
 												</thead>
 												<tbody id="myTable">
@@ -182,9 +223,14 @@ $(function() {
 														<td th:text="${a.groupslip}"></td>
 														<td th:text="${a.shopIncomeFinish}"></td>
 														<td th:text="${a.shopIncomeFinishDate} ? ${#dates.format(a.shopIncomeFinishDate,'yyyy-MM-dd')}"></td>
+														<!-- 마감 -->
 														<td th:if="${a.shopIncomeFinish} == null">
 														<a th:href="@{/shop/accounting/modifyIncome(shopIncomeCode=${a.shopIncomeCode})}"><i class="fas fa-pencil-alt" style="color: #28a745"></i></a></td>
 														<td th:if="${a.shopIncomeFinish} != null"><i class="fas fa-pencil-alt finish"></i></td>
+														<!-- 삭제 -->
+														<td th:if="${a.shopIncomeFinish} == null">
+														<button type="button" class="btn-success btn-xs deleteBtn" th:onclick="deleteBtn([[${a.shopIncomeCode}]]);">삭제</button></td>
+														<td th:if="${a.shopIncomeFinish} != null"><button type="button"class="btn btn-default btn-xs">삭제</button></td>
 													</tr>
 													<tr th:unless="${not #lists.isEmpty(shopAddAccounting)}">
 														<td>표시할 내용이 없습니다</td>

@@ -1,51 +1,98 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" 
-xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
-layout:decorate="@{layout/default-sw}">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="@{layout/default-sw}">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 <th:block layout:fragment="customContents">
-<!-- Content Wrapper. Contains page content -->
+	<!-- 전체컨텐츠 -->
 	<div class="content-wrapper">
-	<!-- Content Header (Page header) -->
+		<!-- 컨텐츠 헤더 -->
 		<div class="content-header">
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1 class="m-0">"addPaymentStateCode / 개발사 서비스 결제 상태 코드 등록"</h1>
-					</div><!-- /.col -->
+						<h1 class="m-0" th:text="${title}"></h1>
+					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
 							<li class="breadcrumb-item"><a href="#">Home</a></li>
 							<li class="breadcrumb-item active">Starter Page</li>
 						</ol>
-					</div><!-- /.col -->
-				</div><!-- /.row -->
-			</div><!-- /.container-fluid -->
+					</div>
+				</div>
+			</div>
 		</div>
-	<!-- /.content-header -->
 	
-	<!-- Main content -->
+		<!-- 메인컨텐츠 -->
 		<div class="content">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="card">
-							<div class="card-body">
-								<h5 class="card-title">Card title</h5>
-								<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-								<a href="#" class="card-link">Card link</a>
-								<a href="#" class="card-link">Another link</a>
+							<div class="card-header">
+							<h1>결제상태 코드 등록</h1>
+								<h5 class="card-title" th:text="${title}"></h5>
 							</div>
+							<form id="addBusinessCodeForm" th:action="@{/sw/code/addBusinessCode}"class="form-horizontal" method="post">
+								<div class="card-body">
+									<div class="form-group row">
+										<label class="col-sm-2 col-form-label text-right">서비스 결제상태 코드 : </label>
+										<div class="col-sm-8">
+											<input type="text" class="form-control" id="businessCode" placeholder="거래처 구분 코드를 입력하세요" name="businessCode">
+										</div>
+										<div>
+											<button type="button" id="businessCodeCheckBtn" class="btn btn-primary">중복확인</button>
+										</div>
+									</div>
+									<div class="form-group row">
+										<label class="col-sm-2 col-form-label text-right">서비스 결제상태  코드 이름 : </label>
+										<div class="col-sm-8">
+											<input type="text" class="form-control" id="businessCodeName" placeholder="서비스 결제상태  코드 이름을 입력하세요" name="businessCodeName">
+										</div>
+									</div>
+									<div class="card-footer">
+										<button type="submit" name="addBusinessCodeBtn" class="btn btn-primary">등록</button>
+										<button type="button" name="cancleBtn" class="btn btn-default float-right">취소</button>
+									</div>
+								</div>
+							</form>
 						</div>
 					</div>
-					<!-- /.row -->
 				</div>
-				<!-- /.container-fluid -->
 			</div>
-	    	<!-- /.content -->
 		</div>
 	</div>
-<!-- /.content-wrapper -->
+	<script type="text/javascript">
+		/* 
+		$('#businessCodeCheckBtn').click(function(){
+			var businessCode = $('#businessCode').val();
+			console.log('assss');
+			//[재천]ajax통신
+			var request = $.ajax({
+				  url: "/sw/code/businessCodeCheck",
+				  method: "POST",
+				  data: { businessCode : businessCode },
+				  dataType: "text"
+				});
+			
+			request.done(function(data) {
+				if(businessCode != null && businessCode != ""){
+					if(data == "true"){
+						alert('등록불가');
+						$('#addBusinessCodeForm input').not('#businessCode').prop('disabled', true);
+						$('#addBusinessCodeForm select').prop('disabled', true);
+						$('#addBusinessCodeForm button').not('#businessCodeCheckBtn').prop('disabled', true);
+					}else{
+						alert('등록 가능');
+						$('#addBusinessCodeForm input').not('#businessCode').prop('disabled', false);
+						$('#addBusinessCodeForm select').prop('disabled', false);
+						$('#addBusinessCodeForm button').not('#businessCodeCheckBtn').prop('disabled', false);
+					}
+				}else{
+					alert('공백에러!');
+				}
+			});
+		}); */
+		
+	</script>
 </th:block>
 </html>
