@@ -18,9 +18,24 @@ public class ExpenseService {
 	public ExpenseService(ExpenseMapper expenseMapper) {
 		this.expenseMapper = expenseMapper;
 	}
-
+	//유성 - 쇼핑몰 비용 조회
 	public List<Expense> getExpense() {
 		List<Expense> expense = expenseMapper.getExpense();
 		return expense;
 	}
+	// 유성 쇼핑몰 비용 마감 
+	public Expense getModifyShopExpense(String shopExpenseCode)	{
+		return expenseMapper.getModifyShopExpense(shopExpenseCode);
+	}
+	
+	// 유성 쇼핑몰 매출 마감 - post
+	public int ShopExpenseFinish(Expense shopExpenseCode) {
+		return expenseMapper.ShopExpenseFinish(shopExpenseCode);
+	}
+	
+	// 유성 쇼핑몰 매출 삭제 
+	public int deleteExpense(Expense expense)	{
+		return expenseMapper.deleteExpense(expense);
+	}
+
 }

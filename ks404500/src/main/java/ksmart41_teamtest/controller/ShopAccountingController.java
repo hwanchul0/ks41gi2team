@@ -98,7 +98,31 @@ public class ShopAccountingController {
 		return "shop/accounting/selectExpense";
 	}
 	
-	//쇼핑몰 매출 마감확인
+	//유성 쇼핑몰 비용 마감확인
+	@PostMapping("/modifyExpense")
+	public String ShopExpenseFinish(Expense expense) {
+			 log.info("정보 : {}", expense );
+			//계정사용여부수정
+			 expenseService.ShopExpenseFinish(expense);
+			return "redirect:/shop/accounting/selectExpense";
+		}
+		
+	// 유성 쇼핑몰 비용 마감확인
+	@GetMapping("/modifyExpense")
+	public String modifyShopExpense(@RequestParam(value="shopExpenseCode", required = false) String shopExpenseCode
+	            ,Model model) {
+			Expense finish = expenseService.getModifyShopExpense(shopExpenseCode);
+			model.addAttribute("finish", finish);
+			log.info("finish 데이터 확인 ", finish);
+			return "/shop/accounting/modifyExpense";
+		}
+	//유성 - 쇼핑몰 비용 삭제
+	@RequestMapping ("/deleteExpense")
+	public @ResponseBody int deleteExpense(Expense expense) {
+		return expenseService.deleteExpense(expense);
+	}
+	
+	// 유경 쇼핑몰 매출 마감확인
 	@PostMapping("/modifyIncome")
 	public String ShopIncomeFinish(ShopAddAccounting shopAddAccounting) {
 		 log.info("정보 : {}", shopAddAccounting );
@@ -107,7 +131,7 @@ public class ShopAccountingController {
 		return "redirect:/shop/accounting/selectIncome";
 	}
 	
-	//쇼핑몰 매출 마감확인
+	// 유경 쇼핑몰 매출 마감확인
 	@GetMapping("/modifyIncome")
 	public String modifyShopIncome(@RequestParam(value="shopIncomeCode", required = false) String shopIncomeCode
             ,Model model) {
@@ -116,6 +140,7 @@ public class ShopAccountingController {
 		log.info("finish 데이터 확인 ", finish);
 		return "/shop/accounting/modifyIncome";
 	}
+	
 	
 	
 	//유경 - 쇼핑몰 매출조회

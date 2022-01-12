@@ -9,7 +9,9 @@ import ksmart41_teamtest.dto.ShopPaymentCheck;
 @Mapper
 public interface ShopPaymentCheckMapper {
 	
-	//유성 쇼핑몰 결제상태 조회
+	//유성 쇼핑몰 결제 조회
 	public List<ShopPaymentCheck> getShopPaymentCheck();
 
+	//유성 쇼핑몰 결제 등록
+	public int addPaymentCheck(ShopPaymentCheck shopPaymentCheck);
 }
