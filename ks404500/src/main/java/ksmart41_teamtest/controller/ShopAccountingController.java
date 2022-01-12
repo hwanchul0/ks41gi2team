@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import ksmart41_teamtest.dto.Expense;
-import ksmart41_teamtest.dto.Member;
 import ksmart41_teamtest.dto.ShopAddAccounting;
 
 import ksmart41_teamtest.service.ExpenseService;
@@ -73,9 +72,20 @@ public class ShopAccountingController {
 		return "redirect:/shop/accounting/addIncome";
 	}
 	
+	//유경 - 쇼핑몰 통합회계  발행대상 조회
 	@GetMapping("/addTotalAccounting")
-	public String addTotalAccounting() {
+	public String addTotalAccounting(Model model) {
+		//통합회계 매출 등록
+		List<ShopAddAccounting> totalIncome = shopAcountingService.selectByTotalIncome();
+		model.addAttribute("totalIncome",totalIncome);
 		return "shop/accounting/addTotalAccounting";
+	}
+	
+	//유경 - 쇼핑몰 통합회계  발행대상 등록
+	@PostMapping("/addTotalAccounting")
+	public String addTotalAccountingByIncome(ShopAddAccounting shopAddAccounting) {
+		shopAcountingService.addTotalAccountingByIncome(shopAddAccounting);
+		return "redirect:/shop/accounting/addTotalAccounting";
 	}
 	
 	/* 유성 쇼핑몰 비용 조회 */
@@ -123,15 +133,15 @@ public class ShopAccountingController {
 	}
 	
 	//유경 - 쇼핑몰 매출삭제
-	@RequestMapping ("/accounting/deleteIncome")
+	@RequestMapping ("/deleteIncome")
 	public @ResponseBody int deleteIncome(ShopAddAccounting shopAddAccounting) {
+		log.info("delete shop매출=========",shopAddAccounting);
 		return shopAcountingService.deleteIncome(shopAddAccounting);
 	}
 	
 	//유경 - 쇼핑몰 통합회계 조회
 	@GetMapping("/selectTotalAccounting")
 	public String selectTotalAccounting(Model model) {
-		//Map<String, Object> expense = shopAcountingService.getSelectTotalAccounting();
 				return "shop/accounting/selectTotalAccounting";
 		}
 	
