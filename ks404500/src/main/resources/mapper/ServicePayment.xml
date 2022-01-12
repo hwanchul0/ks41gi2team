@@ -81,4 +81,34 @@
 			WHERE 
 				paymentCode=#{paymentStateCode}
 		</update>
+		<select id="selectContractState" resultType="ServicePayment">
+		SELECT 
+			k.clientId
+			,n.contractCode
+			,s.paymentState
+			,c.contractState
+			,r.refundState
+			,n.refundReason
+			,n.serviceRegistrationDate
+			,n.serviceDeleteDate
+			,n.contractRegDate
+		FROM 
+			k2_sw_normalContractState AS n
+			left JOIN 
+			k2_sw_contractRefundState AS r
+			ON 
+			n.refundStateCode = r.refundStateCode
+			INNER JOIN 
+			k2_sw_contractState AS c
+			ON 
+			n.contractStateCode = c.contractStateCode
+			INNER JOIN 
+			k2_sw_paymentCheck AS k
+			ON 
+			n.paymentCheckCode = k.paymentCheckCode
+			INNER JOIN 
+			k2_paymentState AS s
+			ON 
+			k.paymentStateCode = s.paymentStateCode;
+		</select>
 </mapper>

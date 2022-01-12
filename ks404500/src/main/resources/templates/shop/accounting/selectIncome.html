@@ -8,22 +8,29 @@
 	<th:block layout:fragment="customJs">
 		<script th:inline="javascript">
 		//검색기능
-		$(document).ready(function(){
-			  $("#myInput").on("keyup", function() {
-			    var value = $(this).val().toLowerCase();
-			    $("#myTable tr").filter(function() {
-			      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-			    });
-			  });
-			});
-		
-		//마감내역 선택시 경고창
-		$(function(){
-			$('.finish').click(function(){
-				alert('이미 마감된내역입니다');
-			})
-
+	$(document).ready(function(){
+		  $("#myInput").on("keyup", function() {
+		    var value = $(this).val().toLowerCase();
+		    $("#myTable tr").filter(function() {
+		      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+		    });
+		  });
 		});
+	
+	//마감내역 선택시 경고창
+	$(function(){
+		$('.finish').click(function(){
+			alert('이미 마감된내역입니다');
+		})
+
+	});
+	
+	$(function(){
+		$('.btn-default').click(function(){
+			alert('이미 마감된내역입니다');
+		})
+
+	});
 
 
 $(function() {
@@ -82,21 +89,27 @@ $(function() {
 				
 				
 			})
+		
 			
-		//매출 삭제
-		function deleteIncome(shopIncomeCode) {
+			
+//매출삭제
+function deleteBtn(shopIncomeCode) {
 		if(shopIncomeCode != null && shopIncomeCode != ""){
-			var request = $.ajax({
-				  url: "/sw/accounting/deleteIncome",
-				  method: "POST",
-				  data: { shopIncomeCode : shopIncomeCode },
-				  dataType: "text"
-				});
 			
+			var delConfirm = confirm('해당 내역을 삭제합니다.');
+			if (delConfirm) {
+			      alert('삭제되었습니다.');
+			      var request = $.ajax({
+					  url: "/shop/accounting/deleteIncome",
+					  method: "POST",
+					  data: { shopIncomeCode : shopIncomeCode },
+					  dataType: "text"
+					});
+			      location.reload();
+			   }
+			location.reload();
 			request.done(function(data) {
-				if(data > 0) {
-					alert("삭제 되었습니다.");
-				}else {
+				if(data < 0) {
 					alert("실패했습니다.");
 				}
 				location.reload();
@@ -104,7 +117,8 @@ $(function() {
 		} else {
 			alert("삭제 실패 ");
 		}
-	}	
+	}
+
 		</script>
 	</th:block>
 	<!-- Content Wrapper. Contains page content -->
@@ -215,8 +229,8 @@ $(function() {
 														<td th:if="${a.shopIncomeFinish} != null"><i class="fas fa-pencil-alt finish"></i></td>
 														<!-- 삭제 -->
 														<td th:if="${a.shopIncomeFinish} == null">
-														<a th:href="@{/shop/accounting/deleteIncome(shopIncomeCode=${a.shopIncomeCode})}"><i class="fas fa-trash-alt" th:onclick="deleteIncome([[${a.shopIncomeCode}]]);" style="color: #28a745"></i></a></td>
-														<td th:if="${a.shopIncomeFinish} != null"><i class="fas fa-trash-alt"></i></td>
+														<button type="button" class="btn-success btn-xs deleteBtn" th:onclick="deleteBtn([[${a.shopIncomeCode}]]);">삭제</button></td>
+														<td th:if="${a.shopIncomeFinish} != null"><button type="button"class="btn btn-default btn-xs">삭제</button></td>
 													</tr>
 													<tr th:unless="${not #lists.isEmpty(shopAddAccounting)}">
 														<td>표시할 내용이 없습니다</td>
