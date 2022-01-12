@@ -16,6 +16,23 @@ public class Expense {
 	private String shopExpenseFinishDate;
 	private String shopExpenseSlipNumber;
 	private String shopExpenseGroupSlip;
+	
+	//차트생성 
+	private String mon; // 월
+	private String chartPrice;// 월 합계 
+	
+	public String getMon() {
+		return mon;
+	}
+	public void setMon(String mon) {
+		this.mon = mon;
+	}
+	public String getChartPrice() {
+		return chartPrice;
+	}
+	public void setChartPrice(String chartPrice) {
+		this.chartPrice = chartPrice;
+	}
 	public String getShopExpenseCode() {
 		return shopExpenseCode;
 	}
@@ -131,6 +148,10 @@ public class Expense {
 		builder.append(shopExpenseSlipNumber);
 		builder.append(", shopExpenseGroupSlip=");
 		builder.append(shopExpenseGroupSlip);
+		builder.append(", mon=");
+		builder.append(mon);
+		builder.append(", chartPrice=");
+		builder.append(chartPrice);
 		builder.append("]");
 		return builder.toString();
 	}

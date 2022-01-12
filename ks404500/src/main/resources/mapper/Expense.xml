@@ -37,4 +37,33 @@
 		k2_shop_expense;
 		
 		</select>
+		<!--  유성 쇼핑몰 비용 마감 코드확인 -->
+		<select id="getModifyShopExpense" resultType="Expense">
+			SELECT
+				*
+			FROM
+				k2_shop_expense
+			WHERE
+				shopExpenseCode =#{shopExpenseCode};
+		</select>
+		<!--  유성 쇼핑몰 비용 마감  -->
+		<update id="ShopExpenseFinish" parameterType="Expense">
+			UPDATE k2_shop_expense
+			SET
+				shopExpenseFinish=#{shopExpenseFinish},
+				shopExpenseFinishDate=CURDATE()
+			WHERE shopExpenseCode=#{shopExpenseCode};
+				
+		</update>
+		
+		<!--  유성 쇼핑몰 비용 삭제  -->
+		<delete id="deleteExpense" parameterType="Expense">
+			DELETE	
+			FROM
+				k2_shop_expense
+			WHERE
+				shopExpenseCode = #{shopExpenseCode};
+		
+		</delete>
+		
 </mapper>

@@ -75,5 +75,17 @@ public class ShopAcountingService {
 	public int deleteIncome(ShopAddAccounting shopAddAccounting) {
 		return shopAddAccountingMapper.deleteIncome(shopAddAccounting); 
 	}
+	
+	//유경 - 쇼핑몰 통합회계 조회
+	public List<ShopAddAccounting> selectByTotalIncome() {
+		List<ShopAddAccounting> totalIncome = shopAddAccountingMapper.selectByTotalIncome();
+		return totalIncome;
+	}
+	
+	//유경 - 쇼핑몰 통합회계 등록
+	public int addTotalAccountingByIncome(ShopAddAccounting shopAddAccounting) {
+		int result = shopAddAccountingMapper.addTotalAccountingByIncome(shopAddAccounting);
+		return result;
+	}
 
 }

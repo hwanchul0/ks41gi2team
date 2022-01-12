@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import ksmart41_teamtest.dto.Code;
 import ksmart41_teamtest.dto.InvoiceReason;
 import ksmart41_teamtest.dto.SwIsListCode;
+import ksmart41_teamtest.service.CodeService;
 import ksmart41_teamtest.service.InvoiceReasonService;
 import ksmart41_teamtest.service.SwIsListService;
 
@@ -33,6 +35,12 @@ public class SwCodeController {
 	/*유경 */
 	@Autowired
 	private SwIsListService swIsListService;
+	//환철
+	private CodeService codeService;
+	
+	public SwCodeController(CodeService codeService) {
+		this.codeService = codeService;
+	}
 	
 	@GetMapping("/addInvoiceReasonCode")
 	public String addInvoiceReasonCode() {
@@ -92,27 +100,50 @@ public class SwCodeController {
 		return "sw/code/selectIsListCode";
 	}
 	
+	// 환철 ==========================================================
+	
+	// SW 계약상태 코드 등록
 	@GetMapping("/addContractStateCode")
 	public String addContractStateCode() {
 		return "sw/code/addContractStateCode";
 	}
-	
+	// SW 계약상태 코드 조회
 	@GetMapping("/selectContractStateCode")
-	public String selectContractStateCode() {
+	public String selectContractStateCode(Model model) {
+		List<Code> selectContractStateCode = codeService.selectContractStateCode();
+		model.addAttribute("title","계약상태 코드 조회");
+		model.addAttribute("selectContractStateCode",selectContractStateCode);
 		return "sw/code/selectContractStateCode";
 	}
 
-	
+	// SW 환불상태 코드 등록
 	@GetMapping("/addContractRefundStateCode")
 	public String addContractRefundStateCode() {
 		return "sw/code/addContractRefundStateCode";
 	}
-	
+	// SW 환불상태 코드 조회
 	@GetMapping("/selectContractRefundStateCode")
-	public String selectContractRefundStateCode() {
+	public String selectContractRefundStateCode(Model model) {
+		List<Code> selectContractRefundStateCode = codeService.selectContractRefundStateCode();
+		model.addAttribute("title","환불상태 코드 조회");
+		model.addAttribute("selectContractRefundStateCode",selectContractRefundStateCode);
 		return "sw/code/selectContractRefundStateCode";
 	}
 	
+	// SW 결제상태 코드 등록
+	@GetMapping("/addPaymentStateCode")
+	public String addPaymentStateCode() {
+		return "sw/code/addPaymentStateCode";
+	}
+	
+	// SW 결제상태 코드 조회
+	@GetMapping("/selectPaymentStateCode")
+	public String selectPaymentStateCode(Model model) {
+		List<Code> selectPaymentStateCode = codeService.selectPaymentStateCode();
+		model.addAttribute("title","결제상태 코드 조회");
+		model.addAttribute("selectPaymentStateCode",selectPaymentStateCode);
+		return "sw/code/selectPaymentStateCode";
+	}
 	
 
 }
