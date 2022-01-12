@@ -38,7 +38,59 @@ public class ShopAddAccounting {
 	
 	//쇼핑몰 통합회계 - 비용
 	private int shopExpensePrice; //21년 비용 합계
-
+	
+	//쇼핑몰 통합회계 - 매출
+	private String shopIncomeGroupSlip;
+	private String shopTotalCode;
+	private int shopTotalPrice;
+	private String shopSalesSection;
+	private String shopTotalTable;
+	private String shopGroupSlip;
+	
+	
+	
+	public String getShopGroupSlip() {
+		return shopGroupSlip;
+	}
+	public void setShopGroupSlip(String shopGroupSlip) {
+		this.shopGroupSlip = shopGroupSlip;
+	}
+	public int getShopExpensePrice() {
+		return shopExpensePrice;
+	}
+	public void setShopExpensePrice(int shopExpensePrice) {
+		this.shopExpensePrice = shopExpensePrice;
+	}
+	public String getShopIncomeGroupSlip() {
+		return shopIncomeGroupSlip;
+	}
+	public void setShopIncomeGroupSlip(String shopIncomeGroupSlip) {
+		this.shopIncomeGroupSlip = shopIncomeGroupSlip;
+	}
+	public String getShopTotalCode() {
+		return shopTotalCode;
+	}
+	public void setShopTotalCode(String shopTotalCode) {
+		this.shopTotalCode = shopTotalCode;
+	}
+	public int getShopTotalPrice() {
+		return shopTotalPrice;
+	}
+	public void setShopTotalPrice(int shopTotalPrice) {
+		this.shopTotalPrice = shopTotalPrice;
+	}
+	public String getShopSalesSection() {
+		return shopSalesSection;
+	}
+	public void setShopSalesSection(String shopSalesSection) {
+		this.shopSalesSection = shopSalesSection;
+	}
+	public String getShopTotalTable() {
+		return shopTotalTable;
+	}
+	public void setShopTotalTable(String shopTotalTable) {
+		this.shopTotalTable = shopTotalTable;
+	}
 	public int getShopExpenseMonPrice() {
 		return shopExpensePrice;
 	}
@@ -267,6 +319,18 @@ public class ShopAddAccounting {
 		builder.append(shopIncomeRegDate);
 		builder.append(", shopExpensePrice=");
 		builder.append(shopExpensePrice);
+		builder.append(", shopIncomeGroupSlip=");
+		builder.append(shopIncomeGroupSlip);
+		builder.append(", shopTotalCode=");
+		builder.append(shopTotalCode);
+		builder.append(", shopTotalPrice=");
+		builder.append(shopTotalPrice);
+		builder.append(", shopSalesSection=");
+		builder.append(shopSalesSection);
+		builder.append(", shopTotalTable=");
+		builder.append(shopTotalTable);
+		builder.append(", shopGroupSlip=");
+		builder.append(shopGroupSlip);
 		builder.append("]");
 		return builder.toString();
 	}
