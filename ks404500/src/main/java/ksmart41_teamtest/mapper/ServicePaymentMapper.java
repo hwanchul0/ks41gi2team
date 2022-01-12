@@ -21,6 +21,9 @@ public interface ServicePaymentMapper {
 	
 	// 서비스 결제 확인 저장시 결제 예정 테이블 결제상태 업데이트
 	public int modifyPaymentStateCode(String paymentStateCode, String servicePaymentCheck);
+	
+	// 서비스 결제 후 계약현황 관리
+	public List<ServicePayment> selectContractState();
 
 
 }

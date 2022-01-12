@@ -15,7 +15,77 @@ public class ServicePayment {
 	private String paymentBalance;
 	private String paymentType;
 	private String paymentDate;
+	private String contractCode;
+	private String contractStateCode;
+	private String contractState;
+	private String paymentCheckCode;
+	private String refundStateCode;
+	private String refundState;
+	private String refundReason;
+	private String serviceRegistrationDate;
+	private String serviceDeleteDate;
+	private String contractRegDate;
 	
+	public String getContractState() {
+		return contractState;
+	}
+	public void setContractState(String contractState) {
+		this.contractState = contractState;
+	}
+	public String getRefundState() {
+		return refundState;
+	}
+	public void setRefundState(String refundState) {
+		this.refundState = refundState;
+	}
+	public String getContractCode() {
+		return contractCode;
+	}
+	public void setContractCode(String contractCode) {
+		this.contractCode = contractCode;
+	}
+	public String getContractStateCode() {
+		return contractStateCode;
+	}
+	public void setContractStateCode(String contractStateCode) {
+		this.contractStateCode = contractStateCode;
+	}
+	public String getPaymentCheckCode() {
+		return paymentCheckCode;
+	}
+	public void setPaymentCheckCode(String paymentCheckCode) {
+		this.paymentCheckCode = paymentCheckCode;
+	}
+	public String getRefundStateCode() {
+		return refundStateCode;
+	}
+	public void setRefundStateCode(String refundStateCode) {
+		this.refundStateCode = refundStateCode;
+	}
+	public String getRefundReason() {
+		return refundReason;
+	}
+	public void setRefundReason(String refundReason) {
+		this.refundReason = refundReason;
+	}
+	public String getServiceRegistrationDate() {
+		return serviceRegistrationDate;
+	}
+	public void setServiceRegistrationDate(String serviceRegistrationDate) {
+		this.serviceRegistrationDate = serviceRegistrationDate;
+	}
+	public String getServiceDeleteDate() {
+		return serviceDeleteDate;
+	}
+	public void setServiceDeleteDate(String serviceDeleteDate) {
+		this.serviceDeleteDate = serviceDeleteDate;
+	}
+	public String getContractRegDate() {
+		return contractRegDate;
+	}
+	public void setContractRegDate(String contractRegDate) {
+		this.contractRegDate = contractRegDate;
+	}
 	public String getPaymentState() {
 		return paymentState;
 	}
@@ -131,10 +201,29 @@ public class ServicePayment {
 		builder.append(paymentType);
 		builder.append(", paymentDate=");
 		builder.append(paymentDate);
+		builder.append(", contractCode=");
+		builder.append(contractCode);
+		builder.append(", contractStateCode=");
+		builder.append(contractStateCode);
+		builder.append(", contractState=");
+		builder.append(contractState);
+		builder.append(", paymentCheckCode=");
+		builder.append(paymentCheckCode);
+		builder.append(", refundStateCode=");
+		builder.append(refundStateCode);
+		builder.append(", refundState=");
+		builder.append(refundState);
+		builder.append(", refundReason=");
+		builder.append(refundReason);
+		builder.append(", serviceRegistrationDate=");
+		builder.append(serviceRegistrationDate);
+		builder.append(", serviceDeleteDate=");
+		builder.append(serviceDeleteDate);
+		builder.append(", contractRegDate=");
+		builder.append(contractRegDate);
 		builder.append("]");
 		return builder.toString();
 	}
-	
 	
 	
 }

@@ -40,5 +40,10 @@ public class ServicePaymentService {
 	public int modifyPaymentStateCode(String paymentStateCode, String servicePaymentCheck) {
 		return servicePaymentMapper.modifyPaymentStateCode(paymentStateCode, servicePaymentCheck);
 	}
+	// 서비스 결제 후 계약현황 조회
+	public List<ServicePayment> selectContractState() {
+		List<ServicePayment> selectContractState = servicePaymentMapper.selectContractState();
+		return selectContractState;
+	}
 		
 }
