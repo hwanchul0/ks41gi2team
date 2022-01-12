@@ -80,7 +80,7 @@
 			ON 
 				bR.businessRegistrationCode = mB.businessRegistrationCode
 			WHERE 
-			clientId = 'shopid001'
+			clientId = #{clientId}
 			ORDER BY serviceRequestDate ASC;
 	</select>
 	<!-- 계약요청 상세정보 (sw) -->

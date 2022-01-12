@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ksmart41_teamtest.mapper.CodeMapper">
+	<resultMap type="Code" id="requestResultMap">
+		<result column="contractStateCode" 							property="contractStateCode"/>
+		<result column="contractState" 								property="contractState"/>
+		<result column="refundStateCode" 							property="refundStateCode"/>
+		<result column="refundState" 								property="refundState"/>
+		<result column="paymentStateCode" 							property="paymentStateCode"/>
+		<result column="paymentState" 								property="paymentState"/>
+	</resultMap>		
+	<!-- 계약상태 코드 조회 ( sw) -->
+	<select id="selectContractStateCode" parameterType="String" resultMap="requestResultMap">
+		SELECT 
+			contractStateCode
+			,contractState
+		FROM 
+			k2_sw_contractState;
+	</select>
+	
+	<!-- 환불상태 코드 조회 -->
+	<select id="selectContractRefundStateCode" parameterType="String" resultMap="requestResultMap">
+	SELECT 
+		refundStateCode
+		,refundState
+	FROM 
+		k2_sw_contractRefundState;
+	</select>
+	
+	<!-- 결제상태 코드 조회 (sw) -->
+	<select id="selectPaymentStateCode" parameterType="String" resultMap="requestResultMap">
+	SELECT 
+		paymentStateCode
+		,paymentState
+	FROM
+		k2_paymentState;
+	</select>
+</mapper>
