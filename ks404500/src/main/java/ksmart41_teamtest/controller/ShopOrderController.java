@@ -23,10 +23,18 @@ public class ShopOrderController {
 	@Autowired
 	private ShopPaymentCheckService	shopPaymentCheckService;
 	
-	/* 유성 쇼핑몰 결제상태 등록 */
+	/* 유성 쇼핑몰 결제상태 등록get */
 	@GetMapping("/addPaymentCheck")
 	public String addPaymentCheck() {
 		return "shop/order/addPaymentCheck";
+	}
+	
+	/*유성 쇼핑몰 결제상태 등록 post */
+	@PostMapping("/addPaymentCheck")
+	public String addPaymentCheck(ShopPaymentCheck shopPaymentCheck) {
+		System.out.println("ShopOrderController에서 입력받은 값 " + shopPaymentCheck);
+		shopPaymentCheckService.addPaymentCheck(shopPaymentCheck);
+		return "redirect:/shop/order/addPaymentCheck";
 	}
 
 	/* 유성 쇼핑몰 주문내역 조회 */

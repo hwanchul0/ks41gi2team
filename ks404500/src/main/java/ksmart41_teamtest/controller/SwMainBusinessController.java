@@ -63,6 +63,9 @@ public class SwMainBusinessController {
 	@GetMapping ("/modifyBusiness")
 	public String modifyBusiness(@RequestParam(value = "clientId", required = false) String clientId,
 								Model model) {
+		Business getDetailBusinessList = businessService.getDetailBusinessList(clientId);
+		//model.addAttribute("title", "사업장 수");
+		model.addAttribute("getDetailBusinessList", getDetailBusinessList);
 		System.out.println(clientId + "받아온 clientId (controller)");
 		if(clientId != null && !"".equals(clientId)) {
 			Business getBusiness = businessService.getDetailBusinessList(clientId);

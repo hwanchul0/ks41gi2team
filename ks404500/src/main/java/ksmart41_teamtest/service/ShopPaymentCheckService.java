@@ -24,4 +24,9 @@ public class ShopPaymentCheckService {
 		return shopPaymentCheck;
 	}
 
+	//유성 쇼핑몰 결제상태 등록 
+	public int addPaymentCheck(ShopPaymentCheck shopPaymentCheck)	{
+		int addPaymentCheck = shopPaymentCheckMapper.addPaymentCheck(shopPaymentCheck);
+		return addPaymentCheck;
+	}
 }

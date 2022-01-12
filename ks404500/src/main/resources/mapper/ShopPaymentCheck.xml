@@ -30,4 +30,31 @@
 		k2_shop_paymentCheck;
 	
 	</select>
+	
+	<insert id = "addPaymentCheck" parameterType="shopPaymentCheck">
+		INSERT INTO k2_shop_paymentCheck(
+		shopPaymentCheckCode,
+			shopConsumerId,
+			paymentStateCode,
+			paymentType,
+			shopPaymentCharge,
+			shopPaymentDate
+		)VALUES(
+			#{shopPaymentCheckCode},
+			#{shopConsumerId},
+			#{paymentStateCode},
+			#{paymentType},
+			#{shopPaymentCharge},
+			#{shopPaymentDate}
+		
+		);
+	</insert>
+	
+	<select id ="getMergePaymentCheck" resultType="shopPaymentCheck">
+	SELECT
+		*
+		FROM
+	k2_shop_paymentCheck;
+	
+	</select>
 </mapper>
