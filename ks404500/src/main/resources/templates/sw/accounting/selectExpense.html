@@ -1,9 +1,47 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" 
-xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
-layout:decorate="@{layout/default-sw}">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="@{layout/default-sw}">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<head th:replace="fragments/head :: headFragment"></head>
+<th:block layout:fragment="customJs">
+<script type="text/javascript">
+console.log('asd');
+/* 
+function deleteBtn(shopIncomeCode) {
+    if(shopIncomeCode != null && shopIncomeCode != ""){
+       
+       var delConfirm = confirm('해당 내역을 삭제합니다.');
+       if (delConfirm) {
+             alert('삭제되었습니다.');
+             var request = $.ajax({
+               url: "/shop/accounting/deleteIncome",
+               method: "POST",
+               data: { shopIncomeCode : shopIncomeCode },
+               dataType: "text"
+             });
+             location.reload();
+          }
+       
+       request.done(function(data) {
+          if(data < 0) {
+             alert("실패했습니다.");
+          }
+          location.reload();
+       });
+    } else {
+       alert("삭제 실패 ");
+    }
+ }
+
+
+
+
+ */
+
+
+
+
+</script>
 <th:block layout:fragment="customContents">
 <!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper">
@@ -38,35 +76,29 @@ layout:decorate="@{layout/default-sw}">
 								<table class="table table-hover table-coondensed" style="text-align: center;">
 									<thead>
 										<tr>
-											<!-- <th>지출 코드</th> -->
 											<th>계정과목코드</th>
-											<th>마감담당자</th>
-											<th>등록담당자</th>
-											<th>그룹전표번호</th>
-											<th>회계통합그룹코드</th>
 											<th>계정과목명</th>
 											<th>적요</th>
 											<th>금액</th>
 											<th>등록일</th>
-											<th>마감유무</th>
+											<th>등록자</th>
+											<th>마감</th>
+											<th>마감자</th>
 											<th>마감일</th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr th:if="${not #lists.isEmpty(expenselist)}" th:each="el : ${expenselist}">
-											<!-- 지출코드 주석처리 -->
 											<!-- <td th:text="${el.swExpensePayCode}"></td> -->
 											<td th:text="${el.swIsCode}"></td>
-											<td th:text="${el.memberIdFinish}"></td>
-											<td th:text="${el.memberId}"></td>
-											<td th:text="${el.swSlipNumber}"></td>
-											<td th:text="${el.swGroupSlip}"></td>
 											<td th:text="${el.swIsName}"></td>
 											<td th:text="${el.swExpenseInfo}"></td>
 											<td th:text="${#numbers.formatInteger(el.swExpensePrice, 0, 'COMMA')}"></td>
 											<td th:text="${el.swExpenseRegDate}"></td>
-											<td th:text="${el.swExpenseFinish}"></td>
-											<td th:text="${el.swExpenseFinishDate}"></td>
+			<!-- 등록자이름insert -->			<td th:text="${el.memberId}"></td>
+			<!-- 마감버튼 -->					<td><button type="button">마감</button> </td>
+			<!-- 마감자이름 select -->			<td th:text="${el.memberIdFinish}"></td>
+			<!-- 마감일select -->				<td th:text="${el.swExpenseFinishDate}"></td>
 										</tr>
 										<tr th:unless="${not #lists.isEmpty(expenselist)}">
 											<td>데이터가 없습니다...</td>

@@ -46,4 +46,10 @@ public class LocalCodeService {
 	public int deleteLocalCode(LocalCode localCode) {
 		return localCodeMapper.deleteLocalCode(localCode);
 	}
+	
+	//[재천]중복체크
+	public int localCodeCheck (String localCode) {
+		return localCodeMapper.localCodeCheck(localCode);
+	}
+	
 }

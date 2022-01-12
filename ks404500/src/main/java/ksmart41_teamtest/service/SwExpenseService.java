@@ -23,6 +23,16 @@ public class SwExpenseService {
 	public List<SwExpense> selectSwExpenseList(){
 		List<SwExpense> expenselist = swExpenseMapper.selectSwExpenseList();
 		return expenselist;
+	}
 	
+	//[재천]비용 등록
+	public int addExpense(SwExpense swExpense) {
+		int addExpense = swExpenseMapper.addExpense(swExpense);
+		return addExpense;
+	}
+	
+	//[재천]지출코드 1개 조회
+	public SwExpense selectSwExpenseInfo(String swExpensePayCode) {
+		return swExpenseMapper.selectSwExpenseInfo(swExpensePayCode);
 	}
 }

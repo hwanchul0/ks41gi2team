@@ -36,4 +36,14 @@ public class ShopMemberService {
 	public ShopMember ShopMemberInfo(String shopMemberId) {
 		return shopMemberMapper.ShopMemberInfo(shopMemberId);
 	}
+	
+	//[재천]외부 회원정보 수정
+	public int modifyClientMember(ShopMember shopMember) {
+		return shopMemberMapper.modifyClientMember(shopMember);
+	}
+	
+	//[재천]외부 회원 삭제
+	public int deleteClient(ShopMember shopMember) {
+		return shopMemberMapper.deleteClientMember(shopMember);
+	}
 }

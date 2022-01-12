@@ -1,6 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ksmart41_teamtest.mapper.SwExpenseMapper">
+
+	<insert id="addExpense" parameterType="SwExpense">
+		<selectKey keyProperty="swExpensePayCode" resultType="String" order="BEFORE">
+			SELECT 
+					CONCAT('sw_expense_pay_code_', LPAD( RIGHT(MAX(ex.swExpensePayCode), 3) +1 , 3, '0'))
+			FROM 
+				k2_sw_expense_pay as ex
+		</selectKey>
+		INSERT INTO k2_sw_expense_pay(
+			swExpensePayCode,
+			swIsCode,
+			memberIdFinish,
+			memberId,
+			swSlipNumber,
+			swGroupSlip,
+			swIsName,
+			swExpenseInfo,
+			swExpensePrice,
+			swExpenseRegDate,
+			swExpenseFinish,
+			swExpenseFinishDate
+		)VALUES(
+			#{swExpensePayCode},
+			#{swIsCode},
+			#{memberIdFinish},
+			#{memberId},
+			#{swSlipNumber},
+			#{swGroupSlip},
+			#{swIsName},
+			#{swExpenseInfo},
+			#{swExpensePrice},
+			#{swExpenseRegDate},
+			#{swExpenseFinish},
+			#{swExpenseFinishDate}
+		)
+	</insert>
+	
 	<select id="selectSwExpenseList" resultType="SwExpense">
 		SELECT
 			swExpensePayCode,
@@ -18,4 +55,28 @@
 		FROM
 			k2_sw_expense_pay
 	</select>
+	
+	<select id="selectSwExpenseInfo" resultType="SwExpense">
+		SELECT
+			swExpensePayCode,
+			swIsCode,
+			memberIdFinish,
+			memberId,
+			swSlipNumber,
+			swGroupSlip,
+			swIsName,
+			swExpenseInfo,
+			swExpensePrice,
+			swExpenseRegDate,
+			swExpenseFinish,
+			swExpenseFinishDate
+		FROM
+			k2_sw_expense_pay
+		WHERE
+			swExpensePayCode = #{swExpensePayCode}
+	</select>
+	
+	
+	
+	
 </mapper>
