@@ -24,6 +24,7 @@ public interface ServicePaymentMapper {
 	
 	// 서비스 결제 후 계약현황 관리
 	public List<ServicePayment> selectContractState();
-
+	// 서비스 결제 후 계약현황 수정
+	public ServicePayment getContractState(String getContractState);
 
 }
