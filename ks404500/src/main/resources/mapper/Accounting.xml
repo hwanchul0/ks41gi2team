@@ -186,5 +186,93 @@
 		FROM k0_invoiceDetail
 		WHERE invoiceDetailCode = #{invoiceDetailCode};
 	</insert>
+	
+	<!-- 유경 - 개발사 통합회계 매출 대상 조회 -->
+	<select id="addTotalAccountingIncome" resultType="SwTotalAccounting">
+		SELECT
+			GROUP_CONCAT(i.swIncomeCode) AS swIncomeCode,
+			p.contractManageCode,
+			i.swGroupSlip,
+			SUM(p.servicePaymentAmount) AS servicePaymentAmount,
+			t.swTotalCode,
+			t.swGroupSlip as swTotalGroupSlip,
+			t.swSalesSection,
+			t.swTotalTable,
+			t.swTotalPrice
+		from
+			k2_sw_income AS i
+		INNER join
+			k2_sw_paymentSum AS p
+		on
+		i.contractManageCode = p.contractManageCode	
+		left join
+			k2_sw_totalAccounting AS t
+		ON
+			i.swGroupSlip = t.swGroupSlip
+		WHERE i.swIncomeCode is NOT NULL
+			AND
+			i.swIncomeFinish = 'Y'
+		GROUP BY i.swGroupSlip
+		ORDER BY (swTotalCode), swTotalCode DESC;
+	</select>
+	
+	<!-- 유경 - 개발사 통합회계 매출 대상 등록  -->
+	<insert id="addTotalByIncome"  parameterType="SwTotalAccounting">
+	INSERT INTO k2_sw_totalAccounting
+	(swTotalCode,
+	 swGroupSlip,
+	swSalesSection,
+	swTotalTable,
+	swTotalPrice)
+	VALUES 
+	((SELECT CONCAT('total_',LPAD(max(SUBSTRING((swTotalCode),8,3))+1,3,'0'))
+				from
+				k2_sw_totalAccounting AS t),
+	#{swGroupSlip},
+	#{swSalesSection},
+	#{swTotalTable},
+	#{swTotalPrice})
+	</insert>
+	
+	<!-- 유경 - 개발사 통합회계 비용 대상 조회 -->
+	<select id="addTotalAccountingExpense" resultType="SwTotalAccounting">
+		SELECT
+			GROUP_CONCAT(e.swExpensePayCode) AS swExpensePayCode,
+			e.swGroupSlip AS swGroupSlip,
+			SUM(e.swExpensePrice) AS swExpensePrice,
+			t.swTotalCode,
+			t.swGroupSlip AS swTotalGroupSlip,
+			t.swSalesSection,
+			t.swTotalTable,
+			t.swTotalPrice
+		from
+			k2_sw_expense_pay AS e
+		left join
+			k2_sw_totalAccounting AS t
+		ON
+			e.swGroupSlip = t.swGroupSlip
+		WHERE e.swGroupSlip is NOT NULL
+		AND
+			e.swExpenseFinish = 'Y'
+		GROUP BY e.swGroupSlip
+		ORDER BY (swTotalCode), swTotalCode DESC;
+	</select>
+	
+	<insert id="addTotalByExpense" parameterType="SwTotalAccounting">
+		INSERT INTO k2_sw_totalAccounting
+			(swTotalCode,
+			 swGroupSlip,
+			swSalesSection,
+			swTotalTable,
+			swTotalPrice)
+		VALUES 
+			((SELECT CONCAT('total_',LPAD(max(SUBSTRING((swTotalCode),8,3))+1,3,'0'))
+						from
+						k2_sw_totalAccounting AS t),
+			#{swGroupSlip},
+			#{swSalesSection},
+			#{swTotalTable},
+			#{swTotalPrice})
+	</insert>
 
 </mapper>

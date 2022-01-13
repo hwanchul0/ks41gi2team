@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+layout:decorate="@{layout/default-shop}">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<th:block layout:fragment="customJs">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" rel="stylesheet">
+<script type="text/javascript">
+
+//검색창
+$(document).ready(function(){
+	  $("#myInput").on("keyup", function() {
+	    var value = $(this).val().toLowerCase();
+	    $("#myTable tr").filter(function() {
+	      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+	    });
+	  });
+	});
+
+//테이블 페이징
+$(function(){
+	$('.table').footable({
+		"paging": {
+			"enabled": true,
+		},
+		"sorting": {
+			"enabled": true
+		}
+
+	});
+});
+//마감내역 선택시 경고창
+$(function(){
+	$('#notAmend').click(function(){
+		alert('이미 마감된내역입니다');
+	})
+
+});
+
+</script>
+</th:block>
+
+<th:block layout:fragment="customContents">
+<!-- Content Wrapper. Contains page content -->
+	<div class="content-wrapper">
+		<!-- Content Header (Page header) -->
+			<div class="content-header">
+				<div class="container-fluid">
+					<div class="row mb-2">
+						<div class="col-sm-6">
+							<h1 class="m-0" th:text="${title}"></h1>
+						</div><!-- /.col -->
+						<div class="col-sm-6">
+							<ol class="breadcrumb float-sm-right">
+								<li class="breadcrumb-item"><a href="/sw/index-sw">Home</a></li>
+								<li class="breadcrumb-item active">코드관리</li>
+							</ol>
+						</div><!-- /.col -->
+					</div><!-- /.row -->
+				</div><!-- /.container-fluid -->
+			</div>
+			<!-- /.content-header -->
+			
+		<!-- Main content -->
+		<div class="content">
+			<div class="container-fluid">
+	        	<div class="row">
+					<div class="col-lg-12">
+						<div class="card">
+							<div class="card-body">
+								<h5 class="card-title">쇼핑몰 계정과목 조회</h5>
+								<p class="card-text">
+								<input class="form-control col-md-3" style="float : right" id="myInput" type="text" placeholder="검색어를 입력해주세요">
+									<div class="card-body table-responsive p-0">
+									<table class="table table-hover" id="swiscodelist">
+										<thead>
+											<tr>
+												<th>계정과목코드</th>
+												<th>계정과목명</th>
+												<th>통합계정그룹코드</th>
+												<th>계정사용여부</th>
+												<th>수정가능여부</th>
+												<th>등록일자</th>
+												<th>등록자아이디</th>
+												<th>반영연도</th>
+												<th>수정</th>
+											</tr>
+										</thead>
+										<tbody id="myTable">
+											<tr th:if="${not #lists.isEmpty(shopIsListCode)}" th:each="sl: ${shopIsListCode}">
+												<td th:text="${sl.shopIsCode}"></td>
+												<td th:text="${sl.shopIsName}"></td>
+												<td th:text="${sl.shopIsGroupCode}"></td>
+												<td th:text="${sl.shopIsUse}"></td>
+												<td th:text="${sl.shopIsAmend}"></td>
+												<td th:text="${sl.shopIsRegDate}"></td>
+												<td th:text="${sl.shopMemberId}"></td>
+												<td th:text="${sl.shopIsYear}"></td>
+												<td th:if="${sl.shopIsAmend} == 'Y'">
+													<a th:href="@{/shop/code/modifyIsListCode(shopIsCode=${sl.shopIsCode})}" class="amend"><i class="fas fa-pencil-alt"></i></a>
+												</td>
+												<td th:unless="${sl.shopIsAmend} == 'Y'">
+													<i class="fas fa-pencil-alt" id="notAmend"></i>
+												</td>
+											<tr th:unless="${not #lists.isEmpty(shopIsListCode)}">
+												<td>내용이 없습니다.</td>
+										</tbody>
+										<tfoot>
+										</tfoot>
+									</table>
+									</div>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /.row -->
+			</div>
+			<!-- /.container-fluid -->
+		</div>
+		<!-- /.content -->
+	</div>
+	<!-- /.content-wrapper -->
+</th:block>
+</html>
