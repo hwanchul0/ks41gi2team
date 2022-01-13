@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" 
 xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
-layout:decorate="@{layout/default-shop}">
+layout:decorate="@{layout/default-sw}">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <th:block layout:fragment="customJs">
@@ -26,11 +26,11 @@ $(document).ready(function () {
 				tdArr.push(td.eq(i).text());
 			});
 			
-			console.log("통합코드"+tdArr[3]); //회계통합코드
-			console.log("금액"+tdArr[4]); //금액
+			console.log("통합코드"+tdArr[4]); //회계통합코드
+			console.log("금액"+tdArr[5]); //금액
 			
-			document.getElementById("shopTotalPrice").value = tdArr[4]; //금액
-			document.getElementById("shopGroupSlip").value = tdArr[3]; //회계통합코드
+			document.getElementById("swTotalPrice").value = tdArr[5]; //금액
+			document.getElementById("swGroupSlip").value = tdArr[4]; //회계통합코드
 
     });
     
@@ -69,11 +69,11 @@ $(document).ready(function(){
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1>"addTotalAccounting / 쇼핑몰 통합회계 매출등록"</h1>
+						<h1>"addTotalAccounting /통합회계 매출등록"</h1>
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
-							<li class="breadcrumb-item"><a href="/shop/index-shop">Home</a></li>
+							<li class="breadcrumb-item"><a href="/shop/index-sw">Home</a></li>
 							<li class="breadcrumb-item active">매출관리</li>
 						</ol>
 					</div>
@@ -90,13 +90,13 @@ $(document).ready(function(){
 					<div class="col-md-12">
 						<!-- /.card-header -->
 						<!-- Horizontal Form -->
-						<div class="card card-success">
+						<div class="card card-primary">
 							<div class="card-header">
-								<h3 class="card-title">쇼핑몰 통합회계 등록 - 매출</h3>
+								<h3 class="card-title">개발사 통합회계 등록 - 매출</h3>
 							</div>
 							<!-- /.card-header -->
 							<!-- form start -->
-							<form class="form-horizontal" th:action="@{/shop/accounting/addTotalAccounting}"  method="post">
+							<form class="form-horizontal" th:action="@{/sw/accounting/addTotalAccounting}" method="post">
 								<div class="card-body">
 									<input class="form-control col-md-3" style="float : right" id="myInput" type="text" placeholder="검색어를 입력해주세요">
 									
@@ -109,6 +109,7 @@ $(document).ready(function(){
 												<th>선택</th>
 												<th>등록구분</th>
 												<th>매출코드</th>
+												<th>계약코드</th>
 												<th>통합그룹코드</th>
 												<th>금액</th>
 												<th>회계통합코드</th>
@@ -118,25 +119,27 @@ $(document).ready(function(){
 											</tr>
 										</thead>
 										<tbody id="myTable">
-											 <tr th:if="${not #lists.isEmpty(totalIncome)}" th:each="i: ${totalIncome}">
-												<td><input type="radio"  th:disabled="${i.shopTotalCode != null}" name="list" class="radioButton"></td>
-												<td th:if="${i.shopTotalCode == null}" th:text="등록대상"></td>
-												<td th:unless="${i.shopTotalCode == null}" th:text="등록완료"></td>
-												<td th:text="${i.shopIncomeCode}"  style="width:125px; word-break: break-all; height:auto"></td>
-												<td th:text="${i.shopIncomeGroupSlip}" ></td>
-												<td th:text="${i.finalIncomeVatNotImply}" ></td>
-												<td th:text="${i.shopTotalCode}" ></td>
-												<td th:text="${i.shopSalesSection}" ></td>
-												<td th:text="${i.shopTotalTable}" ></td>
-												<td th:text="${i.shopTotalPrice}" ></td>
+											 <tr th:if="${not #lists.isEmpty(SwTotalIncome)}" th:each="i: ${SwTotalIncome}">
+												<td><input type="radio"  th:disabled="${i.swTotalCode != null}" name="list" class="radioButton"></td>
+												<td th:if="${i.swTotalCode == null}" th:text="등록대상"></td>
+												<td th:unless="${i.swTotalCode == null}" th:text="등록완료"></td>
+												<td th:text="${i.swIncomeCode}" ></td>
+												<td th:text="${i.contractManageCode}" ></td>
+												<td th:text="${i.swGroupSlip}" ></td>
+												<td th:text="${i.servicePaymentAmount}" ></td>
+												<td th:text="${i.swTotalGroupSlip}" ></td>
+												<td th:text="${i.swSalesSection}" ></td>
+												<td th:text="${i.swTotalTable}" ></td>
+												<td th:text="${i.swTotalPrice}" ></td>
+
 												</tr>
-											<tr th:unless="${not #lists.isEmpty(totalIncome)}">
+											<tr th:unless="${not #lists.isEmpty(SwTotalIncome)}">
 												<td>매출 내역이 없습니다.</td>
 											</tr>
 										</tbody>
 									</table>
 								</div>
-								<!-- 주문내역 테이블 끝  -->
+								<!-- 발행내역 테이블 끝  -->
 								<div class="row">
 									<label for="biz" class="col-sm-6 col-form-label">통합회계매입 - 발행내역을 확인해주세요</label>
 								</div>
@@ -144,26 +147,26 @@ $(document).ready(function(){
 								<div class="form-group row">
 									</div>
 									<div class="form-group row">
-										<label for="shopTotalPrice" class="col-sm-2 col-form-label">금액 </label>
+										<label for="swTotalPrice" class="col-sm-2 col-form-label">금액 </label>
 										<div class="col-sm-6">
 											<div class="col-sm-6">
-							                       <input type="number" name="shopTotalPrice" readonly="readonly" id="shopTotalPrice" style="width:220px;"></input>
+							                       <input type="number" name="swTotalPrice" readonly="readonly" id="swTotalPrice" style="width:220px;"></input>
 							                 </div>
 										</div>
 									</div>
 									<div class="form-group row">
-										<label for="shopSalesSection" class="col-sm-2 col-form-label">구분 </label>
+										<label for="swSalesSection" class="col-sm-2 col-form-label">구분 </label>
 										<div class="col-sm-6">
 											<div class="col-sm-6">
-							                       <input type="text" value="매출" name="shopSalesSection" id="shopSalesSection" readonly="readonly" style="width:220px;"></input>
+							                       <input type="text" value="매출" name="swSalesSection" id="swSalesSection" readonly="readonly" style="width:220px;"></input>
 							                 </div>
 										</div>
 									</div>
 									<div class="form-group row">
-										<label for="shopTotalTable" class="col-sm-2 col-form-label">대상테이블 </label>
+										<label for="swTotalTable" class="col-sm-2 col-form-label">대상테이블 </label>
 										<div class="col-sm-6">
 											<div class="col-sm-6">
-							                       <input type="text" value="2팀_쇼핑몰_매출관리" name="shopTotalTable" id="shopTotalTable" readonly="readonly" style="width:220px;"></input>
+							                       <input type="text" value="2팀_SW서비스_매출관리" name="swTotalTable" id="swTotalTable" readonly="readonly" style="width:220px;"></input>
 							                 </div>
 										</div>
 									</div>
@@ -171,14 +174,14 @@ $(document).ready(function(){
 										<label for="shopGroupSlip" class="col-sm-2 col-form-label">통합그룹코드 </label>
 										<div class="col-sm-6">
 											<div class="col-sm-6">
-							                       <input type="text"  name="shopGroupSlip" id="shopGroupSlip" readonly="readonly" style="width:220px;"></input>
+							                       <input type="text"  name="swGroupSlip" id="swGroupSlip" readonly="readonly" style="width:220px;"></input>
 							                 </div>
 										</div>
 									</div>
 								<!-- /insert -->
 								<!-- /.card-body -->
 								<div class="card-footer">
-									<button type="submit" class="btn btn-success" id="sign">입력완료</button>
+									<button type="submit" class="btn btn-primary" id="sign">입력완료</button>
 									<button type="button" onclick="history.back();"  class="btn btn-default float-right">취소</button>
 								</div>
 								<!-- /.card-footer -->

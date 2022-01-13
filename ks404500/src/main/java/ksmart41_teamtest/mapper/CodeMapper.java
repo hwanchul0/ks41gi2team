@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import ksmart41_teamtest.dto.Code;
 import ksmart41_teamtest.dto.InvoiceReason;
+import ksmart41_teamtest.dto.ShopIsListCode;
 import ksmart41_teamtest.dto.SwIsListCode;
 
 @Mapper
@@ -38,5 +39,8 @@ public interface CodeMapper {
 	
 	//환철- 서비스 결제상태 코드 조회
 	public List<Code> selectPaymentStateCode();
+	
+	//유경 - 쇼핑몰 계정과목조회
+	public List<ShopIsListCode> getSelectShopIsListCode();
 
 }

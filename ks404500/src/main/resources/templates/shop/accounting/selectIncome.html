@@ -45,6 +45,7 @@ $(function() {
 
 				var areaChartData = {
 					labels : JSON.parse(mon),
+					//labels : ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월" ],
 					datasets : [ {
 						label : '매출액',
 						backgroundColor : '#cfe2ce',
@@ -54,7 +55,6 @@ $(function() {
 						pointStrokeColor : '#698c68',
 						pointHighlightFill : '#fff',
 						pointHighlightStroke : '#698c68',
-						//data : [160000,1650000,60000,80000,70000,110000,0,160000,0]
 						data : [[${'['+incomeChart.chartPrice+']'}]]
 					} ]
 				}
