@@ -35,11 +35,7 @@ public class ShopAccountingController {
 	@Autowired
 	private ExpenseService expenseService;
 	
-	@GetMapping("/addExpense")
-	public String addExpense() {
-		return "shop/accounting/addExpense";
-	}
-	
+
 	
 	//유경 - 쇼핑몰 매출 등록화면에서 발행 대상 조회
 	@GetMapping("/addIncome")
@@ -86,6 +82,21 @@ public class ShopAccountingController {
 	public String addTotalAccountingByIncome(ShopAddAccounting shopAddAccounting) {
 		shopAcountingService.addTotalAccountingByIncome(shopAddAccounting);
 		return "redirect:/shop/accounting/addTotalAccounting";
+	}
+	
+	// 유성 쇼핑몰 비용 등록 
+	@GetMapping("/addExpense")
+	public String addExpense(Model model) {
+		model.addAttribute("title", "쇼핑몰비용 등록");
+		return "shop/accounting/addExpense";
+	}
+	
+	@PostMapping("/addExpense")
+	public String addExpense(Expense expense) {
+		System.out.println("ShopAccountingController에서 입력받은 값" + expense);
+		
+		expenseService.addExpense(expense);
+		return "redirect:/shop/accounting/selectExpense";
 	}
 	
 	/* 유성 쇼핑몰 비용 조회 */

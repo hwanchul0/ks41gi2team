@@ -7,7 +7,8 @@ import ksmart41_teamtest.dto.Expense;
 
 @Mapper
 public interface ExpenseMapper {
-	
+	//유성 쇼핑몰 비용등록 
+	public int addExpense(Expense expense);
 	//유성 쇼핑몰 비용조회
 	public List<Expense> getExpense();
 	
