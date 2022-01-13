@@ -1,51 +1,109 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" 
-xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
-layout:decorate="@{layout/default-shop}">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="@{layout/default-shop}">
+<th:block layout:fragment="javascriptFragment">
+</th:block>	  
+
 <th:block layout:fragment="customContents">
-<!-- Content Wrapper. Contains page content -->
+	<!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper">
-	<!-- Content Header (Page header) -->
+		<!-- Content Header (Page header) -->
 		<div class="content-header">
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1 class="m-0">"addExpense / 쇼핑몰 비용 등록"</h1>
-					</div><!-- /.col -->
+						<h1 class="m-0">쇼핑몰 비용 등록</h1>
+					</div>
+					<!-- /.col -->
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
 							<li class="breadcrumb-item"><a href="#">Home</a></li>
 							<li class="breadcrumb-item active">Starter Page</li>
 						</ol>
-					</div><!-- /.col -->
-				</div><!-- /.row -->
-			</div><!-- /.container-fluid -->
+					</div>
+					<!-- /.col -->
+				</div>
+				<!-- /.row -->
+			</div>
+			<!-- /.container-fluid -->
 		</div>
-	<!-- /.content-header -->
-	
-	<!-- Main content -->
+		<!-- /.content-header -->
+
+		<!-- Main content -->
 		<div class="content">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-lg-12">
-						<div class="card">
-							<div class="card-body">
-								<h5 class="card-title">Card title</h5>
-								<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-								<a href="#" class="card-link">Card link</a>
-								<a href="#" class="card-link">Another link</a>
+						<div class="card card-success">
+							<div class="card-header">
+								<h5 class="card-title"> 쇼핑몰 비용 등록</h5>
+							</div>
+							
+							<!--  쇼핑몰 비용 등록 폼바디 시작 -->
+							<form id="addExpenseForm" th:action="@{/shop/accounting/addExpense}" method="post" class="form-horizontal"> 
+								<p class="card-body" >
+
+								<div class="form-group row">
+									<label class="col-sm-2 col-form-laebl text-right">지출 코드</label>
+									<div class="col-sm-4">
+										<input class="form-control" type="text" id="shopExpenseCode" name="shopExpenseCode" readonly="readonly">
+									</div>
+								</div>
+								
+								<div class="form-group row">
+									<label class="col-sm-2 col-form-laebl text-right">계정과목코드</label>
+									<div class="col-sm-4">
+										<input class="form-control" type="text" id="shopIsCode" name="shopIsCode">
+									</div>
+								</div>
+								
+
+								<div class="form-group row">
+									<label class="col-sm-2 col-form-laebl text-right">계정과목이름</label>
+									<div class="col-sm-4">
+										<input class="form-control" type="text" id="shopIsName" name="shopIsName" placeholder="계정과목을 입력하세요">
+									</div>
+								</div>
+
+								<div class="form-group row">
+									<label class="col-sm-2 col-form-laebl text-right">그룹전표번호</label>
+									<div class="col-sm-4">
+										<input class="form-control" type="text" id="shopExpenseSlipNumber" name="shopExpenseSlipNumber"placeholder="그룹전표번호를 입력하세요">
+									</div>
+								</div>
+
+							
+								
+								<div class="form-group row">
+									<label class="col-sm-2 col-form-laebl text-right">등록일</label>
+									<div class="col-sm-4">
+										<input class="form-control" type="date" id="shopExpenseDate" name="shopExpenseDate">
+									</div>
+								</div>
+
+								<div class="form-group row">
+									<label class="col-sm-2 col-form-laebl text-right">금액</label>
+									<div class="col-sm-4">
+										<input class="form-control" type="text" id="shopExpensePrice" name="shopExpensePrice"placeholder="금액을 입력하세요">
+									</div>
+								</div>
+
+								<div class="card-footer">
+									<button type="submit" class="btn btn-success" id="addExpenseBtn"> 등록 </button>
+									<button type="button" class="btn btn-default float-right" id="cancleExpenseBtn"> 취소 </button>
+								</div>
+						<	</form> 
 							</div>
 						</div>
 					</div>
-					<!-- /.row -->
 				</div>
-				<!-- /.container-fluid -->
+				<!-- /.row -->
 			</div>
-	    	<!-- /.content -->
+			<!-- /.container-fluid -->
 		</div>
-	</div>
-<!-- /.content-wrapper -->
+		<!-- /.content -->
+	
+	
 </th:block>
 </html>

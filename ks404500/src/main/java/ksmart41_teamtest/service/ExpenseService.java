@@ -18,6 +18,11 @@ public class ExpenseService {
 	public ExpenseService(ExpenseMapper expenseMapper) {
 		this.expenseMapper = expenseMapper;
 	}
+	//유성 - 사업장 등록
+	public int addExpense(Expense expense) {
+		int addExpense = expenseMapper.addExpense(expense);
+		return addExpense;
+	}
 	//유성 - 쇼핑몰 비용 조회
 	public List<Expense> getExpense() {
 		List<Expense> expense = expenseMapper.getExpense();
@@ -28,12 +33,12 @@ public class ExpenseService {
 		return expenseMapper.getModifyShopExpense(shopExpenseCode);
 	}
 	
-	// 유성 쇼핑몰 매출 마감 - post
+	// 유성 쇼핑몰 비용 마감 - post
 	public int ShopExpenseFinish(Expense shopExpenseCode) {
 		return expenseMapper.ShopExpenseFinish(shopExpenseCode);
 	}
 	
-	// 유성 쇼핑몰 매출 삭제 
+	// 유성 쇼핑몰 비용 삭제 
 	public int deleteExpense(Expense expense)	{
 		return expenseMapper.deleteExpense(expense);
 	}
