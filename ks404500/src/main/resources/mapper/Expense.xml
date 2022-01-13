@@ -17,6 +17,27 @@
 		<result column="shopExpenseSlipNumber"								property="shopExpenseSlipNumber"/>
 		<result column="shopExpenseGroupSlip"								property="shopExpenseGroupSlip"/>
 	</resultMap>
+	<!--  유성 쇼핑몰 비용 등록  -->
+	<insert id="addExpense" parameterType="Expense">
+	INSERT INTO k2_shop_expense(
+		shopExpenseCode, 
+		shopIsName,
+		shopIsCode, 
+		shopExpenseSlipNumber,  
+		shopExpenseDate,
+	  	shopExpensePrice
+		)VALUES (
+      (SELECT CONCAT('shop_expense_',LPAD(max(SUBSTRING((shopExpenseCode),15,3))+1,3,'0'))
+         from
+         k2_shop_expense ALIAS_FOR_SUBQUERY), 	
+      #{shopIsName},
+      #{shopIsCode}, 
+      #{shopExpenseSlipNumber}, 
+      #{shopExpenseDate},
+      #{shopExpensePrice}
+      )
+	</insert>					
+	<!--  유성 쇼핑몰 비용 조회 -->
 	<select id="getExpense" parameterType="String" resultType="Expense">
 	SELECT
 		shopExpenseCode,

@@ -42,7 +42,7 @@
 							
 							<!--  사업장 등록 폼바디 시작 -->
 							<form id="addClientForm" th:action="@{/shop/businessRegistration/addBusinessRegistration}" method="post" class="form-horizontal"> 
-								<p class="card-body" >
+								<div class="card-body" >
 
 								<div class="form-group row">
 									<label class="col-sm-2 col-form-laebl text-right">사업장 아이디</label>
@@ -59,23 +59,20 @@
 									<div class="col-sm-2">
 										<select id="localCode" class="form-control" name="localCode">
 											<option value="">::지역 코드 선택::</option>
-											<option>sw_local_code_02(서울)</option>
-											<option>sw_local_code_031(경기도)</option>
-											<option>sw_local_code_042(세종)</option>
-											<option>sw_local_code_044(대전)</option>
-											<option>sw_local_code_051(부산)</option>
-											<option>sw_local_code_052(울산)</option>
-											<option>sw_local_code_053(대구)</option>
-											<option>sw_local_code_061(전남)</option>
-											<option>sw_local_code_062(광주)</option>
-											<option>sw_local_code_063(전북)</option>
-											
-											
+											<option value="sw_local_code_02">서울</option>
+											<option value="sw_local_code_031">경기도</option>
+											<option value="sw_local_code_042">세종</option>
+											<option value="sw_local_code_044">대전</option>
+											<option value="sw_local_code_051">부산</option>
+											<option value="sw_local_code_052">울산</option>
+											<option value="sw_local_code_053">대구</option>
+											<option value="sw_local_code_061">전남</option>
+											<option value="sw_local_code_062">광주</option>
+											<option value="sw_local_code_063">전북</option>
 										</select>
 									</div>
 								
 								</div>
-								
 
 								<div class="form-group row">
 									<label class="col-sm-2 col-form-laebl text-right">사업장 이름</label>
@@ -139,8 +136,6 @@
 										<input class="form-control" type="text" id="businessManagerEmail" name="businessManagerEmail"placeholder="사업장 담당자 이메일을 입력하세요">
 									</div>
 								</div>
-
-
 								<div class="form-group row">
 									<label class="col-sm-2 col-form-laebl text-right">주거래 통장</label>
 									<div class="col-sm-2">
@@ -151,18 +146,15 @@
 											<option value="신현">신협은행</option>
 											<option value="전북">전북은행</option>
 											<option value="새마을금고">새마을금고</option>
-											
 										</select>
 									</div>
 								</div>
-
 								<div class="form-group row">
 									<label class="col-sm-2 col-form-laebl text-right">계좌번호</label>
 									<div class="col-sm-4">
 										<input class="form-control" type="text" id="businessAccountNumber" name="businessAccountNumber"placeholder="계좌번호를 입력하세요">
 									</div>
 								</div>
-								
 								<div class="form-group row">
 									<label class="col-sm-2 col-form-laebl text-right">예금주</label>
 									<div class="col-sm-4">
@@ -170,10 +162,11 @@
 									</div>
 								</div>
 								<div class="card-footer">
-									<button type="submit" class="btn btn-success" id="addBusinessRegistrationBtn"> 등록 </button>
+									<button type="button" class="btn btn-success" id="addBusinessRegistrationBtn"> 등록 </button>
 									<button type="button" class="btn btn-default float-right" id="cancleBusinessRegistrationBtn"> 취소 </button>
 								</div>
-						<	</form> 
+								</div>
+							</form> 
 							</div>
 						</div>
 					</div>
@@ -184,6 +177,8 @@
 		</div>
 		<!-- /.content -->
 	<script type="text/javascript">
+	console.log('asd');
+	
 	$('#idCheckBtn').click(function(){
 		var clientId = $('#clientId').val();
 		
@@ -214,6 +209,15 @@
 		});
 	});
 	
+	$('#addBusinessRegistrationBtn').click(function(){
+		var clientId = $('#clientId').val();
+		    if(clientId == null || clientId == ""){
+		       alert('아이디가 공백이야~');
+		       return false;
+		    }
+		console.log('a11sd');
+		$('#addClientForm').submit();
+	});
 	</script>
 	
 </th:block>

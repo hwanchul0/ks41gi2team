@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import ksmart41_teamtest.dto.GetInvoiceInfo;
 import ksmart41_teamtest.dto.InvoiceList;
+import ksmart41_teamtest.dto.SwTotalAccounting;
 
 
 @Mapper
@@ -35,5 +36,17 @@ public interface AccountingMapper {
 	
 	//유경 - 수정세.계발행 -detail
 	public int addDetailAmendInvoice(InvoiceList invoiceList);
+	
+	//유경 - 통합회계 매출 등록대상 조회
+	public List<SwTotalAccounting> addTotalAccountingIncome();
+	
+	//유경 - 통합회계 매출 등록대상 등록
+	public int addTotalByIncome(SwTotalAccounting swTotalAccounting);
+	
+	//유경 - 통합회계 비용 등록대상 조회
+	public List<SwTotalAccounting> addTotalAccountingExpense();
+
+	//유경 - 통합회계 비용 등록대상 등록
+	public int addTotalByExpense(SwTotalAccounting swTotalAccounting);
 
 }
