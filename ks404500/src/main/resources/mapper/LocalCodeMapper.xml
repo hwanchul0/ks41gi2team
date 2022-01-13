@@ -56,4 +56,13 @@
 		localCode = #{localCode};
 	</delete>
 	
+	<select id="localCodeCheck" resultType="int">
+		SELECT
+			COUNT(1)
+		FROM
+			k2_sw_local
+		WHERE
+			localCode = #{localCode}
+	</select>
+	
 </mapper>

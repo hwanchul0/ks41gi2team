@@ -47,6 +47,7 @@ public class SwBusinessCodeController {
 		return "sw/code/selectBusinessCode";
 	}
 	
+	//[재천]거래처 구분 코드 수정
 	@GetMapping("/modifyBusinessCode")
 	public String modifyBusinessCode(@RequestParam(value = "businessCode", required = false)String businessCode,
 										Model model) {
@@ -58,15 +59,32 @@ public class SwBusinessCodeController {
 		return "sw/code/modifyBusinessCode";
 	}
 	
+	//[재천]거래처 구분 코드 수정
 	@PostMapping("/modifyBusinessCode")
 	public String modifyBusinessCode(BusinessCode businesscode) {
 		businessCodeService.modifyBusinessCode(businesscode);
 		return "redirect:/sw/code/selectBusinessCode";
 	}
 	
+	//[재천]거래처 구분 코드 삭제
 	@RequestMapping("/deleteBusinessCode")
 	public @ResponseBody int deleteBusinessCode(BusinessCode businessCode){
 		return businessCodeService.deleteBusinessCode(businessCode);
 	}
+	
+	
+	//[재천]거래처 구분 코드 중복확인
+	@PostMapping("/codeCheck")
+	@ResponseBody
+	public boolean codeCheck(@RequestParam(value = "businessCode", required = false)String businessCode) {
+		boolean businessCodeResult = false;
+		int codeCheck = businessCodeService.codeCheck(businessCode);
+		if(codeCheck > 0) {
+			businessCodeResult = true;
+		}
+		return businessCodeResult;
+	}
+	
+	
 	
 }

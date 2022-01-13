@@ -49,4 +49,13 @@
  		WHERE
  			businessCode = #{businessCode}
  	</delete>
+ 	
+ 	<select id="codeCheck" resultType="int">
+ 		SELECT
+			COUNT(1)
+		FROM 
+			k0_BusinessCode
+		WHERE
+			businessCode = #{businessCode}
+ 	</select>
 </mapper>
