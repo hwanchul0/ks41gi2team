@@ -32,7 +32,18 @@ public class SwExpenseService {
 	}
 	
 	//[재천]지출코드 1개 조회
-	public SwExpense selectSwExpenseInfo(String swExpensePayCode) {
-		return swExpenseMapper.selectSwExpenseInfo(swExpensePayCode);
+	public SwExpense selectSwExpense(String swExpensePayCode) {
+		return swExpenseMapper.selectSwExpense(swExpensePayCode);
 	}
+	
+	//[재천]마감 처리
+	public int finishExpense(SwExpense swExpense) {
+		return swExpenseMapper.finishExpense(swExpense);
+	}
+	
+	//[재천]수정
+	public int modifyExpense(SwExpense swExpense) {
+		return swExpenseMapper.modifyExpense(swExpense);
+	}
+	
 }

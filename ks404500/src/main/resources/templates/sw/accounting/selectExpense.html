@@ -3,45 +3,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <head th:replace="fragments/head :: headFragment"></head>
-<th:block layout:fragment="customJs">
-<script type="text/javascript">
-console.log('asd');
-/* 
-function deleteBtn(shopIncomeCode) {
-    if(shopIncomeCode != null && shopIncomeCode != ""){
-       
-       var delConfirm = confirm('해당 내역을 삭제합니다.');
-       if (delConfirm) {
-             alert('삭제되었습니다.');
-             var request = $.ajax({
-               url: "/shop/accounting/deleteIncome",
-               method: "POST",
-               data: { shopIncomeCode : shopIncomeCode },
-               dataType: "text"
-             });
-             location.reload();
-          }
-       
-       request.done(function(data) {
-          if(data < 0) {
-             alert("실패했습니다.");
-          }
-          location.reload();
-       });
-    } else {
-       alert("삭제 실패 ");
-    }
- }
-
-
-
-
- */
-
-
-
-
-</script>
 <th:block layout:fragment="customContents">
 <!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper">
@@ -85,20 +46,24 @@ function deleteBtn(shopIncomeCode) {
 											<th>마감</th>
 											<th>마감자</th>
 											<th>마감일</th>
+											<th>수정</th>
+											<th>삭제</th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr th:if="${not #lists.isEmpty(expenselist)}" th:each="el : ${expenselist}">
-											<!-- <td th:text="${el.swExpensePayCode}"></td> -->
+											<td th:text="${el.swExpensePayCode}" style="display: none;" class="swExpensePayCode"></td>
 											<td th:text="${el.swIsCode}"></td>
 											<td th:text="${el.swIsName}"></td>
 											<td th:text="${el.swExpenseInfo}"></td>
 											<td th:text="${#numbers.formatInteger(el.swExpensePrice, 0, 'COMMA')}"></td>
 											<td th:text="${el.swExpenseRegDate}"></td>
-			<!-- 등록자이름insert -->			<td th:text="${el.memberId}"></td>
-			<!-- 마감버튼 -->					<td><button type="button">마감</button> </td>
-			<!-- 마감자이름 select -->			<td th:text="${el.memberIdFinish}"></td>
-			<!-- 마감일select -->				<td th:text="${el.swExpenseFinishDate}"></td>
+											<td th:text="${el.memberId}"></td>
+											<td><button class="finishiBtn" type="button" th:onclick="finishiBtn([[${el.swExpensePayCode}]])">마감</button> </td>
+											<td th:text="${el.memberIdFinish}" class="memberIdFinish" th:value="${el.memberIdFinish}"></td>
+											<td th:text="${el.swExpenseFinishDate}" class="swExpenseFinishDate" th:value="${el.swExpenseFinishDate}"></td>
+											<td><a th:href="@{/sw/accounting/modifyExpense(swExpensePayCode=${el.swExpensePayCode})}">수정</a></td>
+											<td><button type="button" class="btn btn-primary deleteBtn" th:onclick="deleteBtn([[${el.swExpensePayCode}]]);">삭제</button></td>
 										</tr>
 										<tr th:unless="${not #lists.isEmpty(expenselist)}">
 											<td>데이터가 없습니다...</td>
@@ -116,5 +81,24 @@ function deleteBtn(shopIncomeCode) {
 		</div>
 	</div>
 <!-- /.content-wrapper -->
+
+	<script type="text/javascript">
+		function finishiBtn(swExpensePayCode){
+			var finish = confirm('마감하시겠습니까?');
+			if(finish) {
+				var request = $.ajax({
+					url: "/sw/accounting/finish",
+					method: "POST",
+					data: { swExpensePayCode : swExpensePayCode},
+					dataType: "text"
+				});
+				location.reload();
+			}
+	        
+			request.done(function(data) {
+				
+			});
+		}
+	</script>
 </th:block>
 </html>

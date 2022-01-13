@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ksmart41_teamtest.mapper.SwExpenseMapper">
+	<resultMap type="SwExpense" id="SwExpenseResultMap">
+		<result column="swExpensePayCode" 			property="swExpensePayCode"/>
+		<result column="swIsCode" 			property="swIsCode"/>
+		<result column="memberIdFinish" 			property="memberIdFinish"/>
+		<result column="memberId" 			property="memberId"/>
+		<result column="swSlipNumber" 			property="swSlipNumber"/>
+		<result column="swGroupSlip" 			property="swGroupSlip"/>
+		<result column="swIsName" 			property="swIsName"/>
+		<result column="swExpenseInfo" 			property="swExpenseInfo"/>
+		<result column="swExpensePrice" 			property="swExpensePrice"/>
+		<result column="swExpenseRegDate" 			property="swExpenseRegDate"/>
+		<result column="swExpenseFinish" 			property="swExpenseFinish"/>
+		<result column="swExpenseFinishDate" 			property="swExpenseFinishDate"/>
+	</resultMap>
 
 	<insert id="addExpense" parameterType="SwExpense">
 		<selectKey keyProperty="swExpensePayCode" resultType="String" order="BEFORE">
@@ -32,7 +46,7 @@
 			#{swIsName},
 			#{swExpenseInfo},
 			#{swExpensePrice},
-			#{swExpenseRegDate},
+			NOW(),
 			#{swExpenseFinish},
 			#{swExpenseFinishDate}
 		)
@@ -76,7 +90,47 @@
 			swExpensePayCode = #{swExpensePayCode}
 	</select>
 	
+	<select id="selectSwExpense" resultMap="SwExpenseResultMap">
+		SELECT
+			swExpensePayCode,
+			swIsCode,
+			memberIdFinish,
+			memberId,
+			swSlipNumber,
+			swGroupSlip,
+			swIsName,
+			swExpenseInfo,
+			swExpensePrice,
+			swExpenseRegDate,
+			swExpenseFinish,
+			swExpenseFinishDate
+		FROM
+			k2_sw_expense_pay
+		WHERE
+			swExpensePayCode = #{swExpensePayCode}
+	</select>
 	
+	<update id="finishExpense" parameterType="SwExpense">
+		UPDATE k2_sw_expense_pay
+			SET
+				swExpenseFinish =#{swExpenseFinish},
+				memberIdFinish = #{memberIdFinish},
+				swExpenseFinishDate = NOW()
+			WHERE
+				swExpensePayCode = #{swExpensePayCode}
+	</update>
+	
+	<update id="modifyExpense" parameterType="SwExpense">
+		UPDATE k2_sw_expense_pay
+			SET
+				swExpensePayCode = #{swExpensePayCode},
+				swIsCode = #{swIsCode},
+				swIsName = #{swIsName},
+				swExpenseInfo = #{swExpenseInfo},
+				swExpensePrice = #{swExpensePrice}
+			WHERE
+				swExpensePayCode = #{swExpensePayCode}
+	</update>
 	
 	
 </mapper>

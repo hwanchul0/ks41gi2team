@@ -16,5 +16,11 @@ public interface SwExpenseMapper {
 	public int addExpense(SwExpense swExpense);
 	
 	//[재천]지출코드 1개 조회
-	public SwExpense selectSwExpenseInfo(String swExpensePayCode);
+	public SwExpense selectSwExpense(String swExpensePayCode);
+	
+	//[재천]마감처리
+	public int finishExpense(SwExpense swExpense);
+	
+	//[재천]수정
+	public int modifyExpense(SwExpense swExpense);
 }
