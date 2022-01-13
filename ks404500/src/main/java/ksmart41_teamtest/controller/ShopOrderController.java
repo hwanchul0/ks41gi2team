@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import ksmart41_teamtest.dto.Order;
 import ksmart41_teamtest.dto.ShopPaymentCheck;
@@ -46,6 +47,7 @@ public class ShopOrderController {
 		System.out.println(order + "<--controller");
 		return "shop/order/selectOrder";
 	}
+	
 	/* 유성 쇼핑몰 결제상태 조회*/
 	@GetMapping("/selectPaymentCheck")
 	public String selectPaymentCheck(Model model) {
@@ -56,7 +58,7 @@ public class ShopOrderController {
 		return "shop/order/selectPaymentCheck";
 	}
 	
-	/* 유성 쇼핑몰 결제상태 조회 상세페이지 */
+
 
 	
 	
