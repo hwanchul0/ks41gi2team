@@ -4,11 +4,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <head th:replace="fragments/head :: headFragment"></head>
 <th:block layout:fragment="customJs">
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" rel="stylesheet">
+<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"> -->
+<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" rel="stylesheet"> -->
 <script type="text/javascript">
 //테이블 페이징
-$(function(){
 	//[재천] 회원삭제
 	function deleteBtn(memberId) {
 		if(memberId != null && memberId != ""){
@@ -31,7 +30,8 @@ $(function(){
 			alert("삭제 실패 ");
 		}
 	}
-	
+/* 	
+$(function(){
    $('.table').footable({
       "paging": {
          "enabled": true
@@ -45,7 +45,7 @@ $(function(){
 
    });
 });
-
+ */
 //검색기능
 $(document).ready(function(){
      $("#myInput").on("keyup", function() {

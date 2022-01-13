@@ -36,10 +36,16 @@ public interface ShopAddAccountingMapper {
 	//유경 - 쇼핑몰 매출삭제
 	int deleteIncome(ShopAddAccounting shopAddAccounting);
 	
-	//유경 - 쇼핑몰통합회계조회 
+	//유경 - 쇼핑몰통합매출회계조회 
 	List<ShopAddAccounting> selectByTotalIncome();
 	
-	//유경 - 쇼핑몰통합회계등록
+	//유경 - 쇼핑몰통합매출회계등록
 	int addTotalAccountingByIncome(ShopAddAccounting shopAddAccounting);
+	
+	//유경 - 쇼핑몰통합비용회계조회
+	List<ShopAddAccounting> selectByTotalExpense();
+	
+	//유경 - 쇼핑몰통합비용회계등록
+	int addTotalAccountingByExpense(ShopAddAccounting shopAddAccounting);
 
 }

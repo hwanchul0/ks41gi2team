@@ -35,9 +35,7 @@ public class ShopAddAccounting {
 	private int finalIncomeVatNotImply;
 	private Date shopIncomeDate;
 	private Date shopIncomeRegDate;
-	
-	//쇼핑몰 통합회계 - 비용
-	private int shopExpensePrice; //21년 비용 합계
+
 	
 	//쇼핑몰 통합회계 - 매출
 	private String shopIncomeGroupSlip;
@@ -47,8 +45,24 @@ public class ShopAddAccounting {
 	private String shopTotalTable;
 	private String shopGroupSlip;
 	
+	//쇼핑몰 통합회계 - 매입
+	private String shopExpenseCode;
+	private String shopExpenseGroupSlip;
+	private int shopExpensePrice;
 	
 	
+	public String getShopExpenseCode() {
+		return shopExpenseCode;
+	}
+	public void setShopExpenseCode(String shopExpenseCode) {
+		this.shopExpenseCode = shopExpenseCode;
+	}
+	public String getShopExpenseGroupSlip() {
+		return shopExpenseGroupSlip;
+	}
+	public void setShopExpenseGroupSlip(String shopExpenseGroupSlip) {
+		this.shopExpenseGroupSlip = shopExpenseGroupSlip;
+	}
 	public String getShopGroupSlip() {
 		return shopGroupSlip;
 	}
@@ -317,8 +331,6 @@ public class ShopAddAccounting {
 		builder.append(shopIncomeDate);
 		builder.append(", shopIncomeRegDate=");
 		builder.append(shopIncomeRegDate);
-		builder.append(", shopExpensePrice=");
-		builder.append(shopExpensePrice);
 		builder.append(", shopIncomeGroupSlip=");
 		builder.append(shopIncomeGroupSlip);
 		builder.append(", shopTotalCode=");
@@ -331,6 +343,12 @@ public class ShopAddAccounting {
 		builder.append(shopTotalTable);
 		builder.append(", shopGroupSlip=");
 		builder.append(shopGroupSlip);
+		builder.append(", shopExpenseCode=");
+		builder.append(shopExpenseCode);
+		builder.append(", shopExpenseGroupSlip=");
+		builder.append(shopExpenseGroupSlip);
+		builder.append(", shopExpensePrice=");
+		builder.append(shopExpensePrice);
 		builder.append("]");
 		return builder.toString();
 	}

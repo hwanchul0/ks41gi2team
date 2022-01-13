@@ -212,7 +212,7 @@
 	<!-- 유경 - 쇼핑몰 통합회계 조회/ 매출!! 중 total 테이블에 입력되지 않는 항목 -->
 	<select id="selectByTotalIncome" resultType="ShopAddAccounting">
 		SELECT
-			i.shopIncomeCode,
+			GROUP_CONCAT(i.shopIncomeCode) as shopIncomeCode,
 			i.shopIncomeGroupSlip,
 			SUM(i.finalIncomeVatNotImply) as finalIncomeVatNotImply,
 			t.shopTotalCode,
@@ -250,5 +250,46 @@
 		#{shopTotalTable}, 
 		#{shopTotalPrice})
 	
+	</insert>
+	
+	<!-- 유경 - 쇼핑몰 통합매입회계 조회/ 매입!! 중 total 테이블에 입력되지 않는 항목 -->
+	<select id="selectByTotalExpense" resultType="ShopAddAccounting">
+		SELECT
+			GROUP_CONCAT(e.shopExpenseCode) as shopExpenseCode,
+			e.shopExpenseGroupSlip,
+			SUM(e.shopExpensePrice) as shopExpensePrice,
+			t.shopTotalCode,
+			t.shopSalesSection,
+			t.shopTotalTable,
+			t.shopTotalPrice
+		from
+			k2_shop_expense AS e
+		left join
+			k2_shop_totalAccounting AS t
+		ON
+			e.shopExpenseGroupSlip = t.shopGroupSlip
+		WHERE e.shopExpenseCode is NOT NULL
+			AND
+			e.shopExpenseFinish = 'Y'
+		GROUP BY shopExpenseGroupSlip
+		ORDER BY (shopTotalCode), shopTotalCode DESC;
+	</select>
+	
+	<insert id="addTotalAccountingByExpense" parameterType="ShopAddAccounting">
+		INSERT INTO k2_shop_totalAccounting
+			(shopTotalCode, 
+			shopGroupSlip, 
+			shopSalesSection, 
+			shopTotalTable, 
+			shopTotalPrice)
+		VALUES 
+			(
+			(SELECT CONCAT('shop_total_',LPAD(max(SUBSTRING((shopTotalCode),12,3))+1,3,'0'))
+				from
+				k2_shop_totalAccounting AS t),
+			#{shopGroupSlip}, 
+			#{shopSalesSection}, 
+			#{shopTotalTable}, 
+			#{shopTotalPrice})
 	</insert>
 </mapper>

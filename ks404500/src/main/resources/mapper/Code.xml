@@ -37,4 +37,12 @@
 	FROM
 		k2_paymentState;
 	</select>
+	
+	<!-- 유경 - 쇼핑몰 손익계정과목 조회 -->
+	<select id="getSelectShopIsListCode" resultType="ShopIsListCode">
+		SELECT
+			*
+		FROM k2_shop_is_list
+	</select>
+	
 </mapper>

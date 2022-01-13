@@ -36,7 +36,7 @@
 									<div class="form-group row">
 										<label class="col-sm-2 col-form-label text-right">거래처 구분 코드 : </label>
 										<div class="col-sm-8">
-											<input type="text" class="form-control" id="businessCode" placeholder="거래처 구분 코드를 입력하세요" name="businessCode">
+											<input type="text" class="form-control" id="businessCode" placeholder="거래처 구분 코드를 입력하세요" name="businessCode" check="nomal">
 										</div>
 										<div>
 											<button type="button" id="businessCodeCheckBtn" class="btn btn-primary">중복확인</button>
@@ -49,8 +49,8 @@
 										</div>
 									</div>
 									<div class="card-footer">
-										<button type="submit" name="addBusinessCodeBtn" class="btn btn-primary">등록</button>
-										<button type="button" name="cancleBtn" class="btn btn-default float-right">취소</button>
+										<button type="button" name="addBusinessCodeBtn" class="btn btn-primary" id="addBusinessCodeBtn">등록</button>
+										<button type="button" name="cancleBtn" class="btn btn-default float-right" id="cancleBtn">취소</button>
 									</div>
 								</div>
 							</form>
@@ -61,37 +61,76 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-		/* 
-		$('#businessCodeCheckBtn').click(function(){
-			var businessCode = $('#businessCode').val();
-			console.log('assss');
-			//[재천]ajax통신
-			var request = $.ajax({
-				  url: "/sw/code/businessCodeCheck",
-				  method: "POST",
-				  data: { businessCode : businessCode },
-				  dataType: "text"
-				});
-			
-			request.done(function(data) {
-				if(businessCode != null && businessCode != ""){
-					if(data == "true"){
-						alert('등록불가');
-						$('#addBusinessCodeForm input').not('#businessCode').prop('disabled', true);
-						$('#addBusinessCodeForm select').prop('disabled', true);
-						$('#addBusinessCodeForm button').not('#businessCodeCheckBtn').prop('disabled', true);
-					}else{
-						alert('등록 가능');
-						$('#addBusinessCodeForm input').not('#businessCode').prop('disabled', false);
-						$('#addBusinessCodeForm select').prop('disabled', false);
-						$('#addBusinessCodeForm button').not('#businessCodeCheckBtn').prop('disabled', false);
-					}
-				}else{
-					alert('공백에러!');
-				}
+	$('#businessCodeCheckBtn').click(function(){
+		var businessCode = $('#businessCode').val();
+		//[재천]ajax통신 코드 중복체크
+		var request = $.ajax({
+			  url: "/sw/code/codeCheck",
+			  method: "POST",
+			  data: { businessCode : businessCode },
+			  dataType: "text"
 			});
-		}); */
-		
+		request.done(function(data) {
+			if(businessCode != null && businessCode != ""){
+				if(data == "true"){
+					alert('코드 등록 불가능');
+					$('#addBusinessCodeForm input').not('#businessCode').prop('disabled', true);
+					$('#addBusinessCodeForm button').not('#businessCodeCheckBtn').prop('disabled', true);
+				}else{
+					alert('코드 등록 가능');
+					$('#addBusinessCodeForm input').not('#businessCode').prop('disabled', false);
+					$('#addBusinessCodeForm button').not('#businessCodeCheckBtn').prop('disabled', false);
+					$('#businessCode').attr('check','pass');
+				}
+			}else{
+				alert('공백은 사용하실수 없습니다.');
+			}
+		});
+	});
+	
+	//[재천]코드 변경 시 초기 세팅으로
+	$(function(){
+		$('#businessCode').change(function(){
+			$('#businessCode').attr('check','nomal');
+		});
+	});
+	
+	//[재천]거래처 종류 이름 (한글)
+	$(function(){
+		$('#businessCodeName').blur(function(){
+			var regName = /^[가-힣\s]+$/;
+			var businessCodeName = $('#businessCodeName').val();
+			if(!regName.test(businessCodeName)){
+				alert('한글만 입력하세요');
+				$('#businessCodeName').val('');
+				return false;
+			}else{
+				return true;
+			}
+		});
+	});
+	
+	$(function(){
+		$('#addBusinessCodeBtn').click(function(){
+			//[재천]비즈니스 코드 중복체크
+			var businessCode = $('#businessCode').attr('check');
+			if(businessCode != "pass"){
+				alert("아이디 중복체크를 해주세요");
+				return false;
+			}
+			
+			//코드이름 공백체크
+			var businessCodeName = $('#businessCodeName').val();
+			if(businessCodeName == null || businessCodeName == ""){
+				alert("코드이름을 입력해주세요");
+				return false;
+			}
+			$(this).attr('type','submit');
+			$(this).submit();
+		});
+	});
 	</script>
 </th:block>
 </html>
+
+

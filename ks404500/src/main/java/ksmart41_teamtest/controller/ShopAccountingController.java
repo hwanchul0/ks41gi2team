@@ -35,11 +35,7 @@ public class ShopAccountingController {
 	@Autowired
 	private ExpenseService expenseService;
 	
-	@GetMapping("/addExpense")
-	public String addExpense() {
-		return "shop/accounting/addExpense";
-	}
-	
+
 	
 	//유경 - 쇼핑몰 매출 등록화면에서 발행 대상 조회
 	@GetMapping("/addIncome")
@@ -72,7 +68,7 @@ public class ShopAccountingController {
 		return "redirect:/shop/accounting/addIncome";
 	}
 	
-	//유경 - 쇼핑몰 통합회계  발행대상 조회
+	//유경 - 쇼핑몰 통합매출회계  발행대상 조회
 	@GetMapping("/addTotalAccounting")
 	public String addTotalAccounting(Model model) {
 		//통합회계 매출 등록
@@ -81,11 +77,43 @@ public class ShopAccountingController {
 		return "shop/accounting/addTotalAccounting";
 	}
 	
-	//유경 - 쇼핑몰 통합회계  발행대상 등록
+	//유경 - 쇼핑몰 통합비용 회계  발행대상 조회
+	@GetMapping("/addTotalAccountingExpense")
+	public String addTotalAccountingExpense(Model model) {
+		//통합회계 매입 등록
+		List<ShopAddAccounting> totalExpense = shopAcountingService.selectByTotalExpense();
+		model.addAttribute("totalExpense",totalExpense);
+		return "shop/accounting/addTotalAccountingExpense";
+	}
+	
+	//유경 - 쇼핑몰 통합매출 회계  발행대상 등록
 	@PostMapping("/addTotalAccounting")
 	public String addTotalAccountingByIncome(ShopAddAccounting shopAddAccounting) {
 		shopAcountingService.addTotalAccountingByIncome(shopAddAccounting);
 		return "redirect:/shop/accounting/addTotalAccounting";
+	}
+	
+
+	//유경 - 쇼핑몰 통합비용 회계  발행대상 등록
+	@PostMapping("/addTotalAccountingExpense")
+	public String addTotalAccountingByExpense(ShopAddAccounting shopAddAccounting) {
+		shopAcountingService.addTotalAccountingByExpense(shopAddAccounting);
+		return "redirect:/shop/accounting/addTotalAccountingExpense";
+	}
+	// 유성 쇼핑몰 비용 등록 
+	@GetMapping("/addExpense")
+	public String addExpense(Model model) {
+		model.addAttribute("title", "쇼핑몰비용 등록");
+		return "shop/accounting/addExpense";
+	}
+	
+	@PostMapping("/addExpense")
+	public String addExpense(Expense expense) {
+		System.out.println("ShopAccountingController에서 입력받은 값" + expense);
+		
+		expenseService.addExpense(expense);
+		return "redirect:/shop/accounting/selectExpense";
+
 	}
 	
 	/* 유성 쇼핑몰 비용 조회 */

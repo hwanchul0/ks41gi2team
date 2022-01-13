@@ -76,15 +76,27 @@ public class ShopAcountingService {
 		return shopAddAccountingMapper.deleteIncome(shopAddAccounting); 
 	}
 	
-	//유경 - 쇼핑몰 통합회계 조회
+	//유경 - 쇼핑몰 통합회계매출 조회
 	public List<ShopAddAccounting> selectByTotalIncome() {
 		List<ShopAddAccounting> totalIncome = shopAddAccountingMapper.selectByTotalIncome();
 		return totalIncome;
 	}
 	
-	//유경 - 쇼핑몰 통합회계 등록
+	//유경 - 쇼핑몰 통합회계매출 등록
 	public int addTotalAccountingByIncome(ShopAddAccounting shopAddAccounting) {
 		int result = shopAddAccountingMapper.addTotalAccountingByIncome(shopAddAccounting);
+		return result;
+	}
+	
+	//유경 - 쇼핑몰 통합회계매입 조회
+	public List<ShopAddAccounting> selectByTotalExpense() {
+		List<ShopAddAccounting> totalExpense = shopAddAccountingMapper.selectByTotalExpense();
+		return totalExpense;
+	}
+	
+	//유경 - 쇼핑몰 통합회계비용 등록
+	public int addTotalAccountingByExpense(ShopAddAccounting shopAddAccounting) {
+		int result = shopAddAccountingMapper.addTotalAccountingByExpense(shopAddAccounting);
 		return result;
 	}
 

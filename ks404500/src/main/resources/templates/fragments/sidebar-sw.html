@@ -214,46 +214,7 @@
 			</li>
 			<!-- 서비스 관리끝 -->
 			
-			<!-- 서비스관리(client) -->
-			<li class="nav-item">
-				<a href="#" class="nav-link">
-					<i class="nav-icon fas fa-circle"></i>
-					<p>
-						서비스 관리(client) <i class="right fas fa-angle-down"></i>
-					</p>
-				</a>
-				<ul class="nav nav-treeview">
-					<li class="nav-item">
-						<a th:href="@{/sw/service/selectServiceManagement}" class="nav-link">
-							<i class="far fa-circle nav-icon"></i>
-							<p>
-								!서비스 현황(정보)[환철]
-							</p>
-						</a>
-					</li>
-				</ul>
-				<ul class="nav nav-treeview">
-					<li class="nav-item">
-						<a th:href="@{/sw/service/serviceRequest/addServiceRequest}" class="nav-link">
-							<i class="far fa-circle nav-icon"></i>
-							<p>
-								!서비스 계약요청 등록[환철]
-							</p>
-						</a>
-					</li>
-				</ul>
-				<ul class="nav nav-treeview">
-					<li class="nav-item">
-						<a th:href="@{/sw/service/serviceRequest/selectServiceRequest}" class="nav-link">
-							<i class="far fa-circle nav-icon"></i>
-							<p>
-								!서비스 계약요청 조회[환철]
-							</p>
-						</a>
-					</li>
-				</ul>
-			</li>
-			<!-- /서비스 관리(client) -->
+			
 			<!-- 코드관리 시작 -->
 			<li class="nav-item">
 				<a href="#" class="nav-link">
@@ -448,7 +409,17 @@
 					<a th:href="@{/sw/accounting/addTotalAccounting}" class="nav-link">
 						<i class="far fa-circle nav-icon"></i>
 						<p>
-							#통합회계등록[유경]
+							!통합매출 회계등록[유경]
+						</p>
+					</a>
+				</li>
+			</ul>
+			<ul class="nav nav-treeview">
+				<li class="nav-item">
+					<a th:href="@{/sw/accounting/addTotalAccountingExpense}" class="nav-link">
+						<i class="far fa-circle nav-icon"></i>
+						<p>
+							!통합비용 회계등록[유경]
 						</p>
 					</a>
 				</li>
@@ -458,7 +429,7 @@
 					<a th:href="@{/sw/accounting/selectTotalAccounting}" class="nav-link">
 						<i class="far fa-circle nav-icon"></i>
 						<p>
-							!통합회계조회[유경]
+							#통합회계조회[유경]
 						</p>
 					</a>
 				</li>

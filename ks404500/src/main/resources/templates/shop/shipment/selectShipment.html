@@ -49,6 +49,8 @@ $(document).ready(function(){
 	    });
 	  });
 	});
+	
+
 </script>
 
 </th:block>
@@ -116,7 +118,7 @@ $(document).ready(function(){
 												<button type="button" class="btn btn-block btn-success btn-xs" 
 											onclick="location.href='/shop/shipment/addRequestShipment'">배송요청</button></td>
 											<td th:if="${sc.releaseDate} != null">
-												<button type="button" class="btn btn-block btn-success btn-xs disabled">배송요청</button></td>
+												<button type="button" class="btn btn-block btn-success btn-xs disabled">배송완료</button></td>
 										</tr>
 										<tr th:unless="${not #lists.isEmpty(shipmentCode)}">
 											<td>발행대상이 없습니다.</td>

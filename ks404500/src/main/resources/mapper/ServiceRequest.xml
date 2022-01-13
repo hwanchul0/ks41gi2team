@@ -80,7 +80,7 @@
 			ON 
 				bR.businessRegistrationCode = mB.businessRegistrationCode
 			WHERE 
-			clientId = #{clientId}
+			shopMemberId = #{shopMemberId}
 			ORDER BY serviceRequestDate ASC;
 	</select>
 	<!-- 계약요청 상세정보 (sw) -->
@@ -117,8 +117,8 @@
 			ORDER BY r.serviceRequestDate ASC; 		
 	</select>
 	<!-- 서비스 등록 | 내 사업장대표코드 modal -->
-	<select id="findMyMainBizCode" parameterType="map" resultType="map">
-	SELECT 
+	<select id="findMyMainBizCode" parameterType="String" resultType="map">
+    SELECT 
 		main.mainBusinessCode
 		,main.businessCode
 		,main.businessLevelCode
@@ -130,7 +130,11 @@
 		k0_sw_businessRegistration AS bR
 	ON 
 		main.businessRegistrationCode = bR.businessRegistrationCode
+	INNER JOIN 
+		k2_shop_member AS m
+	ON 
+		bR.shopMemberId = m.shopMemberId
 	WHERE 
-		bR.clientId = #{clientId};
+		m.shopMemberId = #{shopMemberId};
 	</select>
 </mapper>
