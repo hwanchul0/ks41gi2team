@@ -17,7 +17,14 @@ public class ServiceRequest {
 	private String businessLevelCode;
 	private String businessRegistrationCode;
 	private String businessCodeRegistrationDate;
+	private String shopMemberId;
 	
+	public String getShopMemberId() {
+		return shopMemberId;
+	}
+	public void setShopMemberId(String shopMemberId) {
+		this.shopMemberId = shopMemberId;
+	}
 	public String getMainBusinessCode() {
 		return mainBusinessCode;
 	}
@@ -149,6 +156,8 @@ public class ServiceRequest {
 		builder.append(businessRegistrationCode);
 		builder.append(", businessCodeRegistrationDate=");
 		builder.append(businessCodeRegistrationDate);
+		builder.append(", shopMemberId=");
+		builder.append(shopMemberId);
 		builder.append("]");
 		return builder.toString();
 	}

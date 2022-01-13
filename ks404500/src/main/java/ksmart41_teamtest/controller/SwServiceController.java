@@ -2,6 +2,8 @@ package ksmart41_teamtest.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import ksmart41_teamtest.dto.ServiceManagement;
+import ksmart41_teamtest.dto.ServiceRequest;
 import ksmart41_teamtest.service.ServiceManagementService;
 
 @Controller
@@ -33,7 +36,7 @@ public class SwServiceController {
 	
 	// 서비스 현황(정보) 
 	@GetMapping("/selectServiceManagement")
-	public String getServiceManagement(Model model) {
+	public String getServiceManagement(HttpSession session, ServiceManagement myService, Model model) {
 		List<ServiceManagement> getServiceManagement = serviceManagementSerivce.getServiceManagement();
 		model.addAttribute("title", "서비스 현황");
 		model.addAttribute("getServiceManagement", getServiceManagement);

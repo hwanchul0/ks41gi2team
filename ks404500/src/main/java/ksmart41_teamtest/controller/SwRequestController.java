@@ -77,30 +77,7 @@ public class SwRequestController {
 	
 
 	
-	// client /  계약요청 등록
-	@GetMapping("/addServiceRequest")
-	public String addServiceRequest() {
-		
-		return "sw/service/serviceRequest/addServiceRequest";
-	}
-	// client / 계약요청 등록 /  내 사업장별 대표코드 조회하기 modal
-	@PostMapping("/findMyMainBizCode")
-	@ResponseBody
-	public List<Map<String, Object>> findMyMainBizCode(){
-		List<Map<String, Object>> myMainBizCode = serviceRequestService.findMyMainBizCode();
-		log.info("PostMapping 계약요청 등록 - 내 사업장별 대표코드 조회 결과 :{}" , myMainBizCode);
-		return myMainBizCode;
-	}
-	
-	// client 본인 계약요청 조회
-	@GetMapping("/selectServiceRequest") 
-	  public String getRequestList(Model model) { 
-	  List<ServiceRequest> getRequestList = serviceRequestService.getRequestList();
-	  model.addAttribute("title", "계약요청 개인조회"); 
-	  model.addAttribute("getRequestList", getRequestList);
 
-	  return "sw/service/serviceRequest/selectServiceRequest"; 
-	  }
 
 	
 }

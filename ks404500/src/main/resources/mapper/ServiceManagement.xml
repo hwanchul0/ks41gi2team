@@ -19,7 +19,7 @@
 			SELECT 
 			*	
 			FROM 
-				k2_sw_serviceManagement
+				k2_sw_serviceManagement;
 		</select>
 		<!-- 서비스 등록 -->
 		<insert id="addService"  parameterType="ServiceManagement">

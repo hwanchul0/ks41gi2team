@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="@{layout/default-sw}">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="@{layout/default-shop}">
 <th:block layout:fragment="customTitle">
 <title th:text="${title}"></title>
 </th:block>
@@ -19,21 +19,25 @@
 				var serviceRegistrationDate = $('#serviceRegistrationDate').val();
 				var serviceName = $('#serviceName').val();
 				var serviceAmount = $('#serviceAmount').val();
-				var servicePeriod = $('#servicePeriod');
+				var serviceTotalPeriod = $('#serviceTotalPeriod');
 				// 총 서비스 기간(일) 계산
 				var totalServiceDate = Number(serviceName * serviceAmount); 
-				console.log(totalServiceDate);
-				servicePeriod.val(totalServiceDate);
+				serviceTotalPeriod.val(totalServiceDate);
 				// 서비스 만료 날짜 
 				$('#serviceEndDate').val(moment(serviceRegistrationDate).add(totalServiceDate,'d').format("YYYY-MM-DD"));
+				// 총 결제 금액
+				var servicePrice = $("#serviceName option:selected").attr('value2') * serviceAmount
+				$('#serviceTotalPrice').val(servicePrice.toLocaleString());
 			});
+		
 			// 내 사업장 대표코드 모달
 			$(document).on('click', '#myMainBizCode', function(){
 				$('#dataTableAjax').DataTable({
 						destroy: true,
 						ajax: {
-							url: '/sw/service/serviceRequest/findMyMainBizCode',
+							url: '/shop/service/serviceRequest/findMyMainBizCode',
 		   					type: 'POST',
+		   					data: {shopMemberId : '[[${session.SHOPID}]]'},
 		   					dataSrc: function(data){
 		        				console.table(data);
 		        				return data;
@@ -110,7 +114,7 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-lg-12">
-					<div class="card card-primary">
+					<div class="card card-success">
 						<div class="card-header">
 							서비스 계약 요청 등록
 						</div>
@@ -123,7 +127,7 @@
 												<div class="col-md-6">	
 													<label for="mainBusinessCode">사업장 대표코드</label>
 													<input type="hidden" id="mainBusinessCodeIdInput" name="mainBusinessCodeId">
-													<button type="button" class="btn btn-primary btn-lg" id="myMainBizCode" style="height: 27px;padding: 0;margin: 5px;font-size: 14px;" data-toggle="modal" data-target="#myModal">
+													<button type="button" class="btn btn-success btn-lg" id="myMainBizCode" style="height: 27px;padding: 0;margin: 5px;font-size: 14px;" data-toggle="modal" data-target="#myModal">
 													내 사업자 대표코드 </button>
 													<input type="text" class="inputBox form-control" id="mainBusinessCodeNameInput" name="mainBusinessCodeName" readonly>
 													<!-- 로그인한 아이디 select -> 사업장 대표코드 조회 -->
@@ -133,18 +137,16 @@
 											<div class="row">
 												<div class="col-md-4">
 													<label for="serviceName">서비스명</label>
-													<select class="serviceName-select d-block w-100" id="serviceName" style="height: 38px;" required>
-														<option value="#" style="text-align: center;">::서비스를선택해 주세요::</option>
-														<option value="1">공장 1일</option>
-														<option value="30">공장 30일</option>
-														<option value="365">공장 365일</option>
-														<option value="1">물류센터 1일</option>
-														<option value="30">물류센터 30일</option>
-														<option value="365">물류센터 365일</option>
-														<option value="1">쇼핑몰 1일</option>
-														<option value="30">쇼핑몰 30일</option>
-														<option value="365">쇼핑몰 365일</option>
-													</select>
+													<select name="serviceNameCheck" id="serviceName" style="height: 38px; text-align:center; display: flex; width: 100%;">
+															<th:block th:if="${not #lists.isEmpty(serviceManagement)}" th:each="m : ${serviceManagement}">
+																<option th:value="${m.servicePeriod}" th:value2="${m.servicePrice}" th:text="${m.serviceName}">
+																	[[${m.serviceName}]]
+																</option>
+															</th:block>
+															<th:block th:unless="${not #lists.isEmpty(serviceManagement)}">
+																<option>서비스를 먼저 등록해주세요.</option>
+															</th:block>
+														</select>
 													<div class="invalid-feedback">
 														서비스를 선택해주세요.
 													</div>
@@ -157,7 +159,7 @@
 													</div>
 												</div>
 												<div class="col-md-4">
-													<button type="button" id="totalBtn" class="btn btn-primary" style="height: 38px;position: absolute; top: 50%;">총 서비스 기간 조회</button>
+													<button type="button" id="totalBtn" class="btn btn-success" style="height: 38px;position: absolute; top: 50%;">총 서비스 기간 조회</button>
 												</div>
 											</div>
 											<div class="row">
@@ -178,12 +180,12 @@
 											</div>
 											<div class="row">
 												<div class="col-md-6">
-													<label for="servicePeriod">총 서비스 기간(일)</label>
-													<input type="text" class="form-control" id="servicePeriod" readonly>
+													<label for="serviceTotalPeriod">총 서비스 기간(일)</label>
+													<input type="text" class="form-control" id="serviceTotalPeriod" readonly>
 												</div>
 												<div class="col-md-6">
-													<label for="servicePrice">총 결제 금액</label>
-													<input type="text" class="form-control" id="servicePrice" readonly required>
+													<label for="serviceTotalPrice">총 결제 금액</label>
+													<input type="text" class="form-control" id="serviceTotalPrice" readonly required>
 												</div>
 											</div>
 										</form>
@@ -197,12 +199,10 @@
 							</div>
 						</div>
 						<!-- /card-body -->
-						<div class="card-footer">
-							<hr class="mb-4">
-							<div class="mb-4">
-							</div>
-							<button class="btn btn-primary btn-lg btn-block" type="submit">등록완료</button>
-						</div>
+					<div class="card-footer">
+						<button type="button" class="btn btn-success" id="addServiceBtn">등록</button>
+						<button type="button" class="btn btn-default float-right" th:href="@{/shop/service/selectServiceRequest}">취소</button>
+					</div>
 					</div>
 				</div>
 				<!-- /.row -->
@@ -255,9 +255,9 @@
 		<div class="modal_fotter">
 			<button class="btn btn-secondary confirmBtn" type="button">확인</button>
 		</div>
-			</div>
-		</div>
-		<!-- End 모달창 -->
-		<!--/ 내 사업장 대표코드  -->
+	</div>
+</div>
+<!-- End 모달창 -->
+<!--/ 내 사업장 대표코드  -->
 		</th:block>
 		</html>
