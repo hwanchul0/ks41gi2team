@@ -82,7 +82,6 @@
 											<span id="guide" style="color:#999;display:none"></span>
 											<input type="text" id="sample4_detailAddress" placeholder="상세주소" name="postAddr3"  onchange="changeAddr()">
 											<input type="text" id="sample4_extraAddress" placeholder="참고항목" style="display: none">
-											
 										</div>
 									</div>
 									<div class="form-group row">
@@ -152,17 +151,17 @@
 	
 	//[재천]비밀번호 중복 확인
 	$(function(){
-			$('#pwCheck').blur(function(){
-			   if($('#memberPw').val() != $('#pwCheck').val()){
-			    	if($('#pwCheck').val()!=''){
-				    alert("비밀번호가 일치하지 않습니다.");
-			    	    $('#pwCheck').val(null);
-			          $('#pwCheck').focus();
-			       }
-			    }
-			})  	   
-		});
-	
+		$('#pwCheck').blur(function(){
+		   if($('#memberPw').val() != $('#pwCheck').val()){
+		    	if($('#pwCheck').val()!=''){
+			    alert("비밀번호가 일치하지 않습니다.");
+		    	    $('#pwCheck').val(null);
+		          $('#pwCheck').focus();
+		       }
+		    }
+		})  	   
+	});
+
 	//[재천]이름 정규표현식 유효성검사
 	$(function(){
 		$('#memberName').blur(function(){
@@ -283,7 +282,6 @@
 			$('#addMemberForm').submit();
 		});
 	});
-
 	
 	</script>
 </th:block>

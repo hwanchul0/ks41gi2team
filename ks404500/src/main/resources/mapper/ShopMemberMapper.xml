@@ -97,4 +97,13 @@
 			shopMemberId = #{shopMemberId}
 	</delete>
 	
+	<select id="idCheck" resultType="int">
+	SELECT
+		COUNT(1)
+	FROM
+		k2_shop_member
+	WHERE
+		shopMemberId = #{shopMemberId}
+	</select>
+	
 </mapper>
