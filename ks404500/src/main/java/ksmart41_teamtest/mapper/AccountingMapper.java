@@ -48,5 +48,8 @@ public interface AccountingMapper {
 
 	//유경 - 통합회계 비용 등록대상 등록
 	public int addTotalByExpense(SwTotalAccounting swTotalAccounting);
+	
+	//유경 - 개발사 통합회계 조회
+	public List<SwTotalAccounting> selectTotalAccounting();
 
 }

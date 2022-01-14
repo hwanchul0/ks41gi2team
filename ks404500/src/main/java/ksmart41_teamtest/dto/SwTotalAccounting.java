@@ -19,7 +19,24 @@ public class SwTotalAccounting {
 	private int swExpensePrice;
 	
 	
+	//조회
+	private int sales2021;
+	private int expense2021;
 	
+	
+	
+	public int getSales2021() {
+		return sales2021;
+	}
+	public void setSales2021(int sales2021) {
+		this.sales2021 = sales2021;
+	}
+	public int getExpense2021() {
+		return expense2021;
+	}
+	public void setExpense2021(int expense2021) {
+		this.expense2021 = expense2021;
+	}
 	public String getSwExpensePayCode() {
 		return swExpensePayCode;
 	}
@@ -111,6 +128,10 @@ public class SwTotalAccounting {
 		builder.append(swExpensePayCode);
 		builder.append(", swExpensePrice=");
 		builder.append(swExpensePrice);
+		builder.append(", sales2021=");
+		builder.append(sales2021);
+		builder.append(", expense2021=");
+		builder.append(expense2021);
 		builder.append("]");
 		return builder.toString();
 	}
