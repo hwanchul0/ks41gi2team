@@ -3,6 +3,7 @@ package ksmart41_teamtest.dto;
 public class ServiceRequest {
 	private String contractManageCode;
 	private String serviceName;
+	private String serviceCode;
 	private String serviceAmount;
 	private String servicePeriod;
 	private String serviceTotalPrice;
@@ -17,7 +18,20 @@ public class ServiceRequest {
 	private String businessLevelCode;
 	private String businessRegistrationCode;
 	private String businessCodeRegistrationDate;
+	private String shopMemberId;
 	
+	public String getServiceCode() {
+		return serviceCode;
+	}
+	public void setServiceCode(String serviceCode) {
+		this.serviceCode = serviceCode;
+	}
+	public String getShopMemberId() {
+		return shopMemberId;
+	}
+	public void setShopMemberId(String shopMemberId) {
+		this.shopMemberId = shopMemberId;
+	}
 	public String getMainBusinessCode() {
 		return mainBusinessCode;
 	}
@@ -121,6 +135,8 @@ public class ServiceRequest {
 		builder.append(contractManageCode);
 		builder.append(", serviceName=");
 		builder.append(serviceName);
+		builder.append(", serviceCode=");
+		builder.append(serviceCode);
 		builder.append(", serviceAmount=");
 		builder.append(serviceAmount);
 		builder.append(", servicePeriod=");
@@ -149,6 +165,8 @@ public class ServiceRequest {
 		builder.append(businessRegistrationCode);
 		builder.append(", businessCodeRegistrationDate=");
 		builder.append(businessCodeRegistrationDate);
+		builder.append(", shopMemberId=");
+		builder.append(shopMemberId);
 		builder.append("]");
 		return builder.toString();
 	}

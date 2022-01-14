@@ -45,5 +45,9 @@ public class ServicePaymentService {
 		List<ServicePayment> selectContractState = servicePaymentMapper.selectContractState();
 		return selectContractState;
 	}
+	public ServicePayment getContractState(String contractCode) {
+		ServicePayment getContractState = servicePaymentMapper.getContractState(contractCode);
+		return getContractState;
+	}
 		
 }

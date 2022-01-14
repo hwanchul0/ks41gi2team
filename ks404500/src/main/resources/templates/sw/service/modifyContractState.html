@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="@{layout/default-sw}">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<th:block layout:fragment="customContents">
+	<!-- Content Wrapper. Contains page content -->
+	<div class="content-wrapper">
+		<!-- Content Header (Page Header) -->
+		<div class="content-header">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div class="col-sm-6">
+						<h1 class="m-0">modifyService / 서비스 수정하기</h1>
+					</div>
+					<!-- /.col -->
+					<div class="col-sm-6">
+						<ol class="breadcrumb float-sm-right">
+							<li class="breadcrumb-item">
+								<a href="#">Home</a>
+							</li>
+							<li class="breadcrumb-item active">Starter Page</li>
+						</ol>
+					</div>
+					<!-- /.col -->
+				</div>
+				<!-- /.row -->
+			</div>
+			<!-- /.container-fluid -->
+		</div>
+		<!-- Content Header (Page Header) -->
+		<div class="col-md-12">
+			<!-- /.card-header -->
+			<!-- Horizontal Form -->
+			<div class="card card-primary">
+				<div class="card-header">
+					<h3 class="card-title">서비스 등록</h3>
+				</div>
+				<!-- /.card-header -->
+				<!-- form start -->
+				<form class="form-horizontal" th:action="@{/sw/service/modifyServiceManagement}" method="POST">
+					<div class="card-body">
+						<div class="form-group row">
+							<label for="clientId" class="col-sm-2 col-form-label">회원 아이디</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="clientId" name="clientId"  th:value="${contractInfo.serviceCode}" readonly="readonly">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="contractCode" class="col-sm-2 col-form-label">계약 코드</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="contractCode" name="contractCode">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="paymentState" class="col-sm-2 col-form-label">결제 상태</label>
+							<div class="col-sm-4">
+								<input type="number" class="form-control" id="paymentState" name="paymentState">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="contractState" class="col-sm-2 col-form-label">계약 상태</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="contractState" name="contractState">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="refundState" class="col-sm-2 col-form-label">환불 상태</label>
+							<div class="col-sm-4">
+								<input type="number" class="form-control" id="refundState" name="refundState">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="refundReason" class="col-sm-2 col-form-label">환불 사유</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="refundReason" name="refundReason">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="serviceRegistrationDate" class="col-sm-2 col-form-label">서비스 시작 날짜</label>
+							<div class="col-sm-4">
+								<input type="date" class="form-control" id="serviceRegistrationDate" name="serviceRegistrationDate" readonly="readonly" th:value="${getServiceInfo.serviceRegistrationDate}">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="serviceDeleteDate" class="col-sm-2 col-form-label">서비스 종료 날짜</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="serviceDeleteDate" name="serviceDeleteDate" readonly="readonly" th:value="${getServiceInfo.memberId}">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="contractRegDate" class="col-sm-2 col-form-label">등록일</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="contractRegDate" name="contractRegDate" readonly="readonly" th:value="${getServiceInfo.memberId}">
+							</div>
+						</div>
+					</div>
+					<!-- /.card-body -->
+					<div class="card-footer">
+						<button type="submit" class="btn btn-primary">저장</button>
+						<button type="submit" class="btn btn-default float-right" th:href="@{#}">취소</button>
+					</div>
+					<!-- /.card-footer -->
+				</form>
+			</div>
+			<!-- /.card -->
+		</div>
+	</div>
+	<!-- /Content Wrapper. Contains page content -->
+</th:block>

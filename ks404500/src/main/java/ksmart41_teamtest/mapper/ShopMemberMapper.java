@@ -12,10 +12,15 @@ public interface ShopMemberMapper {
 	//[재천]회원 등록
 	public int addShopMember(ShopMember shopMember);
 	
-	//[재천]외부 회원정보 조회
-	public ShopMember ShopMemberInfo (String shopMemberId);
-	
 	//[재천]외부 회원조회
 	public List<ShopMember> selectShopMemberList();
 	
+	//[재천]외부 회원 수정
+	public int modifyClientMember(ShopMember shopMember);
+	
+	//[재천]외부 회원 정보 조회
+	public ShopMember ShopMemberInfo(String shopMemberId);
+	
+	//[재천]외부 회원 정보 삭제
+	public int deleteClientMember(ShopMember shopMember);
 	}

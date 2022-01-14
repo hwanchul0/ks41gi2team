@@ -100,7 +100,7 @@ public class ShopAccountingController {
 		shopAcountingService.addTotalAccountingByExpense(shopAddAccounting);
 		return "redirect:/shop/accounting/addTotalAccountingExpense";
 	}
-	
+
 	// 유성 쇼핑몰 비용 등록 
 	@GetMapping("/addExpense")
 	public String addExpense(Model model) {

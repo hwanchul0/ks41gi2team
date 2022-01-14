@@ -45,4 +45,9 @@ public class BusinessCodeService {
 	public int deleteBusinessCode(BusinessCode businessCode) {
 		return businessCodeMapper.deleteBusinessCode(businessCode);
 	}
+	
+	//[재천]거래처 구분 코드 중복 확인
+	public int codeCheck(String businessCode) {
+		return businessCodeMapper.codeCheck(businessCode);
+	}
 }

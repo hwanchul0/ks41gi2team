@@ -1,7 +1,5 @@
 package ksmart41_teamtest.dto;
 
-import java.util.Date;
-
 public class SwIncome {
 	
 	private String swIncomeCode;

@@ -80,7 +80,7 @@
 			ON 
 				bR.businessRegistrationCode = mB.businessRegistrationCode
 			WHERE 
-			clientId = #{clientId}
+			shopMemberId = #{shopMemberId}
 			ORDER BY serviceRequestDate ASC;
 	</select>
 	<!-- 계약요청 상세정보 (sw) -->
@@ -117,8 +117,8 @@
 			ORDER BY r.serviceRequestDate ASC; 		
 	</select>
 	<!-- 서비스 등록 | 내 사업장대표코드 modal -->
-	<select id="findMyMainBizCode" parameterType="map" resultType="map">
-	SELECT 
+	<select id="findMyMainBizCode" parameterType="String" resultType="map">
+    SELECT 
 		main.mainBusinessCode
 		,main.businessCode
 		,main.businessLevelCode
@@ -130,7 +130,45 @@
 		k0_sw_businessRegistration AS bR
 	ON 
 		main.businessRegistrationCode = bR.businessRegistrationCode
+	INNER JOIN 
+		k2_shop_member AS m
+	ON 
+		bR.shopMemberId = m.shopMemberId
 	WHERE 
-		bR.clientId = #{clientId};
+		m.shopMemberId = #{shopMemberId};
 	</select>
+	<!-- 서비스 등록 -->
+	<insert id="addServiceRequest" parameterType="ServiceRequest">
+	INSERT INTO k2_sw_contractRequest
+		(contractManageCode
+		,mainBusinessCode
+		,memberId
+		,serviceCode
+		,serviceAmount
+		,servicePeriod
+		,serviceTotalPrice
+		,slipNumber
+		,serviceRegistrationDate
+		,serviceEndDate
+		,serviceRequestDate
+		,serviceRequestStatus
+		,serviceApprovalDate)
+	VALUES 
+		((SELECT CONCAT('estimate',LPAD(max(SUBSTRING((contractManageCode),9,2))+1,2,'0'))
+	FROM
+  	 k2_sw_contractRequest ALIAS_FOR_SUBQUERY) 
+			 ,#{mainBusinessCode}
+			 ,''
+			 ,#{serviceCode}
+			 ,#{serviceAmount}
+			 ,#{servicePeriod}
+			 ,#{serviceTotalPrice}
+			 ,''
+			 ,#{serviceRegistrationDate}
+			 ,#{serviceEndDate}
+			 ,NOW()
+			 ,'신청'
+			 ,0
+			 );
+	</insert>
 </mapper>

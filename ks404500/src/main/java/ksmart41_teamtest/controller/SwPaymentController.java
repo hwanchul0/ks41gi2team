@@ -75,5 +75,23 @@ public class SwPaymentController {
 		model.addAttribute("selectContractState",selectContractState);
 		return "sw/service/selectContractState";
 	}
+	//계약현황 관리 - 수정
+	@PostMapping("/modifyContractState")
+	public String modifyContractState(ServicePayment servicePayment) {
+		log.info("계약현황 관리 수정 페이지 | 입력받은 계약코드 ===== :{} ", servicePayment);
+		return "redirect:/sw/service/selectContractState";
+	}
+	@GetMapping("modifyContractState")
+	public String modifyContractState(@RequestParam(value="contractCode", required = false) String contractCode
+										,Model model) {
+		model.addAttribute("title","계약현황 수정");
+		
+		if(contractCode != null && !"".equals(contractCode)) {
+			ServicePayment contractInfo = servicePaymentService.getContractState(contractCode);
+			model.addAttribute("contractInfo", contractInfo);
+		}
+		
+		return "sw/service/modifyContractState";
+	}
 
 }

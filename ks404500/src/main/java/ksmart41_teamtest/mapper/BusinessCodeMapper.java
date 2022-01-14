@@ -23,4 +23,7 @@ public interface BusinessCodeMapper {
 	
 	//[재천] 거래처 구분 코드 삭제
 	public int deleteBusinessCode(BusinessCode businessCode);
+	
+	//[재천]거래처 구분 코드 중복 체크
+	public int codeCheck(String businessCode);
 }
