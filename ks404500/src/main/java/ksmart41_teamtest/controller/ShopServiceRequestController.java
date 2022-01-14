@@ -45,8 +45,8 @@ public class ShopServiceRequestController {
 	}
 	@PostMapping("/addServiceRequest")
 	public String addServiceRequest(ServiceRequest serviceRequest) {
-		log.info("계약요청 등록 ====:{}" + serviceRequest);
-		
+		log.info("ShopServiceRequestController 계약요청 등록 화면에서 입력받은 값 :{}" + serviceRequest);
+		serviceRequestService.addServiceRequest(serviceRequest);
 		return "redirect:/shop/service/serviceRequest/selectServiceRequest";
 	}
 	// client / 계약요청 등록 /  내 사업장별 대표코드 조회하기 modal
