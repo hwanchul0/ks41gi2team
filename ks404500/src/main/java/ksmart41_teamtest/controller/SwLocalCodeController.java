@@ -73,6 +73,18 @@ public class SwLocalCodeController {
 	public @ResponseBody int deleteBusinessCode(LocalCode localCode) {
 		return localCodeService.deleteLocalCode(localCode);
 	}
+	
+	//[재천]지역코드 중복체크
+	@PostMapping("/localCodeCheck")
+	@ResponseBody
+	public boolean localCodeCheck(@RequestParam(value = "localCode", required = false)String localCode) {
+		boolean localCodeCheckResult = false;
+		int localCodeCheck = localCodeService.localCodeCheck(localCode);
+		if(localCodeCheck > 0) {
+			localCodeCheckResult = true;
+		}
+		return localCodeCheckResult;
+	}
 }
 
 

@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import ksmart41_teamtest.dto.Expense;
 import ksmart41_teamtest.dto.ShopAddAccounting;
-
+import ksmart41_teamtest.dto.ShopTotalAccounting;
 import ksmart41_teamtest.service.ExpenseService;
 import ksmart41_teamtest.service.ShopAcountingService;
 
@@ -100,7 +100,6 @@ public class ShopAccountingController {
 		shopAcountingService.addTotalAccountingByExpense(shopAddAccounting);
 		return "redirect:/shop/accounting/addTotalAccountingExpense";
 	}
-	
 	// 유성 쇼핑몰 비용 등록 
 	@GetMapping("/addExpense")
 	public String addExpense(Model model) {
@@ -196,7 +195,16 @@ public class ShopAccountingController {
 	//유경 - 쇼핑몰 통합회계 조회
 	@GetMapping("/selectTotalAccounting")
 	public String selectTotalAccounting(Model model) {
-				return "shop/accounting/selectTotalAccounting";
+		//쇼핑몰 2021년 손익 조회
+		List<ShopAddAccounting> shopAccounting = shopAcountingService.selectTotalAccounting();
+		model.addAttribute("shopAccounting", shopAccounting);
+		//쇼핑몰 2021년 분기별 매출 조회
+		List<ShopTotalAccounting> shop2021Sales = shopAcountingService.selectShopIncome();
+		model.addAttribute("shop2021Sales", shop2021Sales);
+		//쇼핑몰 2021년 분기별 비용 조회
+		List<ShopTotalAccounting> shop2021Expense = shopAcountingService.selectShopExpense();
+		model.addAttribute("shop2021Expense", shop2021Expense);
+		return "shop/accounting/selectTotalAccounting";
 		}
 	
 }

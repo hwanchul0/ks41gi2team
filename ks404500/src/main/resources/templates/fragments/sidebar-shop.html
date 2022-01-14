@@ -72,6 +72,48 @@
 			</ul>
 			</li>
 			<!-- 회원관리 끝 -->
+			
+			<!-- 서비스관리(client) -->
+			<li class="nav-item">
+				<a href="#" class="nav-link">
+					<i class="nav-icon fas fa-circle"></i>
+					<p>
+						서비스 관리(client) <i class="right fas fa-angle-down"></i>
+					</p>
+				</a>
+				<ul class="nav nav-treeview">
+					<li class="nav-item">
+						<a th:href="@{/sw/service/selectServiceManagement}" class="nav-link">
+							<i class="far fa-circle nav-icon"></i>
+							<p>
+								!서비스 현황(정보)[환철]
+							</p>
+						</a>
+					</li>
+				</ul>
+				<ul class="nav nav-treeview">
+					<li class="nav-item">
+						<a th:href="@{/shop/service/serviceRequest/addServiceRequest}" class="nav-link">
+							<i class="far fa-circle nav-icon"></i>
+							<p>
+								!서비스 계약요청 등록[환철]
+							</p>
+						</a>
+					</li>
+				</ul>
+				<ul class="nav nav-treeview">
+					<li class="nav-item">
+						<a th:href="@{/shop/service/serviceRequest/selectServiceRequest}" class="nav-link">
+							<i class="far fa-circle nav-icon"></i>
+							<p>
+								!서비스 계약요청 조회[환철]
+							</p>
+						</a>
+					</li>
+				</ul>
+			</li>
+			<!-- /서비스 관리(client) -->
+			
 			<!-- 쇼핑몰 거래처 관리 시작 -->
 			<li class="nav-item">
 			<a href="#" class="nav-link">

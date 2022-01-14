@@ -42,10 +42,15 @@ public class ServiceRequestService {
 		
 		return getRequestList;
 	}
-	// 계약요청 등록 - 내 사업장별 대표코드 조회
-	public List<Map<String, Object>> findMyMainBizCode() {
+	// 계약요청 등록 - 내 사업장별 대표코드 조회 ( 모달 )
+	public List<Map<String, Object>> findMyMainBizCode(String shopMemberId) {
 		
-		return serviceRequestMapper.findMyMainBizCode(null);
+		return serviceRequestMapper.findMyMainBizCode(shopMemberId);
+	}
+	// 계약요청 등록
+	public int addServiceRequest(ServiceRequest serviceRequest) {
+		int addServiceRequest = serviceRequestMapper.addServiceRequest(serviceRequest);
+		return addServiceRequest;
 	}
 	
 }

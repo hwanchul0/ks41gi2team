@@ -107,6 +107,35 @@ public class SwMemberController {
 		
 		return "sw/client/selectClient";
 	}
+	
+	/*
+	 * client 부분~~~
+	 */
+	
+	//[재천]외부회원 수정!
+	@GetMapping("/client/modifyClient")
+	public String modifyClientMember(@RequestParam(value = "shopMemberId", required = false)String shopMemberId,
+			Model model) {
+		System.out.println("modifyMemberController 값" + shopMemberId);
+		if(shopMemberId != null && !"".equals(shopMemberId)) {
+			ShopMember shopMemberInfo = shopMemberService.ShopMemberInfo(shopMemberId);
+			model.addAttribute("shopMemberInfo", shopMemberInfo);
+		}
+		model.addAttribute("title", "회원 수정");
+		return "sw/client/modifyClient";
+	}
+	
+	//[재천]외부회원 수정
+	@PostMapping("/client/modifyClient")
+	public String modifyClientMember(ShopMember shopMember) {
+		shopMemberService.modifyClientMember(shopMember);
+		return "redirect:/sw/client/selectClient";
+	}
+	//[재천]외부회원 삭제
+	@RequestMapping ("/client/deleteClient")
+	public @ResponseBody int deleteClient(ShopMember shopMember) {
+		return shopMemberService.deleteClient(shopMember);
+	}
 }
 
 

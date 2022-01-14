@@ -23,5 +23,8 @@ public interface LocalCodeMapper {
 	
 	//[재천]
 	public int deleteLocalCode(LocalCode localCode);
+	
+	//[재천]
+	public int localCodeCheck(String localCode);
 }
 

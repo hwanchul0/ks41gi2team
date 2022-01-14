@@ -34,12 +34,12 @@ layout:decorate="@{layout/default-sw}">
 							<div class="card-header">
 								<h5 class="card-title" th:text="${title}"></h5>
 							</div>
-							<form id="addLocalCode" th:action="@{/sw/code/addLocalCode}"class="form-horizontal" method="post">
+							<form id="addLocalCodeForm" th:action="@{/sw/code/addLocalCode}"class="form-horizontal" method="post">
 								<div class="card-body">
 									<div class="form-group row">
 										<label class="col-sm-2 col-form-label text-right">지역 코드 : </label>
 										<div class="col-sm-8">
-											<input type="text" class="form-control" id="localCode" placeholder="지역 코드를 입력하세요" name="localCode">
+											<input type="text" class="form-control" id="localCode" placeholder="지역 코드를 입력하세요" name="localCode" check="nomal">
 										</div>
 										<div>
 											<button type="button" id="localCodeCheckBtn" class="btn btn-primary">중복확인</button>
@@ -59,8 +59,8 @@ layout:decorate="@{layout/default-sw}">
 									</div>
 								</div>
 								<div class="card-footer">
-									<button type="submit" name="addLocalCodeBtn" class="btn btn-primary">등록</button>
-									<button type="button" name="cancleBtn" class="btn btn-default float-right">취소</button>
+									<button type="button" name="addLocalCodeBtn" class="btn btn-primary" id="addLocalCodeBtn">등록</button>
+									<button type="button" name="cancleBtn" class="btn btn-default float-right" id="cancleBtn">취소</button>
 								</div>
 							</form>
 						</div>
@@ -73,5 +73,94 @@ layout:decorate="@{layout/default-sw}">
 		</div>
 	</div>
 <!-- /.content-wrapper -->
+<script type="text/javascript">
+	$('#localCodeCheckBtn').click(function(){
+		var localCode = $('#localCode').val();
+		//[재천]ajax통신 아이디 중복체크
+		var request = $.ajax({
+			  url: "/sw/code/localCodeCheck",
+			  method: "POST",
+			  data: { localCode : localCode },
+			  dataType: "text"
+			});
+		request.done(function(data) {
+			if(localCode != null && localCode != ""){
+				if(data == "true"){
+					alert('지역코드 등록 불가능');
+					$('#addLocalCodeForm input').not('#localCode').prop('disabled', true);
+					$('#addLocalCodeForm button').not('#localCodeCheckBtn').prop('disabled', true);
+					//$('#addMemberForm #memberId').attr("readonly", false);
+				}else{
+					alert('지역코드 등록 가능');
+					$('#addLocalCodeForm input').not('#localCode').prop('disabled', false);
+					$('#addLocalCodeForm button').not('#localCodeCheckBtn').prop('disabled', false);
+					$('#localCode').attr('check','pass');
+					//$('#addMemberForm #memberId').attr("readonly", true);
+				}
+			}else{
+				alert('공백은 사용하실수 없습니다.');
+			}
+		});
+	});
+
+	$(function(){
+		//[재천]지역숫자 유효성검사(숫자)
+		$('#localNumber').blur(function(){
+			var regNumber = /^[0-9]+$/;
+			var localNumber = $('#localNumber').val();
+			if(!regNumber.test(localNumber)){
+				alert("숫자만 입력가능합니다.");
+				$('#localNumber').val('');
+				return false;
+			}else{
+				return true;
+			}
+		});
+	});
+
+	$(function(){
+		//[재천]지역이름 유효성검사(한글)
+		$('#localName').blur(function(){
+			var regName = /^[가-힣]+$/;
+			var localName = $('#localName').val();
+			if(!regName.test(localName)){
+				alert("한글만 입력하세요");
+				$('#localName').val('');
+			}
+		});
+	});
+
+	$(function(){
+		//지역코드 변경시 초기화
+		$('#localCode').change(function(){
+			$('#localCode').attr('check','nomal');
+		});
+	});
+	
+	
+	$(function(){
+		$('#addLocalCodeBtn').click(function(){
+			var localCode = $('#localCode').attr('check');
+			if(localCode != "pass"){
+				alert("중복확인을 해주세요");
+				return false;
+			}
+			var localNumber = $('#localNumber').val();
+			if(localNumber == null || localNumber == ""){
+				alert("지역번호을 입력하세요");
+				return false;
+			}
+			var localName = $('#localName').val();
+			if(localName == null || localName == ""){
+				alert("지역이름을 입력하세요");
+				return false;
+			}
+			$(this).attr('type','submit');
+			$(this).submit();
+		});
+	});
+
+
+</script>
 </th:block>
 </html>

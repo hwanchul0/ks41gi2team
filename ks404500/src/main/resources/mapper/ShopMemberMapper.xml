@@ -39,7 +39,7 @@
 			#{shopMemberState},
 			#{shopWithdrawalReason},
 			#{shopWithdrawalDate},
-			#{shopMemberReg}
+			NOW()
 		)
 	</insert>
 	
@@ -77,4 +77,24 @@
 		WHERE
 			shopMemberId = #{shopMemberId}
 	</select>
+	
+	<update id="modifyClientMember" parameterType="ShopMember">
+		UPDATE k2_shop_member
+		SET
+			shopMemberName = #{shopMemberName},
+			shopMemberAddr = #{shopMemberAddr},
+			shopMemberEmail = #{shopMemberEmail},
+			shopMemberPhone = #{shopMemberPhone}
+		WHERE
+			shopMemberId = #{shopMemberId}
+	</update>
+	
+	<delete id="deleteClientMember" parameterType="ShopMember">
+		DELETE
+		FROM
+			k2_shop_member
+		WHERE
+			shopMemberId = #{shopMemberId}
+	</delete>
+	
 </mapper>
