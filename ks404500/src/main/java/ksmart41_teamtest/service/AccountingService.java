@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ksmart41_teamtest.dto.GetInvoiceInfo;
 import ksmart41_teamtest.dto.InvoiceList;
+import ksmart41_teamtest.dto.SwTotalAccounting;
 import ksmart41_teamtest.mapper.AccountingMapper;
 
 @Service
@@ -63,6 +64,31 @@ public class AccountingService {
 	//유경 - 세금계산서 수정 발행 Detailinsert
 	public int addDetailAmendInvoice(InvoiceList invoiceList) {
 		return accountingMapper.addDetailAmendInvoice(invoiceList);
+	}
+	//유경 - 통합회계 매출 대상 조회
+	public List<SwTotalAccounting> addTotalAccountingIncome() {
+		 List<SwTotalAccounting> SwTotalIncome = accountingMapper.addTotalAccountingIncome();
+		return SwTotalIncome;
+	}
+
+	//유경 - 통합회계 매출 대상 등록
+	public int addTotalByIncome(SwTotalAccounting swTotalAccounting) {
+		int result = accountingMapper.addTotalByIncome(swTotalAccounting);
+		return result;
+		
+	}
+	
+	//유경 - 통합회계 비용 대상 조회
+	public List<SwTotalAccounting> addTotalAccountingExpense() {
+		List<SwTotalAccounting> SwTotalExpense = accountingMapper.addTotalAccountingExpense();
+		return SwTotalExpense;
+	}
+	
+	//유경 - 통합회계 비용 대상 등록
+	public int addTotalByExpense(SwTotalAccounting swTotalAccounting) {
+		int result = accountingMapper.addTotalByExpense(swTotalAccounting);
+		return result;
+		
 	}
 	
 }

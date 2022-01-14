@@ -38,10 +38,10 @@ public class ShopBusinessInfoController {
 	@PostMapping("/addBusinessInfo")
 	public String addBusinessInfo(ShopBusinessInfo shopBusinessInfo) {
 		System.out.println("컨트롤러 에서 받은 값 >>>" + shopBusinessInfo);
-
 		shopBusinessInfoService.addBusinessInfo(shopBusinessInfo);
 		return "redirect:/shop/business/selectBusinessInfo";
 	}
+	
 	@GetMapping("/modifyBusinessInfo")
 	public String modifyBusinessInfo(@RequestParam(value = "shopClientCode", required = false)String shopClientCode,
 			Model model) {

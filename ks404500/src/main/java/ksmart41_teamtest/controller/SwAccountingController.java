@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ksmart41_teamtest.dto.GetInvoiceInfo;
 import ksmart41_teamtest.dto.InvoiceList;
 import ksmart41_teamtest.dto.InvoiceReason;
+import ksmart41_teamtest.dto.SwTotalAccounting;
 import ksmart41_teamtest.service.AccountingService;
 import ksmart41_teamtest.service.InvoiceListService;
 import ksmart41_teamtest.service.InvoiceReasonService;
@@ -37,12 +38,6 @@ public class SwAccountingController {
 
 
 	
-	@GetMapping("/selectTotalAccounting")
-	public String selectTotalAccounting() {
-		return "sw/accounting/selectTotalAccounting";
-	}
-	
-
 	
 	//유경 - 개발사 세금계산서상세정보조회
 	@RequestMapping("/viewInvoice")
@@ -132,6 +127,46 @@ public class SwAccountingController {
 		accountingService.addDetailAmendInvoice(invoiceList);
 		return "redirect:/sw/accounting/selectInvoice";
 	}
+	
+	//유경 - 통합매출 회계조회 
+	@GetMapping("/addTotalAccounting")
+	public String addTotalAccountingIncome(Model model) {
+		//매출 등록대상 내역 조회
+		List<SwTotalAccounting> SwTotalIncome = accountingService.addTotalAccountingIncome();
+		model.addAttribute("SwTotalIncome", SwTotalIncome);
+		return "sw/accounting/addTotalAccounting";
+	}
+	
+	//유경 - 통합매출 회계등록
+	@PostMapping("/addTotalAccounting")
+	public String addTotalAccountingByIncome(SwTotalAccounting swTotalAccounting){
+		accountingService.addTotalByIncome(swTotalAccounting);
+		return "redirect:/sw/accounting/addTotalAccounting";
+	}
+	
+	//유경 - 통합비용 회계조회 
+	@GetMapping("/addTotalAccountingExpense")
+	public String addTotalAccountingExpense(Model model) {
+		//비용 등록대상 내역 조회
+		List<SwTotalAccounting> SwTotalExpense = accountingService.addTotalAccountingExpense();
+		model.addAttribute("SwTotalExpense", SwTotalExpense);
+		return "sw/accounting/addTotalAccountingExpense";
+	}
+	
+	//유경 - 통합비용 회계등록
+	@PostMapping("/addTotalAccountingExpense")
+	public String addTotalAccountingByExpense(SwTotalAccounting swTotalAccounting){
+		accountingService.addTotalByExpense(swTotalAccounting);
+		return "redirect:/sw/accounting/addTotalAccountingExpense";
+	}
+	
+	//유경 - 통합회계 조회
+	@GetMapping("/selectTotalAccounting")
+	public String selectTotalAccounting() {
+		return "sw/accounting/selectTotalAccounting";
+	}
+	
+
 	
 	@GetMapping("/addPaymentSum")
 	public String addPaymentSum() {

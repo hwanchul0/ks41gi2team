@@ -4,48 +4,139 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 layout:decorate="@{layout/default-sw}">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<th:block layout:fragment="customJs">
+		<script th:inline="javascript">
+
+$(function() {
+				//--------------
+				//- AREA CHART -
+				//--------------
+				// Get context with jQuery - using jQuery's .get() method.
+				var areaChartCanvas = $('#areaChart').get(0).getContext('2d')
+				
+
+				var areaChartData = {
+					labels : ['매출','비용'],
+					datasets : [ {
+						label : '매출액',
+						backgroundColor : ['#3c8dbc', '#d2d6de'],
+						borderColor : '#698c68',
+						pointRadius : false,
+						pointColor : '#698c68',
+						pointStrokeColor : '#698c68',
+						pointHighlightFill : '#fff',
+						pointHighlightStroke : '#698c68',
+						data : [100,200]
+					} ]
+				}
+
+				var areaChartOptions = {
+					maintainAspectRatio : false,
+					responsive : true,
+					legend : {
+						display : false
+					},
+					scales : {
+						xAxes : [ {
+							gridLines : {
+								display : true,
+							}
+						} ],
+						yAxes : [ {
+							gridLines : {
+								display : false,
+							}
+						} ]
+					}
+				}
+
+				// This will get the first returned node in the jQuery collection.
+				var areaChart = new Chart(areaChartCanvas, {
+					type : 'doughnut',
+					data : areaChartData,
+					options : areaChartOptions
+				})
+				
+				
+				
+			})
+		</script>
+	</th:block>
+
 <th:block layout:fragment="customContents">
 <!-- Content Wrapper. Contains page content -->
-	<div class="content-wrapper">
-	<!-- Content Header (Page header) -->
-		<div class="content-header">
-			<div class="container-fluid">
-				<div class="row mb-2">
-					<div class="col-sm-6">
-						<h1 class="m-0">"selectTotalAccounting / 통합회계 조회"</h1>
-					</div><!-- /.col -->
-					<div class="col-sm-6">
-						<ol class="breadcrumb float-sm-right">
-							<li class="breadcrumb-item"><a href="/sw/index-sw">Home</a></li>
-							<li class="breadcrumb-item active">재무관리</li>
-						</ol>
-					</div><!-- /.col -->
-				</div><!-- /.row -->
-			</div><!-- /.container-fluid -->
-		</div>
-	<!-- /.content-header -->
-	
-	<!-- Main content -->
-		<div class="content">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-lg-12">
-						<div class="card">
-							<div class="card-body">
-								<h5 class="card-title">Card title</h5>
-								<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-								<a href="#" class="card-link">Card link</a>
-								<a href="#" class="card-link">Another link</a>
-							</div>
-						</div>
-					</div>
-					<!-- /.row -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>개발사 통합회계 조회</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/shop/index-sw">Home</a></li>
+              <li class="breadcrumb-item active">매출관리</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">2021년 손익</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body p-0">	 
+                <table class="table table-condensed">
+                  <thead>
+                    <tr>
+                      <th>구분</th>
+                      <th>후</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1111</td>
+                      <td>222</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">차트</h3>	 
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body p-0">
+              	<div class="chart">
+					<canvas id="areaChart" style="height: 250px; min-height: 250px"></canvas>
 				</div>
-				<!-- /.container-fluid -->
-			</div>
-	    	<!-- /.content -->
-		</div>
-	</div>
-<!-- /.content-wrapper -->
-</th:block>
+
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
 </html>

@@ -138,20 +138,20 @@
 					//$('#addMemberForm #memberId').attr("readonly", true);
 				}
 			}else{
-				alert('공백에러!');
+				alert('공백은 사용하실수 없습니다.');
 			}
 		});
 	});
 	
-	//아이디값 변경시 초기세팅
+	//[재천]아이디값 변경시 초기세팅
 	$(function(){
 		$('#memberId').change(function(){
 			$('#memberId').attr('login','nomal');
 		});
 	});
 	
+	//[재천]비밀번호 중복 확인
 	$(function(){
-		//비밀번호 중복 확인
 			$('#pwCheck').blur(function(){
 			   if($('#memberPw').val() != $('#pwCheck').val()){
 			    	if($('#pwCheck').val()!=''){
@@ -163,10 +163,10 @@
 			})  	   
 		});
 	
+	//[재천]이름 정규표현식 유효성검사
 	$(function(){
-		//이름 정규표현식 유효성검사
 		$('#memberName').blur(function(){
-			var regName = /^[가-힣]{2,4}$/;
+			var regName = /^[가-힣]{2,8}$/;
 			var memberName = $('#memberName').val();
 			if(!regName.test(memberName)){
 				alert("이름이 올바르지 않습니다.");
@@ -179,8 +179,7 @@
 	});
 	
 	
-	
-	//도로명주소
+	//[재천]도로명주소
 	//본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
     function sample4_execDaumPostcode() {
         new daum.Postcode({
@@ -237,7 +236,7 @@
         }).open();
     }
 	
-	//주소 입력
+	//[재천]주소 입력
 	function changeAddr(){
 		var memberAddr = $('#memberAddr').val();
 		var postAddr1 = $('#sample4_postcode').val();
@@ -245,6 +244,45 @@
 		var postAddr3 = $('#sample4_detailAddress').val();
 		$('#memberAddr').val(postAddr1 +" "+ postAddr2 +" "+ postAddr3);
 	}
+	
+	$(function(){
+		//[재천]아이디 중복체크
+		$('#addMemberBtn').click(function(){
+			var memberId = $('#memberId').attr('login');
+			if(memberId != "pass"){
+				alert("아이디 중복체크를 해주세요");
+				return false;
+			}
+			
+			//비밀번호 공백 체크
+			var pwCheck = $('#pwCheck').val();
+			if(pwCheck == null || pwCheck == ""){
+				alert("비밀번호를 입력하세요");
+				return false;
+			}
+			
+			//이름 공백 체크
+			var memberName = $('#memberName').val();
+			if(memberName == null || memberName == ""){
+				alert("이름을 입력하세요");
+				return false;
+			}
+			
+			//주소 공백 체크
+			var sample4_detailAddress = $('#sample4_detailAddress').val();
+			var sample4_postcode = $('#sample4_postcode').val();
+			if(sample4_detailAddress == ""){
+				alert("주소를 입력하세요");
+				return false;
+			}
+			if(sample4_postcode == ""){
+				alert("주소를 입력하세요");
+				return false;
+			}
+			//[재천]submit
+			$('#addMemberForm').submit();
+		});
+	});
 
 	
 	</script>

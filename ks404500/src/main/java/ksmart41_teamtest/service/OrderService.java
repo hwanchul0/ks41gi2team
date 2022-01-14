@@ -18,11 +18,12 @@ public class OrderService {
 	public OrderService(OrderMapper orderMapper) {
 		this.orderMapper = orderMapper;
 	}
-	// 쇼핑몰 결제상태 조회 
+	// 유성 쇼핑몰 주문내역 조회 
 	public List<Order> getOrder()	 {
 		List<Order>	order = orderMapper.getOrder();
 		return order;
 	}
+
 	
 
 }

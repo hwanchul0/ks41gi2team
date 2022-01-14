@@ -5,6 +5,35 @@ layout:decorate="@{layout/default-shop}">
 <meta charset="UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript">
+
+//주문삭제
+function deleteBtn(shopConsumerId) {
+      if(shopConsumerId != null && shopConsumerId != ""){
+         
+         var delConfirm = confirm('해당 내역을 삭제합니다.');
+         if (delConfirm) {
+               alert('삭제되었습니다.');
+               var request = $.ajax({
+                 url: "/shop/Order/deleteOrder",
+                 method: "POST",
+                 data: { shopConsumerId : shopConsumerId },
+                 dataType: "text"
+               });
+               location.reload();
+            }
+         location.reload();
+         request.done(function(data) {
+            if(data < 0) {
+               alert("실패했습니다.");
+            }
+            location.reload();
+         });
+      } else {
+         alert("삭제 실패 ");
+      }
+   }
+</script>
 <th:block layout:fragment="customContents">
 <!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper">
@@ -49,11 +78,13 @@ layout:decorate="@{layout/default-shop}">
 												<th>연락처</th>
 												<th>등록일자</th>
 												<th>주문취소일자</th>
+												<th>주문취소</th>
 											
 											</tr>
 										</thead>
 										<tbody>
-										<tr th:if="${not #lists.isEmpty(order)}" th:each="od: ${order}">
+										<tr th:if="${not #lists.isEmpty(order)}" 
+											th:each="od: ${order}">
 											<td th:text="${od.shopConsumerId}"></td>
 											<td th:text="${od.shopOrderCode}"></td>
 											<td th:text="${od.assortCode}"></td>
@@ -63,6 +94,7 @@ layout:decorate="@{layout/default-shop}">
 											<td th:text="${od.shopCustomerPhone}"></td>
 											<td th:text="${od.shopOrderRegDate}"></td>
 											<td th:text="${od.shopOrderCancleDate}"></td>
+											
 										
 										</tr>
 										<tr th:unless="${not #lists.isEmpty(order)}">

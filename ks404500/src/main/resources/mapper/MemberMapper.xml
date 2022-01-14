@@ -87,8 +87,7 @@
 	</delete>
 	
 	<update id="modifyMember" parameterType="Member">
-		UPDATE 
-			k2_sw_member
+		UPDATE k2_sw_member
 		SET
 			memberPw = #{memberPw},
 			memberAddr = #{memberAddr},
