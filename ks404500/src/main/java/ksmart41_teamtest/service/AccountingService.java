@@ -91,4 +91,10 @@ public class AccountingService {
 		
 	}
 	
+	//유경 - 개발사 통합회계 조회
+	public List<SwTotalAccounting> selectTotalAccounting() {
+		List<SwTotalAccounting> swAccounting= accountingMapper.selectTotalAccounting();
+		return swAccounting;
+	}
+	
 }
