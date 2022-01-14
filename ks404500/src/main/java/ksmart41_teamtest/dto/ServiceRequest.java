@@ -3,6 +3,7 @@ package ksmart41_teamtest.dto;
 public class ServiceRequest {
 	private String contractManageCode;
 	private String serviceName;
+	private String serviceCode;
 	private String serviceAmount;
 	private String servicePeriod;
 	private String serviceTotalPrice;
@@ -19,6 +20,12 @@ public class ServiceRequest {
 	private String businessCodeRegistrationDate;
 	private String shopMemberId;
 	
+	public String getServiceCode() {
+		return serviceCode;
+	}
+	public void setServiceCode(String serviceCode) {
+		this.serviceCode = serviceCode;
+	}
 	public String getShopMemberId() {
 		return shopMemberId;
 	}
@@ -128,6 +135,8 @@ public class ServiceRequest {
 		builder.append(contractManageCode);
 		builder.append(", serviceName=");
 		builder.append(serviceName);
+		builder.append(", serviceCode=");
+		builder.append(serviceCode);
 		builder.append(", serviceAmount=");
 		builder.append(serviceAmount);
 		builder.append(", servicePeriod=");
