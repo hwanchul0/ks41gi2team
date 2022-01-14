@@ -122,7 +122,7 @@ $(document).ready(function(){
 												<td><input type="radio"  th:disabled="${i.swTotalCode != null}" name="list" class="radioButton"></td>
 												<td th:if="${i.swTotalCode == null}" th:text="등록대상"></td>
 												<td th:unless="${i.swTotalCode == null}" th:text="등록완료"></td>
-												<td th:text="${i.swExpensePayCode}" style="width:120px; word-break: break-all; height:auto"></td>
+												<td th:text="${i.swExpensePayCode}" style="width:140px; word-break: break-all; height:auto"></td>
 												<td th:text="${i.swGroupSlip}" ></td>
 												<td th:text="${i.swExpensePrice}" ></td>
 												<td th:text="${i.swTotalCode}" ></td>
