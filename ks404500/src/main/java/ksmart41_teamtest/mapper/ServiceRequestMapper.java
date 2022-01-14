@@ -24,7 +24,9 @@ public interface ServiceRequestMapper {
 
 	// 계약요청 등록 - 내 사업장별 대표코드 조회
 	public List<Map<String, Object>> findMyMainBizCode(String shopMemberId);
-
+	
+	// 계약요청 등록 
+	public int addServiceRequest(ServiceRequest serviceRequest);
 	
 
 }
