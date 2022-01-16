@@ -49,7 +49,7 @@ public class SwRequestController {
 	@GetMapping("/selectAllServiceRequest") 
 	public String getAllRequestList(Model model) { 
 	List<ServiceRequest> getAllRequestList = serviceRequestService.getAllRequestList();
-	model.addAttribute("title", "회원전체조회"); 
+	model.addAttribute("title", "계약요청 전체 조회"); 
 	model.addAttribute("getAllRequestList", getAllRequestList);
 
 	return "sw/service/serviceRequest/selectAllServiceRequest"; 

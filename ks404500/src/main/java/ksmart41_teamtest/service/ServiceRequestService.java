@@ -52,6 +52,15 @@ public class ServiceRequestService {
 		int addServiceRequest = serviceRequestMapper.addServiceRequest(serviceRequest);
 		return addServiceRequest;
 	}
+	// 계약요청 수정
+	public int modifyServiceRequest(ServiceRequest serviceRequest) {
+		return serviceRequestMapper.modifyServiceRequest(serviceRequest);
+	}
+	// 계약요청 정보
+	public ServiceRequest getContractInfo(String contractManageCode) {
+		return serviceRequestMapper.getContractInfo(contractManageCode);
+		
+	}
 	
 }
 
