@@ -110,7 +110,7 @@ tbody tr td:first-child:before {
 											<td th:text="${r.serviceRequestStatus}"></td>
 											<td th:text="${r.serviceApprovalDate}"></td>
 											<td>
-												<a th:href="@{/shop/service/serviceRequest/modifyServiceRequest}">수정</a>
+												<a th:href="@{/shop/service/serviceRequest/modifyServiceRequest(contractManageCode=${r.contractManageCode})}">수정</a>
 											</td>
 											<td>
 												<a th:href="@{/shop/service/serviceRequest/deleteServiceRequest}">삭제</a>
