@@ -28,7 +28,9 @@
 				$('#serviceEndDate').val(moment(serviceRegistrationDate).add(totalServiceDate,'d').format("YYYY-MM-DD"));
 				// 총 결제 금액
 				var servicePrice = $("#serviceName option:selected").attr('value2') * serviceAmount
-				$('#serviceTotalPrice').val(servicePrice.toLocaleString());
+				$('#serviceTotalPrice').val(servicePrice);
+				// 숫자 콤마(,)
+				//$('#serviceTotalPrice').val(servicePrice.toLocaleString());
 			});
 		
 			// 내 사업장 대표코드 모달
@@ -207,8 +209,10 @@
 													<input type="text" class="form-control" id="serviceTotalPrice" name="serviceTotalPrice" readonly="readonly" required>
 												</div>
 											</div>
-											<button type="button" class="btn btn-success" id="addServiceBtn">등록</button>
-											<button type="button" class="btn btn-default float-right" th:href="@{/shop/service/selectServiceRequest}">취소</button>
+											<div class="card-footer">
+												<button type="button" class="btn btn-success" id="addServiceBtn">등록</button>
+												<button type="button" class="btn btn-default float-right" th:href="@{/shop/service/selectServiceRequest}">취소</button>
+											</div>
 										</form>
 									</div>
 								</div>
