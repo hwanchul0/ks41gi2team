@@ -96,9 +96,35 @@
 			}
 	        
 			request.done(function(data) {
-				
+				alert('마감되었습니다.');
 			});
 		}
+		
+		function deleteBtn(swExpensePayCode){
+			var deleteConfirm = confirm('삭제하시겠습니까?');
+			if(deleteConfirm) {
+				if(swExpensePayCode != null && swExpensePayCode != ""){
+					var request = $.ajax({
+						  url: "/sw/accounting/deleteExpense",
+						  method: "POST",
+						  data: { swExpensePayCode : swExpensePayCode },
+						  dataType: "text"
+						});
+					
+					request.done(function(data) {
+						if(data > 0) {
+							alert("삭제 되었습니다.");
+						}else {
+							alert("실패했습니다.");
+						}
+						location.reload();
+					});
+				}else{
+					alert("삭제 실패");
+				}
+			}
+		}
+	
 	</script>
 </th:block>
 </html>

@@ -6,7 +6,6 @@
 	<resultMap type="ServiceRequest" id="requestResultMap">
 		<result column="contractManageCode" 							property="contractManageCode"/>
 		<result column="serviceName" 									property="serviceName"/>
-		<result column="serviceCode" 									property="serviceCode"/>
 		<result column="serviceAmount" 									property="serviceAmount"/>
 		<result column="servicePeriod" 									property="servicePeriod"/>
 		<result column="serviceTotalPrice" 								property="serviceTotalPrice"/>
@@ -21,14 +20,12 @@
 		<result column="businessLevelCode" 								property="businessLevelCode"/>
 		<result column="businessRegistrationCode" 						property="businessRegistrationCode"/>
 		<result column="businessCodeRegistrationDate" 					property="businessCodeRegistrationDate"/>
-		<result column="shopMemberId" 									property="shopMemberId"/>
 	</resultMap>		
 	<!-- 계약요청 전체 조회 ( sw) -->
 		<select id="getAllRequestList" parameterType="String" resultMap="requestResultMap">
 			SELECT
-				r.contractManageCode
-				,bR.shopMemberId
-				,bR.clientId
+				bR.clientId
+				,r.contractManageCode
 				,m.serviceName
 				,r.serviceAmount
 				,r.servicePeriod
@@ -52,12 +49,13 @@
 				k0_sw_businessRegistration AS bR
 			ON 
 				mB.businessRegistrationCode = bR.businessRegistrationCode
+			GROUP BY bR.clientId
 			ORDER BY serviceRequestDate ASC;
 	</select>
 	<!-- 계약요청 조회 (shop-client) -->
 		<select id="getRequestList" parameterType="String" resultMap="requestResultMap">
 			SELECT
-				 r.contractManageCode
+				r.contractManageCode
 				,m.serviceName
 				,r.serviceAmount
 				,r.servicePeriod
@@ -82,8 +80,8 @@
 			ON 
 				bR.businessRegistrationCode = mB.businessRegistrationCode
 			WHERE 
-				bR.clientId = 'shopid001'
-			ORDER BY r.serviceRequestDate ASC;
+			shopMemberId = #{shopMemberId}
+			ORDER BY serviceRequestDate ASC;
 	</select>
 	<!-- 계약요청 상세정보 (sw) -->
 	<select id="getDetailRequestList" resultType="ServiceRequest" resultMap="requestResultMap">
@@ -132,92 +130,11 @@
 		k0_sw_businessRegistration AS bR
 	ON 
 		main.businessRegistrationCode = bR.businessRegistrationCode
+	INNER JOIN 
+		k2_shop_member AS m
+	ON 
+		bR.shopMemberId = m.shopMemberId
 	WHERE 
-		bR.clientId = 'shopid001';
+		m.shopMemberId = #{shopMemberId};
 	</select>
-	<!-- 계약요청 등록 -->
-	<insert id="addServiceRequest" parameterType="ServiceRequest">
-	INSERT INTO k2_sw_contractRequest
-		(contractManageCode
-		,mainBusinessCode
-		,memberId
-		,serviceCode
-		,serviceAmount
-		,servicePeriod
-		,serviceTotalPrice
-		,slipNumber
-		,serviceRegistrationDate
-		,serviceEndDate
-		,serviceRequestDate
-		,serviceRequestStatus
-		,serviceApprovalDate)
-	VALUES 
-		((SELECT CONCAT('estimate',LPAD(max(SUBSTRING((contractManageCode),9,2))+1,2,'0'))
-	FROM
-  	 k2_sw_contractRequest ALIAS_FOR_SUBQUERY) 
-			 ,#{mainBusinessCode}
-			 ,''
-			 ,#{serviceCode}
-			 ,#{serviceAmount}
-			 ,#{servicePeriod}
-			 ,#{serviceTotalPrice}
-			 ,''
-			 ,#{serviceRegistrationDate}
-			 ,#{serviceEndDate}
-			 ,NOW()
-			 ,'신청'
-			 ,0
-			 );
-	</insert>
-	<!-- 계약요청 수정 -->
-	<update id="modifyServiceRequest" parameterType="ServiceRequest">
-		UPDATE k2_sw_contractRequest
-			<trim prefix="SET" prefixOverrides=",">
-				<if test="serviceCode != null and serviceCode != ''.toString()">			
-					 serviceCode		=#{serviceCode}
-				</if>
-				<if test="serviceAmount != null and serviceAmount != ''.toString()">
-					,serviceAmount	=#{serviceAmount}
-				</if>
-				<if test="serviceRegistrationDate != null and serviceRegistrationDate != ''.toString()">		
-					,serviceRegistrationDate		=#{serviceRegistrationDate}
-				</if>
-				<if test="serviceEndDate != null and serviceEndDate != ''.toString()">		
-					,serviceEndDate		=#{serviceEndDate}
-				</if>
-				<if test="serviceTotalPrice != null and serviceTotalPrice != ''.toString()">		
-					,serviceTotalPrice		=#{serviceTotalPrice}
-				</if>
-			</trim>
-			WHERE
-				contractManageCode=#{contractManageCode};
-	</update>
-	
-	<!--  계약요청 정보 -->
-	<select id="getContractInfo" parameterType="String" resultMap="requestResultMap">
-	SELECT 
-		 c.contractManageCode
-		,c.mainBusinessCode
-		,s.serviceName
-		,c.memberId
-		,c.serviceCode
-		,c.serviceAmount
-		,c.servicePeriod
-		,c.serviceTotalPrice
-		,c.slipNumber
-		,c.serviceRegistrationDate
-		,c.serviceEndDate
-		,c.serviceRequestDate
-		,c.serviceRequestStatus
-		,c.serviceApprovalDate
-	FROM
-		k2_sw_contractRequest AS c
-		INNER JOIN
-		k2_sw_serviceManagement AS s
-		ON 
-		c.serviceCode = s.serviceCode
-	WHERE 
-		contractManageCode = #{contractManageCode};
-	</select>
-	
 </mapper>
