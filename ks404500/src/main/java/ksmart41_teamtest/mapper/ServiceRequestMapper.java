@@ -31,8 +31,11 @@ public interface ServiceRequestMapper {
 	// 계약요청 수정
 	public int modifyServiceRequest(ServiceRequest serviceRequest);
 
-
+	// 계약요청 정보
 	public ServiceRequest getContractInfo(String contractManageCode);
+
+	// 계약요청 삭제
+	public int deleteServiceRequest(ServiceRequest serviceRequest);
 	
 
 }
