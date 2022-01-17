@@ -14,134 +14,47 @@ $(function() {
 				//--------------
 				// Get context with jQuery - using jQuery's .get() method.
 				var areaChartCanvas = $('#areaChart').get(0).getContext('2d')
-				//data 값 가져오기
-				var sales = $('#sales2021').text();
-				var expense = $('#expense2021').text();
-				var accounting = sales - expense ;
-				$('#accounting2021').text(accounting);
-				//console.log(sales, expense, accounting);
+				
 
 				var areaChartData = {
-					labels : ['매출','비용'],
+					labels : ['안녕','1'],
 					datasets : [ {
-						label : '손익',
-						backgroundColor : ['#e15759', '#4e79a7'],
+						label : '매출액',
+						backgroundColor : ['#3c8dbc', '#d2d6de'],
 						borderColor : '#698c68',
 						pointRadius : false,
 						pointColor : '#698c68',
 						pointStrokeColor : '#698c68',
 						pointHighlightFill : '#fff',
 						pointHighlightStroke : '#698c68',
-						data : [sales, expense]
+						
+						data : [100,200]
 					} ]
 				}
 
 				var areaChartOptions = {
-					
 					maintainAspectRatio : false,
 					responsive : true,
 					legend : {
-						display : true
+						display : false
 					},
-					
 					scales : {
 						xAxes : [ {
 							gridLines : {
 								display : true,
 							}
 						} ],
-						yAxes: [{
-					        stacked: false, //쌓임
-					        display: true, //y 축 show
-					        ticks: {
-					            stepSize: 0, //증가 범위
-					            max: 99999999, //최대 범위
-					            min: 0, //최소 범위
-					            beginAtZero: true, //0부터 시작
-					            fontFamily: "noto-fonts", //폰트 family
-					            fontColor: '#a5a5a5', //폰트 컬러
-					            padding: 10, //오른쪽 간격
-					            callback: function(label, index, labels) {
-					                return label.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','); //천단위 콤마
-					            },
-					        },
-					        gridLines: {
-					            display: false, //show
-					            drawBorder: false, //세로선 유무
-					        },
-					    }]
+						yAxes : [ {
+							gridLines : {
+								display : false,
+							}
+						} ]
 					}
 				}
 
 				// This will get the first returned node in the jQuery collection.
 				var areaChart = new Chart(areaChartCanvas, {
 					type : 'doughnut',
-					data : areaChartData,
-					options : areaChartOptions
-				})
-				
-				
-				
-			})
-//바 그래프			
-$(function() {
-				//--------------
-				//- AREA CHART -
-				//--------------
-				// Get context with jQuery - using jQuery's .get() method.
-				var areaChartCanvas = $('#areaChart2').get(0).getContext('2d')
-				//data 값 가져오기
-				var sales = $('#sales2021').text();
-				var expense = $('#expense2021').text();
-				var accounting = sales - expense ;
-				$('#accounting2021').text(accounting);
-				//console.log(sales, expense, accounting);
-
-				var areaChartData = {
-					labels : ['2021 1Q','2021 2Q','2021 3Q','2021 4Q',],
-					datasets : [ {
-						label : '매출',
-						backgroundColor : ['#CFE2CE'],
-						borderColor : '#698c68',
-						pointRadius : false,
-						pointColor : '#e15759',
-						fill: false,
-						pointStrokeColor : '#CFE2CE',
-						pointHighlightFill : '#CFE2CE',
-						pointHighlightStroke : '#e15759',
-						data : [-100,-100000,30,40000]
-					} ]
-				}
-
-				var areaChartOptions = {
-					
-					maintainAspectRatio : false,
-					responsive : true,
-					legend : {
-						display : true
-					},
-					
-					scales : {
-						xAxes : [ {
-							gridLines : {
-								display : true,
-							}
-						} ],
-						yAxes: [{
-					        stacked: false, //쌓임
-					        display: true, //y 축 show
-					       
-					        gridLines: {
-					            display: false, //show
-					            drawBorder: true, //세로선 유무
-					        },
-					    }]
-					}
-				}
-
-				// This will get the first returned node in the jQuery collection.
-				var areaChart = new Chart(areaChartCanvas, {
-					type : 'line',
 					data : areaChartData,
 					options : areaChartOptions
 				})
@@ -160,12 +73,12 @@ $(function() {
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>쇼핑몰 통합회계 조회</h1>
+            <h1>"쇼핑몰 통합회계 조회"</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="/shop/index-sw">Home</a></li>
-              <li class="breadcrumb-item active">재무관리</li>
+              <li class="breadcrumb-item"><a href="/shop/index-shop">Home</a></li>
+              <li class="breadcrumb-item active">매출관리</li>
             </ol>
           </div>
         </div>
@@ -182,25 +95,20 @@ $(function() {
                 <h3 class="card-title">2021년 손익</h3>
               </div>
               <!-- /.card-header -->
-              <div class="card-body p-0" style="height: 250px;">	 
-                <table class="table table-condensed" id="table2021">
+              <div class="card-body p-0">	 
+                <table class="table table-condensed">
                   <thead>
                     <tr>
-                  		<th>매출</th>
-						<th>비용</th>
-                		<th>손익</th>                      
+                      <th>구분</th>
+                      <th>비용</th>
                     </tr>
                   </thead>
-					<tbody id="myTable">
-						 <tr th:if="${not #lists.isEmpty(shopAccounting)}" th:each="s: ${shopAccounting}">
-							<td th:text="${s.sales2021}" id="sales2021" th:value="${s.sales2021}"></td>
-							<td th:text="${s.expense2021}" id="expense2021" th:value="${s.expense2021}"></td>
-							<td id="accounting2021"></td>
-							</tr>
-						<tr th:unless="${not #lists.isEmpty(shopAccounting)}">
-							<td>내역이 없습니다.</td>
-						</tr>
-					</tbody>
+                  <tbody>
+                    <tr>
+                      <td>1111</td>
+                      <td>222</td>
+                    </tr>
+                  </tbody>
                 </table>
               </div>
               <!-- /.card-body -->
@@ -208,44 +116,22 @@ $(function() {
             <!-- /.card -->
           </div>
           <!-- /.col -->
-          <!-- 손익 차트 -->
           <div class="col-md-6">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">2021년 손익</h3>	 
+                <h3 class="card-title">차트</h3>	 
               </div>
               <!-- /.card-header -->
               <div class="card-body p-0">
               	<div class="chart">
 					<canvas id="areaChart" style="height: 250px; min-height: 250px"></canvas>
 				</div>
+
               </div>
               <!-- /.card-body -->
             </div>
             <!-- /.card -->
           </div>
-          <!-- 손익 차트 -->
-          <!-- 손익 차트 2-->
-          <div class="col-md-12">
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">2021년 분기별 매출, 비용</h3>	 
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body p-0">
-              	<div class="chart">
-					<canvas id="areaChart2" style="height: 250px; min-height: 250px"></canvas>
-				</div>
-              </div>
-              <div style="display: none">
-              	<!-- 매출 -->
-              	<input type="text">
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-          </div>
-          <!-- 손익 차트 -->
           <!-- /.col -->
         </div>
 

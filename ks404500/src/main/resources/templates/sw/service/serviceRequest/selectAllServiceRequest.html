@@ -6,6 +6,8 @@ layout:decorate="@{layout/default-sw}">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link th:href="@{/customcss/css/serviceRequest.css}" rel="stylesheet"/>
 <th:block layout:fragment="customJs">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" rel="stylesheet">
 	<script type="text/javascript">
 	$(document).ready(function(){
 	     $("#myInput").on("keyup", function() {
@@ -16,11 +18,11 @@ layout:decorate="@{layout/default-sw}">
 	     });
 	});
 	   //테이블 페이징
-/*	     $(function(){
+	     $(function(){
 	        $('.table').footable({
 	           "paging": {
 	              "enabled": true,
-	              "size":7
+	              "size":5
 	           },
 	           "filtering": {
 	              "enabled": false
@@ -31,7 +33,7 @@ layout:decorate="@{layout/default-sw}">
 
 	        });
 
-	   });	*/
+	   });
 	</script>
 </th:block>
 <th:block layout:fragment="customContents">
@@ -92,12 +94,11 @@ layout:decorate="@{layout/default-sw}">
                                     <tbody id="myTable">
                                        <tr th:if="${not #lists.isEmpty(getAllRequestList)}" th:each="r : ${getAllRequestList}">
                                           <td th:text="${r.contractManageCode}"></td>
-                                          <td th:if="${r.shopMemberId != null and r.shopMemberId !=''}" th:text="${r.shopMemberId}"></td>
-										  <td th:unless="${r.shopMemberId != null and r.shopMemberId !=''}" th:text="${r.clientId}"></td>
+                                          <td th:text="${r.clientId}"></td>
                                           <td th:text="${r.serviceName}"></td>
                                           <td th:text="${r.serviceAmount}"></td>
                                           <td th:text="${r.servicePeriod}"></td>
-                                          <td th:text="${r.serviceTotalPrice}"></td>
+                                          <td th:text="${#numbers.formatInteger(r.serviceTotalPrice, 0, 'COMMA')}"></td>
                                           <td th:text="${r.serviceRequestDate}"></td>
                                           <td th:text="${r.serviceEndDate}"></td>
                                           <td th:text="${r.serviceRegistrationDate}"></td>
