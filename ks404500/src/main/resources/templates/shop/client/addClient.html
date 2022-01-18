@@ -101,7 +101,7 @@
 								
 								<div class="card-footer">
 									<button type="button" class="btn btn-success" id ="addClientBtn"> 등록 </button>
-									<button type="button" class="btn btn-default float-right" id="cancleCLientBtn"> 취소 </button>
+									<button type="button" class="btn btn-default float-right" id="cancleCLientBtn" onclick="cancle()"> 취소 </button>
 								</div>
 							</form>
 							<!-- 회원가입 폼 끝 -->
@@ -282,7 +282,12 @@
 		});
 	});
 	
-	
+	function cancle(){
+		var cancleBtn = confirm('거래처 구분 코드 등록을 취소하시겠습니까?');
+		if(cancleBtn){
+			location.href = "/shop/index-shop";
+		}
+	}
 	
 	</script>
 </th:block>

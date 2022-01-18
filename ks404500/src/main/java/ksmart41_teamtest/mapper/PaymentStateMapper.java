@@ -20,4 +20,10 @@ public interface PaymentStateMapper {
 	
 	//[재천]결제상태 코드 1개 조회
 	public PaymentState selectPaymentStateCode(String paymentStateCode);
+	
+	//[재천]결제상태코드 중복체크
+	public int codeCheck (String paymentStateCode);
+	
+	//[재천]결제상태코드 삭제
+	public int deletePaymentCode(PaymentState paymentStateCode);
 }
