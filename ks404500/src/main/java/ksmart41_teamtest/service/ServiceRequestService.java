@@ -61,6 +61,10 @@ public class ServiceRequestService {
 		return serviceRequestMapper.getContractInfo(contractManageCode);
 		
 	}
+	// 계약요청 삭제
+	public int deleteServiceRequest(ServiceRequest serviceRequest) {
+		return serviceRequestMapper.deleteServiceRequest(serviceRequest);
+	}
 	
 }
 

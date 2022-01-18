@@ -94,7 +94,12 @@ public class ShopServiceRequestController {
 		}
 		return "shop/service/serviceRequest/modifyServiceRequest";
 	}
-	
+	// Client 계약요청 삭제 ( 관리자 승인 전 가능 )
+	@RequestMapping("/deleteServiceRequest")
+	public @ResponseBody int deleteServiceRequest(ServiceRequest ServiceRequest) {
+		log.info("계약요청 삭제 페이지 입력 받은 값 ======== {}:");
+		return serviceRequestService.deleteServiceRequest(ServiceRequest);
+	}
 	
 	
 }
