@@ -132,5 +132,12 @@
 				swExpensePayCode = #{swExpensePayCode}
 	</update>
 	
+	<delete id="deleteExpense" parameterType="SwExpense">
+		DELETE FROM
+			k2_sw_expense_pay
+		WHERE
+			swExpensePayCode = #{swExpensePayCode}
+	</delete>
+	
 	
 </mapper>

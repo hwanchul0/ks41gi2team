@@ -14,62 +14,40 @@ $(function() {
 				//--------------
 				// Get context with jQuery - using jQuery's .get() method.
 				var areaChartCanvas = $('#areaChart').get(0).getContext('2d')
-				//data 값 가져오기
-				var sales = $('#sales2021').text();
-				var expense = $('#expense2021').text();
-				var accounting = sales - expense ;
-				$('#accounting2021').text(accounting);
-				//console.log(sales, expense, accounting);
+				
 
 				var areaChartData = {
 					labels : ['매출','비용'],
 					datasets : [ {
-						label : '손익',
-						backgroundColor : ['#e15759', '#4e79a7'],
+						label : '매출액',
+						backgroundColor : ['#3c8dbc', '#d2d6de'],
 						borderColor : '#698c68',
 						pointRadius : false,
 						pointColor : '#698c68',
 						pointStrokeColor : '#698c68',
 						pointHighlightFill : '#fff',
 						pointHighlightStroke : '#698c68',
-						data : [sales, expense]
+						data : [100,200]
 					} ]
 				}
 
 				var areaChartOptions = {
-					
 					maintainAspectRatio : false,
 					responsive : true,
 					legend : {
-						display : true
+						display : false
 					},
-					
 					scales : {
 						xAxes : [ {
 							gridLines : {
 								display : true,
 							}
 						} ],
-						yAxes: [{
-					        stacked: false, //쌓임
-					        display: true, //y 축 show
-					        ticks: {
-					            stepSize: 0, //증가 범위
-					            max: 99999999, //최대 범위
-					            min: 0, //최소 범위
-					            beginAtZero: true, //0부터 시작
-					            fontFamily: "noto-fonts", //폰트 family
-					            fontColor: '#a5a5a5', //폰트 컬러
-					            padding: 10, //오른쪽 간격
-					            callback: function(label, index, labels) {
-					                return label.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','); //천단위 콤마
-					            },
-					        },
-					        gridLines: {
-					            display: false, //show
-					            drawBorder: false, //세로선 유무
-					        },
-					    }]
+						yAxes : [ {
+							gridLines : {
+								display : false,
+							}
+						} ]
 					}
 				}
 
@@ -99,7 +77,7 @@ $(function() {
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="/shop/index-sw">Home</a></li>
-              <li class="breadcrumb-item active">재무관리</li>
+              <li class="breadcrumb-item active">매출관리</li>
             </ol>
           </div>
         </div>
@@ -116,25 +94,20 @@ $(function() {
                 <h3 class="card-title">2021년 손익</h3>
               </div>
               <!-- /.card-header -->
-              <div class="card-body p-0" style="height: 250px;">	 
-                <table class="table table-condensed" id="table2021">
+              <div class="card-body p-0">	 
+                <table class="table table-condensed">
                   <thead>
                     <tr>
-                  		<th>매출</th>
-						<th>비용</th>
-                		<th>손익</th>                      
+                      <th>구분</th>
+                      <th>후</th>
                     </tr>
                   </thead>
-					<tbody id="myTable">
-						 <tr th:if="${not #lists.isEmpty(swAccounting)}" th:each="s: ${swAccounting}">
-							<td th:text="${s.sales2021}" id="sales2021" th:value="${s.sales2021}"></td>
-							<td th:text="${s.expense2021}" id="expense2021" th:value="${s.expense2021}"></td>
-							<td id="accounting2021"></td>
-							</tr>
-						<tr th:unless="${not #lists.isEmpty(swAccounting)}">
-							<td>내역이 없습니다.</td>
-						</tr>
-					</tbody>
+                  <tbody>
+                    <tr>
+                      <td>1111</td>
+                      <td>222</td>
+                    </tr>
+                  </tbody>
                 </table>
               </div>
               <!-- /.card-body -->
@@ -145,7 +118,7 @@ $(function() {
           <div class="col-md-6">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">2021년 손익</h3>	 
+                <h3 class="card-title">차트</h3>	 
               </div>
               <!-- /.card-header -->
               <div class="card-body p-0">

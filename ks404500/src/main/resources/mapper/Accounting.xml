@@ -274,28 +274,5 @@
 			#{swTotalTable},
 			#{swTotalPrice})
 	</insert>
-	
-	<!-- 유경- 개발사 통합회계 조회 2021년 매출, 비용 -->
-	<select id="selectTotalAccounting" resultType="SwTotalAccounting">
-		SELECT
-			DISTINCT((SELECT
-			SUM(t.swTotalPrice)
-			from
-			k2_sw_totalAccounting AS t
-			WHERE
-			substring(swGroupSlip,12,2) = 21
-			AND
-			t.swSalesSection = '매출')) AS sales2021,
-			(SELECT
-			SUM(t.swTotalPrice)
-			from
-			k2_sw_totalAccounting AS t
-		WHERE
-			substring(swGroupSlip,12,2) = 21
-		AND
-			t.swSalesSection = '비용') AS expense2021
-		FROM
-			k2_sw_totalAccounting
-	</select>
 
 </mapper>

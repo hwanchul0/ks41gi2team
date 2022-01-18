@@ -18,11 +18,10 @@
 			$('#totalBtn').click(function(){
 				var serviceRegistrationDate = $('#serviceRegistrationDate').val();
 				var serviceName = $('#serviceName').val();
-				var servicePeriod = $("#serviceName option:selected").attr('value3')
 				var serviceAmount = $('#serviceAmount').val();
 				var serviceTotalPeriod = $('#serviceTotalPeriod');
 				// 총 서비스 기간(일) 계산
-				var totalServiceDate = Number(servicePeriod * serviceAmount); 
+				var totalServiceDate = Number(serviceName * serviceAmount); 
 				serviceTotalPeriod.val(totalServiceDate);
 				// 서비스 만료 날짜 
 				$('#serviceEndDate').val(moment(serviceRegistrationDate).add(totalServiceDate,'d').format("YYYY-MM-DD"));
@@ -84,28 +83,7 @@
  				mainBusinessCodeId.attr('value',checkedTrName);
 				modal.addClass('hidden');
 			});
-			
-				$(document).on('click','#addServiceBtn', function(){
- 	            var submitCheck = true;
-	            var mainBizCode = $('#mainBusinessCodeNameInput').val()
-	            var serviceName = $("#serviceName option:selected").attr('value3')
-	            var serviceAmount = $('#serviceAmount').val()
-	            var serviceTotalPeriod = $('#serviceTotalPeriod').val()
-	            var serviceTotalPrice = $('#serviceTotalPrice').val()
- 	            
-	         
-	            if(mainBizCode == null || mainBizCode == '' || mainBizCode == undefined){
-	            	alert("사업장 대표코드를 선택해주세요");
-	            }else if(serviceAmount == null || serviceAmount == '' || serviceAmount == undefined){
-	            	alert("서비스 수량을 입력해주세요")
-	            }else if(serviceTotalPeriod == null || serviceTotalPeriod == '' || serviceTotalPeriod == undefined){
-	            	alert("희망하시는 서비스 예약 날짜를 선택 후 기간 조회 버튼을 클릭해주세요")
-	            	
-	            }
-				if(submitCheck) $('#addServiceRequestForm').submit();
-	
-	           }); 
-	});
+});
 	</script>
 <!-- /script -->
 </th:block>
@@ -146,14 +124,14 @@
 							<div class="container">
 								<div class="input-form-backgroud row">
 									<div class="input-form col-md-12 mx-auto">
-										<form class="validation-form" id="addServiceRequestForm" th:action="@{/shop/service/serviceRequest/addServiceRequest}" method="post">
+										<form class="validation-form" novalidate>
 											<div class="row">
 												<div class="col-md-6">	
-													<label for="mainBusinessCodeNameInput">사업장 대표코드</label>
+													<label for="mainBusinessCode">사업장 대표코드</label>
 													<input type="hidden" id="mainBusinessCodeIdInput" name="mainBusinessCodeId">
 													<button type="button" class="btn btn-success btn-lg" id="myMainBizCode" style="height: 27px;padding: 0;margin: 5px;font-size: 14px;" data-toggle="modal" data-target="#myModal">
 													내 사업자 대표코드 </button>
-													<input type="text" class="inputBox form-control" id="mainBusinessCodeNameInput" name="mainBusinessCode" readonly="readonly" required>
+													<input type="text" class="inputBox form-control" id="mainBusinessCodeNameInput" name="mainBusinessCodeName" readonly>
 													<!-- 로그인한 아이디 select -> 사업장 대표코드 조회 -->
 													<!-- ID별 사업장 대표코드 모달 -->
 												</div>
@@ -161,9 +139,9 @@
 											<div class="row">
 												<div class="col-md-4">
 													<label for="serviceName">서비스명</label>
-													<select name="serviceCode" id="serviceName" style="height: 38px; text-align:center; display: flex; width: 100%;" required>
+													<select name="serviceNameCheck" id="serviceName" style="height: 38px; text-align:center; display: flex; width: 100%;">
 															<th:block th:if="${not #lists.isEmpty(serviceManagement)}" th:each="m : ${serviceManagement}">
-																<option th:value="${m.serviceCode}" th:value2="${m.servicePrice}" th:value3="${m.servicePeriod}" th:text="${m.serviceName}">
+																<option th:value="${m.servicePeriod}" th:value2="${m.servicePrice}" th:text="${m.serviceName}">
 																	[[${m.serviceName}]]
 																</option>
 															</th:block>
@@ -171,10 +149,13 @@
 																<option>서비스를 먼저 등록해주세요.</option>
 															</th:block>
 														</select>
+													<div class="invalid-feedback">
+														서비스를 선택해주세요.
+													</div>
 												</div>
 												<div class="col-md-4">
 													<label for="serviceAmount">서비스 계약수량</label>
-													<input type="number" class="myInput form-control" id="serviceAmount" name="serviceAmount" required >
+													<input type="number" class="myInput form-control" id="serviceAmount" required>
 													<div class="invalid-feedback">
 														서비스 계약수량을 입력해주세요.
 													</div>
@@ -186,14 +167,14 @@
 											<div class="row">
 												<div class="col-md-6 mb-3">
 													<label for="serviceRegistrationDate">서비스 시작 예약날짜</label>
-													<input type="date" class="form-control" id="serviceRegistrationDate" name="serviceRegistrationDate" required>
+													<input type="date" class="form-control" id="serviceRegistrationDate" required>
 													<div class="invalid-feedback">
 														서비스 시작 예약날짜를 입력해주세요.
 													</div>
 												</div>
 												<div class="col-md-6 mb-3">
 													<label for="serviceEndDate">서비스 만료날짜</label>
-													<input type="text" class="form-control" id="serviceEndDate" name="serviceEndDate" placeholder="2021-01-15" readonly="readonly">
+													<input type="text" class="form-control" id="serviceEndDate" placeholder="2021-01-15" readonly required>
 													<div class="invalid-feedback">
 														서비스 만료날짜를 입력해주세요.
 													</div>
@@ -202,13 +183,14 @@
 											<div class="row">
 												<div class="col-md-6">
 													<label for="serviceTotalPeriod">총 서비스 기간(일)</label>
-													<input type="text" class="form-control" id="serviceTotalPeriod" name="servicePeriod" readonly="readonly" required>
+													<input type="text" class="form-control" id="serviceTotalPeriod" readonly>
 												</div>
 												<div class="col-md-6">
 													<label for="serviceTotalPrice">총 결제 금액</label>
-													<input type="text" class="form-control" id="serviceTotalPrice" name="serviceTotalPrice" readonly="readonly" required>
+													<input type="text" class="form-control" id="serviceTotalPrice" readonly required>
 												</div>
 											</div>
+
 											<div class="card-footer">
 												<button type="button" class="btn btn-success" id="addServiceBtn">등록</button>
 												<button type="button" class="btn btn-default float-right" th:href="@{/shop/service/selectServiceRequest}">취소</button>
@@ -216,9 +198,18 @@
 										</form>
 									</div>
 								</div>
+								<footer class="my-3 text-small">
+								<div class="custom-control custom-checkbox">
+									<input type="checkbox" class="custom-control-input" id="aggrement"><label class="custom-control-label" for="aggrement">개인정보 수집 및 이용에 동의합니다.</label>
+								</div>
+								</footer>
 							</div>
 						</div>
 						<!-- /card-body -->
+					<div class="card-footer">
+						<button type="button" class="btn btn-success" id="addServiceBtn">등록</button>
+						<button type="button" class="btn btn-default float-right" th:href="@{/shop/service/selectServiceRequest}">취소</button>
+					</div>
 					</div>
 				</div>
 				<!-- /.row -->
