@@ -60,7 +60,7 @@ layout:decorate="@{layout/default-sw}">
 								</div>
 								<div class="card-footer">
 									<button type="button" name="addLocalCodeBtn" class="btn btn-primary" id="addLocalCodeBtn">등록</button>
-									<button type="button" name="cancleBtn" class="btn btn-default float-right" id="cancleBtn">취소</button>
+									<button type="button" name="cancleBtn" class="btn btn-default float-right" id="cancleBtn" onclick="cancle()">취소</button>
 								</div>
 							</form>
 						</div>
@@ -160,6 +160,12 @@ layout:decorate="@{layout/default-sw}">
 		});
 	});
 
+	function cancle(){
+		var cancleBtn = confirm('거래처 구분 코드 등록을 취소하시겠습니까?');
+		if(cancleBtn){
+			location.href = "/sw/index-sw";
+		}
+	}
 
 </script>
 </th:block>

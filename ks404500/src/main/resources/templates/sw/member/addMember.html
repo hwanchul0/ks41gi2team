@@ -101,7 +101,7 @@
 								
 								<div class="card-footer">
 									<button type="button" class="btn btn-primary" id ="addMemberBtn"> 등록 </button>
-									<button type="button" class="btn btn-default float-right" id="cancleMemberBtn"> 취소 </button>
+									<button type="button" class="btn btn-default float-right" id="cancleMemberBtn" onclick="cancel();"> 취소 </button>
 								</div>
 							</form>
 							<!-- 회원가입 폼 끝 -->
@@ -283,6 +283,13 @@
 		});
 	});
 	
+	
+	function cancel(){
+		var cancelConfirm = confirm('등록을 취소하시겠습니까?');
+		if (cancelConfirm){
+			location.href = "/sw/index-sw";
+		}		
+	}
 	</script>
 </th:block>
 </html>
