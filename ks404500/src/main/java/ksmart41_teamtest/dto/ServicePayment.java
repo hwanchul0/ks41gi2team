@@ -25,7 +25,22 @@ public class ServicePayment {
 	private String serviceRegistrationDate;
 	private String serviceDeleteDate;
 	private String contractRegDate;
+	private String serviceTotalPrice;
+	private String serviceRequestStatus;
 	
+	
+	public String getServiceRequestStatus() {
+		return serviceRequestStatus;
+	}
+	public void setServiceRequestStatus(String serviceRequestStatus) {
+		this.serviceRequestStatus = serviceRequestStatus;
+	}
+	public String getServiceTotalPrice() {
+		return serviceTotalPrice;
+	}
+	public void setServiceTotalPrice(String serviceTotalPrice) {
+		this.serviceTotalPrice = serviceTotalPrice;
+	}
 	public String getContractState() {
 		return contractState;
 	}
@@ -221,9 +236,12 @@ public class ServicePayment {
 		builder.append(serviceDeleteDate);
 		builder.append(", contractRegDate=");
 		builder.append(contractRegDate);
+		builder.append(", serviceTotalPrice=");
+		builder.append(serviceTotalPrice);
+		builder.append(", serviceRequestStatus=");
+		builder.append(serviceRequestStatus);
 		builder.append("]");
 		return builder.toString();
 	}
-	
 	
 }

@@ -66,6 +66,7 @@ public class SwPaymentController {
 		servicePaymentService.modifyPaymentStateCode(paymentCode,paymentStateCode);
 		return "redirect:/sw/service/servicePaymentSum";
 	}
+	
 	//서비스 결제후 계약현황 관리
 	@GetMapping("/selectContractState")
 	public String selectContractState(Model model) {
