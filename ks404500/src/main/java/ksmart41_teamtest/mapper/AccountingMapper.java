@@ -51,5 +51,11 @@ public interface AccountingMapper {
 	
 	//유경 - 개발사 통합회계 조회
 	public List<SwTotalAccounting> selectTotalAccounting();
+	
+	//유경 - 개발사 2021년 분기별 매출 조회
+	public List<SwTotalAccounting> selectSwIncome();
+
+	//유경 - 개발사 2021년 분기별 비용 조회
+	public List<SwTotalAccounting> selectSwExpense();
 
 }

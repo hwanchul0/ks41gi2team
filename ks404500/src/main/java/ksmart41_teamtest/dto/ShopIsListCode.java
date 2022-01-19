@@ -1,6 +1,6 @@
 package ksmart41_teamtest.dto;
 
-import java.util.Date;
+
 
 public class ShopIsListCode {
 	//유경 - 쇼핑몰 계정과목목록
