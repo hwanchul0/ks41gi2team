@@ -162,7 +162,9 @@ public class SwAccountingController {
 	
 	//유경 - 통합회계 조회
 	@GetMapping("/selectTotalAccounting")
-	public String selectTotalAccounting() {
+	public String selectTotalAccounting(Model model) {
+		List<SwTotalAccounting> swAccounting= accountingService.selectTotalAccounting();
+		model.addAttribute("swAccounting",swAccounting);
 		return "sw/accounting/selectTotalAccounting";
 	}
 	

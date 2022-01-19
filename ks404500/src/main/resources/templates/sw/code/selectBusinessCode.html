@@ -64,24 +64,27 @@
 	</div>
 	<script>
 	function deleteBtn(businessCode) {
-		if(businessCode != null && businessCode != ""){
-			var request = $.ajax({
-				  url: "/sw/code/deleteBusinessCode",
-				  method: "POST",
-				  data: { businessCode : businessCode },
-				  dataType: "text"
+		var confirmBtn = confirm('정말 삭제하시겠습니까?');
+		if(confirmBtn) {
+			if(businessCode != null && businessCode != ""){
+				var request = $.ajax({
+					  url: "/sw/code/deleteBusinessCode",
+					  method: "POST",
+					  data: { businessCode : businessCode },
+					  dataType: "text"
+					});
+				
+				request.done(function(data) {
+					if(data > 0) {
+						alert("삭제 되었습니다.");
+					}else {
+						alert("실패했습니다.");
+					}
+					location.reload();
 				});
-			
-			request.done(function(data) {
-				if(data > 0) {
-					alert("삭제 되었습니다.");
-				}else {
-					alert("실패했습니다.");
-				}
-				location.reload();
-			});
-		} else {
-			alert("삭제 실패 ");
+			} else {
+				alert("삭제 실패 ");
+			}
 		}
 	}
 	

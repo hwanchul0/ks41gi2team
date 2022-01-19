@@ -151,4 +151,5 @@
 			ON 
 			k.paymentStateCode = s.paymentStateCode;
 		</select>
+		
 </mapper>

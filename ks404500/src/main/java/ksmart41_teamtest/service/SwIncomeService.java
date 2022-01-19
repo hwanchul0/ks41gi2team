@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import ksmart41_teamtest.dto.ServicePayment;
 import ksmart41_teamtest.dto.SwIncome;
 import ksmart41_teamtest.mapper.SwIncomeMapper;
 
@@ -25,4 +26,14 @@ public class SwIncomeService {
 		System.out.println("서비스 값" + incomelist);
 		return incomelist;
 	}
+	
+	//[재천]비용 등록 1번
+	public int addSwIncome(ServicePayment servicePayment) {
+		return swIncomeMapper.addSwIncome(servicePayment);
+	}
+	/*
+	 * //[재천]비용 등록 2번 public int addSwIncome2(SwIncome swIncome) { return
+	 * swIncomeMapper.addSwIncome2(swIncome); }
+	 */
+	
 } 
