@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import ksmart41_teamtest.dto.PaymentState;
 import ksmart41_teamtest.service.PaymentStateService;
@@ -65,5 +66,26 @@ public class PaymentStateController {
 		paymentStateService.modifyPaymentStatecode(paymentState);
 		return "redirect:/shop/code/selectPaymentState";
 	}
+	
+	
+	//[재천]결제 상태 코드 중복체크
+	@PostMapping("/codeCheck")
+	@ResponseBody
+	public boolean codeCheck (@RequestParam(value = "paymentStateCode", required = false)String paymentStateCode) {
+		boolean checkResult = false;
+		int codeCheck = paymentStateService.codeCheck(paymentStateCode);
+		
+		if(codeCheck > 0) {
+			checkResult = true;
+		}
+		return checkResult;
+	}
+	
+	//[재천]결제상태 코드삭제
+	@RequestMapping("/deletePaymentCode")
+	public @ResponseBody int deletePaymentCode(PaymentState paymentStateCode) {
+		return paymentStateService.deletePaymentCode(paymentStateCode);
+	}
+	
 }
 

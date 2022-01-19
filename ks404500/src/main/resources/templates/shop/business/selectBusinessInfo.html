@@ -84,25 +84,28 @@
 	<script type="text/javascript">
 	//[재천] 회원삭제
 	function deleteBtn(shopClientCode) {
-		if(shopClientCode != null && shopClientCode != ""){
-			console.log(shopClientCode);
-			var request = $.ajax({
-				  url: "/shop/business/deleteBusinessInfo",
-				  method: "POST",
-				  data: { shopClientCode : shopClientCode },
-				  dataType: "text"
+		var deleteConfirm = confirm('삭제하시겠습니까?');
+		if(deleteConfirm) {
+			if(shopClientCode != null && shopClientCode != ""){
+				console.log(shopClientCode);
+				var request = $.ajax({
+					  url: "/shop/business/deleteBusinessInfo",
+					  method: "POST",
+					  data: { shopClientCode : shopClientCode },
+					  dataType: "text"
+					});
+				
+				request.done(function(data) {
+					if(data > 0) {
+						alert("삭제 되었습니다.");
+					}else {
+						alert("실패했습니다.");
+					}
+					location.reload();
 				});
-			
-			request.done(function(data) {
-				if(data > 0) {
-					alert("삭제 되었습니다.");
-				}else {
-					alert("실패했습니다.");
-				}
-				location.reload();
-			});
-		} else {
-			alert("삭제 실패 ");
+			} else {
+				alert("삭제 실패 ");
+			}
 		}
 	}
     </script>

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import ksmart41_teamtest.dto.ShopAddPaymentCheck;
 import ksmart41_teamtest.dto.ShopPaymentCheck;
 import ksmart41_teamtest.mapper.ShopPaymentCheckMapper;
 
@@ -29,4 +30,13 @@ public class ShopPaymentCheckService {
 		int addPaymentCheck = shopPaymentCheckMapper.addPaymentCheck(shopPaymentCheck);
 		return addPaymentCheck;
 	}
+	
+	// 유성 쇼핑몰 결제등록화면 
+	public List<ShopAddPaymentCheck> getAddShopAddPaymentCheck() {
+		List<ShopAddPaymentCheck> shopAddPaymentCheck = shopPaymentCheckMapper.getAddShopAddPaymentCheck();
+		return shopAddPaymentCheck;
+	
+	}
+
+
 }

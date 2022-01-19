@@ -42,5 +42,12 @@ public interface CodeMapper {
 	
 	//유경 - 쇼핑몰 계정과목조회
 	public List<ShopIsListCode> getSelectShopIsListCode();
+	
+	//유경 - 쇼핑몰 계정과목수정
+	public int ShopModifyIsListCode(ShopIsListCode shopIsCode);
+
+	//유경 - 쇼핑몰 계정과목 세부조회
+	public ShopIsListCode getShopIsCodeByShopIsListCode(String shopIsCode);
+	
 
 }

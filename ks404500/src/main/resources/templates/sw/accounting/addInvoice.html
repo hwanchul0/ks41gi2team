@@ -22,7 +22,7 @@
 		$(function() {
 			$('input.money1').on('keyup', function() {
 				var cnt = $(".exam input.num_sum").length;
-				console.log(cnt);
+				//console.log(cnt);
 
 				for (var i = 1; i < cnt; i++) {
 					var sum = parseInt($(this).val() || 0);
@@ -108,6 +108,7 @@ $(document).ready(function() {
 					//console.log(invoiceDetail);
 					document.getElementById("invoiceDetail").value = invoiceDetail; //단가
 
+
 				});
 });
 		
@@ -130,6 +131,8 @@ $(document).ready(function(){
 		}
 	})
 })
+
+
 
 
 	</script>
@@ -519,7 +522,7 @@ $(document).ready(function(){
 										</div>
 										<!-- serviceTotalPrice -->
 										<div class="col-sm-2">
-											<input type="text" class="form-control num_sum"
+											<input type="number" class="form-control num_sum"
 												id="serviceTotalPrice" name="serviceTotalPrice"
 												style="height: 85%" min="0">
 										</div>

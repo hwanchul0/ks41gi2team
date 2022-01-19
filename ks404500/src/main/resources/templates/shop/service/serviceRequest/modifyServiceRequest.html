@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="@{layout/default-shop}">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<th:block layout:fragment="customJs">
+<!-- 날짜계산 moment.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.0/moment.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			var nowDate = moment();
+			 $('#serviceRegistrationDate').val(nowDate.format("YYYY-MM-DD"));
+			// 총 서비스 기간 조회		
+				  $("#serviceName,#serviceAmount,#serviceRegistrationDate").on("change", function() {
+					var serviceRegistrationDate = $('#serviceRegistrationDate').val();
+					var serviceName = $('#serviceName').val();
+					var servicePeriod = $("#serviceName option:selected").attr('value2')
+					var serviceAmount = $('#serviceAmount').val();
+					var serviceTotalPeriod = $('#serviceTotalPeriod');
+					// 총 서비스 기간(일) 계산
+					var totalServiceDate = Number(servicePeriod * serviceAmount); 
+					serviceTotalPeriod.val(totalServiceDate);
+					// 서비스 만료 날짜 
+					$('#serviceEndDate').val(moment(serviceRegistrationDate).add(totalServiceDate,'d').format("YYYY-MM-DD"));
+					// 총 결제 금액
+					var servicePrice = $("#serviceName option:selected").attr('value3') * serviceAmount;
+					$('#serviceTotalPrice').val(servicePrice);
+					// 숫자 콤마(,)적용
+					//$('#serviceTotalPrice').val(servicePrice.toLocaleString());
+				});
+			
+				$(document).on('click','#cancleBtn',function(){
+					if(confirm("취소하시겠습니까?")){
+						$(location).attr('href', '/shop/serivce/serviceRequest/selectServiceRequest');
+					}else{
+						location.reload();
+					}
+				})
+			
+		});
+	</script>
+</th:block>
+<th:block layout:fragment="customContents">
+	<!-- Content Wrapper. Contains page content -->
+	<div class="content-wrapper">
+		<!-- Content Header (Page Header) -->
+		<div class="content-header">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div class="col-sm-6">
+						<h1 class="m-0">계약요청 수정</h1>
+					</div>
+					<!-- /.col -->
+					<div class="col-sm-6">
+						<ol class="breadcrumb float-sm-right">
+							<li class="breadcrumb-item">
+								<a href="#">Home</a>
+							</li>
+							<li class="breadcrumb-item active">Starter Page</li>
+						</ol>
+					</div>
+					<!-- /.col -->
+				</div>
+				<!-- /.row -->
+			</div>
+			<!-- /.container-fluid -->
+		</div>
+		<!-- Content Header (Page Header) -->
+		<div class="col-md-12">
+			<!-- /.card-header -->
+			<!-- Horizontal Form -->
+			<div class="card card-success">
+				<div class="card-header">
+					<h3 class="card-title">서비스 계약요청 수정</h3>
+				</div>
+				<!-- /.card-header -->
+				<!-- form start -->
+				<form id="modifyRequestForm" class="form-horizontal" th:action="@{/shop/service/serviceRequest/modifyServiceRequest}" method="POST">
+					<div class="card-body">
+						<div class="form-group row">
+							<label for="contractManageCode" class="col-sm-2 col-form-label">계약요청코드</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="contractManageCode" name="contractManageCode"  th:value="${getContractInfo.contractManageCode}" readonly="readonly">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="myServiceName" class="col-sm-2 col-form-label">서비스명</label>
+							<div class="col-sm-4">
+								<select name="serviceCode" id="serviceName"  style="height: 38px; text-align:center;">
+									<th:block th:if="${not #lists.isEmpty(serviceInfo)}" th:each="c : ${serviceInfo}">
+										<option th:value="${c.serviceCode}"  th:value2="${c.servicePeriod}" th:value3="${c.servicePrice}" th:text="${c.serviceName}" th:selected="${getContractInfo.serviceCode==#strings.toString(c.serviceCode)}">
+												[${c.serviceName}]]</option>
+									</th:block>
+									<th:block th:unless="${not #lists.isEmpty(getContractInfo)}">
+										<option>서비스 명을 등록해주세요</option>
+									</th:block>
+								</select>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="serviceAmount" class="col-sm-2 col-form-label">서비스 계약 수량</label>
+							<div class="col-sm-4">
+								<input type="number" class="form-control" id="serviceAmount" name="serviceAmount" th:value="${getContractInfo.serviceAmount}">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="serviceRequestDate" class="col-sm-2 col-form-label">서비스 요청 날짜</label>
+							<div class="col-sm-4">
+								<input type="date" class="form-control" id="serviceRequestDate" name="serviceRequestDate" readonly="readonly" th:value="${getContractInfo.serviceRequestDate}">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="serviceRegistrationDat" class="col-sm-2 col-form-label">서비스 시작 날짜</label>
+							<div class="col-sm-4">
+								<input type="date" class="form-control" id="serviceRegistrationDate" name="serviceRegistrationDate" th:value="${getContractInfo.serviceRegistrationDate}">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="serviceEndDate" class="col-sm-2 col-form-label">서비스 종료 날짜</label>
+							<div class="col-sm-4">
+								<input type="date" class="form-control" id="serviceEndDate" name="serviceEndDate" th:value="${getContractInfo.serviceEndDate}" readonly>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="serviceTotalPeriod" class="col-sm-2 col-form-label">총 이용 날짜</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="serviceTotalPeriod" name="serviceTotalPeriod" readonly="readonly" th:value="${getContractInfo.servicePeriod}">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="serviceTotalPrice" class="col-sm-2 col-form-label">총 결제금액</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="serviceTotalPrice" name="serviceTotalPrice" readonly="readonly" th:value="${getContractInfo.serviceTotalPrice}">
+							</div>
+						</div>
+						
+					</div>
+					<!-- /.card-body -->
+					<div class="card-footer">
+						<button type="submit" class="btn btn-primary">저장</button>
+						<button type="button" id="cancleBtn" class="btn btn-default float-right" th:href="@{#}">취소</button>
+					</div>
+					<!-- /.card-footer -->
+				</form>
+			</div>
+			<!-- /.card -->
+		</div>
+	</div>
+	<!-- /Content Wrapper. Contains page content -->
+</th:block>

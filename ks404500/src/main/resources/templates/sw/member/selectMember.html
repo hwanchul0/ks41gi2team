@@ -10,24 +10,27 @@
 //테이블 페이징
 	//[재천] 회원삭제
 	function deleteBtn(memberId) {
-		if(memberId != null && memberId != ""){
-			var request = $.ajax({
-				  url: "/sw/member/deleteMember",
-				  method: "POST",
-				  data: { memberId : memberId },
-				  dataType: "text"
+		var confirmBtn = confirm('삭제하시겠습니까?');
+		if(confirmBtn){
+			if(memberId != null && memberId != ""){
+				var request = $.ajax({
+					  url: "/sw/member/deleteMember",
+					  method: "POST",
+					  data: { memberId : memberId },
+					  dataType: "text"
+					});
+				
+				request.done(function(data) {
+					if(data > 0) {
+						alert("삭제 되었습니다.");
+					}else {
+						alert("실패했습니다.");
+					}
+					location.reload();
 				});
-			
-			request.done(function(data) {
-				if(data > 0) {
-					alert("삭제 되었습니다.");
-				}else {
-					alert("실패했습니다.");
-				}
-				location.reload();
-			});
-		} else {
-			alert("삭제 실패 ");
+			} else {
+				alert("삭제 실패 ");
+			}
 		}
 	}
 /* 	
@@ -112,7 +115,10 @@ $(document).ready(function(){
 									<tbody id="myTable">
 										<tr th:if="${not #lists.isEmpty(memberList)}" th:each="ml : ${memberList}">
 											<td th:text="${ml.memberId}"></td>
+											
+											
 											<td th:text="${ml.memberLevelCode}"></td>
+											
 											<td th:text="${ml.memberName}"></td>
 											<td th:text="${ml.memberAddr}"></td>
 											<td th:text="${ml.memberEmail}"></td>
@@ -134,8 +140,6 @@ $(document).ready(function(){
 								<!-- <div class="card-footer">
 								
 								</div> -->
-								
-							
 						</div>
 					</div>
 				</div>

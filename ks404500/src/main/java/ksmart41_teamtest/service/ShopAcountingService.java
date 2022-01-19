@@ -35,8 +35,8 @@ public class ShopAcountingService {
 	
 	//유경 - 쇼핑몰 매출 등록
 	public int addIncome(ShopAddAccounting shopAddAccounting) {
-		int result = shopAddAccountingMapper.addIncome(shopAddAccounting);
-		return result;
+		//int result = shopAddAccountingMapper.addIncome(shopAddAccounting,shopMemberId);
+		return shopAddAccountingMapper.addIncome(shopAddAccounting);
 	}
 	
 	//유경 - 쇼핑몰 매출 조회

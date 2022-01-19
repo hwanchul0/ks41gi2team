@@ -41,8 +41,8 @@ public class ServiceManagementService {
 		return serviceManagementMapper.getServiceInfo(serviceCode);
 	}
 	// 서비스 삭제
-	public int deleteService(ServiceManagement serviceManagement) {
-		return serviceManagementMapper.deleteService(serviceManagement);
+	public int deleteServiceManagemenet(ServiceManagement serviceManagement) {
+		return serviceManagementMapper.deleteServiceManagemenet(serviceManagement);
 	}
 		
 

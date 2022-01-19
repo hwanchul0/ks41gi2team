@@ -14,42 +14,37 @@ $(function() {
 				//--------------
 				// Get context with jQuery - using jQuery's .get() method.
 				var areaChartCanvas = $('#areaChart').get(0).getContext('2d')
-				//data 값 가져오기
-				var sales = $('#sales2021').text();
-				var expense = $('#expense2021').text();
-				var accounting = sales - expense ;
-				$('#accounting2021').text(accounting);
-				//console.log(sales, expense, accounting);
+				
 
 				var areaChartData = {
-					labels : ['매출','비용'],
+					labels : ['안녕','1'],
 					datasets : [ {
-						label : '손익',
-						backgroundColor : ['#e15759', '#4e79a7'],
+						label : '매출액',
+						backgroundColor : ['#3c8dbc', '#d2d6de'],
 						borderColor : '#698c68',
 						pointRadius : false,
 						pointColor : '#698c68',
 						pointStrokeColor : '#698c68',
 						pointHighlightFill : '#fff',
 						pointHighlightStroke : '#698c68',
-						data : [sales, expense]
+						
+						data : [100,200]
 					} ]
 				}
 
 				var areaChartOptions = {
-					
 					maintainAspectRatio : false,
 					responsive : true,
 					legend : {
-						display : true
+						display : false
 					},
-					
 					scales : {
 						xAxes : [ {
 							gridLines : {
 								display : true,
 							}
 						} ],
+
 						yAxes: [{
 					        stacked: false, //쌓임
 					        display: true, //y 축 show
@@ -83,7 +78,8 @@ $(function() {
 				
 				
 			})
-//바 그래프			
+
+//분기별 그래프			
 $(function() {
 				//--------------
 				//- AREA CHART -
@@ -91,26 +87,62 @@ $(function() {
 				// Get context with jQuery - using jQuery's .get() method.
 				var areaChartCanvas = $('#areaChart2').get(0).getContext('2d')
 				//data 값 가져오기
-				var sales = $('#sales2021').text();
-				var expense = $('#expense2021').text();
-				var accounting = sales - expense ;
-				$('#accounting2021').text(accounting);
-				//console.log(sales, expense, accounting);
+				//매출
+				var sales1 = $('#sales1Q').text();
+				var sales2 = $('#sales2Q').text();
+				var sales3 = $('#sales3Q').text();
+				var sales4 = $('#sales4Q').text();
+				//console.log(sales4);
+				//매입
+				var expense1 = $('#expense1Q').text();
+				var expense2 = $('#expense2Q').text();
+				var expense3 = $('#expense3Q').text();
+				var expense4 = $('#expense4Q').text();
+				//손익
+				var a1 = Number(sales1-expense1);
+				var a2 = a1+Number(sales2-expense2);
+				var a3 = a2+Number(sales3-expense3);
+				var a4 = a3+Number(sales4-expense4);
+				//console.log("a1"+a1);
+				//console.log(a2);
+				//console.log(a3);
+				//console.log(a4);
+
+
 
 				var areaChartData = {
 					labels : ['2021 1Q','2021 2Q','2021 3Q','2021 4Q',],
 					datasets : [ {
 						label : '매출',
-						backgroundColor : ['#CFE2CE'],
-						borderColor : '#698c68',
+						backgroundColor : ['#e15759'],
+						borderColor : '#e15759',
 						pointRadius : false,
 						pointColor : '#e15759',
 						fill: false,
 						pointStrokeColor : '#CFE2CE',
 						pointHighlightFill : '#CFE2CE',
 						pointHighlightStroke : '#e15759',
-						data : [-100,-100000,30,40000]
-					} ]
+						data : [sales1,sales2,sales3,sales4]
+					}, {
+	                    label: '매입',
+	                    type : 'line',         // 'line' type
+	                    fill : false,         // 채우기 없음
+	                    lineTension : 0.2,  // 0이면 꺾은선 그래프, 숫자가 높을수록 둥글해짐
+	                    pointRadius : 0,    // 각 지점에 포인트 주지 않음
+	                    backgroundColor: 'rgb(255, 153, 0)',
+	                    borderColor: '#4e79a7',
+	                    data: [expense1, expense2, expense3, expense4]
+	                },
+                    {
+	                label: '누적손익',
+                    type : 'bar',         // 'line' type
+                    fill : false,         // 채우기 없음
+                    lineTension : 0.2,  // 0이면 꺾은선 그래프, 숫자가 높을수록 둥글해짐
+                    pointRadius : 0,    // 각 지점에 포인트 주지 않음
+                    backgroundColor: 'rgb(255, 153, 0)',
+                    borderColor: '#4e79a7',
+                    data: [a1, a2, a3, a4]
+                }]
 				}
 
 				var areaChartOptions = {
@@ -124,7 +156,7 @@ $(function() {
 					scales : {
 						xAxes : [ {
 							gridLines : {
-								display : true,
+								display : false,
 							}
 						} ],
 						yAxes: [{
@@ -132,7 +164,7 @@ $(function() {
 					        display: true, //y 축 show
 					       
 					        gridLines: {
-					            display: false, //show
+					            display: true, //show
 					            drawBorder: true, //세로선 유무
 					        },
 					    }]
@@ -141,13 +173,12 @@ $(function() {
 
 				// This will get the first returned node in the jQuery collection.
 				var areaChart = new Chart(areaChartCanvas, {
-					type : 'line',
+					type : 'doughnut',
 					data : areaChartData,
 					options : areaChartOptions
 				})
 				
-				
-				
+
 			})
 		</script>
 	</th:block>
@@ -160,12 +191,12 @@ $(function() {
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>쇼핑몰 통합회계 조회</h1>
+            <h1>"쇼핑몰 통합회계 조회"</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="/shop/index-sw">Home</a></li>
-              <li class="breadcrumb-item active">재무관리</li>
+              <li class="breadcrumb-item"><a href="/shop/index-shop">Home</a></li>
+              <li class="breadcrumb-item active">매출관리</li>
             </ol>
           </div>
         </div>
@@ -182,25 +213,20 @@ $(function() {
                 <h3 class="card-title">2021년 손익</h3>
               </div>
               <!-- /.card-header -->
-              <div class="card-body p-0" style="height: 250px;">	 
-                <table class="table table-condensed" id="table2021">
+              <div class="card-body p-0">	 
+                <table class="table table-condensed">
                   <thead>
                     <tr>
-                  		<th>매출</th>
-						<th>비용</th>
-                		<th>손익</th>                      
+                      <th>구분</th>
+                      <th>비용</th>
                     </tr>
                   </thead>
-					<tbody id="myTable">
-						 <tr th:if="${not #lists.isEmpty(shopAccounting)}" th:each="s: ${shopAccounting}">
-							<td th:text="${s.sales2021}" id="sales2021" th:value="${s.sales2021}"></td>
-							<td th:text="${s.expense2021}" id="expense2021" th:value="${s.expense2021}"></td>
-							<td id="accounting2021"></td>
-							</tr>
-						<tr th:unless="${not #lists.isEmpty(shopAccounting)}">
-							<td>내역이 없습니다.</td>
-						</tr>
-					</tbody>
+                  <tbody>
+                    <tr>
+                      <td>1111</td>
+                      <td>222</td>
+                    </tr>
+                  </tbody>
                 </table>
               </div>
               <!-- /.card-body -->
@@ -208,17 +234,17 @@ $(function() {
             <!-- /.card -->
           </div>
           <!-- /.col -->
-          <!-- 손익 차트 -->
           <div class="col-md-6">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">2021년 손익</h3>	 
+                <h3 class="card-title">차트</h3>	 
               </div>
               <!-- /.card-header -->
               <div class="card-body p-0">
               	<div class="chart">
 					<canvas id="areaChart" style="height: 250px; min-height: 250px"></canvas>
 				</div>
+
               </div>
               <!-- /.card-body -->
             </div>
@@ -239,7 +265,15 @@ $(function() {
               </div>
               <div style="display: none">
               	<!-- 매출 -->
-              	<input type="text">
+              	<span th:each="s : ${shop2021Sales}" th:text="${s.sales1Q}" id="sales1Q"></span>
+              	<span th:each="s : ${shop2021Sales}" th:text="${s.sales2Q}" id="sales2Q"></span>
+              	<span th:each="s : ${shop2021Sales}" th:text="${s.sales3Q}" id="sales3Q"></span>
+              	<span th:each="s : ${shop2021Sales}" th:text="${s.sales4Q}" id="sales4Q"></span>
+              	<!-- 비용 -->
+              	<span th:each="e : ${shop2021Expense}" th:text="${e.expense1Q}" id="expense1Q"></span>
+              	<span th:each="e : ${shop2021Expense}" th:text="${e.expense2Q}" id="expense2Q"></span>
+              	<span th:each="e : ${shop2021Expense}" th:text="${e.expense3Q}" id="expense3Q"></span>
+              	<span th:each="e : ${shop2021Expense}" th:text="${e.expense4Q}" id="expense4Q"></span>
               </div>
               <!-- /.card-body -->
             </div>
