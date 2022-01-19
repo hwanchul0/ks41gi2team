@@ -70,6 +70,7 @@ public class ServiceRequestService {
 		int requestState = serviceRequestMapper.modifyRequestState(serviceRequestStatus,contractManageCode);
 		return requestState;
 	}
+	// 서비스 계약요청 승인 -> 결제예정 테이블
 	public int acceptRequest(String contractManageCode) {
 		int addPayment = serviceRequestMapper.acceptRequest(contractManageCode);
 		return addPayment;
