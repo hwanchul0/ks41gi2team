@@ -2,6 +2,8 @@ package ksmart41_teamtest.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,24 +72,26 @@ public class SwPaymentController {
 										@RequestParam(value="paymentCode" , required = false) String paymentCode,
 										@RequestParam(value = "paymentState", required = false) String paymentState,
 										@RequestParam(value = "servicePaymentCheck", required = false)String servicePaymentCheck,
-										Model model, ServicePayment servicePayment) {
+										Model model, ServicePayment servicePayment,
+										HttpSession session) {
 		
 		log.info("서비스 결제정보 코드  {} : " + paymentCode);
 		log.info("서비스 결제 상태  코드  {} : " + paymentStateCode);
 		servicePaymentService.modifyPaymentStateCode(paymentCode,paymentStateCode);
 		
-		//재천코드
+		//재천코드(insert)
 		//servicePaymentCheck
 		String Check1 = servicePayment.getServicePaymentCheck();
 		String complete = "payComplete";
+		String memberId = (String) session.getAttribute("SWID");
+		servicePayment.setMemberId(memberId);
+		servicePayment.setMemberIdFinish(memberId);
 		if(Check1.equals(complete)) {
 			swIncomeService.addSwIncome(servicePayment);
-			System.out.println("확인3");
 		}
+		
 		return "redirect:/sw/service/servicePaymentSum";
 	}
-	
-	
 	
 	//서비스 결제후 계약현황 관리
 	@GetMapping("/selectContractState")

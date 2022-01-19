@@ -140,7 +140,6 @@
    INSERT INTO k2_sw_contractRequest
       (contractManageCode
       ,mainBusinessCode
-      ,memberId
       ,serviceCode
       ,serviceAmount
       ,servicePeriod
@@ -151,12 +150,11 @@
       ,serviceRequestDate
       ,serviceRequestStatus
       ,serviceApprovalDate)
-   VALUES 
-      ((SELECT CONCAT('estimate',LPAD(max(SUBSTRING((contractManageCode),9,2))+1,2,'0'))
+   VALUES( 
+      (SELECT CONCAT('estimate',LPAD(max(SUBSTRING((contractManageCode),10,2))+1,2,'0'))
    FROM
       k2_sw_contractRequest ALIAS_FOR_SUBQUERY) 
           ,#{mainBusinessCode}
-          ,''
           ,#{serviceCode}
           ,#{serviceAmount}
           ,#{servicePeriod}
@@ -220,7 +218,7 @@
       contractManageCode = #{contractManageCode};
    </select>
    
-   <!-- 계약요청 삭제 -->
+   <!-- 계약요청 삭제(Client) -->
    <delete id="deleteServiceRequest" parameterType="ServiceRequest">
    DELETE 
    FROM 
@@ -229,4 +227,38 @@
       contractManageCode=#{contractManageCode};
    </delete>
    
+   <!-- 계약요청 승인 상태 변경-->
+   <update id="modifyRequestState" parameterType="String">
+   UPDATE 
+      k2_sw_contractRequest
+   SET
+      serviceRequestStatus=#{serviceRequestStatus}
+   WHERE 
+      contractManageCode =#{contractManageCode};
+   </update>
+   <!-- 계약요청 승인 시 -> 결제 예정 테이블 추가 -->
+   <insert id="acceptRequest" parameterType="ServiceRequest">
+   INSERT INTO k2_sw_paymentSum
+   (
+   paymentCode
+   ,contractManageCode
+   ,slipNumber
+   ,servicePaymentDueDate
+   ,paymentSumRegistration
+   )
+   SELECT 
+   (SELECT 
+      CONCAT('sum',(MAX(CAST((SUBSTRING_INDEX(paymentCode,'sum',-1)) AS UNSIGNED)+1)))
+   FROM 
+      k2_sw_paymentSum AS l)
+      ,#{contractManageCode}
+      ,''
+      ,DATE_ADD(NOW(), INTERVAL 7 DAY)
+      ,NOW()
+   WHERE NOT EXISTS (
+   SELECT contractManageCode 
+   FROM k2_sw_paymentSum
+   WHERE contractManageCode = #{contractManageCode}
+   );
+   </insert>
 </mapper>

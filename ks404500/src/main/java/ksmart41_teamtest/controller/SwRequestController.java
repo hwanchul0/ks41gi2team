@@ -73,7 +73,24 @@ public class SwRequestController {
 		return "sw/service/serviceRequest/detailServiceRequest";
 	}
 	// 서비스 계약요청 상세페이지 끝 ======================================================
-	
+	// 서비스 계약요청 확인 -> 승인 페이지
+	   @PostMapping("/modifyRequestState")
+	   public String serviceRequestState(@RequestParam(value="serviceRequestStatus", required=false)String serviceRequestStatus
+	                            ,@RequestParam(value="contractManageCode", required = false) String contractManageCode
+	                            ,ServiceRequest serviceRequest) {
+	      log.info("serviceRequestState 계약 상태 === {}:",serviceRequestStatus);
+	      log.info("serviceRequestState 계약 상태 코드  === {}:",contractManageCode);
+	      serviceRequestService.modifyRequestState(serviceRequestStatus,contractManageCode);
+	      
+	      String RequestStatus = serviceRequest.getServiceRequestStatus();
+	      String requsetAccept = "승인";
+	      if(RequestStatus.equals(requsetAccept)) {
+	         serviceRequestService.acceptRequest(contractManageCode);
+	      }
+	         
+	      
+	      return "redirect:/sw/service/serviceRequest/selectAllServiceRequest";
+	   }
 	
 
 	
