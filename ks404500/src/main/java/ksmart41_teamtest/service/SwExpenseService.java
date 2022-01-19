@@ -36,14 +36,19 @@ public class SwExpenseService {
 		return swExpenseMapper.selectSwExpense(swExpensePayCode);
 	}
 	
-	//[재천]마감 처리
+	//[재천]비용마감 처리
 	public int finishExpense(SwExpense swExpense) {
 		return swExpenseMapper.finishExpense(swExpense);
 	}
 	
-	//[재천]수정
+	//[재천]비용 수정
 	public int modifyExpense(SwExpense swExpense) {
 		return swExpenseMapper.modifyExpense(swExpense);
+	}
+	
+	//[재천]비용 삭제
+	public int deleteExpense(SwExpense swExpense) {
+		return swExpenseMapper.deleteExpense(swExpense);
 	}
 	
 }

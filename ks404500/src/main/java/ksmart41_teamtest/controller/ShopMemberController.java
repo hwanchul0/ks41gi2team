@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import ksmart41_teamtest.dto.ShopMember;
 import ksmart41_teamtest.service.ShopMemberService;
@@ -40,6 +41,16 @@ public class ShopMemberController {
 		return "redirect:/shop/index-shop";
 	}
 	
-
+	@PostMapping("/idCheck")
+	@ResponseBody
+	public boolean idCheck(@RequestParam(value = "shopMemberId", required = false)String shopMemberId) {
+		boolean idCheckResult = false;
+		int idCheck = shopMemberService.idCheck(shopMemberId);
+		if(idCheck > 0 ) {
+			idCheckResult = true;
+		}
+		return idCheckResult;
+	}
+	
 }
 

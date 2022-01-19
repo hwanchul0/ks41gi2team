@@ -62,6 +62,7 @@ public class SwRequestController {
 		return "sw/service/serviceRequest/detailServiceRequest";
 	}
 	// 서비스 계약요청 상세페이지 끝 ======================================================
+
 	
 	// 서비스 계약요청 확인 -> 승인 페이지
 	@PostMapping("/modifyRequestState")
@@ -80,7 +81,7 @@ public class SwRequestController {
 			
 		
 		return "redirect:/sw/service/serviceRequest/selectAllServiceRequest";
-	}
+  }
 
 	
 

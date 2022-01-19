@@ -6,6 +6,7 @@ layout:decorate="@{layout/default-sw}">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link th:href="@{/customcss/css/serviceRequest.css}" rel="stylesheet"/>
 <th:block layout:fragment="customJs">
+<<<<<<< HEAD
    <script type="text/javascript">
    $(document).ready(function(){
         $("#myInput").on("keyup", function() {
@@ -16,6 +17,18 @@ layout:decorate="@{layout/default-sw}">
         });
    });
    </script>
+=======
+	<script type="text/javascript">
+	$(document).ready(function(){
+	     $("#myInput").on("keyup", function() {
+	       var value = $(this).val().toLowerCase();
+	       $("#myTable tr").filter(function() {
+	         $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+	       });
+	     });
+	});
+	</script>
+>>>>>>> branch 'develop' of https://github.com/hwanchul0/ks41gi2team.git
 </th:block>
 <th:block layout:fragment="customContents">
 <!-- Content Wrapper. Contains page content -->

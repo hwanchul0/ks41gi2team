@@ -1,3 +1,4 @@
+
 package ksmart41_teamtest.controller;
 
 import java.util.List;
@@ -115,5 +116,4 @@ public class SwPaymentController {
 		
 		return "sw/service/modifyContractState";
 	}
-
 }
