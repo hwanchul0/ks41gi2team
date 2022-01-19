@@ -87,7 +87,8 @@ tbody tr td:first-child:before {
 								<form>
 								<div class="row">
 									<div class="col-sm-12">
-										<table id="example2" class="table table-bordered table-hover dataTable dtr-inline" role="grid" aria-describedby="example2_info">
+										<table id="example2" class="table table-bordered table-hover dataTable dtr-inline" role="grid"
+										style="font-size:14px;" aria-describedby="example2_info">
 										<thead>
 										<tr role="row">
 											<th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">
@@ -106,19 +107,19 @@ tbody tr td:first-child:before {
 												총 금액
 											</th>
 											<th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">
-												서비스 시작 요청 날짜
+												시작 요청 날짜
 											</th>
 											<th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">
-												서비스 시작 예약 날짜
+												시작 예약 날짜
 											</th>
 											<th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">
 												서비스 종료 날짜
 											</th>
 											<th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">
-												서비스 승인 상태
+												승인 상태
 											</th>
 											<th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">
-												서비스 승인 날짜
+												승인 날짜
 											</th>
 											<th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">
 												수정
@@ -134,14 +135,16 @@ tbody tr td:first-child:before {
 											<td th:text="${r.serviceName}"></td>
 											<td th:text="${r.serviceAmount}"></td>
 											<td th:text="${r.servicePeriod}"></td>
-											<td th:text="${r.serviceTotalPrice}"></td>
+											<td th:text="${#numbers.formatInteger(r.serviceTotalPrice, 0, 'COMMA')}"></td>
 											<td th:text="${r.serviceRequestDate}"></td>
 											<td th:text="${r.serviceRegistrationDate}"></td>
 											<td th:text="${r.serviceEndDate}"></td>
 											<td th:text="${r.serviceRequestStatus}"></td>
 											<td th:text="${r.serviceApprovalDate}"></td>
 											<td>
-												<a th:href="@{/shop/service/serviceRequest/modifyServiceRequest(contractManageCode=${r.contractManageCode})}">수정</a>
+												<a th:href="@{/shop/service/serviceRequest/modifyServiceRequest(contractManageCode=${r.contractManageCode})}">
+													<button type="button" class="btn btn-success">수정</button>
+												</a>
 											</td>
 											<td><button type="button" class="btn btn-success" th:onclick="deleteBtn([[${r.contractManageCode}]]);">삭제</button>
 											</td>
