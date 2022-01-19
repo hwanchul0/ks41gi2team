@@ -75,7 +75,7 @@ layout:decorate="@{layout/default-sw}">
                                     <tbody id="myTable">
                                        <tr th:if="${not #lists.isEmpty(getAllRequestList)}" th:each="r : ${getAllRequestList}">
                                           <td th:text="${r.contractManageCode}"></td>
-										                      <td th:text="${r.clientId}"></td>
+                                                    <td th:text="${r.clientId}"></td>
                                           <td th:text="${r.clientId}"></td>
                                           <td th:text="${r.serviceName}"></td>
                                           <td th:text="${r.serviceAmount}"></td>
@@ -87,9 +87,9 @@ layout:decorate="@{layout/default-sw}">
                                           <td th:text="${r.serviceRequestStatus}"></td>
                                           <td th:text="${r.serviceApprovalDate}"></td>
                                           <td>
-	                                          <a th:href="@{/sw/service/serviceRequest/detailServiceRequest(contractManageCode=${r.contractManageCode})}">
-	                                          	<button type="button" class="btn-primary">보기</button>
-	                                          </a>
+                                             <a th:href="@{/sw/service/serviceRequest/detailServiceRequest(contractManageCode=${r.contractManageCode})}">
+                                                <button type="button" class="btn-primary">보기</button>
+                                             </a>
                                           </td>
                                        </tr>
                                        <tr th:unless="${not #lists.isEmpty(getAllRequestList)}">

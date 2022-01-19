@@ -98,6 +98,12 @@ public class SwExpenseController {
 		model.addAttribute("title","비용 수정");
 		return "sw/accounting/modifyExpense";
 	}
-}
+	
+	//[재천]비용 삭제
+	@RequestMapping("/deleteExpense")
+	public @ResponseBody int deleteExpense(SwExpense swExpense) {
+		return swExpenseService.deleteExpense(swExpense);
+	}
+}	
 
 

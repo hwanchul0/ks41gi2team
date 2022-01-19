@@ -1,7 +1,6 @@
 
 
 
-
 package ksmart41_teamtest.controller;
 
 
@@ -23,10 +22,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import ksmart41_teamtest.dto.Expense;
 import ksmart41_teamtest.dto.ShopAddAccounting;
+import ksmart41_teamtest.dto.ShopIsListCode;
 import ksmart41_teamtest.dto.ShopTotalAccounting;
 import ksmart41_teamtest.mapper.ShopAddAccountingMapper;
 import ksmart41_teamtest.service.ExpenseService;
 import ksmart41_teamtest.service.ShopAcountingService;
+import ksmart41_teamtest.service.ShopCodeServiceJYK;
 
 @Controller
 @RequestMapping("/shop/accounting")
@@ -40,6 +41,8 @@ public class ShopAccountingController {
 	private ExpenseService expenseService;
 	@Autowired
 	private ShopAddAccountingMapper shopAddAccountingMapper;
+	@Autowired
+	private ShopCodeServiceJYK shopCodeServiceJYK;
 
 	
 	//유경 - 쇼핑몰 매출 등록화면에서 발행 대상 조회
@@ -113,12 +116,18 @@ public class ShopAccountingController {
 		return "redirect:/shop/accounting/addTotalAccountingExpense";
 	}
 
-	// 유성 쇼핑몰 비용 등록 
-	@GetMapping("/addExpense")
-	public String addExpense(Model model) {
-		model.addAttribute("title", "쇼핑몰비용 등록");
-		return "shop/accounting/addExpense";
-	}
+	// 유성 쇼핑몰 비용 등록 										
+	@GetMapping("/addExpense")										
+	public String addExpense(Model model) {										
+		model.addAttribute("title", "쇼핑몰비용 등록");									
+											
+											
+		List<ShopIsListCode> shopIsListCode = shopCodeServiceJYK.getSelectShopIsListCode();									
+		model.addAttribute("shopIsListCode", shopIsListCode); 									
+		return "shop/accounting/addExpense";									
+											
+	}										
+
 	
 	@PostMapping("/addExpense")
 	public String addExpense(Expense expense) {
