@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import ksmart41_teamtest.dto.ShipmentCode;
+import ksmart41_teamtest.dto.ShopRequestShipment;
+import ksmart41_teamtest.service.ShopRequestShipmentService;
 import ksmart41_teamtest.service.ShopShipmentService;
 
 @Controller
@@ -19,6 +21,8 @@ public class ShopShipmentController {
 	
 	@Autowired
 	private ShopShipmentService shopShipmentService; 
+	@Autowired
+	private ShopRequestShipmentService shopRequestShipmentService;
 	
 	@GetMapping("/addRequestShipment")
 	public String addRequestShipment() {
@@ -30,11 +34,7 @@ public class ShopShipmentController {
 		return "shop/shipment/addShipment";
 	}
 	
-	@GetMapping("/selectRequestShipment")
-	public String selectRequestShipment() {
-		return "shop/shipment/selectRequestShipment";
-	}
-	
+
 	//유경 - shop 미배송된 주문내역의 합계 구하기
 	@PostMapping("/shipmentCheck")
 	@ResponseBody
@@ -53,6 +53,16 @@ public class ShopShipmentController {
 		model.addAttribute("shipmentCode", shipmentCode);
 		//System.out.println(shipmentCode + "<---controller");
 		return "shop/shipment/selectShipment";
+	}
+	
+	// 유성 - 배송요청 조회 (출고가 안된) 
+	@GetMapping("/selectRequestShipment")
+	public String selectRequestShipment(Model model) {
+		List<ShopRequestShipment> shopRequestShipment = shopRequestShipmentService.getShopRequestShipment();
+		model.addAttribute("title", "배송요청조회");
+		model.addAttribute("shopRequestShipment", shopRequestShipment);
+		System.out.println(shopRequestShipment + "<--controller");
+		return "shop/shipment/selectRequestShipment";
 	}
 	
 }

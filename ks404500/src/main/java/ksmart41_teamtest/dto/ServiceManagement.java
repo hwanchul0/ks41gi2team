@@ -6,13 +6,20 @@ public class ServiceManagement {
 	private String serviceName;
 	private String servicePrice;
 	private String serviceDiscount;
-	private String servicePeriod;
+	private int servicePeriod;
 	private String serviceStatus;
 	private String serviceRegistrationDate;
+	private String serviceDeleteDate;
 	private String serviceModifyDate;
 	
 	public String getServiceCode() {
 		return serviceCode;
+	}
+	public String getServiceDeleteDate() {
+		return serviceDeleteDate;
+	}
+	public void setServiceDeleteDate(String serviceDeleteDate) {
+		this.serviceDeleteDate = serviceDeleteDate;
 	}
 	public void setServiceCode(String serviceCode) {
 		this.serviceCode = serviceCode;
@@ -41,10 +48,10 @@ public class ServiceManagement {
 	public void setServiceDiscount(String serviceDiscount) {
 		this.serviceDiscount = serviceDiscount;
 	}
-	public String getServicePeriod() {
+	public int getServicePeriod() {
 		return servicePeriod;
 	}
-	public void setServicePeriod(String servicePeriod) {
+	public void setServicePeriod(int servicePeriod) {
 		this.servicePeriod = servicePeriod;
 	}
 	public String getServiceStatus() {
@@ -85,11 +92,10 @@ public class ServiceManagement {
 		builder.append(", serviceRegistrationDate=");
 		builder.append(serviceRegistrationDate);
 		builder.append(", serviceDeleteDate=");
+		builder.append(serviceDeleteDate);
+		builder.append(", serviceModifyDate=");
 		builder.append(serviceModifyDate);
-		builder.append(", serviceApprovalDate=");
 		builder.append("]");
 		return builder.toString();
 	}
-	
-	
 }

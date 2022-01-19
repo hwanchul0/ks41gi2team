@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="@{layout/default-shop}">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<th:block layout:fragment="customJs">
+<script type="text/javascript">
+$( document ).ready( function() {
+
+	$("#submit").click(function(){
+		var select = $(this).children("option:selected").text();
+		if(select == null){
+			alert('수정여부를 선택해주세요');
+			return false;
+		}
+	});
+	
+});
+</script>
+</th:block>
+<th:block layout:fragment="customContents">
+	<!-- Content Wrapper. Contains page content -->
+	<div class="content-wrapper">
+		<!-- Content Header (Page header) -->
+		<section class="content-header">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div class="col-sm-6">
+						<h1>"modifyIsListCode / 쇼핑몰 계정과목 수정"</h1>
+					</div>
+					<div class="col-sm-6">
+						<ol class="breadcrumb float-sm-right">
+							<li class="breadcrumb-item"><a href="/sw/index-shop">Home</a></li>
+							<li class="breadcrumb-item active">재무관리</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+			<!-- /.container-fluid -->
+		</section>
+
+		<!-- Main content -->
+		<section class="content">
+			<div class="container-fluid">
+				<div class="row">
+					<!-- left column -->
+					<div class="col-md-12">
+						<!-- /.card-header -->
+						<!-- Horizontal Form -->
+						<div class="card card-success">
+							<div class="card-header">
+								<h3 class="card-title">쇼핑몰 계정과목 수정</h3>
+							</div>
+							<!-- /.card-header -->
+							<!-- form start -->
+							<form class="form-horizontal" th:action="@{/shop/code/modifyIsListCode}" method="post">
+								<div class="card-body">
+									<div class="form-group row">
+										<label for="shopIsCode" class="col-sm-2 col-form-label">수정할 계정과목코드 : </label>
+										<div class="col-sm-6">
+											<input type="text" id="shopIsCode" name="shopIsCode" readonly="readonly" th:value="${shopIsCodeInfo.shopIsCode}">
+										</div>
+									</div>
+									<div class="form-group row">
+										<label for="shopIsName" class="col-sm-2 col-form-label">수정할 계정과목이름 : </label>
+										<div class="col-sm-6">
+											<input type="text" id="shopIsName" name="shopIsName" readonly="readonly" th:value="${shopIsCodeInfo.shopIsName}">
+										</div>
+									</div>
+									<div class="form-group row">
+										<label for="shopIsUse" class="col-sm-2 col-form-label">계정사용여부</label>
+										<div class="col-sm-2">
+											
+										 <select class="form-control " style="width: 120%;" name="shopIsUse" id="selectbox">
+												<option selected="selected" th:value="Y">Y</option>
+												<option th:value="N">N</option>
+											</select> 
+											
+										</div>
+									</div>
+									<div class="form-group row">
+										<label for="IsCode" class="col-sm-2 col-form-label">통합그룹코드</label>
+										<div class="col-sm-6">
+											<input type="text" id="GroupCode" th:value="${shopIsCodeInfo.shopIsGroupCode}" disabled="disabled">
+										</div>
+									</div>
+								</div>
+								<!-- /.card-body -->
+								<div class="card-footer">
+									<button type="submit" class="btn btn-success" id="submit">입력완료</button>
+									<button type="submit" class="btn btn-default float-right">취소</button>
+								</div>
+								<!-- /.card-footer -->
+							</form>
+						</div>
+						<!-- /.card -->
+					</div>
+					<!--/.col (left) -->
+				</div>
+				<!-- /.row -->
+			</div>
+			<!-- /.container-fluid -->
+		</section>
+		<!-- /.content -->
+	</div>
+	<!-- /.content-wrapper -->
+</th:block>
+</html>

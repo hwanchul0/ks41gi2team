@@ -31,8 +31,14 @@
 		<result column="businessRegistrationState"		property="businessRegistrationState"/>
 	</resultMap>
 	
+	<select id="insertMainBusinessCode" parameterType="String" resultType="BusinessSelect">
+		SELECT
+			max(businessRegistrationCode)+1
+		FROM k0_sw_businessRegistration;
+	</select>
 	<insert id="addBusinessRegistration" parameterType="BusinessSelect">
 	   INSERT INTO k0_sw_businessRegistration(
+	   		businessRegistrationCode,
 			clientId,
 			localCode,
 			memberId,
@@ -53,6 +59,9 @@
 			businessRegistration,
 			businessRegistrationState
 		)VALUES(
+			(SELECT
+			max(businessRegistrationCode)+1
+			FROM k0_sw_businessRegistration AS SUBQUERY),
 			#{clientId},
 			#{localCode},
 			#{memberId},

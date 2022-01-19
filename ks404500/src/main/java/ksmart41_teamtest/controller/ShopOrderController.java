@@ -2,6 +2,10 @@ package ksmart41_teamtest.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import ksmart41_teamtest.dto.Order;
+import ksmart41_teamtest.dto.ShopAddAccounting;
+import ksmart41_teamtest.dto.ShopAddPaymentCheck;
 import ksmart41_teamtest.dto.ShopPaymentCheck;
 import ksmart41_teamtest.service.OrderService;
 import ksmart41_teamtest.service.ShopPaymentCheckService;
@@ -19,16 +25,33 @@ import ksmart41_teamtest.service.ShopPaymentCheckService;
 @RequestMapping("/shop/order")
 public class ShopOrderController {
 	
+	private static final Logger log = LoggerFactory.getLogger(ShopOrderController.class);
 	@Autowired
 	private OrderService orderService;
 	@Autowired
 	private ShopPaymentCheckService	shopPaymentCheckService;
 	
-	/* 유성 쇼핑몰 결제상태 등록get */
+	  //유성 쇼핑몰 결제 등록 화면에서 결제 내역 조회
+	
 	@GetMapping("/addPaymentCheck")
-	public String addPaymentCheck() {
+	public String showAddPaymentCheck(Model model,HttpSession session) {
+		List<ShopAddPaymentCheck> shopAddPaymentCheck = shopPaymentCheckService.getAddShopAddPaymentCheck();
+
+		
+		model.addAttribute("shopAddPaymentCheck", shopAddPaymentCheck);
+
+		
+		String clientId = (String) session.getAttribute("SHOPID");
+		session.setAttribute("SHOPID", clientId);
+		log.info("addPaymentCheck memberId: {}", clientId);
+		model.addAttribute("SHOPID", clientId);
+		
 		return "shop/order/addPaymentCheck";
+
 	}
+	
+	 
+	
 	
 	/*유성 쇼핑몰 결제상태 등록 post */
 	@PostMapping("/addPaymentCheck")

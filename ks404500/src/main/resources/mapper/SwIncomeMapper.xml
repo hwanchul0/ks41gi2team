@@ -28,7 +28,7 @@
  	<insert id="addSwIncome" parameterType="servicePayment">
  		<selectKey keyProperty="swIncomeCode" resultType="String" order="BEFORE">
  			SELECT
- 				concat(MAX(i.swIncomeCode)+1)
+ 				CONCAT(MAX(i.swIncomeCode)+1)
 			FROM
 				k2_sw_income as i
  		</selectKey>
@@ -48,11 +48,11 @@
 				swIncomeFinishDate
 			)VALUES(
 				#{swIncomeCode},
-				'estimate06',
-				'40101',
-				'swid001',
-				'code_20210101_001',
-				'swid001',
+				#{contractManageCode},
+				#{swIsCode},
+				#{memberIdFinish},
+				#{invoiceCode},
+				#{memberId},
 				'1',
 				'2',
 				'3',
