@@ -94,7 +94,7 @@
 				serviceCode = #{serviceCode};
 		</select>
 		
-		<delete id="deleteService" parameterType="ServiceManagement">
+		<delete id="deleteServiceManagemenet" parameterType="ServiceManagement">
 			DELETE
 			FROM
 				k2_sw_serviceManagement

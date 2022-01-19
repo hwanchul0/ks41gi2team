@@ -91,4 +91,22 @@ public class AccountingService {
 		
 	}
 	
+	//유경 - 개발사 통합회계 조회
+	public List<SwTotalAccounting> selectTotalAccounting() {
+		List<SwTotalAccounting> swAccounting= accountingMapper.selectTotalAccounting();
+		return swAccounting;
+	}
+	
+	//유경 - 개발사 2021년 분기별 매출 조회
+	public List<SwTotalAccounting> selectSwIncome() {
+		List<SwTotalAccounting> sw2021Sales = accountingMapper.selectSwIncome();
+		return sw2021Sales;
+	}
+	
+	//유경 - 개발사 2021년 분기별 비용 조회
+	public List<SwTotalAccounting> selectSwExpense() {
+		List<SwTotalAccounting> sw2021Expense = accountingMapper.selectSwExpense();
+		return sw2021Expense;
+	}
+	
 }

@@ -88,7 +88,7 @@
 														<label for="serviceRequestStatus">서비스 승인상태 </label>
 														
 														
-														<select name="servicePaymentCheck" style="height: 38px; text-align:center; display: flex; width: 100%;">
+														<select id="servicePaymentCheck" name="servicePaymentCheck" style="height: 38px; text-align:center; display: flex; width: 100%;">
 															<th:block th:if="${not #lists.isEmpty(PaymentStateCode)}" th:each="s : ${PaymentStateCode}">
 																<option th:value="${s.paymentStateCode}" th:text="${s.paymentState}" th:selected="${servicePaymentCheck.paymentStateCode==#strings.toString(s.paymentStateCode)}">
 															[[${s.paymentState}]]</option>

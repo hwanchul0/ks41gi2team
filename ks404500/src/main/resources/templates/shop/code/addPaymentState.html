@@ -39,7 +39,7 @@ layout:decorate="@{layout/default-shop}">
 									<div class="form-group row">
 										<label class="col-sm-2 col-form-label text-right">상태코드 : </label>
 										<div class="col-sm-8">
-											<input type="text" class="form-control" id="paymentStateCode" placeholder="결제상태코드" name="paymentStateCode">
+											<input type="text" class="form-control" id="paymentStateCode" placeholder="결제상태코드" name="paymentStateCode" login="nomal">
 										</div>
 										<div>
 											<button type="button" id="paymentStateCodeCheck" class="btn btn-primary">중복확인</button>
@@ -53,8 +53,8 @@ layout:decorate="@{layout/default-shop}">
 									</div>
 								</div>
 								<div class="card-footer">
-									<button type="submit" class="btn btn-primary" id="addPaymentStateBtn">등록</button>
-									<button type="button" class="btn btn-default float-right" id="canclePaymentStateBtn">취소</button>
+									<button type="button" class="btn btn-primary" id="addPaymentStateBtn">등록</button>
+									<button type="button" class="btn btn-default float-right" id="canclePaymentStateBtn" onclick="cancle();">취소</button>
 								</div>
 							</form>
 						</div>
@@ -67,5 +67,70 @@ layout:decorate="@{layout/default-shop}">
 		</div>
 	</div>
 <!-- /.content-wrapper -->
+<script>
+	$('#paymentStateCodeCheck').click(function(){
+		var paymentStateCode = $('#paymentStateCode').val();
+		//[재천]ajax통신 아이디 중복체크
+		var request = $.ajax({
+			  url: "/shop/code/codeCheck",
+			  method: "POST",
+			  data: { paymentStateCode : paymentStateCode },
+			  dataType: "text"
+			});
+		request.done(function(data) {
+			if(paymentStateCode != null && paymentStateCode != ""){
+				if(data == "true"){
+					alert('코드 등록 불가능');
+					$('#addPaymentStateCodeForm input').not('#paymentStateCode').prop('disabled', true);
+					$('#addPaymentStateCodeForm button').not('#paymentStateCodeCheck').prop('disabled', true);
+				}else{
+					alert('회원가입 가능');
+					$('#addPaymentStateCodeForm input').not('#paymentStateCode').prop('disabled', false);
+					$('#addPaymentStateCodeForm button').not('#paymentStateCodeCheck').prop('disabled', false);
+					$('#paymentStateCode').attr('login','pass');
+				}
+			}else{
+				alert('공백은 사용하실수 없습니다.');
+			}
+		});
+	});
+	
+	function cancle(){
+		var cancleBtn = confirm('결제상태 코드조회를 취소 하시겠습니까?');
+		if(cancleBtn){
+			location.href = "/shop/index-shop";
+		}
+	}
+	
+	$('#paymentStateCode').change(function(){
+		$('#paymentStateCode').attr('login', 'nomal');
+	});
+	
+	
+	$('#addPaymentStateBtn').click(function(){
+		var payment = $('#paymentStateCode').val();
+		if(payment == null || payment == ""){
+			alert('결제상태코드를 입력하세요');
+			return false;
+		}
+		
+		var paymentState = $('#paymentState').val();
+		var regName = /^[가-힣\s]+$/;
+		if(!regName.test(paymentState)){
+			alert('결제상태는 한글로 입력하세요');
+			return false;
+		}
+		
+		var login = $('#paymentStateCode').attr('login');
+		if(login != "pass"){
+			alert('중복체크 진행을 해주세요');
+			return false;
+		}
+		$('#addPaymentStateCodeForm').submit();
+	});
+	
+		
+	
+</script>
 </th:block>
 </html>

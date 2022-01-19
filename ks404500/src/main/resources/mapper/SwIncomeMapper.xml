@@ -2,21 +2,99 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ksmart41_teamtest.mapper.SwIncomeMapper">
  	<select id="selectSwIncomeList" resultType="SwIncome">
- 		SELECT
-	 		swIncomeCode,
-	 		contractManageCode,
-	 		swIsCode,
-	 		memberIdFinish,
-	 		invoiceCode,
-	 		memberId,
-	 		swGroupSlip,
-	 		swSlipNumber,
-	 		swIsName,
-	 		swIncomeInfo,
-	 		swIncomeRegDate,
-	 		swIncomeFinish,
-	 		swIncomeFinishDate
+		SELECT
+			i.swIncomeCode,
+			i.swIsName,
+			i.swGroupSlip,
+			p.clientId,
+			p.paymentCharge,
+			p.paymentType,
+			i.memberId,
+			i.swIncomeRegDate,
+			i.swIncomeFinish,
+			i.swIncomeFinishDate
 		FROM
-			k2_sw_income
+			k2_sw_income AS i
+		INNER JOIN
+			k2_sw_paymentCheck AS p
+		on
+			i.contractManageCode = p.contractManageCode
+		WHERE
+			p.paymentStateCode = 'payComplete'
+		ORDER BY
+			i.swIncomeCode ASC
  	</select>
+ 	
+ 	<insert id="addSwIncome" parameterType="servicePayment">
+ 		<selectKey keyProperty="swIncomeCode" resultType="String" order="BEFORE">
+ 			SELECT
+ 				MAX(i.swIncomeCode)+1
+			FROM
+				k2_sw_income as i
+ 		</selectKey>
+			INSERT INTO k2_sw_income(
+				swIncomeCode,
+				contractManageCode,
+				swIsCode,
+				memberIdFinish,
+				invoiceCode,
+				memberId,
+				swGroupSlip,
+				swSlipNumber,
+				swIsName,
+				swIncomeInfo,
+				swIncomeRegDate,
+				swIncomeFinish,
+				swIncomeFinishDate
+			)VALUES(
+				#{swIncomeCode},
+				'estimate06',
+				'40101',
+				'swid001',
+				'code_20210101_001',
+				'swid001',
+				'1',
+				'2',
+				'3',
+				'4',
+				NOW(),
+				'5',
+				NOW()
+			)
+ 	</insert>
+ 	<!-- 
+ 	<insert id="addSwIncome2" parameterType="ServicePayment">
+ 		<selectKey keyProperty="paymentCheckCode" resultType="String" order="BEFORE">
+ 			SELECT
+ 				MAX(p.paymentCheckCode)+1
+			FROM
+				k2_sw_paymentCheck as p
+ 		</selectKey>
+	 	INSERT INTO k2_sw_paymentCheck(
+			paymentCheckCode,
+			contractManageCode,
+			paymentCode,
+			clientId,
+			paymentStateCode,
+			paymentEstimate,
+			paymentCharge,
+			paymentBalance,
+			paymentType,
+			paymentDate
+		)VALUES(
+			#{paymentCheckCode},
+			'estimate01',
+			'sum5',
+			'shopid001',
+			'payComplete',
+			7,
+			6,
+			5,
+			'',
+			NOW()
+		)
+ 	</insert>
+ 	 -->
 </mapper>
+
+

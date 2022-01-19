@@ -1,7 +1,6 @@
 package ksmart41_teamtest.service;
 
 import java.util.List;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,9 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import ksmart41_teamtest.controller.ShopAccountingController;
-import ksmart41_teamtest.dto.Member;
 import ksmart41_teamtest.dto.ShopAddAccounting;
+import ksmart41_teamtest.dto.ShopTotalAccounting;
 import ksmart41_teamtest.mapper.ShopAddAccountingMapper;
 
 @Service
@@ -37,8 +35,8 @@ public class ShopAcountingService {
 	
 	//유경 - 쇼핑몰 매출 등록
 	public int addIncome(ShopAddAccounting shopAddAccounting) {
-		int result = shopAddAccountingMapper.addIncome(shopAddAccounting);
-		return result;
+		//int result = shopAddAccountingMapper.addIncome(shopAddAccounting,shopMemberId);
+		return shopAddAccountingMapper.addIncome(shopAddAccounting);
 	}
 	
 	//유경 - 쇼핑몰 매출 조회
@@ -98,6 +96,23 @@ public class ShopAcountingService {
 	public int addTotalAccountingByExpense(ShopAddAccounting shopAddAccounting) {
 		int result = shopAddAccountingMapper.addTotalAccountingByExpense(shopAddAccounting);
 		return result;
+	}
+	
+	//유경 - 쇼핑몰 통합회계조회
+	public List<ShopAddAccounting> selectTotalAccounting() {
+		List<ShopAddAccounting> shopAccounting = shopAddAccountingMapper.selectTotalAccounting();
+		return shopAccounting;
+	}
+
+	//유경 - 쇼핑몰 분기 매출 조회
+	public List<ShopTotalAccounting> selectShopIncome() {
+		List<ShopTotalAccounting> shop2021Income = shopAddAccountingMapper.selectShopIncome();
+		return shop2021Income;
+	}
+	//유경 - 쇼핑몰 분기 비용 조회
+	public List<ShopTotalAccounting> selectShopExpense() {
+		List<ShopTotalAccounting> shop2021Expense = shopAddAccountingMapper.selectShopExpense();
+		return shop2021Expense;
 	}
 
 }

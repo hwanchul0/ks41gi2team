@@ -36,4 +36,20 @@
 	WHERE
 		paymentStateCode =#{paymentStateCode}
 	</select>
+	
+	<select id="codeCheck" resultType="int">
+	SELECT
+		COUNT(1)
+	FROM
+		k2_paymentState
+	WHERE
+		paymentStateCode = #{paymentStateCode}
+	</select>
+	
+	<delete id="deletePaymentCode" parameterType="PaymentState">
+	DELETE FROM
+		k2_paymentState
+	WHERE
+		paymentStateCode = #{paymentStateCode}
+	</delete>
 </mapper>

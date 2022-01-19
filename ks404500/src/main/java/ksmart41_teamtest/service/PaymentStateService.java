@@ -43,4 +43,13 @@ public class PaymentStateService {
 		return paymentStateMapper.selectPaymentStateCode(paymentStateCode);
 	}
 	
+	//[재천]결제 상태 코드 중복체크
+	public int codeCheck (String paymentStateCode) {
+		return paymentStateMapper.codeCheck(paymentStateCode);
+	}
+	
+	//[재천]결제상태 코드 삭제
+	public int deletePaymentCode(PaymentState paymentStateCode) {
+		return paymentStateMapper.deletePaymentCode(paymentStateCode);
+	}
 }

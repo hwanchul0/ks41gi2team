@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import ksmart41_teamtest.dto.ServicePayment;
 import ksmart41_teamtest.service.ServicePaymentService;
+import ksmart41_teamtest.service.SwIncomeService;
 
 @Controller
 @RequestMapping("/sw/service")
@@ -23,6 +24,9 @@ public class SwPaymentController {
 	
 	@Autowired
 	private ServicePaymentService servicePaymentService;
+	//재천 의존성주입
+	@Autowired
+	private SwIncomeService swIncomeService;
 	
 	
 	public SwPaymentController(ServicePaymentService servicePaymentService) {
@@ -45,6 +49,7 @@ public class SwPaymentController {
 		
 		return "redirect:/servicePaymentCheck";
 	}
+	
 	@GetMapping("/servicePaymentCheck")
 	public String servicePaymentCheck (@RequestParam(value="paymentCode", required=false) String paymentCode,
 											Model model) {
@@ -57,15 +62,31 @@ public class SwPaymentController {
 		return "sw/service/servicePaymentCheck";
 	}
 	
+	
+	//[재천] ++추가
 	// 서비스 결제예정 확인 -> 결제예정 결제상태 업데이트
 	@PostMapping("/modifyPaymentState")
-	public String modifyPaymentState(@RequestParam(value="servicePaymentCheck" , required = false) String paymentStateCode
-									,@RequestParam(value="paymentCode" , required = false) String paymentCode) {
+	public String modifyPaymentState(	@RequestParam(value="servicePaymentCheck" , required = false) String paymentStateCode,
+										@RequestParam(value="paymentCode" , required = false) String paymentCode,
+										@RequestParam(value = "paymentState", required = false) String paymentState,
+										@RequestParam(value = "servicePaymentCheck", required = false)String servicePaymentCheck,
+										Model model, ServicePayment servicePayment) {
+		
 		log.info("서비스 결제정보 코드  {} : " + paymentCode);
 		log.info("서비스 결제 상태  코드  {} : " + paymentStateCode);
 		servicePaymentService.modifyPaymentStateCode(paymentCode,paymentStateCode);
+		
+		//재천코드
+		//servicePaymentCheck
+		String Check1 = servicePayment.getServicePaymentCheck();
+		String complete = "payComplete";
+		if(Check1.equals(complete)) {
+			swIncomeService.addSwIncome(servicePayment);
+			System.out.println("확인3");
+		}
 		return "redirect:/sw/service/servicePaymentSum";
 	}
+	
 	//서비스 결제후 계약현황 관리
 	@GetMapping("/selectContractState")
 	public String selectContractState(Model model) {
@@ -81,6 +102,7 @@ public class SwPaymentController {
 		log.info("계약현황 관리 수정 페이지 | 입력받은 계약코드 ===== :{} ", servicePayment);
 		return "redirect:/sw/service/selectContractState";
 	}
+	
 	@GetMapping("modifyContractState")
 	public String modifyContractState(@RequestParam(value="contractCode", required = false) String contractCode
 										,Model model) {

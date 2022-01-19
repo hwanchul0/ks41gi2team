@@ -3,8 +3,11 @@ package ksmart41_teamtest.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import ksmart41_teamtest.dto.ShopAddAccounting;
+import ksmart41_teamtest.dto.ShopTotalAccounting;
 
 @Mapper
 public interface ShopAddAccountingMapper {
@@ -47,5 +50,14 @@ public interface ShopAddAccountingMapper {
 	
 	//유경 - 쇼핑몰통합비용회계등록
 	int addTotalAccountingByExpense(ShopAddAccounting shopAddAccounting);
+	
+	//유경 - 쇼핑몰통합손익 조회
+	List<ShopAddAccounting> selectTotalAccounting();
+	
+	//유경 - 쇼핑몰 분기 매출 조회
+	List<ShopTotalAccounting> selectShopIncome();
+	
+	//유경 - 쇼핑몰 분기 비용 조회
+	List<ShopTotalAccounting> selectShopExpense();
 
 }

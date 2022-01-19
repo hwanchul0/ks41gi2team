@@ -48,5 +48,14 @@ public interface AccountingMapper {
 
 	//유경 - 통합회계 비용 등록대상 등록
 	public int addTotalByExpense(SwTotalAccounting swTotalAccounting);
+	
+	//유경 - 개발사 통합회계 조회
+	public List<SwTotalAccounting> selectTotalAccounting();
+	
+	//유경 - 개발사 2021년 분기별 매출 조회
+	public List<SwTotalAccounting> selectSwIncome();
+
+	//유경 - 개발사 2021년 분기별 비용 조회
+	public List<SwTotalAccounting> selectSwExpense();
 
 }

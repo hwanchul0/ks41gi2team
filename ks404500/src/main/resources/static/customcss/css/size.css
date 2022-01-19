@@ -72,3 +72,10 @@ display: none;
 	 margin: 0; padding: 0;
 }
 
+/*개발사 세금계산서 등록 페이지 탭 색상*/
+.nav-tabs > li > a{
+        color: #000000;
+    }
+.nav-tabs > li > a:focus {
+        color: #007bff;
+    }

@@ -19,5 +19,15 @@ public class ShopCodeServiceJYK {
 		List<ShopIsListCode> shopIsListCode = codeMapper.getSelectShopIsListCode();
 		return shopIsListCode;
 	}
+	
+	//유경 - 쇼핑몰 계정과목마감 수정
+	public int shopModifyIsListCode(ShopIsListCode shopIsCode) {
+		return codeMapper.ShopModifyIsListCode(shopIsCode);		
+	}
+	
+	//유경 - 쇼핑몰 계정과목마감 
+	public ShopIsListCode getShopIsCodeByShopIsListCode(String shopIsCode) {
+		return codeMapper.getShopIsCodeByShopIsListCode(shopIsCode);
+	}
 
 }
