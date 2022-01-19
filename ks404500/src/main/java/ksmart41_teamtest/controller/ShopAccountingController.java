@@ -40,8 +40,6 @@ public class ShopAccountingController {
 	@Autowired
 	private ExpenseService expenseService;
 	@Autowired
-	private ShopAddAccountingMapper shopAddAccountingMapper;
-	@Autowired
 	private ShopCodeServiceJYK shopCodeServiceJYK;
 
 	
@@ -81,7 +79,7 @@ public class ShopAccountingController {
 		
 
 		return "redirect:/shop/accounting/addIncome";
-	}
+		}
 	
 	//유경 - 쇼핑몰 통합매출회계  발행대상 조회
 	@GetMapping("/addTotalAccounting")

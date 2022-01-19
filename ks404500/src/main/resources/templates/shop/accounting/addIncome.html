@@ -132,7 +132,7 @@ $(document).ready(function(){
 										</thead>
 										<tbody id="myTable">
 											<tr th:if="${not #lists.isEmpty(shopAddAccounting)}" th:each="a: ${shopAddAccounting}">
-												<td><input type="radio" th:disabled="${a.addIncome.equals('발행완료')}" name="list" class="radioButton"	></td>
+												<td><input type="radio" th:disabled="${a.addIncome.equals('발행완료')}" name="list" class="radioButton"></td>
 												<td th:text="${a.addIncome}" ></td>
 												<td th:text="${a.shopIncomeCode}"></td>
 												<td th:text="${a.shopOrderCode}" ></td>
@@ -203,15 +203,7 @@ $(document).ready(function(){
 							                 </div>
 										</div>
 									</div>
-									<!-- 매퍼에서 shopid001로 고정되어있음. -->
-									<div class="form-group row">
-										<label for="shopMemberId" class="col-sm-2 col-form-label">등록자 </label>
-										<div class="col-sm-6">
-											<div class="col-sm-6">
-							                       <input type="text" th:value="${shopMemberId}" readonly="readonly" style="width:220px;"></input>
-							                 </div>
-										</div>
-									</div>
+									
 								<!-- /insert -->
 								<!-- /.card-body -->
 								<div class="card-footer">
