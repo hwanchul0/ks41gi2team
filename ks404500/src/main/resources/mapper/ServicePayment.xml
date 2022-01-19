@@ -22,7 +22,6 @@
 				p.paymentCode
 				,p.contractManageCode
 				,p.slipNumber
-				,p.servicePaymentAmount
 				,p.servicePaymentDueDate
 				,p.paymentSumRegistration
 				,s.paymentState
@@ -144,4 +143,5 @@
 			ON 
 			k.paymentStateCode = s.paymentStateCode;
 		</select>
+		
 </mapper>
