@@ -74,27 +74,12 @@ public class SwServiceController {
 		return codeCheckResult;
 	}
 	// 서비스 삭제 페이지
-	@PostMapping("/deleteServiceManagement")
-	public String deleteService(ServiceManagement serviceManagement) {
-		log.info("서비스 삭제 페이지 / 입력받은 서비스 코드 : {}", serviceManagement);
-		serviceManagementSerivce.deleteService(serviceManagement);
-		
-		return "redirect:/sw/service/selectServiceManagement";
+	@RequestMapping("/deleteServiceManagement")
+	public @ResponseBody int deleteServiceManagemenet(ServiceManagement serviceManagement) {
+		log.info("서비스 삭제 페이지 ======== {}:", serviceManagement);
+		return serviceManagementSerivce.deleteServiceManagemenet(serviceManagement);
 	}
-	@GetMapping("/deleteServiceManagement")
-	public String deleteService(@RequestParam(value="serviceCode", required = false) String serviceCode
-								,Model model) {
-		log.info("deleteServiceManagement serviceCode : {}", serviceCode);
-		model.addAttribute("title", "서비스 수정화면");
-		//서비스 정보
-		if(serviceCode != null && !"".equals(serviceCode)) {
-			ServiceManagement ServiceInfo = serviceManagementSerivce.getServiceInfo(serviceCode);
-			model.addAttribute("ServiceInfo", ServiceInfo);
-		}
-		
-		return "sw/service/deleteServiceManagement";
-	}
-
+	
 
 	// 서비스 수정 페이지 ========================================================
 	@PostMapping("/modifyServiceManagement")

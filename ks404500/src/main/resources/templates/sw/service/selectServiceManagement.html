@@ -7,6 +7,33 @@
 
 <th:block layout:fragment="customJs">
 <script type="text/javascript">
+	// 계약요청 삭제 ajax
+	function deleteBtn(serviceCode){
+		if(serviceCode != null && serviceCode != ""){
+			var deleteConfirm = confirm("서비스 코드 : "+ serviceCode +" 를 삭제하시겠습니까?");
+			if (deleteConfirm) {
+	               alert('해당 서비스가 삭제되었습니다.');
+	               var request = $.ajax({
+	                 url: "/sw/service/deleteServiceManagement",
+	                 method: "POST",
+	                 data: { serviceCode : serviceCode },
+	                 dataType: "text"
+	               });
+	               location.reload();
+	            }
+	         location.reload();
+	         request.done(function(data) {
+	            if(data < 0) {
+	               alert("삭제 실패했습니다.");
+	            }
+	            location.reload();
+	         });
+	      } else {
+	         alert("삭제 실패 ");
+	      };
+			
+		}
+
 	// 검색창
 	$(document).ready(function(){
 	     $("#myInput").on("keyup", function() {
@@ -100,9 +127,7 @@
 																	</a>
 																</td>
 																<td>
-																	<a th:href="@{/sw/service/deleteServiceManagement(serviceCode=${s.serviceCode})}">
-																		<button type="button" class="btn btn-primary deleteBtn">삭제</button>
-																	</a>
+																	<button type="button" class="btn btn-primary" th:onclick="deleteBtn([[${s.serviceCode}]]);">삭제</button>
 																</td>
 															</tr>
 															<tr th:unless="${not #lists.isEmpty(getServiceManagement)}">

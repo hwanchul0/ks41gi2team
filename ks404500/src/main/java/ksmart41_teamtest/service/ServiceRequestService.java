@@ -52,6 +52,29 @@ public class ServiceRequestService {
 		int addServiceRequest = serviceRequestMapper.addServiceRequest(serviceRequest);
 		return addServiceRequest;
 	}
+	// 계약요청 수정
+	public int modifyServiceRequest(ServiceRequest serviceRequest) {
+		return serviceRequestMapper.modifyServiceRequest(serviceRequest);
+	}
+	// 계약요청 정보
+	public ServiceRequest getContractInfo(String contractManageCode) {
+		return serviceRequestMapper.getContractInfo(contractManageCode);
+		
+	}
+	// 계약요청 삭제
+	public int deleteServiceRequest(ServiceRequest serviceRequest) {
+		return serviceRequestMapper.deleteServiceRequest(serviceRequest);
+	}
+	// 서비스 계약요청 확인 -> 승인 페이지
+	public int modifyRequestState(String serviceRequestStatus, String contractManageCode) {
+		int requestState = serviceRequestMapper.modifyRequestState(serviceRequestStatus,contractManageCode);
+		return requestState;
+	}
+	public int acceptRequest(String contractManageCode) {
+		int addPayment = serviceRequestMapper.acceptRequest(contractManageCode);
+		return addPayment;
+	}
+	
 	
 }
 

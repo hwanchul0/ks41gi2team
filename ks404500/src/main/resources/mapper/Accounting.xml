@@ -395,4 +395,5 @@
 	FROM
 		k2_sw_totalAccounting
 	</select>
+
 </mapper>

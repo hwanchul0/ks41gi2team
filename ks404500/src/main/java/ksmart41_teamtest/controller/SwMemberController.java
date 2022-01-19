@@ -52,6 +52,7 @@ public class SwMemberController {
 		//insert처리
 		String memberId = member.getMemberId();
 		if(memberId != null && !"".equals(memberId)) {
+			member.setMemberStatus("Y");
 			member.setMemberLevelCode("SW2");
 			memberService.addMember(member);
 		}

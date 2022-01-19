@@ -1,7 +1,6 @@
 package ksmart41_teamtest.dto;
 
 public class SwIncome {
-	
 	private String swIncomeCode;
 	private String contractManageCode;
 	private String swIsCode;
@@ -15,6 +14,15 @@ public class SwIncome {
 	private String swIncomeRegDate;
 	private String swIncomeFinish;
 	private String swIncomeFinishDate;
+	private String paymentCheckCode;
+	private String paymentCode;
+	private String clientId;
+	private String paymentStateCode;
+	private String paymentEstimate;
+	private String paymentCharge;
+	private String paymentBalance;
+	private String paymentType;
+	private String paymentDate;
 	public String getSwIncomeCode() {
 		return swIncomeCode;
 	}
@@ -93,38 +101,72 @@ public class SwIncome {
 	public void setSwIncomeFinishDate(String swIncomeFinishDate) {
 		this.swIncomeFinishDate = swIncomeFinishDate;
 	}
-	
+	public String getPaymentCheckCode() {
+		return paymentCheckCode;
+	}
+	public void setPaymentCheckCode(String paymentCheckCode) {
+		this.paymentCheckCode = paymentCheckCode;
+	}
+	public String getPaymentCode() {
+		return paymentCode;
+	}
+	public void setPaymentCode(String paymentCode) {
+		this.paymentCode = paymentCode;
+	}
+	public String getClientId() {
+		return clientId;
+	}
+	public void setClientId(String clientId) {
+		this.clientId = clientId;
+	}
+	public String getPaymentStateCode() {
+		return paymentStateCode;
+	}
+	public void setPaymentStateCode(String paymentStateCode) {
+		this.paymentStateCode = paymentStateCode;
+	}
+	public String getPaymentEstimate() {
+		return paymentEstimate;
+	}
+	public void setPaymentEstimate(String paymentEstimate) {
+		this.paymentEstimate = paymentEstimate;
+	}
+	public String getPaymentCharge() {
+		return paymentCharge;
+	}
+	public void setPaymentCharge(String paymentCharge) {
+		this.paymentCharge = paymentCharge;
+	}
+	public String getPaymentBalance() {
+		return paymentBalance;
+	}
+	public void setPaymentBalance(String paymentBalance) {
+		this.paymentBalance = paymentBalance;
+	}
+	public String getPaymentType() {
+		return paymentType;
+	}
+	public void setPaymentType(String paymentType) {
+		this.paymentType = paymentType;
+	}
+	public String getPaymentDate() {
+		return paymentDate;
+	}
+	public void setPaymentDate(String paymentDate) {
+		this.paymentDate = paymentDate;
+	}
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("SwIncome [swIncomeCode=");
-		builder.append(swIncomeCode);
-		builder.append(", contractManageCode=");
-		builder.append(contractManageCode);
-		builder.append(", swIsCode=");
-		builder.append(swIsCode);
-		builder.append(", memberIdFinish=");
-		builder.append(memberIdFinish);
-		builder.append(", invoiceCode=");
-		builder.append(invoiceCode);
-		builder.append(", memberId=");
-		builder.append(memberId);
-		builder.append(", swGroupSlip=");
-		builder.append(swGroupSlip);
-		builder.append(", swSlipNumber=");
-		builder.append(swSlipNumber);
-		builder.append(", swIsName=");
-		builder.append(swIsName);
-		builder.append(", swIncomeInfo=");
-		builder.append(swIncomeInfo);
-		builder.append(", swIncomeRegDate=");
-		builder.append(swIncomeRegDate);
-		builder.append(", swIncomeFinish=");
-		builder.append(swIncomeFinish);
-		builder.append(", swIncomeFinishDate=");
-		builder.append(swIncomeFinishDate);
-		builder.append("]");
-		return builder.toString();
+		return "SwIncome [swIncomeCode=" + swIncomeCode + ", contractManageCode=" + contractManageCode + ", swIsCode="
+				+ swIsCode + ", memberIdFinish=" + memberIdFinish + ", invoiceCode=" + invoiceCode + ", memberId="
+				+ memberId + ", swGroupSlip=" + swGroupSlip + ", swSlipNumber=" + swSlipNumber + ", swIsName="
+				+ swIsName + ", swIncomeInfo=" + swIncomeInfo + ", swIncomeRegDate=" + swIncomeRegDate
+				+ ", swIncomeFinish=" + swIncomeFinish + ", swIncomeFinishDate=" + swIncomeFinishDate
+				+ ", paymentCheckCode=" + paymentCheckCode + ", paymentCode=" + paymentCode + ", clientId=" + clientId
+				+ ", paymentStateCode=" + paymentStateCode + ", paymentEstimate=" + paymentEstimate + ", paymentCharge="
+				+ paymentCharge + ", paymentBalance=" + paymentBalance + ", paymentType=" + paymentType
+				+ ", paymentDate=" + paymentDate + "]";
 	}
+	
 	
 }

@@ -17,23 +17,6 @@ layout:decorate="@{layout/default-sw}">
 	       });
 	     });
 	});
-	   //테이블 페이징
-	     $(function(){
-	        $('.table').footable({
-	           "paging": {
-	              "enabled": true,
-	              "size":5
-	           },
-	           "filtering": {
-	              "enabled": false
-	           },
-	           "sorting": {
-	              "enabled": true
-	           }
-
-	        });
-
-	   });
 	</script>
 </th:block>
 <th:block layout:fragment="customContents">
@@ -75,25 +58,26 @@ layout:decorate="@{layout/default-sw}">
                            <div class="row">
                               <div class="col-sm-12">
                                  <table id="example2" class="table table-bordered table-hover dataTable dtr-inline" role="grid" aria-describedby="example2_info">
-                                    <thead>
+                                    <thead style="font-size:14px;">
                                        <tr role="row">
                                           <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">Code</th>
                                           <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">ID</th>
-                                          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"> 서비스 명</th>
-                                          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"> 계약수량</th>
+                                          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">서비스 명</th>
+                                          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">계약수량</th>
                                           <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">서비스 기간(일)</th>
                                           <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">총 금액</th>
-                                          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">서비스 시작 요청 날짜</th>
-                                          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">서비스 시작 예약 날짜</th>
-                                          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">서비스 종료 날짜</th>
-                                          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">서비스 승인 상태</th>
-                                          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">서비스 승인 날짜</th>
+                                          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">시작 요청 날짜</th>
+                                          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">시작 예약 날짜</th>
+                                          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">종료 날짜</th>
+                                          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">승인 상태</th>
+                                          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">승인 날짜</th>
                                           <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">상세정보</th>
                                        </tr>
                                     </thead>
                                     <tbody id="myTable">
                                        <tr th:if="${not #lists.isEmpty(getAllRequestList)}" th:each="r : ${getAllRequestList}">
                                           <td th:text="${r.contractManageCode}"></td>
+										                      <td th:text="${r.clientId}"></td>
                                           <td th:text="${r.clientId}"></td>
                                           <td th:text="${r.serviceName}"></td>
                                           <td th:text="${r.serviceAmount}"></td>

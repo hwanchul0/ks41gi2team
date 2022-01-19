@@ -27,6 +27,23 @@ public interface ServiceRequestMapper {
 	
 	// 계약요청 등록 
 	public int addServiceRequest(ServiceRequest serviceRequest);
+
+	// 계약요청 수정
+	public int modifyServiceRequest(ServiceRequest serviceRequest);
+
+	// 계약요청 정보
+	public ServiceRequest getContractInfo(String contractManageCode);
+
+	// 계약요청 삭제
+	public int deleteServiceRequest(ServiceRequest serviceRequest);
+
+
+	// 서비스 계약요청 확인 -> 승인 페이지
+	public int modifyRequestState(String serviceRequestStatus, String contractManageCode);
+
+	// 서비스 계약요청 승인 -> 결제예정 테이블
+	public int acceptRequest(String contractManageCode);
+
 	
 
 }
