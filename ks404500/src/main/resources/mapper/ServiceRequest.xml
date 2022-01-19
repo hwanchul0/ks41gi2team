@@ -121,6 +121,7 @@
    <!-- 서비스 등록 | 내 사업장대표코드 modal -->
    <select id="findMyMainBizCode" parameterType="String" resultType="map">
     SELECT 
+
 		main.mainBusinessCode
 		,main.businessCode
 		,main.businessLevelCode
@@ -261,4 +262,5 @@
 	WHERE contractManageCode = #{contractManageCode}
 	);
 	</insert>
+
 </mapper>

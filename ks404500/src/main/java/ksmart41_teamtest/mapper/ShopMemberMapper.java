@@ -23,4 +23,8 @@ public interface ShopMemberMapper {
 	
 	//[재천]외부 회원 정보 삭제
 	public int deleteClientMember(ShopMember shopMember);
+	
+	//[재천]중복 확인
+	public int idCheck(String shopMemberId);
 	}
+

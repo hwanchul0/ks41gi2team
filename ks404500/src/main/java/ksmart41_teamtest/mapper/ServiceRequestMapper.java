@@ -38,6 +38,7 @@ public interface ServiceRequestMapper {
 	public int deleteServiceRequest(ServiceRequest serviceRequest);
 
 
+
 	// 서비스 계약요청 확인 -> 승인 페이지
 	public int modifyRequestState(String serviceRequestStatus, String contractManageCode);
 
@@ -45,5 +46,6 @@ public interface ServiceRequestMapper {
 	public int acceptRequest(String contractManageCode);
 
 	
+
 
 }
