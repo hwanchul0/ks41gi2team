@@ -3,6 +3,8 @@ package ksmart41_teamtest.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import ksmart41_teamtest.dto.ShopAddAccounting;
 import ksmart41_teamtest.dto.ShopTotalAccounting;

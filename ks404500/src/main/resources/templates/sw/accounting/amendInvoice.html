@@ -43,7 +43,72 @@ $(document).ready(function(){
 	})
 })
 
+//합계금액 계산하기
+		$(function() {
+			$('input.money1').on('keyup', function() {
+				var cnt = $(".exam input.num_sum").length;
+				//console.log(cnt);
 
+				for (var i = 1; i < cnt; i++) {
+					var sum = parseInt($(this).val() || 0);
+					sum++
+					//console.log(sum);
+				}
+
+				var sum1 = parseInt($("#fn_type1_price").val() || 0); // input 값을 가져오며 계산하지만 값이 없을경우 0이 대입된다  뒷부분에 ( || 0 ) 없을경우 합계에 오류가 생겨 NaN 값이 떨어진다
+				var sum2 = parseInt($("#fn_type2_price").val() || 0);
+				var sum3 = parseInt($("#fn_type3_price").val() || 0);
+				var sum4 = parseInt($("#fn_type4_price").val() || 0);
+
+				var sum = sum1 + sum2 + sum3 + sum4;
+				//console.log(sum);
+				$("#fn_total").val(sum);
+
+			});
+		});
+		
+//마이너스 입력 제한		
+$(function() {
+//Select your input element.
+var number1 = document.getElementById('fn_type1_price'); //현금
+var number2 = document.getElementById('fn_type2_price'); //수표
+var number3 = document.getElementById('fn_type3_price'); //어음
+var number4 = document.getElementById('fn_type4_price'); //외상미수금
+
+// Listen for input event on numInput.
+number1.onkeydown = function(e) {
+    if(!((e.keyCode > 95 && e.keyCode < 106)
+      || (e.keyCode > 47 && e.keyCode < 58) 
+      || e.keyCode == 8)) {
+    	alert('현금은 0 이상의 숫자만 입력가능합니다.');
+        return false;
+    }
+}
+number2.onkeydown = function(e) {
+    if(!((e.keyCode > 95 && e.keyCode < 106)
+      || (e.keyCode > 47 && e.keyCode < 58) 
+      || e.keyCode == 8)) {
+    	alert('수표는 0 이상의 숫자만 입력가능합니다.');
+        return false;
+    }
+}
+number3.onkeydown = function(e) {
+    if(!((e.keyCode > 95 && e.keyCode < 106)
+      || (e.keyCode > 47 && e.keyCode < 58) 
+      || e.keyCode == 8)) {
+    	alert('어음은 0 이상의 숫자만 입력가능합니다.');
+        return false;
+    }
+}
+number4.onkeydown = function(e) {
+    if(!((e.keyCode > 95 && e.keyCode < 106)
+      || (e.keyCode > 47 && e.keyCode < 58) 
+      || e.keyCode == 8)) {
+    	alert('외상미수금은 0 이상의 숫자만 입력가능합니다.');
+        return false;
+    }
+}
+});
 </script>
 </th:block>
 
