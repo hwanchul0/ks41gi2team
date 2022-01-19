@@ -25,6 +25,25 @@ public class ServicePayment {
 	private String serviceRegistrationDate;
 	private String serviceDeleteDate;
 	private String contractRegDate;
+	private String serviceTotalPrice;
+	private String serviceRequestStatus;
+	
+	
+	public String getServiceRequestStatus() {
+		return serviceRequestStatus;
+	}
+	public void setServiceRequestStatus(String serviceRequestStatus) {
+		this.serviceRequestStatus = serviceRequestStatus;
+	}
+	public String getServiceTotalPrice() {
+		return serviceTotalPrice;
+	}
+	public void setServiceTotalPrice(String serviceTotalPrice) {
+		this.serviceTotalPrice = serviceTotalPrice;
+	}
+	public String getContractState() {
+		return contractState;
+
 	private String servicePaymentCheck;
 	
 	//재천 조인
@@ -42,6 +61,7 @@ public class ServicePayment {
 	private String swIncomeFinishDate;
 	public String getPaymentCode() {
 		return paymentCode;
+
 	}
 	public void setPaymentCode(String paymentCode) {
 		this.paymentCode = paymentCode;
@@ -264,6 +284,7 @@ public class ServicePayment {
 	}
 	@Override
 	public String toString() {
+
 		return "ServicePayment [paymentCode=" + paymentCode + ", contractManageCode=" + contractManageCode
 				+ ", slipNumber=" + slipNumber + ", servicePaymentAmount=" + servicePaymentAmount
 				+ ", paymentStateCode=" + paymentStateCode + ", paymentState=" + paymentState
@@ -281,8 +302,5 @@ public class ServicePayment {
 				+ ", swIsName=" + swIsName + ", swIncomeInfo=" + swIncomeInfo + ", swIncomeRegDate=" + swIncomeRegDate
 				+ ", swIncomeFinish=" + swIncomeFinish + ", swIncomeFinishDate=" + swIncomeFinishDate + "]";
 	}
-	
 
-	
-	
 }

@@ -21,6 +21,6 @@ public interface SeviceManagementMapper {
 	// 서비스 정보 조회
 	public ServiceManagement getServiceInfo(String serviceCode);
 	// 서비스 제거
-	public int deleteService(ServiceManagement serviceManagement);
+	public int deleteServiceManagemenet(ServiceManagement serviceManagement);
 		
 }
