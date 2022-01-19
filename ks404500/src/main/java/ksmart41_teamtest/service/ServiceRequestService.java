@@ -65,6 +65,7 @@ public class ServiceRequestService {
 	public int deleteServiceRequest(ServiceRequest serviceRequest) {
 		return serviceRequestMapper.deleteServiceRequest(serviceRequest);
 	}
+
 	// 서비스 계약요청 확인 -> 승인 페이지
 	public int modifyRequestState(String serviceRequestStatus, String contractManageCode) {
 		int requestState = serviceRequestMapper.modifyRequestState(serviceRequestStatus,contractManageCode);
@@ -74,7 +75,7 @@ public class ServiceRequestService {
 		int addPayment = serviceRequestMapper.acceptRequest(contractManageCode);
 		return addPayment;
 	}
-	
+
 	
 }
 
