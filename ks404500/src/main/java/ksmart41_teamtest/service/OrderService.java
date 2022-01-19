@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ksmart41_teamtest.dto.Order;
+import ksmart41_teamtest.dto.ShopAddAccounting;
+import ksmart41_teamtest.dto.ShopAddPaymentCheck;
 import ksmart41_teamtest.mapper.OrderMapper;
 
 @Service
@@ -23,7 +25,5 @@ public class OrderService {
 		List<Order>	order = orderMapper.getOrder();
 		return order;
 	}
-
-	
 
 }

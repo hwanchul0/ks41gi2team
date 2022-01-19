@@ -132,7 +132,7 @@ $(document).ready(function(){
 										</thead>
 										<tbody id="myTable">
 											<tr th:if="${not #lists.isEmpty(shopAddAccounting)}" th:each="a: ${shopAddAccounting}">
-												<td><input type="radio" th:disabled="${a.addIncome.equals('발행완료')}" name="list" class="radioButton"></td>
+												<td><input type="radio" th:disabled="${a.addIncome.equals('발행완료')}" name="list" class="radioButton"	></td>
 												<td th:text="${a.addIncome}" ></td>
 												<td th:text="${a.shopIncomeCode}"></td>
 												<td th:text="${a.shopOrderCode}" ></td>
@@ -208,7 +208,7 @@ $(document).ready(function(){
 										<label for="shopMemberId" class="col-sm-2 col-form-label">등록자 </label>
 										<div class="col-sm-6">
 											<div class="col-sm-6">
-							                       <input type="text" th:value="${SHOPID}" name="shopMemberId" id="shopMemberId" readonly="readonly" style="width:220px;"></input>
+							                       <input type="text" th:value="${shopMemberId}" readonly="readonly" style="width:220px;"></input>
 							                 </div>
 										</div>
 									</div>

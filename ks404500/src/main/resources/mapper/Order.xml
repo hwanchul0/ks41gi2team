@@ -32,6 +32,6 @@
 	FROM
 		k2_shop_order;
 	</select>
-	<!-- 유성 쇼핑몰 주문내역 삭제 -->
+
 	
 </mapper>

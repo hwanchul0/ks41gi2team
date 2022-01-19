@@ -31,7 +31,7 @@
 	
 	</select>
 	
-	<insert id = "addPaymentCheck" parameterType="shopPaymentCheck">
+	<insert id = "addPaymentCheck" parameterType="ShopPaymentCheck">
 		INSERT INTO k2_shop_paymentCheck(
 		shopPaymentCheckCode,
 			shopConsumerId,
@@ -40,7 +40,10 @@
 			shopPaymentCharge,
 			shopPaymentDate
 		)VALUES(
-			#{shopPaymentCheckCode},
+			 (SELECT
+				max(shopPaymentCheckCode)+1
+				FROM
+				k2_shop_paymentCheck),
 			#{shopConsumerId},
 			#{paymentStateCode},
 			#{paymentType},
@@ -49,12 +52,23 @@
 		
 		);
 	</insert>
+	<!--  유성 쇼핑몰 결제 등록 -->
 	
-	<select id ="getMergePaymentCheck" resultType="shopPaymentCheck">
+	<select id="getAddShopAddPaymentCheck"  parameterType="String" resultType="ShopPaymentCheck">
 	SELECT
-		*
-		FROM
-	k2_shop_paymentCheck;
+		if(ISNULL(P.shopPaymentCheckCode), '발행대상','발행완료') AS addPaymentCheck,
+		P.shopConsumerId,
+		P.shopMemberId,
+		P.paymentStateCode,
+		P.shopPaymentCode,
+		P.shopPaymentCharge,
+		P.shopPaymentBalance,
+		P.paymentType,
+		P.shopPaymentDate
+	FROM
+		k2_shop_paymentCheck as P;
 	
 	</select>
+
+	
 </mapper>

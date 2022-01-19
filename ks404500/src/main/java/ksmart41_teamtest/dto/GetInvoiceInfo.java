@@ -18,8 +18,8 @@ public class GetInvoiceInfo {
 	private String slipNumber;
 	private String serviceRegistrationDate;
 	private int serviceTotalPrice;
-	private int nontax;
-	private int tax;
+	private int nontax; //공급가
+	private int tax; //세액
 	private String invoiceCode;
 	private String contractManageCode;
 	
