@@ -1,6 +1,5 @@
 
 package ksmart41_teamtest.controller;
-
 import java.util.List;
 import javax.servlet.http.HttpSession;
 
@@ -38,6 +37,7 @@ public class ShopAccountingController {
 	private ShopAddAccountingMapper shopAddAccountingMapper;
 	@Autowired
 	private ShopCodeServiceJYK shopCodeServiceJYK;
+
 	
 	//유경 - 쇼핑몰 매출 등록화면에서 발행 대상 조회
 	@GetMapping("/addIncome")
@@ -110,17 +110,17 @@ public class ShopAccountingController {
 		return "redirect:/shop/accounting/addTotalAccountingExpense";
 	}
 
-	// 유성 쇼핑몰 비용 등록                            
-	@GetMapping("/addExpense")                           
-	public String addExpense(Model model) {                           
-	   model.addAttribute("title", "쇼핑몰비용 등록");                        
-	                           
-	                           
-	   List<ShopIsListCode> shopIsListCode = shopCodeServiceJYK.getSelectShopIsListCode();                        
-	   model.addAttribute("shopIsListCode", shopIsListCode);                         
-	   return "shop/accounting/addExpense";                        
-	                           
-	}                           
+	// 유성 쇼핑몰 비용 등록 										
+	@GetMapping("/addExpense")										
+	public String addExpense(Model model) {										
+		model.addAttribute("title", "쇼핑몰비용 등록");									
+											
+											
+		List<ShopIsListCode> shopIsListCode = shopCodeServiceJYK.getSelectShopIsListCode();									
+		model.addAttribute("shopIsListCode", shopIsListCode); 									
+		return "shop/accounting/addExpense";									
+											
+	}										
 
 	
 	@PostMapping("/addExpense")
@@ -228,5 +228,5 @@ public class ShopAccountingController {
 		model.addAttribute("shop2021Expense", shop2021Expense);
 		return "shop/accounting/selectTotalAccounting";
 		}
-	
+
 }

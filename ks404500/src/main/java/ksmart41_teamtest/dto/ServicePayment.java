@@ -41,13 +41,16 @@ public class ServicePayment {
 	public void setServiceTotalPrice(String serviceTotalPrice) {
 		this.serviceTotalPrice = serviceTotalPrice;
 	}
+
 	public String getContractState() {
 		return contractState;
 	}
 
 	private String servicePaymentCheck;
 	
+
 	//재천 조인
+	private String servicePaymentCheck;
 	private String swIncomeCode;
 	private String swIsCode;
 	private String memberIdFinish;
