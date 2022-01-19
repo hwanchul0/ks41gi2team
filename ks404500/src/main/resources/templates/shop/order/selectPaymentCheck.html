@@ -39,11 +39,11 @@ layout:decorate="@{layout/default-shop}">
 									<table class="table table-hover table-condensed shopPaymentCheck" >
 										<thead>
 											<tr>
+												<th>구분</th>
 												<th>결제확인코드</th>
 												<th>소비자 아이디</th>
 												<th>결제 상태 코드</th>
 												<th>결제 금액(VAT포함)</th>
-												<th>잔금</th>
 												<th>결제방법</th>
 												<th>결제일</th>
 
@@ -52,11 +52,12 @@ layout:decorate="@{layout/default-shop}">
 										</thead>
 										<tbody>
 										<tr th:if="${not #lists.isEmpty(shopPaymentCheck)}" th:each="sp: ${shopPaymentCheck}">
+											<td th:if="${sp.shopPaymentDate == payWaiting}" th:text="등록대상"></td>
+                                    		<td th:unless="${sp.shopPaymentDate == payComplete}" th:text="등록완료"></td>
 											<td th:text="${sp.shopPaymentCheckCode}"></td>
 											<td th:text="${sp.shopConsumerId}"></td>
 											<td th:text="${sp.paymentStateCode}"></td>
 											<td th:text="${#numbers.formatInteger(sp.shopPaymentCharge, 0, 'COMMA')}"></td>
-											<td th:text="${sp.shopPaymentBalance}"></td>
 											<td th:text="${sp.paymentType}"></td>
 											<td th:text="${sp.shopPaymentDate}"></td>
 											

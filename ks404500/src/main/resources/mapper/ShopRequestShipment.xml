@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ksmart41_teamtest.mapper.ShopRequestShipmentMapper">
+
+<select id="getShopRequestShipment" resultType="ShopRequestShipment" >
+	SELECT
+		o.shopOrderCode,
+		o.assortCode,
+		a.mainBusinessCode,
+		o.shopConsumerId,
+		o.shopOrderAmount,
+		o.shopDeliveryLocation,
+		a.stockAmount,
+		a.stockSchedule,
+		a.stockPossible,
+		a.stockPrice,
+		p.goodsName
+
+	FROM
+		k2_shop_order AS o
+		left JOIN
+		k2_release AS r
+		ON
+		o.shopOrderCode = r.shopOrderCode
+		INNER JOIN
+		k2_assort_goods AS a
+		on
+		a.assortCode = o.assortCode
+		INNER JOIN
+		k0_productCategory AS p
+		on
+		p.categoryCode = a.categoryCode
+	WHERE
+		r.releaseCode IS null
+
+</select>
+
+
+
+
+
+</mapper>
