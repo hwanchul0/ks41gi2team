@@ -2,105 +2,230 @@
 <html xmlns:th="http://www.thymeleaf.org" 
 xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
 layout:decorate="@{layout/default-shop}">
-<th:block layout:fragment="javascriptFragment">
-</th:block>	 
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<th:block layout:fragment="customJs">
+<script>
+$(document).ready(function () {
+    $('.radioButton').click(function () {
+
+			var str = ""
+			var tdArr = new Array();	// 배열 선언
+			var checkBtn = $(this);
+
+			var tr = checkBtn.parent().parent();
+			var td = tr.children();
+			td.each(function(i){	
+				tdArr.push(td.eq(i).text());
+			});
+
+			console.log("클릭한 Row의 모든 데이터 : "+td.text());
+			
+			// 반복문을 이용해서 배열에 값을 담음
+			td.each(function(i){	
+				tdArr.push(td.eq(i).text());
+			});
+		
+			
+			/*console.log(tdArr[2]); //결제코드
+			console.log(tdArr[3]); //소비자아이디
+			console.log(tdArr[4]); //담당자아이디
+			console.log(tdArr[5]); //결제상태코드
+			console.log(tdArr[6]); //합계코드
+			console.log(tdArr[7]); //금액
+			console.log(tdArr[8]); //잔금
+			console.log(tdArr[9]); //결제방법
+			console.log(tdArr[10]); //결제일 */
+			
+			document.getElementById("shopConsumerId").value = tdArr[3]; //소비자아이디
+			document.getElementById("shopPaymentCharge").value = tdArr[7]; //금액
+			document.getElementById("paymentType").value = tdArr[9]; //결제방법
+			document.getElementById("shopPaymentDate").value = tdArr[10];//결제일
+
+    });
+    
+    //버튼을 선택하지않고 입력완료 선택시 경고창
+    $('#sign').click(function () {
+    	 var Category1 = $('.radioButton');
+    	    if($(':radio[class="radioButton"]:checked').length < 1){
+    	        alert('발행대상을 선택해주세요');
+    	        Category1.focus();
+    	        event.preventDefault();
+    	   		}
+    	
+    });
+   
+  });
+ 
+ //검색
+
+$(document).ready(function(){
+	  $("#myInput").on("keyup", function() {
+	    var value = $(this).val().toLowerCase();
+	    $("#myTable tr").filter(function() {
+	      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+	    });
+	  });
+	});
+
+</script>
+</th:block>
 
 <th:block layout:fragment="customContents">
 <!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper">
-	<!-- Content Header (Page header) -->
-		<div class="content-header">
+		<!-- Content Header (Page header) -->
+		<section class="content-header">
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1 class="m-0">쇼핑몰 결제  등록 </h1>
-					</div><!-- /.col -->
+						<h1>"addPaymentCheck / 쇼핑몰 결제 등록"</h1>
+					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
-							<li class="breadcrumb-item"><a href="#">Home</a></li>
-							<li class="breadcrumb-item active">Starter Page</li>
+							<li class="breadcrumb-item"><a href="/shop/index-shop">Home</a></li>
+							<li class="breadcrumb-item active">결제관리</li>
 						</ol>
-					</div><!-- /.col -->
-				</div><!-- /.row -->
-			</div><!-- /.container-fluid -->
-		</div>
-	<!-- /.content-header -->
-	
-	<!-- Main content -->
-		<div class="content">
+					</div>
+				</div>
+			</div>
+			<!-- /.container-fluid -->
+		</section>
+
+		<!-- Main content -->
+		<section class="content">
 			<div class="container-fluid">
 				<div class="row">
-					<div class="col-lg-12">
+					<!-- left column -->
+					<div class="col-md-12">
+						<!-- /.card-header -->
+						<!-- Horizontal Form -->
 						<div class="card card-success">
 							<div class="card-header">
-								<h5 class="card-title"> 쇼핑몰 결제  등록</h5>
+								<h3 class="card-title">쇼핑몰 결제 등록</h3>
 							</div>
-							
-							<!--  쇼핑몰 결제  등록 등록 폼바디 시작 -->
-								<form id="addPaymentCheckForm" th:action="@{/shop/order/addPaymentCheck}" method="post" class="form-horizontal"> 
-								<p class="card-body" >
+							<!-- /.card-header -->
+							<!-- form start -->
+							<form class="form-horizontal" th:action="@{/shop/order/addPaymentCheck}" method="post">
+								<div class="card-body">
+									<input class="form-control col-md-3" style="float : right" id="myInput" type="text" placeholder="검색어를 입력해주세요">
 									
-								
-								<div class="form-group row">
-									<label class="col-sm-2 col-form-laebl text-right">소비자아이디</label>
-									<div class="col-sm-4">
-										<input class="form-control" type="text" id="shopConsumerId" name="shopConsumerId" placeholder="소비자아이디" >
-									</div>
-								</div>
-								
-								
-								
+									<!-- 테이블 시작 -->
+									<div style="width: 100%;">
+									<label for="biz" class="col-sm-6 col-form-label">결제내역 - 결제대상을 선택해주세요</label>
+									<table class="table table-hover table-condensed" style="font-size: 13px; overflow-y : scroll; height: 150px;">
+										<thead>
+											<tr>
+												<th>선택</th>
+												<th>구분</th>
+												<th>결제코드</th>
+												<th>담당자 아이디</th>
+												<th>결제 상태 코드</th>
+												<th>결제정보코드</th>
+												<th>결제 금액</th>
+												<th>결제방법</th>
+												<th>결제일</th>
 
-								<div class="form-group row">
-									<label class="col-sm-2 col-form-laebl text-right">결제상태코드</label>
-									<div class="col-sm-4">
-										<input class="form-control" type="text" id="paymentStateCode" name="paymentStateCode" placeholder="paywaiting" readonly ="readonly">
-									</div>
+											</tr>
+										</thead>
+										<tbody id="myTable">
+											<tr th:if="${not #lists.isEmpty(shopAddPaymentCheck)}" th:each="p: ${shopAddPaymentCheck}">
+												<td><input type="radio" th:disabled="${p.shopPaymentCheckCode.equals('등록완료')}" name="list" class="radioButton"></td>
+												
+												<td th:if="${p.shopPaymentCheckCode == null}" th:text="등록대상"></td>
+                                    			<td th:unless="${p.shopPaymentCheckCode == null}" th:text="등록완료"></td>
+												<td th:text="${p.shopPaymentCheckCode}"></td>
+												<td th:text="${p.shopConsumerId}" ></td>
+												<td th:text="${p.shopMemberId}" ></td>
+												<td th:text="${p.paymentStateCode}"></td>
+												<td th:text="${p.shopPaymentCode}" ></td>
+												<td th:text="${p.shopPaymentCharge}" ></td>
+												<td th:text="${p.paymentType}"></td>
+												<td th:text="${p.shopPaymentDate}" ></td>
+										
+												</tr>
+											<tr th:unless="${not #lists.isEmpty(shopAddPaymentCheck)}">
+												<td>내역이 없습니다.</td>
+											</tr>
+										</tbody>
+									</table>
 								</div>
+								<!-- 결제내역 테이블 끝  -->
+								<div class="row">
+									<label for="biz" class="col-sm-6 col-form-label">결제내역 - 결제내역을 확인해주세요</label>
+								</div>
+								<!-- insert -->
+							
 								
-								<div class="form-group row">
-									<label class="col-sm-2 col-form-laebl text-right">금액</label>
-									<div class="col-sm-4">
-										<input class="form-control" type="text" id="shopPaymentCharge" name="shopPaymentCharge" placeholder="결제금액 (VAT포함)">
+									<div class="form-group row">
+										<label for="shopMemberId" class="col-sm-2 col-form-label">담당자아이디 </label>
+										<div class="col-sm-6">
+											<div class="col-sm-6">
+							                       <input type="text" th:value="${SHOPID}" name="shopMemberId" id="shopMemberId" readonly="readonly" style="width:220px;"></input>
+							                 </div>
+										</div>
 									</div>
-								</div>
-								
-								<div class="form-group row">
-									<label class="col-sm-2 col-form-laebl text-right">결제방법</label>
-									<div class="col-sm-2">
-										<select id="businessCode" class="form-control" name="paymentType">
-											<option value="">::결제방법선택::</option>
-											<option value="현금">현금</option>
-											<option value="카드">카드</option>
-											<option value="계좌이체">계좌이체</option>
-											
-										</select>
+										<div class="form-group row">
+									<label for="paymentStateCode" class="col-sm-2 col-form-label">결제상태코드</label>
+										<div class="col-sm-6">
+											<div class="col-sm-6">
+							                        <input type="text" value="PayWaiting" name="paymentStateCode"  readonly="readonly" style="width:220px;">
+							                 </div>
+										</div>
 									</div>
-								</div>
-								
-								<div class="form-group row">
-									<label class="col-sm-2 col-form-laebl text-right">결제일</label>
-									<div class="col-sm-4">
-										<input class="form-control" type="date" id="shopPaymentDate" name="shopPaymentDate" placeholder="결제일">
+									<div class="form-group row">
+										<label for="shopPaymentCode" class="col-sm-2 col-form-label">결제정보코드</label>
+										<div class="col-sm-6">
+											<div class="col-sm-6">
+							                       <input type="text" name="shopPaymentCode" readonly="readonly"  id="shopPaymentCode"style="width:220px;"></input>
+							                 </div>
+										</div>
 									</div>
-								</div>
-
+									<div class="form-group row">
+										<label for="shopPaymentCharge" class="col-sm-2 col-form-label">결제금액 </label>
+										<div class="col-sm-6">
+											<div class="col-sm-6">
+							                       <input type="text" name="shopPaymentCharge" id="shopPaymentCharge"  style="width:220px;"></input>
+							                 </div>
+										</div>
+									</div>
+									
+									<div class="form-group row">
+										<label for="paymentType" class="col-sm-2 col-form-label">결제방법 </label>
+										<div class="col-sm-6">
+											<div class="col-sm-6">
+							                       <<input type="text" name="paymentType" id="paymentType"  style="width:220px;"></input>
+							                 </div>
+										</div>
+									</div>
+									<div class="form-group row">
+										<label for="shopPaymentDate" class="col-sm-2 col-form-label">결제일</label>
+										<div class="col-sm-6">
+											<div class="col-sm-6">
+							                       <input type="text" name="shopPaymentDate" id="shopPaymentDate" readonly="readonly" style="width:220px;"></input>
+							                 </div>
+										</div>
+									</div>
+								<!-- /insert -->
+								<!-- /.card-body -->
 								<div class="card-footer">
-									<button type="submit" class="btn btn-success" id="addPaymentCheckBtn"> 등록 </button>
-									<button type="button" class="btn btn-default float-right" id="cancleMainBusinessCodeBtn"> 취소 </button>
+									<button type="submit" class="btn btn-success" id="sign">입력완료</button>
+									<button type="button" onclick="history.back();"  class="btn btn-default float-right">취소</button>
 								</div>
-							</form> 
-							</div>
+								<!-- /.card-footer -->
+								</div>
+							</form>
 						</div>
+						<!-- /.card -->
 					</div>
+					<!--/.col (left) -->
 				</div>
 				<!-- /.row -->
 			</div>
 			<!-- /.container-fluid -->
-		</div>
+		</section>
 		<!-- /.content -->
-		</div>
 	</div>
-<!-- /.content-wrapper -->
+	<!-- /.content-wrapper -->
 </th:block>
 </html>

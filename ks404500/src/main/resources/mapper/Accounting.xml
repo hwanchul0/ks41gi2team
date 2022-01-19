@@ -4,9 +4,8 @@
 
 	<resultMap type="GetInvoiceInfo" id="GetInvoiceInfoResultMap">
 		<result column="mainBusinessCode"				property="mainBusinessCode"/>
-		<result column="businessName"				property="businessName"/>
+		<result column="businessName"					property="businessName"/>
 		<result column="contractManageCode"				property="contractManageCode"/>
-
 	</resultMap>
 
 	<!--유경 : 세금계산서 발행화면- 계약내용 조회  -->
@@ -193,7 +192,7 @@
 			GROUP_CONCAT(i.swIncomeCode) AS swIncomeCode,
 			p.contractManageCode,
 			i.swGroupSlip,
-			SUM(p.servicePaymentAmount) AS servicePaymentAmount,
+			SUM(c.serviceTotalPrice) AS servicePaymentAmount,
 			t.swTotalCode,
 			t.swGroupSlip as swTotalGroupSlip,
 			t.swSalesSection,
@@ -204,7 +203,11 @@
 		INNER join
 			k2_sw_paymentSum AS p
 		on
-		i.contractManageCode = p.contractManageCode	
+		i.contractManageCode = p.contractManageCode
+		INNER join
+		k2_sw_contractRequest AS c
+		on
+		c.contractManageCode = p.contractManageCode
 		left join
 			k2_sw_totalAccounting AS t
 		ON
@@ -258,6 +261,7 @@
 		ORDER BY (swTotalCode), swTotalCode DESC;
 	</select>
 	
+	<!-- 유경 - 통합회계등록 - 비용 -->
 	<insert id="addTotalByExpense" parameterType="SwTotalAccounting">
 		INSERT INTO k2_sw_totalAccounting
 			(swTotalCode,
@@ -274,5 +278,122 @@
 			#{swTotalTable},
 			#{swTotalPrice})
 	</insert>
+	
+	<!-- 유경- 개발사 통합회계 조회 2021년 매출, 비용 -->
+	<select id="selectTotalAccounting" resultType="SwTotalAccounting">
+		SELECT
+			DISTINCT((SELECT
+			SUM(t.swTotalPrice)
+			from
+			k2_sw_totalAccounting AS t
+			WHERE
+			substring(swGroupSlip,12,2) = 21
+			AND
+			t.swSalesSection = '매출')) AS sales2021,
+			(SELECT
+			SUM(t.swTotalPrice)
+			from
+			k2_sw_totalAccounting AS t
+		WHERE
+			substring(swGroupSlip,12,2) = 21
+		AND
+			t.swSalesSection = '비용') AS expense2021
+		FROM
+			k2_sw_totalAccounting
+	</select>
+	
+	<!-- 개발사 2021년 분기별 매출  -->
+	<select id="selectSwIncome" resultType="SwTotalAccounting">
+	SELECT
+	DISTINCT((SELECT
+		SUM(t.swTotalPrice)
+	FROM
+		k2_sw_totalAccounting  AS t
+	WHERE 
+		QUARTER(cast(SUBSTRING(swGroupSlip, 12, 6)AS DATE)) = 1	
+	and
+		substring(swGroupSlip,12,2) = 21
+	AND
+			t.swSalesSection = '매출')) AS 'sales1Q',
+	(SELECT
+		SUM(t.swTotalPrice)
+	FROM
+		k2_sw_totalAccounting  AS t
+	WHERE 
+		QUARTER(cast(SUBSTRING(swGroupSlip, 12, 6)AS DATE)) = 2
+	and
+		substring(swGroupSlip,12,2) = 21
+	AND
+			t.swSalesSection = '매출') AS 'sales2Q',
+	(SELECT
+		SUM(t.swTotalPrice)
+	FROM
+		k2_sw_totalAccounting  AS t
+	WHERE 
+		QUARTER(cast(SUBSTRING(swSalesSection,12, 6)AS DATE)) = 3
+	and
+		substring(swSalesSection,12,2) = 21
+	AND
+			t.swSalesSection = '매출') AS 'sales3Q',
+	(SELECT
+		SUM(t.swTotalPrice)
+	FROM
+		k2_sw_totalAccounting  AS t
+	WHERE 
+		QUARTER(cast(SUBSTRING(swGroupSlip, 12, 6)AS DATE)) = 4
+	and
+		substring(swGroupSlip,12,2) = 21
+	AND
+			t.swSalesSection = '매출') AS 'sales4Q'		
+	FROM
+	k2_sw_totalAccounting;
+	</select>
+	
+	<!-- 유경- 개발사 21년 분기별 비용 -->
+	<select id="selectSwExpense" resultType="SwTotalAccounting">
+	SELECT
+		DISTINCT((SELECT
+			SUM(t.swTotalPrice)
+		FROM
+			k2_sw_totalAccounting  AS t
+		WHERE 
+			QUARTER(cast(SUBSTRING(swGroupSlip, 12, 6)AS DATE)) = 1
+		AND
+			substring(swGroupSlip,12,2) = 21
+		AND
+				t.swSalesSection = '비용')) AS 'expense1Q',
+		(SELECT
+			SUM(t.swTotalPrice)
+		FROM
+			k2_sw_totalAccounting  AS t
+		WHERE 
+			QUARTER(cast(SUBSTRING(swGroupSlip, 12, 6)AS DATE)) = 2
+		AND
+			substring(swGroupSlip,12,2) = 21
+		AND
+				t.swSalesSection = '비용') AS 'expense2Q',
+		(SELECT
+			SUM(t.swTotalPrice)
+		FROM
+			k2_sw_totalAccounting  AS t
+		WHERE 
+			QUARTER(cast(SUBSTRING(swGroupSlip, 12, 6)AS DATE)) = 3
+		AND
+			substring(swGroupSlip,12,2) = 21
+		AND
+				t.swSalesSection = '비용') AS 'expense3Q',
+		(SELECT
+			SUM(t.swTotalPrice)
+		FROM
+			k2_sw_totalAccounting  AS t
+		WHERE 
+			QUARTER(cast(SUBSTRING(swGroupSlip, 12, 6)AS DATE)) = 4
+		AND
+			substring(swGroupSlip,12,2) = 21
+		AND
+			t.swSalesSection = '비용') AS 'expense4Q'		
+	FROM
+		k2_sw_totalAccounting
+	</select>
 
 </mapper>

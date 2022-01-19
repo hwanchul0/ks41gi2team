@@ -38,11 +38,46 @@
 		k2_paymentState;
 	</select>
 	
+	<!-- 유경 - 손익계정 사용여부 수정하기 -->
+	<update id="ShopModifyIsListCode" parameterType="ShopIsListCode">
+		UPDATE k2_shop_is_list
+			SET
+				shopIsUse = #{shopIsUse}
+			WHERE 
+				shopIsCode = #{shopIsCode};
+	</update>
+	
 	<!-- 유경 - 쇼핑몰 손익계정과목 조회 -->
 	<select id="getSelectShopIsListCode" resultType="ShopIsListCode">
 		SELECT
-			*
+			shopIsCode, 
+			shopIsName, 
+			shopIsGroupCode, 
+			mainBusinessCode, 
+			shopIsUse, 
+			shopIsAmend, 
+			shopIsRegDate, 
+			shopIsYear,
+			shopMemberId
+		FROM 
+			k2_shop_is_list
+	</select>
+	
+	<!-- 유경 : 쇼핑몰 손익계정에서 값 가져오기 -->
+	<select id="getShopIsCodeByShopIsListCode" resultType="ShopIsListCode">
+		SELECT 
+			shopIsCode, 
+			shopIsName, 
+			shopIsGroupCode, 
+			mainBusinessCode, 
+			shopIsUse,
+			shopIsAmend, 
+			shopIsRegDate,
+			shopIsYear,
+			shopMemberId
 		FROM k2_shop_is_list
+		where
+			shopIsCode = #{shopIsCode};
 	</select>
 	
 </mapper>

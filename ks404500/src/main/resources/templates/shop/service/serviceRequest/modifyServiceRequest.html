@@ -29,6 +29,15 @@
 					// 숫자 콤마(,)적용
 					//$('#serviceTotalPrice').val(servicePrice.toLocaleString());
 				});
+			
+				$(document).on('click','#cancleBtn',function(){
+					if(confirm("취소하시겠습니까?")){
+						$(location).attr('href', '/shop/serivce/serviceRequest/selectServiceRequest');
+					}else{
+						location.reload();
+					}
+				})
+			
 		});
 	</script>
 </th:block>
@@ -67,7 +76,7 @@
 				</div>
 				<!-- /.card-header -->
 				<!-- form start -->
-				<form class="form-horizontal" th:action="@{/shop/service/serviceRequest/modifyServiceRequest}" method="POST">
+				<form id="modifyRequestForm" class="form-horizontal" th:action="@{/shop/service/serviceRequest/modifyServiceRequest}" method="POST">
 					<div class="card-body">
 						<div class="form-group row">
 							<label for="contractManageCode" class="col-sm-2 col-form-label">계약요청코드</label>
@@ -130,7 +139,7 @@
 					<!-- /.card-body -->
 					<div class="card-footer">
 						<button type="submit" class="btn btn-primary">저장</button>
-						<button type="submit" class="btn btn-default float-right" th:href="@{#}">취소</button>
+						<button type="button" id="cancleBtn" class="btn btn-default float-right" th:href="@{#}">취소</button>
 					</div>
 					<!-- /.card-footer -->
 				</form>
