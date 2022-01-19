@@ -115,7 +115,10 @@ $(document).ready(function(){
 									<tbody id="myTable">
 										<tr th:if="${not #lists.isEmpty(memberList)}" th:each="ml : ${memberList}">
 											<td th:text="${ml.memberId}"></td>
+											
+											
 											<td th:text="${ml.memberLevelCode}"></td>
+											
 											<td th:text="${ml.memberName}"></td>
 											<td th:text="${ml.memberAddr}"></td>
 											<td th:text="${ml.memberEmail}"></td>
