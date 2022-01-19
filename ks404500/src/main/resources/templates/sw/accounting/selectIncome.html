@@ -38,36 +38,30 @@ layout:decorate="@{layout/default-sw}">
 								<table class="table table-hover table-coondensed" style="text-align: center;">
 									<thead>
 										<tr>
-											<th>#</th>
-											<th>요청코드</th>
+											<th>신청번호</th>
 											<th>계정과목</th>
-											<th>마감자</th>
-											<th>전자계산서</th>
-											<!-- <th>등록자</th> -->
-											<th>회계통합 그룹코드</th>
-											<th>그룹전표</th>
-											<th>계정과목</th>
-											<th>적요</th>
-											<th>마감일</th>
-											<!-- <th>마감유무</th> -->
+											<th>회계통합그룹코드</th>
+											<th>구매자</th>
+											<th>결제금액</th>
+											<th>결제방법</th>
+											<th>등록자</th>
 											<th>등록일</th>
+											<th>수정</th>
+											<th>삭제</th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr th:if="${not #lists.isEmpty(incomelist)}" th:each="il : ${incomelist}">
 											<td th:text="${il.swIncomeCode}"></td>
-											<td th:text="${il.contractManageCode}"></td>
-											<td th:text="${il.swIsCode}"></td>
-											<td th:text="${il.memberIdFinish}"></td>
-											<td th:text="${il.invoiceCode}"></td>
-											<!-- <td th:text="${il.memberId}"></td> -->
-											<td th:text="${il.swGroupSlip}"></td>
-											<td th:text="${il.swSlipNumber}"></td>
 											<td th:text="${il.swIsName}"></td>
-											<td th:text="${il.swIncomeInfo}"></td>
-											<td th:text="${il.swIncomeFinishDate}"></td>
-											<!-- <td th:text="${il.swIncomeFinish}"></td> -->
+											<td th:text="${il.swGroupSlip}"></td>
+											<td th:text="${il.clientId}"></td>
+											<td th:text="${il.paymentCharge}"></td>
+											<td th:text="${il.paymentType}"></td>
+											<td th:text="${il.memberId}"></td>
 											<td th:text="${il.swIncomeRegDate}"></td>
+											<td>수정</td>
+											<td>삭제<td>
 										</tr>
 										<tr th:unless="${not #lists.isEmpty(incomelist)}">
 											<td>데이터가 없습니다.</td>
