@@ -132,7 +132,7 @@ $(document).ready(function(){
 										</thead>
 										<tbody id="myTable">
 											<tr th:if="${not #lists.isEmpty(shopAddAccounting)}" th:each="a: ${shopAddAccounting}">
-												<td><input type="radio" th:disabled="${a.addIncome.equals('발행완료')}" name="list" class="radioButton"></td>
+												<td><input type="radio" th:disabled="${a.addIncome.equals('발행완료')}" name="list" class="radioButton"	></td>
 												<td th:text="${a.addIncome}" ></td>
 												<td th:text="${a.shopIncomeCode}"></td>
 												<td th:text="${a.shopOrderCode}" ></td>
