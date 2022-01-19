@@ -28,7 +28,7 @@
  	<insert id="addSwIncome" parameterType="servicePayment">
  		<selectKey keyProperty="swIncomeCode" resultType="String" order="BEFORE">
  			SELECT
- 				MAX(i.swIncomeCode)+1
+ 				concat(MAX(i.swIncomeCode)+1)
 			FROM
 				k2_sw_income as i
  		</selectKey>

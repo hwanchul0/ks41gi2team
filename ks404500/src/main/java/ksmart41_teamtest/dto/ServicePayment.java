@@ -43,10 +43,11 @@ public class ServicePayment {
 	}
 	public String getContractState() {
 		return contractState;
+	}
 
-	private String servicePaymentCheck;
 	
 	//재천 조인
+	private String servicePaymentCheck;
 	private String swIncomeCode;
 	private String swIsCode;
 	private String memberIdFinish;
@@ -155,9 +156,6 @@ public class ServicePayment {
 	}
 	public void setContractStateCode(String contractStateCode) {
 		this.contractStateCode = contractStateCode;
-	}
-	public String getContractState() {
-		return contractState;
 	}
 	public void setContractState(String contractState) {
 		this.contractState = contractState;
