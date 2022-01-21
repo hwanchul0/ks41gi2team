@@ -15,7 +15,7 @@ public interface SwIncomeMapper {
 	
 	//[재천]매출 등록 (k2_sw_income)
 	public int addSwIncome (ServicePayment servicePayment);
-	/*
-	 * //[재천]매출등록 (k2_sw_paymentCheck) public int addSwIncome2 (SwIncome swIncome);
-	 */
+	
+	//[재천]매출 삭제
+	public int deleteIncome(SwIncome swIncome);
 }

@@ -34,9 +34,10 @@
 								<h5 class="card-title" th:text="${title}"></h5>
 							</div>
 							<div class="card-body" >
-								<table class="table table-hover table-coondensed" style="text-align: center;">
+								<table class="table table-hover table-coondensed" style="text-align: center; font-size: 13px">
 									<thead>
 										<tr>
+											<th>#</th>
 											<th>계정과목코드</th>
 											<th>계정과목명</th>
 											<th>적요</th>
@@ -52,18 +53,21 @@
 									</thead>
 									<tbody>
 										<tr th:if="${not #lists.isEmpty(expenselist)}" th:each="el : ${expenselist}">
-											<td th:text="${el.swExpensePayCode}" style="display: none;" class="swExpensePayCode"></td>
+											<td th:text="${el.swExpensePayCode}" style="text-align: center; font-size: 13px;" class="swExpensePayCode"></td>
 											<td th:text="${el.swIsCode}"></td>
 											<td th:text="${el.swIsName}"></td>
 											<td th:text="${el.swExpenseInfo}"></td>
 											<td th:text="${#numbers.formatInteger(el.swExpensePrice, 0, 'COMMA')}"></td>
 											<td th:text="${el.swExpenseRegDate}"></td>
 											<td th:text="${el.memberId}"></td>
-											<td><button class="finishiBtn" type="button" th:onclick="finishiBtn([[${el.swExpensePayCode}]])">마감</button> </td>
+											
+											<td th:if="${el.memberIdFinish} == null"><button class="btn btn-primary finishiBtn btn-xs" type="button" th:onclick="finishiBtn([[${el.swExpensePayCode}]])">마감</button></td>
+											<td th:if="${el.memberIdFinish} != null"><span style="font-size: 13px"> 마감완료 </span></td>
+											
 											<td th:text="${el.memberIdFinish}" class="memberIdFinish" th:value="${el.memberIdFinish}"></td>
 											<td th:text="${el.swExpenseFinishDate}" class="swExpenseFinishDate" th:value="${el.swExpenseFinishDate}"></td>
 											<td><a th:href="@{/sw/accounting/modifyExpense(swExpensePayCode=${el.swExpensePayCode})}">수정</a></td>
-											<td><button type="button" class="btn btn-primary deleteBtn" th:onclick="deleteBtn([[${el.swExpensePayCode}]]);">삭제</button></td>
+											<td><button type="button" class="btn btn-primary deleteBtn btn-xs"  th:onclick="deleteBtn([[${el.swExpensePayCode}]]);">삭제</button></td>
 										</tr>
 										<tr th:unless="${not #lists.isEmpty(expenselist)}">
 											<td>데이터가 없습니다...</td>

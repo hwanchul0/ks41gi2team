@@ -49,5 +49,4 @@ public class ServicePaymentService {
 		ServicePayment getContractState = servicePaymentMapper.getContractState(contractCode);
 		return getContractState;
 	}
-		
 }

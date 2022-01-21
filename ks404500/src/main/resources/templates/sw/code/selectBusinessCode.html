@@ -33,7 +33,7 @@
 								<h5 class="card-title" th:text="${title}"></h5>
 							</div>
 							<div class="card-body">
-								<table class="table table-hover table-coondensed" style="text-align: center;">
+								<table class="table table-hover table-coondensed" style="text-align: center; font-size: 13px;">
 									<thead>
 										<tr>
 											<td>거래처 구분 코드</td>
@@ -47,7 +47,7 @@
 											<td th:text="${bl.businessCode}"></td>
 											<td th:text="${bl.businessCodeName}"></td>
 											<td><a th:href="@{/sw/code/modifyBusinessCode(businessCode=${bl.businessCode})}">수정</a></td>
-											<td><button type="button" class="btn btn-primary deleteBtn" th:onclick="deleteBtn([[${bl.businessCode}]]);">삭제</button></td>
+											<td><button type="button" class="btn btn-primary deleteBtn btn-xs" th:onclick="deleteBtn([[${bl.businessCode}]]);">삭제</button></td>
 										</tr>
 										<tr th:unless="${not #lists.isEmpty(businessCodeList)}">
 											<td>

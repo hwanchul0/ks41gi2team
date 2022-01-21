@@ -88,14 +88,13 @@ $(document).ready(function(){
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-lg-12">
-						<!-- 회원가입폼 -->
 						<div class="card card-primary">
 							<div class="card-header">
 								<h5 class="card-title" th:text="${title}"></h5>
 							</div>
 							<div class="card-body">
 								<input class="form-control col-md-3" style="float : right" id="myInput" type="text" placeholder="검색어를 입력해주세요">
-								<table class="table table-hover table-coondensed" style="text-align: center;">
+								<table class="table table-hover table-coondensed" style="text-align: center; font-size: 13px;">
 									<thead>
 										<tr>
 											<th>아이디</th>
@@ -115,10 +114,7 @@ $(document).ready(function(){
 									<tbody id="myTable">
 										<tr th:if="${not #lists.isEmpty(memberList)}" th:each="ml : ${memberList}">
 											<td th:text="${ml.memberId}"></td>
-											
-											
 											<td th:text="${ml.memberLevelCode}"></td>
-											
 											<td th:text="${ml.memberName}"></td>
 											<td th:text="${ml.memberAddr}"></td>
 											<td th:text="${ml.memberEmail}"></td>
@@ -129,7 +125,7 @@ $(document).ready(function(){
 											<td th:text="${ml.memberWithdrawalReason}"></td>
 											<!-- <td><button type="button" class="modifyBtn" th:onclick="modifyBtn([[${ml.memberId}]]);">수정</button></td> -->
 											<td><a th:href="@{/sw/member/modifyMember(memberId=${ml.memberId})}">수정</a></td>
-											<td><button type="button" class="btn btn-primary deleteBtn" th:onclick="deleteBtn([[${ml.memberId}]]);">삭제</button></td>
+											<td><button type="button" class="btn btn-primary deleteBtn btn-xs" th:onclick="deleteBtn([[${ml.memberId}]]);">삭제</button></td>
 										</tr>
 										<tr th:unless="${not #lists.isEmpty(memberList)}">
 											<td><h1>불러올 데이터가 없습니다.</h1></td>

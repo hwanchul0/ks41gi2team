@@ -3,6 +3,8 @@ package ksmart41_teamtest.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import ksmart41_teamtest.dto.ServicePayment;
+import ksmart41_teamtest.dto.SwExpense;
+import ksmart41_teamtest.dto.SwIsListCode;
 import ksmart41_teamtest.service.ServicePaymentService;
+import ksmart41_teamtest.service.SwExpenseService;
 import ksmart41_teamtest.service.SwIncomeService;
+import ksmart41_teamtest.service.SwIsListService;
 
 @Controller
 @RequestMapping("/sw/service")
@@ -28,7 +34,6 @@ public class SwPaymentController {
 	//재천 의존성주입
 	@Autowired
 	private SwIncomeService swIncomeService;
-	
 	
 	public SwPaymentController(ServicePaymentService servicePaymentService) {
 		this.servicePaymentService = servicePaymentService;
@@ -53,8 +58,8 @@ public class SwPaymentController {
 	
 	@GetMapping("/servicePaymentCheck")
 	public String servicePaymentCheck (@RequestParam(value="paymentCode", required=false) String paymentCode,
+			@RequestParam(value = "swIsCode", required = false) String swIsCode,
 											Model model) {
-		
 		ServicePayment servicePaymentCheck = servicePaymentService.servicePaymentCheck(paymentCode);
 		model.addAttribute("title","서비스 결제확인");
 		model.addAttribute("servicePaymentCheck",servicePaymentCheck);
@@ -71,7 +76,7 @@ public class SwPaymentController {
 										@RequestParam(value="paymentCode" , required = false) String paymentCode,
 										@RequestParam(value = "paymentState", required = false) String paymentState,
 										@RequestParam(value = "servicePaymentCheck", required = false)String servicePaymentCheck,
-										Model model, ServicePayment servicePayment) {
+										Model model, ServicePayment servicePayment, HttpSession session) {
 		
 		log.info("서비스 결제정보 코드  {} : " + paymentCode);
 		log.info("서비스 결제 상태  코드  {} : " + paymentStateCode);
@@ -81,9 +86,12 @@ public class SwPaymentController {
 		//servicePaymentCheck
 		String Check1 = servicePayment.getServicePaymentCheck();
 		String complete = "payComplete";
+		
+		String memberId = (String) session.getAttribute("SWID");
+		servicePayment.setMemberId(memberId);
+		servicePayment.setMemberIdFinish(memberId);
 		if(Check1.equals(complete)) {
 			swIncomeService.addSwIncome(servicePayment);
-			System.out.println("확인3");
 		}
 		return "redirect:/sw/service/servicePaymentSum";
 	}
@@ -97,6 +105,7 @@ public class SwPaymentController {
 		model.addAttribute("selectContractState",selectContractState);
 		return "sw/service/selectContractState";
 	}
+	
 	//계약현황 관리 - 수정
 	@PostMapping("/modifyContractState")
 	public String modifyContractState(ServicePayment servicePayment) {
