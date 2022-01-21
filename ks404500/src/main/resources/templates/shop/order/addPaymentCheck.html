@@ -27,20 +27,20 @@ $(document).ready(function () {
 			});
 		
 			
-			/*console.log(tdArr[2]); //결제코드
-			console.log(tdArr[3]); //소비자아이디
-			console.log(tdArr[4]); //담당자아이디
+	/* 		console.log("결제코드"+ tdArr[3]); //결제코드
+			console.log("소비자 아이디" + tdArr[3]); //소비자아이디
+			console.log(" 담당자 아이디" + tdArr[4]); //담당자아이디
 			console.log(tdArr[5]); //결제상태코드
 			console.log(tdArr[6]); //합계코드
 			console.log(tdArr[7]); //금액
-			console.log(tdArr[8]); //잔금
-			console.log(tdArr[9]); //결제방법
-			console.log(tdArr[10]); //결제일 */
-			
+			console.log(tdArr[8]); //결제방법
+			console.log(tdArr[9]); //결제일  
+			 */
 			document.getElementById("shopConsumerId").value = tdArr[3]; //소비자아이디
+			document.getElementById("shopPaymentCode").value = tdArr[6]; //합계코드
 			document.getElementById("shopPaymentCharge").value = tdArr[7]; //금액
-			document.getElementById("paymentType").value = tdArr[9]; //결제방법
-			document.getElementById("shopPaymentDate").value = tdArr[10];//결제일
+			document.getElementById("paymentType").value = tdArr[8]; //결제방법
+			document.getElementById("shopPaymentDate").value = tdArr[9];//결제일
 
     });
     
@@ -119,6 +119,7 @@ $(document).ready(function(){
 												<th>선택</th>
 												<th>구분</th>
 												<th>결제코드</th>
+												<th>소비자 아이디</th>
 												<th>담당자 아이디</th>
 												<th>결제 상태 코드</th>
 												<th>결제정보코드</th>
@@ -130,7 +131,7 @@ $(document).ready(function(){
 										</thead>
 										<tbody id="myTable">
 											<tr th:if="${not #lists.isEmpty(shopAddPaymentCheck)}" th:each="p: ${shopAddPaymentCheck}">
-												<td><input type="radio" th:disabled="${p.shopPaymentCheckCode.equals('등록완료')}" name="list" class="radioButton"></td>
+												<td><input type="radio" th:disabled="${p.addPaymentCheck.equals('등록완료')}" name="list" class="radioButton"></td>
 												
 												<td th:if="${p.shopPaymentCheckCode == null}" th:text="등록대상"></td>
                                     			<td th:unless="${p.shopPaymentCheckCode == null}" th:text="등록완료"></td>
@@ -156,12 +157,20 @@ $(document).ready(function(){
 								</div>
 								<!-- insert -->
 							
-								
+									
+									<div class="form-group row">
+										<label for="shopConsumerId" class="col-sm-2 col-form-label">소비자아이디 </label>
+										<div class="col-sm-6">
+											<div class="col-sm-6">
+							                       <input type="text"  name="shopConsumerId" id="shopConsumerId" readonly="readonly" style="width:220px;"></input>
+							                 </div>
+										</div>
+									</div>
 									<div class="form-group row">
 										<label for="shopMemberId" class="col-sm-2 col-form-label">담당자아이디 </label>
 										<div class="col-sm-6">
 											<div class="col-sm-6">
-							                       <input type="text" th:value="${SHOPID}" name="shopMemberId" id="shopMemberId" readonly="readonly" style="width:220px;"></input>
+							                       <input type="text" th:value="${shopMemberId}" name="shopMemberId" id="shopMemberId" readonly="readonly" style="width:220px;"></input>
 							                 </div>
 										</div>
 									</div>
@@ -194,7 +203,13 @@ $(document).ready(function(){
 										<label for="paymentType" class="col-sm-2 col-form-label">결제방법 </label>
 										<div class="col-sm-6">
 											<div class="col-sm-6">
-							                       <<input type="text" name="paymentType" id="paymentType"  style="width:220px;"></input>
+							                       <select id="paymentType" name="paymentType"   style="width:220px;">
+							                       <option value="">::결제방법 선택::</option>
+							                       <option value="현금">현금</option>
+							                       <option value="카드">카드</option>
+							                        
+							                       
+							                       </select>
 							                 </div>
 										</div>
 									</div>
@@ -202,7 +217,7 @@ $(document).ready(function(){
 										<label for="shopPaymentDate" class="col-sm-2 col-form-label">결제일</label>
 										<div class="col-sm-6">
 											<div class="col-sm-6">
-							                       <input type="text" name="shopPaymentDate" id="shopPaymentDate" readonly="readonly" style="width:220px;"></input>
+							                       <input type="date" name="shopPaymentDate" id="shopPaymentDate"  style="width:220px;"></input>
 							                 </div>
 										</div>
 									</div>
