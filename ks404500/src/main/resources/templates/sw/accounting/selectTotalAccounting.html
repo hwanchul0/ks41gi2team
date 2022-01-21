@@ -52,12 +52,12 @@ $(function() {
 						} ],
 						yAxes: [{
 					        stacked: false, //쌓임
-					        display: true, //y 축 show
+					        display: false, //y 축 show
 					        ticks: {
-					            stepSize: 0, //증가 범위
-					            max: 99999999, //최대 범위
-					            min: 0, //최소 범위
-					            beginAtZero: true, //0부터 시작
+					            //stepSize: 0, //증가 범위
+					            //max: 99999999, //최대 범위
+					            //min: 0, //최소 범위
+					            //beginAtZero: true, //0부터 시작
 					            fontFamily: "noto-fonts", //폰트 family
 					            fontColor: '#a5a5a5', //폰트 컬러
 					            padding: 10, //오른쪽 간격
@@ -139,7 +139,7 @@ $(function() {
 	                    data: [expense1, expense2, expense3, expense4]
 	                },
                     {
-	                label: '손익',
+	                label: '누적손익',
                     type : 'bar',         // 'line' type
                     fill : false,         // 채우기 없음
                     lineTension : 0.2,  // 0이면 꺾은선 그래프, 숫자가 높을수록 둥글해짐
@@ -219,8 +219,8 @@ $(function() {
                 <h3 class="card-title">2021년 손익</h3>
               </div>
               <!-- /.card-header -->
-              <div class="card-body p-0" style="height: 250px;">	 
-                <table class="table table-condensed" id="table2021">
+              <div class="card-body" style="height: 250px;">	 
+                <table class="table table-bordered" id="table2021" style="text-align: center; font-size: 13px;">
                   <thead>
                     <tr>
                   		<th>매출</th>
@@ -274,7 +274,7 @@ $(function() {
 					<canvas id="areaChart2" style="height: 250px; min-height: 250px"></canvas>
 				</div>
               </div>
-              <div style="display: ">
+              <div style="display: none">
               	<!-- 매출 -->
               	<span th:each="s : ${sw2021Sales}" th:text="${s.sales1Q}" id="sales1Q"></span>
               	<span th:each="s : ${sw2021Sales}" th:text="${s.sales2Q}" id="sales2Q"></span>

@@ -156,7 +156,8 @@
 		UPDATE k2_shop_income
 		SET
 			shopIncomeFinish=#{shopIncomeFinish},
-			shopIncomeFinishDate=CURDATE()
+			shopIncomeFinishDate=CURDATE(),
+			shopMemberIdFinish=#{shopMemberId}
 		WHERE shopIncomeCode=#{shopIncomeCode};
 	</update>
 	

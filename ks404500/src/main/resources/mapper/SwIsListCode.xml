@@ -37,7 +37,9 @@
 	<update id="modifyIsListCode" parameterType="SwIsListCode">
 		UPDATE k2_sw_is_list
 			SET
-				swIsUse = #{swIsUse}
+				swIsUse = #{swIsUse},
+				memberId = #{memberId},
+				swIsRegDate = CURDATE()
 			WHERE 
 				swIsCode = #{swIsCode};
 	</update>

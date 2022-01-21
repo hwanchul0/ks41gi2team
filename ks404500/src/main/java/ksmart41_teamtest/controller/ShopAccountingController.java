@@ -1,9 +1,5 @@
 
-
-
 package ksmart41_teamtest.controller;
-
-
 
 
 import java.util.List;
@@ -24,7 +20,6 @@ import ksmart41_teamtest.dto.Expense;
 import ksmart41_teamtest.dto.ShopAddAccounting;
 import ksmart41_teamtest.dto.ShopIsListCode;
 import ksmart41_teamtest.dto.ShopTotalAccounting;
-import ksmart41_teamtest.mapper.ShopAddAccountingMapper;
 import ksmart41_teamtest.service.ExpenseService;
 import ksmart41_teamtest.service.ShopAcountingService;
 import ksmart41_teamtest.service.ShopCodeServiceJYK;
@@ -41,7 +36,6 @@ public class ShopAccountingController {
 	private ExpenseService expenseService;
 	@Autowired
 	private ShopCodeServiceJYK shopCodeServiceJYK;
-
 	
 	//유경 - 쇼핑몰 매출 등록화면에서 발행 대상 조회
 	@GetMapping("/addIncome")
@@ -51,12 +45,6 @@ public class ShopAccountingController {
 		
 		model.addAttribute("shopAddAccounting", shopAddAccounting);
 		model.addAttribute("shopAddIncomeCode", shopAddIncomeCode);
-		
-		//세션 아이디 가져오기
-		String shopMemberId = (String) session.getAttribute("SHOPID");
-		session.setAttribute("shopMemberId", shopMemberId);
-		log.info("addIncome memberId: {}", shopMemberId);
-		model.addAttribute("shopMemberId", shopMemberId);
 		
 		//System.out.println(shopAddIncomeCode);
 		return "shop/accounting/addIncome";
@@ -70,14 +58,11 @@ public class ShopAccountingController {
 		String shopMemberId = (String) session.getAttribute("SHOPID");
 		session.setAttribute("shopMemberId", shopMemberId);
 		log.info("addIncome memberId: {}", shopMemberId);
-		
+		shopAddAccounting.setShopMemberId(shopMemberId);
 		System.out.println("입력받은 값 : " + shopAddAccounting);
-		//System.out.println("입력받은 addIncomeCode : " + addIncomeCode);
-		//String code = shopAddAccounting.getAddIncomeCode();
-		//System.out.println("코드 code" + code);
+		
 		shopAcountingService.addIncome(shopAddAccounting);
 		
-
 		return "redirect:/shop/accounting/addIncome";
 		}
 	
@@ -172,8 +157,13 @@ public class ShopAccountingController {
 	
 	// 유경 쇼핑몰 매출 마감확인
 	@PostMapping("/modifyIncome")
-	public String ShopIncomeFinish(ShopAddAccounting shopAddAccounting) {
+	public String ShopIncomeFinish(ShopAddAccounting shopAddAccounting, HttpSession session) {
 		 log.info("정보 : {}", shopAddAccounting );
+		//세션 아이디 가져오기
+		String shopMemberId = (String) session.getAttribute("SHOPID");
+		session.setAttribute("shopMemberId", shopMemberId);
+		log.info("addIncome memberId: {}", shopMemberId);
+		shopAddAccounting.setShopMemberId(shopMemberId);
 		//계정사용여부수정
 		 shopAcountingService.ShopIncomeFinish(shopAddAccounting);
 		return "redirect:/shop/accounting/selectIncome";

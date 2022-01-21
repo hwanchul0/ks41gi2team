@@ -43,6 +43,11 @@ public class ShopLoginController {
 				//로그인 비밀번호 일치 시 세션을 정보에 담음
 				session.setAttribute("SHOPID", shopMemberId);
 				session.setAttribute("SHOPNAME", shopmember.getShopMemberName());
+				session.setAttribute("SHOPEMAIL", shopmember.getShopMemberEmail());
+				session.setAttribute("SHOPADDR", shopmember.getShopMemberAddr());
+				session.setAttribute("SHOPDATE", shopmember.getShopMemberReg());
+				session.setAttribute("SHOPPHONE", shopmember.getShopMemberPhone());
+				session.setAttribute("SHOPLEVEL", shopmember.getBusinessLevelCode());
 				return "redirect:/shop/index-shop";
 				}
 			}

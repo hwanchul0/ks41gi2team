@@ -8,7 +8,13 @@ layout:decorate="@{layout/default-shop}">
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" rel="stylesheet">
 <script type="text/javascript">
+//마감내역 선택시 경고창
+$(function(){
+	$('#notAmend').click(function(){
+		alert('이미 마감된내역입니다');
+	})
 
+});
 //검색창
 $(document).ready(function(){
 	  $("#myInput").on("keyup", function() {
@@ -31,13 +37,7 @@ $(function(){
 
 	});
 });
-//마감내역 선택시 경고창
-$(function(){
-	$('#notAmend').click(function(){
-		alert('이미 마감된내역입니다');
-	})
 
-});
 
 </script>
 </th:block>
