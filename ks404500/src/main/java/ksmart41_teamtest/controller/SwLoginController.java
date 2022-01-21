@@ -43,6 +43,10 @@ public class SwLoginController {
 				session.setAttribute("SWID", memberId);
 				session.setAttribute("SWNAME", member.getMemberName());
 				session.setAttribute("SWLEVEL", member.getMemberLevelCode());
+				session.setAttribute("SWADDR", member.getMemberAddr());
+				session.setAttribute("SWEMAIL", member.getMemberEmail());
+				session.setAttribute("SWDATE", member.getMemberRegDate());
+				session.setAttribute("SWPHONE", member.getMemberPhone());
 				return "redirect:/sw/index-sw";
 			}
 		}

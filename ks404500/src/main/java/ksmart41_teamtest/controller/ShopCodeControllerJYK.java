@@ -43,13 +43,13 @@ public class ShopCodeControllerJYK {
 		return "redirect:/shop/code/selectIsListCode";
 	}
 	 
-	//유경 - 쇼핑몰 손익계정 마감
+	//유경 - 쇼핑몰 손익계정 수정
 	@GetMapping("/modifyIsListCode")
 	public String modifyIsListCode(@RequestParam(value="shopIsCode", required = false) String shopIsCode
             ,Model model,  HttpServletResponse response,HttpServletRequest request) throws IOException {
 		ShopIsListCode shopIsCodeInfo = shopCodeServiceJYK.getShopIsCodeByShopIsListCode(shopIsCode);
 		List<ShopIsListCode> shopIsListCode = shopCodeServiceJYK.getSelectShopIsListCode();
-		System.out.println(shopIsListCode);
+		System.out.println("shopIsListCode====="+shopIsListCode);
 		response.setContentType("text/html; charset=UTF-8");
 		if(shopIsCode != null && !"".equals(shopIsCode) && "Y".equals(shopIsCodeInfo.getShopIsAmend()) ) {
 			model.addAttribute("shopIsCodeInfo", shopIsCodeInfo);

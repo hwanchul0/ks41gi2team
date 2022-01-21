@@ -45,21 +45,20 @@ $(document).ready(function () {
 
     });
     
-    //버튼을 선택하지않고 입력완료 선택시 경고창
-    $('#sign').click(function () {
-    	 var Category1 = $('.radioButton');
-    	    if($(':radio[class="radioButton"]:checked').length < 1){
-    	        alert('발행대상을 선택해주세요');
-    	        Category1.focus();
-    	        event.preventDefault();
-    	   		}
-    	
-    });
-   
+
+  $('#sign').click(function () {
+	  //버튼을 선택하지않고 입력완료 선택시 경고창
+  	 var Category1 = $('.radioButton');
+  	    if($(':radio[class="radioButton"]:checked').length < 1){
+  	        alert('발행대상을 선택해주세요');
+  	        Category1.focus();
+  	        event.preventDefault();
+  	   		}
   });
  
+});
+ 
  //검색
-
 $(document).ready(function(){
 	  $("#myInput").on("keyup", function() {
 	    var value = $(this).val().toLowerCase();

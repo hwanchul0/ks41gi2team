@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -60,8 +61,14 @@ public class SwCodeController {
 	
 	/*유경 개발사 손익계정과목 등록 -> 수정*/
 	@PostMapping("/addIsListCode")
-	public String modifyIsListCode(SwIsListCode swIsListCode) {
-		 log.info("정보 : {}", swIsListCode );
+	public String modifyIsListCode(SwIsListCode swIsListCode,HttpSession session) {
+		 
+		//계정 수정 아이디
+		String memberId = (String) session.getAttribute("SWID");
+		session.setAttribute("memberId", memberId);
+		swIsListCode.setMemberId(memberId);
+		
+		log.info("정보 : {}", swIsListCode );
 		//계정사용여부수정
 		swIsListService.modifyIsListCode(swIsListCode);
 		return "redirect:/sw/code/selectIsListCode";

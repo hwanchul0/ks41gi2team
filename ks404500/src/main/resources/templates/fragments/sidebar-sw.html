@@ -71,6 +71,16 @@
 						</a>
 					</li>
 				</ul>
+				<ul class="nav nav-treeview">
+					<li class="nav-item">
+						<a th:if="${session.SWID != null}" th:href="@{/sw/member/myPage}" class="nav-link">
+							<i class="far fa-circle nav-icon"></i>
+							<p>
+								!내부 회원 마이페이지[유경]
+							</p>
+						</a>
+					</li>
+				</ul>
 			</li>
 			<!-- 회원관리 끝 -->
 			<!-- 권한관리시작 -->
