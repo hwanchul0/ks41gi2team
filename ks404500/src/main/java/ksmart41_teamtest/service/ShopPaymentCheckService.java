@@ -27,8 +27,8 @@ public class ShopPaymentCheckService {
 
 	//유성 쇼핑몰 결제상태 등록 
 	public int addPaymentCheck(ShopPaymentCheck shopPaymentCheck)	{
-		int addPaymentCheck = shopPaymentCheckMapper.addPaymentCheck(shopPaymentCheck);
-		return addPaymentCheck;
+		//int addPaymentCheck = shopPaymentCheckMapper.addPaymentCheck(shopPaymentCheck);
+		return shopPaymentCheckMapper.addPaymentCheck(shopPaymentCheck);
 	}
 	
 	// 유성 쇼핑몰 결제등록화면 
@@ -37,6 +37,21 @@ public class ShopPaymentCheckService {
 		return shopAddPaymentCheck;
 	
 	}
-
+	
+	// 유성 쇼핑몰 결제삭제
+	public int deletePaymentCheck(ShopPaymentCheck shopPaymentCheck) {
+		return shopPaymentCheckMapper.deletePaymentCheck(shopPaymentCheck);
+		
+	}
+	//유성 쇼핑몰 수정(paymentComplete)
+	public int modifyShopPaymentCheck(ShopPaymentCheck shopPaymentCheckCode) {
+		return shopPaymentCheckMapper.ShopModifyPaymentCheck(shopPaymentCheckCode);
+	}
+	
+	//유성 쇼핑몰 수정 
+	public ShopPaymentCheck getModifyPaymentCheck(String shopPaymentCheckCode)	{
+		return shopPaymentCheckMapper.getModifyPaymentCheck(shopPaymentCheckCode);
+	}
+	
 
 }

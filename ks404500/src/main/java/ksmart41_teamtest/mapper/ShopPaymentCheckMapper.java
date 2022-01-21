@@ -19,5 +19,12 @@ public interface ShopPaymentCheckMapper {
 	//유성 쇼핑몰 결제 등록대상 조회
 	List<ShopAddPaymentCheck> getAddShopAddPaymentCheck();
 	
+	//유성 쇼핑몰 결제 삭제
+	int deletePaymentCheck(ShopPaymentCheck shopPaymentCheck);
 
+	//유성 쇼핑몰 결제 수정 (complete 바꾸기)
+	public int ShopModifyPaymentCheck(ShopPaymentCheck shopPaymentCheckCode);
+	
+	public ShopPaymentCheck getModifyPaymentCheck(String shopPaymentCheckCode);
+	
 }

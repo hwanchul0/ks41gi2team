@@ -5,6 +5,42 @@ layout:decorate="@{layout/default-shop}">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <th:block layout:fragment="customContents">
+<script th:inline="javascript">
+function deleteBtn(shopPaymentCheckCode) {
+	if(shopPaymentCheckCode != null && shopPaymentCheckCode != ""){
+		
+		var delConfirm = confirm('해당 내역을 삭제합니다.');
+		if (delConfirm) {
+		      alert('삭제되었습니다.');
+		      var request = $.ajax({
+				  url: "/shop/order/deletePaymentCheck",
+				  method: "POST",
+				  data: { shopPaymentCheckCode : shopPaymentCheckCode },
+				  dataType: "text"
+				});
+		      location.reload();
+		   }
+		location.reload();
+		request.done(function(data) {
+			if(data < 0) {
+				alert("실패했습니다.");
+			}
+			location.reload();
+		});
+	} else {
+		alert("삭제 실패 ");
+	}
+}
+
+//마감내역 선택시 경고창
+$(function(){
+	$('#notPay').click(function(){
+		alert('이미 결제된 내역입니다');
+	})
+
+});
+
+</script>
 <!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper">
 	<!-- Content Header (Page header) -->
@@ -46,6 +82,8 @@ layout:decorate="@{layout/default-shop}">
 												<th>결제 금액(VAT포함)</th>
 												<th>결제방법</th>
 												<th>결제일</th>
+												<th>결제완료</th>
+												<th>삭제</th>
 
 
 											</tr>
@@ -60,7 +98,14 @@ layout:decorate="@{layout/default-shop}">
 											<td th:text="${#numbers.formatInteger(sp.shopPaymentCharge, 0, 'COMMA')}"></td>
 											<td th:text="${sp.paymentType}"></td>
 											<td th:text="${sp.shopPaymentDate}"></td>
-											
+											<td th:if="${sp.paymentStateCode} == 'PayWaiting'">
+												<a th:href="@{/shop/order/modifyPaymentCheck(shopPaymentCheckCode=${sp.shopPaymentCheckCode})}"><i class="fas fa-pencil-alt" style="color: #28a745"></i></a></td>
+											<td th:if="${sp.paymentStateCode} != 'PayWaiting'"><i class="fas fa-pencil-alt finish"></i></td>
+												
+											<td>
+												<button type="button" class="btn btn-success deleteBtn" th:onclick="deleteBtn([[${sp.shopPaymentCheckCode}]]);">삭제</button>
+											</td>
+										
 										
 										</tr>
 										<tr th:unless="${not #lists.isEmpty(shopPaymentCheck)}">

@@ -6,48 +6,49 @@
 		<result column="shopConsumerId"							property="shopConsumerId"/>
 		<result column="shopMemberId"							property="shopMemberId"/>
 		<result column="paymentStateCode"						property="paymentStateCode"/>
-		<result column="shopPaymentCode"						property="shopPaymentCode"/>
+		<result column="shopPaymentCode"							property="shopPaymentCode"/>
 		<result column="shopPaymentCharge"						property="shopPaymentCharge"/>
 		<result column="shopPaymentBalance"						property="shopPaymentBalance"/>
 		<result column="paymentType"							property="paymentType"/>
 		<result column="shopPaymentDate"						property="shopPaymentDate"/>
-		
+		<result column="shopPaymentAmount"						property="shopPaymentAmount"/>
 	
 	
 	</resultMap>
 	<select id="getShopPaymentCheck" parameterType="String" resultType="ShopPaymentCheck">
-	SELECT
-		shopPaymentCheckCode,
+		SELECT
+		shoppaymentCheckCode,
+		shopPaymentCode,
+		shopPaymentCharge,
 		shopConsumerId,
 		shopMemberId,
 		paymentStateCode,
-		shopPaymentCode,
-		shopPaymentCharge,
-		shopPaymentBalance,
 		paymentType,
 		shopPaymentDate
 	FROM
-		k2_shop_paymentCheck;
+		k2_shop_paymentCheck; 
 	
 	</select>
 	
-	<insert id = "addPaymentCheck" parameterType="ShopPaymentCheck">
+	<insert id ="addPaymentCheck" parameterType="ShopPaymentCheck">
 		INSERT INTO k2_shop_paymentCheck(
 		shopPaymentCheckCode,
 			shopConsumerId,
 			paymentStateCode,
 			paymentType,
 			shopPaymentCharge,
+			shopPaymentCode,
 			shopPaymentDate
 		)VALUES(
 			 (SELECT
-				max(shopPaymentCheckCode)+1
+				max(shopPaymentCheckCode+1)
 				FROM
-				k2_shop_paymentCheck),
+				k2_shop_paymentCheck ALIAS_FOR_SUBQUERY ),
 			#{shopConsumerId},
 			#{paymentStateCode},
 			#{paymentType},
 			#{shopPaymentCharge},
+			#{shopPaymentCode},
 			#{shopPaymentDate}
 		
 		);
@@ -56,19 +57,64 @@
 	
 	<select id="getAddShopAddPaymentCheck"  parameterType="String" resultType="ShopPaymentCheck">
 	SELECT
-		if(ISNULL(P.shopPaymentCheckCode), '발행대상','발행완료') AS addPaymentCheck,
-		P.shopConsumerId,
-		P.shopMemberId,
-		P.paymentStateCode,
-		P.shopPaymentCode,
-		P.shopPaymentCharge,
-		P.shopPaymentBalance,
-		P.paymentType,
-		P.shopPaymentDate
-	FROM
-		k2_shop_paymentCheck as P;
-	
+		if(ISNULL(p.shopPaymentCheckCode), '등록대상','등록완료') AS addPaymentCheck,
+		p.shopPaymentCheckCode,
+		c.shopPaymentCode,
+		p.shopPaymentCharge,
+		o.shopConsumerId,
+		o.shopMemberId,
+		p.paymentStateCode,
+		p.paymentType,
+		p.shopPaymentDate
+	from
+		k2_shop_paymentCheck AS p
+		right join
+		k2_shop_paymentSum AS c
+	ON
+		p.shopPaymentCode = c.shopPaymentCode
+	INNER JOIN
+		k2_shop_order AS o
+	on
+		o.shopSlipNumber = c.shopSlipNumber
+	GROUP by c.shopSlipNumber
+	ORDER BY (c.shopPaymentCode IS NOT NULL),
+		c.shopPaymentCode DESC;
 	</select>
 
+	<!--  유성 쇼핑몰 결제 삭제 -->
+	<delete id="deletePaymentCheck" parameterType="ShopPaymentCheck">
+		DELETE
+		FROM
+			k2_shop_paymentCheck
+		WHERE
+			shopPaymentCheckCode = #{shopPaymentCheckCode};
+	
+	</delete>
+	<!-- 유성 쇼핑몰 결제 수정하기 -->
+	<update id="ShopModifyPaymentCheck" parameterType="ShopPaymentCheck">
+		UPDATE k2_shop_paymentCheck
+			SET
+				paymentStateCode =#{paymentStateCode}
+			WHERE
+				shopPaymentCheckCode =#{shopPaymentCheckCode};
+	
+	</update>
+	<!--  유성 쇼핑몰 결제 값가져오기 -->
+	<select id="getModifyPaymentCheck" resultType="ShopPaymentCheck">
+		SELECT
+		shopPaymentCheckCode,
+		shopPaymentCode,
+		shopPaymentCharge,
+		shopConsumerId,
+		shopMemberId,
+		paymentStateCode,
+		paymentType,
+		shopPaymentDate
+	FROM
+		k2_shop_paymentCheck
+	WHERE
+		shopPaymentCheckCode = #{shopPaymentCheckCode};
+	
+	</select>
 	
 </mapper>
