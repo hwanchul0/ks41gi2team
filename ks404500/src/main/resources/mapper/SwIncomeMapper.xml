@@ -28,7 +28,7 @@
  	<insert id="addSwIncome" parameterType="servicePayment">
  		<selectKey keyProperty="swIncomeCode" resultType="String" order="BEFORE">
  			SELECT
- 				CONCAT(MAX(i.swIncomeCode)+1)
+ 				MAX(CAST(i.swIncomeCode AS INTEGER)+1)
 			FROM
 				k2_sw_income as i
  		</selectKey>
@@ -49,19 +49,28 @@
 			)VALUES(
 				#{swIncomeCode},
 				#{contractManageCode},
-				#{swIsCode},
+				'40101',
 				#{memberIdFinish},
 				#{invoiceCode},
 				#{memberId},
-				'1',
-				'2',
-				'3',
-				'4',
+				CONCAT('개발사','_','서비스','_','매출', '_', DATE_FORMAT(NOW(),'%y%m%d')),
+				#{swSlipNumber},
+				'상품매출',
+				#{swIncomeInfo},
 				NOW(),
-				'5',
+				#{swIncomeFinish},
 				NOW()
 			)
  	</insert>
+ 	
+ 	<delete id="deleteIncome" parameterType="SwIncome">
+ 		DELETE
+ 		FROM
+ 			k2_sw_income
+ 		WHERE
+ 			swIncomeCode = #{swIncomeCode}
+ 	</delete>
+ 	
  	<!-- 
  	<insert id="addSwIncome2" parameterType="ServicePayment">
  		<selectKey keyProperty="paymentCheckCode" resultType="String" order="BEFORE">

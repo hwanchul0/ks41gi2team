@@ -35,7 +35,7 @@ layout:decorate="@{layout/default-sw}">
 								<h5 class="card-title" th:text="${title}"></h5>
 							</div>
 							<div class="card-body" >
-								<table class="table table-hover table-coondensed" style="text-align: center;">
+								<table class="table table-hover table-coondensed" style="text-align: center; font-size: 13px;">
 									<thead>
 										<tr>
 											<th>신청번호</th>
@@ -46,7 +46,6 @@ layout:decorate="@{layout/default-sw}">
 											<th>결제방법</th>
 											<th>등록자</th>
 											<th>등록일</th>
-											<th>수정</th>
 											<th>삭제</th>
 										</tr>
 									</thead>
@@ -60,8 +59,7 @@ layout:decorate="@{layout/default-sw}">
 											<td th:text="${il.paymentType}"></td>
 											<td th:text="${il.memberId}"></td>
 											<td th:text="${il.swIncomeRegDate}"></td>
-											<td>수정</td>
-											<td>삭제<td>
+											<td><button type="button" class="btn btn-primary deleteBtn btn-xs" th:onclick="deleteBtn([[${il.swIncomeCode}]]);">삭제</button><td>
 										</tr>
 										<tr th:unless="${not #lists.isEmpty(incomelist)}">
 											<td>데이터가 없습니다.</td>
@@ -79,5 +77,31 @@ layout:decorate="@{layout/default-sw}">
 		</div>
 	</div>
 <!-- /.content-wrapper -->
+<script type="text/javascript">
+	function deleteBtn(swIncomeCode){
+		var confirmBtn = confirm('삭제하시겠습니까?');
+		if(confirmBtn){
+			if(swIncomeCode != null && swIncomeCode != ""){
+				var request = $.ajax({
+					  url: "/sw/accounting/deleteIncome",
+					  method: "POST",
+					  data: { swIncomeCode : swIncomeCode },
+					  dataType: "text"
+					});
+				
+				request.done(function(data) {
+					if(data > 0) {
+						alert("삭제 되었습니다.");
+					}else {
+						alert("실패했습니다.");
+					}
+					location.reload();
+				});
+			} else {
+				alert("삭제 실패 ");
+			}
+		}
+	}
+</script>
 </th:block>
 </html>

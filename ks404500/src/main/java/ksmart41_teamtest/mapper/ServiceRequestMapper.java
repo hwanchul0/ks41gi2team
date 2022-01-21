@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+
+import ksmart41_teamtest.dto.ServicePayment;
 import ksmart41_teamtest.dto.ServiceRequest;
 
 @Mapper
@@ -45,7 +47,6 @@ public interface ServiceRequestMapper {
 	// 서비스 계약요청 승인 -> 결제예정 테이블
 	public int acceptRequest(String contractManageCode);
 
+
 	
-
-
 }

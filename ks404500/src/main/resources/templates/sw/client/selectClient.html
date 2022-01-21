@@ -95,7 +95,7 @@ $(document).ready(function(){
 							</div>
 							<div class="card-body">
 								<input class="form-control col-md-3" style="float : right" id="myInput" type="text" placeholder="검색어를 입력해주세요">
-								<table class="table table-hover table-coondensed">
+								<table class="table table-hover table-coondensed" style="text-align: center; font-size: 13px;">
 									<thead>
 										<tr>
 											<th>아이디</th>
@@ -125,7 +125,7 @@ $(document).ready(function(){
 											<td th:text="${sl.shopWithdrawalDate}"></td>
 											<td th:text="${sl.shopMemberReg}"></td>
 											<td><a th:href="@{/sw/client/modifyClient(shopMemberId=${sl.shopMemberId})}">수정</a></td>
-											<td><button type="button" class="btn btn-primary deleteBtn" th:onclick="deleteBtn([[${sl.shopMemberId}]]);">삭제</button></td>
+											<td><button type="button" class="btn btn-primary deleteBtn btn-xs" th:onclick="deleteBtn([[${sl.shopMemberId}]]);">삭제</button></td>
 										</tr>
 										<tr th:unless="${not #lists.isEmpty(shopmemberlist)}">
 											<td><h1>데이터 없음!</h1></td>
