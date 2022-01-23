@@ -24,6 +24,7 @@ public class ShopMemberController {
 	@GetMapping("/addClient")
 	public String addShopMember(Model model) {
 		model.addAttribute("title", "회원가입");
+		
 		return "shop/client/addClient";
 	}
 	
@@ -31,11 +32,11 @@ public class ShopMemberController {
 	@PostMapping("/addClient")
 	public String addClient(ShopMember shopMember) {
 		System.out.println("shopclientController에서 받은 값" + shopMember);
-		
 		//insert처리
 		String shopMemberId = shopMember.getShopMemberId();
 		if(shopMemberId != null && !"".equals(shopMemberId)) {
 			shopMember.setBusinessLevelCode("user");
+			shopMember.setShopMemberState("Y");
 			shopMemberService.addShopMember(shopMember);
 		}
 		return "redirect:/shop/index-shop";

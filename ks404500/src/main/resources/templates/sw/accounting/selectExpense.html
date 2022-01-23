@@ -15,8 +15,8 @@
 					</div><!-- /.col -->
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
-							<li class="breadcrumb-item"><a href="#">Home</a></li>
-							<li class="breadcrumb-item active">Starter Page</li>
+							<li class="breadcrumb-item"><a th:href="@{/sw/index-sw}">Home</a></li>
+							<li class="breadcrumb-item active">재무관리</li>
 						</ol>
 					</div><!-- /.col -->
 				</div><!-- /.row -->
@@ -61,8 +61,17 @@
 											<td th:text="${el.swExpenseRegDate}"></td>
 											<td th:text="${el.memberId}"></td>
 											
-											<td th:if="${el.memberIdFinish} == null"><button class="btn btn-primary finishiBtn btn-xs" type="button" th:onclick="finishiBtn([[${el.swExpensePayCode}]])">마감</button></td>
+											<td th:if="${el.memberIdFinish} == null"><a th:onclick="finishiBtn([[${el.swExpensePayCode}]])" style="cursor: pointer;" ><i class="fas fa-pencil-alt" style="color: #0069D9"></i></a></td>
 											<td th:if="${el.memberIdFinish} != null"><span style="font-size: 13px"> 마감완료 </span></td>
+											
+											
+											<!-- 
+											마감
+                                          <td th:if="${a.shopIncomeFinish} == null">
+                                          <a th:href="@{/shop/accounting/modifyIncome(shopIncomeCode=${a.shopIncomeCode})}"><i class="fas fa-pencil-alt" style="color: #28a745"></i></a></td>
+                                          <td th:if="${a.shopIncomeFinish} != null"><i class="fas fa-pencil-alt finish"></i></td>
+											 -->
+											
 											
 											<td th:text="${el.memberIdFinish}" class="memberIdFinish" th:value="${el.memberIdFinish}"></td>
 											<td th:text="${el.swExpenseFinishDate}" class="swExpenseFinishDate" th:value="${el.swExpenseFinishDate}"></td>

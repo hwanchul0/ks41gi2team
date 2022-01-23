@@ -23,8 +23,8 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="/sw/index-sw">Home</a></li>
-              <li class="breadcrumb-item active">회원관리</li>
+			<li class="breadcrumb-item"><a th:href="@{/sw/index-sw}">Home</a></li>
+			<li class="breadcrumb-item active">회원관리</li>
             </ol>
           </div>
         </div>
@@ -43,32 +43,39 @@
                   <img src="/customcss/img/profile.png" alt="User profile picture" style="height : 180px;">
                 </div>
             
-
-                <h3 class="profile-username text-center" th:text="${session.SWNAME}"></h3>
-
-                <p class="text-muted text-center">[[${session.SWLEVEL}]]</p>
-                
-
-                <ul class="list-group list-group-unbordered mb-3">
-                  <li class="list-group-item">
-                    <b>아이디</b> <a class="float-right" th:text="${session.SWID}" ></a>
-                  </li>
-                  <li class="list-group-item">
-                    <b>가입일자</b> <a class="float-right" th:text="${session.SWDATE}"></a>
-                  </li>
-                  <li class="list-group-item">
-                    <b>주소</b> <a class="float-right" th:text="${session.SWADDR}"></a>
-                  </li>
-                  <li class="list-group-item">
-                    <b>연락처</b> <a class="float-right" >[[${session.SWPHONE}]]</a>
-                  </li>
-                  <li class="list-group-item">
-                    <b>이메일</b> <a class="float-right" th:text="${session.SWEMAIL}"></a>
-                  </li>
-                </ul>
-              </div>
-              <a th:href="@{/sw/member/modifyMember}">수정</a>
-              
+	                <h3 class="profile-username text-center" th:text="${session.SWNAME}"></h3>
+	                <p class="text-muted text-center">[[${session.SWLEVEL}]]</p>
+	                
+	                <ul class="list-group list-group-unbordered mb-3">
+	                  <li class="list-group-item">
+	                    <b>아이디</b> <a class="float-right" th:text="${session.SWID}" ></a>
+	                  </li>
+	                  
+	                  <li class="list-group-item">
+	                    <b>이름</b> <a class="float-right" th:text="${session.SWNAME}" ></a>
+	                  </li>
+	                  
+	                  <li class="list-group-item">
+	                    <b>가입일자</b> <a class="float-right" th:text="${session.SWDATE}"></a>
+	                  </li>
+	                  <li class="list-group-item">
+	                    <b>주소</b> <a class="float-right" th:text="${session.SWADDR}"></a>
+	                  </li>
+	                  <li class="list-group-item">
+	                    <b>연락처</b> <a class="float-right" >[[${session.SWPHONE}]]</a>
+	                  </li>
+	                  <li class="list-group-item">
+	                    <b>이메일</b> <a class="float-right" th:text="${session.SWEMAIL}"></a>
+	                  </li>
+	                </ul>
+	              </div>
+	              <div class="card-footer">
+		              <a th:href="@{/sw/member/modifyMyPage(memberId=${session.SWID})}">수정</a>
+					<form name="secessionForm" id="secessionForm" method="post" th:action="@{/sw/member/secession}" style="font-size: 13px;">
+						<input type="text" id="memberId" name="memberId" th:value="${session.SWID}" style="display: none">
+						<button type="submit" class="btn btn-primary btn-xs" id="secessionBtn" th:onclick="secession();">탈퇴</button>
+					</form>
+	              </div>
               <!-- /.card-body -->
             </div>
             <!-- /.card -->
@@ -84,7 +91,13 @@
   </div>
   <!-- /.content-wrapper -->
   
-  
-
+	<script type="text/javascript">
+	function secession(){
+		var secessionConfirm = confirm('회원탈퇴를 진행하시겠습니까?');
+		if (secessionConfirm){
+			location.href = "/sw/member/secession";
+		}		
+	}
+	</script>
 </th:block>
 </html>

@@ -25,92 +25,80 @@
 		</div>
 		<!-- 컨텐츠 헤더 끝 -->
 
-		<!-- 메인컨텐츠 -->
-		<div class="content">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-lg-12">
-						<!-- 회원가입폼 -->
-						<div class="card card-primary">
-							<div class="card-header">
-								<h5 class="card-title" th:text="${title}"></h5>
+<section class="content">
+	<div class="container-fluid" >
+		<div class="row  d-flex justify-content-center align-items-center h-100">
+			<div class="col-md-8" style="display: center">
+           <!-- Profile Image -->
+				<div class="card card-primary card-outline col-md-12">
+					<form id="myPageForm" th:action="@{/sw/member/modifyMyPage}" method="post" class="form-horizontal"> 
+						<div class="card-body box-profile">
+							<div class="text-center">
+								<img src="/customcss/img/profile.png" alt="User profile picture" style="height : 180px;">
 							</div>
+							<h3 class="profile-username text-center" th:text="${session.SWNAME}"></h3>
+							<p class="text-muted text-center">[[${session.SWLEVEL}]]</p>
+							<ul class="list-group list-group-unbordered mb-3">
+								<li class="list-group-item">
+									<b>아이디</b><input type="text" class="float-right" id="memberId" name="memberId" th:value="${session.SWID}" readonly="readonly">
+								</li>
 							
-							<!-- 회원가입 폼 바디 시작 -->
-							<form id="modifyMemberForm" th:action="@{/sw/member/modifyMember}" method="post" class="form-horizontal">
-								<div class="card-body">
-									<div class="form-group row">
-										<label class="col-sm-2 col-form-label text-right">아이디</label>
-										<div class="col-sm-8">
-											<input th:value="${memberInfo.memberId}" type="text" class="form-control" id="inputId" name="memberId" readonly="readonly">
-										</div>
-									</div>
-									<div class="form-group row">
-										<label class="col-sm-2 col-form-label text-right">변경할 비밀번호</label>
-										<div class="col-sm-8">
-											<input type="password" class="form-control" id="inputPw" placeholder="비밀번호를 입력하세요" name="inputPw">
-										</div>
-									</div>
-									<div class="form-group row">
-										<label class="col-sm-2 col-form-label text-right">변경할 비밀번호 확인</label>
-										<div class="col-sm-8">
-											<input type="password" class="form-control" id="pwCheck" placeholder="비밀번호를 한번 더 입력하세요" name="memberPw">
-										</div>
-									</div>
-									<div class="form-group row">
-										<label class="col-sm-2 col-form-label text-right">이름</label>
-										<div class="col-sm-8">
-											<input type="text" class="form-control" id="inputName" th:value="${memberInfo.memberName}" name="pwCheck" readonly="readonly" >
-										</div>
-									</div>
-									<div class="form-group row">
-										<label class="col-sm-2 col-form-label text-right">주소</label>
-										<div class="col-sm-8">
-											<input type="text" class="form-control" id="memberAddr" name="memberAddr" readonly="readonly">
-										</div>
-									</div>
-									<div class="form-group row">
-										<label class="col-sm-2 col-form-label text-right"></label>
-										<div class="col-sm-8">
-											<input type="text" id="sample4_postcode" placeholder="우편번호" name="postAddr1">
-											<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
-											<input type="text" id="sample4_roadAddress" placeholder="도로명주소" name="postAddr2">
-											<input type="text" id="sample4_jibunAddress" placeholder="지번주소" style="display: none">
-											<span id="guide" style="color:#999;display:none"></span>
-											<input type="text" id="sample4_detailAddress" placeholder="상세주소" name="postAddr3"  onchange="changeAddr()">
-											<input type="text" id="sample4_extraAddress" placeholder="참고항목" style="display: none">
-										</div>
-									</div>
-									<div class="form-group row">
-										<label class="col-sm-2 col-form-label text-right">이메일</label>
-										<div class="col-sm-8">
-											<input type="email" class="form-control" id="memberEmail" placeholder="이메일을 입력하세요" name="memberEmail">
-										</div>
-									</div>
-									<div class="form-group row">
-										<label class="col-sm-2 col-form-label text-right">전화번호</label>
-										<div class="col-sm-8">
-											<input type="text" class="form-control" id="memberPhone" placeholder="전화번호를 입력하세요" name="memberPhone">
-										</div>
-									</div>
-								<!-- 회원가입폼 바디 끝 -->
-								</div>
-								<div class="card-footer">
-									<button type="button" class="btn btn-primary" id ="modifyMemberBtn">수정완료</button>
-									<button type="button" class="btn btn-default float-right" id="cancleMemberBtn" th:onclick="cancel();">취소</button>
-								</div>
-							</form>
+								<li class="list-group-item">
+									<b>이름</b><input type="text" class="float-right" id="memberName" name="memberName" th:value="${session.SWNAME}" readonly="readonly">
+								</li>
+							
+								<li class="list-group-item">
+									<b>가입일자</b><input type="text" class="float-right" id="memberRegDate" name="memberRegDate" th:value="${session.SWDATE}" readonly="readonly">
+								</li>
+							
+								<li class="list-group-item">
+									<b>주소</b>
+											<input type="text" class="float-right" id="memberAddr" name="memberAddr" readonly="readonly">
+								</li>
+								<li style="list-style: none; margin-top: 11px; margin-bottom: 11px">
+									<b>주소 검색</b>
+											<input type="text" id="sample4_postcode" placeholder="우편번호" name="postAddr1" class="float-right">
+											<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="float-right">
+								</li>
+								<li style="list-style: none; margin-bottom: 11px;">
+											<input type="text" id="sample4_detailAddress" placeholder="상세주소" name="postAddr3"  onchange="changeAddr()" class="float-right">
+											<input type="text" id="sample4_roadAddress" placeholder="도로명주소" name="postAddr2" class="float-right">
+									<input type="text" id="sample4_jibunAddress" placeholder="지번주소" style="display: none">
+									<span id="guide" style="color:#999;display:none"></span>
+									<input type="text" id="sample4_extraAddress" placeholder="참고항목" style="display: none">
+								</li>
+								<li class="list-group-item">
+									<b>연락처</b><input type="number" class="float-right" id="memberPhone" name="memberPhone">
+								</li>
+								<li class="list-group-item">
+									<b>이메일</b><input type="email" class="float-right" id="memberEmail" name="memberEmail">
+								</li>
+							</ul>
 						</div>
-					</div>
+						<div class="card-footer">
+							<button type="button" class="btn btn-primary" id ="modifyMyPageBtn">수정완료</button>
+							<button type="button" class="btn btn-default float-right" id="cancleMemberBtn" th:onclick="cancel();">취소</button>
+						</div>
+					</form>
+              <!-- /.card-body -->
 				</div>
+            <!-- /.card -->
 			</div>
+          <!-- /.col -->   
 		</div>
+        <!-- /.row -->
+	</div>
+      <!-- /.container-fluid -->
+</section>
+			
+		<!-- 메인컨텐츠 -->
 	</div>
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script type="text/javascript">
 		//[재천]도로명주소
+		
 		//본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
-	    function sample4_execDaumPostcode() {
+		function sample4_execDaumPostcode() {
 	        new daum.Postcode({
 	            oncomplete: function(data) {
 	                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
@@ -174,21 +162,8 @@
 			$('#memberAddr').val(postAddr1 +" "+ postAddr2 +" "+ postAddr3);
 		}
 		
-		//[재천]비밀번호 중복 확인
 		$(function(){
-			$('#pwCheck').blur(function(){
-			   if($('#inputPw').val() != $('#pwCheck').val()){
-			    	if($('#pwCheck').val()!=''){
-				    alert("비밀번호가 일치하지 않습니다.");
-			    	    $('#pwCheck').val(null);
-			          $('#pwCheck').focus();
-			       }
-			    }
-			});
-		});
-		
-		$(function(){
-			$('#modifyMemberBtn').click(function(){
+			$('#modifyMyPageBtn').click(function(){
 				//주소 공백 체크
 				var sample4_detailAddress = $('#sample4_detailAddress').val();
 				var sample4_postcode = $('#sample4_postcode').val();
@@ -200,7 +175,7 @@
 					alert("주소를 입력하세요");
 					return false;
 				}
-
+				
 				//전화번호 공백체크
 				var memberPhone = $('#memberPhone').val();
 				if(memberPhone == null || memberPhone == ""){
@@ -208,17 +183,26 @@
 					return false;
 				}
 				
-				//[재천]submit
-				$('#modifyMemberForm').submit();
-			})  	   
-		});
+				//이메일 공백체크
+				var memberEmail = $('#memberEmail').val();
+				if(memberEmail == null || memberEmail == ""){
+					alert('이메일을 입력하세요');
+					return false;
+				}
+				alert('회원정보가 변경되었습니다. 다시 로그인해주세요')
+				$('#myPageForm').submit();
 				
+				
+			});
+		});
+		
 		function cancel(){
-			var cancelConfirm = confirm('등록을 취소하시겠습니까?');
+			var cancelConfirm = confirm('회원수정을 취소하시겠습니까?');
 			if (cancelConfirm){
 				location.href = "/sw/index-sw";
 			}		
 		}
+		
 	</script>
 </th:block>
 </html>

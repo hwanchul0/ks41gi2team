@@ -16,8 +16,8 @@ layout:decorate="@{layout/default-shop}">
 					</div><!-- /.col -->
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
-							<li class="breadcrumb-item"><a href="#">Home</a></li>
-							<li class="breadcrumb-item active">Starter Page</li>
+							<li class="breadcrumb-item"><a th:href="@{/shop/index-shop}">Home</a></li>
+							<li class="breadcrumb-item active">코드관리</li>
 						</ol>
 					</div><!-- /.col -->
 				</div><!-- /.row -->
@@ -92,6 +92,12 @@ layout:decorate="@{layout/default-shop}">
 			}else{
 				alert('공백은 사용하실수 없습니다.');
 			}
+		});
+	});
+	
+	$(function(){
+		$('paymentStateCode').change(function(){
+			$('#paymentStateCode').attr('login','nomal');
 		});
 	});
 	

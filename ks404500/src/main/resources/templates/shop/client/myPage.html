@@ -23,8 +23,8 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="/sw/index-sw">Home</a></li>
-              <li class="breadcrumb-item active">회원관리</li>
+			<li class="breadcrumb-item"><a th:href="@{/shop/index-shop}">Home</a></li>
+			<li class="breadcrumb-item active">회원관리</li>
             </ol>
           </div>
         </div>
@@ -51,6 +51,9 @@
                   <li class="list-group-item">
                     <b>아이디</b> <a class="float-right" th:text="${session.SHOPID}" style="color: #28a745"></a>
                   </li>
+					<li class="list-group-item">
+	                    <b>이름</b> <a class="float-right" th:text="${session.SHOPNAME}" style="color: #28a745"></a>
+					</li>
                   <li class="list-group-item">
                     <b>가입일자</b> <a class="float-right" th:text="${session.SHOPDATE}" style="color: #28a745"></a>
                   </li>
@@ -66,6 +69,13 @@
                 </ul>
 
               </div>
+              	   	<div class="card-footer">
+		              <a th:href="@{/shop/client/modifyMyPage(shopMemberId=${session.SHOPID})}">수정</a>
+					<form name="secessionForm" id="secessionForm" method="post" th:action="@{/shop/client/secession}" style="font-size: 13px;">
+						<input type="text" id="shopMemberId" name="shopMemberId" th:value="${session.SHOPID}" style="display: none">
+						<button type="submit" class="btn btn-primary btn-xs" id="secessionBtn" th:onclick="secession();">탈퇴</button>
+					</form>
+	              </div>
               <!-- /.card-body -->
             </div>
             <!-- /.card -->
@@ -80,7 +90,14 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-  
+  	<script type="text/javascript">
+	function secession(){
+		var secessionConfirm = confirm('회원탈퇴를 진행하시겠습니까?');
+		if (secessionConfirm){
+			location.href = "/shop/client/secession";
+		}		
+	}
+	</script>
   
 
 </th:block>

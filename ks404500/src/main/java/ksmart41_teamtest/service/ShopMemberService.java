@@ -51,4 +51,8 @@ public class ShopMemberService {
 	public int idCheck(String shopMemberId) {
 		return shopMemberMapper.idCheck(shopMemberId);
 	}
+	
+	public ShopMember selectShopMemberState(String shopMemberId) {
+		return shopMemberMapper.selectShopMemberState(shopMemberId);
+	}
 }
