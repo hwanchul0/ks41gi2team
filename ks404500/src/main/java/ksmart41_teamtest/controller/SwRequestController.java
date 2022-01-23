@@ -78,6 +78,8 @@ public class SwRequestController {
 		// selectAllServiceRequest 계약 상태가 '승인' 일 때  결제 예정 합계 테이블 insert 쿼리 실행
 		if(RequestStatus.equals(requsetAccept)) {
 			serviceRequestService.acceptRequest(contractManageCode);
+		}else {
+			serviceRequestService.deleteRequest(contractManageCode);
 		}
 			
 		

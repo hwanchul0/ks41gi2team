@@ -49,4 +49,15 @@ public class ServicePaymentService {
 		ServicePayment getContractState = servicePaymentMapper.getContractState(contractCode);
 		return getContractState;
 	}
+	// Client / 계약요청 승인시 결제
+	public int addPayment(ServicePaymentService servicePayment) {
+		int addPayment = servicePaymentMapper.addPayment(servicePayment);
+		return addPayment;
+	}
+	// 결제 정보 
+	public ServicePayment getRequestInfo(ServicePayment paymentCode) {
+		ServicePayment getRequestInfo = servicePaymentMapper.getRequestInfo(paymentCode);
+		return getRequestInfo;
+	}
+		
 }

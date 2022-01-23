@@ -139,7 +139,12 @@ tbody tr td:first-child:before {
 											<td th:text="${r.serviceRequestDate}"></td>
 											<td th:text="${r.serviceRegistrationDate}"></td>
 											<td th:text="${r.serviceEndDate}"></td>
-											<td th:text="${r.serviceRequestStatus}"></td>
+											<td th:if="${r.serviceRequestStatus == '승인'}">
+												<a th:href="@{/shop/service/serviceRequest/addPayment(contractManageCode=${r.contractManageCode})}">
+													<button type="button" class="btn btn-success">결제하기</button>
+												</a>
+											</td>
+											<td th:unless="${r.serviceRequestStatus == '승인'}" th:text="${r.serviceRequestStatus}"></td>
 											<td th:text="${r.serviceApprovalDate}"></td>
 											<td>
 												<a th:href="@{/shop/service/serviceRequest/modifyServiceRequest(contractManageCode=${r.contractManageCode})}">

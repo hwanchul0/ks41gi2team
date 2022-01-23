@@ -80,6 +80,11 @@ public class ServiceRequestService {
 		int addPayment = serviceRequestMapper.acceptRequest(contractManageCode);
 		return addPayment;
 	}
+	// 서비스 계약요청 승인이 아닐 때 결제예정 테이블 삭제
+	public int deleteRequest(String contractManageCode) {
+		int deletePayment = serviceRequestMapper.deleteRequest(contractManageCode);
+		return deletePayment;
+	}
 	
 
 	
