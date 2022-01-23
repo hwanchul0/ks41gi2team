@@ -8,8 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import ksmart41_teamtest.dto.Business;
 import ksmart41_teamtest.dto.ShipmentCode;
 import ksmart41_teamtest.dto.ShopRequestShipment;
 import ksmart41_teamtest.service.ShopRequestShipmentService;
@@ -24,16 +26,28 @@ public class ShopShipmentController {
 	@Autowired
 	private ShopRequestShipmentService shopRequestShipmentService;
 	
-	@GetMapping("/addRequestShipment")
-	public String addRequestShipment() {
-		return "shop/shipment/addRequestShipment";
+	/* 유성 배송 요청 ((수정modify)배송단계 / 배송 시작일자 input) */
+	@GetMapping("/modifyShipment")
+	public String modifyShipment(@RequestParam(value = "shopOrderCode", required = false) String shopOrderCode,
+								Model model) {
+		ShipmentCode getShipmetRequest = shopShipmentService.getShipmetRequest(shopOrderCode);
+		model.addAttribute("getShipmetRequest", getShipmetRequest);
+		System.out.println(shopOrderCode + "받아온 shopOrderCode (controller)");
+		if(shopOrderCode != null && !"".equals(shopOrderCode)) {
+			ShipmentCode getShipmentCode = shopShipmentService.getShipmetRequest(shopOrderCode);
+			model.addAttribute("getShipmentCode", getShipmentCode);
+		}
+		model.addAttribute("tilte", "배송요청등록");
+		return "shop/shipment/modifyShipment";
 	}
 	
-	@GetMapping("/addShipment")
-	public String addShipment() {
-		return "shop/shipment/addShipment";
+	/* 유성 배송 요청 ( modify post) */
+	@PostMapping("/modifyShipment")
+	public String modifyShipment(ShipmentCode shipmentCode) {
+		shopShipmentService.modifyShipment(shipmentCode);
+		return "redirect:/shop/shipment/selectShipment";
 	}
-	
+
 
 	//유경 - shop 미배송된 주문내역의 합계 구하기
 	@PostMapping("/shipmentCheck")

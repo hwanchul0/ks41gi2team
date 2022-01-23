@@ -29,6 +29,16 @@ public class ShopShipmentService {
 		result = shopShipmentMapper.getCountNoneRealese();
 		return result;
 	}
+	// 유성 - 쇼핑몰 배송요청 
+	public int modifyShipment(ShipmentCode shopOrderCode) {
+		return shopShipmentMapper.modifyShipment(shopOrderCode);
+	}
 
+	// 유성 - 쇼핑몰 배송
+	public ShipmentCode getShipmetRequest(String shopOrderCode) {
+		ShipmentCode getShipmetRequest = shopShipmentMapper.getShipmetRequest(shopOrderCode);
+		return getShipmetRequest;
+		
+	}
 	
 }
