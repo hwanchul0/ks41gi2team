@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ksmart41_teamtest.mapper.SwIndexMapper">
+	
+	<!--유경- 공급중인 서비스 -->
+	<select id="indexSwGetServiceAmount" resultType="ServicePayment">
+	SELECT
+		SUM(n.contractStateCode = 'serviceUsing') as contractStateCode
+	from
+	k2_sw_normalContractState AS n;
+	</select>
+	
+	<!--유경 sw 인덱스 -  서비스 결제대기 -->
+	<select id="indexSwGetWatingAmount" resultType="java.util.HashMap">
+	SELECT
+		COUNT(*) as count
+	from
+		k2_sw_contractRequest AS c
+		left JOIN
+		k2_sw_paymentCheck AS p
+		on
+		c.contractManageCode = p.contractManageCode
+	WHERE
+		c.serviceRequestStatus != '반려'
+		AND
+		p.paymentCheckCode IS null;
+	</select>
+	
+	<!-- 유경 인덱스 - client 수 -->
+	<select id="indexSwGeClientAmount" resultType="java.util.HashMap">
+	SELECT
+		COUNT(*) AS count
+	FROM
+		k2_sw_client AS c
+	WHERE
+		c.clientStatus = '정상';
+	</select>
+	
+	<!-- 유경 sw 인덱스 매출 -->
+	<select id="indexSwGeServicePercent" resultType="java.util.HashMap">
+		SELECT
+			c.serviceCode,
+			s.serviceName,
+			s.servicePrice,
+			SUM(c.serviceTotalPrice) AS serviceTotalPrice,
+			
+			ROUND((SUM(c.serviceTotalPrice) / (SELECT 
+			SUM(serviceTotalPrice)
+			FROM 
+			k2_sw_contractRequest AS c
+			INNER join
+			k2_sw_paymentCheck AS p
+			on
+			c.contractManageCode = p.contractManageCode) * 100),1) AS percent
+		FROM
+			k2_sw_contractRequest AS c
+			INNER join
+			k2_sw_paymentCheck AS p
+			on
+			c.contractManageCode = p.contractManageCode
+			INNER JOIN
+			k2_sw_serviceManagement AS s
+			on
+			c.serviceCode = s.serviceCode
+		GROUP BY c.serviceCode
+		ORDER BY serviceTotalPrice DESC
+		LIMIT 0,5;
+			</select>
+			
+		
+</mapper>

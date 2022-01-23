@@ -53,8 +53,16 @@ $(document).ready(function () {
   	        alert('발행대상을 선택해주세요');
   	        Category1.focus();
   	        event.preventDefault();
-  	   		}
-  });
+  	    //유효성 검사
+  	   		}else if($('#renontax').val().length == 0){
+  				alert('공급가를 확인해주세요');
+  				return false;
+  			}else if($('#groupslip').val().length == 0){
+  				alert('전표번호를 확인해주세요');
+  				return false;
+  			}
+  });	
+  		
  
 });
  

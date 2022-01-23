@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ksmart41_teamtest.mapper.ShopIndexMapper">
+	
+	<!-- 유경 shop인덱스 미배송건수 -->
+	<select id="indexShopGetSipment" resultType="java.util.HashMap">
+		SELECT
+			COUNT(*) AS non
+		from
+			k2_shop_order AS o
+			left join
+			k2_release AS r
+			on
+			o.shopOrderCode = r.shopOrderCode
+		WHERE
+			r.releaseCode IS NULL;
+	</select>
+	
+	<!-- 유경 shop인덱스 결제대기-->
+	<select id="indexShopGetWatingPayment"  resultType="java.util.HashMap">
+		SELECT
+			COUNT(*) AS waiting
+		from
+			k2_shop_paymentCheck AS p
+		WHERE
+		p.paymentStateCode = 'PayWaiting';
+	</select>
+	
+	
+	<select id="indexShopGetWeekOrder"  resultType="java.util.HashMap">
+	SELECT
+		count(*) as week
+	from
+		k2_shop_order AS o
+	WHERE
+	o.shopOrderRegDate BETWEEN DATE_ADD(NOW(),INTERVAL -1 week ) AND NOW();
+	</select>
+	
+	<!-- 유경 shop 인덱스 매출 -->
+	<select id="indexShopGetPercent" resultType="java.util.HashMap">
+	SELECT
+		p.categoryCode,
+		p.goodsName,
+		SUM(o.shopOrderAmount) AS shopOrderAmount,
+		a.stockPrice,
+		sum(o.goodsPaymentAmount) AS goodsPaymentAmount,
+		round(sum(o.goodsPaymentAmount)/(SELECT
+		sum(o.goodsPaymentAmount) AS paymentAmount
+	from
+		k2_shop_order AS o
+		INNER JOIN
+		k2_assort_goods AS a
+		ON
+		o.assortCode = a.assortCode
+		INNER JOIN
+		k0_productCategory AS p
+		on
+		a.categoryCode = p.categoryCode
+	ORDER BY paymentAmount),2)*100 AS paymentAmount
+	
+	from
+		k2_shop_order AS o
+		INNER JOIN
+		k2_assort_goods AS a
+		ON
+		o.assortCode = a.assortCode
+		INNER JOIN
+		k0_productCategory AS p
+		on
+		a.categoryCode = p.categoryCode
+	GROUP BY	p.categoryCode
+	ORDER BY paymentAmount DESC
+	LIMIT 0,5;
+		</select>
+		
+	<!--유경 -  shop 인덱스 최근 일주일 날짜 조회 -->
+	<select id="indexShopGetPeriod" resultType="java.util.HashMap">
+	SELECT
+	GROUP_CONCAT(ADDDATE( CURDATE(), INTERVAL -1 WEEK ),'~',CURDATE()) AS period
+
+	</select>
+	
+	
+</mapper>
