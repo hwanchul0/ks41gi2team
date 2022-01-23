@@ -5,8 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <th:block layout:fragment="customJs">
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" rel="stylesheet">
+
 <script type="text/javascript">
 
 //미배송건수 받아오기
@@ -29,13 +28,13 @@ $(function(){
 $(function(){
 	$('.table').footable({
 		"paging": {
-			"enabled": true
+			"enabled": false
 		},
 		"filtering": {
 			"enabled": false
 		},
 		"sorting": {
-			"enabled": true
+			"enabled": false
 		}
 
 	});
@@ -115,8 +114,8 @@ $(document).ready(function(){
 											<td th:text="${sc.releaseDate}"></td>
 											<td th:text="${sc.shopMemberId}"></td>
 											<td th:if="${sc.releaseDate} == null">
-												<button type="button" class="btn btn-block btn-success btn-xs" 
-											onclick="location.href='/shop/shipment/addRequestShipment'">배송요청</button></td>
+												<a th:href="@{/shop/shipment/modifyShipment(shopOrderCode=${sc.shopOrderCode})}">
+												<button type="button" class="btn btn-block btn-success btn-xs" >배송요청</button></a></td>
 											<td th:if="${sc.releaseDate} != null">
 												<button type="button" class="btn btn-block btn-success btn-xs disabled">배송완료</button></td>
 										</tr>
