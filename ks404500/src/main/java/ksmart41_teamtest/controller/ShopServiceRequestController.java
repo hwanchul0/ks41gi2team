@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import ksmart41_teamtest.dto.ServiceRequest;
 import ksmart41_teamtest.dto.ShopMember;
 import ksmart41_teamtest.dto.ServiceManagement;
+import ksmart41_teamtest.dto.ServicePayment;
 import ksmart41_teamtest.service.ServiceRequestService;
 import ksmart41_teamtest.service.ServiceManagementService;
+import ksmart41_teamtest.service.ServicePaymentService;
 
 @Controller
 @RequestMapping("/shop/service/serviceRequest")
@@ -32,9 +34,13 @@ public class ShopServiceRequestController {
    // 계약요청 관련 의존성 주입
    private ServiceRequestService serviceRequestService;
    
-   public ShopServiceRequestController(ServiceRequestService serviceRequestService , ServiceManagementService serviceManagementService) {
+   private ServicePaymentService servicePaymentService;
+   
+   public ShopServiceRequestController(ServiceRequestService serviceRequestService , ServiceManagementService serviceManagementService
+		   								,ServicePaymentService servicePaymentService) {
       this.serviceRequestService = serviceRequestService;
       this.serviceManagementService = serviceManagementService;
+      this.servicePaymentService = servicePaymentService;
    }
    
    // client /  계약요청 등록
@@ -60,7 +66,21 @@ public class ShopServiceRequestController {
       log.info("PostMapping 계약요청 등록 - 내 사업장별 대표코드 조회 결과 :{}" , myMainBizCode);
       return myMainBizCode;
    }
-   
+   // 계약요청 조회 - 승인 시 결제하기
+   @GetMapping("/addPayment")
+   public String addPayment(Model model, ServicePayment paymentCode) {
+	   model.addAttribute("title","결제하기");
+	   ServicePayment getRequestInfo = servicePaymentService.getRequestInfo(paymentCode);
+	   model.addAttribute("getRequestInfo", getRequestInfo);
+	   return "shop/service/serviceRequest/addPayment";
+   }
+   @PostMapping("/addPayment")
+   public String addPayment(ServicePaymentService servicePayment) {
+	   log.info("서비스 결제 ==========={}:" , servicePayment);
+	   servicePaymentService.addPayment(servicePayment);
+	   
+	   return "redirect:/shop/service/serviceRequest/selectServiceRequest";
+   }
    // client 본인 계약요청 조회
    @GetMapping("/selectServiceRequest") 
      public String getRequestList(Model model, HttpSession session) { 

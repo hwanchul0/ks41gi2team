@@ -152,4 +152,58 @@
 			k.paymentStateCode = s.paymentStateCode;
 		</select>
 		
+		<!-- Client 계약요청 승인 시 결제  -->	
+		<insert id="addPayment" parameterType="ServicePayment">
+		INSERT INTO k2_sw_paymentCheck(
+			paymentCheckCode
+			,contractManageCode
+			,paymentCode
+			,clientId
+			,paymentStateCode
+			,paymentEstimate
+			,paymentCharge
+			,paymentBalance
+			,paymentType
+			,paymentDate
+		)VALUES (
+		(SELECT 
+			MAX(CAST(paymentCheckCode AS INTEGER)+1)
+		FROM 
+			k2_sw_paymentCheck AS z)
+			,#{contractManageCode}
+			,#{paymentCode}
+			,#{clientId}
+			,'payWaiting'
+			,#{paymentEstimate}
+			,#{paymentCharge}
+			,#{paymentBalance}
+			,#{paymentType}
+			,NOW()
+			);
+		</insert>
+		
+		<!-- 계약요청 승인시 결제 정보 -->
+		<select id="getRequestInfo" resultType="ServicePayment">
+		SELECT 
+			 ps.paymentCode
+			,cr.serviceTotalPrice
+			,ps.contractManageCode
+		FROM 
+			k2_sw_paymentSum AS ps
+			INNER JOIN 
+			k2_sw_contractRequest AS cr
+			ON 
+			ps.contractManageCode = cr.contractManageCode
+			INNER JOIN 
+			k0_sw_mainBusinessCodeManagement AS mc
+			ON 
+			cr.mainBusinessCode = mc.mainBusinessCode
+			INNER JOIN 
+			k0_sw_businessRegistration AS br
+			ON 
+			mc.businessRegistrationCode = br.businessRegistrationCode
+			WHERE 
+			ps.contractManageCode = #{contractManageCode};
+		</select>
+		
 </mapper>

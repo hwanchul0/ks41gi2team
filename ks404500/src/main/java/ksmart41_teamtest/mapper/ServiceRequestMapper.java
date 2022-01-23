@@ -47,6 +47,9 @@ public interface ServiceRequestMapper {
 	// 서비스 계약요청 승인 -> 결제예정 테이블
 	public int acceptRequest(String contractManageCode);
 
+	// 서비스 계약요청 승인이 아닐 때 결제예정 테이블 삭제
+	public int deleteRequest(String contractManageCode);
+
 
 	
 }

@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import ksmart41_teamtest.dto.PaymentState;
 import ksmart41_teamtest.dto.ServicePayment;
+import ksmart41_teamtest.service.ServicePaymentService;
 
 @Mapper
 public interface ServicePaymentMapper {
@@ -30,5 +31,10 @@ public interface ServicePaymentMapper {
 
 	//재천
 	public ServicePayment selectIsCode(String swIsCode);
+	
+	//Client / 계약요청 승인시 결제
+	public int addPayment(ServicePaymentService servicePayment);
+	// 결제 정보 
+	public ServicePayment getRequestInfo(ServicePayment paymentCode);
 
 }

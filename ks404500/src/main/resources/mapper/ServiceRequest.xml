@@ -262,6 +262,14 @@
 	WHERE contractManageCode = #{contractManageCode}
 	);
 	</insert>
+	<!-- 계약요청 승인 상태가 아닐시 결제 예정 테이블 삭제 -->
+	<delete id="deleteRequest" parameterType="ServiceRequest">
+	DELETE 
+	FROM 
+		k2_sw_paymentSum 
+	WHERE 
+		contractManageCode=#{contractManageCode};
+	</delete>
 	
 
 
