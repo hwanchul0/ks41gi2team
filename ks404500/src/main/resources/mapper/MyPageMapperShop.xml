@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ksmart41_teamtest.mapper.MyPageMapperShop">
+	<resultMap type="ShopMember" id="memberResultMap">
+		<result column="shopMemberId"				property="shopMemberId" />
+		<result column="businessLevelCode"			property="businessLevelCode" />
+		<result column="shopMemberPw"				property="shopMemberPw" />
+		<result column="shopMemberName"				property="shopMemberName" />
+		<result column="shopMemberAddr"				property="shopMemberAddr" />
+		<result column="shopMemberEmail"			property="shopMemberEmail" />
+		<result column="shopMemberPhone"			property="shopMemberPhone" />
+		<result column="shopMemberState"			property="shopMemberState" />
+		<result column="shopWithdrawalReason"		property="shopWithdrawalReason" />
+		<result column="shopWithdrawalDate"			property="shopWithdrawalDate" />
+		<result column="shopMemberReg"				property="shopMemberReg" />
+	</resultMap>
+	
+		<update id="modifyMyPage" parameterType="ShopMember">
+		UPDATE k2_shop_member
+		SET
+			shopMemberName =#{shopMemberName},
+			shopMemberAddr = #{shopMemberAddr},
+			shopMemberPhone = #{shopMemberPhone},
+			shopMemberEmail =#{shopMemberEmail}
+		WHERE
+			shopMemberId = #{shopMemberId}
+	</update>
+	
+	
+	<select id="MemberInfo" parameterType="String" resultMap="memberResultMap">
+		SELECT
+			shopMemberId,
+			businessLevelCode,
+			shopMemberPw,
+			shopMemberName,
+			shopMemberAddr,
+			shopMemberEmail,
+			shopMemberPhone,
+			shopMemberState,
+			shopWithdrawalReason,
+			shopWithdrawalDate,
+			shopMemberReg
+		FROM
+			k2_shop_member
+		WHERE
+			shopMemberId = #{shopMemberId}
+	</select>
+	
+	
+		<select id="selectMemberStatus" parameterType="String" resultMap="memberResultMap">
+		SELECT 
+			shopMemberId,
+			shopMemberState
+		FROM 
+			k2_shop_member
+		WHERE
+			shopMemberId = #{shopMemberId}
+	</select>
+	
+	
+	
+	<update id="modifystatus" parameterType="Member">
+			UPDATE k2_shop_member
+			SET
+				shopMemberState = 'N',
+				shopWithdrawalDate = NOW()
+			WHERE
+				shopMemberId = #{shopMemberId}
+	</update>
+</mapper>

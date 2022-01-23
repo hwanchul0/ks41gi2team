@@ -51,4 +51,9 @@ public class MemberService {
 	public int idCheck(String memberId) {
 		return memberMapper.idCheck(memberId);
 	}
+	
+	//회원상태체크
+	public Member selectMemberStatus(String memberId) {
+		return memberMapper.selectMemberStatus(memberId);
+	}
 } 

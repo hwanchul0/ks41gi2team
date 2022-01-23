@@ -26,5 +26,9 @@ public interface ShopMemberMapper {
 	
 	//[재천]중복 확인
 	public int idCheck(String shopMemberId);
+	
+	//재천 상태확인
+	public ShopMember selectShopMemberState(String shopMemberId);
+	
 	}
 
