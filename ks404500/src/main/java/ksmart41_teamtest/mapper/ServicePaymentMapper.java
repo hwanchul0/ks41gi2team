@@ -33,7 +33,7 @@ public interface ServicePaymentMapper {
 	public ServicePayment selectIsCode(String swIsCode);
 	
 	//Client / 계약요청 승인시 결제
-	public int addPayment(ServicePaymentService servicePayment);
+	public int addPayment(ServicePayment servicePayment);
 	// 결제 정보 
 	public ServicePayment getRequestInfo(ServicePayment paymentCode);
 

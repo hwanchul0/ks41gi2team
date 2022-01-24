@@ -3,11 +3,9 @@ package ksmart41_teamtest.service;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import ksmart41_teamtest.dto.ServicePayment;
 import ksmart41_teamtest.dto.ServiceRequest;
 import ksmart41_teamtest.mapper.ServiceRequestMapper;
 

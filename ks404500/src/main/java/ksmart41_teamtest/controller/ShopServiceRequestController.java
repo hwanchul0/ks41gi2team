@@ -15,13 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import ksmart41_teamtest.dto.ServiceRequest;
-import ksmart41_teamtest.dto.ShopMember;
 import ksmart41_teamtest.dto.ServiceManagement;
 import ksmart41_teamtest.dto.ServicePayment;
-import ksmart41_teamtest.service.ServiceRequestService;
+import ksmart41_teamtest.dto.ServiceRequest;
 import ksmart41_teamtest.service.ServiceManagementService;
 import ksmart41_teamtest.service.ServicePaymentService;
+import ksmart41_teamtest.service.ServiceRequestService;
 
 @Controller
 @RequestMapping("/shop/service/serviceRequest")
@@ -75,7 +74,7 @@ public class ShopServiceRequestController {
 	   return "shop/service/serviceRequest/addPayment";
    }
    @PostMapping("/addPayment")
-   public String addPayment(ServicePaymentService servicePayment) {
+   public String addPayment(ServicePayment servicePayment) {
 	   log.info("서비스 결제 ==========={}:" , servicePayment);
 	   servicePaymentService.addPayment(servicePayment);
 	   
