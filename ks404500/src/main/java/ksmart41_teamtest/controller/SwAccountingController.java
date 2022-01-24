@@ -2,6 +2,7 @@ package ksmart41_teamtest.controller;
 
 
 import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ksmart41_teamtest.dto.GetInvoiceInfo;
 import ksmart41_teamtest.dto.InvoiceList;
 import ksmart41_teamtest.dto.InvoiceReason;
-import ksmart41_teamtest.dto.ShopTotalAccounting;
 import ksmart41_teamtest.dto.SwTotalAccounting;
 import ksmart41_teamtest.service.AccountingService;
 import ksmart41_teamtest.service.InvoiceListService;
