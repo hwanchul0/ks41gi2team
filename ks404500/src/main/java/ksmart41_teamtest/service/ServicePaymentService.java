@@ -50,7 +50,7 @@ public class ServicePaymentService {
 		return getContractState;
 	}
 	// Client / 계약요청 승인시 결제
-	public int addPayment(ServicePaymentService servicePayment) {
+	public int addPayment(ServicePayment servicePayment) {
 		int addPayment = servicePaymentMapper.addPayment(servicePayment);
 		return addPayment;
 	}

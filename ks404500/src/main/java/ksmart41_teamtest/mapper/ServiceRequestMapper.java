@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import ksmart41_teamtest.dto.ServicePayment;
 import ksmart41_teamtest.dto.ServiceRequest;
 
 @Mapper

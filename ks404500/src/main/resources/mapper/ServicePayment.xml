@@ -172,7 +172,7 @@
 			k2_sw_paymentCheck AS z)
 			,#{contractManageCode}
 			,#{paymentCode}
-			,#{clientId}
+			,'shopid001'
 			,'payWaiting'
 			,#{paymentEstimate}
 			,#{paymentCharge}

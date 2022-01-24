@@ -152,15 +152,25 @@
 		,serviceRequestStatus
 		,serviceApprovalDate)
 	VALUES( 
-		(SELECT CONCAT('estimate',LPAD(max(SUBSTRING((contractManageCode),10,2))+1,2,'0'))
+	(SELECT 
+		CONCAT('estimate',(Max(SUBSTRING_INDEX(ALIAS_FOR_SUBQUERY.contractManageCode,'estimate',-1))+1))
 	FROM
-  	 k2_sw_contractRequest ALIAS_FOR_SUBQUERY) 
+	  	 k2_sw_contractRequest ALIAS_FOR_SUBQUERY )
 			 ,#{mainBusinessCode}
 			 ,#{serviceCode}
 			 ,#{serviceAmount}
 			 ,#{servicePeriod}
 			 ,#{serviceTotalPrice}
-			 ,''
+			 ,(SELECT
+				CASE
+				WHEN (MAX(RIGHT(slipNumber,1)) > 0) 
+				THEN CONCAT( '전표', '_',DATE_FORMAT(#{serviceRegistrationDate}, '%y%m%d'), '_', MAX(RIGHT(slipNumber,1))+1 )
+				ELSE CONCAT( '전표', '_',DATE_FORMAT(#{serviceRegistrationDate}, '%y%m%d'), '_', 1 )
+				END AS slipNumber
+				FROM
+				k2_sw_contractRequest ALIAS_FOR_SUBQUERY 
+				WHERE
+				substring(slipNumber,4,7) =DATE_FORMAT(#{serviceRegistrationDate}, '%y%m%d'))
 			 ,#{serviceRegistrationDate}
 			 ,#{serviceEndDate}
 			 ,NOW()
