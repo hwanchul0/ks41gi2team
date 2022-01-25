@@ -73,7 +73,7 @@ public class SwServiceController {
 		
 		return codeCheckResult;
 	}
-	// 서비스 삭제 페이지
+	// 서비스 삭제 
 	@RequestMapping("/deleteServiceManagement")
 	public @ResponseBody int deleteServiceManagemenet(ServiceManagement serviceManagement) {
 		log.info("서비스 삭제 페이지 ======== {}:", serviceManagement);

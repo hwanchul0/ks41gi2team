@@ -138,6 +138,7 @@ public class SwCodeController {
 		model.addAttribute("selectContractStateCode",selectContractStateCode);
 		return "sw/code/selectContractStateCode";
 	}
+	// [환철]SW 계약상태 코드 삭제
 	@RequestMapping("/deleteContractStateCode")
 	public @ResponseBody int deleteContractStateCode(Code ContractStateCode) {
 		log.info("계약상태코드 삭제 페이지 ========={}:",ContractStateCode);
