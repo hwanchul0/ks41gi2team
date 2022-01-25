@@ -29,10 +29,7 @@ public class ShopServiceRequestController {
    private static final Logger log = LoggerFactory.getLogger(ShopServiceRequestController.class);
    // 계약요청 관련 의존성 주입
    private ServiceManagementService serviceManagementService;
-   
-   // 계약요청 관련 의존성 주입
    private ServiceRequestService serviceRequestService;
-   
    private ServicePaymentService servicePaymentService;
    
    public ShopServiceRequestController(ServiceRequestService serviceRequestService , ServiceManagementService serviceManagementService
@@ -46,6 +43,7 @@ public class ShopServiceRequestController {
    @GetMapping("/addServiceRequest")
    public String addServiceRequest(Model model) {
       List<ServiceManagement> serviceManagement = serviceManagementService.getServiceManagement();
+      // 서비스 정보 가져오기
       model.addAttribute("serviceManagement",serviceManagement);
       model.addAttribute("title","계약요청 등록");
       return "shop/service/serviceRequest/addServiceRequest";

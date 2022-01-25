@@ -17,6 +17,7 @@ public class AccountingService {
 	@Autowired
 	private AccountingMapper accountingMapper;
 	
+	// 세금계산서 발행화면- 계약내용 조회
 	public List<GetInvoiceInfo> getAddByBizInvoice() {
 		List<GetInvoiceInfo> getInvoiceInfo = accountingMapper.getAddByBizInvoice();
 		//System.out.println(getInvoiceInfo);

@@ -118,7 +118,7 @@
          GROUP BY bR.clientId
          ORDER BY r.serviceRequestDate ASC;       
    </select>
-   <!-- 서비스 등록 | 내 사업장대표코드 modal -->
+   <!-- 계약요청 등록 | 내 사업장대표코드 modal -->
    <select id="findMyMainBizCode" parameterType="String" resultType="map">
     SELECT 
 

@@ -32,7 +32,7 @@
             // 숫자 콤마(,)
             //$('#serviceTotalPrice').val(servicePrice.toLocaleString());
          });
-         // 내 사업장 대표코드 모달
+         // 내 사업장 대표코드 모달 start
          $(document).on('click', '#myMainBizCode', function(){
             $('#dataTableAjax').DataTable({
                   destroy: true,
@@ -82,8 +82,10 @@
              mainBusinessCodeId.attr('value',checkedTrName);
             modal.addClass('hidden');
          });
+      // 내 사업장 대표코드 모달 end
+      
+      		// 서비스 등록
             $(document).on('click','#addServiceBtn', function(){
-                var submitCheck = true;
                var mainBizCode = $('#mainBusinessCodeNameInput').val()
                var serviceName = $("#serviceName option:selected").attr('value3')
                var serviceAmount = $('#serviceAmount').val()
@@ -95,13 +97,14 @@
                   alert("서비스 수량을 입력해주세요")
                }else if(serviceTotalPeriod == null || serviceTotalPeriod == '' || serviceTotalPeriod == undefined){
                   alert("희망하시는 서비스 예약 날짜를 선택 후 기간 조회 버튼을 클릭해주세요")
+
                }else{
-            	   var addConfirm = confirm("등록하시겠습니까?")
-            	   if(addConfirm){
+					var addConfirm = confirm("등록하시겠습니까?")
+					if(addConfirm){
 					$('#addServiceRequestForm').submit();
-            	   }
+					}
 				}
-			}); 
+		}); 
    	});
    </script>
 <!-- /script -->
