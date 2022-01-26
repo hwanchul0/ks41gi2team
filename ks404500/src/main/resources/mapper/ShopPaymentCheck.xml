@@ -17,16 +17,22 @@
 	</resultMap>
 	<select id="getShopPaymentCheck" parameterType="String" resultType="ShopPaymentCheck">
 		SELECT
-		shoppaymentCheckCode,
-		shopPaymentCode,
-		shopPaymentCharge,
-		shopConsumerId,
-		shopMemberId,
-		paymentStateCode,
-		paymentType,
-		shopPaymentDate
+		p.shopPaymentCheckCode,
+		p.shopPaymentCode,
+		s.shopPaymentAmount,
+		p.shopConsumerId,
+		p.shopMemberId,
+		p.paymentStateCode,
+		p.paymentType,
+		p.shopPaymentDate
 	FROM
-		k2_shop_paymentCheck; 
+		k2_shop_paymentCheck AS p
+		inner join 
+		k2_shop_paymentSum AS s
+	ON	
+		p.shopPaymentCode = s.shopPaymentCode
+	ORDER BY 
+		 p.shopPaymentDate DESC; 
 	
 	</select>
 	
@@ -77,8 +83,8 @@
 	on
 		o.shopSlipNumber = c.shopSlipNumber
 	GROUP by c.shopSlipNumber
-	ORDER BY (c.shopPaymentCode IS NOT NULL),
-		c.shopPaymentCode DESC;
+	ORDER BY (p.shopPaymentCheckCode IS not NULL),
+		 cast(p.shopPaymentCheckCode AS integer);
 	</select>
 
 	<!--  유성 쇼핑몰 결제 삭제 -->

@@ -21,9 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import ksmart41_teamtest.dto.Business;
 import ksmart41_teamtest.dto.Order;
-import ksmart41_teamtest.dto.ShopAddAccounting;
 import ksmart41_teamtest.dto.ShopAddPaymentCheck;
-import ksmart41_teamtest.dto.ShopIsListCode;
 import ksmart41_teamtest.dto.ShopPaymentCheck;
 import ksmart41_teamtest.service.OrderService;
 import ksmart41_teamtest.service.ShopPaymentCheckService;
@@ -90,6 +88,30 @@ public class ShopOrderController {
 		System.out.println(order + "<--controller");
 		return "shop/order/selectOrder";
 	}
+	
+	/* 유성 쇼핑몰 주문 취소(수정) */
+	@PostMapping ("/modifyOrder")
+	public String modifyOrder(Order order) {
+		orderService.modifyOrder(order);
+		return "redirect:/shop/order/selectOrder";
+	}
+	
+	/* 유성 쇼핑몰 주문 취소(수정) */
+	@GetMapping ("/modifyOrder")
+	public String modifyOrder(@RequestParam(value = "shopOrderCode", required = false) String shopOrderCode,
+								Model model) {
+		Order getOrderList = orderService.getOrderList(shopOrderCode);
+		//model.addAttribute("title", "사업장 수");
+		model.addAttribute("getOrderList", getOrderList);
+		System.out.println(shopOrderCode + "받아온 shopOrderCode (controller)");
+		if(shopOrderCode != null && !"".equals(shopOrderCode)) {
+			Order getOrder = orderService.getOrderList(shopOrderCode);
+			model.addAttribute("getOrder", getOrder);
+		}
+		model.addAttribute("tilte", "주문내역 수정");
+		return "shop/order/modifyOrder";
+	}
+	
 	
 	/* 유성 쇼핑몰 결제조회*/
 	@GetMapping("/selectPaymentCheck")
