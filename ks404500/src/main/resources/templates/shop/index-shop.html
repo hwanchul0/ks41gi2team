@@ -51,8 +51,9 @@
 									<div class="icon">
 										<i class="fas fa-bell"></i>
 									</div>
-									<a href="/shop/order/selectOrder" class="small-box-footer">바로가기 <i
-										class="fas fa-arrow-circle-right"></i></a>
+									<a href="/shop/order/selectOrder" class="small-box-footer">바로가기
+										<i class="fas fa-arrow-circle-right"></i>
+									</a>
 								</div>
 							</div>
 							<!-- ./col -->
@@ -68,7 +69,8 @@
 									<div class="icon">
 										<i class="ion ion-bag"></i>
 									</div>
-									<a href="/shop/order/selectPaymentCheck" class="small-box-footer">바로가기 <i
+									<a href="/shop/order/selectPaymentCheck"
+										class="small-box-footer">바로가기 <i
 										class="fas fa-arrow-circle-right"></i></a>
 								</div>
 							</div>
@@ -83,7 +85,8 @@
 									<div class="icon">
 										<i class="fas fa-truck"></i>
 									</div>
-									<a href="/shop/shipment/selectShipment" class="small-box-footer">바로가기<i
+									<a href="/shop/shipment/selectShipment"
+										class="small-box-footer">바로가기<i
 										class="fas fa-arrow-circle-right"></i></a>
 								</div>
 							</div>
@@ -92,7 +95,7 @@
 						<!-- /.row -->
 					</div>
 					<!-- /박스 시작 -->
-					
+
 					<!-- 판매현황 테이블 시작 -->
 					<div class="col-lg-12">
 						<div class="card">
@@ -110,7 +113,7 @@
 											<th>상품명</th>
 											<th>상품가격</th>
 											<th>판매실적</th>
-											<th style="width : 10%">실적</th>
+											<th style="width: 10%">실적</th>
 										</tr>
 									</thead>
 									<tbody id="myTable">
@@ -127,12 +130,13 @@
 											<td th:if="${p.paymentAmount} > '50'"><span
 												class="badge badge-danger float-right"
 												th:text="${p.paymentAmount}+'%'" style="display: center"></span></td>
-												
-											<td th:if="${p.paymentAmount} <= '50' and ${p.paymentAmount} >'20'">
+
+											<td
+												th:if="${p.paymentAmount} <= '50' and ${p.paymentAmount} >'20'">
 												<span class="badge badge-warning float-right"
-												th:text="${p.paymentAmount}+'%'" ></span>
+												th:text="${p.paymentAmount}+'%'"></span>
 											</td>
-											
+
 											<td th:if="${p.paymentAmount} <= '20'"><span
 												class="badge badge-success float-right"
 												th:text="${p.paymentAmount}+'%'"></span></td>
