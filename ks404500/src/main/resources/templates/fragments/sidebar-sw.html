@@ -46,7 +46,7 @@
 						<a th:href="@{/sw/member/addMember}" class="nav-link">
 							<i class="far fa-circle nav-icon"></i>
 							<p>
-								!SW회원 가입 [재천]
+								SW회원 가입 [재천]
 							</p>
 						</a>
 					</li>
@@ -56,7 +56,7 @@
 						<a th:href="@{/sw/member/selectMember}" class="nav-link">
 							<i class="far fa-circle nav-icon"></i>
 							<p>
-								!SW회원 조회 [재천]
+								SW회원 조회 [재천]
 							</p>
 						</a>
 					</li>
@@ -66,7 +66,7 @@
 						<a th:href="@{/sw/client/selectClient}" class="nav-link">
 							<i class="far fa-circle nav-icon"></i>
 							<p>
-								!외부 회원조회[재천]
+								외부 회원조회[재천]
 							</p>
 						</a>
 					</li>
@@ -76,63 +76,13 @@
 						<a th:if="${session.SWID != null}" th:href="@{/sw/member/myPage}" class="nav-link">
 							<i class="far fa-circle nav-icon"></i>
 							<p>
-								!내부 회원 마이페이지[유경]
+								내부 회원 마이페이지[유경]
 							</p>
 						</a>
 					</li>
 				</ul>
 			</li>
 			<!-- 회원관리 끝 -->
-			<!-- 권한관리시작 -->
-			<li class="nav-item">
-				<a href="#" class="nav-link">
-					<i class="nav-icon fas fa-circle"></i>
-					<p>
-						권한관리 <i class="right fas fa-angle-down"></i>
-					</p>
-				</a>
-				<ul class="nav nav-treeview">
-					<li class="nav-item">
-						<a th:href="@{/sw/level/addMemberLevel}" class="nav-link">
-							<i class="far fa-circle nav-icon"></i>
-							<p>
-								!개발사 내부권한등록[유성]
-							</p>
-						</a>
-					</li>
-				</ul>
-				<ul class="nav nav-treeview">
-					<li class="nav-item">
-						<a th:href="@{/sw/level/selectMemberLevel}" class="nav-link">
-							<i class="far fa-circle nav-icon"></i>
-							<p>
-								!개발사 내부권한조회[유성]
-							</p>
-						</a>
-					</li>
-				</ul>
-				<ul class="nav nav-treeview">
-					<li class="nav-item">
-						<a th:href="@{/sw/level/addClientLevel}" class="nav-link">
-							<i class="far fa-circle nav-icon"></i>
-							<p>
-								!개발사 외부권한등록 [유성]
-							</p>
-						</a>
-					</li>
-				</ul>
-				<ul class="nav nav-treeview">
-					<li class="nav-item">
-						<a th:href="@{/sw/level/selectClientLevel}" class="nav-link">
-							<i class="far fa-circle nav-icon"></i>
-							<p>
-								!개발사 외부권한조회 [유성]
-							</p>
-						</a>
-					</li>
-				</ul>
-			</li>
-			<!-- 권한관리 끝 -->
 			<!-- 사업장관리 시작 -->
 			<li class="nav-item">
 				<a href="#" class="nav-link">
@@ -146,7 +96,7 @@
 						<a th:href="@{/sw/business/selectBusiness}" class="nav-link">
 							<i class="far fa-circle nav-icon"></i>
 							<p>
-								!사업장 조회[유성]
+								사업장 조회[유성]
 							</p>
 						</a>
 					</li>
@@ -156,7 +106,7 @@
 						<a th:href="@{/sw/business/addMainBusinessCode}" class="nav-link">
 							<i class="far fa-circle nav-icon"></i>
 							<p>
-								!사업장 대표 코드 등록[유성]
+								사업장 대표 코드 등록[유성]
 							</p>
 						</a>
 					</li>
@@ -166,7 +116,7 @@
 						<a th:href="@{/sw/business/selectMainBusinessCode}" class="nav-link">
 							<i class="far fa-circle nav-icon"></i>
 							<p>
-								!사업장 대표 코드 조회[유성]
+								사업장 대표 코드 조회[유성]
 							</p>
 						</a>
 					</li>
@@ -186,7 +136,7 @@
 						<a th:href="@{/sw/service/selectServiceManagement}" class="nav-link">
 							<i class="far fa-circle nav-icon"></i>
 							<p>
-								!서비스 현황(정보)[환철]
+								서비스 현황(정보)[환철]
 							</p>
 						</a>
 					</li>
@@ -196,7 +146,7 @@
 						<a th:href="@{/sw/service/serviceRequest/selectAllServiceRequest}" class="nav-link">
 							<i class="far fa-circle nav-icon"></i>
 							<p>
-								!서비스 계약요청 조회[환철]
+								서비스 계약요청 조회[환철]
 							</p>
 						</a>
 					</li>
@@ -206,7 +156,7 @@
 						<a th:href="@{/sw/service/servicePaymentSum}" class="nav-link">
 							<i class="far fa-circle nav-icon"></i>
 							<p>
-								!서비스 결제예정[환철]
+								서비스 결제예정[환철]
 							</p>
 						</a>
 					</li>
@@ -216,7 +166,7 @@
 						<a th:href="@{/sw/service/selectContractState}" class="nav-link">
 							<i class="far fa-circle nav-icon"></i>
 							<p>
-								!서비스 계약현황 [환철]
+								서비스 계약현황 [환철]
 							</p>
 						</a>
 					</li>
@@ -238,7 +188,7 @@
 						<a th:href="@{/sw/code/addContractStateCode}" class="nav-link">
 							<i class="far fa-circle nav-icon"></i>
 							<p>
-								!서비스 계약 상태 코드 등록 [환철]
+								서비스 계약 상태 코드 등록 [환철]
 							</p>
 						</a>
 					</li>
@@ -248,7 +198,7 @@
 						<a th:href="@{/sw/code/selectContractStateCode}" class="nav-link">
 							<i class="far fa-circle nav-icon"></i>
 							<p>
-								!서비스 계약 상태 코드 조회 [환철]
+								서비스 계약 상태 코드 조회 [환철]
 							</p>
 						</a>
 					</li>
@@ -258,7 +208,7 @@
 						<a th:href="@{/sw/code/addPaymentStateCode}" class="nav-link">
 							<i class="far fa-circle nav-icon"></i>
 							<p>
-								!서비스 결제 상태 코드 등록[환철]
+								서비스 결제 상태 코드 등록[환철]
 							</p>
 						</a>
 					</li>
@@ -268,7 +218,7 @@
 						<a th:href="@{/sw/code/selectPaymentStateCode}" class="nav-link">
 							<i class="far fa-circle nav-icon"></i>
 							<p>
-								!서비스 결제 상태 코드 조회 [환철]
+								서비스 결제 상태 코드 조회 [환철]
 							</p>
 						</a>
 					</li>
@@ -278,7 +228,7 @@
 						<a th:href="@{/sw/code/addContractRefundStateCode}" class="nav-link">
 							<i class="far fa-circle nav-icon"></i>
 							<p>
-								!서비스 환불상태 코드 등록[환철]
+								서비스 환불상태 코드 등록[환철]
 							</p>
 						</a>
 					</li>
@@ -288,7 +238,7 @@
 						<a th:href="@{/sw/code/selectContractRefundStateCode}" class="nav-link">
 							<i class="far fa-circle nav-icon"></i>
 							<p>
-								!서비스 환불상태 코드 조회 [환철]
+								서비스 환불상태 코드 조회 [환철]
 							</p>
 						</a>
 					</li>
@@ -298,7 +248,7 @@
 						<a th:href="@{/sw/code/addBusinessCode}" class="nav-link">
 							<i class="far fa-circle nav-icon"></i>
 							<p>
-								!거래처 구분 코드 등록[재천]
+								거래처 구분 코드 등록[재천]
 							</p>
 						</a>
 					</li>
@@ -308,7 +258,7 @@
 						<a th:href="@{/sw/code/selectBusinessCode}" class="nav-link">
 							<i class="far fa-circle nav-icon"></i>
 							<p>
-								!거래처 구분 코드 조회[재천]
+								거래처 구분 코드 조회[재천]
 							</p>
 						</a>
 					</li>
@@ -318,7 +268,7 @@
 						<a th:href="@{/sw/code/addLocalCode}" class="nav-link">
 							<i class="far fa-circle nav-icon"></i>
 							<p>
-								!거래처 지역 코드 등록[재천]
+								거래처 지역 코드 등록[재천]
 							</p>
 						</a>
 					</li>
@@ -328,7 +278,7 @@
 						<a th:href="@{/sw/code/selectLocalCode}" class="nav-link">
 							<i class="far fa-circle nav-icon"></i>
 							<p>
-								!거래처 지역 코드 조회[재천]
+								거래처 지역 코드 조회[재천]
 							</p>
 						</a>
 					</li>
@@ -359,7 +309,7 @@
 					<a th:href="@{/sw/accounting/selectIncome}" class="nav-link">
 						<i class="far fa-circle nav-icon"></i>
 						<p>
-							!서비스 매출 조회[재천]
+							서비스 매출 조회[재천]
 						</p>
 					</a>
 				</li>
@@ -369,7 +319,7 @@
 					<a th:href="@{/sw/accounting/addExpense}" class="nav-link">
 						<i class="far fa-circle nav-icon"></i>
 						<p>
-							!비용 등록[재천]
+							비용 등록[재천]
 						</p>
 					</a>
 				</li>
@@ -379,7 +329,7 @@
 					<a th:href="@{/sw/accounting/selectExpense}" class="nav-link">
 						<i class="far fa-circle nav-icon"></i>
 						<p>
-							!비용 조회[재천]
+							비용 조회[재천]
 						</p>
 					</a>
 				</li>
@@ -389,7 +339,7 @@
 					<a th:href="@{/sw/accounting/addInvoice}" class="nav-link">
 						<i class="far fa-circle nav-icon"></i>
 						<p>
-							!세금계산서 등록[유경]
+							세금계산서 등록[유경]
 						</p>
 					</a>
 				</li>
@@ -399,7 +349,7 @@
 					<a th:href="@{/sw/accounting/selectInvoice}" class="nav-link">
 						<i class="far fa-circle nav-icon"></i>
 						<p>
-							!세금계산서 조회[유경]
+							세금계산서 조회[유경]
 						</p>
 					</a>
 				</li>
@@ -409,7 +359,7 @@
 					<a th:href="@{/sw/accounting/addTotalAccounting}" class="nav-link">
 						<i class="far fa-circle nav-icon"></i>
 						<p>
-							!통합매출 회계등록[유경]
+							통합매출 회계등록[유경]
 						</p>
 					</a>
 				</li>
@@ -419,7 +369,7 @@
 					<a th:href="@{/sw/accounting/addTotalAccountingExpense}" class="nav-link">
 						<i class="far fa-circle nav-icon"></i>
 						<p>
-							!통합비용 회계등록[유경]
+							통합비용 회계등록[유경]
 						</p>
 					</a>
 				</li>
@@ -429,7 +379,7 @@
 					<a th:href="@{/sw/accounting/selectTotalAccounting}" class="nav-link">
 						<i class="far fa-circle nav-icon"></i>
 						<p>
-							#통합회계조회[유경]
+							통합회계조회[유경]
 						</p>
 					</a>
 				</li>
