@@ -25,7 +25,18 @@ public class SwMainBusinessController {
 	private MainBusinessCodeService mainBusinessCodeService;
 	
 	
-	
+	// 유성 사업장 대표코드 중복체크
+	@PostMapping("/codeCheck")
+	@ResponseBody
+	public boolean codeCheck(@RequestParam (value="mainBusinessCode", required = false) String mainBusinessCode) {
+		boolean codeCheckResult = false;
+		int codeCheck = mainBusinessCodeService.codeCheck(mainBusinessCode);
+		
+		if(codeCheck > 0) {
+			codeCheckResult = true;
+		}
+		return codeCheckResult;
+	}
 	/* 유성 사업장 전체 조회 */
 	@GetMapping("/selectBusiness")
 	public String selectBusiness(Model model) {
@@ -91,7 +102,7 @@ public class SwMainBusinessController {
 	public String addMainBusinessCode(MainBusinessCode mainBusinessCode) {
 	System.out.println("SwMainBusinessController에서 입력받은 값" + mainBusinessCode);
 		mainBusinessCodeService.addMainBusinessCode(mainBusinessCode);
-		return	"redirect:/sw/business/addMainBusinessCode";
+		return	"redirect:/sw/business/selectMainBusinessCode";
 	}
 	
 	/* 유성 사업장 대표코드 조회 */

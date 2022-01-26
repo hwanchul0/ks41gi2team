@@ -25,4 +25,7 @@ public interface MainBusinessCodeMapper {
 	
 	//유성 merge 코드
 	public List<MainBusinessCode> getMergeCode();
+	
+	//유성 사업장 대표코드 중복확인 
+	public int codeCheck(String mainBusinessCode);
 }

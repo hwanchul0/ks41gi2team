@@ -7,8 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ksmart41_teamtest.dto.Order;
-import ksmart41_teamtest.dto.ShopAddAccounting;
-import ksmart41_teamtest.dto.ShopAddPaymentCheck;
 import ksmart41_teamtest.mapper.OrderMapper;
 
 @Service
@@ -24,6 +22,15 @@ public class OrderService {
 	public List<Order> getOrder()	 {
 		List<Order>	order = orderMapper.getOrder();
 		return order;
+	}
+	// 유성 주문내역 조회(수정 들어가기)
+	public Order getOrderList(String shopOrderCode) {
+		Order getOrderList = orderMapper.getOrderList(shopOrderCode);
+		return getOrderList;
+	}
+	// 유성 쇼핑몰 주문내역 수정(삭제)
+	public int modifyOrder(Order shopOrderCode) {
+		return orderMapper.modifyOrder(shopOrderCode);
 	}
 
 }

@@ -50,4 +50,8 @@ public class MainBusinessCodeService {
 		List<MainBusinessCode> merge = mainBusinessCodeMapper.getMergeCode();
 		return merge;
 	}
+	// 유성 대표코드 중복확인
+	public int codeCheck(String mainBusinessCode)	{
+		return mainBusinessCodeMapper.codeCheck(mainBusinessCode);
+	}
 }

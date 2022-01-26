@@ -44,15 +44,12 @@ layout:decorate="@{layout/default-sw}">
 									<div class="col-sm-4">
 										<input th:value="${mainBusinessCodeInfo.mainBusinessCode}" type="text" id="mainBusinessCode" name="mainBusinessCode" placeholder="사업장 대표코드를 입력하세요"  readonly="readonly">
 									</div>
-									<div>
-										<button type="button" id="idCheckBtn" class="btn btn-primary">중복확인</button>
-									</div>
 								</div>
 								
 								<div class="form-group row">
 									<label class="col-sm-2 col-form-laebl text-right">거래처 구분 코드</label>
 									<div class="col-sm-2">
-											<select class="form-control" name="BusinessCode" style="height: 85%">
+											<select class="form-control" name="BusinessCode" style="height: 85%" >
                                                    <option value=""> ::거래처 구분 코드 선택:: </option>
                                                 <th:block th:if="${not #lists.isEmpty(merge)}"
                                                          th:each="mbc : ${merge}">
@@ -94,7 +91,7 @@ layout:decorate="@{layout/default-sw}">
 
 								<div class="card-footer">
 									<button type="submit" class="btn btn-primary" id="modifyMainBusinessCode"> 수정완료 </button>
-									<button type="button" class="btn btn-default float-right" id="cancleMainBusinessCodeBtn"> 취소 </button>
+									<button type="button" class="btn btn-default float-right" id="cancleMainBusinessCodeBtn" onclick="cancle()"> 취소 </button>
 								</div>
 							</form> 
 							</div>
@@ -109,5 +106,13 @@ layout:decorate="@{layout/default-sw}">
 		</div>
 	</div>
 <!-- /.content-wrapper -->
+<script type="text/javascript">	
+function cancle(){
+	var cancleMainBusinessCodeBtn = confirm('사업장 대표코드 수정을 취소하시겠습니까?');
+	if(cancleMainBusinessCodeBtn){
+		location.href = "/sw/index-sw";
+	}
+}
+</script>
 </th:block>
 </html>

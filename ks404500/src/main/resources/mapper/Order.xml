@@ -32,6 +32,45 @@
 	FROM
 		k2_shop_order;
 	</select>
+	
+	<select id="getOrderList" resultType="Order">
+	SELECT
+		shopOrderCode,
+		assortCode,
+		shopConsumerId,
+		shopMemberId,
+		shopSlipNumber,
+		shopOrderAmount,
+		goodsPaymentAmount,
+		shopDeliveryLocation,
+		shopCustomerPhone,
+		shopOrderRegDate,
+		shopOrderCancleDate
+	FROM
+		k2_shop_order
+	WHERE
+		shopOrderCode = #{shopOrderCode};
+	
+	</select>
+	
+	<update id="modifyOrder" parameterType="Order">
+		UPDATE
+			k2_shop_order
+		SET
+			shopOrderCode = #{shopOrderCode},
+			assortCode = #{assortCode},
+			shopConsumerId = #{shopConsumerId},
+			shopMemberId = #{shopMemberId},
+			shopSlipNumber = #{shopSlipNumber},
+			shopOrderAmount = #{shopOrderAmount},
+			goodsPaymentAmount = #{goodsPaymentAmount},
+			shopDeliveryLocation = #{shopDeliveryLocation},
+			shopCustomerPhone = #{shopCustomerPhone},
+			shopOrderRegDate = #{shopOrderRegDate},
+			shopOrderCancleDate = #{shopOrderCancleDate}
+		WHERE
+			shopOrderCode = #{shopOrderCode}
+	</update>
 
 	
 </mapper>

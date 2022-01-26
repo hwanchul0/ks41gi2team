@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="@{layout/default-sw}">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<head th:replace="fragments/head :: headFragment"></head>
 <th:block layout:fragment="customContents">
 
 
@@ -12,8 +13,8 @@
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1 class="m-0" th:text="${title}"></h1>
-					</div><!-- /.col -->
+						<h1 class="m-0">사업장 수정</h1>
+					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
 							<li class="breadcrumb-item"><a href="/sw/index-sw">Home</a></li>
@@ -33,7 +34,7 @@
 						<!--  사업장 수정 폼 -->
 						<div class="card card-primary" >
 							<div class="card-header">
-								<h5 class="card-title" th:text="${title}"></h5>
+								<h5 class="card-title"> 사업장 수정</h5>
 							</div>
 							<!-- 사업장 수정  폼 바디 시작 -->
 							<form id="modifyBusinessForm" th:action="@{/sw/business/modifyBusiness}" method="post" class="form-horizontal">
@@ -48,7 +49,7 @@
 										<label class="col-sm-2 col-form-laebl text-right">지역 코드: </label>
 											<div class="col-sm-8">
 												
-												<select id="localCode" class="form-control" name="localCode">
+												<select id="localCode" class="form-control" name="localCode" th:value="${getDetailBusinessList.localCode}">
 												<option value="">::지역 코드 선택::</option>
 													<option value="sw_local_code_02">서울</option>
 													<option value="sw_local_code_031">경기도</option>
@@ -84,7 +85,7 @@
 									<div class="form-group row">
 										<label class="col-sm-2 col-form-label text-right">사업장 번호 : </label>
 										<div class="col-sm-8">
-											<input th:value="${getBusiness.businessNumber}" type="text" class="form-control" id="inputbusinessNumber" name="businessNumber" readonly="readonly" >
+											<input th:value="${getBusiness.businessNumber}" type="text" class="form-control" id="businessNumber" name="businessNumber" readonly="readonly" >
 										</div>
 									</div>
 									<div class="form-group row">
@@ -100,9 +101,21 @@
 										</div>
 									</div>
 									<div class="form-group row">
+										<label class="col-sm-2 col-form-label text-right"></label>
+										<div class="col-sm-8">
+											<input type="text" id="sample4_postcode" placeholder="우편번호" name="postAddr1">
+											<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
+											<input type="text" id="sample4_roadAddress" placeholder="도로명주소" name="postAddr2">
+											<input type="text" id="sample4_jibunAddress" placeholder="지번주소" style="display: none">
+											<span id="guide" style="color:#999;display:none"></span>
+											<input type="text" id="sample4_detailAddress" placeholder="상세주소" name="postAddr3"  onchange="changeAddr()">
+											<input type="text" id="sample4_extraAddress" placeholder="참고항목" style="display: none">
+										</div>
+									</div>
+									<div class="form-group row">
 										<label class="col-sm-2 col-form-laebl text-right">사업장 이메일</label>
 										<div class="col-sm-8">
-											<input class="form-control" type="text" id="businessEmail" name="businessEmail"placeholder="사업장 이메일을 입력하세요" th:value="${getDetailBusinessList.businessEmail}">
+											<input type="email" class="form-control" id="businessEmail" name="businessEmail"placeholder="사업장 이메일을 입력하세요" th:value="${getDetailBusinessList.businessEmail}">
 									</div>
 									</div>
 									<div class="form-group row">
@@ -127,12 +140,12 @@
 									<div class="form-group row">
 									<label class="col-sm-2 col-form-laebl text-right">주거래 통장</label>
 									<div class="col-sm-8">
-										<select id="AccountTrade" class="form-control" name="businessMainAccount" th:value="${getDetailBusinessList.businessMainAccount}" >
+										<select id="businessMainAccount" class="form-control" name="businessMainAccount" th:value="${getDetailBusinessList.businessMainAccount}">
 											<option value="">::주거래 은행 선택::</option>
-											<option value="기업">기업은행</option>
-											<option value="농협">농협은행</option>
-											<option value="신현">신협은행</option>
-											<option value="전북">전북은행</option>
+											<option value="기업">기업</option>
+											<option value="농협">농협</option>
+											<option value="신현">신협</option>
+											<option value="전북">전북은행</option>	
 											<option value="새마을금고">새마을금고</option>
 											
 										</select>
@@ -187,8 +200,8 @@
 								</div>
 								
 								<div class="card-footer">
-									<button type="submit" class="btn btn-primary" id ="modifyBusinessBtn"> 수정완료 </button>
-									<button type="button" class="btn btn-default float-right" id="cancleBusinessBtn"> 취소 </button>
+									<button type="button" class="btn btn-primary" id ="modifyBusinessBtn"> 수정 </button>
+									<button type="button" class="btn btn-default float-right" id="cancleBusinessBtn" onclick="cancle()"> 취소 </button>
 								</div>
 							</form>
 								
@@ -203,5 +216,204 @@
 		</div>
 	</div>
 <!-- /.content-wrapper -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script type="text/javascript">	
+
+	//도로명주소
+	//본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
+    function sample4_execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var roadAddr = data.roadAddress; // 도로명 주소 변수
+                var extraRoadAddr = ''; // 참고 항목 변수
+
+                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                    extraRoadAddr += data.bname;
+                }
+                // 건물명이 있고, 공동주택일 경우 추가한다.
+                if(data.buildingName !== '' && data.apartment === 'Y'){
+                   extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                }
+                // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                if(extraRoadAddr !== ''){
+                    extraRoadAddr = ' (' + extraRoadAddr + ')';
+                }
+
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('sample4_postcode').value = data.zonecode;
+                document.getElementById("sample4_roadAddress").value = roadAddr;
+                document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
+                
+                // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
+                if(roadAddr !== ''){
+                    document.getElementById("sample4_extraAddress").value = extraRoadAddr;
+                } else {
+                    document.getElementById("sample4_extraAddress").value = '';
+                }
+
+                var guideTextBox = document.getElementById("guide");
+                // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
+                if(data.autoRoadAddress) {
+                    var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
+                    guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
+                    guideTextBox.style.display = 'block';
+
+                } else if(data.autoJibunAddress) {
+                    var expJibunAddr = data.autoJibunAddress;
+                    guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
+                    guideTextBox.style.display = 'block';
+                } else {
+                    guideTextBox.innerHTML = '';
+                    guideTextBox.style.display = 'none';
+                }
+            }
+        }).open();
+    }
+	
+  //주소 입력
+	function changeAddr(){
+		var businessAddr = $('#businessAddr').val();
+		var postAddr1 = $('#sample4_postcode').val();
+		var postAddr2 = $('#sample4_roadAddress').val();
+		var postAddr3 = $('#sample4_detailAddress').val();
+		$('#businessAddr').val(postAddr1 +" "+ postAddr2 +" "+ postAddr3);
+	}
+	
+	$(function(){
+		$('#modifyBusinessBtn').click(function(){
+			
+			//사업장 지역코드 공백 체크
+			var localCode = $('#localCode').val();
+			if(localCode == "::지역 코드 선택::" || localCode == ""){
+				alert("사업장 지역코드를 선택하세요");
+				return false;
+			}
+	
+			//사업장 이름 공백 체크
+			var businessName = $('#businessName').val();
+			if(businessName == null || businessName == ""){
+				alert("사업장 이름을 입력하세요.");
+				return false;
+			}
+			
+			//사업장 대표이름 공백 체크
+			var businessRepresentativeName = $('#businessRepresentativeName').val();
+			if(businessRepresentativeName == null || businessRepresentativeName == ""){
+				alert("사업장 대표 이름을 입력하세요");
+				return false;
+			}
+			
+			//사업장 번호 공백 체크
+			var businessNumber = $('#businessNumber').val();
+			if(businessNumber == null || businessNumber == ""){
+				alert("사업장 번호를 입력하세요");
+				return false;
+			}
+			
+			
+			//사업장 전화번호 공백 체크
+			var businessPhone = $('#businessPhone').val();
+			if(businessPhone == null || businessPhone == ""){
+				alert("사업장 전화번호를 입력하세요");
+				return false;
+			}
+			
+			
+			
+			
+			//주소 공백 체크
+			var sample4_detailAddress = $('#sample4_detailAddress').val();
+			var sample4_postcode = $('#sample4_postcode').val();
+			if(sample4_detailAddress == ""){
+				alert("사업장 주소를 입력하세요");
+				return false;
+			}
+			if(sample4_postcode == ""){
+				alert("사업장 주소를 입력하세요");
+				return false;
+			}
+			
+			//사업장 이메일 공백 체크
+			var businessEmail = $('#businessEmail').val();
+			if(businessEmail == null || businessEmail == ""){
+				alert("사업장 이메일을 입력하세요");
+				return false;
+			}
+			
+			//사업장 담당자 이름 공백 체크
+			var businessManagerName = $('#businessManagerName').val();
+			if(businessManagerName == null || businessManagerName == ""){
+				alert("사업장 담당자 이름을 입력하세요");
+				return false;
+			}
+			
+			//사업장 담당자 번호 공백 체크
+			var businessManagerPhone = $('#businessManagerPhone').val();
+			if(businessManagerPhone == null || businessManagerPhone == ""){
+				alert("사업장 담당자 번호를 입력하세요");
+				return false;
+			}
+			
+			//사업장 담당자 이메일 공백 체크
+			var businessManagerEmail = $('#businessManagerEmail').val();
+			if(businessManagerEmail == null || businessManagerEmail == ""){
+				alert("사업장 담당자 이메일을 입력하세요");
+				return false;
+			}
+			
+			//주거래 통장 공백 체크
+			var businessMainAccount = $('#businessMainAccount').val();
+			if(businessMainAccount == "::주거래 은행 선택::" || businessMainAccount == ""){
+				alert("주거래 은행을 선택하세요");
+				return false;
+			}
+			
+			//사업장 계좌번호 공백 체크
+			var businessAccountNumber = $('#businessAccountNumber').val();
+			if(businessAccountNumber == null || businessAccountNumber == ""){
+				alert("계좌번호를 입력하세요");
+				return false;
+			}
+			
+			//사업장 예금주 공백 체크
+			var businessAccountHolder = $('#businessAccountHolder').val();
+			if(businessAccountHolder == null || businessAccountHolder == ""){
+				alert("예금주를 입력하세요");
+				return false;
+			}
+			
+			/* // 사업장 등록상태 공백 체크
+			var businessRegistration = $('#businessRegistration').val();
+			if(businessRegistration == "::등록상태 선택::" || businessRegistration == ""){
+				alert("사업장 등록상태를 선택하세요");
+				return false;
+			}
+			
+			// 사업장 등록 승인자  공백 체크
+			var memberId = $('#memberId').val();
+			if(memberId == "::사업장 등록 승인자 선택::" || memberId == ""){
+				alert("사업장 등록 승인자를 선택하세요");
+				return false;
+			} */
+			
+			//submit
+			$('#modifyBusinessForm').submit();
+		})
+	});
+	
+	//사업장 수정 취소
+	function cancle(){
+		var cancleBusinessBtn = confirm('사업장 수정을 취소하시겠습니까?');
+		if(cancleBusinessBtn){
+			location.href = "/sw/index-sw";
+		}
+	}
+</script>
 </th:block>
 </html>

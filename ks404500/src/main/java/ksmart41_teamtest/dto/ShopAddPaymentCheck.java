@@ -12,6 +12,13 @@ public class ShopAddPaymentCheck {
 	private String shopPaymentBalance;
 	private String paymentType;
 	private String shopPaymentDate;
+	private String shopPaymentAmount;
+	public String getShopPaymentAmount() {
+		return shopPaymentAmount;
+	}
+	public void setShopPaymentAmount(String shopPaymentAmount) {
+		this.shopPaymentAmount = shopPaymentAmount;
+	}
 	public String getAddPcCode() {
 		return addPcCode;
 	}
@@ -95,6 +102,8 @@ public class ShopAddPaymentCheck {
 		builder.append(paymentType);
 		builder.append(", shopPaymentDate=");
 		builder.append(shopPaymentDate);
+		builder.append(", shopPaymentAmount=");
+		builder.append(shopPaymentAmount);
 		builder.append("]");
 		return builder.toString();
 	}

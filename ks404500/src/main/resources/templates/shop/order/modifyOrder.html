@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+layout:decorate="@{layout/default-shop}">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<th:block layout:fragment="customContents">
+
+<!-- Content Wrapper. Contains page content -->
+	<div class="content-wrapper">
+	<!-- Content Header (Page header) -->
+		<div class="content-header">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div class="col-sm-6">
+						<h1 class="m-0">"modifyOrder / 쇼핑몰 주문취소"</h1>
+					</div><!-- /.col -->
+					<div class="col-sm-6">
+						<ol class="breadcrumb float-sm-right">
+							<li class="breadcrumb-item"><a href="/shop/index-shop">Home</a></li>
+							<li class="breadcrumb-item active">주문 관리</li>
+						</ol>
+					</div><!-- /.col -->
+				</div><!-- /.row -->
+			</div><!-- /.container-fluid -->
+		</div>
+	<!-- /.content-header -->
+	
+	<!-- Main content -->
+		<div class="content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="card card-success" >
+							<div class="card-header">
+								<h5 class="card-title">쇼핑몰 주문취소</h5>
+							</div>
+							<!-- 쇼핑몰 주문취소 시작 -->
+							<form id="modifyOrderForm" th:action="@{/shop/order/modifyOrder}" method="post" class="form-horizontal">
+								<div class="card-body">
+								<div class="form-group row">
+										<label class="col-sm-2 col-form-label text-right">주문자아이디</label>
+										<div class="col-sm-8">
+											<input th:value="${getOrder.shopConsumerId}" type="text" class="form-control" id="shopConsumerId" name="shopConsumerId" readonly="readonly">
+										</div>
+									</div>
+									
+									<div class="form-group row">
+										<label class="col-sm-2 col-form-label text-right">담당자</label>
+										<div class="col-sm-8">
+											<input th:value="${getOrder.shopMemberId}" type="text" class="form-control" id="shopMemberId" name="shopMemberId" readonly="readonly">
+										</div>
+									</div>
+									
+									<div class="form-group row">
+										<label class="col-sm-2 col-form-label text-right">주문내역코드 </label>
+										<div class="col-sm-8">
+											<input th:value="${getOrder.shopOrderCode}" type="text" class="form-control" id="inputOrderCode" name="shopOrderCode" readonly="readonly">
+										</div>
+									</div>
+									
+									<div class="form-group row">
+										<label class="col-sm-2 col-form-label text-right">상품코드 </label>
+										<div class="col-sm-8">
+											<input type="text" class="form-control" id="assortCode" placeholder="사업장 담당자 이름을 입력하세요" name="assortCode" th:value="${getOrder.assortCode}" readonly="readonly">
+										</div>
+									</div>
+									<div class="form-group row">
+										<label class="col-sm-2 col-form-label text-right">주문수량 </label>
+										<div class="col-sm-8">
+											<input type="text" class="form-control" id="shopOrderAmount" placeholder="사업장 담당자 번호를 입력하세요" name="shopOrderAmount" th:value="${getOrder.shopOrderAmount}" readonly="readonly">
+										</div>
+									</div>
+									<div class="form-group row">
+										<label class="col-sm-2 col-form-label text-right">결제금액 </label>
+										<div class="col-sm-8">
+											<input type="email" class="form-control" id="goodsPaymentAmount" placeholder="사업장 담당자 이메일을 입력하세요" name="goodsPaymentAmount" th:value="${getOrder.goodsPaymentAmount}" readonly="readonly">
+										</div>
+									</div>
+									
+								
+								
+								<div class="form-group row">
+										<label class="col-sm-2 col-form-label text-right">배송지 </label>
+										<div class="col-sm-8">
+											<input type="text" class="form-control" id="shopDeliveryLocation" placeholder="계좌번호를 입력하세요" name="shopDeliveryLocation" th:value="${getOrder.shopDeliveryLocation}" readonly="readonly">
+										</div>
+									</div>
+									
+									<div class="form-group row">
+										<label class="col-sm-2 col-form-label text-right">연락처  </label>
+										<div class="col-sm-8">
+											<input type="text" class="form-control" id="shopCustomerPhone" placeholder="예금주를 입력하세요" name="shopCustomerPhone" th:value="${getOrder.shopCustomerPhone}" readonly="readonly">
+										</div>
+									</div>
+									
+									<div class="form-group row">
+										<label class="col-sm-2 col-form-label text-right">등록날짜 </label>
+										<div class="col-sm-8">
+											<input type="date" class="form-control" id="shopOrderRegDate" placeholder="승인날짜를 입력하세요" name="shopOrderRegDate" th:value="${getOrder.shopOrderRegDate}" readonly="readonly">
+										</div>
+									</div>
+									
+									<div class="form-group row">
+										<label class="col-sm-2 col-form-label text-right">주문취소일자 </label>
+										<div class="col-sm-8">
+											<input type="date" class="form-control" id="shopOrderCancleDate" placeholder="승인날짜를 입력하세요" name="shopOrderCancleDate" th:value="${getOrder.shopOrderCancleDate}">
+										</div>
+									</div>
+									
+								<!-- 회원가입폼 바디 끝 -->
+								</div>
+								
+								<div class="card-footer">
+									<button type="submit" class="btn btn-success" id ="modifyOrderBtn"> 주문취소 </button>
+									<button type="button" class="btn btn-default float-right" id="cancleOrderCancleBtn" onclick="cancle()"> 취소 </button>
+								</div>
+							</form>
+								
+							</div>
+						</div>
+					</div>
+					<!-- /.row -->
+				</div>
+				<!-- /.container-fluid -->
+			</div>
+	    	<!-- /.content -->
+		</div>
+	</div>
+<!-- /.content-wrapper -->
+<script type="text/javascript">
+//사업장 등록 취소
+function cancle(){
+	var cancleOrderCancleBtn = confirm('쇼핑몰 주문을 취소하시겠습니까?');
+	if(cancleOrderCancleBtn){
+		location.href = "/shop/index-shop";
+	}
+}
+
+</script>
+</th:block>
+</html>
