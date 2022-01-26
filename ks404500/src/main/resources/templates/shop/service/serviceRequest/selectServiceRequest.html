@@ -11,6 +11,37 @@ tbody tr td:first-child:before {
 }
 </style>
 <link th:href="@{/customcss/css/serviceRequest.css}" rel="stylesheet"/>
+<th:block layout:fragment="customJs">
+	<script>
+		// 서비스 계약요청 삭제 ( 관리자가 처리 하기 전 삭제 가능)
+		function deleteBtn(contractManageCode){
+			if(contractManageCode != null && contractManageCode != ""){
+				var deleteConfirm = confirm("해당 계약요청을 삭제하시겠습니까?");
+				if (deleteConfirm) {
+		               alert('해당 계약요청이 삭제되었습니다.');
+		               var request = $.ajax({
+		                 url: "/shop/service/serviceRequest/deleteServiceRequest",
+		                 method: "POST",
+		                 data: { contractManageCode : contractManageCode },
+		                 dataType: "text"
+		               });
+		               location.reload();
+		            }
+		         location.reload();
+		         request.done(function(data) {
+		            if(data < 0) {
+		               alert("삭제 실패했습니다.");
+		            }
+		            location.reload();
+		         });
+		      } else {
+		         alert("삭제 실패 ");
+		      };
+				
+		}
+		
+	</script>
+</th:block>
 <th:block layout:fragment="customContents">
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -56,7 +87,8 @@ tbody tr td:first-child:before {
 								<form>
 								<div class="row">
 									<div class="col-sm-12">
-										<table id="example2" class="table table-bordered table-hover dataTable dtr-inline" role="grid" aria-describedby="example2_info">
+										<table id="example2" class="table table-bordered table-hover dataTable dtr-inline" role="grid"
+										style="font-size:14px;" aria-describedby="example2_info">
 										<thead>
 										<tr role="row">
 											<th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">
@@ -75,19 +107,19 @@ tbody tr td:first-child:before {
 												총 금액
 											</th>
 											<th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">
-												서비스 시작 요청 날짜
+												신청 날짜
 											</th>
 											<th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">
-												서비스 시작 예약 날짜
+												시작 날짜
 											</th>
 											<th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">
-												서비스 종료 날짜
+												만료 날짜
 											</th>
 											<th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">
-												서비스 승인 상태
+												승인 상태
 											</th>
 											<th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">
-												서비스 승인 날짜
+												승인 날짜
 											</th>
 											<th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">
 												수정
@@ -103,17 +135,23 @@ tbody tr td:first-child:before {
 											<td th:text="${r.serviceName}"></td>
 											<td th:text="${r.serviceAmount}"></td>
 											<td th:text="${r.servicePeriod}"></td>
-											<td th:text="${r.serviceTotalPrice}"></td>
+											<td th:text="${#numbers.formatInteger(r.serviceTotalPrice, 0, 'COMMA')}"></td>
 											<td th:text="${r.serviceRequestDate}"></td>
 											<td th:text="${r.serviceRegistrationDate}"></td>
 											<td th:text="${r.serviceEndDate}"></td>
-											<td th:text="${r.serviceRequestStatus}"></td>
+											<td th:if="${r.serviceRequestStatus == '승인'}">
+												<a th:href="@{/shop/service/serviceRequest/addPayment(contractManageCode=${r.contractManageCode})}">
+													<button type="button" class="btn btn-success">결제하기</button>
+												</a>
+											</td>
+											<td th:unless="${r.serviceRequestStatus == '승인'}" th:text="${r.serviceRequestStatus}"></td>
 											<td th:text="${r.serviceApprovalDate}"></td>
 											<td>
-												<a th:href="@{/shop/service/serviceRequest/modifyServiceRequest}">수정</a>
+												<a th:href="@{/shop/service/serviceRequest/modifyServiceRequest(contractManageCode=${r.contractManageCode})}">
+													<button type="button" class="btn btn-success">수정</button>
+												</a>
 											</td>
-											<td>
-												<a th:href="@{/shop/service/serviceRequest/deleteServiceRequest}">삭제</a>
+											<td><button type="button" class="btn btn-success" th:onclick="deleteBtn([[${r.contractManageCode}]]);">삭제</button>
 											</td>
 										</tr>
 										<tr th:unless="${not #lists.isEmpty(getRequestList)}">

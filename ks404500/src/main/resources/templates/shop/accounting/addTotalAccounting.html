@@ -41,7 +41,10 @@ $(document).ready(function () {
     	        alert('등록대상을 선택해주세요');
     	        Category1.focus();
     	        event.preventDefault();
-    	   		}
+    	   		}else if($('#shopGroupSlip').val().length == 0){
+        			alert('그룹코드를 확인해주세요');
+        			return false;
+        		}
     	
     });
    

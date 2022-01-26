@@ -46,4 +46,13 @@ public class ShopMemberService {
 	public int deleteClient(ShopMember shopMember) {
 		return shopMemberMapper.deleteClientMember(shopMember);
 	}
+	
+	//[재천]외부 회원 중복 확인
+	public int idCheck(String shopMemberId) {
+		return shopMemberMapper.idCheck(shopMemberId);
+	}
+	
+	public ShopMember selectShopMemberState(String shopMemberId) {
+		return shopMemberMapper.selectShopMemberState(shopMemberId);
+	}
 }

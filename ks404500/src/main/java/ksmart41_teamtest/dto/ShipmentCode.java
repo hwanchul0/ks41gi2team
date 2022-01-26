@@ -9,8 +9,37 @@ public class ShipmentCode {
 	private String shopDeliveryLocation;
 	private String shopShipmentName;
 	private String shopOrderRegDate;
+	private String releaseCode;
+	private String mainBusinessCode;
+	private String shopShipmentCode;
+	private String shopPaymentCheckCode;
+
 	
 	
+	public String getReleaseCode() {
+		return releaseCode;
+	}
+	public void setReleaseCode(String releaseCode) {
+		this.releaseCode = releaseCode;
+	}
+	public String getMainBusinessCode() {
+		return mainBusinessCode;
+	}
+	public void setMainBusinessCode(String mainBusinessCode) {
+		this.mainBusinessCode = mainBusinessCode;
+	}
+	public String getShopShipmentCode() {
+		return shopShipmentCode;
+	}
+	public void setShopShipmentCode(String shopShipmentCode) {
+		this.shopShipmentCode = shopShipmentCode;
+	}
+	public String getShopPaymentCheckCode() {
+		return shopPaymentCheckCode;
+	}
+	public void setShopPaymentCheckCode(String shopPaymentCheckCode) {
+		this.shopPaymentCheckCode = shopPaymentCheckCode;
+	}
 	public String getShopOrderCode() {
 		return shopOrderCode;
 	}
@@ -55,9 +84,31 @@ public class ShipmentCode {
 	}
 	@Override
 	public String toString() {
-		return "ShipmentCode [shopOrderCode=" + shopOrderCode + ", shopConsumerId=" + shopConsumerId + ", shopMemberId="
-				+ shopMemberId + ", releaseDate=" + releaseDate + ", shopDeliveryLocation=" + shopDeliveryLocation
-				+ ", shopShipmentName=" + shopShipmentName + ", shopOrderRegDate=" + shopOrderRegDate + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("ShipmentCode [shopOrderCode=");
+		builder.append(shopOrderCode);
+		builder.append(", shopConsumerId=");
+		builder.append(shopConsumerId);
+		builder.append(", shopMemberId=");
+		builder.append(shopMemberId);
+		builder.append(", releaseDate=");
+		builder.append(releaseDate);
+		builder.append(", shopDeliveryLocation=");
+		builder.append(shopDeliveryLocation);
+		builder.append(", shopShipmentName=");
+		builder.append(shopShipmentName);
+		builder.append(", shopOrderRegDate=");
+		builder.append(shopOrderRegDate);
+		builder.append(", releaseCode=");
+		builder.append(releaseCode);
+		builder.append(", mainBusinessCode=");
+		builder.append(mainBusinessCode);
+		builder.append(", shopShipmentCode=");
+		builder.append(shopShipmentCode);
+		builder.append(", shopPaymentCheckCode=");
+		builder.append(shopPaymentCheckCode);
+		builder.append("]");
+		return builder.toString();
 	}
 	
 	

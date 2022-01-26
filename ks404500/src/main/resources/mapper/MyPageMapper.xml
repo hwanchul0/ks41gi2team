@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ksmart41_teamtest.mapper.MyPageMapper">
+	<resultMap type="Member" id="memberResultMap">
+		<result column="memberId" 					property="memberId"/>
+		<result column="memberLevelCode" 			property="memberLevelCode"/>
+		<result column="memberPw" 					property="memberPw"/>
+		<result column="memberName" 				property="memberName"/>
+		<result column="memberAddr" 				property="memberAddr"/>
+		<result column="memberEmail" 				property="memberEmail"/>
+		<result column="memberPhone" 				property="memberPhone"/>
+		<result column="memberRegDate" 				property="memberRegDate"/>
+		<result column="memberStatus" 				property="memberStatus"/>
+		<result column="memberWithdrawal" 			property="memberWithdrawal"/>
+		<result column="memberWithdrawalReason" 	property="memberWithdrawalReason"/>
+	</resultMap>
+	
+	<update id="modifyMyPage" parameterType="Member">
+		UPDATE k2_sw_member
+		SET
+			memberName =#{memberName},
+			memberAddr = #{memberAddr},
+			memberPhone = #{memberPhone},
+			memberEmail =#{memberEmail},
+			memberStatus = #{memberStatus}
+		WHERE
+			memberId = #{memberId}
+	</update>
+	
+	<select id="MemberInfo" parameterType="String" resultMap="memberResultMap">
+		SELECT
+			memberId,
+			memberPw,
+			memberLevelCode,
+			memberName,
+			memberAddr,
+			memberEmail,
+			memberPhone,
+			memberRegDate,
+			memberStatus,
+			memberWithdrawal,
+			memberWithdrawalReason
+		FROM
+			k2_sw_member
+		WHERE
+			memberId = #{memberId}
+	</select>
+	
+		
+	<select id="selectMemberStatus" parameterType="String" resultMap="memberResultMap">
+		SELECT 
+			memberId,
+			memberStatus
+		FROM 
+			k2_sw_member
+		WHERE
+			memberId = #{memberId}
+	</select>
+	
+	<update id="modifystatus" parameterType="Member">
+			UPDATE k2_sw_member
+			SET
+				memberStatus = 'N',
+				memberWithdrawal = NOW()
+			WHERE
+				memberId = #{memberId}
+	</update>
+	
+	
+	
+</mapper>

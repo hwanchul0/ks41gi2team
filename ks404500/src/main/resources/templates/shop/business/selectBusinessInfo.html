@@ -14,8 +14,8 @@
 					</div><!-- /.col -->
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
-							<li class="breadcrumb-item"><a href="#">Home</a></li>
-							<li class="breadcrumb-item active">Starter Page</li>
+							<li class="breadcrumb-item"><a th:href="@{/shop/index-shop}">Home</a></li>
+							<li class="breadcrumb-item active">거래처관리</li>
 						</ol>
 					</div><!-- /.col -->
 				</div><!-- /.row -->
@@ -33,7 +33,7 @@
 								<h5 class="card-title" th:text="${title}"></h5>
 							</div>
 							<div class="card-body">
-								<table class="table table-hover table-coondensed" style="text-align: center;">
+								<table class="table table-hover table-coondensed" style="text-align: center; font-size: 13px;">
 									<thead>
 										<tr>
 											<th>상호명</th>
@@ -63,7 +63,7 @@
 											<td th:text="${bl.shopClientBusinessType2}"></td>
 											<td th:text="${bl.shopClientBusinessRegDate}"></td>
 											<td><a th:href="@{/shop/business/modifyBusinessInfo(shopClientCode=${bl.shopClientCode})}">수정</a></td>
-											<td><button type="button" class="btn btn-primary deleteBtn" th:onclick="deleteBtn([[${bl.shopClientCode}]]);">삭제</button></td>
+											<td><button type="button" class="btn btn-primary deleteBtn btn-success btn-xs" th:onclick="deleteBtn([[${bl.shopClientCode}]]);">삭제</button></td>
 										</tr>
 										<tr th:unless="${not #lists.isEmpty(businesslist)}">
 											<td><h3>데이터가 없습니다.</h3></td>
@@ -84,25 +84,28 @@
 	<script type="text/javascript">
 	//[재천] 회원삭제
 	function deleteBtn(shopClientCode) {
-		if(shopClientCode != null && shopClientCode != ""){
-			console.log(shopClientCode);
-			var request = $.ajax({
-				  url: "/shop/business/deleteBusinessInfo",
-				  method: "POST",
-				  data: { shopClientCode : shopClientCode },
-				  dataType: "text"
+		var deleteConfirm = confirm('삭제하시겠습니까?');
+		if(deleteConfirm) {
+			if(shopClientCode != null && shopClientCode != ""){
+				console.log(shopClientCode);
+				var request = $.ajax({
+					  url: "/shop/business/deleteBusinessInfo",
+					  method: "POST",
+					  data: { shopClientCode : shopClientCode },
+					  dataType: "text"
+					});
+				
+				request.done(function(data) {
+					if(data > 0) {
+						alert("삭제 되었습니다.");
+					}else {
+						alert("실패했습니다.");
+					}
+					location.reload();
 				});
-			
-			request.done(function(data) {
-				if(data > 0) {
-					alert("삭제 되었습니다.");
-				}else {
-					alert("실패했습니다.");
-				}
-				location.reload();
-			});
-		} else {
-			alert("삭제 실패 ");
+			} else {
+				alert("삭제 실패 ");
+			}
 		}
 	}
     </script>

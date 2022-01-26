@@ -15,4 +15,8 @@ public interface ShopShipmentMapper {
 	//유경 - shop 배송단계 조회
 	public List<ShipmentCode> getShipmentCode();
 
+	//유성 - shop 배송요청(수정)
+	int modifyShipment(ShipmentCode shopOrderCode);
+	
+	public ShipmentCode getShipmetRequest(String shopOrderCode);
 }

@@ -45,21 +45,28 @@ $(document).ready(function () {
 
     });
     
-    //버튼을 선택하지않고 입력완료 선택시 경고창
-    $('#sign').click(function () {
-    	 var Category1 = $('.radioButton');
-    	    if($(':radio[class="radioButton"]:checked').length < 1){
-    	        alert('발행대상을 선택해주세요');
-    	        Category1.focus();
-    	        event.preventDefault();
-    	   		}
-    	
-    });
-   
-  });
+
+  $('#sign').click(function () {
+	  //버튼을 선택하지않고 입력완료 선택시 경고창
+  	 var Category1 = $('.radioButton');
+  	    if($(':radio[class="radioButton"]:checked').length < 1){
+  	        alert('발행대상을 선택해주세요');
+  	        Category1.focus();
+  	        event.preventDefault();
+  	    //유효성 검사
+  	   		}else if($('#renontax').val().length == 0){
+  				alert('공급가를 확인해주세요');
+  				return false;
+  			}else if($('#groupslip').val().length == 0){
+  				alert('전표번호를 확인해주세요');
+  				return false;
+  			}
+  });	
+  		
+ 
+});
  
  //검색
-
 $(document).ready(function(){
 	  $("#myInput").on("keyup", function() {
 	    var value = $(this).val().toLowerCase();
@@ -203,15 +210,7 @@ $(document).ready(function(){
 							                 </div>
 										</div>
 									</div>
-									<!-- 매퍼에서 shopid001로 고정되어있음. -->
-									<div class="form-group row">
-										<label for="shopMemberId" class="col-sm-2 col-form-label">등록자 </label>
-										<div class="col-sm-6">
-											<div class="col-sm-6">
-							                       <input type="text" th:value="${SHOPID}" name="shopMemberId" id="shopMemberId" readonly="readonly" style="width:220px;"></input>
-							                 </div>
-										</div>
-									</div>
+									
 								<!-- /insert -->
 								<!-- /.card-body -->
 								<div class="card-footer">

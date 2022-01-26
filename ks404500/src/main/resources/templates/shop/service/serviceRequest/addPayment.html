@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="@{layout/default-shop}">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<head th:replace="fragments/head :: headFragment"></head>
+<th:block layout:fragment="customContents">
+	<!-- Content Wrapper. Contains page content -->
+	<div class="content-wrapper">
+		<!-- Content Header (Page Header) -->
+		<div class="content-header">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div class="col-sm-6">
+						<h1 class="m-0">addPayment / 서비스 결제하기</h1>
+					</div>
+					<!-- /.col -->
+					<div class="col-sm-6">
+						<ol class="breadcrumb float-sm-right">
+							<li class="breadcrumb-item">
+								<a href="#">Home</a>
+							</li>
+							<li class="breadcrumb-item active">Starter Page</li>
+						</ol>
+					</div>
+					<!-- /.col -->
+				</div>
+				<!-- /.row -->
+			</div>
+			<!-- /.container-fluid -->
+		</div>
+		<!-- Content Header (Page Header) -->
+		<div class="col-md-12">
+			<!-- /.card-header -->
+			<!-- Horizontal Form -->
+			<div class="card card-success">
+				<div class="card-header">
+					<h3 class="card-title" th:text="${title}"></h3>
+				</div>
+				<!-- card-header -->
+				<!-- form start -->
+				<form class="form-horizontal" id="addPaymentForm" th:action="@{/shop/service/serviceRequest/addPayment}" method="post">
+					<!-- card-body -->
+					<div class="card-body">
+						<div class="form-group row">
+							<label for="paymentCode" class="col-sm-2 col-form-label">결제정보 코드</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="paymentCode" name="paymentCode" th:value="${getRequestInfo.paymentCode}" readonly="readonly">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="contractManageCode" class="col-sm-2 col-form-label">계약 코드</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="contractManageCode" name="contractManageCode" th:value="${getRequestInfo.contractManageCode}" readonly="readonly">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="serviceTotalPrice" class="col-sm-2 col-form-label">총 결제 금액</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="paymentEstimate" name="paymentEstimate" th:value="${getRequestInfo.serviceTotalPrice}" readonly="readonly">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="paymentCharge" class="col-sm-2 col-form-label">결제 금액</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="paymentCharge" name="paymentCharge">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="paymentType" class="col-sm-2 col-form-label">결제 방법</label>
+								<select name="paymentType" id="paymentType">
+									<option>현금</option>
+									<option>카드</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="servicePeriod" class="col-sm-2 col-form-label">잔금</label>
+							<div class="col-sm-4">
+								<input type="number" class="form-control" id="paymentBalance" name="paymentBalance">
+							</div>
+						</div>
+					<!-- /card-body -->
+					<!-- card-footer -->
+					<div class="card-footer">
+						<button type="submit" class="btn btn-success" id="addPaymentBtn">등록</button>
+						<button type="button" class="btn btn-default float-right" th:href="@{/shop/service/serviceRequest/selectServiceRequest}">취소</button>
+					</div>
+					<!-- /.card-footer -->
+				</form>
+				<!-- /form -->
+			</div>
+			<!-- /.card -->
+		</div>
+	</div>
+	<!-- /Content Wrapper. Contains page content -->
+</th:block>
+</html>

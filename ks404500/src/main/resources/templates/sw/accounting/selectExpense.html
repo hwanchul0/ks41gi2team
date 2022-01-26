@@ -15,8 +15,8 @@
 					</div><!-- /.col -->
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
-							<li class="breadcrumb-item"><a href="#">Home</a></li>
-							<li class="breadcrumb-item active">Starter Page</li>
+							<li class="breadcrumb-item"><a th:href="@{/sw/index-sw}">Home</a></li>
+							<li class="breadcrumb-item active">재무관리</li>
 						</ol>
 					</div><!-- /.col -->
 				</div><!-- /.row -->
@@ -34,9 +34,10 @@
 								<h5 class="card-title" th:text="${title}"></h5>
 							</div>
 							<div class="card-body" >
-								<table class="table table-hover table-coondensed" style="text-align: center;">
+								<table class="table table-hover table-coondensed" style="text-align: center; font-size: 13px">
 									<thead>
 										<tr>
+											<th>#</th>
 											<th>계정과목코드</th>
 											<th>계정과목명</th>
 											<th>적요</th>
@@ -52,18 +53,30 @@
 									</thead>
 									<tbody>
 										<tr th:if="${not #lists.isEmpty(expenselist)}" th:each="el : ${expenselist}">
-											<td th:text="${el.swExpensePayCode}" style="display: none;" class="swExpensePayCode"></td>
+											<td th:text="${el.swExpensePayCode}" style="text-align: center; font-size: 13px;" class="swExpensePayCode"></td>
 											<td th:text="${el.swIsCode}"></td>
 											<td th:text="${el.swIsName}"></td>
 											<td th:text="${el.swExpenseInfo}"></td>
 											<td th:text="${#numbers.formatInteger(el.swExpensePrice, 0, 'COMMA')}"></td>
 											<td th:text="${el.swExpenseRegDate}"></td>
 											<td th:text="${el.memberId}"></td>
-											<td><button class="finishiBtn" type="button" th:onclick="finishiBtn([[${el.swExpensePayCode}]])">마감</button> </td>
+											
+											<td th:if="${el.memberIdFinish} == null"><a th:onclick="finishiBtn([[${el.swExpensePayCode}]])" style="cursor: pointer;" ><i class="fas fa-pencil-alt" style="color: #0069D9"></i></a></td>
+											<td th:if="${el.memberIdFinish} != null"><span style="font-size: 13px"> 마감완료 </span></td>
+											
+											
+											<!-- 
+											마감
+                                          <td th:if="${a.shopIncomeFinish} == null">
+                                          <a th:href="@{/shop/accounting/modifyIncome(shopIncomeCode=${a.shopIncomeCode})}"><i class="fas fa-pencil-alt" style="color: #28a745"></i></a></td>
+                                          <td th:if="${a.shopIncomeFinish} != null"><i class="fas fa-pencil-alt finish"></i></td>
+											 -->
+											
+											
 											<td th:text="${el.memberIdFinish}" class="memberIdFinish" th:value="${el.memberIdFinish}"></td>
 											<td th:text="${el.swExpenseFinishDate}" class="swExpenseFinishDate" th:value="${el.swExpenseFinishDate}"></td>
 											<td><a th:href="@{/sw/accounting/modifyExpense(swExpensePayCode=${el.swExpensePayCode})}">수정</a></td>
-											<td><button type="button" class="btn btn-primary deleteBtn" th:onclick="deleteBtn([[${el.swExpensePayCode}]]);">삭제</button></td>
+											<td><button type="button" class="btn btn-primary deleteBtn btn-xs"  th:onclick="deleteBtn([[${el.swExpensePayCode}]]);">삭제</button></td>
 										</tr>
 										<tr th:unless="${not #lists.isEmpty(expenselist)}">
 											<td>데이터가 없습니다...</td>
@@ -96,9 +109,35 @@
 			}
 	        
 			request.done(function(data) {
-				
+				alert('마감되었습니다.');
 			});
 		}
+		
+		function deleteBtn(swExpensePayCode){
+			var deleteConfirm = confirm('삭제하시겠습니까?');
+			if(deleteConfirm) {
+				if(swExpensePayCode != null && swExpensePayCode != ""){
+					var request = $.ajax({
+						  url: "/sw/accounting/deleteExpense",
+						  method: "POST",
+						  data: { swExpensePayCode : swExpensePayCode },
+						  dataType: "text"
+						});
+					
+					request.done(function(data) {
+						if(data > 0) {
+							alert("삭제 되었습니다.");
+						}else {
+							alert("실패했습니다.");
+						}
+						location.reload();
+					});
+				}else{
+					alert("삭제 실패");
+				}
+			}
+		}
+	
 	</script>
 </th:block>
 </html>

@@ -2,7 +2,62 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="@{layout/default-shop}">
-<th:block layout:fragment="javascriptFragment">
+<th:block layout:fragment="customJs">
+<script type="text/javascript">
+      $(function(){
+         
+         $('#shopIsName').change(function(){
+            var shopIsName = $('#shopIsName option:selected');
+            $('#shopIsCode').val(shopIsName.attr("shopcode"));
+         });
+         
+         //등록버튼 클릭 시 
+         $('#addExpenseBtn').click(function(){
+            var shopIsName = $('#shopIsName option:selected').val();
+            
+            if(shopIsName =="none") {
+            	alert('계정과목을 선택해주세요');
+            	return false;
+            }
+            
+          //쇼핑몰 비용 적요 공백 체크
+  			var shopExpenseInfo = $('#shopExpenseInfo').val();
+  			if(shopExpenseInfo == null || shopExpenseInfo == ""){
+  				alert("쇼핑몰 비용 적요를 입력하세요");
+  				return false;
+  			}
+  			
+  			/* //사업장 지역코드 공백 체크
+			var shopExpenseDate = $('#shopExpenseDate').val();
+			if(shopExpenseDate == "연도-월-일" || shopExpenseDate == ""){
+				alert("등록일을 선택해주세요);
+				return false;
+			} */
+    			
+    			
+    			//금액 공백체크
+  			var shopExpensePrice = $('#shopExpensePrice').val();
+  			if(shopExpensePrice == null || shopExpensePrice == ""){
+  				alert("금액을 입력하세요");
+  				return false;
+  			}
+            
+            $('#addExpenseForm').submit();
+
+         });
+      });
+      
+     
+        
+      //쇼핑몰 비용등록 취소 
+      	function cancle(){
+      		var cancleExpenseBtn = confirm('쇼핑몰 비용등록을 취소하시겠습니까?');
+      		if(cancleExpenseBtn){
+      			location.href = "/shop/index-shop";
+      		}
+      	}
+      
+   </script>
 </th:block>	  
 
 <th:block layout:fragment="customContents">
@@ -18,8 +73,8 @@
 					<!-- /.col -->
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
-							<li class="breadcrumb-item"><a href="#">Home</a></li>
-							<li class="breadcrumb-item active">Starter Page</li>
+							<li class="breadcrumb-item"><a href="/shop/index-shop">Home</a></li>
+							<li class="breadcrumb-item active">매출 관리</li>
 						</ol>
 					</div>
 					<!-- /.col -->
@@ -43,35 +98,33 @@
 							<!--  쇼핑몰 비용 등록 폼바디 시작 -->
 							<form id="addExpenseForm" th:action="@{/shop/accounting/addExpense}" method="post" class="form-horizontal"> 
 								<p class="card-body" >
-
-								<div class="form-group row">
-									<label class="col-sm-2 col-form-laebl text-right">지출 코드</label>
-									<div class="col-sm-4">
-										<input class="form-control" type="text" id="shopExpenseCode" name="shopExpenseCode" readonly="readonly">
-									</div>
-								</div>
 								
 								<div class="form-group row">
 									<label class="col-sm-2 col-form-laebl text-right">계정과목코드</label>
 									<div class="col-sm-4">
-										<input class="form-control" type="text" id="shopIsCode" name="shopIsCode">
+										<select name="shopIsName" id="shopIsName">
+											<option value="none">계정과목을 선택하세요</option>
+                                  			<th:block th:if="${not #lists.isEmpty(shopIsListCode)}" th:each="s : ${shopIsListCode}">
+                                   		  	    <option th:value="${s.shopIsName}" th:text="${s.shopIsName}" th:shopcode="${s.shopIsCode}"></option>
+                                  			</th:block>
+                               		  		<th:block th:unless="${not #lists.isEmpty(shopIsListCode)}">
+                                    	 		<option>계정과목을 만드세요.</option>
+                                	 		</th:block>
+                               			</select>
+										<input id="shopIsCode" name="shopIsCode" style="display: none;"/>
 									</div>
 								</div>
 								
 
+							
 								<div class="form-group row">
-									<label class="col-sm-2 col-form-laebl text-right">계정과목이름</label>
+									<label class="col-sm-2 col-form-laebl text-right">쇼핑몰 비용 적요</label>
 									<div class="col-sm-4">
-										<input class="form-control" type="text" id="shopIsName" name="shopIsName" placeholder="계정과목을 입력하세요">
+										<input class="form-control" type="text" id="shopExpenseInfo" name="shopExpenseInfo" placeholder="쇼핑몰 비용적요를 입력하세요">
 									</div>
 								</div>
 
-								<div class="form-group row">
-									<label class="col-sm-2 col-form-laebl text-right">그룹전표번호</label>
-									<div class="col-sm-4">
-										<input class="form-control" type="text" id="shopExpenseSlipNumber" name="shopExpenseSlipNumber"placeholder="그룹전표번호를 입력하세요">
-									</div>
-								</div>
+						
 
 							
 								
@@ -93,7 +146,7 @@
 									<button type="submit" class="btn btn-success" id="addExpenseBtn"> 등록 </button>
 									<button type="button" class="btn btn-default float-right" id="cancleExpenseBtn"> 취소 </button>
 								</div>
-						<	</form> 
+							</form> 
 							</div>
 						</div>
 					</div>
@@ -103,6 +156,7 @@
 			<!-- /.container-fluid -->
 		</div>
 		<!-- /.content -->
+
 	
 	
 </th:block>

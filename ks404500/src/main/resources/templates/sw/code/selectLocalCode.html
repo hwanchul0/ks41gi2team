@@ -15,8 +15,8 @@
 						</div><!-- /.col -->
 						<div class="col-sm-6">
 							<ol class="breadcrumb float-sm-right">
-								<li class="breadcrumb-item"><a href="#">Home</a></li>
-								<li class="breadcrumb-item active">Starter Page</li>
+							<li class="breadcrumb-item"><a th:href="@{/sw/index-sw}">Home</a></li>
+							<li class="breadcrumb-item active">코드관리</li>
 							</ol>
 						</div><!-- /.col -->
 					</div><!-- /.row -->
@@ -34,7 +34,7 @@
 								<h5 class="card-title" th:text="${title}"></h5>
 							</div>
 							<div class="card-body">
-								<table class="table table-hover table-coondensed" style="text-align: center;">
+								<table class="table table-hover table-coondensed" style="text-align: center; font-size: 13px;">
 									<thead>
 										<tr>
 											<th>지역 코드</th>
@@ -50,7 +50,7 @@
 											<td th:text="${cl.localNumber}"></td>
 											<td th:text="${cl.localName}"></td>
 											<td><a th:href="@{/sw/code/modifyLocalCode(localCode=${cl.localCode})}">수정</a></td>
-											<td><button type="button" class="btn btn-primary deleteBtn" th:onclick="deleteBtn([[${cl.localCode}]])">삭제</button></td>
+											<td><button type="button" class="btn btn-primary deleteBtn btn-xs" th:onclick="deleteBtn([[${cl.localCode}]])">삭제</button></td>
 										</tr>
 										<tr th:unless="${not #lists.isEmpty(localcodeList)}">
 											<h3>데이터가 없습니다.</h3>
@@ -68,6 +68,7 @@
 		<!-- /.content -->
 	</div>
 	<!-- /.content-wrapper -->
+	
 	<script>
 	function deleteBtn(localCode) {
 		if(localCode != null && localCode != ""){

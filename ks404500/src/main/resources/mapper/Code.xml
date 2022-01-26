@@ -10,7 +10,29 @@
 		<result column="refundState" 								property="refundState"/>
 		<result column="paymentStateCode" 							property="paymentStateCode"/>
 		<result column="paymentState" 								property="paymentState"/>
-	</resultMap>		
+	</resultMap>
+	
+	
+	<!-- 계약상태 코드 등록 -->
+	<insert id="addContractStateCode" parameterType="Code">
+		INSERT INTO k2_sw_contractState(
+			 contractStateCode
+			,contractState
+		)
+		VALUES (
+			 #{contractStateCode}
+			,#{contractState}
+	);
+	</insert>
+	<!-- 계약상태 코드 등록 - 중복체크 -->
+	<select id="contractCodeCheck" resultType="int">
+		 SELECT
+			COUNT(1)
+		FROM 
+			k2_sw_contractState
+		WHERE
+			contractStateCode = #{contractStateCode};
+	</select>		
 	<!-- 계약상태 코드 조회 ( sw) -->
 	<select id="selectContractStateCode" parameterType="String" resultMap="requestResultMap">
 		SELECT 
@@ -19,6 +41,15 @@
 		FROM 
 			k2_sw_contractState;
 	</select>
+	
+	<!-- 계약상태 코드 삭제 -->
+	<delete id="deleteContractStateCode" parameterType="Code">
+	DELETE 
+	FROM 
+		k2_sw_contractState 
+	WHERE 
+		contractStateCode=#{contractStateCode};
+	</delete>
 	
 	<!-- 환불상태 코드 조회 -->
 	<select id="selectContractRefundStateCode" parameterType="String" resultMap="requestResultMap">
@@ -29,20 +60,115 @@
 		k2_sw_contractRefundState;
 	</select>
 	
+	<!-- 환불상태 코드 등록 -->
+	<insert id="addContractRefundStateCode" parameterType="Code">
+	INSERT INTO k2_sw_contractRefundState(
+		refundStateCode
+		,refundState
+	)
+	VALUES (
+		 #{refundStateCode}
+		,#{refundState}
+	);
+	</insert>
+	
+	<!-- 환불상태 코드등록 - 중복체크 -->
+	<select id="refundCodeCheck" resultType="int">
+		 SELECT
+			COUNT(1)
+		FROM 
+			k2_sw_contractRefundState
+		WHERE
+			refundStateCode = #{refundStateCode};
+	</select>
+	
+	<!-- 환불상태 코드 삭제 -->
+	<delete id="deleteRefundStateCode" parameterType="Code">
+	DELETE 
+	FROM 
+		k2_sw_contractRefundState 
+	WHERE 
+		refundStateCode=#{refundStateCode};
+	</delete>
+	
 	<!-- 결제상태 코드 조회 (sw) -->
 	<select id="selectPaymentStateCode" parameterType="String" resultMap="requestResultMap">
 	SELECT 
-		paymentStateCode
+		 paymentStateCode
 		,paymentState
 	FROM
 		k2_paymentState;
 	</select>
+	<!-- 결제상태 코드 등록 -->
+	<insert id="addPaymentStateCode" parameterType="Code">
+		INSERT INTO k2_paymentState(
+			 paymentStateCode
+			,paymentState
+		)
+		VALUES (
+			 #{paymentStateCode}
+			,#{paymentState}
+		);
+	</insert>
+	<!-- 결제상태 코드 등록 - 중복체크 -->
+	<select id="PaymentCodeCheck" resultType="int">
+	 SELECT
+		COUNT(1)
+	FROM 
+		k2_paymentState
+	WHERE
+		paymentStateCode = #{paymentStateCode};
+	</select> 
+	
+	<!-- 결제상태 코드 삭제 -->
+	<delete id="deletePaymentStateCode" parameterType="Code">
+	DELETE 
+	FROM 
+		k2_paymentState 
+	WHERE 
+		paymentStateCode=#{paymentStateCode};
+	</delete>
+	
+	<!-- 유경 - 손익계정 사용여부 수정하기 -->
+	<update id="ShopModifyIsListCode" parameterType="ShopIsListCode">
+		UPDATE k2_shop_is_list
+			SET
+				shopIsUse = #{shopIsUse}
+			WHERE 
+				shopIsCode = #{shopIsCode};
+	</update>
 	
 	<!-- 유경 - 쇼핑몰 손익계정과목 조회 -->
 	<select id="getSelectShopIsListCode" resultType="ShopIsListCode">
 		SELECT
-			*
+			shopIsCode, 
+			shopIsName, 
+			shopIsGroupCode, 
+			mainBusinessCode, 
+			shopIsUse, 
+			shopIsAmend, 
+			shopIsRegDate, 
+			shopIsYear,
+			shopMemberId
+		FROM 
+			k2_shop_is_list
+	</select>
+	
+	<!-- 유경 : 쇼핑몰 손익계정에서 값 가져오기 -->
+	<select id="getShopIsCodeByShopIsListCode" resultType="ShopIsListCode">
+		SELECT 
+			shopIsCode, 
+			shopIsName, 
+			shopIsGroupCode, 
+			mainBusinessCode, 
+			shopIsUse,
+			shopIsAmend, 
+			shopIsRegDate,
+			shopIsYear,
+			shopMemberId
 		FROM k2_shop_is_list
+		where
+			shopIsCode = #{shopIsCode};
 	</select>
 	
 </mapper>

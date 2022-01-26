@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="@{layout/default-shop}">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<head th:replace="fragments/head :: headFragment"></head>
+
+<th:block layout:fragment="customJs">
+ 
+<script type="text/javascript">
+
+</script>
+
+</th:block>
+<th:block layout:fragment="customContents">
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-10">
+          <div class="col-sm-6">
+            <h1>마이페이지</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+			<li class="breadcrumb-item"><a th:href="@{/shop/index-shop}">Home</a></li>
+			<li class="breadcrumb-item active">회원관리</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid" >
+        <div class="row  d-flex justify-content-center align-items-center h-100">
+          <div class="col-md-8" style="display: center">
+            <!-- Profile Image -->
+            <div class="card card-success card-outline col-md-12">
+              <div class="card-body box-profile">
+                <div class="text-center">
+                  <img src="/customcss/img/profile.png" alt="User profile picture" style="height : 180px;">
+                </div>
+
+                <h3 class="profile-username text-center" th:text="${session.SHOPNAME}"></h3>
+
+                <p class="text-muted text-center">[[${session.SHOPLEVEL}]]</p>
+
+                <ul class="list-group list-group-unbordered mb-3">
+                  <li class="list-group-item">
+                    <b>아이디</b> <a class="float-right" th:text="${session.SHOPID}" style="color: #28a745"></a>
+                  </li>
+					<li class="list-group-item">
+	                    <b>이름</b> <a class="float-right" th:text="${session.SHOPNAME}" style="color: #28a745"></a>
+					</li>
+                  <li class="list-group-item">
+                    <b>가입일자</b> <a class="float-right" th:text="${session.SHOPDATE}" style="color: #28a745"></a>
+                  </li>
+                  <li class="list-group-item">
+                    <b>주소</b> <a class="float-right" th:text="${session.SHOPADDR}" style="color: #28a745"></a>
+                  </li>
+                  <li class="list-group-item">
+                    <b>연락처</b> <a class="float-right" style="color: #28a745" >[[${session.SHOPPHONE}]]</a>
+                  </li>
+                  <li class="list-group-item">
+                    <b>이메일</b> <a class="float-right" th:text="${session.SHOPEMAIL}" style="color: #28a745"></a>
+                  </li>
+                </ul>
+
+              </div>
+              	   	<div class="card-footer">
+		              <a th:href="@{/shop/client/modifyMyPage(shopMemberId=${session.SHOPID})}">수정</a>
+					<form name="secessionForm" id="secessionForm" method="post" th:action="@{/shop/client/secession}" style="font-size: 13px;">
+						<input type="text" id="shopMemberId" name="shopMemberId" th:value="${session.SHOPID}" style="display: none">
+						<button type="submit" class="btn btn-primary btn-xs" id="secessionBtn" th:onclick="secession();">탈퇴</button>
+					</form>
+	              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->   
+        </div>
+        <!-- /.row -->
+        
+        
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  	<script type="text/javascript">
+	function secession(){
+		var secessionConfirm = confirm('회원탈퇴를 진행하시겠습니까?');
+		if (secessionConfirm){
+			location.href = "/shop/client/secession";
+		}		
+	}
+	</script>
+  
+
+</th:block>
+</html>

@@ -20,7 +20,7 @@ public class SwIsListService {
 		this.codeMapper = codeMapper;
 	}
 	
-	/*유경 */
+	/*유경  개발사 손익계정과목 조회 */
 	public List<SwIsListCode> getSwIsListCode() {
 		List<SwIsListCode> swIsListCode = codeMapper.getSwIsListCode();
 		//System.out.println(swIsListCode + "<--service");

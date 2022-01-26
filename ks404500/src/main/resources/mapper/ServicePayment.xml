@@ -16,27 +16,34 @@
 		<result column="serviceApprovalDate" 			property="serviceApprovalDate"/>
 		<result column="clientId" 						property="clientId"/>
 	</resultMap>		
-	<!-- 계약요청 결제예정  조회 ( sw) -->
+	<!-- 계약요청 결제예정(승인상태)  조회 ( sw) -->
 		<select id="getServicePaymentSum" parameterType="String" resultMap="paymentResultMap">
-			SELECT 
-				p.paymentCode
-				,p.contractManageCode
-				,p.slipNumber
-				,p.servicePaymentAmount
-				,p.servicePaymentDueDate
-				,p.paymentSumRegistration
-				,s.paymentState
-			FROM 
-				k2_sw_paymentSum AS p
-				INNER JOIN 
-				k2_sw_paymentCheck AS c
+		SELECT 
+			pm.paymentCode
+			,pm.contractManageCode
+			,pm.slipNumber
+			,cr.serviceTotalPrice
+			,pm.servicePaymentDueDate
+			,pm.paymentSumRegistration
+			,ps.paymentState
+		FROM 
+			k2_sw_paymentCheck AS pc
+			INNER JOIN 
+			k2_paymentState AS ps
 			ON 
-				p.paymentCode = c.paymentCode
-				INNER join
-				k2_paymentState AS s
+			pc.paymentStateCode = ps.paymentStateCode
+			right JOIN 
+			k2_sw_paymentSum AS pm
 			ON 
-				c.paymentStateCode = s.paymentStateCode
-			ORDER BY p.paymentSumRegistration ASC;
+			pc.paymentCode = pm.paymentCode 
+			INNER JOIN 
+			k2_sw_contractRequest AS cr
+			ON 
+			pm.contractManageCode = cr.contractManageCode
+			where
+			cr.serviceRequestStatus = '승인'
+		GROUP BY pm.paymentCode
+		ORDER BY pm.paymentSumRegistration ASC;
 		</select>
 	<!-- 계약요청 결제예정 확인 -->
 		<select id="servicePaymentCheck" resultType="ServicePayment" resultMap="paymentResultMap">
@@ -50,7 +57,7 @@
 				,c.paymentBalance
 				,c.paymentType
 				,c.paymentDate
-				,c.paymentStateCode
+				,s.paymentState
 			FROM 
 				k2_sw_paymentSum AS p
 				INNER JOIN 
@@ -144,4 +151,59 @@
 			ON 
 			k.paymentStateCode = s.paymentStateCode;
 		</select>
+		
+		<!-- Client 계약요청 승인 시 결제  -->	
+		<insert id="addPayment" parameterType="ServicePayment">
+		INSERT INTO k2_sw_paymentCheck(
+			paymentCheckCode
+			,contractManageCode
+			,paymentCode
+			,clientId
+			,paymentStateCode
+			,paymentEstimate
+			,paymentCharge
+			,paymentBalance
+			,paymentType
+			,paymentDate
+		)VALUES (
+		(SELECT 
+			MAX(CAST(paymentCheckCode AS INTEGER)+1)
+		FROM 
+			k2_sw_paymentCheck AS z)
+			,#{contractManageCode}
+			,#{paymentCode}
+			,'shopid001'
+			,'payWaiting'
+			,#{paymentEstimate}
+			,#{paymentCharge}
+			,#{paymentBalance}
+			,#{paymentType}
+			,NOW()
+			);
+		</insert>
+		
+		<!-- 계약요청 승인시 결제 정보 -->
+		<select id="getRequestInfo" resultType="ServicePayment">
+		SELECT 
+			 ps.paymentCode
+			,cr.serviceTotalPrice
+			,ps.contractManageCode
+		FROM 
+			k2_sw_paymentSum AS ps
+			INNER JOIN 
+			k2_sw_contractRequest AS cr
+			ON 
+			ps.contractManageCode = cr.contractManageCode
+			INNER JOIN 
+			k0_sw_mainBusinessCodeManagement AS mc
+			ON 
+			cr.mainBusinessCode = mc.mainBusinessCode
+			INNER JOIN 
+			k0_sw_businessRegistration AS br
+			ON 
+			mc.businessRegistrationCode = br.businessRegistrationCode
+			WHERE 
+			ps.contractManageCode = #{contractManageCode};
+		</select>
+		
 </mapper>

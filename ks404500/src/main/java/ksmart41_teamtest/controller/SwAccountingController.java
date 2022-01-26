@@ -2,6 +2,7 @@ package ksmart41_teamtest.controller;
 
 
 import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -163,8 +164,18 @@ public class SwAccountingController {
 	//유경 - 통합회계 조회
 	@GetMapping("/selectTotalAccounting")
 	public String selectTotalAccounting(Model model) {
+		//2021년 합계 조회
 		List<SwTotalAccounting> swAccounting= accountingService.selectTotalAccounting();
 		model.addAttribute("swAccounting",swAccounting);
+		
+		//개발사 2021년 분기별 매출 조회
+		List<SwTotalAccounting> sw2021Sales = accountingService.selectSwIncome();
+		model.addAttribute("sw2021Sales", sw2021Sales);
+		
+		//개발사 2021년 분기별 비용 조회
+		List<SwTotalAccounting> sw2021Expense = accountingService.selectSwExpense();
+		model.addAttribute("sw2021Expense", sw2021Expense);
+		
 		return "sw/accounting/selectTotalAccounting";
 	}
 	

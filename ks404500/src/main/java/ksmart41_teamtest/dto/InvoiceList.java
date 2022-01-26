@@ -34,6 +34,7 @@ public class InvoiceList {
 	private int totalPrice;
 	private int totalTax;
 	private String contractManageCode;
+
 	
 	//유경 - 세금계산서 발행 상세 발행
 	private String invoiceDetailCode;

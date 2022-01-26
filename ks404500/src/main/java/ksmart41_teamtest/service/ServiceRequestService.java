@@ -14,7 +14,9 @@ import ksmart41_teamtest.mapper.ServiceRequestMapper;
 public class ServiceRequestService {
 
 	private ServiceRequestMapper serviceRequestMapper;
-
+	//재천
+	
+	
 	public ServiceRequestService(ServiceRequestMapper serviceRequestMapper) {
 		this.serviceRequestMapper = serviceRequestMapper;
 		}
@@ -52,6 +54,37 @@ public class ServiceRequestService {
 		int addServiceRequest = serviceRequestMapper.addServiceRequest(serviceRequest);
 		return addServiceRequest;
 	}
+	// 계약요청 수정
+	public int modifyServiceRequest(ServiceRequest serviceRequest) {
+		return serviceRequestMapper.modifyServiceRequest(serviceRequest);
+	}
+	// 계약요청 정보
+	public ServiceRequest getContractInfo(String contractManageCode) {
+		return serviceRequestMapper.getContractInfo(contractManageCode);
+		
+	}
+	// 계약요청 삭제
+	public int deleteServiceRequest(ServiceRequest serviceRequest) {
+		return serviceRequestMapper.deleteServiceRequest(serviceRequest);
+	}
+
+	// 서비스 계약요청 확인 -> 승인 페이지
+	public int modifyRequestState(String serviceRequestStatus, String contractManageCode) {
+		int requestState = serviceRequestMapper.modifyRequestState(serviceRequestStatus,contractManageCode);
+		return requestState;
+	}
+	// 서비스 계약요청 승인 -> 결제예정 테이블
+	public int acceptRequest(String contractManageCode) {
+		int addPayment = serviceRequestMapper.acceptRequest(contractManageCode);
+		return addPayment;
+	}
+	// 서비스 계약요청 승인이 아닐 때 결제예정 테이블 삭제
+	public int deleteRequest(String contractManageCode) {
+		int deletePayment = serviceRequestMapper.deleteRequest(contractManageCode);
+		return deletePayment;
+	}
+	
+
 	
 }
 

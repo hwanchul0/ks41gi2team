@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import ksmart41_teamtest.dto.ShopMember;
 import ksmart41_teamtest.service.ShopMemberService;
@@ -23,6 +24,7 @@ public class ShopMemberController {
 	@GetMapping("/addClient")
 	public String addShopMember(Model model) {
 		model.addAttribute("title", "회원가입");
+		
 		return "shop/client/addClient";
 	}
 	
@@ -30,16 +32,26 @@ public class ShopMemberController {
 	@PostMapping("/addClient")
 	public String addClient(ShopMember shopMember) {
 		System.out.println("shopclientController에서 받은 값" + shopMember);
-		
 		//insert처리
 		String shopMemberId = shopMember.getShopMemberId();
 		if(shopMemberId != null && !"".equals(shopMemberId)) {
 			shopMember.setBusinessLevelCode("user");
+			shopMember.setShopMemberState("Y");
 			shopMemberService.addShopMember(shopMember);
 		}
 		return "redirect:/shop/index-shop";
 	}
 	
-
+	@PostMapping("/idCheck")
+	@ResponseBody
+	public boolean idCheck(@RequestParam(value = "shopMemberId", required = false)String shopMemberId) {
+		boolean idCheckResult = false;
+		int idCheck = shopMemberService.idCheck(shopMemberId);
+		if(idCheck > 0 ) {
+			idCheckResult = true;
+		}
+		return idCheckResult;
+	}
+	
 }
 

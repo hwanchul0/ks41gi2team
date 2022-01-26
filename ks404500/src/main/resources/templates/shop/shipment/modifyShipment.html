@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="@{layout/default-shop}">
+<th:block layout:fragment="javascriptFragment">
+</th:block>	  
+
+<th:block layout:fragment="customContents">
+	<!-- Content Wrapper. Contains page content -->
+	<div class="content-wrapper">
+		<!-- Content Header (Page header) -->
+		<div class="content-header">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div class="col-sm-6">
+						<h1 class="m-0">배송요청 등록</h1>
+					</div>
+					<!-- /.col -->
+					<div class="col-sm-6">
+						<ol class="breadcrumb float-sm-right">
+							<li class="breadcrumb-item"><a href="#">Home</a></li>
+							<li class="breadcrumb-item active">Starter Page</li>
+						</ol>
+					</div>
+					<!-- /.col -->
+				</div>
+				<!-- /.row -->
+			</div>
+			<!-- /.container-fluid -->
+		</div>
+		<!-- /.content-header -->
+
+		<!-- Main content -->
+		<div class="content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="card card-success">
+							<div class="card-header">
+								<h5 class="card-title"> 배송요청등록</h5>
+							</div>
+							
+							<!--  사업장 등록 폼바디 시작 -->
+							<form id="modifyRequestShipmentForm" th:action="@{/shop/shipment/modifyShipment}" method="post" class="form-horizontal"> 
+								<div class="card-body" >
+
+								<div class="form-group row">
+									<label class="col-sm-2 col-form-laebl text-right">주문코드</label>
+									<div class="col-sm-4">
+										<input th:value="${getShipmentCode.shopOrderCode}" type="text" class="form-control" id="shopOrderCode" name="shopOrderCode" readonly="readonly">
+									</div>	
+								</div>
+								
+								<div class="form-group row">
+									<label class="col-sm-2 col-form-laebl text-right">배송단계</label>
+									<div class="col-sm-2">
+										<select id="shopShipmentCode" class="form-control" name="shopShipmentCode">
+											<option value="">::배송단계선택::</option>
+											<option value="shipment01">배송준비중</option>
+											<option value="shipment02">배송시작</option>
+											<option value="shipment03">배송중</option>
+											<option value="shipment04">배송완료</option>
+											<option value="shipment05">구매확정</option>
+											<option value="shipment06">환불처리중 </option>
+										</select>
+									</div>
+								
+								</div>
+
+								<div class="form-group row">
+									<label class="col-sm-2 col-form-laebl text-right">주문자 아이디</label>
+									<div class="col-sm-4">
+										<input th:value="${getShipmentCode.shopConsumerId}" type="text" class="form-control" id="shopConsumerId" name="shopConsumerId" readonly="readonly">
+									</div>
+								</div>
+
+								<div class="form-group row">
+									<label class="col-sm-2 col-form-laebl text-right">주문일자</label>
+									<div class="col-sm-4">
+										<input th:value="${getShipmentCode.shopOrderRegDate}" type="text" class="form-control" id="shopOrderRegDate" name="shopOrderRegDate" readonly="readonly">
+									</div>
+								</div>
+
+								<div class="form-group row">
+									<label class="col-sm-2 col-form-laebl text-right">배송지</label>
+									<div class="col-sm-4">
+										<input th:value="${getShipmentCode.shopDeliveryLocation}" type="text" class="form-control" id="shopDeliveryLocation" name="shopDeliveryLocation" readonly="readonly">
+									</div>
+								</div>
+
+								<div class="form-group row">
+									<label class="col-sm-2 col-form-laebl text-right">물류센터 정보 </label>
+									<div class="col-sm-4">
+										<input th:value="${getShipmentCode.mainBusinessCode}" type="text" class="form-control" id="mainBusinessCode" name="mainBusinessCode" readonly="readonly">
+									</div>
+								</div>
+							<div>
+								
+								<div class="form-group row">
+									<label class="col-sm-2 col-form-laebl text-right">결제코드 </label>
+									<div class="col-sm-4">
+										<input th:value="${getShipmentCode.shopPaymentCheckCode}" type="text" class="form-control" id="shopPaymentCheckCode" name="shopPaymentCheckCode" readonly="readonly">
+									</div>
+								</div>
+							</div>	
+								<div class="form-group row">
+									<label class="col-sm-2 col-form-laebl text-right">배송시작일자</label>
+									<div class="col-sm-4">
+										<input type="date" class="form-control" id="releaseDate" placeholder="배송날짜를 입력하세요" name="releaseDate" >
+									</div>
+								</div>
+
+								<div class="form-group row">
+									<label class="col-sm-2 col-form-laebl text-right">담당자</label>
+									<div class="col-sm-4">
+										<input th:value="${getShipmentCode.shopMemberId}" type="text" class="form-control" id="shopMemberId" name="shopMemberId" readonly="readonly">
+									</div>
+								</div>
+
+								
+								<div class="card-footer">
+									<button type="submit" class="btn btn-success" id="modifyShipmentBtn"> 등록 </button>
+									<button type="button" class="btn btn-default float-right" id="cancleShipmentBtn"> 취소 </button>
+								</div>
+								</div>
+							</form> 
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /.row -->
+			</div>
+			<!-- /.container-fluid -->
+		</div>
+		<!-- /.content -->
+
+	
+</th:block>
+</html>

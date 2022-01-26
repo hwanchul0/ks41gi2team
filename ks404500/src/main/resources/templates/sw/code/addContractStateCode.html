@@ -2,6 +2,78 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="@{layout/default-sw}">
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+<th:block layout:fragment="customJs">
+	<script>
+	$(function(){
+	$('#contractStateCodeCheckBtn').click(function(){
+	
+		var contractStateCode = $('#contractStateCode').val();
+		//[환철]ajax통신 결제상태 코드 중복체크
+		var request = $.ajax({
+			  url: "/sw/code/contractCodeCheck",
+			  method: "POST",
+			  data: { contractStateCode : contractStateCode },
+			  dataType: "text"
+			});
+		request.done(function(data) {
+			if(contractStateCode != null && contractStateCode != ""){
+				// [환철] 결제상태 코드 - 영어 (소,대) 입력 가능
+					var eng = /^[a-zA-Z]*$/; 
+				if(data == "true"){
+					alert('중복되는 코드입니다.');
+					$('#addContractStateCodeForm input').not('#contractStateCode').prop('disabled', true);
+					$('#addContractStateCodeForm button').not('#contractStateCodeCheckBtn').prop('disabled', true);
+				}else if(!eng.test($('#contractStateCode').val())){
+					alert('영어만 입력 가능합니다');
+					$('#contractStateCode').val('');
+					$('#addContractStateCodeForm input').not('#contractStateCode').prop('disabled', true);
+					$('#addContractStateCodeForm button').not('#contractStateCodeCheckBtn').prop('disabled', true);
+				}else{
+					alert('사용할 수 있는 코드입니다.');
+					$('#addContractStateCodeForm input').not('#contractStateCode').prop('disabled', false);
+					$('#addContractStateCodeForm button').not('#contractStateCodeCheckBtn').prop('disabled', false);
+					$('#contractStateCode').attr('check','pass');
+				}
+			}else{
+				alert('코드를 입력해주세요');
+			}
+		});
+	});	
+	$('#addContractStateCode').click(function(){
+		// [환철] - 결제상태 / 한글만 입력가능
+		var regName = /^[가-힣\s]+$/;
+		var contractState = $('#contractState').val();
+		if(!regName.test(contractState)){
+			alert('결제 상태는 한글만 입력 가능합니다');
+			$('#contractState').val('');
+		}
+		//[환철]결제상태 코드 중복체크
+		var contractStateCode = $('#contractStateCode').attr('check');
+		if(contractStateCode != "pass"){
+			alert("코드 중복체크를 해주세요");
+			return false;
+		}
+		
+		//코드이름 공백체크
+		var contractState = $('#contractState').val();
+		if(contractState == null || contractState == ""){
+			alert("코드이름을 입력해주세요");
+			return false;
+		}
+		$(this).attr('type','submit');
+		$(this).submit();
+	});
+
+	// [환철]-  취소 버튼
+	$('#cancleBtn').click(function(){
+		var cancleBtn = confirm('결제상태코드 등록을 취소하시겠습니까?');
+		if(cancleBtn){
+			location.href = "/sw/code/selectContractRefundStateCode";
+			}
+		});
+});
+	</script>
+</th:block>
 <th:block layout:fragment="customContents">
 	<!-- 전체컨텐츠 -->
 	<div class="content-wrapper">
@@ -27,31 +99,30 @@
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-lg-12">
-						<div class="card">
+						<div class="card card-primary">
 							<div class="card-header">
-							<h1>계약상태 코드 등록</h1>
-								<h5 class="card-title" th:text="${title}"></h5>
+								<div class="card-title" th:text="${title}"></div>
 							</div>
-							<form id="addBusinessCodeForm" th:action="@{/sw/code/addBusinessCode}"class="form-horizontal" method="post">
+							<form id="addContractStateCodeForm" th:action="@{/sw/code/addContractStateCode}"class="form-horizontal" method="post">
 								<div class="card-body">
 									<div class="form-group row">
-										<label class="col-sm-2 col-form-label text-right">서비스 결제상태 코드 : </label>
+										<label class="col-sm-2 col-form-label text-right">서비스 계약상태 코드 : </label>
 										<div class="col-sm-8">
-											<input type="text" class="form-control" id="businessCode" placeholder="거래처 구분 코드를 입력하세요" name="businessCode">
+											<input type="text" class="form-control" id="contractStateCode" placeholder="계약 상태 코드를 입력하세요" name="contractStateCode">
 										</div>
 										<div>
-											<button type="button" id="businessCodeCheckBtn" class="btn btn-primary">중복확인</button>
+											<button type="button" id="contractStateCodeCheckBtn" class="btn btn-primary">중복확인</button>
 										</div>
 									</div>
 									<div class="form-group row">
-										<label class="col-sm-2 col-form-label text-right">서비스 결제상태  코드 이름 : </label>
+										<label class="col-sm-2 col-form-label text-right">서비스 계약 상태   : </label>
 										<div class="col-sm-8">
-											<input type="text" class="form-control" id="businessCodeName" placeholder="서비스 결제상태  코드 이름을 입력하세요" name="businessCodeName">
+											<input type="text" class="form-control" id="contractState" placeholder="서비스  계약상태를 입력하세요" name="contractState">
 										</div>
 									</div>
 									<div class="card-footer">
-										<button type="submit" name="addBusinessCodeBtn" class="btn btn-primary">등록</button>
-										<button type="button" name="cancleBtn" class="btn btn-default float-right">취소</button>
+										<button type="submit" id="addContractStateCode" name="addContractStateCode" class="btn btn-primary">등록</button>
+										<button type="button" id="cancleBtn" name="cancleBtn" class="btn btn-default float-right">취소</button>
 									</div>
 								</div>
 							</form>
@@ -61,38 +132,5 @@
 			</div>
 		</div>
 	</div>
-	<script type="text/javascript">
-		/* 
-		$('#businessCodeCheckBtn').click(function(){
-			var businessCode = $('#businessCode').val();
-			console.log('assss');
-			//[재천]ajax통신
-			var request = $.ajax({
-				  url: "/sw/code/businessCodeCheck",
-				  method: "POST",
-				  data: { businessCode : businessCode },
-				  dataType: "text"
-				});
-			
-			request.done(function(data) {
-				if(businessCode != null && businessCode != ""){
-					if(data == "true"){
-						alert('등록불가');
-						$('#addBusinessCodeForm input').not('#businessCode').prop('disabled', true);
-						$('#addBusinessCodeForm select').prop('disabled', true);
-						$('#addBusinessCodeForm button').not('#businessCodeCheckBtn').prop('disabled', true);
-					}else{
-						alert('등록 가능');
-						$('#addBusinessCodeForm input').not('#businessCode').prop('disabled', false);
-						$('#addBusinessCodeForm select').prop('disabled', false);
-						$('#addBusinessCodeForm button').not('#businessCodeCheckBtn').prop('disabled', false);
-					}
-				}else{
-					alert('공백에러!');
-				}
-			});
-		}); */
-		
-	</script>
 </th:block>
 </html>

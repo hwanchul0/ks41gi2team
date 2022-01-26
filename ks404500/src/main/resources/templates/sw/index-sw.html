@@ -1,7 +1,16 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="@{layout/default-sw}">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="@{layout/default-sw}">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<th:block layout:fragment="customJs">
+	<script>
+		
+	</script>
+</th:block>
+
+
 <th:block layout:fragment="customContents">
 	<!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper">
@@ -10,16 +19,13 @@
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-<!-- 						<h1 class="m-0" th:text="${title}"></h1> -->
+						<h1 class="m-0" th:text="${title}"></h1>
 					</div>
 					<!-- /.col -->
 					<div class="col-sm-6">
-<!-- 						<ol class="breadcrumb float-sm-right">
-							<li class="breadcrumb-item">
-								<a href="/">Home</a>
-							</li>
-							<li class="breadcrumb-item active">main</li>
-						</ol> -->
+						<ol class="breadcrumb float-sm-right">
+							<li class="breadcrumb-item"><a href="/sw/index-sw">Home</a></li>
+						</ol>
 					</div>
 					<!-- /.col -->
 				</div>
@@ -33,102 +39,113 @@
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-lg-12">
-						<!-- 프로젝트 설명 시작 -->
-						<div class="callout">
-			              <h5><i class="fas fa-info"></i><strong> SW 메인페이지</strong></h5>
-			              	<p><p>
-			              	<i class="fas fa-chart-line"></i> 프로젝트 개요 및 목적 : 이러쿵
-			              	<p>
-			              	<i class="fas fa-calendar-alt"></i> 개발기간 : 2021-00-00 ~ 2022-00-00
-			            </div>
-						<!-- 프로젝트 설명 끝 -->
-						<!-- <div class="card card-primary">
-							<div class="card-header">
-								<h5 class="card-title" th:text="${title}"></h5>
+						<!-- 박스 시작 -->
+						<!-- Small boxes (Stat box) -->
+						<div class="row">
+							<div class="col-lg-4 col-6">
+								<!-- small box -->
+								<div class="small-box bg-info">
+									<div class="inner">
+										<h3 th:text="${service.contractStateCode}"></h3>
+										<p>공급중인 사업장 수</p>
+									</div>
+									<div class="icon">
+										<i class="ion ion-stats-bars"></i>	
+									</div>
+									<a href="#" class="small-box-footer">바로가기 <i
+										class="fas fa-arrow-circle-right"></i></a>
+								</div>
 							</div>
-							<div class="card-body">
-									<p class="card-text">간단한 프로젝트 설명</p>
+							<!-- ./col -->
+							<div class="col-lg-4 col-6">
+								<!-- small box -->
+								<div class="small-box bg-success">
+									<div class="inner">
+										<h3 th:text="${wating.count}">
+											<sup style="font-size: 20px">%</sup>
+										</h3>
+										<p>서비스 결제대기</p>
+									</div>
+									<div class="icon">
+										<i class="ion ion-bag"></i>
+									</div>
+									<a href="/sw/service/servicePaymentSum" class="small-box-footer">바로가기 <i
+										class="fas fa-arrow-circle-right"></i></a>
+								</div>
 							</div>
-								<a href="#" class="card-link">Card link</a>
-								<a href="#"	class="card-link">Another link</a>
-							</div> 
-						</div>-->
-<!-- 						<div class="card card-primary card-outline">
-							<div class="card-body">
-								<h5 class="card-title">Card title</h5>
-								<p class="card-text">Some quick example text to build on the
-									card title and make up the bulk of the card's content.</p>
-								<a href="#" class="card-link">Card link</a> <a href="#"
-									class="card-link">Another link</a>
+							<!-- ./col -->
+							<div class="col-lg-4 col-6">
+								<!-- small box -->
+								<div class="small-box bg-warning">
+									<div class="inner">
+										<h3 th:text="${client.count}"></h3>
+										<p>회원</p>
+									</div>
+									<div class="icon">
+										<i class="fas fa-users"></i>
+									</div>
+									<a href="/sw/business/selectBusiness" class="small-box-footer">바로가기<i
+										class="fas fa-arrow-circle-right"></i></a>
+								</div>
 							</div>
-						</div> -->
-						<!-- /.card -->
-					</div>
-				</div>
-				<div class="row">
-					<!-- /.col-md-6 -->
-					<div class="col-lg-6">
-						<!-- 진유경 소개 시작 -->
-						<div class="card card-primary card-outline">
-							<div class="card-header">
-								<i class="far fa-user"></i><h6 class="col-md-3 text-muted text-center" style="display: inline">ks404500 팀원</h6>
-								<h2 class="col-md-3 lead text-center" style="display: inline;"><strong>진유경 Jin Yukyeong</strong></h2>
-							</div>
-							<div class="card-body box-profile">								
-								<strong><i class="far fa-file-alt mr-1"></i> Notes</strong>
-								<p class="text-muted">소개 /개발내용을 적자 </p>
-								<hr>
-								<strong><i class="fas fa-pencil-alt mr-1"></i> Skills</strong>
-				                <p class="text-muted">
-				                  <span class="tag tag-danger">Java 문맹</span>
-				                  <span class="tag tag-info">Javascript 못함</span>
-				                  <span class="tag tag-warning">MySql 별로</span>
-				                  <span class="tag tag-primary">jQuery 그닥</span>
-				                </p>
-								<a href="#" class="btn btn-primary float-right"> <i class="fas fa-user"></i> View Profile</a>
-							</div>
+							<!-- ./col -->
+
 						</div>
-						<!-- 진유경 소개 끝 -->
-						<div class="card">
-							<div class="card-header">
-								<h5 class="col-lg-6">ks404500팀원</h5>
-							</div>
-							<div class="card-body">
-								<h6 class="card-title">백재천</h6>
-								<p class="card-text">소개 & 개발내용</p>
-								<p class="card-text">소개 & 개발내용</p>
-								<p class="card-text">소개 & 개발내용</p>
-								<a href="#" class="btn btn-primary float-right">링크</a>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-6">
-						<div class="card">
-							<div class="card-header">
-								<h5 class="col-lg-3">ks404500팀원</h5>
-							</div>
-							<div class="card-body">
-								<h6 class="card-title">김유성</h6>
-								<p class="card-text">소개 & 개발내용</p>
-								<p class="card-text">소개 & 개발내용</p>
-								<p class="card-text">소개 & 개발내용</p>
-								<a href="#" class="btn btn-primary float-right">링크</a>
-							</div>
-						</div>
-						<div class="card">
-							<div class="card-header">
-								<h5 class="col-lg-6">ks404500팀원</h5>
-							</div>
-							<div class="card-body">
-								<h6 class="card-title">김환철</h6>
-								<p class="card-text">소개 & 개발내용</p>
-								<p class="card-text">소개 & 개발내용</p>
-								<p class="card-text">소개 & 개발내용</p>
-								<a href="#" class="btn btn-primary float-right">링크</a>
-							</div>
-						</div>
+						<!-- /.row -->
 					</div>
 					<!-- /.col-md-6 -->
+
+					<div class="col-lg-12">
+						<div class="card">
+							<div class="card-header">
+								<h5 class="m-0">서비스 판매현황</h5>
+							</div>
+							<div class="card-body">
+								<h6 class="card-title col-md-12"></h6>
+								<!-- 판매현황 테이블 시작 -->
+								<table class="table table-hover table-condensed"
+									style="font-size: 13px; text-align: center">
+									<thead>
+										<tr>
+											<th>순위</th>
+											<th>구분</th>
+											<th>서비스명</th>
+											<th>서비스가격</th>
+											<th>판매실적</th>
+											<th style="width : 10%">실적</th>
+										</tr>
+									</thead>
+									<tbody id="myTable">
+										<tr th:if="${not #lists.isEmpty(percent)}"
+											th:each="p, count: ${percent}">
+											<td th:text="${count.count}"></td>
+											<td th:text="${p.serviceCode}"></td>
+											<td th:text="${p.serviceName}"></td>
+											<td th:text="${#numbers.formatInteger(p.servicePrice, 0, 'COMMA')}"></td>
+											<td
+												th:text="${#numbers.formatInteger(p.serviceTotalPrice, 0, 'COMMA')}"></td>
+											<!-- 실적 퍼센트 -->
+											<td th:if="${p.percent} > '50'"><span
+												class="badge badge-danger float-right"
+												th:text="${p.percent}+'%'" style="display: center"></span></td>
+												
+											<td th:if="${p.percent} <= '50' and ${p.percent} >'20'">
+												<span class="badge badge-warning float-right"
+												th:text="${p.percent}+'%'" ></span>
+											</td>
+											
+											<td th:if="${p.percent} <= '20'"><span
+												class="badge badge-success float-right"
+												th:text="${p.percent}+'%'"></span></td>
+										<tr th:unless="${not #lists.isEmpty(percent)}">
+											<td>표시할 내용이 없습니다</td>
+										</tr>
+									</tbody>
+								</table>
+								<!-- 판매현황 테이블 끝  -->
+							</div>
+						</div>
+					</div>
 				</div>
 				<!-- /.row -->
 			</div>
@@ -137,5 +154,6 @@
 		<!-- /.content -->
 	</div>
 	<!-- /.content-wrapper -->
+
 </th:block>
 </html>

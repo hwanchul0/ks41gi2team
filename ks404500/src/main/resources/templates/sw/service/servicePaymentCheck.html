@@ -43,8 +43,12 @@
 										<form class="validation-form" th:action="@{/sw/service/modifyPaymentState}" method="POST" novalidate>
 											<div th:if="${not #lists.isEmpty(servicePaymentCheck)}" th:each="d : ${servicePaymentCheck}">
 												<div class="row">
-													<div class="col-md-6">
+													<div class="col-md-4">
 														<label for="clientId">구매자</label>
+														<input type="text" class="form-control" id="clientId" name="clientId" th:value="${d.clientId}" readonly>
+													</div>
+													<div class="col-md-4">
+														<label for="clientId"></label>
 														<input type="text" class="form-control" id="clientId" name="clientId" th:value="${d.clientId}" readonly>
 													</div>
 												</div>
@@ -88,7 +92,7 @@
 														<label for="serviceRequestStatus">서비스 승인상태 </label>
 														
 														
-														<select name="servicePaymentCheck" style="height: 38px; text-align:center; display: flex; width: 100%;">
+														<select id="servicePaymentCheck" name="servicePaymentCheck" style="height: 38px; text-align:center; display: flex; width: 100%;">
 															<th:block th:if="${not #lists.isEmpty(PaymentStateCode)}" th:each="s : ${PaymentStateCode}">
 																<option th:value="${s.paymentStateCode}" th:text="${s.paymentState}" th:selected="${servicePaymentCheck.paymentStateCode==#strings.toString(s.paymentStateCode)}">
 															[[${s.paymentState}]]</option>
@@ -97,8 +101,6 @@
 																<option>결제상태를 먼저 등록해주세요.</option>
 															</th:block>
 														</select>
-														
-														
 													</div>
 												</div>
 											</div>

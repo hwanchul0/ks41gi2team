@@ -20,9 +20,10 @@
 
 		//합계금액 계산하기
 		$(function() {
+
 			$('input.money1').on('keyup', function() {
 				var cnt = $(".exam input.num_sum").length;
-				console.log(cnt);
+				//console.log(cnt);
 
 				for (var i = 1; i < cnt; i++) {
 					var sum = parseInt($(this).val() || 0);
@@ -38,7 +39,8 @@
 				var sum = sum1 + sum2 + sum3 + sum4;
 				//console.log(sum);
 				$("#fn_total").val(sum);
-
+				
+				
 			});
 		});
 
@@ -109,9 +111,13 @@ $(document).ready(function() {
 					document.getElementById("invoiceDetail").value = invoiceDetail; //단가
 
 				});
+	
 });
-		
+
+
+
 $(document).ready(function(){
+
 	//탬 메뉴1번 첫번째로 보이기
 	$('a[href="#tabmenu_01"]').tab('show');
 	//유효성 검사
@@ -128,9 +134,9 @@ $(document).ready(function(){
 			alert('세부발행의 수량를 입력하세요');
 			return false;
 		}
+		
 	})
 })
-
 
 	</script>
 </th:block>
@@ -326,15 +332,15 @@ $(document).ready(function(){
 														style="font-size: 14px;">입력합계</label>
 													<div class="col-sm-2">
 														<input type="text" class="form-control num_sum"
-															placeholder="" id="fn_total" readonly="readonly"
-															style="height: 85%" min="0">
+															placeholder="" id="fn_total" name="fn_total"
+															style="height: 85%" min="0" readonly="readonly">
 													</div>
 												</div>
 												<div class="form-group row">
 													<label for="invoiceNote" class="col-sm-2 col-form-label"
 														style="font-size: 14px;">비고</label>
 													<div class="col-sm-2">
-														<input type="text" class="form-control num_sum"
+														<input type="text" class="form-control"
 															placeholder="" id="invoiceNote" name="invoiceNote"
 															style="height: 85%" maxlength="15">
 													</div>
@@ -519,7 +525,7 @@ $(document).ready(function(){
 										</div>
 										<!-- serviceTotalPrice -->
 										<div class="col-sm-2">
-											<input type="text" class="form-control num_sum"
+											<input type="number" class="form-control num_sum"
 												id="serviceTotalPrice" name="serviceTotalPrice"
 												style="height: 85%" min="0">
 										</div>

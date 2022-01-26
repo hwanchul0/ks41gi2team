@@ -26,6 +26,43 @@
       	 , releaseDate DESC
 	</select>
 	
+	<!--  유성  쇼핑몰 배송 요청 -->
+	<select id ="getShipmetRequest" resultType="ShipmentCode">
+	SELECT
+            o.shopOrderCode,
+            o.shopConsumerId,
+            o.shopMemberId,
+            o.shopDeliveryLocation,
+            o.shopOrderRegDate,
+            a.mainBusinessCode,
+            pc.shopPaymentCheckCode
+         FROM
+            k2_shop_order AS o
+         LEFT JOIN
+            k2_release AS r
+         ON
+            o.shopOrderCode = r.shopOrderCode
+         LEFT JOIN
+            k2_shop_shipment AS s
+         on
+            s.shopShipmentCode = r.shopShipmentCode
+         LEFT join
+            k2_assort_goods AS a 
+         ON 
+            o.assortCode = a.assortCode
+         LEFT join
+         k2_shop_paymentSum AS p
+         on
+         p.shopSlipNumber = o.shopSlipNumber
+         LEFT join
+         k2_shop_paymentCheck AS pc
+         on
+         pc.shopPaymentCode = p.shopPaymentCode
+where
+   o.shopOrderCode = #{shopOrderCode}
+   ORDER BY (releaseDate IS NOT NULL)
+               , releaseDate DESC
+	</select>	
 	<!-- 유경 - 쇼핑몰 주문내역 중 출고되지 않은 건수 조회 -->
 	<select id="getCountNoneRealese" resultType="int">
 		SELECT
@@ -43,4 +80,29 @@
 		WHERE 
 			releaseDate IS NULL;
 	</select>
+	
+	<!--  유성 쇼핑몰 배송등록 -->
+	<insert id="modifyShipment" parameterType="ShipmentCode">
+		INSERT INTO k2_release
+			(
+			releaseCode, 
+			mainBusinessCode, 
+			shopMemberId,
+	 		shopShipmentCode, 
+	 		shopOrderCode, 
+	 		shopPaymentCheckCode,
+	  		releaseDate)
+		VALUES (
+			(SELECT CONCAT('release',LPAD(max(SUBSTRING((releaseCode),8,2))+1,2,'0'))
+        	 from
+       		k2_release ALIAS_FOR_SUBQUERY),
+			#{mainBusinessCode}, 
+			#{shopMemberId}, 
+			#{shopShipmentCode}, 
+			#{shopOrderCode},
+			#{shopPaymentCheckCode}, 
+			#{releaseDate} 
+			);
+			
+	</insert>
 </mapper>

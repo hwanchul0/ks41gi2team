@@ -37,15 +37,25 @@ public class ShopLoginController {
 						HttpSession session) {
 		System.out.println(shopMemberId + " shopMemberId입력값");
 		System.out.println(shopMemberPw + " shopMemberPw입력값");
-		if(shopMemberId != null && !"".equals(shopMemberId) && shopMemberPw != null && !"".equals(shopMemberPw)){
-			ShopMember shopmember = shopMembeService.ShopMemberInfo(shopMemberId);
-			if(shopmember != null && shopmember.getShopMemberId() != null && shopMemberPw.equals(shopmember.getShopMemberPw())) {
-				//로그인 비밀번호 일치 시 세션을 정보에 담음
-				session.setAttribute("SHOPID", shopMemberId);
-				session.setAttribute("SHOPNAME", shopmember.getShopMemberName());
-				return "redirect:/shop/index-shop";
+		ShopMember state = shopMembeService.selectShopMemberState(shopMemberId);
+		String shopState = state.getShopMemberState();
+		String resultY = "Y";
+		if(shopState.equals(resultY)) {
+			if(shopMemberId != null && !"".equals(shopMemberId) && shopMemberPw != null && !"".equals(shopMemberPw)){
+				ShopMember shopmember = shopMembeService.ShopMemberInfo(shopMemberId);
+				if(shopmember != null && shopmember.getShopMemberId() != null && shopMemberPw.equals(shopmember.getShopMemberPw())) {
+					//로그인 비밀번호 일치 시 세션을 정보에 담음
+					session.setAttribute("SHOPID", shopMemberId);
+					session.setAttribute("SHOPNAME", shopmember.getShopMemberName());
+					session.setAttribute("SHOPEMAIL", shopmember.getShopMemberEmail());
+					session.setAttribute("SHOPADDR", shopmember.getShopMemberAddr());
+					session.setAttribute("SHOPDATE", shopmember.getShopMemberReg());
+					session.setAttribute("SHOPPHONE", shopmember.getShopMemberPhone());
+					session.setAttribute("SHOPLEVEL", shopmember.getBusinessLevelCode());
+					return "redirect:/shop/index-shop";
 				}
 			}
+		}
 		//로그인 불일치 시
 		return "redirect:/Swlogin";
 		}

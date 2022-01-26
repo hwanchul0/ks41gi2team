@@ -41,8 +41,15 @@ $(document).ready(function () {
     	        alert('등록대상을 선택해주세요');
     	        Category1.focus();
     	        event.preventDefault();
-    	   		}
-    	
+    	        //유효성 검사
+    	   		}else if($('#shopGroupSlip').val().length == 0){
+        			alert('통합그룹코드를 확인해주세요');
+        			return false;
+        		}
+    	   		}else if($('#shopTotalPrice').val().length == 0){
+        			alert('금액을 확인해주세요');
+        			return false;
+        		}
     });
    
   });

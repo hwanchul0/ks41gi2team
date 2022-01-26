@@ -2,7 +2,19 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
 	layout:decorate="@{layout/default-sw}">
-
+	<th:block layout:fragment="customJs">
+	<script>
+	$(document).ready(function(){
+		var invoicePrice = $('#invoicePrice').text();
+		var invoiceTax = $('#invoiceTax').text();
+		var total = Number(invoicePrice) + Number(invoiceTax);
+		console.log(total);
+		$('#total').text(total);
+	});
+	
+	
+	</script>
+	</th:block>
 <th:block layout:fragment="customContents">
 <!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper">
@@ -17,7 +29,7 @@
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
 							<li class="breadcrumb-item"><a href="/sw/index-sw">Home</a></li>
-							<li class="breadcrumb-item active">Starter Page</li>
+							<li class="breadcrumb-item active">재무관리</li>
 						</ol>
 					</div>
 					<!-- /.col -->
@@ -2065,9 +2077,9 @@ td {
 									<td colspan="3" class="x59"
 										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;"><p th:text="${#dates.format(invoiceView.invoiceRegDate, 'yyyy-MM-dd')}"></td>
 									<td colspan="3" class="x68"
-										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;"><p th:text="${#numbers.formatInteger(invoiceView.invoicePrice, 3, 'COMMA')}"></td>
+										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;"><p th:text="${invoiceView.invoicePrice}" id="invoicePrice"></td>
 									<td colspan="2" class="x49"
-										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;"><p th:text="${#numbers.formatInteger(invoiceView.invoiceTax, 3, 'COMMA')}"></td>
+										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;"><p th:text="${invoiceView.invoiceTax}" id="invoiceTax"></td>
 									<td colspan="2" class="x49"
 										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;"><p th:text="${invoiceView.amendedInvoiceReasonName}"></td>
 									<td colspan="3" class="x49"
@@ -2157,13 +2169,13 @@ td {
 									<td colspan="2" class="x55"
 										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;">외상미수금</td>
 									<td colspan="4" rowspan="2" height="62" class="x79"
-										style="border-right: 2px solid windowtext; border-bottom: 2px solid windowtext; height: 46.5pt;">위 금액을<p th:text="${invoiceView.confirm}"/>함</td>
+										style="border-right: 2px solid windowtext; border-bottom: 2px solid windowtext; height: 46.5pt;">위 금액을( <span th:text="${invoiceView.confirm}"></span> )함</td>
 								</tr>
 								<tr height="32" style="mso-height-source: userset; height: 24pt"
 									id="r15">
 									<td height="32" style="height: 24pt;"></td>
 									<td colspan="3" class="x53"
-										style="border-right: 1px solid windowtext; border-bottom: 2px solid windowtext;">합자리</td>
+										style="border-right: 1px solid windowtext; border-bottom: 2px solid windowtext;"><p id="total"></td>
 									<td class="x38"><p th:text="${invoiceView.cash}"></td>
 									<td colspan="2" class="x45"
 										style="border-right: 1px solid windowtext; border-bottom: 2px solid windowtext;"><p th:text="${invoiceView.invoiceCheck}"></td>

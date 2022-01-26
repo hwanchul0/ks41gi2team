@@ -82,4 +82,14 @@
 	k0_BusinessCode;
 	</select>
 	
+	<select id="codeCheck" resultType="int">
+	SELECT
+		COUNT(1)
+	FROM
+		k0_sw_mainBusinessCodeManagement
+	WHERE
+		mainBusinessCode = #{mainBusinessCode}
+	</select>
+	
+	
 </mapper>

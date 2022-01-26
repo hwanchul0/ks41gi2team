@@ -1,7 +1,6 @@
 package ksmart41_teamtest.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import ksmart41_teamtest.dto.ServiceRequest;
 import ksmart41_teamtest.service.ServiceRequestService;
@@ -31,25 +29,13 @@ public class SwRequestController {
 		this.serviceRequestService = serviceRequestService;
 	}
 
-	// 계약요청 수정 페이지
-	@GetMapping("/modifyServiceRequest")
-	public String modifyServiceRequest(Model model) {
-		
-		return "sw/service/serviceRequest/modifyServiceRequest";
-	}
-	// 계약요청 삭제 페이지
-	@GetMapping("/deleteServiceRequest")
-	public String deleteServiceRequest(Model model) {
-		
-		return "sw/service/serviceRequest/deleteServiceRequest";
-	}
 	
 	
 	// 계약요청 전체 조회 (sw개발사)
 	@GetMapping("/selectAllServiceRequest") 
 	public String getAllRequestList(Model model) { 
 	List<ServiceRequest> getAllRequestList = serviceRequestService.getAllRequestList();
-	model.addAttribute("title", "회원전체조회"); 
+	model.addAttribute("title", "계약요청 전체 조회"); 
 	model.addAttribute("getAllRequestList", getAllRequestList);
 
 	return "sw/service/serviceRequest/selectAllServiceRequest"; 
@@ -73,8 +59,30 @@ public class SwRequestController {
 		return "sw/service/serviceRequest/detailServiceRequest";
 	}
 	// 서비스 계약요청 상세페이지 끝 ======================================================
+
 	
-	
+	// 서비스 계약요청 확인 -> 승인 페이지
+	@PostMapping("/modifyRequestState")
+	public String serviceRequestState(@RequestParam(value="serviceRequestStatus", required=false)String serviceRequestStatus
+									 ,@RequestParam(value="contractManageCode", required = false) String contractManageCode
+									 ,ServiceRequest serviceRequest) {
+		log.info("serviceRequestState 계약 상태 === {}:",serviceRequestStatus);
+		log.info("serviceRequestState 계약 상태 코드  === {}:",contractManageCode);
+		serviceRequestService.modifyRequestState(serviceRequestStatus,contractManageCode);
+		
+		String RequestStatus = serviceRequest.getServiceRequestStatus();
+		String requsetAccept = "승인";
+		// selectAllServiceRequest 계약 상태가 '승인' 일 때  결제 예정 합계 테이블 insert 쿼리 실행
+		if(RequestStatus.equals(requsetAccept)) {
+			serviceRequestService.acceptRequest(contractManageCode);
+		// selectAllServiceRequest 계약상태가 '승인' 이 아닐 때 delete 쿼리 실행
+		}else {
+			serviceRequestService.deleteRequest(contractManageCode);
+		}
+			
+		
+		return "redirect:/sw/service/serviceRequest/selectAllServiceRequest";
+  }
 
 	
 

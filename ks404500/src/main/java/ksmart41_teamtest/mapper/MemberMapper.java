@@ -26,5 +26,8 @@ public interface MemberMapper {
 	
 	//[재천]중복 체크
 	public int idCheck(String memberId);
+	
+	//회원상태체크
+	public Member selectMemberStatus(String memberId);
 }
 

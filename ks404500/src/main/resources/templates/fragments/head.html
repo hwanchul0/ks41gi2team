@@ -1,12 +1,10 @@
 
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head th:fragment="headFragment">
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title th:text="${title}"></title>
   <script src="/js/jquery-3.6.0.min.js"></script>
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -30,15 +28,17 @@
   <link rel="stylesheet" href="/adminLTE/plugins/summernote/summernote-bs4.min.css">
   <!-- custom css -->
   <link rel="stylesheet" href="/customcss/css/size.css">
-
-      <!-- 푸테이블 -->
+  
+  <!-- 푸테이블 -->
   <link rel="stylesheet" href="/customcss/css/footable.bootstrap.min.css">
   <link rel="stylesheet" href="/customcss/css/footable.bootstrap.css">
+
   <!-- 사용자 정의 js -->
   <th:block layout:fragment="customJs">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
   </th:block>
+  
 </head>
 <body>
 

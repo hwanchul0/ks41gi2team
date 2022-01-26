@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ksmart41_teamtest.mapper.ShopAddAccountingMapper">
 
+
 <!-- 유경 - 쇼핑몰  매출 등록-->
 <select id="getAddIncome"  resultType="ShopAddAccounting">
 	SELECT
@@ -53,7 +54,7 @@
 	</select>
 	
 	<!-- 유경 - 쇼핑몰  매출등록 -->
-	<insert id="addIncome" parameterType="ShopAddAccounting">
+	<insert id="addIncome" parameterType="ShopAddAccounting" >
 	INSERT INTO k2_shop_income
 		(shopIncomeCode, 
 		shopIsCode, 
@@ -69,7 +70,7 @@
 		#{addIncomeCode}
 		,'40101'
 		,#{releaseCode}
-		,'shopid001'
+		,#{shopMemberId}
 		,#{groupslip}
 		,'1'
 		,#{renontax}
@@ -155,7 +156,8 @@
 		UPDATE k2_shop_income
 		SET
 			shopIncomeFinish=#{shopIncomeFinish},
-			shopIncomeFinishDate=CURDATE()
+			shopIncomeFinishDate=CURDATE(),
+			shopMemberIdFinish=#{shopMemberId}
 		WHERE shopIncomeCode=#{shopIncomeCode};
 	</update>
 	

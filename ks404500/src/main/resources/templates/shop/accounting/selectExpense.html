@@ -4,7 +4,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <th:block layout:fragment="customJs">
-
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" rel="stylesheet">
 <script type="text/javascript">
 //검색기능
 $(document).ready(function(){
@@ -15,6 +16,20 @@ $(document).ready(function(){
       });
     });
   });
+  
+//테이블 페이징
+$(function(){
+	$('.table').footable({
+		"paging": {
+			"enabled": true,
+		},
+		"sorting": {
+			"enabled": true
+		}
+
+	});
+});
+
 
 //마감내역 선택시 경고창
 $(function(){
@@ -75,8 +90,8 @@ function deleteBtn(shopExpenseCode) {
 					</div><!-- /.col -->
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
-							<li class="breadcrumb-item"><a href="#">Home</a></li>
-							<li class="breadcrumb-item active">Starter Page</li>
+							<li class="breadcrumb-item"><a href="/shop/index-shop">Home</a></li>
+							<li class="breadcrumb-item active">매출 관리</li>
 						</ol>
 					</div><!-- /.col -->
 				</div><!-- /.row -->
@@ -101,13 +116,13 @@ function deleteBtn(shopExpenseCode) {
 										<thead>
 											<tr>
 												<th>지출코드</th>
-												<th>계정과목명</th>
+												<th>계정과목코드</th>
 												<th>쇼핑몰 비용 적요</th>
 												<th>비용발생일</th>
 												<th>금액</th>
-												<th>마감</th>
+												<th>마감여부</th>
 												<th>마감날짜</th>
-												<th>수정</th>
+												<th>마감</th>
 												<th>삭제</th>
 
 
@@ -126,9 +141,7 @@ function deleteBtn(shopExpenseCode) {
 											
 											<td th:if="${es.shopExpenseFinish} == null">
 											<a th:href="@{/shop/accounting/modifyExpense(shopExpenseCode=${es.shopExpenseCode})}">
-									
 											<i class="fas fa-pencil-alt" style="color: #28a745"></i></a></td>
-											
 											<td th:if="${es.shopExpenseFinish} != null"><i class="fas fa-pencil-alt finish"></i></td>
 											<!-- 삭제 -->
 											<td th:if="${es.shopExpenseFinish} == null">

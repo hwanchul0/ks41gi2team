@@ -1,7 +1,6 @@
  package ksmart41_teamtest.controller;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import ksmart41_teamtest.dto.Member;
 import ksmart41_teamtest.dto.ShopMember;
 import ksmart41_teamtest.service.MemberService;
@@ -52,10 +50,11 @@ public class SwMemberController {
 		//insert처리
 		String memberId = member.getMemberId();
 		if(memberId != null && !"".equals(memberId)) {
+			member.setMemberStatus("Y");
 			member.setMemberLevelCode("SW2");
 			memberService.addMember(member);
 		}
-		return "redirect:/sw/member/selectMember";
+		return "redirect:/sw/index-sw";
 	}
 	
 	//[재천]멤버 삭제

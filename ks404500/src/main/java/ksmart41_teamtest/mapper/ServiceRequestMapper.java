@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+
 import ksmart41_teamtest.dto.ServiceRequest;
 
 @Mapper
@@ -27,6 +28,27 @@ public interface ServiceRequestMapper {
 	
 	// 계약요청 등록 
 	public int addServiceRequest(ServiceRequest serviceRequest);
-	
 
+	// 계약요청 수정
+	public int modifyServiceRequest(ServiceRequest serviceRequest);
+
+	// 계약요청 정보
+	public ServiceRequest getContractInfo(String contractManageCode);
+
+	// 계약요청 삭제
+	public int deleteServiceRequest(ServiceRequest serviceRequest);
+
+
+
+	// 서비스 계약요청 확인 -> 승인 페이지
+	public int modifyRequestState(String serviceRequestStatus, String contractManageCode);
+
+	// 서비스 계약요청 승인 -> 결제예정 테이블
+	public int acceptRequest(String contractManageCode);
+
+	// 서비스 계약요청 승인이 아닐 때 결제예정 테이블 삭제
+	public int deleteRequest(String contractManageCode);
+
+
+	
 }

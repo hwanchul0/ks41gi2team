@@ -7,7 +7,10 @@ layout:decorate="@{layout/default-shop}">
 <th:block layout:fragment="customJs">
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" rel="stylesheet">
+
 <script type="text/javascript">
+
+
 //검색창
 $(document).ready(function(){
 	  $("#myInput").on("keyup", function() {
@@ -95,7 +98,7 @@ $(function(){
 													<a th:href="@{/shop/code/modifyIsListCode(shopIsCode=${sl.shopIsCode})}" class="amend"><i class="fas fa-pencil-alt"></i></a>
 												</td>
 												<td th:unless="${sl.shopIsAmend} == 'Y'">
-													<i class="fas fa-pencil-alt" onclick="alert('수정할 수 없는 계정과목입니다.');" id="notAmend"></i>
+													<i class="fas fa-pencil-alt" id="notAmend"></i>
 												</td>
 											<tr th:unless="${not #lists.isEmpty(shopIsListCode)}">
 												<td>내용이 없습니다.</td>

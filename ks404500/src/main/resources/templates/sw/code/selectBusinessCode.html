@@ -15,8 +15,8 @@
 						</div>
 						<div class="col-sm-6">
 							<ol class="breadcrumb float-sm-right">
-								<li class="breadcrumb-item"><a href="#">Home</a></li>
-								<li class="breadcrumb-item active">Starter Page</li>
+								<li class="breadcrumb-item"><a th:href="@{/sw/index-sw}">Home</a></li>
+								<li class="breadcrumb-item active">코드관리</li>
 							</ol>
 						</div>
 					</div>
@@ -33,7 +33,7 @@
 								<h5 class="card-title" th:text="${title}"></h5>
 							</div>
 							<div class="card-body">
-								<table class="table table-hover table-coondensed" style="text-align: center;">
+								<table class="table table-hover table-coondensed" style="text-align: center; font-size: 13px;">
 									<thead>
 										<tr>
 											<td>거래처 구분 코드</td>
@@ -47,7 +47,7 @@
 											<td th:text="${bl.businessCode}"></td>
 											<td th:text="${bl.businessCodeName}"></td>
 											<td><a th:href="@{/sw/code/modifyBusinessCode(businessCode=${bl.businessCode})}">수정</a></td>
-											<td><button type="button" class="btn btn-primary deleteBtn" th:onclick="deleteBtn([[${bl.businessCode}]]);">삭제</button></td>
+											<td><button type="button" class="btn btn-primary deleteBtn btn-xs" th:onclick="deleteBtn([[${bl.businessCode}]]);">삭제</button></td>
 										</tr>
 										<tr th:unless="${not #lists.isEmpty(businessCodeList)}">
 											<td>
@@ -64,24 +64,27 @@
 	</div>
 	<script>
 	function deleteBtn(businessCode) {
-		if(businessCode != null && businessCode != ""){
-			var request = $.ajax({
-				  url: "/sw/code/deleteBusinessCode",
-				  method: "POST",
-				  data: { businessCode : businessCode },
-				  dataType: "text"
+		var confirmBtn = confirm('정말 삭제하시겠습니까?');
+		if(confirmBtn) {
+			if(businessCode != null && businessCode != ""){
+				var request = $.ajax({
+					  url: "/sw/code/deleteBusinessCode",
+					  method: "POST",
+					  data: { businessCode : businessCode },
+					  dataType: "text"
+					});
+				
+				request.done(function(data) {
+					if(data > 0) {
+						alert("삭제 되었습니다.");
+					}else {
+						alert("실패했습니다.");
+					}
+					location.reload();
 				});
-			
-			request.done(function(data) {
-				if(data > 0) {
-					alert("삭제 되었습니다.");
-				}else {
-					alert("실패했습니다.");
-				}
-				location.reload();
-			});
-		} else {
-			alert("삭제 실패 ");
+			} else {
+				alert("삭제 실패 ");
+			}
 		}
 	}
 	
