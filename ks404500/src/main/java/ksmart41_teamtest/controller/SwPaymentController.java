@@ -87,6 +87,7 @@ public class SwPaymentController {
 		servicePayment.setMemberId(memberId);
 		servicePayment.setMemberIdFinish(memberId);
 		if(Check1.equals(complete)) {
+			servicePaymentService.addContractState(servicePayment);
 			swIncomeService.addSwIncome(servicePayment);
 		}
 		return "redirect:/sw/service/servicePaymentSum";

@@ -5,6 +5,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <head th:replace="fragments/head :: headFragment"></head>
+<th:block layout:fragment="customJs">
+	<script>
+		$(function(){
+			$('#paymentCharge').on('change', function(){
+				var paymentEstimate = Number($('#paymentEstimate').val())
+				var paymentCharge = Number($('#paymentCharge').val())
+				if(paymentEstimate < paymentCharge){
+					alert("결제 금액은 총 결제금액 보다 적어야 됩니다.")
+					$('#paymentCharge').val('')
+					$('#paymentCharge').focus()
+				}else{
+				$('#paymentBalance').val(paymentEstimate - paymentCharge);
+				}
+		});
+	});
+	</script>
+</th:block>
 <th:block layout:fragment="customContents">
 	<!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper">
@@ -18,10 +35,8 @@
 					<!-- /.col -->
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
-							<li class="breadcrumb-item">
-								<a href="#">Home</a>
-							</li>
-							<li class="breadcrumb-item active">Starter Page</li>
+							<li class="breadcrumb-item"><a th:href="@{/shop/index-shop}">Home</a></li>
+							<li class="breadcrumb-item active">결제</li>
 						</ol>
 					</div>
 					<!-- /.col -->
@@ -64,7 +79,7 @@
 						<div class="form-group row">
 							<label for="paymentCharge" class="col-sm-2 col-form-label">결제 금액</label>
 							<div class="col-sm-4">
-								<input type="text" class="form-control" id="paymentCharge" name="paymentCharge">
+								<input type="number" class="form-control" id="paymentCharge" name="paymentCharge">
 							</div>
 						</div>
 						<div class="form-group row">
@@ -73,7 +88,6 @@
 									<option>현금</option>
 									<option>카드</option>
 								</select>
-							</div>
 						</div>
 						<div class="form-group row">
 							<label for="servicePeriod" class="col-sm-2 col-form-label">잔금</label>
@@ -81,6 +95,7 @@
 								<input type="number" class="form-control" id="paymentBalance" name="paymentBalance">
 							</div>
 						</div>
+					</div>
 					<!-- /card-body -->
 					<!-- card-footer -->
 					<div class="card-footer">

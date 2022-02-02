@@ -56,7 +56,7 @@ public class CodeService {
 	// 결제상태 코드 조회
 	public List<Code> selectPaymentStateCode(){
 		List<Code> selectPaymentStateCode = codeMapper.selectPaymentStateCode();
-		System.out.println("CodeService.java 조회된 환불상태 코드 ======= :" + selectPaymentStateCode);
+		System.out.println("CodeService.java 조회된 결제 코드 ======= :" + selectPaymentStateCode);
 		return selectPaymentStateCode;
 	}
 	//[환철]결제상태 코드 등록 

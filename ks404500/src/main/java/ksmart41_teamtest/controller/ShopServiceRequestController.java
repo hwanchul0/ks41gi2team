@@ -74,11 +74,11 @@ public class ShopServiceRequestController {
    @PostMapping("/addPayment")
    public String addPayment(ServicePayment servicePayment) {
 	   log.info("서비스 결제 ==========={}:" , servicePayment);
-	   servicePaymentService.addPayment(servicePayment);
-	   
+			   servicePaymentService.addPayment(servicePayment);
 	   return "redirect:/shop/service/serviceRequest/selectServiceRequest";
    }
-   // client 본인 계약요청 조회
+
+// client 본인 계약요청 조회
    @GetMapping("/selectServiceRequest") 
      public String getRequestList(Model model, HttpSession session) { 
       String SHOPID = (String) session.getAttribute("SHOPID");
