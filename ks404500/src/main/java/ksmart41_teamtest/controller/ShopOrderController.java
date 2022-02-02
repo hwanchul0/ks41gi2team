@@ -2,6 +2,7 @@ package ksmart41_teamtest.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,10 +20,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import ksmart41_teamtest.dto.Business;
 import ksmart41_teamtest.dto.Order;
 import ksmart41_teamtest.dto.ShopAddPaymentCheck;
+import ksmart41_teamtest.dto.ShopCategoryOrder;
 import ksmart41_teamtest.dto.ShopPaymentCheck;
+import ksmart41_teamtest.mapper.OrderMapper;
 import ksmart41_teamtest.service.OrderService;
 import ksmart41_teamtest.service.ShopPaymentCheckService;
 
@@ -35,6 +37,41 @@ public class ShopOrderController {
 	private OrderService orderService;
 	@Autowired
 	private ShopPaymentCheckService	shopPaymentCheckService;
+	@Autowired
+	private OrderMapper orderMapper;
+	
+	
+	//유경 - 상품코드 카테고리 등록
+	@PostMapping("/addGoods")
+	public String addShopGoods(ShopCategoryOrder shopCategoryOrder,HttpSession session) {
+
+		//세션 아이디 가져오기
+		String memberId = (String) session.getAttribute("SHOPID");
+		session.setAttribute("shopMemberId", memberId);
+		shopCategoryOrder.setMemberId(memberId);
+		System.out.println("shopMemberId==============="+memberId );
+		//카테 등록
+		orderMapper.addShopGoods(shopCategoryOrder);
+		return "redirect:/shop/order/addGoods";
+		}
+
+
+	//유경 - 상품코드 카테고리 등록
+	@GetMapping("/addGoods")
+	public String shopGoods(Model model) {
+		//List<HashMap<String, Object>> shopBizInfo = orderMapper.getShopBizInfo();
+		//model.addAttribute("shopBizInfo", shopBizInfo);
+		return "shop/order/addGoods";
+	}
+	
+	
+	@PostMapping("/getBiz")
+	public String addShopgetbIZ(Model model) {
+		List<HashMap<String, Object>> shopBizInfo = orderMapper.getShopBizInfo();
+		model.addAttribute("shopBizInfo", shopBizInfo);
+		return "shop/order/getBiz";
+	}
+	
 	
 	  //유성 쇼핑몰 결제 등록 화면에서 결제 내역 조회
 	

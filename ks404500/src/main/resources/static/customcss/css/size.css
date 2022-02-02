@@ -28,10 +28,14 @@
 
 /* 하위메뉴 폰트 사이즈 변경 */
 .nav-treeview p{
-   font-size : 13px;
+   font-size : 12px;
 }
 /*하위메뉴 아이콘 사이즈 변경*/
 .nav-treeview .fa-circle:before{
+   font-size : 13px;
+}
+/*상위메뉴 아이콘 사이즈 변경*/
+.nav-item .fa-circle:before{
    font-size : 13px;
 }
 /*쇼핑몰 사이드바 색 변경*/

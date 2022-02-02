@@ -41,7 +41,7 @@
 		on
 		i.releaseCode = r.releaseCode
 	ORDER BY (i.shopIncomeCode IS NOT NULL)
-	, i.shopIncomeCode DESC
+	, i.shopIncomeCode DESC;
 
 </select>
 
@@ -122,7 +122,7 @@
 		i.releaseCode = r.releaseCode
 		WHERE i.shopIncomeCode IS NOT null
 	ORDER BY (i.shopIncomeCode IS NOT NULL)
-	, i.shopIncomeCode DESC
+	, i.shopIncomeCode DESC;
 	</select>
 	
 	<!-- 유경 - 쇼핑몰  매출 조회 차트- 지웠나?? -->
@@ -138,7 +138,7 @@
 			sum(i.finalIncomeVatImply)AS chartPrice
 			FROM
 			k2_shop_income AS i
-			WHERE YEAR(i.shopIncomeDate) = 2021
+			WHERE YEAR(i.shopIncomeDate) = 2021;
 	</select>
 	
 	<!-- 유경 - 쇼핑몰 매출 마감  코드 확인 -->
@@ -169,7 +169,7 @@
 			k2_shop_totalAccounting AS t
 		WHERE t.shopSalesSection = '비용'
 		AND
-			substring(t.shopGroupSlip,8,2) = '21'
+			substring(t.shopGroupSlip,8,2) = '21';
 	</select>
 	
 	<!-- 유경 - 쇼핑몰 2021 매출 차트 조회 -->
@@ -250,7 +250,7 @@
 		#{shopGroupSlip}, 
 		#{shopSalesSection}, 
 		#{shopTotalTable}, 
-		#{shopTotalPrice})
+		#{shopTotalPrice});
 	
 	</insert>
 	
@@ -292,7 +292,7 @@
 			#{shopGroupSlip}, 
 			#{shopSalesSection}, 
 			#{shopTotalTable}, 
-			#{shopTotalPrice})
+			#{shopTotalPrice});
 	</insert>
 	
 	<!--  유경 - 쇼핑몰 통합회계조회 -->
@@ -315,7 +315,7 @@
 		AND
 			t.shopSalesSection = '비용') AS expense2021
 		FROM
-			k2_shop_totalAccounting
+			k2_shop_totalAccounting;
 	</select>
 	
 	<!-- 유경 쇼핑몰 분기별 비용 조회 -->
@@ -362,7 +362,7 @@
 			AND
 				t.shopSalesSection = '비용') AS 'expense4Q'		
 		FROM
-			k2_shop_totalAccounting
+			k2_shop_totalAccounting;
 	</select>
 	
 	<!-- 유경 쇼핑몰 분기별 매출 조회 -->
