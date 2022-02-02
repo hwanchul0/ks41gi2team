@@ -54,9 +54,9 @@
 				#{invoiceCode},
 				#{memberId},
 				CONCAT('개발사','_','서비스','_','매출', '_', DATE_FORMAT(NOW(),'%y%m%d')),
-				#{swSlipNumber},
+				#{slipNumber},
 				'상품매출',
-				#{swIncomeInfo},
+				'서비스대금',
 				NOW(),
 				#{swIncomeFinish},
 				NOW()

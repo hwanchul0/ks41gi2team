@@ -38,6 +38,7 @@
             ,r.serviceEndDate
             ,r.serviceRequestStatus
             ,r.serviceApprovalDate
+            ,r.slipNumber
          FROM
             k2_sw_contractRequest AS r
             INNER JOIN 
@@ -99,6 +100,7 @@
             ,r.serviceEndDate
             ,r.serviceRequestStatus
             ,r.serviceApprovalDate
+            ,r.slipNumber
          FROM
             k2_sw_contractRequest AS r
             INNER JOIN 
@@ -153,7 +155,7 @@
 		,serviceApprovalDate)
 	VALUES( 
 	(SELECT 
-		CONCAT('estimate',(Max(SUBSTRING_INDEX(ALIAS_FOR_SUBQUERY.contractManageCode,'estimate',-1))+1))
+		CONCAT('estimate0',(Max(SUBSTRING_INDEX(ALIAS_FOR_SUBQUERY.contractManageCode,'estimate',-1))+1))
 	FROM
 	  	 k2_sw_contractRequest ALIAS_FOR_SUBQUERY )
 			 ,#{mainBusinessCode}
@@ -208,7 +210,6 @@
 		 c.contractManageCode
 		,c.mainBusinessCode
 		,s.serviceName
-		,c.memberId
 		,c.serviceCode
 		,c.serviceAmount
 		,c.servicePeriod
@@ -251,7 +252,7 @@
 	<insert id="acceptRequest" parameterType="ServiceRequest">
 	INSERT INTO k2_sw_paymentSum
 	(
-	paymentCode
+	 paymentCode
 	,contractManageCode
 	,slipNumber
 	,servicePaymentDueDate
@@ -263,8 +264,8 @@
 	FROM 
 		k2_sw_paymentSum AS l)
 		,#{contractManageCode}
-		,''
-		,DATE_ADD(NOW(), INTERVAL 7 DAY)
+		,#{slipNumber}
+		,DATE_ADD(NOW(), INTERVAL 1 DAY)
 		,NOW()
 	WHERE NOT EXISTS (
 	SELECT contractManageCode 
@@ -281,6 +282,14 @@
 		contractManageCode=#{contractManageCode};
 	</delete>
 	
-
+	<!-- 서비스 계약요청 승인 / 승인 날짜 업데이트 -->
+	<update id="nowApprovalDate" parameterType="String">
+	UPDATE 
+		k2_sw_contractRequest
+	SET
+		serviceApprovalDate= NOW()
+	WHERE 
+		contractManageCode=#{contractManageCode};
+	</update>
 
 </mapper>

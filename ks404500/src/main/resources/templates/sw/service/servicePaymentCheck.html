@@ -43,6 +43,9 @@
 										<form class="validation-form" th:action="@{/sw/service/modifyPaymentState}" method="POST" novalidate>
 											<div th:if="${not #lists.isEmpty(servicePaymentCheck)}" th:each="d : ${servicePaymentCheck}">
 												<div class="row">
+												<input type="hidden" id="serviceRegistrationDate" name="serviceRegistrationDate" th:value="${d.serviceRegistrationDate}">
+												<input type="hidden" id="serviceEndDate" name="serviceEndDate" th:value="${d.serviceEndDate}">
+												<input type="hidden" id="paymentCheckCode" name="paymentCheckCode" th:value="${d.paymentCheckCode}">
 													<div class="col-md-4">
 														<label for="clientId">구매자</label>
 														<input type="text" class="form-control" id="clientId" name="clientId" th:value="${d.clientId}" readonly>

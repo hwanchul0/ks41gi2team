@@ -43,40 +43,41 @@
 		});
 	});	
 	$('#addPaymentCodeBtn').click(function(){
-		// [환철] - 결제상태 - 정규식 (한글)
+		var eng = /^[a-zA-Z]*$/; 
+		var kor = /^[가-힣\s]+$/
 		
-		var paymentStateCode = $('#paymentStateCode').val()
-		console.log(paymentStateCode)
-		// 결제 상태 코드 공백체크
-		if(paymentStateCode == null || paymentStateCode == ''){
-			alert("코드를 입력해주세요")
+		if($('#paymentStateCode').val() == ''){
+			alert('코드명을 입력해주세요')
+			return false;
 		}
-		
-		var regName = /^[가-힣\s]+$/;
-		var paymentState = $('#paymentState').val();
-		if(!regName.test(paymentState)){
+		if(!eng.test($('paymentStateCode').val())){
+			alert('코드명은 영어만 입력 가능합니다.')
+			$('paymentStateCode').val('');
+			$('paymentStateCode').focus();
+			return false;
+		}
+		if($('#paymentState').val() == ''){
+			alert('서비스 결제 상태를 입력해주세요');
+			return false;
+		}
+		if(!kor.test($('#paymentState').val())){
 			alert('결제 상태는 한글만 입력 가능합니다');
 			$('#paymentState').val('');
+			$('#paymentState').focus();
 		}
-		//[환철]결제상태 코드 중복체크
 		var paymentStateCode = $('#paymentStateCode').attr('check');
 		if(paymentStateCode != "pass"){
 			alert("코드 중복체크를 해주세요");
 			return false;
 		}
-		
-		//코드이름 공백체크
-		if(paymentState == null || paymentState == ""){
-			alert("코드명을 입력해주세요");
-			return false;
-		}
+
 		$(this).attr('type','submit');
 		$(this).submit();
 	});
 
 	// [환철]-  취소 버튼
 	$('#cancleBtn').click(function(){
-		var cancleBtn = confirm('결제상태코드 등록을 취소하시겠습니까?');
+		var cancleBtn = confirm('결제상태 코드 등록을 취소하시겠습니까?');
 		if(cancleBtn){
 			location.href = "/sw/code/selectPaymentStateCode";
 			}
@@ -96,8 +97,8 @@
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
-							<li class="breadcrumb-item"><a href="#">Home</a></li>
-							<li class="breadcrumb-item active">Starter Page</li>
+							<li class="breadcrumb-item"><a th:href="@{/sw/index-sw}">Home</a></li>
+							<li class="breadcrumb-item active">결제상태 등록 </li>
 						</ol>
 					</div>
 				</div>
