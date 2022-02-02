@@ -1998,11 +1998,11 @@ td {
 										style="border-right: 1px solid windowtext; border-bottom: 2px solid windowtext; height: 124.55pt; overflow: hidden;">공급<br>받는자
 									</td>
 									<td class="x25">등록번호</td>
-									<td class="x23"><p th:text="${invoiceView.invoiceDemandBizNumber}"></td>
+									<td class="x23"><span th:text="${invoiceView.invoiceDemandBizNumber}"></span></td>
 									<td colspan="2" class="x57"
 										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;">종사업장<br>번호
 									</td>
-									<td class="x26"><p th:text="${invoiceView.invoiceDemandNumber}"></td>
+									<td class="x26"><span th:text="${invoiceView.invoiceDemandNumber}"></span></td>
 								</tr>
 								<tr height="29"
 									style="mso-height-source: userset; height: 22.4pt" id="r3">
@@ -2014,10 +2014,10 @@ td {
 										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;">성명</td>
 									<td class="x28">이팀</td>
 									<td class="x29">상호</td>
-									<td class="x27"><p th:text="${invoiceView.invoiceDemand}"></td>
+									<td class="x27"><span th:text="${invoiceView.invoiceDemand}"></span></td>
 									<td colspan="2" class="x56"
 										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;">성명</td>
-									<td class="x30"><p th:text="${invoiceView.invoiceDemandName}"></td>
+									<td class="x30"><span th:text="${invoiceView.invoiceDemandName}"></span></td>
 								</tr>
 								<tr height="29"
 									style="mso-height-source: userset; height: 22.4pt" id="r4">
@@ -2029,7 +2029,7 @@ td {
 										전주시 덕진구</td>
 									<td class="x29">사업장주소</td>
 									<td colspan="4" class="x49"
-										style="border-right: 2px solid windowtext; border-bottom: 1px solid windowtext;">주소자리</td>
+										style="border-right: 2px solid windowtext; border-bottom: 1px solid windowtext;"><span th:text="${invoiceView.invoiceDemandAddr}"></span></td>
 								</tr>
 								<tr height="29"
 									style="mso-height-source: userset; height: 22.4pt" id="r5">
@@ -2041,10 +2041,10 @@ td {
 										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;">종목</td>
 									<td class="x28">전자상거래</td>
 									<td class="x29">업태</td>
-									<td class="x27"><p th:text="${invoiceView.invoiceDemandType1}"></td>
+									<td class="x27"><span th:text="${invoiceView.invoiceDemandType1}"></span></td>
 									<td colspan="2" class="x56"
 										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;">종목</td>
-									<td class="x30"><p th:text="${invoiceView.invoiceDemandType2}"></td>
+									<td class="x30"><span th:text="${invoiceView.invoiceDemandType2}"></span></td>
 								</tr>
 								<tr height="29"
 									style="mso-height-source: userset; height: 22.4pt" id="r6">
@@ -2055,7 +2055,7 @@ td {
 										style="border-right: 2px solid windowtext; border-bottom: 2px solid windowtext;">404500@naver.com</td>
 									<td class="x31">이메일</td>
 									<td colspan="4" class="x45"
-										style="border-right: 2px solid windowtext; border-bottom: 2px solid windowtext;"><p th:text="${invoiceView.invoiceDemandEmail1}"></td>
+										style="border-right: 2px solid windowtext; border-bottom: 2px solid windowtext;"><span th:text="${invoiceView.invoiceDemandEmail1}"></span></td>
 								</tr>
 								<tr height="29"
 									style="mso-height-source: userset; height: 22.4pt" id="r7">
@@ -2075,15 +2075,15 @@ td {
 									style="mso-height-source: userset; height: 22.4pt" id="r8">
 									<td height="29" style="height: 22.4pt;"></td>
 									<td colspan="3" class="x59"
-										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;"><p th:text="${#dates.format(invoiceView.invoiceRegDate, 'yyyy-MM-dd')}"></td>
+										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;"><span th:text="${#dates.format(invoiceView.invoiceRegDate, 'yyyy-MM-dd')}"></span></td>
 									<td colspan="3" class="x68"
-										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;"><p th:text="${invoiceView.invoicePrice}" id="invoicePrice"></td>
+										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;"><span th:text="${invoiceView.invoicePrice}" id="invoicePrice"></span></td>
 									<td colspan="2" class="x49"
-										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;"><p th:text="${invoiceView.invoiceTax}" id="invoiceTax"></td>
+										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;"><span th:text="${invoiceView.invoiceTax}" id="invoiceTax"></span></td>
 									<td colspan="2" class="x49"
-										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;"><p th:text="${invoiceView.amendedInvoiceReasonName}"></td>
+										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;"><span th:text="${invoiceView.amendedInvoiceReasonName}"></span></td>
 									<td colspan="3" class="x49"
-										style="border-right: 2px solid windowtext; border-bottom: 1px solid windowtext;"><p th:text="${invoiceView.invoiceNote}"></td>
+										style="border-right: 2px solid windowtext; border-bottom: 1px solid windowtext;"><span th:text="${invoiceView.invoiceNote}"></span></td>
 								</tr>
 								<tr height="29"
 									style="mso-height-source: userset; height: 22.4pt" id="r9">
@@ -2112,18 +2112,18 @@ td {
 								<tr height="29"
 									style="mso-height-source: userset; height: 22.4pt" id="r11">
 									<td height="29" style="height: 22.4pt;"></td>
-									<td class="x34"><p th:text="${#dates.format(invoiceView.invoiceDetailDate, 'MM')}"></td>
-									<td class="x27"><p th:text="${#dates.format(invoiceView.invoiceDetailDate, 'dd')}"></td>
+									<td class="x34"><span th:text="${#dates.format(invoiceView.invoiceDetailDate, 'MM')}"></span></td>
+									<td class="x27"><span th:text="${#dates.format(invoiceView.invoiceDetailDate, 'dd')}"></span></td>
 									<td colspan="2" class="x68"
-										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;"><p th:text="${invoiceView.invoiceDetailProduct}"></td>
-									<td class="x27"><p th:text="${invoiceView.invoiceDetailStandard}"></td>
-									<td class="x27"><p th:text="${invoiceView.invoiceDetailQty}"></td>
-									<td class="x27"><p th:text="${#numbers.formatInteger(invoiceView.invoiceDetail, 3, 'COMMA')}"></td>
+										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;"><span th:text="${invoiceView.invoiceDetailProduct}"></span></td>
+									<td class="x27"><span th:text="${invoiceView.invoiceDetailStandard}"></span></td>
+									<td class="x27"><span th:text="${invoiceView.invoiceDetailQty}"></span></td>
+									<td class="x27"><span th:text="${#numbers.formatInteger(invoiceView.invoiceDetail, 3, 'COMMA')}"></span></td>
 									<td colspan="2" class="x49"
-										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;"><p th:text="${#numbers.formatInteger(invoiceView.invoiceDetailUnitPrice, 3, 'COMMA')}"></td>
-									<td class="x27"><p th:text="${#numbers.formatInteger(invoiceView.invoiceDetailTax, 3, 'COMMA')}"></td>
+										style="border-right: 1px solid windowtext; border-bottom: 1px solid windowtext;"><span th:text="${#numbers.formatInteger(invoiceView.invoiceDetailUnitPrice, 3, 'COMMA')}"></span></td>
+									<td class="x27"><span th:text="${#numbers.formatInteger(invoiceView.invoiceDetailTax, 3, 'COMMA')}"></span></td>
 									<td colspan="3" class="x49"
-										style="border-right: 2px solid windowtext; border-bottom: 1px solid windowtext;"><p th:text="${invoiceView.invoiceDetailNote}"></td>
+										style="border-right: 2px solid windowtext; border-bottom: 1px solid windowtext;"><span th:text="${invoiceView.invoiceDetailNote}"></span></td>
 								</tr>
 								<tr height="29"
 									style="mso-height-source: userset; height: 22.4pt" id="r12">

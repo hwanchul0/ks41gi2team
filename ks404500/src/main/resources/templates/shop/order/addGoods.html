@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="@{layout/default-shop}">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<th:block layout:fragment="customJs">
+	<script type="text/javascript">
+	 
+	$('document').ready(function() {
+		 var area0 = ["대분류","패션의류","식품"];
+		 var area1 = ["여성의류","남성의류","여성언더웨어/잠옷","남성언더웨어/잠옷","잡화"];
+		 var area2 = ["농산물","과자","음료"];
+
+		   
+		   $("select[name^=largeCategory]").each(function() {
+			   $large = $(this);
+			   $.each(eval(area0), function() {
+			    $large.append("<option value='"+this+"'>"+this+"</option>");
+			   });
+			   $large.next().append("<option value=''>중분류</option>");
+			  });
+
+			  $("select[name^=largeCategory]").change(function() {
+			   var area = "area"+$("option",$(this)).index($("option:selected",$(this))); 
+			   var $middle = $(this).next(); 
+			   $("option",$middle).remove();
+
+			   if(area == "area0")
+			    $middle.append("<option value=''>중분류</option>");
+			   else {
+			    $.each(eval(area), function() {
+			     $middle.append("<option value='"+this+"'>"+this+"</option>");
+			    });
+			   }
+			  });
+			 
+			 });
+	
+	$(document).ready(function(){
+		//유효성 검사
+		 $('#sign').click(function () {
+	  	   		if($('#largeCategory').val() == '대분류'){
+	  				alert('대분류를 선택해주세요');
+	  				return false;
+	  			}else if($('#middleCategory').val().length == 0){
+	  				alert('중분류를 선택해주세요');
+	  				return false;
+	  			}else if($('#smallCategory').val().length == 0){
+	  				alert('소분류를 입력해주세요');
+	  				return false;
+	  			}else if($('#goodsName').val().length == 0){
+	  				alert('상품명 입력해주세요');
+	  				return false;
+	  			}else{
+	  				 var result = confirm('상품을 등록합니다.');
+	  				 if(result) {
+	  					 $('#form').submit();
+	  					 } else {
+	  					location.href = "/shop/order/addGoods";
+	  				}
+	  			}
+		  });	
+
+	})
+	
+	
+		
+
+	</script>
+</th:block>
+<th:block layout:fragment="customContents">
+	<!-- Content Wrapper. Contains page content -->
+	<div class="content-wrapper">
+		<!-- Content Header (Page header) -->
+		<div class="content-header">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div class="col-sm-6">
+						<h1 class="m-0">"addGoods / 쇼핑몰 상품코드등록"</h1>
+					</div>
+					<!-- /.col -->
+					<div class="col-sm-6">
+						<ol class="breadcrumb float-sm-right">
+							<li class="breadcrumb-item"><a href="/shop/index-shop">Home</a></li>
+							<li class="breadcrumb-item active">코드관리</li>
+						</ol>
+					</div>
+					<!-- /.col -->
+				</div>
+				<!-- /.row -->
+			</div>
+			<!-- /.container-fluid -->
+		</div>
+		<!-- /.content-header -->
+
+		<!-- Main content -->
+		<div class="content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="card card-success">
+							<div class="card-header">
+								<h5 class="card-title">쇼핑몰 상품 카테고리 등록</h5>
+							</div>
+							<form class="form-horizontal" id="form" th:action="@{/shop/order/addGoods}" method="post">
+								<div class="card-body">
+									<p class="card-text">
+									<div id="cate" class="col-sm-12">
+										대분류  <select name="largeCategory" id="largeCategory" class="form-control"></select>
+										중분류  <select name="middleCategory" id="middleCategory"  class="form-control" ></select>
+										소분류  <input type="text" name="smallCategory" id="smallCategory" class="form-control" maxlength="50">
+										상품명  <input type="text" name="goodsName" id="goodsName" class="form-control"  maxlength="50">
+										비고  <input type="text" name="categoryNote" id="categoryNote" class="form-control"  maxlength="50">
+									</div>
+									</p>
+								</div>
+									<!-- /.card-body -->
+									<div class="card-footer">
+										<button type="submit" class="btn btn-success" id="sign">입력완료</button>
+										<button type="button" class="btn btn-default float-right" onclick="history.go(0);">취소</button>
+									</div>
+									<!-- /.card-footer -->
+							</form>
+						</div>
+					</div>
+					<!-- /.row -->
+				</div>
+				<!-- /.container-fluid -->
+			</div>
+			<!-- /.content -->
+		</div>
+	</div>
+	<!-- /.content-wrapper -->
+</th:block>
+</html>
