@@ -32,6 +32,89 @@
 	FROM
 		k2_shop_order;
 	</select>
+	
+	<select id="getOrderList" resultType="Order">
+	SELECT
+		shopOrderCode,
+		assortCode,
+		shopConsumerId,
+		shopMemberId,
+		shopSlipNumber,
+		shopOrderAmount,
+		goodsPaymentAmount,
+		shopDeliveryLocation,
+		shopCustomerPhone,
+		shopOrderRegDate,
+		shopOrderCancleDate
+	FROM
+		k2_shop_order
+	WHERE
+		shopOrderCode = #{shopOrderCode};
+	
+	</select>
+	
+	<update id="modifyOrder" parameterType="Order">
+		UPDATE
+			k2_shop_order
+		SET
+			shopOrderCode = #{shopOrderCode},
+			assortCode = #{assortCode},
+			shopConsumerId = #{shopConsumerId},
+			shopMemberId = #{shopMemberId},
+			shopSlipNumber = #{shopSlipNumber},
+			shopOrderAmount = #{shopOrderAmount},
+			goodsPaymentAmount = #{goodsPaymentAmount},
+			shopDeliveryLocation = #{shopDeliveryLocation},
+			shopCustomerPhone = #{shopCustomerPhone},
+			shopOrderRegDate = #{shopOrderRegDate},
+			shopOrderCancleDate = #{shopOrderCancleDate}
+		WHERE
+			shopOrderCode = #{shopOrderCode}
+	</update>
 
+	<!-- 유경 - 쇼핑몰 상품주문 가능한 거래처 검색 -->
+	<select id="getShopBizInfo" resultType="java.util.HashMap">
+		SELECT
+			shopClientCode,
+			mainBusinessCode,
+			shopClientBusinessName,
+			shopClientBusinessPhone,
+			shopClientBusinessStaff,
+			shopClientBizLeaderName,
+			shopClientBusinessNumber,
+			shopClientBusinessAddr,
+			shopClientBusinessType1,
+			shopClientBusinessType2,
+			shopClientBusinessRegDate
+		FROM
+		
+			k2_shop_businessInfo AS b
+		WHERE b.mainBusinessCode IS NOT null
+			
+	</select>
+	
+	<!-- 유경 상품 카테고리 등록 -->
+	<insert id="addShopGoods" parameterType="ShopCategoryOrder">
+		INSERT INTO k0_productCategory
+		(categoryCode,
+		memberId,
+		largeCategory,
+		middleCategory,
+		smallCategory,
+		goodsName,
+		regDate,
+		categoryNote)
+		VALUES (
+		(SELECT CONCAT('goodsCategoryCode',LPAD(max(SUBSTRING((categoryCode),18,2))+1,2,'0'))
+	         from
+	         k0_productCategory ALIAS_FOR_SUBQUERY),
+		#{memberId},
+		#{largeCategory},
+		#{middleCategory},
+		#{smallCategory},
+		#{goodsName},
+		CURDATE(),
+		#{categoryNote});
+	</insert>
 	
 </mapper>

@@ -12,21 +12,26 @@
 			i.memberId,
 			i.swIncomeRegDate,
 			i.swIncomeFinish,
-			i.swIncomeFinishDate
+			i.swIncomeFinishDate,
+			c.slipNumber,
+			c.serviceRequestDate
 		FROM
 			k2_sw_income AS i
 		INNER JOIN
 			k2_sw_paymentCheck AS p
 		on
 			i.contractManageCode = p.contractManageCode
-		WHERE
+		INNER join
+			k2_sw_contractRequest AS c
+		ON c.contractManageCode = i.contractManageCode
+				WHERE
 			p.paymentStateCode = 'payComplete'
-		ORDER BY
+		ORDER By
 			i.swIncomeCode ASC
  	</select>
  	
  	<insert id="addSwIncome" parameterType="servicePayment">
- 		<selectKey keyProperty="swIncomeCode" resultType="String" order="BEFORE">
+ 		<selectKey keyProperty="swIncomeCode" keyColumn="" resultType="String" order="BEFORE">
  			SELECT
  				MAX(CAST(i.swIncomeCode AS INTEGER)+1)
 			FROM
@@ -57,9 +62,9 @@
 				#{slipNumber},
 				'상품매출',
 				'서비스대금',
-				NOW(),
-				#{swIncomeFinish},
-				NOW()
+				now(),
+				'Y',
+				now()
 			)
  	</insert>
  	

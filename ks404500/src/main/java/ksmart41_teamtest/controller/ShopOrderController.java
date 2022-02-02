@@ -2,6 +2,7 @@ package ksmart41_teamtest.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,12 +20,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import ksmart41_teamtest.dto.Business;
 import ksmart41_teamtest.dto.Order;
-import ksmart41_teamtest.dto.ShopAddAccounting;
 import ksmart41_teamtest.dto.ShopAddPaymentCheck;
-import ksmart41_teamtest.dto.ShopIsListCode;
+import ksmart41_teamtest.dto.ShopCategoryOrder;
 import ksmart41_teamtest.dto.ShopPaymentCheck;
+import ksmart41_teamtest.mapper.OrderMapper;
 import ksmart41_teamtest.service.OrderService;
 import ksmart41_teamtest.service.ShopPaymentCheckService;
 
@@ -37,6 +37,41 @@ public class ShopOrderController {
 	private OrderService orderService;
 	@Autowired
 	private ShopPaymentCheckService	shopPaymentCheckService;
+	@Autowired
+	private OrderMapper orderMapper;
+	
+	
+	//유경 - 상품코드 카테고리 등록
+	@PostMapping("/addGoods")
+	public String addShopGoods(ShopCategoryOrder shopCategoryOrder,HttpSession session) {
+
+		//세션 아이디 가져오기
+		String memberId = (String) session.getAttribute("SHOPID");
+		session.setAttribute("shopMemberId", memberId);
+		shopCategoryOrder.setMemberId(memberId);
+		System.out.println("shopMemberId==============="+memberId );
+		//카테 등록
+		orderMapper.addShopGoods(shopCategoryOrder);
+		return "redirect:/shop/order/addGoods";
+		}
+
+
+	//유경 - 상품코드 카테고리 등록
+	@GetMapping("/addGoods")
+	public String shopGoods(Model model) {
+		//List<HashMap<String, Object>> shopBizInfo = orderMapper.getShopBizInfo();
+		//model.addAttribute("shopBizInfo", shopBizInfo);
+		return "shop/order/addGoods";
+	}
+	
+	
+	@PostMapping("/getBiz")
+	public String addShopgetbIZ(Model model) {
+		List<HashMap<String, Object>> shopBizInfo = orderMapper.getShopBizInfo();
+		model.addAttribute("shopBizInfo", shopBizInfo);
+		return "shop/order/getBiz";
+	}
+	
 	
 	  //유성 쇼핑몰 결제 등록 화면에서 결제 내역 조회
 	
@@ -90,6 +125,30 @@ public class ShopOrderController {
 		System.out.println(order + "<--controller");
 		return "shop/order/selectOrder";
 	}
+	
+	/* 유성 쇼핑몰 주문 취소(수정) */
+	@PostMapping ("/modifyOrder")
+	public String modifyOrder(Order order) {
+		orderService.modifyOrder(order);
+		return "redirect:/shop/order/selectOrder";
+	}
+	
+	/* 유성 쇼핑몰 주문 취소(수정) */
+	@GetMapping ("/modifyOrder")
+	public String modifyOrder(@RequestParam(value = "shopOrderCode", required = false) String shopOrderCode,
+								Model model) {
+		Order getOrderList = orderService.getOrderList(shopOrderCode);
+		//model.addAttribute("title", "사업장 수");
+		model.addAttribute("getOrderList", getOrderList);
+		System.out.println(shopOrderCode + "받아온 shopOrderCode (controller)");
+		if(shopOrderCode != null && !"".equals(shopOrderCode)) {
+			Order getOrder = orderService.getOrderList(shopOrderCode);
+			model.addAttribute("getOrder", getOrder);
+		}
+		model.addAttribute("tilte", "주문내역 수정");
+		return "shop/order/modifyOrder";
+	}
+	
 	
 	/* 유성 쇼핑몰 결제조회*/
 	@GetMapping("/selectPaymentCheck")

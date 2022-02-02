@@ -23,6 +23,21 @@ public class SwIncome {
 	private String paymentBalance;
 	private String paymentType;
 	private String paymentDate;
+	private String slipNumber;
+	private String serviceRequestDate;
+	
+	public String getSlipNumber() {
+		return slipNumber;
+	}
+	public void setSlipNumber(String slipNumber) {
+		this.slipNumber = slipNumber;
+	}
+	public String getServiceRequestDate() {
+		return serviceRequestDate;
+	}
+	public void setServiceRequestDate(String serviceRequestDate) {
+		this.serviceRequestDate = serviceRequestDate;
+	}
 	public String getSwIncomeCode() {
 		return swIncomeCode;
 	}
@@ -157,15 +172,57 @@ public class SwIncome {
 	}
 	@Override
 	public String toString() {
-		return "SwIncome [swIncomeCode=" + swIncomeCode + ", contractManageCode=" + contractManageCode + ", swIsCode="
-				+ swIsCode + ", memberIdFinish=" + memberIdFinish + ", invoiceCode=" + invoiceCode + ", memberId="
-				+ memberId + ", swGroupSlip=" + swGroupSlip + ", swSlipNumber=" + swSlipNumber + ", swIsName="
-				+ swIsName + ", swIncomeInfo=" + swIncomeInfo + ", swIncomeRegDate=" + swIncomeRegDate
-				+ ", swIncomeFinish=" + swIncomeFinish + ", swIncomeFinishDate=" + swIncomeFinishDate
-				+ ", paymentCheckCode=" + paymentCheckCode + ", paymentCode=" + paymentCode + ", clientId=" + clientId
-				+ ", paymentStateCode=" + paymentStateCode + ", paymentEstimate=" + paymentEstimate + ", paymentCharge="
-				+ paymentCharge + ", paymentBalance=" + paymentBalance + ", paymentType=" + paymentType
-				+ ", paymentDate=" + paymentDate + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("SwIncome [swIncomeCode=");
+		builder.append(swIncomeCode);
+		builder.append(", contractManageCode=");
+		builder.append(contractManageCode);
+		builder.append(", swIsCode=");
+		builder.append(swIsCode);
+		builder.append(", memberIdFinish=");
+		builder.append(memberIdFinish);
+		builder.append(", invoiceCode=");
+		builder.append(invoiceCode);
+		builder.append(", memberId=");
+		builder.append(memberId);
+		builder.append(", swGroupSlip=");
+		builder.append(swGroupSlip);
+		builder.append(", swSlipNumber=");
+		builder.append(swSlipNumber);
+		builder.append(", swIsName=");
+		builder.append(swIsName);
+		builder.append(", swIncomeInfo=");
+		builder.append(swIncomeInfo);
+		builder.append(", swIncomeRegDate=");
+		builder.append(swIncomeRegDate);
+		builder.append(", swIncomeFinish=");
+		builder.append(swIncomeFinish);
+		builder.append(", swIncomeFinishDate=");
+		builder.append(swIncomeFinishDate);
+		builder.append(", paymentCheckCode=");
+		builder.append(paymentCheckCode);
+		builder.append(", paymentCode=");
+		builder.append(paymentCode);
+		builder.append(", clientId=");
+		builder.append(clientId);
+		builder.append(", paymentStateCode=");
+		builder.append(paymentStateCode);
+		builder.append(", paymentEstimate=");
+		builder.append(paymentEstimate);
+		builder.append(", paymentCharge=");
+		builder.append(paymentCharge);
+		builder.append(", paymentBalance=");
+		builder.append(paymentBalance);
+		builder.append(", paymentType=");
+		builder.append(paymentType);
+		builder.append(", paymentDate=");
+		builder.append(paymentDate);
+		builder.append(", slipNumber=");
+		builder.append(slipNumber);
+		builder.append(", serviceRequestDate=");
+		builder.append(serviceRequestDate);
+		builder.append("]");
+		return builder.toString();
 	}
 	
 	

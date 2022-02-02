@@ -4,7 +4,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <th:block layout:fragment="customJs">
-
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" rel="stylesheet">
 <script type="text/javascript">
 //검색기능
 $(document).ready(function(){
@@ -15,6 +16,20 @@ $(document).ready(function(){
       });
     });
   });
+  
+//테이블 페이징
+$(function(){
+	$('.table').footable({
+		"paging": {
+			"enabled": true,
+		},
+		"sorting": {
+			"enabled": true
+		}
+
+	});
+});
+
 
 //마감내역 선택시 경고창
 $(function(){
