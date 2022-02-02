@@ -19,7 +19,14 @@ public class ServiceRequest {
 	private String businessRegistrationCode;
 	private String businessCodeRegistrationDate;
 	private String shopMemberId;
+	private String slipNumber;
 	
+	public String getSlipNumber() {
+		return slipNumber;
+	}
+	public void setSlipNumber(String slipNumber) {
+		this.slipNumber = slipNumber;
+	}
 	public String getServiceCode() {
 		return serviceCode;
 	}
@@ -167,6 +174,8 @@ public class ServiceRequest {
 		builder.append(businessCodeRegistrationDate);
 		builder.append(", shopMemberId=");
 		builder.append(shopMemberId);
+		builder.append(", slipNumber=");
+		builder.append(slipNumber);
 		builder.append("]");
 		return builder.toString();
 	}

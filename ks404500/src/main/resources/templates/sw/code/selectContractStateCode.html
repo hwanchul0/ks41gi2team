@@ -42,8 +42,8 @@
 				<!-- /.col -->
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
-						<li class="breadcrumb-item"><a href="#">Home</a></li>
-						<li class="breadcrumb-item active">Starter Page</li>
+						<li class="breadcrumb-item"><a th:href="@{/sw/index-sw}">Home</a></li>
+						<li class="breadcrumb-item active">계약요청 코드 조회</li>
 					</ol>
 				</div>
 				<!-- /.col -->
@@ -68,7 +68,6 @@
 							<tr>
 								<th>계약상태 코드</th>
 								<th>계약상태</th>
-								<th>수정</th>
 								<th>삭제</th>
 							</tr>
 							</thead>
@@ -77,9 +76,6 @@
 								<td th:text="${cs.contractStateCode}">
 								</td>
 								<td th:text="${cs.contractState}">
-								</td>
-								<td>
-									<a th:href="@{/sw/code/modifyContractStateCode(contractStateCode=${cs.contractStateCode})}">수정</a>
 								</td>
 								<td>
 									<button type="button" class="btn btn-primary" th:onclick="deleteBtn([[${cs.contractStateCode}]])">삭제</button>

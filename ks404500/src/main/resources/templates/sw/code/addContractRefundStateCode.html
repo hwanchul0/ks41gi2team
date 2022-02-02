@@ -8,7 +8,7 @@
 	$('#refundStateCodeCheckBtn').click(function(){
 	
 		var refundStateCode = $('#refundStateCode').val();
-		//[환철]ajax통신 결제상태 코드 중복체크
+		//[환철]ajax통신 환불상태 코드 중복체크
 		var request = $.ajax({
 			  url: "/sw/code/refundCodeCheck",
 			  method: "POST",
@@ -17,7 +17,7 @@
 			});
 		request.done(function(data) {
 			if(refundStateCode != null && refundStateCode != ""){
-				// [환철] 결제상태 코드 - 영어 (소,대) 입력 가능
+				// [환철] 환불상태 코드 - 영어 (소,대) 입력 가능
 					var eng = /^[a-zA-Z]*$/; 
 				if(data == "true"){
 					alert('중복되는 코드입니다.');
@@ -40,33 +40,41 @@
 		});
 	});	
 	$('#addRefundStateCode').click(function(){
-		// [환철] - 결제상태 / 한글만 입력가능
-		var regName = /^[가-힣\s]+$/;
-		var refundState = $('#refundState').val();
-		if(!regName.test(refundState)){
-			alert('결제 상태는 한글만 입력 가능합니다');
-			$('#refundState').val('');
+		var eng = /^[a-zA-Z]*$/; 
+		var kor = /^[가-힣\s]+$/
+		
+		if($('#refundStateCode').val() == ''){
+			alert('코드명을 입력해주세요')
+			return false;
 		}
-		//[환철]결제상태 코드 중복체크
+		if(!eng.test($('refundStateCode').val())){
+			alert('코드명은 영어만 입력 가능합니다.')
+			$('refundStateCode').val('');
+			$('refundStateCode').focus();
+			return false;
+		}
+		if($('#refundState').val() == ''){
+			alert('서비스 환불 상태를 입력해주세요');
+			return false;
+		}
+		if(!kor.test($('#refundState').val())){
+			alert('환불 상태는 한글만 입력 가능합니다');
+			$('#refundState').val('');
+			$('#refundState').focus();
+		}
 		var refundStateCode = $('#refundStateCode').attr('check');
 		if(refundStateCode != "pass"){
 			alert("코드 중복체크를 해주세요");
 			return false;
 		}
-		
-		//코드이름 공백체크
-		var refundState = $('#refundState').val();
-		if(refundState == null || refundState == ""){
-			alert("코드이름을 입력해주세요");
-			return false;
-		}
+
 		$(this).attr('type','submit');
 		$(this).submit();
 	});
 
 	// [환철]-  취소 버튼
 	$('#cancleBtn').click(function(){
-		var cancleBtn = confirm('결제상태코드 등록을 취소하시겠습니까?');
+		var cancleBtn = confirm('환불상태 코드 등록을 취소하시겠습니까?');
 		if(cancleBtn){
 			location.href = "/sw/code/selectContractRefundStateCode";
 			}
@@ -86,8 +94,8 @@
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
-							<li class="breadcrumb-item"><a href="#">Home</a></li>
-							<li class="breadcrumb-item active">Starter Page</li>
+							<li class="breadcrumb-item"><a th:href="@{/sw/index-sw}">Home</a></li>
+							<li class="breadcrumb-item active">환불상태 코드 등록</li>
 						</ol>
 					</div>
 				</div>
@@ -121,7 +129,7 @@
 										</div>
 									</div>
 									<div class="card-footer">
-										<button type="submit" id="addRefundStateCode" name="addRefundStateCode" class="btn btn-primary">등록</button>
+										<button type="button" id="addRefundStateCode" name="addRefundStateCode" class="btn btn-primary">등록</button>
 										<button type="button" id="cancleBtn" name="cancleBtn" class="btn btn-default float-right">취소</button>
 									</div>
 								</div>

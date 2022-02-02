@@ -59,5 +59,9 @@ public class ServicePaymentService {
 		ServicePayment getRequestInfo = servicePaymentMapper.getRequestInfo(paymentCode);
 		return getRequestInfo;
 	}
+	// 서비스 결제 완료시 - 계약현황 테이블 추가
+	public int addContractState(ServicePayment servicePayment) {
+		return servicePaymentMapper.addContractState(servicePayment);
+	}
 		
 }
