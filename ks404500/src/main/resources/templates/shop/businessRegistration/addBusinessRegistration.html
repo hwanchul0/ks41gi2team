@@ -204,13 +204,13 @@
 					alert('사업장 등록 불가능');
 					$('#addClientForm input').not('#clientId').prop('disabled', true);
 					$('#addClientForm button').not('#idCheckBtn').prop('disabled', true);
-					//$('#addMemberForm #clientId').attr("readonly", false);
+					
 				}else{
 					alert('사업장 등록 가능');
 					$('#addClientForm input').not('#clientId').prop('disabled', false);
 					$('#addClientForm button').not('#idCheckBtn').prop('disabled', false);
 					$('#clientId').attr('login','pass');
-					//$('#addMemberForm #clientId').attr("readonly", true);
+					
 				}
 			}else{
 				alert('공백은 사용하실수 없습니다.');
@@ -224,6 +224,120 @@
 			location.href = "/shop/index-shop";
 		}
 	}
+	// 사업장 전화번호 문자
+	$(document).ready(function() {
+	    $("#businessPhone").focus(focused); //input에 focus일 때
+	    $("#businessPhone").blur(blured);   //focus out일 때
+	  })
+	function focused(){
+	  var input = $("#businessPhone").val();
+	  //input안에서 하이픈(-) 제거
+	  var businessPhone = input.replace( /-/gi, '');
+	  //number 타입으로 변경(숫자만 입력)
+	  $("#businessPhone").prop('type', 'number');
+	  
+	  $("#businessPhone").val(businessPhone);
+	}
+	function blured(){
+	  var input = $("#businessPhone").val();
+	  
+	  //숫자에 하이픈(-) 추가
+	  var businessPhone = chkItemPhone(input);
+	  //text 타입으로 변경
+	  $("#businessPhone").prop('type', 'text');
+	  
+	  $("#businessPhone").val(businessPhone);
+	}
+	
+	//전화번호 문자(-)
+	function chkItemPhone(temp) {
+	  var number = temp.replace(/[^0-9]/g, "");
+	  var businessPhone = "";
+	  if (number.length < 9) {
+	    return number;
+	  } else if (number.length < 10) {
+		  businessPhone += number.substr(0, 2);
+		  businessPhone += "-";
+	        businessPhone += number.substr(2, 3);
+	        businessPhone += "-";
+	        businessPhone += number.substr(5);
+	  } else if (number.length < 11) {
+		  businessPhone += number.substr(0, 3);
+		  businessPhone += "-";
+		  businessPhone += number.substr(3, 3);
+		  businessPhone += "-";
+		  businessPhone += number.substr(6);
+	  } else if(number.length < 12){
+		  businessPhone += number.substr(0, 3);
+		  businessPhone += "-";
+	    businessPhone += number.substr(3, 4);
+	    businessPhone += "-";
+	    businessPhone += number.substr(7);
+	  }else {
+		  alert('사업장 전화번호를 확인하세요');
+		  return businessPhone;
+	  }
+	  return businessPhone;
+	}	
+	
+	
+	// 사업장 담당자번호 문자
+	$(document).ready(function() {
+	    $("#businessManagerPhone").focus(focused); //input에 focus일 때
+	    $("#businessManagerPhone").blur(blured);   //focus out일 때
+	  })
+	function focused(){
+	  var input = $("#businessManagerPhone").val();
+	  //input안에서 하이픈(-) 제거
+	  var businessManagerPhone = input.replace( /-/gi, '');
+	  //number 타입으로 변경(숫자만 입력)
+	  $("#businessManagerPhone").prop('type', 'number');
+	  
+	  $("#businessManagerPhone").val(businessManagerPhone);
+	}
+	function blured(){
+	  var input = $("#businessManagerPhone").val();
+	  
+	  //숫자에 하이픈(-) 추가
+	  var businessManagerPhone = chkItemPhone(input);
+	  //text 타입으로 변경
+	  $("#businessManagerPhone").prop('type', 'text');
+	  
+	  $("#businessManagerPhone").val(businessManagerPhone);
+	}
+	
+	//사업장 담당자번호 문자(-)
+	function chkItemPhone(temp) {
+	  var number = temp.replace(/[^0-9]/g, "");
+	  var businessManagerPhone = "";
+	  if (number.length < 9) {
+	    return number;
+	  } else if (number.length < 10) {
+		  businessManagerPhone += number.substr(0, 2);
+		  businessManagerPhone += "-";
+		  businessManagerPhone += number.substr(2, 3);
+		  businessManagerPhone += "-";
+		  businessManagerPhone += number.substr(5);
+	  } else if (number.length < 11) {
+		  businessManagerPhone += number.substr(0, 3);
+		  businessManagerPhone += "-";
+		  businessManagerPhone += number.substr(3, 3);
+		  businessManagerPhone += "-";
+		  businessManagerPhone += number.substr(6);
+	  } else if(number.length < 12){
+		  businessManagerPhone += number.substr(0, 3);
+		  businessManagerPhone += "-";
+		  businessManagerPhone += number.substr(3, 4);
+		  businessManagerPhone += "-";
+		  businessManagerPhone += number.substr(7);
+	  }else {
+		  alert('사업장 담당자 전화번호를 확인하세요');
+		  return businessManagerPhone;
+	  }
+	  return businessManagerPhone;
+	}	
+
+	
 	//도로명주소
 	//본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
     function sample4_execDaumPostcode() {
@@ -280,7 +394,37 @@
             }
         }).open();
     }
-	
+	//사업자번호 
+	function licenseNum(str){
+          str = str.replace(/[^0-9]/g, '');
+          var tmp = '';
+          if(str.length < 4){
+              return str;
+          }else if(str.length < 7){
+              tmp += str.substr(0, 3);
+              tmp += '-';
+              tmp += str.substr(3);
+              return tmp;
+          }else if(str.length < 12 ){             
+              tmp += str.substr(0, 3);
+              tmp += '-';
+              tmp += str.substr(1, 2);
+              tmp += '-';
+              tmp += str.substr(5);
+              return tmp;
+          }else{
+        	  return tmp;
+          }
+          return str;
+      }
+ 
+var businessNumber = document.getElementById("businessNumber");
+businessNumber.onkeyup = function(event){
+       event = event || window.event;
+       var _val = this.value.trim();
+       this.value = licenseNum(_val) ;
+}
+
   //주소 입력
 	function changeAddr(){
 		var businessAddr = $('#businessAddr').val();
