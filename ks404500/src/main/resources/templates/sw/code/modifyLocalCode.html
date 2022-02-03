@@ -55,7 +55,7 @@
 								</div>
 								<div class="card-footer">
 									<button type="submit" class="btn btn-primary" id ="modifylocalCodeBtn"> 수정완료 </button>
-									<button type="button" class="btn btn-default float-right" id="cancleLocalCodeBtn"> 취소 </button>
+									<button type="button" class="btn btn-default float-right" id="cancleLocalCodeBtn" onclick="cancel();"> 취소 </button>
 								</div>
 							</form>
 						</div>
@@ -65,4 +65,15 @@
 		</div>
 	</div>
 </th:block>
+<script type="text/javascript">
+
+	function cancel(){
+		var cancelConfirm = confirm('등록을 취소하시겠습니까?');
+		if (cancelConfirm){
+			location.href = "/sw/index-sw";
+		}		
+	}
+
+	
+</script>
 </html>

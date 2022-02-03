@@ -78,7 +78,7 @@
 								</div>
 								<div class="card-footer">
 									<button type="button" class="btn btn-primary" id ="modifyExpenseBtn"> 수정완료 </button>
-									<button type="button" class="btn btn-default float-right" id="cancleModifyExpense"> 취소 </button>
+									<button type="button" class="btn btn-default float-right" id="cancleModifyExpense" onclick="cancle();"> 취소 </button>
 								</div>
 							</form>
 							<!-- 회원가입 폼 끝 -->
@@ -118,6 +118,19 @@
 	
 	</script>
 </th:block>
+
+<script type="text/javascript">
+
+	function cancel(){
+		var cancelConfirm = confirm('등록을 취소하시겠습니까?');
+		if (cancelConfirm){
+			location.href = "/sw/index-sw";
+		}		
+	}
+
+	
+</script>
+
 </html>
 
 

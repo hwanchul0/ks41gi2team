@@ -93,7 +93,7 @@
 									<div class="form-group row">
 										<label class="col-sm-2 col-form-label text-right">전화번호</label>
 										<div class="col-sm-8">
-											<input type="number" class="form-control" id="memberPhone" placeholder="전화번호를 입력하세요 ( - 제외)" name="memberPhone">
+											<input type="number" class="form-control" id="phone" placeholder="전화번호를 입력하세요 ('-'제외)" name="memberPhone">
 										</div>
 									</div>
 								<!-- 회원가입폼 바디 끝 -->
@@ -186,7 +186,58 @@
 			}
 		});
 	});
-
+	
+	  $(document).ready(function() {
+		    $("#phone").focus(focused); //input에 focus일 때
+		    $("#phone").blur(blured);   //focus out일 때
+		  })
+		function focused(){
+		  var input = $("#phone").val();
+		  //input안에서 하이픈(-) 제거
+		  var phone = input.replace( /-/gi, '');
+		  //number 타입으로 변경(숫자만 입력)
+		  $("#phone").prop('type', 'number');
+		  $("#phone").val(phone);
+		}
+		function blured(){
+		  var input = $("#phone").val();
+		  //숫자에 하이픈(-) 추가
+		  var phone = chkItemPhone(input);
+		  //text 타입으로 변경
+		  $("#phone").prop('type', 'text');
+		  
+		  $("#phone").val(phone);
+		}
+		//전화번호 문자(-)
+		function chkItemPhone(temp) {
+		  var number = temp.replace(/[^0-9]/g, "");
+		  var phone = "";
+		  if (number.length < 9) {
+		    return number;
+		  } else if (number.length < 10) {
+		    phone += number.substr(0, 2);
+	        phone += "-";
+	        phone += number.substr(2, 3);
+		    phone += "-";
+		    phone += number.substr(5);
+		  } else if (number.length < 11) {
+		    phone += number.substr(0, 3);
+		    phone += "-";
+		    phone += number.substr(3, 3);
+		    phone += "-";
+		    phone += number.substr(6);
+		  } else if (number.length < 12){
+		    phone += number.substr(0, 3);
+		    phone += "-";
+		    phone += number.substr(3, 4);
+		    phone += "-";
+		    phone += number.substr(7);
+		  } else {
+			  alert('전화번호를 확인하세요');
+			  return phone;
+		  }
+		  return phone;
+		}	
 	
 	//[재천]도로명주소
 	//본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
@@ -296,11 +347,12 @@
 				return false;
 			}
 			//전화번호 공백체크
-			var memberPhone = $('#memberPhone').val();
-			if(memberPhone == null || memberPhone == ""){
+			var phone = $('#phone').val();
+			if(phone == null || phone == ""){
 				alert('전화번호를 입력하세요');
 				return false;
 				}
+				
 			//[재천]submit
 			$('#addMemberForm').submit();
 		});
@@ -310,8 +362,9 @@
 		var cancelConfirm = confirm('등록을 취소하시겠습니까?');
 		if (cancelConfirm){
 			location.href = "/";
-		}		
+		}
 	}
+	
 	</script>
 </th:block>
 </html>

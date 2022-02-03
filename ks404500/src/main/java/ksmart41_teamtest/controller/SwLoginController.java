@@ -1,5 +1,9 @@
 package ksmart41_teamtest.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -34,28 +38,33 @@ public class SwLoginController {
 	@PostMapping("/Swlogin")
 	public String login(@RequestParam(value="memberId", required = false)String memberId,
 						@RequestParam(value="memberPw", required = false)String memberPw,
-						HttpSession session) {
+						HttpServletResponse response,
+						HttpSession session) throws IOException {
 		System.out.println(memberId + " memberId입력값");
-		Member status = memberService.selectMemberStatus(memberId);
-		String memberStatus = status.getMemberStatus();
-		String resultY = "Y";
-		if(memberStatus.equals(resultY)) {
 			if(memberId != null && !"".equals(memberId) && memberPw != null && !"".equals(memberPw)){
 				Member member = memberService.MemberInfo(memberId);
 				if(member != null && member.getMemberPw()!= null && memberPw.equals(member.getMemberPw())) {
-					//로그인 비밀번호 일치 시 세션을 정보에 담음
-					session.setAttribute("SWID", memberId);
-					session.setAttribute("SWNAME", member.getMemberName());
-					session.setAttribute("SWLEVEL", member.getMemberLevelCode());
-					session.setAttribute("SWADDR", member.getMemberAddr());
-					session.setAttribute("SWEMAIL", member.getMemberEmail());
-					session.setAttribute("SWDATE", member.getMemberRegDate());
-					session.setAttribute("SWPHONE", member.getMemberPhone());
-					return "redirect:/sw/index-sw";
+					Member status = memberService.selectMemberStatus(memberId);
+					String memberStatus = status.getMemberStatus();
+					String resultY = "Y";
+						if(memberStatus.equals(resultY)) {
+						//로그인 비밀번호 일치 시 세션을 정보에 담음
+						session.setAttribute("SWID", memberId);
+						session.setAttribute("SWNAME", member.getMemberName());
+						session.setAttribute("SWLEVEL", member.getMemberLevelCode());
+						session.setAttribute("SWADDR", member.getMemberAddr());
+						session.setAttribute("SWEMAIL", member.getMemberEmail());
+						session.setAttribute("SWDATE", member.getMemberRegDate());
+						session.setAttribute("SWPHONE", member.getMemberPhone());
+						return "redirect:/sw/index-sw";
 				}
 			}
 		}
 		//로그인 불일치 시
+		String SwLogin = "/Swlogin";
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter writer = response.getWriter(); writer.println("<script>alert('아이디 혹은 패스워드를 확인하세요'); location.href='"+SwLogin+"';</script>");
+		writer.close();
 		return "redirect:/Swlogin";
 		}
 

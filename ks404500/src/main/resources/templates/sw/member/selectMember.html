@@ -106,7 +106,6 @@ $(document).ready(function(){
 											<th>가입일</th>
 											<th>회원상태</th>
 											<th>탈퇴날짜</th>
-											<th>탈퇴이유</th>
 											<th>수정</th>
 											<th>삭제</th>
 										</tr>
@@ -116,13 +115,14 @@ $(document).ready(function(){
 											<td th:text="${ml.memberId}"></td>
 											<td th:text="${ml.memberLevelCode}"></td>
 											<td th:text="${ml.memberName}"></td>
-											<td th:text="${ml.memberAddr}"></td>
+											
+											<td id="memberAddr" th:text="${ml.memberAddr}"></td>
+											
 											<td th:text="${ml.memberEmail}"></td>
 											<td th:text="${ml.memberPhone}"></td>
 											<td th:text="${ml.memberRegDate}"></td>
 											<td th:text="${ml.memberStatus}"></td>
 											<td th:text="${ml.memberWithdrawal}"></td>
-											<td th:text="${ml.memberWithdrawalReason}"></td>
 											<!-- <td><button type="button" class="modifyBtn" th:onclick="modifyBtn([[${ml.memberId}]]);">수정</button></td> -->
 											<td><a th:href="@{/sw/member/modifyMember(memberId=${ml.memberId})}">수정</a></td>
 											<td><button type="button" class="btn btn-primary deleteBtn btn-xs" th:onclick="deleteBtn([[${ml.memberId}]]);">삭제</button></td>

@@ -30,7 +30,7 @@ public class ShopConsumerController {
 	@GetMapping("/selectConsumer")
 	public String selectConsumer(Model model) {
 		List<Consumer> consumerlist = consumerService.selectConsumerList();
-		model.addAttribute("title", "회원 조회");
+		model.addAttribute("title", "소비자 조회");
 		model.addAttribute("consumerlist", consumerlist);
 		return "shop/consumer/selectConsumer";
 	}

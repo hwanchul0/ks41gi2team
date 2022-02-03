@@ -14,7 +14,7 @@
 					<p class="login-box-msg">개발사 로그인</p>
 					<form th:action="@{/Swlogin}" method="post">
 						<div class="input-group mb-3">
-							<input type="text" class="form-control" placeholder="아이디를 입력하세요" name="memberId" value="test">
+							<input type="text" class="form-control" placeholder="아이디를 입력하세요" name="memberId" value="swid001" id="memberId">
 							<div class="input-group-append">
 								<div class="input-group-text">
 									<span class="fas fa-user"></span>
@@ -22,25 +22,23 @@
 							</div>
 						</div>
 						<div class="input-group mb-3">
-							<input type="password" class="form-control" placeholder="비밀번호를 입력하세요" name="memberPw" value="test">
+							<input type="password" class="form-control" placeholder="비밀번호를 입력하세요" name="memberPw" value="swpw001">
 							<div class="input-group-append">
 								<div class="input-group-text">
 									<span class="fas fa-lock"></span>
 								</div>
 							</div>
 						</div>
+						<p class="mb-0">
+							<a th:href=@{/addMember} class="text-center" style="float: right; size: 8px;">회원가입</a>
+						</p>
 						<div class="row">
 							<div class="mb-3">
-								<button type="submit" class="btn btn-primary btn-block">로그인</button>
+								<button type="submit" class="btn btn-primary btn-block btn-sm">로그인</button>
 							</div>
 						</div>
 					</form>
-					<p class="mb-1">
-						<a href="#">비밀번호 찾기</a>
-					</p>
-					<p class="mb-0">
-						<a th:href=@{/addMember} class="text-center">회원가입</a>
-					</p>
+
 				</div>
 			</div>
 		</div>
@@ -55,7 +53,7 @@
 					<p class="login-box-msg">쇼핑몰 로그인</p>
 					<form th:action="@{/Shoplogin}" method="post">
 						<div class="input-group mb-3">
-							<input type="text" class="form-control" placeholder="아이디를 입력하세요" name="shopMemberId" value="test">
+							<input type="text" class="form-control" placeholder="아이디를 입력하세요" name="shopMemberId" value="shopid001" id="shopMemberId">
 							<div class="input-group-append">
 								<div class="input-group-text">
 									<span class="fas fa-user"></span>
@@ -63,25 +61,23 @@
 							</div>
 						</div>
 						<div class="input-group mb-3">
-							<input type="password" class="form-control"	placeholder="비밀번호를 입력하세요" name="shopMemberPw" value="test">
+							<input type="password" class="form-control"	placeholder="비밀번호를 입력하세요" name="shopMemberPw" value="shoppw001">
 							<div class="input-group-append">
 								<div class="input-group-text">
 									<span class="fas fa-lock"></span>
 								</div>
 							</div>
 						</div>
+						<p class="mb-0">
+							<a th:href=@{/addClient} class="text-center" style="float: right; size: 8px;">회원가입</a>
+						</p>
 						<div class="row">
 							<div class="mb-3">
-								<button type="submit" class="btn btn-primary btn-block" id="loginBtn">로그인</button>
+								<button type="submit" class="btn btn-success btn-block btn-sm " id="loginBtn">로그인</button>
 							</div>
 						</div>
 					</form>
-					<p class="mb-1">
-						<a href="#">비밀번호 찾기</a>
-					</p>
-					<p class="mb-0">
-						<a th:href=@{/addClient} class="text-center">회원가입</a>
-					</p>
+
 				</div>
 			</div>
 		</div>

@@ -45,7 +45,7 @@ layout:decorate="@{layout/default-shop}">
 									<div class="form-group row">
 										<label class="col-sm-2 col-form-label text-right">연락처</label>
 										<div class="col-sm-8">
-											<input type="number" class="form-control" id="shopClientBusinessPhone" placeholder="연락처를 입력하세요" name="shopClientBusinessPhone">
+											<input type="number" class="form-control" id="phone" placeholder="연락처를 입력하세요" name="shopClientBusinessPhone">
 										</div>
 									</div>
 									<div class="form-group row">
@@ -63,7 +63,7 @@ layout:decorate="@{layout/default-shop}">
 									<div class="form-group row">
 										<label class="col-sm-2 col-form-label text-right">사업자 번호</label>
 										<div class="col-sm-8">
-											<input type="number" class="form-control" id="shopClientBusinessNumber" placeholder="사업자 번호를 입력하세요" name="shopClientBusinessNumber">
+											<input type="text" class="form-control" id="li_number" placeholder="사업자 번호를 입력하세요" name="shopClientBusinessNumber">
 										</div>
 									</div>
 									<div class="form-group row">
@@ -114,6 +114,117 @@ layout:decorate="@{layout/default-shop}">
 <!-- /.content-wrapper -->
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script type="text/javascript">
+	$(function(){
+		$('#shopClientBusinessStaff').blur(function(){
+			var regName = /^[가-힣]{2,8}$/;
+			var shopClientBusinessStaff = $('#shopClientBusinessStaff').val();
+			if(!regName.test(shopClientBusinessStaff)){
+				alert("이름이 올바르지 않습니다.");
+				 $('#shopClientBusinessStaff').val('');
+				return false;
+			}
+		});
+	});
+	
+	$(function(){
+		$('#shopClientBizLeaderName').blur(function(){
+			var regName = /^[가-힣]{2,8}$/;
+			var shopClientBizLeaderName = $('#shopClientBizLeaderName').val();
+			if(!regName.test(shopClientBizLeaderName)){
+				alert("이름이 올바르지 않습니다.");
+				 $('#shopClientBizLeaderName').val('');
+				return false;
+			}
+		});
+	});
+	
+	$(document).ready(function() {
+	    $("#phone").focus(focused); //input에 focus일 때
+	    $("#phone").blur(blured);   //focus out일 때
+	  })
+	function focused(){
+	  var input = $("#phone").val();
+	  //input안에서 하이픈(-) 제거
+	  var phone = input.replace( /-/gi, '');
+	  //number 타입으로 변경(숫자만 입력)
+	  $("#phone").prop('type', 'number');
+	  
+	  $("#phone").val(phone);
+	}
+	function blured(){
+	  var input = $("#phone").val();
+	  
+	  //숫자에 하이픈(-) 추가
+	  var phone = chkItemPhone(input);
+	  //text 타입으로 변경
+	  $("#phone").prop('type', 'text');
+	  
+	  $("#phone").val(phone);
+	}
+	//전화번호 문자(-)
+	function chkItemPhone(temp) {
+	  var number = temp.replace(/[^0-9]/g, "");
+	  var phone = "";
+	  if (number.length < 9) {
+	    return number;
+	  } else if (number.length < 10) {
+	    phone += number.substr(0, 2);
+	        phone += "-";
+	        phone += number.substr(2, 3);
+	    phone += "-";
+	    phone += number.substr(5);
+	  } else if (number.length < 11) {
+	    phone += number.substr(0, 3);
+	    phone += "-";
+	    phone += number.substr(3, 3);
+	    phone += "-";
+	    phone += number.substr(6);
+	  } else if(number.length < 12){
+	    phone += number.substr(0, 3);
+	    phone += "-";
+	    phone += number.substr(3, 4);
+	    phone += "-";
+	    phone += number.substr(7);
+	  }else {
+		  alert('전화번호를 확인하세요');
+		  return phone;
+	  }
+	  return phone;
+	}	
+
+	
+	
+	//사업자번호 
+	function licenseNum(str){
+          str = str.replace(/[^0-9]/g, '');
+          var tmp = '';
+          if(str.length < 4){
+              return str;
+          }else if(str.length < 7){
+              tmp += str.substr(0, 3);
+              tmp += '-';
+              tmp += str.substr(3);
+              return tmp;
+          }else if(str.length < 12 ){             
+              tmp += str.substr(0, 3);
+              tmp += '-';
+              tmp += str.substr(1, 2);
+              tmp += '-';
+              tmp += str.substr(5);
+              return tmp;
+          }else{
+        	  return tmp;
+          }
+          return str;
+      }
+ 
+var li_number = document.getElementById("li_number");
+li_number.onkeyup = function(event){
+       event = event || window.event;
+       var _val = this.value.trim();
+       this.value = licenseNum(_val) ;
+}
+	
 		//[재천]도로명주소
 		//본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
 	    function sample4_execDaumPostcode() {
