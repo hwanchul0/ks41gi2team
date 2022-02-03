@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head th:replace="fragments/head :: headFragment"></head>
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+   <div id="wrapper">
+
+   <!-- begin Contents -->
+         <title>MAIN</title>
+         <th:block layout:fragment="customContents-main">
+         </th:block>
+   <!-- end Contents -->
+      
+   <!-- begin javascript -->
+      <div th:replace="fragments/javascript :: javascriptFragment"></div>
+   <!-- end javascript -->
+   </div>
+</body>
+</html>

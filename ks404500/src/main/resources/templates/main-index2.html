@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="@{layout/default-main}">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<th:block layout:fragment="customJs">
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link th:href="@{/customcss/css/main-index2.css}" rel="stylesheet"/>
+	<script>
+		$(document).ready(
+				function() {
+					// Add smooth scrolling to all links in navbar + footer link
+					$(".navbar a, footer a[href='#myPage']").on('click',
+							function(event) {
+								// Make sure this.hash has a value before overriding default behavior
+								if (this.hash !== "") {
+									// Prevent default anchor click behavior
+									event.preventDefault();
+
+									// Store hash
+									var hash = this.hash;
+
+									// Using jQuery's animate() method to add smooth page scroll
+									// The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
+									$('html, body').animate({
+										scrollTop : $(hash).offset().top
+									}, 900, function() {
+
+										// Add hash (#) to URL when done scrolling (default click behavior)
+										window.location.hash = hash;
+									});
+								} // End if
+							});
+
+					$(window).scroll(function() {
+						$(".slideanim").each(function() {
+							var pos = $(this).offset().top;
+
+							var winTop = $(window).scrollTop();
+							if (pos < winTop + 600) {
+								$(this).addClass("slide");
+							}
+						});
+					});
+				})
+//캐러셀 호버 이벤트
+$(document).ready(function () {
+    $('.item button').hover(function(){
+        $(this).css('background-color','#f6f6f6');
+        $(this).css('color','#f4511e');
+    }, function() {
+        $(this).css('background-color','#003366');
+        $(this).css('color','#fff');
+    });
+});
+		
+			
+	</script>
+</th:block>
+<th:block layout:fragment="customContents-main">
+
+	<!-- 유경 - 메인 인덱스 -->
+	<!-- 내비바 -->
+	<nav class="navbar navbar-fixed-top" >
+	    <div class="collapse navbar-collapse" id="myNavbar">
+	      <ul class="nav navbar-nav" style="float: right; display: inline">
+	        <li><a href="#portfolio">PORTFOLIO</a></li>
+	        <li><a href="#about">ABOUT</a></li>
+	        <li><a href="#TEAM">TEAM</a></li>
+	      </ul>
+	    </div>
+	</nav>
+	
+	<!-- 프로젝트명-->
+	<div class="jumbotron text-center">
+		<h1>TEAM_404500</h1>
+		<p>SW개발사 운영 및 쇼핑몰 통합 시스템</p>
+		<a th:href="@{https://github.com/hwanchul0/ks41gi2team}" target="_blacnk">
+			<i class="fab fa-github">Gtihub : https://github.com/hwanchul0/ks41gi2team</i>
+		</a>
+		<h3>배포 : 2022-02-02 22:50</h3>
+	</div>
+	
+	<!-- 포트폴리오 -->
+	<div id="portfolio" class="container-fluid text-center bg-grey">
+	  <h2>Portfolio</h2><br>
+	  <div id="myCarousel" class="carousel slide text-center" data-ride="carousel">
+	    <!-- Indicators -->
+	    <ol class="carousel-indicators">
+	      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+	      <li data-target="#myCarousel" data-slide-to="1"></li>
+	    </ol>
+	
+	    <!-- Wrapper for slides -->
+	    <div class="carousel-inner" role="listbox">
+	      <div class="item active" OnClick="location.href='/Swlogin'">  
+	      		<h4>SW 개발사<br>&nbsp;<br>
+				<button class="btn btn-lg" style="background-color: #003366; color : #fff;">페이지 이동하기</button></h4>
+				</div>
+	      <div class="item" OnClick="location.href='/Swlogin'">
+	       	  <h4>쇼핑몰 사업자<br>&nbsp;<br>
+	       	  <button class="btn btn-lg" style="background-color: #003366; color : #fff;">페이지 이동하기</button></h4>
+	      </div>
+	    </div>
+	
+	    <!-- Left and right controls -->
+	    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+	      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+	      <span class="sr-only">Previous</span>
+	    </a>
+	    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+	      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+	      <span class="sr-only">Next</span>
+	    </a>
+	  </div>
+	</div>
+
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+	<!-- 프로젝트 소개 -->
+	<div id="about" class="container-fluid">
+		<div class="row">
+			<div class="col-sm-9">
+				<h2>프로젝트 소개</h2>
+				<br>
+				<h4>SW개발사와 서비스 사용 고객 관리 및 쇼핑몰 사업자와 물류센터를 연결하여 물류 강화 시스템을 통한 사업자
+					매출 상승 기대</h4>
+				<br>
+				<p>사용 고객에게 재무관리를 통한 편의성 제공</p>
+				<p>개발사 입장에서의 사업장 관리를 통한 고객(사업장) 관리 효율 극대</p>
+				<br>
+				
+			</div>
+			<div class="col-sm-3">
+      <span class="glyphicon glyphicon-signal logo" style="color : #003366"></span>
+    </div>
+		</div>
+	</div>
+	<!-- /프로젝트 소개 -->
+
+	<!-- 팀원소개 -->	
+	<div class="container-fluid bg-grey" id="TEAM">
+	  <div class="row">
+	    <div class="col-sm-12">
+	      <h2>팀원 소개</h2><br>
+	      <section>
+	      	<table class="table table-hover table-responsive">
+	      		<thead>
+	      			<tr>
+		      			<th style="width: 25%">팀장 김환철</th>
+		      			<th style="width: 25%">팀원 김유성</th>
+		      			<th style="width: 25%">팀원 백재천</th>
+		      			<th style="width: 25%">팀원 진유경</th>
+	      			</tr>
+	      		</thead>
+	      		<tbody>
+	      			<tr>
+		      			<td style="width: 25%">
+		      				<p class="text-muted"><b>담당기능</b></p>
+		      				<b>Sw</b>
+		      				<p>서비스 관리  | 결제 예정 및 확인 | 계약 현황 | </p>
+		      				<p>결제 | 환불 |계약 코드 관리</p>
+		      				<p class="text-muted"><b>Shop</b></p>
+		      				<p> 서비스 계약요청 관리 및 결제</p>
+		      				<p> <i class="nav-icon far fa-envelope"></i> E-MAIL : hwanchulkk@gmail.com</p>
+		      				<p><i class="fas fa-sm fa-phone"></i> Phone : 010-4565-0682</p>
+		      			</td>
+						<td style="width: 25%">
+	                        <p class="text-muted"><b>담당기능</b></p>
+	                        <b>Sw</b>
+	                        <p> 사업장조회  | 사업장 대표 코드 관리 |  </p>
+	                        <p class="text-muted"><b>Shop</b></p>
+	                        <p> 사업장 신청 | 쇼핑몰 비용 관리 | 쇼핑몰 배송 요청 | </p>
+      						<p> 쇼핑몰 주문내역 조회 | 쇼핑몰 결제 관리 | </p>
+                        	<p> <i class="nav-icon far fa-envelope"></i> E-MAIL : kusung1018@naver.com</p>
+                        	<p><i class="fas fa-sm fa-phone"></i> Phone : 010-5687-4027</p>
+						</td>
+						<td style="width: 25%">
+	                        <p class="text-muted"><b>담당기능</b></p>
+	                        <b>Sw</b>
+	                        <p>로그인&로그아웃  | 회원가입 | 회원관리</p>
+	                        <p>마이페이지 | 거래처 구분코드 관리 |거래처 지역코드 관리</p>
+							<p>서비스 매출 관리 | 개발사 비용관리</p>
+							<p class="text-muted"><b>Shop</b></p>
+							<p>로그인&로그아웃 | 회원가입 | 회원관리</p>
+							<p>마이페이지 | 거래처 관리 | 결제상태 코드관리</p>
+	                        <p> <i class="nav-icon far fa-envelope"></i> E-MAIL : baekjc94@gmail.com</p>
+	                        <p><i class="fas fa-sm fa-phone"></i> Phone : 010-9424-1318</p>
+						</td>
+						<td style="width: 25%">
+	                        <p class="text-muted"><b>담당기능</b></p>
+	                        <b>SW</b>
+	                        <p>메인 | 세금계산서 | 통합회계 | 손익계정과목</p>
+	                        <p class="text-muted"><b>Shop</b></p>
+	                        <p>메인 | 매출관리 | 통합회계 | 배송조회 </p>
+	                        <p> <i class="nav-icon far fa-envelope"></i> E-MAIL : shara4@naver.com</p>
+	                        <p><i class="fas fa-sm fa-phone"></i> Phone : 010-6653-1803</p>
+						</td>
+	      		</tr>
+	      		</tbody>
+	      	</table>
+	      </section>
+	    </div>
+	  </div>
+	</div>
+	<!-- /팀원소개 -->	
+	
+	<!-- 하단 -->	
+	<footer class="container-fluid text-center">
+	  <a href="#myPage" title="To Top">
+	    <span class="glyphicon glyphicon-chevron-up"></span>
+	  </a>
+	  <p>Contact us! Made by TEAM_404500</p>
+	</footer>
+
+</th:block>
+</html>
