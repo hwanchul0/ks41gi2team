@@ -42,7 +42,8 @@
 												<th>거래처 구분 코드</th>
 												<th>사업장 권한</th>
 												<th>사업장코드 등록일자</th>
-												<th>사업장코드 삭제일자</th>
+												<th>수정</th>
+												<th>삭제</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -51,7 +52,7 @@
 											<td th:text="${mbc.businessCode}"></td>
 											<td th:text="${mbc.businessLevelCode}"></td>
 											<td th:text="${mbc.businessCodeRegistrationDate}"></td>
-											<td th:text="${mbc.businessCodeDeleteDate}"></td>
+											
 
 											<td>
 												<a th:href="@{/sw/business/modifyMainBusinessCode(mainBusinessCode=${mbc.mainBusinessCode})}">수정</a>

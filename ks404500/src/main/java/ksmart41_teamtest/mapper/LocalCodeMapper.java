@@ -21,10 +21,10 @@ public interface LocalCodeMapper {
 	//[재천] 지역 코드 정보 조회
 	public LocalCode selectLocalCodeInfo(String localCode);
 	
-	//[재천]
+	//[재천] 지역 코드 삭제
 	public int deleteLocalCode(LocalCode localCode);
 	
-	//[재천]
+	//[재천] 지역 코드 조회
 	public int localCodeCheck(String localCode);
 }
 

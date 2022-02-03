@@ -5,6 +5,64 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <head th:replace="fragments/head :: headFragment"></head>
+<th:block layout:fragment="customJs">
+	<script>
+	$(function(){
+		// 서비스 코드 중복체크
+		$('#codeCheckbtn').click(function(){
+
+			var serviceCode = $('#serviceCode').val();
+				var request = $.ajax({
+					  url: "/sw/service/codeCheck", 
+					  method: "POST", 
+					  data: { serviceCode : serviceCode },
+					  dataType: "text" 
+					});			
+				
+				request.done(function(data) {
+					if(serviceCode != null && serviceCode !=""){
+						if(data == "true"){
+							alert('중복되는 코드입니다');
+							$('#addServiceForm input').not('#serviceCode').prop('disabled', true);
+							$('#addServiceForm select').prop('disabled', true);
+							$('#addServiceForm button').not('#codeCheckbtn').prop('disabled', true);
+						}else{
+							alert('등록가능한 코드입니다')
+							$('#addServiceForm input').not('#serviceCode').prop('disabled', false);
+							$('#addServiceForm select').prop('disabled', false);
+							$('#addServiceForm button').not('#codeCheckbtn').prop('disabled', false);
+						}
+					}else{
+						alert('공백 없이 입력해주세요');
+					}
+					});;				
+				});
+       		//서비스 등록 유효성 검사
+			$(document).on('click','#addServiceBtn', function(){
+	            var submitCheck = true;
+	            var inputObj = $('#addServiceForm').find('input');
+	            $.each(inputObj, function(i, d){
+	                  var inputData = $(this).val();
+	                  var inputId  = $(this).attr('id');
+	                  var labelText = $('label[for='+ inputId +']').text();
+	                  serviceStatus = $('#serviceStatus').val();
+	                  //console.log(inputData);
+	                   if(typeof inputData == 'undefined' || inputData == null || inputData ==''){
+	                     alert(labelText + '을 입력해주세요');
+							$(this).focus();
+		                	  if(serviceStatus != 'Y' || serviceStatus != 'N'){
+		                		  alert('서비스 상태는 Y / N 으로만 입력해주세요');
+		                		  $(this).focus();
+		                		  submitCheck = false;
+		                		  return false;
+		                	  }
+	                   }
+		           });
+	                  if(submitCheck) $('#addServiceForm').submit();
+	           });
+		});
+	</script>
+</th:block>
 <th:block layout:fragment="customContents">
 	<!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper">
@@ -19,9 +77,8 @@
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
 							<li class="breadcrumb-item">
-								<a href="#">Home</a>
-							</li>
-							<li class="breadcrumb-item active">Starter Page</li>
+						<li class="breadcrumb-item"><a th:href="@{/shop/index-sㅈ}">Home</a></li>
+						<li class="breadcrumb-item active">서비스 등록</li>
 						</ol>
 					</div>
 					<!-- /.col -->
@@ -104,59 +161,6 @@
 	</div>
 	<!-- /Content Wrapper. Contains page content -->
 
-	<script>
-	$(function(){
-		// 서비스 코드 중복체크
-		$('#codeCheckbtn').click(function(){
 
-			var serviceCode = $('#serviceCode').val();
-				var request = $.ajax({
-					  url: "/sw/service/codeCheck", 
-					  method: "POST", 
-					  data: { serviceCode : serviceCode },
-					  dataType: "text" 
-					});			
-				
-				request.done(function(data) {
-					if(serviceCode != null && serviceCode !=""){
-						if(data == "true"){
-							alert('중복되는 코드입니다');
-							$('#addServiceForm input').not('#serviceCode').prop('disabled', true);
-							$('#addServiceForm select').prop('disabled', true);
-							$('#addServiceForm button').not('#codeCheckbtn').prop('disabled', true);
-						}else{
-							alert('등록가능한 코드입니다')
-							$('#addServiceForm input').not('#serviceCode').prop('disabled', false);
-							$('#addServiceForm select').prop('disabled', false);
-							$('#addServiceForm button').not('#codeCheckbtn').prop('disabled', false);
-						}
-					}else{
-						alert('공백 없이 입력해주세요');
-					}
-					});;				
-				});
-       		//서비스 등록 유효성 검사
-			$(document).on('click','#addServiceBtn', function(){
-	            var submitCheck = true;
-	            var inputObj = $('#addServiceForm').find('input');
-	               
-	               $.each(inputObj, function(i, d){
-	                  var inputData = $(this).val();
-	                  var inputId  = $(this).attr('id');
-	                  var labelText = $('label[for='+ inputId +']').text();
-	                  //console.log(inputData);
-	                   if(typeof inputData == 'undefined' || inputData == null || inputData ==''){
-	                     alert(labelText + '을 입력해주세요');
-	                     $(this).focus();
-	                     submitCheck = false;
-	                     return false;
-	                   }
-	                 
-	               });
-	                  if(submitCheck) $('#addServiceForm').submit();
-	
-	           });
-		});
-	</script>
 </th:block>
 </html>

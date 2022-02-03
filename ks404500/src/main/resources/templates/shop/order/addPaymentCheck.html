@@ -50,8 +50,23 @@ $(document).ready(function () {
     	    if($(':radio[class="radioButton"]:checked').length < 1){
     	        alert('발행대상을 선택해주세요');
     	        Category1.focus();
-    	        event.preventDefault();
+    	        
+    	        return false;
     	   		}
+    	  //쇼핑몰 비용 적요 공백 체크
+			var shopPaymentCharge = $('#shopPaymentCharge').val();
+			if(shopPaymentCharge == null || shopPaymentCharge == ""){
+				alert("금액을 입력하세요");
+				return false;
+			}
+			//결제방법 선택 공백 체크
+			var paymentType = $('#paymentType').val();
+			if(paymentType == "::결제방법 선택::" || paymentType == ""){
+				alert("결제방법을  선택하세요");
+				return false;
+			}
+			
+			
     	
     });
    
@@ -225,7 +240,7 @@ $(document).ready(function(){
 								<!-- /.card-body -->
 								<div class="card-footer">
 									<button type="submit" class="btn btn-success" id="sign">입력완료</button>
-									<button type="button" onclick="history.back();"  class="btn btn-default float-right">취소</button>
+									<button type="button" id="cancleAddPaymentCheckBtn" onclick="cancle()"  class="btn btn-default float-right">취소</button>
 								</div>
 								<!-- /.card-footer -->
 								</div>
@@ -242,5 +257,14 @@ $(document).ready(function(){
 		<!-- /.content -->
 	</div>
 	<!-- /.content-wrapper -->
+	<script type="text/javascript">	
+	//사업장 등록 취소
+	function cancle(){
+		var cancleAddPaymentCheckBtn = confirm('결제 등록을 취소하시겠습니까?');
+		if(cancleAddPaymentCheckBtn){
+			location.href = "/shop/index-shop";
+		}
+	}
+	</script>
 </th:block>
 </html>

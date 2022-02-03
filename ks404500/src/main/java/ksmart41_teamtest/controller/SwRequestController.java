@@ -1,7 +1,6 @@
 package ksmart41_teamtest.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,9 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import ksmart41_teamtest.dto.ServicePayment;
 import ksmart41_teamtest.dto.ServiceRequest;
 import ksmart41_teamtest.service.ServiceRequestService;
 
@@ -69,16 +66,21 @@ public class SwRequestController {
 	public String serviceRequestState(@RequestParam(value="serviceRequestStatus", required=false)String serviceRequestStatus
 									 ,@RequestParam(value="contractManageCode", required = false) String contractManageCode
 									 ,ServiceRequest serviceRequest) {
-		log.info("serviceRequestState 계약 상태 === {}:",serviceRequestStatus);
-		log.info("serviceRequestState 계약 상태 코드  === {}:",contractManageCode);
+		log.info("serviceRequestState 계약 상태 === :{}"  ,serviceRequestStatus);
+		log.info("serviceRequestState 계약 상태 코드  === :{}"  ,contractManageCode);
+		log.info("serviceRequestState 입력받은 값  === :{}"  ,serviceRequest);
 		serviceRequestService.modifyRequestState(serviceRequestStatus,contractManageCode);
 		
 		String RequestStatus = serviceRequest.getServiceRequestStatus();
 		String requsetAccept = "승인";
-		// selectAllServiceRequest 계약 상태가 '승인' 일 때  결제 예정 합계 테이블 insert 쿼리 실행
+		
 		if(RequestStatus.equals(requsetAccept)) {
-			serviceRequestService.acceptRequest(contractManageCode);
+			// selectAllServiceRequest 계약 상태가 '승인' 일 때  결제 예정 합계 테이블 insert 쿼리 실행
+			serviceRequestService.acceptRequest(contractManageCode,serviceRequest.getSlipNumber());
+			// 계약 상태가 '승인' 일때 승인 날짜 변경
+			serviceRequestService.nowApprovalDate(contractManageCode);
 		}else {
+			// selectAllServiceRequest 계약상태가 '승인' 이 아닐 때 delete
 			serviceRequestService.deleteRequest(contractManageCode);
 		}
 			

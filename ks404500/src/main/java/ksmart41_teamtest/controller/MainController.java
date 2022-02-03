@@ -28,6 +28,12 @@ public class MainController {
 	public String mainIndex(HttpSession session) {
 		session.invalidate();
 
+		return "main-index2";
+	}
+	
+	@GetMapping("/main-index2")
+	public String mainIndex2(HttpSession session) {
+		session.invalidate();
 		return "main-index";
 	}
 

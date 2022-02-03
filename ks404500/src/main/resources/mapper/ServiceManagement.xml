@@ -93,7 +93,7 @@
 			WHERE 
 				serviceCode = #{serviceCode};
 		</select>
-		
+		<!-- 서비스 삭제 -->
 		<delete id="deleteServiceManagemenet" parameterType="ServiceManagement">
 			DELETE
 			FROM

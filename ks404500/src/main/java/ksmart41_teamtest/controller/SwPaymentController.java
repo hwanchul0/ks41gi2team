@@ -16,12 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import ksmart41_teamtest.dto.ServicePayment;
-import ksmart41_teamtest.dto.SwExpense;
-import ksmart41_teamtest.dto.SwIsListCode;
 import ksmart41_teamtest.service.ServicePaymentService;
-import ksmart41_teamtest.service.SwExpenseService;
 import ksmart41_teamtest.service.SwIncomeService;
-import ksmart41_teamtest.service.SwIsListService;
 
 @Controller
 @RequestMapping("/sw/service")
@@ -91,12 +87,13 @@ public class SwPaymentController {
 		servicePayment.setMemberId(memberId);
 		servicePayment.setMemberIdFinish(memberId);
 		if(Check1.equals(complete)) {
+			servicePaymentService.addContractState(servicePayment);
 			swIncomeService.addSwIncome(servicePayment);
 		}
 		return "redirect:/sw/service/servicePaymentSum";
 	}
 	
-	//서비스 결제후 계약현황 관리
+	//서비스 결제후 계약현황 조회
 	@GetMapping("/selectContractState")
 	public String selectContractState(Model model) {
 		List<ServicePayment> selectContractState = servicePaymentService.selectContractState();

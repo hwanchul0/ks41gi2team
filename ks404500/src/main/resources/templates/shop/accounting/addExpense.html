@@ -20,10 +20,42 @@
             	return false;
             }
             
+          //쇼핑몰 비용 적요 공백 체크
+  			var shopExpenseInfo = $('#shopExpenseInfo').val();
+  			if(shopExpenseInfo == null || shopExpenseInfo == ""){
+  				alert("쇼핑몰 비용 적요를 입력하세요");
+  				return false;
+  			}
+  			
+  			/* //사업장 지역코드 공백 체크
+			var shopExpenseDate = $('#shopExpenseDate').val();
+			if(shopExpenseDate == "연도-월-일" || shopExpenseDate == ""){
+				alert("등록일을 선택해주세요);
+				return false;
+			} */
+    			
+    			
+    			//금액 공백체크
+  			var shopExpensePrice = $('#shopExpensePrice').val();
+  			if(shopExpensePrice == null || shopExpensePrice == ""){
+  				alert("금액을 입력하세요");
+  				return false;
+  			}
+            
             $('#addExpenseForm').submit();
 
          });
       });
+      
+     
+        
+      //쇼핑몰 비용등록 취소 
+      	function cancle(){
+      		var cancleExpenseBtn = confirm('쇼핑몰 비용등록을 취소하시겠습니까?');
+      		if(cancleExpenseBtn){
+      			location.href = "/shop/index-shop";
+      		}
+      	}
       
    </script>
 </th:block>	  

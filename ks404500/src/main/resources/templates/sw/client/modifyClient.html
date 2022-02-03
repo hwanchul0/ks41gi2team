@@ -86,7 +86,7 @@
 								<!-- 수정폼 바디 끝 -->
 								<div class="card-footer">
 									<button type="button" class="btn btn-primary" id ="modifyClientBtn"> 수정완료 </button>
-									<button type="button" class="btn btn-default float-right" id="cancleClientBtn"> 취소 </button>
+									<button type="button" class="btn btn-default float-right" id="cancleClientBtn" onclick="cancel();"> 취소 </button>
 								</div>
 							</form>
 							<!-- 회원가입 폼 끝 -->
@@ -168,6 +168,14 @@
 				$('#modifyClientForm').submit();
 			});
 		});
+		
+		function cancel(){
+			var cancelConfirm = confirm('등록을 취소하시겠습니까?');
+			if (cancelConfirm){
+				location.href = "/sw/index-sw";
+			}		
+		}
+		
 	</script>
 </th:block>
 </html>

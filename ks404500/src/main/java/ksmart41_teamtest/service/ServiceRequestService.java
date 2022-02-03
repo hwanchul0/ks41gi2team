@@ -3,11 +3,9 @@ package ksmart41_teamtest.service;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import ksmart41_teamtest.dto.ServicePayment;
 import ksmart41_teamtest.dto.ServiceRequest;
 import ksmart41_teamtest.mapper.ServiceRequestMapper;
 
@@ -76,14 +74,20 @@ public class ServiceRequestService {
 		return requestState;
 	}
 	// 서비스 계약요청 승인 -> 결제예정 테이블
-	public int acceptRequest(String contractManageCode) {
-		int addPayment = serviceRequestMapper.acceptRequest(contractManageCode);
+	public int acceptRequest(String contractManageCode, String slipNumber) {
+		int addPayment = serviceRequestMapper.acceptRequest(contractManageCode,slipNumber);
 		return addPayment;
 	}
 	// 서비스 계약요청 승인이 아닐 때 결제예정 테이블 삭제
 	public int deleteRequest(String contractManageCode) {
 		int deletePayment = serviceRequestMapper.deleteRequest(contractManageCode);
 		return deletePayment;
+	}
+	// 서비스 계약요청 승인 / 승인 날짜 업데이트
+	public int nowApprovalDate(String contractManageCode) {
+		int nowApprovalDate = serviceRequestMapper.nowApprovalDate(contractManageCode);
+		return nowApprovalDate;
+		
 	}
 	
 

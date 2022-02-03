@@ -11,6 +11,7 @@ public class ShopPaymentCheck {
 	private String paymentType;
 	private String shopPaymentDate;
 	private String shopPaymentCharge;
+	
 
 	
 	public String getShopPaymentCharge() {

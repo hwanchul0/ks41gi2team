@@ -49,8 +49,8 @@ public class ServicePaymentService {
 		ServicePayment getContractState = servicePaymentMapper.getContractState(contractCode);
 		return getContractState;
 	}
-	// Client / 계약요청 승인시 결제
-	public int addPayment(ServicePaymentService servicePayment) {
+	// Client / 계약요청 승인시 결제 가능
+	public int addPayment(ServicePayment servicePayment) {
 		int addPayment = servicePaymentMapper.addPayment(servicePayment);
 		return addPayment;
 	}
@@ -58,6 +58,10 @@ public class ServicePaymentService {
 	public ServicePayment getRequestInfo(ServicePayment paymentCode) {
 		ServicePayment getRequestInfo = servicePaymentMapper.getRequestInfo(paymentCode);
 		return getRequestInfo;
+	}
+	// 서비스 결제 완료시 - 계약현황 테이블 추가
+	public int addContractState(ServicePayment servicePayment) {
+		return servicePaymentMapper.addContractState(servicePayment);
 	}
 		
 }

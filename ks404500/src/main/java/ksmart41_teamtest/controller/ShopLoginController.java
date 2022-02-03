@@ -1,5 +1,9 @@
 package ksmart41_teamtest.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -34,16 +38,17 @@ public class ShopLoginController {
 	@PostMapping("/Shoplogin")
 	public String login(@RequestParam(value="shopMemberId", required = false)String shopMemberId,
 						@RequestParam(value="shopMemberPw", required = false)String shopMemberPw,
-						HttpSession session) {
+						HttpServletResponse response,
+						HttpSession session) throws IOException {
 		System.out.println(shopMemberId + " shopMemberId입력값");
 		System.out.println(shopMemberPw + " shopMemberPw입력값");
-		ShopMember state = shopMembeService.selectShopMemberState(shopMemberId);
-		String shopState = state.getShopMemberState();
-		String resultY = "Y";
-		if(shopState.equals(resultY)) {
 			if(shopMemberId != null && !"".equals(shopMemberId) && shopMemberPw != null && !"".equals(shopMemberPw)){
 				ShopMember shopmember = shopMembeService.ShopMemberInfo(shopMemberId);
 				if(shopmember != null && shopmember.getShopMemberId() != null && shopMemberPw.equals(shopmember.getShopMemberPw())) {
+					ShopMember state = shopMembeService.selectShopMemberState(shopMemberId);
+					String shopState = state.getShopMemberState();
+					String resultY = "Y";
+					if(shopState.equals(resultY)) {
 					//로그인 비밀번호 일치 시 세션을 정보에 담음
 					session.setAttribute("SHOPID", shopMemberId);
 					session.setAttribute("SHOPNAME", shopmember.getShopMemberName());
@@ -57,6 +62,10 @@ public class ShopLoginController {
 			}
 		}
 		//로그인 불일치 시
+		String SwLogin = "/Swlogin";
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter writer = response.getWriter(); writer.println("<script>alert('아이디 혹은 패스워드를 확인하세요'); location.href='"+SwLogin+"';</script>");
+		writer.close();
 		return "redirect:/Swlogin";
 		}
 	

@@ -53,7 +53,6 @@ layout:decorate="@{layout/default-shop}">
 										<tr th:if="${not #lists.isEmpty(consumerlist)}" th:each="cl : ${consumerlist}">
 											<td th:text="${cl.shopConsumerId}"></td>
 											<td th:text="${cl.shopConsumerName}"></td>
-											<td th:text="${cl.shopConsumerPw}"></td>
 											<td th:text="${cl.shopConsumerAddr}"></td>
 											<td th:text="${cl.shopConsumerEmail}"></td>
 											<td th:text="${cl.shopConsumerPhone}"></td>

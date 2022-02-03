@@ -58,6 +58,9 @@
 				,c.paymentType
 				,c.paymentDate
 				,s.paymentState
+				,r.serviceRegistrationDate
+				,r.serviceEndDate
+				,c.paymentCheckCode
 			FROM 
 				k2_sw_paymentSum AS p
 				INNER JOIN 
@@ -68,6 +71,10 @@
 				k2_paymentState AS s
 			ON 
 				c.paymentStateCode = s.paymentStateCode
+				INNER JOIN 
+				k2_sw_contractRequest AS r
+			ON 
+				c.contractManageCode = r.contractManageCode
 			WHERE
 				p.paymentCode = #{paymentCode};				
 		</select>
@@ -172,7 +179,7 @@
 			k2_sw_paymentCheck AS z)
 			,#{contractManageCode}
 			,#{paymentCode}
-			,#{clientId}
+			,'shopid001'
 			,'payWaiting'
 			,#{paymentEstimate}
 			,#{paymentCharge}
@@ -205,5 +212,36 @@
 			WHERE 
 			ps.contractManageCode = #{contractManageCode};
 		</select>
+		
+		<!-- 서비스 결제완료 시 계약현황 테이블 추가 -->
+		<insert id="addContractState" parameterType="ServicePayment">
+		INSERT INTO k2_sw_normalContractState (
+			 contractCode
+			,contractStateCode
+			,paymentCheckCode
+			,refundStateCode
+			,refundReason
+			,serviceRegistrationDate
+			,serviceDeleteDate
+			,contractRegDate
+			)
+			SELECT
+			(SELECT
+				 CONCAT('contract',(MAX(CAST((SUBSTRING_INDEX(contractCode,'contract',-1)) AS UNSIGNED)+1)))
+			FROM 
+			k2_sw_normalContractState AS l)
+			,'serviceUsing'
+			,#{paymentCheckCode}
+			,''
+			,''
+			,#{serviceRegistrationDate}
+			,#{serviceEndDate}
+			,NOW()
+	WHERE NOT EXISTS (
+	SELECT paymentCheckCode 
+	FROM k2_sw_normalContractState
+	WHERE paymentCheckCode = #{paymentCheckCode}
+	);
+		</insert>
 		
 </mapper>
