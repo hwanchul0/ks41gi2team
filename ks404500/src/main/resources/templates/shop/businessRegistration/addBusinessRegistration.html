@@ -2,7 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="@{layout/default-shop}">
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<head th:replace="fragments/head :: headFragment"></head>
 
 <th:block layout:fragment="customContents">
 	<!-- Content Wrapper. Contains page content -->
@@ -96,7 +98,7 @@
 								<div class="form-group row">
 									<label class="col-sm-2 col-form-laebl text-right">사업장 전화번호</label>
 									<div class="col-sm-4">
-										<input class="form-control" type="text" id="businessPhone" name="businessPhone"placeholder="사업장  전화번호를 입력하세요">
+										<input class="form-control" type="text" id="businessPhone" name="businessPhone" placeholder="사업장  전화번호를 입력하세요">
 									</div>
 								</div>
 
@@ -224,62 +226,58 @@
 			location.href = "/shop/index-shop";
 		}
 	}
-	// 사업장 전화번호 문자
-	$(document).ready(function() {
-	    $("#businessPhone").focus(focused); //input에 focus일 때
-	    $("#businessPhone").blur(blured);   //focus out일 때
-	  })
-	function focused(){
-	  var input = $("#businessPhone").val();
-	  //input안에서 하이픈(-) 제거
-	  var businessPhone = input.replace( /-/gi, '');
-	  //number 타입으로 변경(숫자만 입력)
-	  $("#businessPhone").prop('type', 'number');
-	  
-	  $("#businessPhone").val(businessPhone);
-	}
-	function blured(){
-	  var input = $("#businessPhone").val();
-	  
-	  //숫자에 하이픈(-) 추가
-	  var businessPhone = chkItemPhone(input);
-	  //text 타입으로 변경
-	  $("#businessPhone").prop('type', 'text');
-	  
-	  $("#businessPhone").val(businessPhone);
-	}
 	
-	//전화번호 문자(-)
-	function chkItemPhone(temp) {
-	  var number = temp.replace(/[^0-9]/g, "");
-	  var businessPhone = "";
-	  if (number.length < 9) {
-	    return number;
-	  } else if (number.length < 10) {
-		  businessPhone += number.substr(0, 2);
-		  businessPhone += "-";
-	        businessPhone += number.substr(2, 3);
-	        businessPhone += "-";
-	        businessPhone += number.substr(5);
-	  } else if (number.length < 11) {
-		  businessPhone += number.substr(0, 3);
-		  businessPhone += "-";
-		  businessPhone += number.substr(3, 3);
-		  businessPhone += "-";
-		  businessPhone += number.substr(6);
-	  } else if(number.length < 12){
-		  businessPhone += number.substr(0, 3);
-		  businessPhone += "-";
-	    businessPhone += number.substr(3, 4);
-	    businessPhone += "-";
-	    businessPhone += number.substr(7);
-	  }else {
-		  alert('사업장 전화번호를 확인하세요');
+	 $(document).ready(function() {
+		    $("#businessPhone").focus(focused2); //input에 focus일 때
+		    $("#businessPhone").blur(blured2);   //focus out일 때
+		  })
+		function focused2(){
+		  var input = $("#businessPhone").val();
+		  //input안에서 하이픈(-) 제거
+		  var businessPhone = input.replace( /-/gi, '');
+		  //number 타입으로 변경(숫자만 입력)
+		  $("#businessPhone").prop('type', 'number');
+		  $("#businessPhone").val(businessPhone);
+		}
+		function blured2(){
+		  var input = $("#businessPhone").val();
+		  //숫자에 하이픈(-) 추가
+		  var businessPhone = chkItemPhone(input);
+		  //text 타입으로 변경
+		  $("#businessPhone").prop('type', 'text');
+		  
+		  $("#businessPhone").val(businessPhone);
+		}
+		//전화번호 문자(-)
+		function chkItemPhone(temp) {
+		  var number = temp.replace(/[^0-9]/g, "");
+		  var businessPhone = "";
+		  if (number.length < 9) {
+		    return number;
+		  } else if (number.length < 10) {
+			  businessPhone += number.substr(0, 2);
+			  businessPhone += "-";
+			  businessPhone += number.substr(2, 3);
+			  businessPhone += "-";
+			  businessPhone += number.substr(5);
+		  } else if (number.length < 11) {
+			  businessPhone += number.substr(0, 3);
+			  businessPhone += "-";
+			  businessPhone += number.substr(3, 3);
+			  businessPhone += "-";
+			  businessPhone += number.substr(6);
+		  } else if (number.length < 12){
+			  businessPhone += number.substr(0, 3);
+			  businessPhone += "-";
+		    businessPhone += number.substr(3, 4);
+		    businessPhone += "-";
+		    businessPhone += number.substr(7);
+		  } else {
+			  alert('전화번호를 확인하세요');
+			  return businessPhone;
+		  }
 		  return businessPhone;
-	  }
-	  return businessPhone;
-	}	
-	
+		}
 	
 	// 사업장 담당자번호 문자
 	$(document).ready(function() {
@@ -299,7 +297,7 @@
 	  var input = $("#businessManagerPhone").val();
 	  
 	  //숫자에 하이픈(-) 추가
-	  var businessManagerPhone = chkItemPhone(input);
+	  var businessManagerPhone = chkPhone(input);
 	  //text 타입으로 변경
 	  $("#businessManagerPhone").prop('type', 'text');
 	  
@@ -307,7 +305,7 @@
 	}
 	
 	//사업장 담당자번호 문자(-)
-	function chkItemPhone(temp) {
+	function chkPhone(temp) {
 	  var number = temp.replace(/[^0-9]/g, "");
 	  var businessManagerPhone = "";
 	  if (number.length < 9) {
@@ -556,7 +554,7 @@ businessNumber.onkeyup = function(event){
 		});
 	});
 	
-//유성
+
 	</script>
 	
 </th:block>

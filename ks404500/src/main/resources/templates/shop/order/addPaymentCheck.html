@@ -53,18 +53,19 @@ $(document).ready(function () {
     	        
     	        return false;
     	   		}
-    	  //쇼핑몰 비용 적요 공백 체크
-			var shopPaymentCharge = $('#shopPaymentCharge').val();
-			if(shopPaymentCharge == null || shopPaymentCharge == ""){
-				alert("금액을 입력하세요");
-				return false;
-			}
+
 			//결제방법 선택 공백 체크
 			var paymentType = $('#paymentType').val();
 			if(paymentType == "::결제방법 선택::" || paymentType == ""){
 				alert("결제방법을  선택하세요");
 				return false;
 			}
+			
+			//결제일 공백 체크
+			if($('#shopPaymentDate').val().length == 0){
+		         alert('결제일을 입력하세요');
+		         return false;
+		      }
 			
 			
     	
@@ -155,7 +156,7 @@ $(document).ready(function(){
 												<td th:text="${p.shopMemberId}" ></td>
 												<td th:text="${p.paymentStateCode}"></td>
 												<td th:text="${p.shopPaymentCode}" ></td>
-												<td th:text="${p.shopPaymentCharge}" ></td>
+												<td th:text="${p.shopPaymentAmount}" ></td>
 												<td th:text="${p.paymentType}"></td>
 												<td th:text="${p.shopPaymentDate}" ></td>
 										
