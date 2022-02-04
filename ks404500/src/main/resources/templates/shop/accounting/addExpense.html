@@ -2,6 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="@{layout/default-shop}">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<head th:replace="fragments/head :: headFragment"></head>
 <th:block layout:fragment="customJs">
 <script type="text/javascript">
       $(function(){
@@ -27,12 +30,11 @@
   				return false;
   			}
   			
-  			/* //사업장 지역코드 공백 체크
-			var shopExpenseDate = $('#shopExpenseDate').val();
-			if(shopExpenseDate == "연도-월-일" || shopExpenseDate == ""){
-				alert("등록일을 선택해주세요);
-				return false;
-			} */
+  			//비용등록 날짜 공백 체크
+  			if($('#shopExpenseDate').val().length == 0){
+  		         alert('비용등록 날짜를 선택하세요');
+  		         return false;
+  		      }
     			
     			
     			//금액 공백체크

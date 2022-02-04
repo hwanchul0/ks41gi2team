@@ -2,7 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="@{layout/default-shop}">
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<head th:replace="fragments/head :: headFragment"></head>
 
 <th:block layout:fragment="customContents">
 	<!-- Content Wrapper. Contains page content -->
@@ -552,7 +554,7 @@ businessNumber.onkeyup = function(event){
 		});
 	});
 	
-//유성
+
 	</script>
 	
 </th:block>

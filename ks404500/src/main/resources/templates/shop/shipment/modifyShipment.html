@@ -2,8 +2,36 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="@{layout/default-shop}">
-<th:block layout:fragment="javascriptFragment">
-</th:block>	  
+<th:block layout:fragment="customJs">
+<script type="text/javascript">
+
+//버튼을 선택하지않고 입력완료 선택시 경고창
+$(document).ready(function () {
+$('#modifyShipmentBtn').click(function () {
+
+
+		//배송단계를 선택 공백 체크
+		var shopShipmentCode = $('#shopShipmentCode').val();
+		if(shopShipmentCode == "::배송단계선택::" || shopShipmentCode == ""){
+			alert("배송단계를 선택하세요");
+			return false;
+		}
+		
+	 	//배송시작날짜 공백 체크
+		if($('#releaseDate').val().length == 0){
+	         alert('배송시작 날짜를 선택하세요');
+	         return false;
+	      }
+		
+		 
+	
+	});
+});
+
+</script>
+</th:block>
+
+
 
 <th:block layout:fragment="customContents">
 	<!-- Content Wrapper. Contains page content -->
