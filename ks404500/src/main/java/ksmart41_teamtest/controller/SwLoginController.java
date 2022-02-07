@@ -39,7 +39,7 @@ public class SwLoginController {
 	public String login(@RequestParam(value="memberId", required = false)String memberId,
 						@RequestParam(value="memberPw", required = false)String memberPw,
 						HttpServletResponse response,
-						HttpSession session) throws IOException {
+						HttpSession session, Model model) throws IOException {
 		System.out.println(memberId + " memberId입력값");
 			if(memberId != null && !"".equals(memberId) && memberPw != null && !"".equals(memberPw)){
 				Member member = memberService.MemberInfo(memberId);
@@ -56,6 +56,7 @@ public class SwLoginController {
 						session.setAttribute("SWEMAIL", member.getMemberEmail());
 						session.setAttribute("SWDATE", member.getMemberRegDate());
 						session.setAttribute("SWPHONE", member.getMemberPhone());
+						session.setAttribute("SWPROFILE", member.getMemberProfile());
 						return "redirect:/sw/index-sw";
 				}
 			}

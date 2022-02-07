@@ -16,4 +16,5 @@ public interface MyPageMapper {
 	
 	public int modifystatus(Member member);
 	
+	
 }

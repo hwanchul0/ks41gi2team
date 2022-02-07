@@ -31,31 +31,27 @@
 			<div class="col-md-8" style="display: center">
            <!-- Profile Image -->
 				<div class="card card-primary card-outline col-md-12">
-					<form id="myPageForm" th:action="@{/sw/member/modifyMyPage}" method="post" class="form-horizontal"> 
+					<form id="myPageForm" th:action="@{/sw/member/modifyMyPage}" method="post" class="form-horizontal" enctype="multipart/form-data">  
 						<div class="card-body box-profile">
-							<div class="text-center">
-								<img src="/customcss/img/profile.png" alt="User profile picture" style="height : 180px;">
-							</div>
+						
+						
+<div class="text-center image-box" th:if="${session.SWPROFILE != null}">
+	<img th:src="${memberInfo.memberProfile}" class="img-circle image-thumbnail" alt="User Image"> 
+</div>
+<div class="text-center image-box" th:if="${session.SWPROFILE == null}">
+	<img src="/customcss/img/profile.png" class="img-circle image-thumbnail" alt="User Image"> 
+</div>				
+							
+							
 							<h3 class="profile-username text-center" th:text="${session.SWNAME}"></h3>
 							<p class="text-muted text-center">[[${session.SWLEVEL}]]</p>
 							<ul class="list-group list-group-unbordered mb-3">
 							
 							
-							
-							
-							
 								<li class="list-group-item">
-								
-								
-								<input type="file" id="fileInput"/>
-								
-								
+									<b>프로필</b>
+									<input type="file" name="multipartFile" id="multipartFile" style="float: right;">
 								</li>
-								
-								
-								
-								
-								
 								
 								
 								<li class="list-group-item">
@@ -184,6 +180,7 @@
 		$(function(){
 			$('#modifyMyPageBtn').click(function(){
 				//주소 공백 체크
+				/*
 				var sample4_detailAddress = $('#sample4_detailAddress').val();
 				var sample4_postcode = $('#sample4_postcode').val();
 				if(sample4_detailAddress == ""){
@@ -208,10 +205,9 @@
 					alert('이메일을 입력하세요');
 					return false;
 				}
+				*/
 				alert('회원정보가 변경되었습니다. 다시 로그인해주세요')
 				$('#myPageForm').submit();
-				
-				
 			});
 		});
 		
@@ -225,29 +221,7 @@
 
 
 		
-		
-		
-		//재천추가 이미지변경
-		
-		var fileInput = $('#fileInput');
-		  //값이 변경될때 호출 되는 이벤트 리스너
-		  fileInput.addEventListener('change',function(e){
-		    var file = e.target.files[0]; //선택된 파일
-		    var reader = new FileReader();
-		    reader.readAsDataURL(file); //파일을 읽는 메서드 
-		
-		    reader.onload = function(){
-		      var photoFrame = document.createElement("div");
-		      photoFrame.style = `background : url(${reader.result}); background-size : cover`;
-		      photoFrame.className = "photoFrame";
-		      document.getElementById("pictures").appendChild(photoFrame);
-		      e.target.value = "";
-		
-		      photoFrame.addEventListener("click",function(){
-		        document.getElementById("pictures").removeChild(photoFrame);
-		      })
-		    }
-		  })	</script>
+</script>
 </th:block>
 </html>
 

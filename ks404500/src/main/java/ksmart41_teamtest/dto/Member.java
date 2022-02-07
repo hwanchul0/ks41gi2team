@@ -12,7 +12,8 @@ public class Member {
 	private String memberStatus;
 	private String memberWithdrawal;
 	private String memberWithdrawalReason;
-	
+	private String memberProfile;
+	private String memberfileName;
 	public String getMemberId() {
 		return memberId;
 	}
@@ -79,33 +80,25 @@ public class Member {
 	public void setMemberWithdrawalReason(String memberWithdrawalReason) {
 		this.memberWithdrawalReason = memberWithdrawalReason;
 	}
+	public String getMemberProfile() {
+		return memberProfile;
+	}
+	public void setMemberProfile(String memberProfile) {
+		this.memberProfile = memberProfile;
+	}
+	public String getMemberfileName() {
+		return memberfileName;
+	}
+	public void setMemberfileName(String memberfileName) {
+		this.memberfileName = memberfileName;
+	}
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Member [memberId=");
-		builder.append(memberId);
-		builder.append(", memberLevelCode=");
-		builder.append(memberLevelCode);
-		builder.append(", memberPw=");
-		builder.append(memberPw);
-		builder.append(", memberName=");
-		builder.append(memberName);
-		builder.append(", memberAddr=");
-		builder.append(memberAddr);
-		builder.append(", memberEmail=");
-		builder.append(memberEmail);
-		builder.append(", memberPhone=");
-		builder.append(memberPhone);
-		builder.append(", memberRegDate=");
-		builder.append(memberRegDate);
-		builder.append(", memberStatus=");
-		builder.append(memberStatus);
-		builder.append(", memberWithdrawal=");
-		builder.append(memberWithdrawal);
-		builder.append(", memberWithdrawalReason=");
-		builder.append(memberWithdrawalReason);
-		builder.append("]");
-		return builder.toString();
+		return "Member [memberId=" + memberId + ", memberLevelCode=" + memberLevelCode + ", memberPw=" + memberPw
+				+ ", memberName=" + memberName + ", memberAddr=" + memberAddr + ", memberEmail=" + memberEmail
+				+ ", memberPhone=" + memberPhone + ", memberRegDate=" + memberRegDate + ", memberStatus=" + memberStatus
+				+ ", memberWithdrawal=" + memberWithdrawal + ", memberWithdrawalReason=" + memberWithdrawalReason
+				+ ", memberProfile=" + memberProfile + ", memberfileName=" + memberfileName + "]";
 	}
 	
 	

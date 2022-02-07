@@ -39,9 +39,15 @@
             <!-- Profile Image -->
             <div class="card card-primary card-outline col-md-12">
               <div class="card-body box-profile">
-                <div class="text-center">
-                  <img src="/customcss/img/profile.png" alt="User profile picture" style="height : 180px;">
-                </div>
+
+			<div class="text-center image-box" th:if="${session.SWID != null}">
+				<img th:src="${session.SWPROFILE}" class="img-circle image-thumbnail" alt="User Image"> 
+			</div>
+			<div class="text-center image-box" th:if="${session.SWID == null}">
+				<img src="/customcss/img/profile.png" class="img-circle image-thumbnail" alt="User Image"> 
+			</div>	
+
+
 	                <h3 class="profile-username text-center" th:text="${session.SWNAME}"></h3>
 	                <p class="text-muted text-center">[[${session.SWLEVEL}]]</p>
 	                

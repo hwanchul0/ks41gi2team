@@ -18,9 +18,17 @@
 	<div class="sidebar">
 		<!-- 사이드바 프로필 -->
 		<div class="mt-3 pb-3 pt-3 mb-3">
-			<div class="text-center image-box">
-				<img src="/customcss/img/profile.png" class="img-circle image-thumbnail" alt="User Image">
+<!-- ${memberInfo.memberProfile} -->
+			<div class="text-center image-box" th:if="${session.SWID != null}">
+				<img th:src="${session.SWPROFILE}" class="img-circle image-thumbnail" alt="User Image"> 
 			</div>
+			<div class="text-center image-box" th:if="${session.SWID == null}">
+				<img src="/customcss/img/profile.png" class="img-circle image-thumbnail" alt="User Image"> 
+			</div>	
+			
+			
+			
+			
 			<div th:if="${session.SWID !=null}" class="text-center mt-3" >
 				<a th:href="@{/sw/member/myPage}"><h5 class="text-white">[[${session.SWID}]]</h5></a>
 				<a th:href="@{/sw/member/myPage}"><span class="text-white">[[${session.SWLEVEL}]]</span></a>
@@ -28,7 +36,8 @@
 			<div th:unless="${session.SWID !=null}" class="text-center mt-3">
 				<h5 class="text-white">비회원</h5>
 				<span class="text-white">user</span>
-			</div>
+			</div> 
+			
 		</div>
 		<!-- 사이드바 메뉴 -->
 		<nav class="mt-2">
