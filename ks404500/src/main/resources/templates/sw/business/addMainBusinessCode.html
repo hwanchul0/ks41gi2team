@@ -139,11 +139,11 @@ layout:decorate="@{layout/default-sw}">
 	}
 	
 	$(function(){
-		//[유성]아이디 중복체크
+		//[유성]사업장 대표코드 중복체크
 		$('#addMainBusinessCodeBtn').click(function(){
 			var mainBusinessCode = $('#mainBusinessCode').attr('login');
 			if(mainBusinessCode != "pass"){
-				alert("아이디 중복체크를 해주세요");
+				alert("사업장 대표코드 중복체크를 해주세요");
 				return false;
 			}
 			
@@ -164,7 +164,7 @@ layout:decorate="@{layout/default-sw}">
 			//사업장 등록날짜 공백 체크
 			var businessCodeRegistrationDate = $('#businessCodeRegistrationDate').val();
 			if(businessCodeRegistrationDate == "연도-월-일" || businessCodeRegistrationDate == ""){
-				alert("사업장 등록날짜를 선택하세요");
+				alert("사업장 대표코드 등록날짜를 선택하세요");
 				return false;
 			}
 			

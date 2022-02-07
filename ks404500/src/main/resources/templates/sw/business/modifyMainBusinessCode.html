@@ -2,7 +2,49 @@
 <html xmlns:th="http://www.thymeleaf.org" 
 xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
 layout:decorate="@{layout/default-sw}">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<th:block layout:fragment="customJs">
+<script type="text/javascript">	
+	$(function(){
+	//클릭시
+		$('#modifyMainBusinessCodeBtn').click(function(){
+	
+			if($('#businessCode').val().length == 0){
+		         alert('거래처 구분코드를 선택하세요');
+		         return false;
+		      }
+			
+		
+			//사업장 권한 공백 체크
+			var businessLevelCode = $('#businessLevelCode').val();
+			if(businessLevelCode == "::사업장 권한 선택::" || businessLevelCode == ""){
+				alert("사업장 권한을 선택하세요");
+				return false;
+			}
+			
+			//사업장 등록날짜 공백 체크
+			var businessCodeRegistrationDate = $('#businessCodeRegistrationDate').val();
+			if(businessCodeRegistrationDate == "연도-월-일" || businessCodeRegistrationDate == ""){
+				alert("사업장 대표코드 등록날짜를 선택하세요");
+				return false;
+			}
+			
+			
+			
+			//submit
+			$('#modifyMainBusinessCode').submit();
+		});
+	});
 
+function cancle(){
+	var cancleMainBusinessCodeBtn = confirm('사업장 대표코드 수정을 취소하시겠습니까?');
+	if(cancleMainBusinessCodeBtn){
+		location.href = "/sw/index-sw";
+	}
+}
+</script>
+</th:block>	 
 
 <th:block layout:fragment="customContents">
 <!-- Content Wrapper. Contains page content -->
@@ -46,30 +88,25 @@ layout:decorate="@{layout/default-sw}">
 									</div>
 								</div>
 								
-								<div class="form-group row">
+									<div class="form-group row">
 									<label class="col-sm-2 col-form-laebl text-right">거래처 구분 코드</label>
 									<div class="col-sm-2">
-											<select class="form-control" name="BusinessCode" style="height: 85%" >
-                                                   <option value=""> ::거래처 구분 코드 선택:: </option>
-                                                <th:block th:if="${not #lists.isEmpty(merge)}"
-                                                         th:each="mbc : ${merge}">
-                                                   <option th:value="${mbc.businessCode}" th:text="${mbc.businessCodeName}" >
-                                                      [[${mbc.businessCodeName}]]
-                                                   </option>
-                                                </th:block>
-                                                <th:block th:unless="${not #lists.isEmpty(merge)}">
-                                                   <option>거래처 구분 코드를 등록해주세요</option>
-                                                </th:block>
-                                             </select>
-                                             
-										
+										<select id="businessCode" class="form-control" name="businessCode">
+											<option value="">::거래처 구분 코드 선택::</option>
+											<option value="merge_shop">merge_shop</option>
+											<option value="merge_fac">merge_fac</option>
+											<option value="merge_mart">merge_mart</option>
+											<option value="merge_ware">merge_ware</option>
+											<option value="merge_agency">merge_agency</option>		
+											
+										</select>
 									</div>
 								</div>
 								
 								<div class="form-group row">
 									<label class="col-sm-2 col-form-laebl text-right">사업장 권한</label>
 									<div class="col-sm-2">
-										<select id="localCode" class="form-control" name="businessLevelCode">
+										<select id="businessLevelCode" class="form-control" name="businessLevelCode">
 											<option value="">::사업장 권한 선택::</option>
 											<option>shop1</option>
 											<option>fac1</option>
@@ -90,7 +127,7 @@ layout:decorate="@{layout/default-sw}">
 								</div>
 
 								<div class="card-footer">
-									<button type="submit" class="btn btn-primary" id="modifyMainBusinessCode"> 수정완료 </button>
+									<button type="submit" class="btn btn-primary" id="modifyMainBusinessCodeBtn"> 수정완료 </button>
 									<button type="button" class="btn btn-default float-right" id="cancleMainBusinessCodeBtn" onclick="cancle()"> 취소 </button>
 								</div>
 							</form> 
@@ -106,13 +143,6 @@ layout:decorate="@{layout/default-sw}">
 		</div>
 	</div>
 <!-- /.content-wrapper -->
-<script type="text/javascript">	
-function cancle(){
-	var cancleMainBusinessCodeBtn = confirm('사업장 대표코드 수정을 취소하시겠습니까?');
-	if(cancleMainBusinessCodeBtn){
-		location.href = "/sw/index-sw";
-	}
-}
-</script>
+
 </th:block>
 </html>
