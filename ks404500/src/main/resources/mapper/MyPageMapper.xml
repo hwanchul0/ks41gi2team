@@ -14,7 +14,6 @@
 		<result column="memberWithdrawal" 			property="memberWithdrawal"/>
 		<result column="memberWithdrawalReason" 	property="memberWithdrawalReason"/>
 		<result column="memberProfile" 				property="memberProfile"/>
-		<result column="memberfileName" 			property="memberfileName"/>
 	</resultMap>
 	
 	<update id="modifyMyPage" parameterType="Member">
@@ -25,8 +24,7 @@
 			memberPhone =#{memberPhone},
 			memberEmail =#{memberEmail},
 			memberStatus =#{memberStatus},
-			memberProfile =#{memberProfile},
-			memberfileName =#{memberfileName}
+			memberProfile =#{memberProfile}
 		WHERE
 			memberId = #{memberId}
 	</update>
@@ -44,8 +42,7 @@
 			memberStatus,
 			memberWithdrawal,
 			memberWithdrawalReason,
-			memberProfile,
-			memberfileName
+			memberProfile
 		FROM
 			k2_sw_member
 		WHERE
@@ -57,8 +54,7 @@
 		SELECT 
 			memberId,
 			memberStatus,
-			memberProfile,
-			memberfileName
+			memberProfile
 		FROM 
 			k2_sw_member
 		WHERE

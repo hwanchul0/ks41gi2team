@@ -22,13 +22,14 @@ public class MyPageService {
 	public int modifyMyPage(MultipartFile multipartFile, Member member, HttpServletRequest request) {
 		//파일경로
 		String filePath = request.getSession().getServletContext().getRealPath("");
+		System.out.println(filePath + "<- filePath MyPageService.java / 22-02-07 15:33");
 		String imgPath = "/profile/";
 		//파일이름
 		String fileName = member.getMemberId() + "_" + multipartFile.getOriginalFilename();
 		
 		//파일전체경로
 		String fullPath = filePath + imgPath + fileName;
-		System.out.println(fullPath + "test.재천");
+		System.out.println(fullPath + "<-- fullPath MyPageService.java");
 		
 		//파일을 받음
 		if(multipartFile.getSize() != 0) {
@@ -70,8 +71,4 @@ public class MyPageService {
 		return myPageMapper.modifystatus(member);
 	}
 	
-	//프로필 확인
-	public Member selectMemberProfile(String memberfileName) {
-		return myPageMapper.selectMemberStatus(memberfileName);
-	}
 }

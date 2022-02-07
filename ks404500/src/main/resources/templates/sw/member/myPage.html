@@ -40,10 +40,10 @@
             <div class="card card-primary card-outline col-md-12">
               <div class="card-body box-profile">
 
-			<div class="text-center image-box" th:if="${session.SWID != null}">
+			<div class="text-center image-box" th:if="${session.SWPROFILE != null}">
 				<img th:src="${session.SWPROFILE}" class="img-circle image-thumbnail" alt="User Image"> 
 			</div>
-			<div class="text-center image-box" th:if="${session.SWID == null}">
+			<div class="text-center image-box" th:if="${session.SWPROFILE == null}">
 				<img src="/customcss/img/profile.png" class="img-circle image-thumbnail" alt="User Image"> 
 			</div>	
 
