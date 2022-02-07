@@ -28,6 +28,14 @@ $('#modifyShipmentBtn').click(function () {
 	});
 });
 
+//사업장 등록 취소
+function cancle(){
+	var cancleShipmentBtn = confirm('배송요청 등록을 취소하시겠습니까?');
+	if(cancleShipmentBtn){
+		location.href = "/shop/index-shop";
+	}
+}
+
 </script>
 </th:block>
 
@@ -148,7 +156,7 @@ $('#modifyShipmentBtn').click(function () {
 								
 								<div class="card-footer">
 									<button type="submit" class="btn btn-success" id="modifyShipmentBtn"> 등록 </button>
-									<button type="button" class="btn btn-default float-right" id="cancleShipmentBtn"> 취소 </button>
+									<button type="button" class="btn btn-default float-right" id="cancleShipmentBtn" onclick="cancle()"> 취소 </button>
 								</div>
 								</div>
 							</form> 
