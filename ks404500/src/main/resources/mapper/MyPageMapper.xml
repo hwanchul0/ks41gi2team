@@ -13,16 +13,20 @@
 		<result column="memberStatus" 				property="memberStatus"/>
 		<result column="memberWithdrawal" 			property="memberWithdrawal"/>
 		<result column="memberWithdrawalReason" 	property="memberWithdrawalReason"/>
+		<result column="memberProfile" 				property="memberProfile"/>
+		<result column="memberfileName" 			property="memberfileName"/>
 	</resultMap>
 	
 	<update id="modifyMyPage" parameterType="Member">
 		UPDATE k2_sw_member
 		SET
 			memberName =#{memberName},
-			memberAddr = #{memberAddr},
-			memberPhone = #{memberPhone},
+			memberAddr =#{memberAddr},
+			memberPhone =#{memberPhone},
 			memberEmail =#{memberEmail},
-			memberStatus = #{memberStatus}
+			memberStatus =#{memberStatus},
+			memberProfile =#{memberProfile},
+			memberfileName =#{memberfileName}
 		WHERE
 			memberId = #{memberId}
 	</update>
@@ -39,7 +43,9 @@
 			memberRegDate,
 			memberStatus,
 			memberWithdrawal,
-			memberWithdrawalReason
+			memberWithdrawalReason,
+			memberProfile,
+			memberfileName
 		FROM
 			k2_sw_member
 		WHERE
@@ -50,7 +56,9 @@
 	<select id="selectMemberStatus" parameterType="String" resultMap="memberResultMap">
 		SELECT 
 			memberId,
-			memberStatus
+			memberStatus,
+			memberProfile,
+			memberfileName
 		FROM 
 			k2_sw_member
 		WHERE
@@ -66,6 +74,13 @@
 				memberId = #{memberId}
 	</update>
 	
-	
-	
+	<!-- 
+	<insert id="update" parameterType="Member">
+		INSERT INTO k2_sw_member(
+			memberProfile
+		)VALUES(
+			#{memberProfile}
+		)
+	</insert>
+	 -->
 </mapper>

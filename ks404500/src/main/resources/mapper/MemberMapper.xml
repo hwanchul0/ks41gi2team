@@ -13,6 +13,7 @@
 		<result column="memberStatus" 				property="memberStatus"/>
 		<result column="memberWithdrawal" 			property="memberWithdrawal"/>
 		<result column="memberWithdrawalReason" 	property="memberWithdrawalReason"/>
+		<result column="memberProfile" 				property="memberProfile"/>
 	</resultMap>
 	
 	<insert id="addMember" parameterType="Member">
@@ -71,7 +72,8 @@
 			memberRegDate,
 			memberStatus,
 			memberWithdrawal,
-			memberWithdrawalReason
+			memberWithdrawalReason,
+			memberProfile
 		FROM
 			k2_sw_member
 		WHERE
